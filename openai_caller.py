@@ -23,7 +23,8 @@ parser.add_argument('--patience', type=int, help='failure trials', default=3)
 parser.add_argument('--key_path', help='API key to call OpenAI', default='openai_token.key')
 parser.add_argument('--storage', help='Directory to store the prompting result', default='responses')
 parser.add_argument('--system_prompt', help='Prefix prompt as the system role',
-                    default='You are a professional assistant for programmers.')
+                    default='You are a professional assistant for programmers. '
+                            'By default, questions are answers are in Markdown format.')
 
 
 def single_turn(prompt, system_prompt, model_name, temp, top_p, n, max_tokens, timeout, patience):
