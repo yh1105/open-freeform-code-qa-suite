@@ -1,0 +1,14 @@
+Sure, here's a function that should do what you're looking for:
+
+```javascript
+function convertToUTC(date) {
+  const utcDate = new Date(date.getTime() + date.getTimezoneOffset() * 60 * 1000);
+  return utcDate;
+}
+```
+
+This function takes a `Date` object as input and returns a new `Date` object that represents the same moment in time, but in UTC timezone. 
+
+The function works by first getting the current time in milliseconds since the Unix epoch using the `getTime()` method of the input `Date` object. It then adds the number of minutes in the local timezone offset (which is returned by the `getTimezoneOffset()` method) multiplied by 60 seconds and 1000 milliseconds. This effectively subtracts the local timezone offset from the current time, resulting in the UTC time.
+
+Let me know if you have any questions!

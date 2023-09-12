@@ -1,0 +1,10 @@
+xlrd==1.2.0
+pyyaml
+openai
+tqdm
+numpy
+numba
+evaluate>=0.3.0
+absl-py
+nltk
+rouge-score

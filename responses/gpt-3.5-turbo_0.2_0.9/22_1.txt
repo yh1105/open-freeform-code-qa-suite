@@ -1,0 +1,20 @@
+The issue is that you are passing `booksRefresh` as a prop to the `AddBookForm` component, but you are not accessing it correctly within the component. Instead of using `booksRefresh` as a function, you are using it as an object.
+
+To fix this, you need to destructure the `booksRefresh` prop in the function definition of `AddBookForm` like this:
+
+```
+const AddBookForm = ({booksRefresh}) => {
+  ...
+}
+```
+
+This will allow you to access `booksRefresh` as a function within the component, and you can call it like this:
+
+```
+const postRequestHandler = () => {
+  addBook(title, description);
+  booksRefresh();
+}
+```
+
+With this change, the `booksRefresh` function should be called correctly when the button is clicked.

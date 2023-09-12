@@ -1,0 +1,29 @@
+The error message you're seeing indicates that the MongoDB version you're trying to download does not exist for your platform. The MongoDB version is specified in the `MongoBinary options` log line, which in your case is `4.0.14`.
+
+The MongoDB version you're trying to download is for a 32-bit Windows system (`win32` and `ia32`), but MongoDB stopped providing 32-bit support after MongoDB 4.0. 
+
+You can try to fix this issue by doing the following:
+
+1. Update the MongoDB version to a version that supports your platform. If you're using a 64-bit system, you should use a MongoDB version that supports 64-bit systems. You can specify the MongoDB version in your `MongoMemoryServer` options like this:
+
+```javascript
+mongo = new MongoMemoryServer({
+  binary: {
+    version: '4.2.6' // replace with your desired version
+  }
+});
+```
+
+2. If you're using a 32-bit system, you should consider upgrading to a 64-bit system if possible, as MongoDB no longer provides 32-bit support.
+
+3. If you can't upgrade your system, you can try to use an older version of MongoDB that still supports 32-bit systems, but keep in mind that these versions are no longer maintained and may have security vulnerabilities. You can specify the MongoDB version in your `MongoMemoryServer` options like this:
+
+```javascript
+mongo = new MongoMemoryServer({
+  binary: {
+    version: '4.0.14' // replace with your desired version
+  }
+});
+```
+
+4. If none of the

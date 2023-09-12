@@ -1,0 +1,34 @@
+The error message `Plugin project :location_web not found. Please update settings.gradle;` is related to the location package. It seems like you are trying to use the location package on the web. However, the location package does not support web. It only supports Android and iOS. If you are trying to use it on the web, you will need to find a different package or a workaround.
+
+The second error `Invalid argument(s): No host specified in URI file:///Instance%20of%20'Future%3CString%3E'` is because you are trying to use a Future as a String. The `_getUserLocation()` function is asynchronous and returns a Future, not a String. 
+
+You need to wait for the Future to complete before you can use the String. You can do this by using a FutureBuilder. Here is how you can modify your code:
+
+```dart
+class NearbyScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        Container(
+          height: 170,
+          width: double.infinity,
+          child: FutureBuilder(
+            future: _getUserLocation(),
+            builder: (ctx, snapshot) {
+              // while data is loading
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+              // If we got an error
+              if (snapshot.hasError) {
+                return Center(
+                  child: Text('Something went wrong.'),
+                );
+              }
+              // If we got our data
+              if (snapshot.hasData) {
+                return Image.network(snapshot.data);
+             

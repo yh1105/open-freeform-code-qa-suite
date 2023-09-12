@@ -1,0 +1,17 @@
+This error occurs when the Android Gradle plugin tries to compare two files that are located in different file systems. This is a known issue in Android Studio 4.0 and Gradle 6.1.1.
+
+Here are a few solutions you can try:
+
+1. **Downgrade Gradle version**: You can try downgrading your Gradle version to 5.6.4 and see if it resolves the issue. You can do this by changing the Gradle version in your `gradle-wrapper.properties` file.
+
+2. **Move your project to the same drive as Android Studio**: If your project is on a different drive than your Android Studio installation, try moving it to the same drive.
+
+3. **Use command line for generating the signed bundle**: You can try generating the signed bundle using the command line instead of the Android Studio GUI. Here's the command you can use:
+
+```
+./gradlew bundleRelease
+```
+
+4. **Update Android Studio and Gradle**: This issue has been fixed in later versions of Android Studio and Gradle. Try updating to the latest stable version of both.
+
+Remember to always backup your project before making any changes to your development environment.

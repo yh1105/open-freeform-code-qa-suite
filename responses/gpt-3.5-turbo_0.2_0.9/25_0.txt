@@ -1,0 +1,50 @@
+In React Navigation 5, you can pass parameters to the screen using the `route.params` object. However, you need to make sure that the parameters are serializable. 
+
+One way to achieve what you are trying to do is by using the `useCallback` hook to create a memoized function that you can pass as a parameter to the child screen. This will ensure that the function reference remains the same and doesn't get serialized.
+
+Here's an example of how you can implement this:
+
+```
+import React, { useCallback } from 'react';
+import { TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+
+const ParentScreen = () => {
+  const navigation = useNavigation();
+
+  const onSelectCountry = useCallback((data) => {
+    // Update parent screen state here
+  }, []);
+
+  const handlePress = useCallback(() => {
+    navigation.navigate('CountrySelect', {
+      onSelect: onSelectCountry,
+      countryCode: 'US',
+    });
+  }, [navigation, onSelectCountry]);
+
+  return (
+    <TouchableOpacity onPress={handlePress}>
+      // Render parent screen content here
+    </TouchableOpacity>
+  );
+};
+
+export default ParentScreen;
+```
+
+In the child screen, you can call the `onSelect` function with the selected data:
+
+```
+import React from 'react';
+import { TouchableOpacity } from 'react-native';
+import { useNavigation, useRoute } from '@react-navigation/native';
+
+const ChildScreen = () => {
+  const navigation = useNavigation();
+  const route = useRoute();
+
+  const handlePress = (data) => {
+    route.params.onSelect(data);
+    navigation.goBack();
+ 

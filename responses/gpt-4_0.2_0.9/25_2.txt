@@ -1,0 +1,35 @@
+In React Navigation 5, passing non-serializable values as parameters is not recommended. This is because the parameters might be used as input for serialization when the state of the navigation is saved (for example, on Android when the screen is backgrounded and then restored).
+
+To achieve your goal, you can use React Context or Redux to manage your state. However, if you want to avoid using these state management libraries, you can use React Navigation's events, specifically the `addListener` function, to listen for when the screen comes into focus.
+
+Here's an example of how you can implement this:
+
+In your parent screen:
+
+```jsx
+import { useIsFocused } from '@react-navigation/native';
+
+// ...
+
+const isFocused = useIsFocused();
+
+useEffect(() => {
+    if (isFocused) {
+        // get the new value and update the state
+        const newValue = // get the new value from somewhere
+        this.setState(newValue);
+    }
+}, [isFocused]);
+```
+
+In your child screen:
+
+```jsx
+_onPress = (country, country_code, calling_code) => {
+    const { navigation } = this.props;
+    // save the new value somewhere where the parent screen can access it
+    navigation.goBack();
+};
+```
+
+In this example, whenever the parent screen comes into focus, it checks if there's a new value and updates its state accordingly. The child screen saves the new value somewhere (for example, in a global variable or in a local storage) before navigating back to the parent screen.

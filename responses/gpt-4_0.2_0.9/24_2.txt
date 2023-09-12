@@ -1,0 +1,7 @@
+As of now, there are no official guidelines from Oracle or the Java community that suggest a change in the naming convention for getters and setters after the introduction of records in Java 14.
+
+The JavaBeans naming conventions (`getName()`, `setName()`, etc.) are deeply ingrained in the Java ecosystem and are used by many libraries and frameworks. Therefore, it's recommended to continue using these conventions in your regular classes.
+
+Records are a special kind of classes in Java, designed to be simple data carriers. The main advantage of records is that they generate a lot of boilerplate code for you, including the `equals()`, `hashCode()`, `toString()` methods, and the getters. However, the getters in records follow a different naming convention: they are named after the field (e.g., `name()` instead of `getName()`). This is a design choice made by the creators of the Java language, and it's not meant to replace the JavaBeans conventions.
+
+In conclusion, for regular classes, continue using the JavaBeans conventions. For records, use the naming convention provided by the language (i.e., the field name). Mixing the two in the same codebase might not look very nice, but it's the current state of the language.

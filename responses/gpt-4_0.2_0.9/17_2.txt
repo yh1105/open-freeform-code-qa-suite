@@ -1,0 +1,51 @@
+To use an alias in VSCode, you need to configure both your `jsconfig.json` and your project's build system. Here's how you can do it:
+
+1. Update your `jsconfig.json` file:
+
+```json
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@styles/*": ["src/styled/*"]
+    }
+  },
+  "include": ["src/**/*"]
+}
+```
+
+In this configuration, `baseUrl` is set to the root directory (`.`), and `@styles` is mapped to the `src/styled` directory. The `*` after `@styles/` and `src/styled/` allows you to import any file in the `src/styled` directory.
+
+2. Update your build system configuration:
+
+If you're using webpack, you can add the following configuration to your `webpack.config.js` file:
+
+```javascript
+const path = require('path');
+
+module.exports = {
+  //...
+  resolve: {
+    alias: {
+      '@styles': path.resolve(__dirname, 'src/styled/'),
+    },
+  },
+};
+```
+
+If you're using Babel, you can install the `babel-plugin-module-resolver` plugin and add the following configuration to your `.babelrc` file:
+
+```json
+{
+  "plugins": [
+    ["module-resolver", {
+      "root": ["./src"],
+      "alias": {
+        "@styles": "./styled"
+      }
+    }]
+  ]
+}
+```
+
+After these changes, you should be able to import files from the `src/styled` directory using the `@

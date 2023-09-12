@@ -1,0 +1,5 @@
+id: 2748
+prompt_path: prompt_2748.txt
+type: knowledge question-answering
+lang: python
+grading: {}

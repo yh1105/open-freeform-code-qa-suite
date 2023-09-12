@@ -1,0 +1,5 @@
+id: 6495
+prompt_path: prompt_6495.txt
+type: code completion
+lang: python
+grading: {}

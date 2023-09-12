@@ -1,0 +1,17 @@
+Your `app.module.ts` file seems to be correctly importing the `FlexLayoutModule` from `@angular/flex-layout`. If you're having trouble getting it to work in your `login-view` component, there are a few things you might want to check:
+
+1. **Check your component's HTML file**: Make sure you're using the correct syntax for Angular Flex-Layout in your component's HTML file. For example, you might use it to set up a flex container like this:
+
+```html
+<div fxLayout="row" fxLayoutAlign="start center">
+  <!-- Your content here -->
+</div>
+```
+
+2. **Check your component's CSS file**: If you're using any custom CSS that might interfere with Flex-Layout, try commenting it out to see if that resolves the issue.
+
+3. **Check your component's TypeScript file**: Make sure your component is correctly set up and doesn't have any errors that might prevent it from rendering correctly.
+
+4. **Check your app's other modules**: If your `login-view` component is declared in a different module, you might need to import `FlexLayoutModule` in that module as well. Angular modules encapsulate their imports, so importing a module in `app.module.ts` doesn't necessarily make it available in all other modules.
+
+5. **Check for errors in the browser console**: If there's an issue with your use of Flex-Layout, there might be an error message in the browser console that can help you diagnose the problem.

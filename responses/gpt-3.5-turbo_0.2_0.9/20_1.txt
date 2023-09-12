@@ -1,0 +1,7 @@
+I'm sorry to hear that you lost your work. Unfortunately, it sounds like the autosave feature in Jupyter Notebook did not work properly, and the checkpoint file is also empty. 
+
+One thing you can try is to look for any temporary files that Jupyter Notebook may have created. On a Mac, you can do this by opening the Terminal and navigating to the directory where your notebook file is saved. Then, type `ls -a` to show all files, including hidden ones. Look for any files that start with `.~` or end with `.swp`. These are temporary files that Jupyter Notebook may have created while you were working on the notebook. If you find any, try opening them in a text editor to see if they contain any of your lost work.
+
+Another option is to check if your text editor or IDE has a backup or recovery feature. Some editors automatically save backup copies of your files, which you may be able to recover.
+
+If neither of these options work, unfortunately, it may not be possible to recover your lost work. In the future, I recommend saving your work frequently and making backups to avoid losing important data.

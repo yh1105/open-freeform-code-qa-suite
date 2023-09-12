@@ -1,0 +1,22 @@
+Sure, here's one way to do it using the `io` module:
+
+```
+import io
+
+def transform(input: plt.Figure) -> Image:
+    # Create a buffer to hold the image data
+    buf = io.BytesIO()
+
+    # Save the figure to the buffer as PNG
+    input.savefig(buf, format='png')
+
+    # Move the buffer's position to the beginning
+    buf.seek(0)
+
+    # Open the image from the buffer using PIL
+    img = Image.open(buf)
+
+    return img
+```
+
+This code saves the `Figure` object to a buffer as a PNG image, then opens that image using PIL's `Image.open()` method. The resulting `Image` object can be returned to the caller.

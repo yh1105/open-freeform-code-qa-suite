@@ -1,0 +1,20 @@
+Sure, here's an updated version of the code that should work:
+
+```
+!wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+!bash Miniconda3-latest-Linux-x86_64.sh -b -f -p /usr/local/
+!rm Miniconda3-latest-Linux-x86_64.sh
+!conda install -y -c conda-forge ujson aiohttp tqdm
+import sys
+import os
+os.environ['PYTHONPATH'] = "/usr/local/miniconda3"
+os.environ['PATH'] = '/usr/local/miniconda3/bin:' + os.environ['PATH']
+sys.path.append('/usr/local/lib/python3.6/site-packages/')
+import ujson
+```
+
+The changes I made are:
+
+- Added the `-c conda-forge` flag to the `conda install` command, which tells it to look for the `ujson` package in the conda-forge channel.
+- Added an `import os` statement at the top of the cell, since `os.environ` is used later on.
+- Fixed a typo in the `sys.path.append` statement (changed `site-packages` to `lib/python3.6/site-packages/`).

@@ -1,0 +1,24 @@
+The error message suggests that you are missing the Ribbon load balancer, which is a client-side load balancer that gives you a lot of control over the behavior of HTTP and TCP clients. Feign already uses Ribbon, so if you are using `@FeignClient` you might also need to add Ribbon to your classpath.
+
+You can add the Ribbon dependency to your `pom.xml` file:
+
+```xml
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
+</dependency>
+```
+
+If you have already added this dependency and it's still not working, you might need to check your configuration. Make sure you have `@EnableFeignClients` in your main Spring Boot application class or in a configuration class.
+
+Also, check if you have `spring-cloud-starter-netflix-eureka-client` in your `pom.xml` file. This is because Ribbon is a part of the Netflix OSS stack and it needs Eureka for its list of servers.
+
+If you are not using Eureka, you need to provide a list of servers for Ribbon. You can do this in your `application.properties` or `application.yml` file:
+
+```properties
+user-service.ribbon.listOfServers = localhost:8080,localhost:8081
+```
+
+Replace `user-service` with the name of your service and `localhost:8080,localhost:8081` with a comma-separated list of your servers.
+
+If none of these solutions work, please provide more details about your configuration and setup.

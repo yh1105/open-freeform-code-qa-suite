@@ -1,0 +1,8 @@
+const today = new Date();
+const month = today.getMonth() + 1;
+const day = today.getDate();
+const year = today.getFullYear();
+return `${month}/${day}/${year}`;
+} 
+
+This function will return the current date in the format of `MM/DD/YYYY`.

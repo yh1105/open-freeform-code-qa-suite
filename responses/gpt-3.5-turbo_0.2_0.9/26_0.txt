@@ -1,0 +1,45 @@
+To fix the issue, you need to use a watcher to watch for changes in the `userToLoad` computed property and update the `username` accordingly. Also, you need to move the redirection logic inside the watcher. Here's the updated code:
+
+```
+<template>
+  <div>{{username}}</div>
+</template>
+
+<script lang="ts">
+import { computed, defineComponent, ref, getCurrentInstance } from '@vue/composition-api';
+
+export const useUsername = ({ user }) => {
+  return { username: user.name };
+};
+
+export default defineComponent({
+  setup(props, { root }) {
+    const vm = getCurrentInstance();
+
+    const userToLoad = computed(() => root.$route.params.userId);
+    const listOfUsers = [
+      { userId: 1, name: 'user1' },
+      { userId: 2, name: 'user2' },
+    ];
+
+    const user = ref(listOfUsers.find((u) => u.userId === +userToLoad.value));
+    const { username } = useUsername({ user });
+
+    // Watch for changes in userToLoad and update the user and username accordingly
+    watch(userToLoad, (newVal) => {
+      const newUser = listOfUsers.find((u) => u.userId === +newVal);
+      if (!newUser) {
+        root.$router.push('/404');
+      } else {
+        user.value = newUser;
+      }
+    });
+
+    return { username };
+  },
+});
+
+</script>
+```
+
+With this code, the `username` will be updated whenever the `userToLoad` changes, and if the new `userId` is not found

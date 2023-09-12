@@ -1,0 +1,33 @@
+To use an alias in VSCode with IntelliSense, you need to configure both your project and VSCode settings. Here's how you can do it:
+
+1. Install the `path-intellisense` extension in VSCode. This extension autocompletes filenames in your project.
+
+2. Configure your `jsconfig.json` or `tsconfig.json` (if you're using TypeScript) to include the path alias. Here's an example:
+
+```json
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@styles/*": ["src/styled/*"]
+    }
+  },
+  "exclude": ["node_modules", "**/node_modules/*"]
+}
+```
+
+In this example, `@styles` is the alias for the `src/styled` directory.
+
+3. Configure the `path-intellisense` extension to recognize the alias. Open the settings in VSCode (File > Preferences > Settings or `Ctrl + ,`) and search for `Path Intellisense Mappings`. Add a new entry with the alias and the corresponding path. Here's an example:
+
+```json
+{
+  "path-intellisense.mappings": {
+    "@styles": "${workspaceFolder}/src/styled"
+  }
+}
+```
+
+Now, when you type `@styles` in an import statement, VSCode should autocomplete with the files and directories in `src/styled`.
+
+Please note that this setup assumes that your `src/styled` directory is at the root of your workspace. If it's not, you'll need to adjust the paths accordingly.

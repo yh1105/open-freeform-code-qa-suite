@@ -1,0 +1,28 @@
+Yes, you can customize the height of `BottomNavigationBar` in Flutter. You can do this by setting the `height` property of the `BottomNavigationBar` widget.
+
+Here's an example:
+
+```dart
+BottomNavigationBar(
+  height: 50, // set the height here
+  items: [
+    BottomNavigationBarItem(
+      icon: Icon(Icons.home),
+      label: 'Home',
+    ),
+    BottomNavigationBarItem(
+      icon: Icon(Icons.search),
+      label: 'Search',
+    ),
+    BottomNavigationBarItem(
+      icon: Icon(Icons.person),
+      label: 'Profile',
+    ),
+  ],
+  onTap: (index) {
+    // handle tap event here
+  },
+)
+```
+
+In the example above, the `height` property is set to `50`. You can adjust this value to your desired height.

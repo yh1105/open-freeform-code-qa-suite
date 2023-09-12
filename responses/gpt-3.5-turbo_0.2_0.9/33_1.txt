@@ -1,0 +1,40 @@
+The first error message suggests that the `location_web` plugin is missing. You can try adding it to your `pubspec.yaml` file and running `flutter pub get` to install it. Here's an example of how to add it:
+
+```
+dependencies:
+  location: ^4.1.1
+  location_web: ^0.1.0+2
+```
+
+As for the second error message, it seems like you're trying to display a `Future` object as an image. You need to wait for the `Future` to complete and return the URL before displaying the image. You can do this by using a `FutureBuilder` widget in your `NearbyScreen` widget. Here's an example:
+
+```
+class NearbyScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<String>(
+      future: _getUserLocation(),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return Column(
+            children: <Widget>[
+              Container(
+                height: 170,
+                width: double.infinity,
+                child: Image.network(snapshot.data),
+              ),
+              Text("hello"),
+            ],
+          );
+        } else if (snapshot.hasError) {
+          return Text("Error: ${snapshot.error}");
+        } else {
+          return CircularProgressIndicator();
+        }
+      },
+    );
+  }
+}
+```
+
+This code will display a loading spinner while the `Future` is being fetched, and then display the image once the URL is available.

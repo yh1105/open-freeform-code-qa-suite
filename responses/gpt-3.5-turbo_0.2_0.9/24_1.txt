@@ -1,0 +1,13 @@
+Yes, there are official guidelines for naming getters and setters in Java 14 and beyond. The Java Language Specification (JLS) recommends using the same name for the accessor method as the field it accesses. This is known as the "uniform naming convention" and is used by default for record classes.
+
+However, if you need to maintain compatibility with existing code that uses the JavaBeans naming convention, you can still use the traditional getter and setter names (`getName()` and `setName()`) by explicitly defining them in your record class.
+
+For example, if you have a record class `Person` with a field `name`, you can define a traditional getter like this:
+
+```
+public String getName() {
+    return name;
+}
+```
+
+This will allow you to use both styles in the same codebase, depending on your needs. However, it's generally recommended to stick with the uniform naming convention for new code, as it's simpler and more concise.

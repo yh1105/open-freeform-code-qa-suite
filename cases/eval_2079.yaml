@@ -1,0 +1,5 @@
+id: 2079
+prompt_path: prompt_2079.txt
+type: code debugging
+lang: sql
+grading: {}

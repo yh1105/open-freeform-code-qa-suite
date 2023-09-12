@@ -1,0 +1,11 @@
+Based on the error message you provided, it seems like the linker is unable to find the libraries it needs. Here are a few more things you can try:
+
+1. **Check your Podfile**: Make sure that all the libraries that you are using are included in the Podfile and are installed correctly. You can try to deintegrate the pods using `pod deintegrate` and then install them again using `pod install`.
+
+2. **Check your project's .pbxproj file**: Open your .xcodeproj file with a text editor and search for the paths that are causing the warnings. If you find them, delete these lines, save the file, and try to build the project again.
+
+3. **Check your Library Search Paths**: Go to your project settings -> Build Settings -> Search Paths -> Library Search Paths. Make sure that the paths are correct and the libraries exist at those paths. If not, correct them.
+
+4. **Recreate the project**: If none of the above works, you might want to consider creating a new project and moving your files there. This is a last resort option, but sometimes project settings can get corrupted and it's easier to start fresh.
+
+Remember to always backup your project before making these kinds of changes.

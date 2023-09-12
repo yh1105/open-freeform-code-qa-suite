@@ -1,0 +1,5 @@
+id: 4660
+prompt_path: prompt_4660.txt
+type: code debugging
+lang: javascript
+grading: {}

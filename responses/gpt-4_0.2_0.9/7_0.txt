@@ -1,0 +1,17 @@
+Sure, the error you're seeing is because you're trying to copy a file to a directory without specifying a filename in the destination. You need to include the filename in the destination path. Here's how you can modify your function:
+
+```python
+from shutil import copyfile
+import os
+
+def copy_from_file_list(fileList, destFolder):
+    for item in fileList:
+        # Get the base name of the source file
+        base_name = os.path.basename(item[0])
+        # Construct the destination file path
+        dest_file = os.path.join(destFolder, base_name)
+        # Copy the file
+        copyfile(item[0], dest_file)
+```
+
+This function will copy each file in `fileList` to `destFolder`, preserving the original filenames. It uses `os.path.basename` to get the filename from the source path, and `os.path.join` to construct the destination path.

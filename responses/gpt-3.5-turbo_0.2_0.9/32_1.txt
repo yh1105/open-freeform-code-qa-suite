@@ -1,0 +1,7 @@
+It seems that the issue is related to the version of MongoDB that is being downloaded by `mongodb-memory-server`. You can try specifying a different version of MongoDB to download by setting the `MONGOMS_DOWNLOAD_URL` environment variable in your test script. For example:
+
+```
+"test": "MONGOMS_DOWNLOAD_URL=https://fastdl.mongodb.org/win32/mongodb-win32-x86_64-2012plus-ssl-4.2.8.zip jest --watchAll --no-cache"
+```
+
+This will download MongoDB version 4.2.8 for Windows 64-bit. You can find the download URLs for other versions and platforms on the MongoDB website.

@@ -1,0 +1,27 @@
+The error you're encountering is because the Python interpreter can't find the 'ujson' module in its path. This could be due to a variety of reasons, but it's likely that the module isn't being installed in the correct location.
+
+Here's a modified version of your code that should work:
+
+```python
+!wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+!chmod +x Miniconda3-latest-Linux-x86_64.sh
+!bash ./Miniconda3-latest-Linux-x86_64.sh -b -f -p /usr/local
+!conda install --channel defaults conda python=3.6 --yes
+!conda update --channel defaults --all --yes
+!conda install -c anaconda ujson --yes
+import sys
+sys.path.append('/usr/local/lib/python3.6/site-packages/')
+import ujson
+```
+
+This script does the following:
+
+1. Downloads the latest Miniconda installer.
+2. Makes the installer executable.
+3. Installs Miniconda to '/usr/local'.
+4. Updates Conda and Python to the latest version.
+5. Installs 'ujson' using Conda.
+6. Appends the path where 'ujson' is installed to the system path.
+7. Imports 'ujson'.
+
+Remember, Google Colab already has a Python environment set up, and installing Miniconda might interfere with it. It's generally recommended to use `!pip install` to install packages in Colab. If 'ujson' is available on PyPI,

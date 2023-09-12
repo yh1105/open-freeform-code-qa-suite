@@ -1,0 +1,11 @@
+It seems like the issue is related to SSL protocol. You can try accessing the app using http instead of https by typing `http://localhost:8080` in your browser. If this works, then the issue is related to SSL configuration in your application.
+
+If you want to access the app using https, you can try the following steps:
+
+1. Make sure that the SSL certificate is properly configured in your application. You can check this by looking at the application.properties or application.yml file in your project.
+
+2. Make sure that the SSL certificate is trusted by your browser. You can try adding an exception for the certificate in your browser settings.
+
+3. If the above steps do not work, you can try changing the port number to something other than 8080. You can do this by modifying the server.port property in your application.properties or application.yml file.
+
+Regarding your question about Apache, it is not necessary to install Apache to access your application in localhost. Spring Boot has an embedded web server that can serve your application.

@@ -1,0 +1,26 @@
+Certainly! Here's one way to do it using the `io` module to create a buffer for the `FigureCanvas` and then converting that buffer to a `PIL.Image`:
+
+```
+import io
+from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
+
+def transform(input: plt.Figure) -> Image:
+    # Create a canvas for the figure
+    canvas = FigureCanvas(input)
+
+    # Create a buffer to hold the canvas data
+    buf = io.BytesIO()
+
+    # Save the canvas to the buffer as a PNG
+    canvas.print_png(buf)
+
+    # Rewind the buffer to the beginning
+    buf.seek(0)
+
+    # Create a PIL Image from the buffer
+    img = Image.open(buf)
+
+    return img
+```
+
+This function takes a `plt.Figure` as input, creates a `FigureCanvas` for it, and then saves the canvas data to a buffer as a PNG. The buffer is then used to create a `PIL.Image`, which is returned by the function.

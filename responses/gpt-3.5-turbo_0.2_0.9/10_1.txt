@@ -1,0 +1,21 @@
+Yes, you can delete all saved shared preferences in Flutter using the `SharedPreferences` package. Here's how you can do it:
+
+1. Import the `SharedPreferences` package:
+
+```dart
+import 'package:shared_preferences/shared_preferences.dart';
+```
+
+2. Get an instance of `SharedPreferences`:
+
+```dart
+SharedPreferences prefs = await SharedPreferences.getInstance();
+```
+
+3. Call the `clear()` method to delete all saved preferences:
+
+```dart
+prefs.clear();
+```
+
+This will delete all saved preferences in a single shot. You can call this method when the user taps on logout to clear all saved preferences.

@@ -1,0 +1,23 @@
+It seems like the issue is with the version-platform combination of MongoDB that you are trying to download. You can try specifying a different version or platform in the options of `MongoMemoryServer`. 
+
+For example, you can try specifying a specific version of MongoDB like this:
+
+```
+mongo = new MongoMemoryServer({
+  instance: {
+    version: '4.0.13'
+  }
+});
+```
+
+Or you can try specifying a different platform like this:
+
+```
+mongo = new MongoMemoryServer({
+  binary: {
+    platform: 'osx'
+  }
+});
+```
+
+You can find more information on the available options in the `MongoMemoryServer` documentation.

@@ -1,0 +1,14 @@
+Yes, you can customize the height of `BottomNavigationBar` in Flutter. You can use the `SizedBox` widget to wrap the `BottomNavigationBar` and set its height as per your requirement. Here's an example:
+
+```dart
+Scaffold(
+  bottomNavigationBar: SizedBox(
+    height: 50, // set the height as per your requirement
+    child: BottomNavigationBar(
+      // your BottomNavigationBar code here
+    ),
+  ),
+);
+```
+
+In the above example, the `SizedBox` widget is used to wrap the `BottomNavigationBar` and its height is set to `50`. You can change the height value as per your requirement.

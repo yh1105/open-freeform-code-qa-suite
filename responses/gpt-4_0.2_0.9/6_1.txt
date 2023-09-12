@@ -1,0 +1,15 @@
+The error message you're seeing is typically due to a SSL/TLS handshake failure. This can occur if your application is trying to serve HTTPS content over HTTP or vice versa. 
+
+Here are a few things you can try to resolve this issue:
+
+1. **Check your application's configuration**: Ensure that your application is configured to serve content over the correct protocol (HTTP or HTTPS). If your application is configured to serve content over HTTPS, you'll need to ensure that it's configured with the correct SSL/TLS certificates.
+
+2. **Try accessing the application over HTTP**: If your application is configured to serve content over HTTP, try accessing it at `http://localhost:8080` instead of `https://localhost:8080`.
+
+3. **Check for port conflicts**: If another application is using port 8080, this could cause issues. You can check for port conflicts by running the command `netstat -ano | findstr :8080`. If another application is using port 8080, you'll need to either stop that application or configure your application to use a different port.
+
+4. **Check your firewall settings**: Your firewall could be blocking access to port 8080. You can check your firewall settings to ensure that access to port 8080 is allowed.
+
+5. **Check your hosts file**: Your hosts file (located at `C:\Windows\System32\drivers\etc\hosts` on Windows) should have an entry for localhost. The entry should look like this: `127.0.0.1 localhost`.
+
+You don't necessarily need to install Apache to run a Spring Boot application. Spring Boot comes with embedded Tom

@@ -1,0 +1,5 @@
+id: 4548
+prompt_path: prompt_4548.txt
+type: code debugging
+lang: go
+grading: {}

@@ -1,0 +1,8 @@
+const today = new Date();
+const month = today.getMonth() + 1;
+const day = today.getDate();
+const year = today.getFullYear();
+return `${month}/${day}/${year}`;
+}
+
+This function uses the `Date` object in Javascript to get the current date, and then formats it into a string with the desired format. The `getMonth()` method returns a zero-based index of the month, so we add 1 to get the actual month number.

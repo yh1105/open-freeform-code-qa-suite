@@ -1,0 +1,6 @@
+*.key
+test.*
+__pycache__/
+tmp/
+result.*
+.idea/

@@ -1,0 +1,4 @@
+Please write a function `getCurrentDate` in Javascript, which returns the current date in string of the format `MM/DD/YYYY`.
+
+Answer:
+function getCurrentDate() {

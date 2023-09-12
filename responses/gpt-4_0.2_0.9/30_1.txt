@@ -1,0 +1,15 @@
+This error is usually caused by a mismatch between the Gradle version and the Android Gradle plugin version. 
+
+Here are a few steps you can take to resolve this issue:
+
+1. **Update Gradle and Android Gradle Plugin**: Make sure both are updated to the latest version. You can do this by going to `File > Project Structure > Project` in Android Studio. As of now, the latest Gradle version is 7.2 and the latest Android Gradle plugin version is 7.0.2.
+
+2. **Check your JDK version**: Android Studio 4.0 and higher requires JDK 8 or higher. You can download it from the Oracle website and then set it in your project structure dialog.
+
+3. **Clean and Rebuild your project**: Sometimes, simply cleaning and rebuilding your project can solve the issue. You can do this by going to `Build > Clean Project` and then `Build > Rebuild Project`.
+
+4. **Invalidate Caches / Restart**: This option is available under the `File` menu in Android Studio. It clears the local cache of the IDE and forces it to resync with the project files.
+
+5. **Check your keystore path**: Make sure the path to your keystore file is correct and it exists. If you are using a relative path, try changing it to an absolute path.
+
+If none of these solutions work, you might want to consider downgrading your Android Studio and Gradle versions to the ones you were using before the update.

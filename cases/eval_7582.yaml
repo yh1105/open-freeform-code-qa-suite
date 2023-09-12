@@ -1,0 +1,5 @@
+id: 7582
+prompt_path: prompt_7582.txt
+type: knowledge question-answering
+lang: git
+grading: {}

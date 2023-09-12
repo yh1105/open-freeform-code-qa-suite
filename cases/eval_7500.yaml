@@ -1,0 +1,5 @@
+id: 7500
+prompt_path: prompt_7500.txt
+type: code debugging
+lang: mobile
+grading: {}

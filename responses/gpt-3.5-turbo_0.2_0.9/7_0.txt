@@ -1,0 +1,14 @@
+Yes, I can help you with that. Here's the completed function:
+
+```
+from shutil import copyfile
+
+def copy_from_file_list(fileList, destFolder):
+    for item in fileList:
+        filename = item[0].split("/")[-1] # get the filename from the full path
+        copyfile(item[0], destFolder + "/" + filename)
+```
+
+This function takes in the `fileList` and `destFolder` as parameters. It then loops through each item in `fileList`, extracts the filename from the full path using `split("/")[-1]`, and copies the file to the `destFolder` using `copyfile`. The destination filename is constructed by concatenating `destFolder` and the extracted filename.
+
+Note that the error you were getting was because you were trying to copy the files to a folder instead of a file. You need to specify the full path of the destination file, not just the folder.

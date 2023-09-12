@@ -1,0 +1,24 @@
+The error message you're seeing indicates that the MongoDB version you're trying to download does not exist for your platform. The MongoDB version is specified in the `MongoBinary options` log line:
+
+```
+2020-06-06T03:12:45.217Z MongoMS:MongoBinary MongoBinary options: {"downloadDir":"C:\\Users\\admin\\Desktop\\projects\\react-node-docker-kubernetes-app-two\\auth\\node_modules\\.cache\\mongodb-memory-server\\mongodb-binaries","platform":"win32","arch":"ia32","version":"4.0.14"}
+```
+
+Here, it's trying to download MongoDB version 4.0.14 for the win32 platform and the ia32 architecture. However, MongoDB stopped providing 32-bit support as of version 3.4, so you're getting a 403 error because the requested version-platform combination does not exist.
+
+To fix this issue, you can either:
+
+1. Upgrade your system to a 64-bit architecture and then try to download a 64-bit version of MongoDB.
+2. Specify a MongoDB version that supports 32-bit systems (i.e., version 3.4 or earlier) in your `MongoMemoryServer` configuration.
+
+Here's how you can specify the MongoDB version:
+
+```javascript
+mongo = new MongoMemoryServer({
+  binary: {
+    version: '3.4.0'
+  }
+});
+```
+
+Please note that using an older version of MongoDB might not be the best solution because it might lack features present in newer versions and it's no longer maintained by MongoDB. Therefore, upgrading your system to a 64-bit architecture would

@@ -1,0 +1,30 @@
+Certainly! Here's an implementation of the TRIM function in SQL that should work for you:
+
+```
+CREATE FUNCTION TRIM(@string VARCHAR(8000))
+RETURNS VARCHAR(8000)
+BEGIN
+    WHILE CHARINDEX(' ', @string) = 1
+    BEGIN
+        SET @string = STUFF(@string, 1, 1, '')
+    END
+
+    WHILE CHARINDEX(' ', @string, LEN(@string) - 1) = LEN(@string)
+    BEGIN
+        SET @string = LEFT(@string, LEN(@string) - 1)
+    END
+
+    RETURN @string
+END
+```
+
+You can then use it like this:
+
+```
+DECLARE @ss varchar(60)
+SET @ss = ' admin '
+
+SELECT TRIM(@ss)
+```
+
+This should return 'admin' with no leading or trailing spaces.

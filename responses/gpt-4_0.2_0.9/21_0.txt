@@ -1,0 +1,17 @@
+The issue might be due to the fact that the Python interpreter in Google Colab is not recognizing the path where the 'ujson' module is installed. You can try to append the path to sys.path where 'ujson' is installed. Here is the modified code:
+
+```python
+!wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+!chmod +x Miniconda3-latest-Linux-x86_64.sh
+!bash ./Miniconda3-latest-Linux-x86_64.sh -b -f -p /usr/local
+!conda install -q -y --prefix /usr/local python=3.6 ujson
+
+import sys
+import os
+sys.path.append('/usr/local/lib/python3.6/site-packages/')
+os.environ['PATH'] = '/usr/local/bin:' + os.environ['PATH']
+
+import ujson
+```
+
+In this code, I have added the path '/usr/local/lib/python3.6/site-packages/' to sys.path where 'ujson' is installed. Also, I have added '/usr/local/bin' to the PATH environment variable. This should help Python find the 'ujson' module.

@@ -1,0 +1,13 @@
+It seems like the issue is related to SSL protocol error. You can try accessing the application using HTTP instead of HTTPS by using the following URL: http://localhost:8080. 
+
+If you still want to access the application using HTTPS, you can try the following steps:
+
+1. Check if the SSL certificate is valid. If it is not valid, you can try generating a new SSL certificate.
+
+2. Check if the SSL certificate is installed correctly. You can check this by going to the browser settings and looking for the certificate.
+
+3. Check if the SSL configuration in the application is correct. You can check this by looking at the application configuration files.
+
+Regarding the Apache installation, it is not necessary to install Apache to access the application in localhost. The application can be accessed directly using the localhost URL. 
+
+Regarding the port issue, it seems like the port 8080 is already in use by another process. You can try stopping the process that is using the port or changing the port number in the application configuration files.
