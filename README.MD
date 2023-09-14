@@ -14,13 +14,19 @@ Then, run `python grader_main.py suite_v1.yaml responses/[your dir]`
 
 Results will be printed and stored in `result/`.
 
-For example, for GPT-4:
+For example:
 
-`python grader_main.py suite_v1.yaml responses/gpt-4_0.2_0.9_10`
+- For GPT-4:
 
-For GPT-3.5-Turbo:
+    `python grader_main.py suite_v1.yaml responses/gpt-4_0.2_0.9_10`
+    
+    **Best @ 10: 28.792 / 40**
 
-`python grader_main.py suite_v1.yaml responses/gpt-3.5-turbo_0.2_0.9_10`
+- For GPT-3.5-Turbo:
+
+    `python grader_main.py suite_v1.yaml responses/gpt-3.5-turbo_0.2_0.9_10`
+    
+    **Best @ 10: 22.906 / 40**
 
 ---
 
