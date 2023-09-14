@@ -1,0 +1,39 @@
+The error message indicates that the MongoDB version you're trying to download does not exist for your platform. The MongoDB version being downloaded is `4.0.14` for `win32` and `ia32` architecture.
+
+The MongoDB Memory Server is trying to download MongoDB from the URL `https://fastdl.mongodb.org/win32/mongodb-win32-i386-2008plus-ssl-4.0.14.zip`, which is returning a `403` status code. This means the requested resource is not available.
+
+To fix this issue, you can try the following solutions:
+
+1. **Specify a different MongoDB version**: You can specify a different MongoDB version in your `package.json` file. For example, you can use version `4.2.8` which is a more recent version and likely to be available. Here is how you can do it:
+
+```json
+"config": {
+  "mongodbMemoryServer": {
+    "version": "4.2.8"
+  }
+}
+```
+
+2. **Use a different architecture**: If you're on a 64-bit Windows machine, you can try using the `x64` architecture instead of `ia32`. You can specify this in your `package.json` file as follows:
+
+```json
+"config": {
+  "mongodbMemoryServer": {
+    "arch": "x64"
+  }
+}
+```
+
+3. **Download MongoDB manually**: If the automatic download still doesn't work, you can download MongoDB manually from the [MongoDB Download Center](https://www.mongodb.com/try/download/community), and then specify the path to the MongoDB binary in your `package.json` file:
+
+```json
+"config": {
+  "mongodbMemoryServer": {
+    "downloadDir": "/path/to/your/mongodb/binary"
+  }
+}
+```
+
+Remember to replace `"/path/to/your/mongodb/binary"` with the actual path to your MongoDB binary.
+
+After making these changes, run `npm install` to install the new configuration, and then try running your tests again.

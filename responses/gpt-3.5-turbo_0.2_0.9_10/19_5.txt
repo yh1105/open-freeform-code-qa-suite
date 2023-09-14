@@ -1,0 +1,7 @@
+This error occurs when there are too many files being watched by the system. You can try increasing the maximum number of files that can be watched by the system by running the following command in your terminal:
+
+```
+echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+```
+
+This will increase the maximum number of files that can be watched to 524288. If the error persists, you can try increasing this number further.

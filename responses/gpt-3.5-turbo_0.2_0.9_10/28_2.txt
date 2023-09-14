@@ -1,0 +1,19 @@
+Sure! Here's the completed function:
+
+```
+import plotly.figure_factory as ff
+import kaleido
+
+def plot_confusion_matrix(matrix: list[list[int]], x_labels: list[str], y_labels: list[str]):
+    fig = ff.create_annotated_heatmap(z=matrix, x=x_labels, y=y_labels, colorscale='Viridis')
+    fig.update_layout(title='Confusion Matrix', xaxis_title='Predicted', yaxis_title='Actual')
+    fig.update_layout(width=500, height=500)
+    fig.update_traces(showscale=False)
+    return fig
+```
+
+This function uses the `create_annotated_heatmap` function from `plotly.figure_factory` to create an annotated heatmap. The `z` parameter is set to the `matrix` input, which is the confusion matrix. The `x` and `y` parameters are set to the `x_labels` and `y_labels` inputs, respectively.
+
+The `update_layout` function is used to add a title and axis labels to the plot, and to set the width and height of the plot. The `update_traces` function is used to hide the color scale legend.
+
+Finally, the function returns the `fig` object, which is the `plotly` figure containing the annotated heatmap.

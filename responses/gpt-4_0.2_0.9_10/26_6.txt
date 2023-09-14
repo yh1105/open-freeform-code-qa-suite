@@ -1,0 +1,50 @@
+The problem is that the `setup` function in Vue Composition API is only called once when the component is created. So when you navigate to another user, the `setup` function is not called again, and the user data is not updated.
+
+To fix this, you can use a `watch` function to observe changes in the route parameters and update the user data accordingly. Also, you should use `reactive` instead of `ref` to make `user` reactive.
+
+Here is the updated code:
+
+```vue
+<template>
+  <div>{{username}}</div>
+</template>
+
+<script lang="ts">
+import { computed, defineComponent, watch, reactive, onMounted } from '@vue/composition-api';
+
+export const useUsername = ({ user }) => {
+  return { username: user.name };
+};
+
+export default defineComponent({
+  setup(props, { root }) {
+    const userToLoad = computed(() => root.$route.params.userId);
+    const listOfUsers = [
+      { userId: 1, name: 'user1' },
+      { userId: 2, name: 'user2' },
+    ];
+
+    const user = reactive({ name: '', userId: null });
+
+    const loadUser = () => {
+      const foundUser = listOfUsers.find((u) => u.userId === +userToLoad.value);
+      if (!foundUser) {
+        root.$router.push('/404');
+      } else {
+        user.name = foundUser.name;
+        user.userId = foundUser.userId;
+      }
+    }
+
+    onMounted(loadUser);
+    watch(userToLoad, loadUser);
+
+    const { username } = useUsername({ user });
+
+    return { username };
+  },
+});
+</script>
+```
+
+In this code, `loadUser` is a function that loads the user data based on the current route parameter. This function is called when the component is mounted (`onMounted(loadUser)`) and whenever the route parameter changes (`watch(userToLoad, loadUser)`).

@@ -1,0 +1,73 @@
+In React Navigation 5, you can achieve this by using React Context API or a state management library like Redux or MobX. I'll show you an example using React Context API.
+
+First, create a context for your state:
+
+```javascript
+import React from 'react';
+
+const CountryContext = React.createContext();
+
+export default CountryContext;
+```
+
+Next, wrap your parent component with the context provider and pass the state and the update function as the value:
+
+```javascript
+import React, { useState } from 'react';
+import CountryContext from './CountryContext';
+
+const ParentComponent = () => {
+  const [countryData, setCountryData] = useState({
+    country_name: '',
+    country_code: '',
+    calling_code: ''
+  });
+
+  const onSelectCountry = (data) => {
+    setCountryData(data);
+  };
+
+  return (
+    <CountryContext.Provider value={{ countryData, onSelectCountry }}>
+      {/* Your other components and navigation here */}
+    </CountryContext.Provider>
+  );
+};
+
+export default ParentComponent;
+```
+
+Now, in your child component, you can access the context and call the `onSelectCountry` function:
+
+```javascript
+import React, { useContext } from 'react';
+import { TouchableOpacity } from 'react-native';
+import CountryContext from './CountryContext';
+
+const ChildComponent = ({ navigation }) => {
+  const { onSelectCountry } = useContext(CountryContext);
+
+  const onPress = (country, country_code, calling_code) => {
+    navigation.goBack();
+    onSelectCountry({
+      country_name: country,
+      country_code: country_code,
+      calling_code: calling_code
+    });
+  };
+
+  return (
+    <TouchableOpacity
+      style={styles.countrySelector}
+      activeOpacity={0.7}
+      onPress={() => onPress('USA', 'us', '+1')}
+    >
+      {/* Your other components here */}
+    </TouchableOpacity>
+  );
+};
+
+export default ChildComponent;
+```
+
+This way, you can update the state in the parent component from the child component without passing functions as navigation params.

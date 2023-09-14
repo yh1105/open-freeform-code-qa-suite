@@ -24,3 +24,4 @@ Could you complete the function `copy_from_file_list` below to finish the task?
 from shutil import copyfile
 
 def copy_from_file_list(fileList, destFolder):
+```

@@ -1,0 +1,52 @@
+The problem is that the `setup` function only runs once when the component is created. So when you navigate to another user, the `setup` function doesn't run again and the user doesn't get updated.
+
+To fix this, you can use a `watch` function to observe changes in the `userId` route parameter and update the user accordingly. 
+
+Here is how you can do it:
+
+```vue
+<template>
+  <div>{{username}}</div>
+</template>
+
+<script lang="ts">
+import { computed, defineComponent, ref, watch, getCurrentInstance } from '@vue/composition-api';
+
+export const useUsername = ({ user }) => {
+  return { username: user.name };
+};
+
+export default defineComponent({
+  setup(props, { root }) {
+    const vm = getCurrentInstance();
+
+    const userToLoad = computed(() => root.$route.params.userId);
+    const listOfUsers = [
+      { userId: 1, name: 'user1' },
+      { userId: 2, name: 'user2' },
+    ];
+
+    const user = ref(listOfUsers.find((u) => u.userId === +userToLoad.value));
+
+    watch(userToLoad, (newUserId) => {
+      const newUser = listOfUsers.find((u) => u.userId === +newUserId);
+      if (!newUser) {
+        root.$router.push('/404');
+      } else {
+        user.value = newUser;
+      }
+    }, { immediate: true });
+
+    const { username } = useUsername({ user: user.value });
+
+    return { username };
+  },
+});
+</script>
+```
+
+In this code, I've added a `watch` function that observes changes in the `userToLoad` computed property. When `userToLoad` changes, the `watch` function will find the new user from the `listOfUsers` array and update the `user` ref. If the user is not found, it will redirect to the 404 page.
+
+The `{ immediate: true }` option in the `watch` function makes sure that the function runs immediately when the component is created, in addition to when `userToLoad` changes.
+
+Also, I've changed `user` to be a `ref` instead of a constant, so that it can be updated when the route changes.

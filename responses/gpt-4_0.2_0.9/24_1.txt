@@ -1,7 +1,0 @@
-As of now, there are no official or semi-official guidelines on how to name getters and setters after Java 14 in new code. The introduction of records in Java 14 is a preview feature, which means it's a new feature of the Java language that's being introduced for developers to try out and provide feedback on. It's not a final feature of the language, and it may change in future versions of Java.
-
-The use of records in Java 14 does not change the JavaBeans naming conventions for getters and setters. If you're using records, you would use the direct field name as the getter (e.g., `person.name()`). If you're using JavaBeans, you would continue to use the `get` or `set` prefix (e.g., `person.getName()`).
-
-If you're working in a codebase that uses both records and JavaBeans, it's up to you and your team to decide on a convention that works best for you. You might decide to use the JavaBeans convention for all getters and setters, or you might decide to use the record convention for all getters and setters. Or you might decide to use the record convention for records and the JavaBeans convention for JavaBeans.
-
-In any case, the most important thing is to be consistent in your naming conventions throughout your codebase.

@@ -1,0 +1,13 @@
+This issue is usually caused by the Go tools not being able to find the package in your GOPATH or GOROOT. Here are some steps you can take to resolve this issue:
+
+1. **Check your GOPATH and GOROOT settings**: Make sure that your GOPATH and GOROOT are set correctly. You can check these settings by running `go env` in your terminal. The GOPATH should be the path to your workspace, and the GOROOT should be the path to your Go installation.
+
+2. **Download the package**: If the package is not found in your GOPATH or GOROOT, you may need to download it. You can do this by running `go get github.com/gomodule/redigo/redis` in your terminal.
+
+3. **Update your Go tools**: If the package is in your GOPATH or GOROOT but VSCode is still not recognizing it, you may need to update your Go tools. You can do this by running `Go: Install/Update Tools` in the command palette (Ctrl+Shift+P).
+
+4. **Reload VSCode**: After updating your Go tools, you may need to reload VSCode for the changes to take effect. You can do this by running `Developer: Reload Window` in the command palette.
+
+5. **Check your import statement**: Make sure that your import statement is correct. It should be `import "github.com/gomodule/redigo/redis"`.
+
+If none of these steps resolve the issue, it may be a bug with VSCode or the Go extension. In this case, you may want to submit an issue on the relevant GitHub repository.

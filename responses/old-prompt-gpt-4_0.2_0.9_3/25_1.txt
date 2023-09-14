@@ -1,0 +1,47 @@
+In React Navigation 5, passing non-serializable values as parameters is not recommended. This is because the parameters might be used as input for the URI which is generated when linking to a screen in the app. Non-serializable values like functions will not work in this case.
+
+To achieve your goal, you can use React Context or Redux to manage your state. However, if you don't want to use these libraries, you can use a workaround by using `React.useEffect` and `React.useCallback` hooks.
+
+Here is an example of how you can do it:
+
+```jsx
+// Parent Screen
+import React, { useState, useCallback } from 'react';
+import { TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+
+const ParentScreen = () => {
+  const [countryCode, setCountryCode] = useState(null);
+  const navigation = useNavigation();
+
+  const onSelectCountry = useCallback((data) => {
+    setCountryCode(data);
+  }, []);
+
+  return (
+    <TouchableOpacity
+      style={styles.countrySelector}
+      activeOpacity={0.7}
+      onPress={() => {
+        navigation.navigate('CountrySelect', {
+          countryCode,
+          onSelectCountry,
+        });
+      }}
+    />
+  );
+};
+```
+
+```jsx
+// Child Screen
+import React, { useEffect } from 'react';
+import { useRoute, useNavigation } from '@react-navigation/native';
+
+const ChildScreen = () => {
+  const { params } = useRoute();
+  const navigation = useNavigation();
+
+  const onPress = (country, country_code, calling_code) => {
+    navigation.goBack();
+    params.on

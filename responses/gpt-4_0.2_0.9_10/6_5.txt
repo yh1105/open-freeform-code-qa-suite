@@ -1,0 +1,18 @@
+It seems like the issue is related to SSL/TLS configuration. Your application is running on HTTPS, which requires a valid SSL certificate. There are a few possible reasons for this error:
+
+1. Missing or invalid SSL certificate: Ensure that you have a valid SSL certificate for your application. You can create a self-signed certificate for local development purposes. In a production environment, you should obtain a valid SSL certificate from a trusted Certificate Authority (CA).
+
+2. Incorrect SSL configuration: Check your Spring Boot application's configuration to ensure that SSL is properly configured. You can refer to the [official Spring Boot documentation](https://docs.spring.io/spring-boot/docs/current/reference/html/howto.html#howto-configure-ssl) for more details on how to configure SSL.
+
+3. Port conflict: Although it seems that Java is using port 8080, it's still a good idea to check if there are any other applications using the same port. You can try changing the port in your Spring Boot application's configuration to see if it resolves the issue.
+
+If you still face issues, you can try running your application without SSL (using HTTP) for local development purposes. To do this, update your Spring Boot application's configuration to disable SSL and use a different port if needed.
+
+For example, in your `application.properties` or `application.yml` file, you can set the following properties:
+
+```
+server.port=8080
+server.ssl.enabled=false
+```
+
+Remember that running your application without SSL is not recommended for production environments, as it can expose your application to security risks.

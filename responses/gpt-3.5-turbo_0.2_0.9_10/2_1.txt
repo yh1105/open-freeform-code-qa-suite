@@ -1,0 +1,18 @@
+Yes, you can use the built-in Jupyter Notebook integration in Visual Studio Code to display the plot inline. Here's how you can modify your code to achieve this:
+
+```
+#%%
+import matplotlib.pyplot as plt
+import matplotlib as mpl
+import numpy as np
+
+%matplotlib inline
+
+x = np.linspace(0, 20, 100)
+plt.plot(x, np.sin(x))
+plt.show()
+```
+
+The `%matplotlib inline` command tells Matplotlib to display the plot inline in the output cell of the Jupyter Notebook. The `#%%` at the beginning of the code block is a cell separator that is used by Jupyter Notebooks, but it's not necessary in Visual Studio Code.
+
+Once you've added these lines to your code, you can run it in Visual Studio Code and the plot will be displayed inline in the output cell.

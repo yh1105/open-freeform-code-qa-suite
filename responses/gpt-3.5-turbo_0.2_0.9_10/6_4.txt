@@ -1,0 +1,9 @@
+It seems like the issue is related to SSL protocol error. This error occurs when the browser is unable to establish a secure connection with the server. 
+
+You can try accessing the application using http instead of https. To do this, try accessing the application using the following URL: http://localhost:8080
+
+If this works, then it means that the SSL certificate is not configured properly. You can either configure the SSL certificate or continue using http.
+
+Regarding the Apache installation, it is not necessary to install Apache to access the application in localhost. The application can be accessed directly using the URL mentioned above.
+
+Regarding the port issue, it seems like the application is running on port 8080. If you have any other application running on the same port, it can cause conflicts. You can try stopping the other application or changing the port number for your application. To change the port number, you can modify the application.properties file and set a different port number.

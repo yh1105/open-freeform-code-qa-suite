@@ -1,0 +1,13 @@
+The error message `RuntimeError: CUDA error: device-side assert triggered` is a general error message from CUDA, which means that somewhere in your CUDA code, an assertion failed. This could be due to a variety of reasons, but it's often due to an out-of-bounds access in a CUDA kernel or other similar issues.
+
+The assert is there as a debugging aid. In CUDA, you can use the `assert()` function in device code to check for conditions that should always be true. If the condition is false, the assert will trigger, and the kernel will stop executing. This can be very useful for catching bugs in your code.
+
+To debug the problem, you need to identify the specific assert that is being triggered. This can be challenging, as the error message doesn't tell you where the assert is. Here are some general steps you can follow:
+
+1. **Check the input data**: Make sure that all inputs to your CUDA kernels are valid. For example, if you're passing an array to a kernel, make sure that the array is not null and that it contains the expected data.
+
+2. **Check the kernel launch parameters**: Make sure that you're launching your CUDA kernels with the correct number of blocks and threads. If you're launching too many threads or blocks, you might be causing an out-of-bounds access.
+
+3. **Use a debugger**: If you're still unable to find the problem, you can use a CUDA-capable debugger to step through your code and find the exact location of the assert. NVIDIA's Nsight debugger is a good option for this.
+
+4. **Add your own asserts**: If you

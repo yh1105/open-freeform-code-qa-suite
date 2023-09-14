@@ -1,0 +1,5 @@
+It seems like the issue is related to the version-platform combination of MongoDB that you are trying to use. The error message indicates that the requested version-platform combination does not exist.
+
+You can try specifying a different version of MongoDB in your `package.json` file and see if that resolves the issue. For example, you can try using `"mongodb-memory-server": "^6.7.0"` and `"mongodb-memory-server-core": "^6.7.0"`.
+
+If that doesn't work, you can also try deleting the `node_modules` folder and running `npm install` again to ensure that all dependencies are up to date.

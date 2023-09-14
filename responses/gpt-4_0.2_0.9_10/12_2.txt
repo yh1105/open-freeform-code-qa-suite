@@ -1,0 +1,17 @@
+The error `RuntimeError: CUDA error: device-side assert triggered` is a general error message from CUDA, which means that somewhere in your CUDA code, an assertion failed. This could be due to a variety of reasons, such as an out-of-bounds access in a CUDA kernel, a failed CUDA API call, or other types of programming errors.
+
+An "assert" is a debugging feature of many programming languages. It's a statement that allows a program to check if a certain condition is true at a certain point in the code. If the condition is not true, the program will stop and throw an error. In CUDA, assertions can be used in device code, and if a condition in an assert statement evaluates to false, a runtime error will be triggered.
+
+The reason why the assert is there is to catch programming errors. It's a way to make sure that the assumptions you made about your code are actually true. If an assert fails, it means that something unexpected happened, and it's usually a sign that there's a bug in your code that needs to be fixed.
+
+Debugging this error can be a bit tricky, because the error message doesn't tell you where the assert was triggered. Here are some general steps you can take to debug the problem:
+
+1. **Check the CUDA kernel launches**: Make sure that the configuration of your CUDA kernel launches is correct. This includes the number of blocks, the number of threads per block, and the size of the shared memory. If you're launching too many threads or blocks, or if you're allocating too much shared memory, this could cause a device-side assert.
+
+2. **Check the array indices**: Out-of-bounds access is a common cause of device-side asserts. Make sure that all your array indices are within the bounds of the array.
+
+3. **Use CUDA's debugging tools**: CUDA provides several tools that can help you debug your code, such as cuda-memcheck and cuda-gdb. These tools can help you find where the assert is being triggered.
+
+4. **Simplify your code**: If you're still having trouble finding the bug, try to simplify your code as much as possible. Remove any unnecessary code, and try to isolate the part of the code that's causing the problem.
+
+5. **Check the CUDA API calls**: Make sure that all your CUDA API calls are successful. You can do this by checking the return value of each API call, or by using the `cudaPeekAt

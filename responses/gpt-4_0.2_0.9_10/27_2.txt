@@ -1,0 +1,23 @@
+Your `app.module.ts` file looks fine and you have correctly imported the `FlexLayoutModule` from `@angular/flex-layout`. 
+
+The issue might be in your `login-view` component. Here's a basic example of how you can use Angular Flex Layout in your component:
+
+```html
+<div fxLayout="row" fxLayoutAlign="center center">
+  <div fxFlex="50%">
+    <!-- Your login form goes here -->
+  </div>
+</div>
+```
+
+In this example, `fxLayout="row"` sets the layout direction to row, and `fxLayoutAlign="center center"` aligns the children elements both horizontally and vertically in the center. `fxFlex="50%"` sets the width of the child div to 50%.
+
+If it's still not working, make sure that you have installed the correct version of Angular Flex Layout that is compatible with your Angular version. For Angular 9, you should install Angular Flex Layout version 9.0.0-beta.31.
+
+You can install it using the following command:
+
+```bash
+npm install @angular/flex-layout@9.0.0-beta.31
+```
+
+Also, check if you have imported the `FlexLayoutModule` in the module where your `login-view` component is declared. If your `login-view` component is declared in a different module other than `app.module.ts`, you need to import `FlexLayoutModule` in that module too.

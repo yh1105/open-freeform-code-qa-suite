@@ -1,0 +1,46 @@
+The error message suggests that you need to include the `spring-cloud-starter-netflix-ribbon` dependency in your `pom.xml`. Since you mentioned that you have already tried adding it but it didn't help, there might be a version conflict or some other issue.
+
+First, make sure you have the correct version of `spring-cloud-dependencies` in your `pom.xml`. For Spring Boot 2.0.8, you should use the `Finchley.SR2` release train. Add or update the following in your `pom.xml`:
+
+```xml
+<properties>
+    <spring-cloud.version>Finchley.SR2</spring-cloud.version>
+</properties>
+
+<dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-dependencies</artifactId>
+            <version>${spring-cloud.version}</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+    </dependencies>
+</dependencyManagement>
+```
+
+Next, add the `spring-cloud-starter-netflix-ribbon` dependency to your `pom.xml`:
+
+```xml
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
+</dependency>
+```
+
+After adding these dependencies, clean and rebuild your project:
+
+```bash
+mvn clean install
+```
+
+If the issue persists, try adding the following configuration to your `application.properties` or `application.yml` file:
+
+```properties
+feign.hystrix.enabled=false
+```
+
+This will disable Hystrix for Feign clients, which might help in resolving the issue.
+
+If none of these solutions work, please provide more information about your project setup, such as the complete `pom.xml` file and any other relevant configuration files.

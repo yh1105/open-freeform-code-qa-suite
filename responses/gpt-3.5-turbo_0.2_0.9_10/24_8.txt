@@ -1,0 +1,3 @@
+There is no official or semi-official guideline on how to name getters and setters after Java 14. However, it is recommended to follow the naming convention that is most appropriate for the context of your codebase. 
+
+If you are working with legacy code that follows the Java bean convention, it may be best to continue using `getName()` and `setName()` for consistency. On the other hand, if you are starting a new project or working with code that is not tied to the Java bean convention, using the record syntax with `name()` may be more concise and readable. Ultimately, the choice is up to you and your team.

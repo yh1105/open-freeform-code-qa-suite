@@ -1,0 +1,13 @@
+You should modify the `main.ts` file to:
+
+```
+import Logo from 'assets/images/logo.png';
+```
+
+And modify the HTML file `main.html` to:
+
+```
+<img src={Logo.default} alt="" />
+```
+
+This is because the `import` statement in `main.ts` is importing the module as a namespace object, which is not compatible with the `src` property of the `img` element. By importing the module as a default export, you can access the actual value of the module, which is the URL of the image.

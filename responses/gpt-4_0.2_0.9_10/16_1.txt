@@ -1,0 +1,23 @@
+To generate a REST client using Swagger Codegen, follow these steps:
+
+1. **Install Swagger Codegen**: If you haven't installed Swagger Codegen yet, you can do so by following the instructions on the [official GitHub repository](https://github.com/swagger-api/swagger-codegen). You can either download the pre-built JAR file or build it from the source.
+
+2. **Obtain the Swagger/OpenAPI Specification**: To generate a REST client, you need the Swagger/OpenAPI specification file (usually in JSON or YAML format) for your REST server. This file describes the API endpoints, request parameters, and response structures. If you don't have the specification file, you can create one using tools like [Swagger Editor](https://editor.swagger.io/) or generate it automatically from your server code using libraries like [Swashbuckle](https://github.com/domaindrivendev/Swashbuckle.AspNetCore) for .NET or [Springfox](https://github.com/springfox/springfox) for Java.
+
+3. **Generate the REST Client**: Once you have the Swagger/OpenAPI specification file, you can generate the REST client using Swagger Codegen. Open a terminal/command prompt and run the following command:
+
+```bash
+java -jar swagger-codegen-cli.jar generate -i /path/to/swagger-spec.yaml -l <language> -o /path/to/output/directory
+```
+
+Replace `/path/to/swagger-spec.yaml` with the path to your Swagger/OpenAPI specification file, `<language>` with the programming language you want to generate the client in (e.g., `java`, `python`, `csharp`, etc.), and `/path/to/output/directory` with the directory where you want to save the generated client code.
+
+For example, if you want to generate a Python client, the command would look like this:
+
+```bash
+java -jar swagger-codegen-cli.jar generate -i /path/to/swagger-spec.yaml -l python -o /path/to/output/directory
+```
+
+4. **Use the Generated Client**: After the client code is generated, you can use it in your application by importing the required classes and making API calls. The usage will depend on the programming language and the structure of the generated client. You can usually find a README file in the output directory with instructions on how to use the generated client.
+
+That's it! You've successfully generated a REST client using Swagger Codegen.

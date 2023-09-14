@@ -1,0 +1,3 @@
+"Access-Control-Allow-Credentials" value to True. There are two other settings need to be set: Access-Control-Allow-Origin and Access-Control-Allow-Methods.
+
+For front-end settings, Chrome delivers cookies with cross-site requests only with "credentials=true" and "sameSite=None". Then, the request code, if written in Angular, needs to set "withCredentials: true".

@@ -1,0 +1,54 @@
+It seems like you have imported the `FlexLayoutModule` correctly in your `app.module.ts`. To use Angular Flex-Layout in your `login-view` component, follow these steps:
+
+1. Make sure you have installed the `@angular/flex-layout` package. If not, install it using the following command:
+
+   ```
+   npm install @angular/flex-layout
+   ```
+
+2. In your `login-view.component.html`, you can now use the Angular Flex-Layout directives like `fxLayout`, `fxLayoutAlign`, `fxLayoutGap`, and others. Here's a basic example:
+
+   ```html
+   <div fxLayout="column" fxLayoutAlign="center center">
+     <h1>Login</h1>
+     <form>
+       <mat-form-field>
+         <mat-label>Email</mat-label>
+         <input matInput type="email" placeholder="Enter your email">
+       </mat-form-field>
+       <mat-form-field>
+         <mat-label>Password</mat-label>
+         <input matInput type="password" placeholder="Enter your password">
+       </mat-form-field>
+       <button mat-raised-button color="primary">Login</button>
+     </form>
+   </div>
+   ```
+
+   In this example, we're using `fxLayout="column"` to stack the elements vertically and `fxLayoutAlign="center center"` to center the content both horizontally and vertically.
+
+3. If you still face issues, make sure you have imported the required Angular Material components in your `material.module.ts` file. For the example above, you should have the following imports:
+
+   ```typescript
+   import { MatFormFieldModule } from '@angular/material/form-field';
+   import { MatInputModule } from '@angular/material/input';
+   import { MatButtonModule } from '@angular/material/button';
+
+   @NgModule({
+     imports: [
+       // other imports
+       MatFormFieldModule,
+       MatInputModule,
+       MatButtonModule,
+     ],
+     exports: [
+       // other exports
+       MatFormFieldModule,
+       MatInputModule,
+       MatButtonModule,
+     ],
+   })
+   export class MaterialModule {}
+   ```
+
+By following these steps, you should be able to use Angular Flex-Layout in your `login-view` component.

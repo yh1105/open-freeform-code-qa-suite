@@ -1,0 +1,7 @@
+It seems like the issue is with the version-platform combination of MongoDB. The requested version-platform combination doesn't exist, which is causing the 403 error. 
+
+You can try specifying a different version of MongoDB in the `package.json` file. For example, if you're currently using version 4.0.14, you can try downgrading to version 4.0.13 or upgrading to version 4.0.15 to see if that resolves the issue. 
+
+You can also try deleting the `node_modules` folder and running `npm install` again to ensure that all dependencies are up to date. 
+
+If neither of these solutions work, you can try reaching out to the maintainers of `mongodb-memory-server` for further assistance.

@@ -1,0 +1,27 @@
+Yes, you can use a personal access token to clone, commit, and push to a GitHub repository. Here's how you can do it:
+
+```bash
+# Navigate to the directory where you want to clone the repository
+cd /tmp
+
+# Clone the repository
+git clone https://<username>:<personal_access_token>@github.com/<username>/<project_name>.git
+
+# Navigate to the cloned repository
+cd <project_name>
+
+# Make changes to the files as needed
+
+# Stage the changes for commit
+git add .
+
+# Commit the changes
+git commit -m 'Your commit message'
+
+# Push the changes to the repository
+git push https://<username>:<personal_access_token>@github.com/<username>/<project_name>.git
+```
+
+Replace `<username>`, `<personal_access_token>`, and `<project_name>` with your GitHub username, your personal access token, and the name of your project, respectively.
+
+Note: It's not a good practice to put your personal access token directly in the command because it can be exposed in your shell history. It's better to use a git credential helper to manage this.

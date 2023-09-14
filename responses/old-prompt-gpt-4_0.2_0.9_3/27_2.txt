@@ -1,0 +1,15 @@
+From the `app.module.ts` file you provided, it seems like you have correctly imported the `FlexLayoutModule` in your `AppModule`. This should make the flex-layout directives available throughout your application.
+
+If you're having trouble using flex-layout in your `login-view` component, here are a few things you can check:
+
+1. **Check your component's HTML file**: Make sure you're using the correct flex-layout directives in your component's HTML file. For example, you should be able to use directives like `fxLayout`, `fxLayoutAlign`, `fxFlex`, etc.
+
+2. **Check your component's CSS file**: If you're using flex-layout, you might not need to use traditional CSS flexbox properties in your component's CSS file. If you have conflicting CSS rules, it might cause unexpected behavior.
+
+3. **Check for errors in the console**: If there's an issue with your setup, Angular might be logging errors to the console. Check your browser's developer tools for any error messages.
+
+4. **Check your Angular version**: Angular Flex-Layout requires Angular 9 or higher. Make sure you're using a compatible version of Angular.
+
+5. **Check your Flex-Layout version**: Make sure you're using a version of Flex-Layout that's compatible with your Angular version. You can check the [Flex-Layout compatibility chart](https://github.com/angular/flex-layout#compatibility) for more information.
+
+If you're still having trouble, please provide more information about the issue you're experiencing. For example, are there any error messages? What does your `login-view` component's HTML and CSS look

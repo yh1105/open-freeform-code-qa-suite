@@ -1,0 +1,17 @@
+The error message you're seeing is typically due to a problem with the SSL/TLS setup on your server. It seems like your application is trying to serve content over HTTPS, but there's an issue with the SSL configuration.
+
+Here are a few things you can try:
+
+1. **Check your application's SSL configuration**: Ensure that your Spring Boot application is correctly configured to support HTTPS. You should have a valid SSL certificate and the application should be configured to use it. If you're using a self-signed certificate for local development, make sure your browser accepts it.
+
+2. **Try using HTTP instead of HTTPS**: If you're just running your application locally for development purposes, you might not need to use HTTPS. Try accessing your application at `http://localhost:8080` instead of `https://localhost:8080`.
+
+3. **Change the port**: If the port 8080 is being used by another process, you can change the port your Spring Boot application runs on. You can do this by adding `server.port = 8081` (or any other unused port) in your `application.properties` file.
+
+4. **Check your firewall settings**: Ensure that your firewall is not blocking the port 8080.
+
+5. **Reinstall or update Java**: Sometimes, this issue can be caused by a problem with your Java installation. Try reinstalling or updating Java on your machine.
+
+Remember, you don't need to install Apache to run a Spring Boot application. Spring Boot comes with embedded servers (Tomcat, Jetty, or Undertow), so you don't need to install a separate server to run your application.
+
+If none of

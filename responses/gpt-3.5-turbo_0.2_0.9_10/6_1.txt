@@ -1,0 +1,13 @@
+It seems like the issue is related to SSL protocol error. You can try accessing the app using `http` instead of `https` by typing `http://localhost:8080` in your browser. If this works, then it means that the SSL certificate is not configured properly.
+
+If you want to access the app using `https`, you can try the following steps:
+
+1. Check if the SSL certificate is configured properly in your application. You can check this by looking at the `application.yml` or `application.properties` file in your project.
+
+2. If the SSL certificate is configured properly, then you can try importing the SSL certificate into your browser. To do this, you can follow the steps mentioned in this article: https://www.sslshopper.com/article-how-to-import-a-certificate-into-google-chrome.html
+
+3. If importing the SSL certificate does not work, then you can try running the app on a different port by changing the `server.port` property in the `application.yml` or `application.properties` file. For example, you can change it to `server.port=8081`.
+
+4. If none of the above steps work, then you can try disabling SSL in your application by setting the `server.ssl.enabled` property to `false` in the `application.yml` or `application.properties` file. However, this is not recommended for production environments.
+
+Regarding your question about Apache, it is not necessary to install Apache to access your app in localhost. The app should be accessible by typing `http://localhost:8080` in your browser.

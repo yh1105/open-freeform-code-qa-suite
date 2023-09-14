@@ -1,0 +1,27 @@
+This error message usually occurs when the Go language server is unable to find the package in your Go workspace. Here are some steps you can try to resolve this issue:
+
+1. Make sure that the Redigo package is installed in your Go workspace. You can do this by running the following command in your terminal:
+
+   ```
+   go get github.com/gomodule/redigo/redis
+   ```
+
+2. Check that your Go workspace is set up correctly. You can do this by running the following command in your terminal:
+
+   ```
+   go env
+   ```
+
+   This will display your Go environment variables. Make sure that the `GOPATH` variable is set correctly and that it includes the path to your Go workspace.
+
+3. If you have recently installed the Redigo package, try restarting VSCode. This will force the Go language server to re-scan your workspace and should resolve the issue.
+
+4. If none of the above steps work, try adding the following line to your `settings.json` file in VSCode:
+
+   ```
+   "gopls": {"experimentalWorkspaceModule": true}
+   ```
+
+   This will enable experimental support for Go modules in the Go language server and may resolve the issue.
+
+I hope this helps! Let me know if you have any further questions.

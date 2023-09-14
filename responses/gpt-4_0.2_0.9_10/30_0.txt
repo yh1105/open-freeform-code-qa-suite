@@ -1,0 +1,17 @@
+This error is caused by a mismatch in the signing configuration between the old and new versions of Android Studio. To fix this issue, follow these steps:
+
+1. Open your `build.gradle` file (Module: app) in Android Studio.
+2. Locate the `signingConfigs` block and ensure that the `storeFile` property is using an absolute path. For example:
+
+```groovy
+signingConfigs {
+    release {
+        storeFile file('/absolute/path/to/your/keystore.jks')
+        storePassword 'your_store_password'
+        keyAlias 'your_key_alias'
+        keyPassword 'your_key_password'
+    }
+}
+```
+
+3. Sync your project with Gradle files and try generating the signed bundle again.

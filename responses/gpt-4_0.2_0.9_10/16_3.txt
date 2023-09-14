@@ -1,0 +1,34 @@
+Swagger Codegen is a powerful tool that allows you to generate server stubs, client SDKs, and API documentation from your OpenAPI Specification. Here's a step-by-step guide on how to generate a REST client using Swagger Codegen:
+
+1. **Install Swagger Codegen**: If you haven't installed Swagger Codegen yet, you can do so by using Homebrew if you're on a Mac:
+
+```bash
+brew install swagger-codegen
+```
+
+For other platforms, you can download the JAR file directly from its [GitHub repository](https://github.com/swagger-api/swagger-codegen).
+
+2. **Get the Swagger Specification for your API**: You need the Swagger specification (in JSON or YAML format) for your API. If you don't have it, you can usually get it from the API's documentation or by asking the API provider. The URL of the Swagger specification often ends in `swagger.json` or `swagger.yaml`.
+
+3. **Generate the Client Code**: Once you have the Swagger specification, you can generate the client code. The basic command is:
+
+```bash
+swagger-codegen generate -i /path/to/swagger.yaml -l language -o /output/directory
+```
+
+Replace `/path/to/swagger.yaml` with the path to your Swagger specification file, `language` with the programming language you want the client in (e.g., `java`, `python`, `ruby`, `php`, `javascript`, etc.), and `/output/directory` with the directory where you want the generated code to be saved.
+
+For example, if you want to generate a Python client and save it in a directory called `my_python_client`, you would use:
+
+```bash
+swagger-codegen generate -i /path/to/swagger.yaml -l python -o my_python_client
+```
+
+4. **Use the Generated Client**: The generated code will include everything you need to interact with the API, including models for the data and an API client class. You can import this class into your code and use it to make API calls.
+
+Remember to check the README file in the generated code. It usually contains instructions on how to install and use the client.
+
+Please note that Swagger Codegen is not actively maintained and it's suggested to use [OpenAPI Generator](https://github.com/OpenAPITools/openapi-generator) for new projects. The process is similar, but the command to generate the client code is slightly different:
+
+```bash
+openapi-generator generate -i /path

@@ -1,0 +1,19 @@
+This error occurs when the number of files that are being watched by the system exceeds the limit set by the operating system. 
+
+To fix this issue, you can try increasing the maximum number of files that can be watched by the system. 
+
+On macOS or Linux, you can run the following command in your terminal:
+
+```
+echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+```
+
+This will increase the limit to 524288. You can try increasing it further if needed.
+
+On Windows, you can try running the following command in an elevated command prompt:
+
+```
+echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+```
+
+If this doesn't work, you can try closing some of the open files or restarting your computer to release the file handles.

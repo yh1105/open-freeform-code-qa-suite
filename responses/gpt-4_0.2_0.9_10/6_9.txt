@@ -1,0 +1,45 @@
+It seems like the issue is related to SSL/TLS configuration. Your application is running on HTTPS, which requires a valid SSL certificate. Since you're using localhost, you might need to create a self-signed certificate for development purposes.
+
+Here are the steps to create a self-signed certificate and configure your Spring Boot application to use it:
+
+1. Create a self-signed certificate using the Java keytool:
+
+```bash
+keytool -genkey -alias selfsigned_localhost_sslserver -keyalg RSA -keysize 2048 -validity 700 -keypass changeit -storepass changeit -keystore ssl-server.jks -dname "CN=localhost, OU=Localhost, O=Localhost, L=Unknown, ST=Unknown, C=Unknown"
+```
+
+This command will create a self-signed certificate named `ssl-server.jks` with the password `changeit`. You can change the password and other details as needed.
+
+2. Place the generated `ssl-server.jks` file in your Spring Boot project's `src/main/resources` directory.
+
+3. Update your `application.properties` or `application.yml` file to include the SSL configuration:
+
+For `application.properties`:
+
+```properties
+server.ssl.key-store=classpath:ssl-server.jks
+server.ssl.key-store-password=changeit
+server.ssl.key-password=changeit
+server.ssl.key-alias=selfsigned_localhost_sslserver
+server.ssl.key-store-type=JKS
+server.port=8080
+```
+
+For `application.yml`:
+
+```yaml
+server:
+  ssl:
+    key-store: classpath:ssl-server.jks
+    key-store-password: changeit
+    key-password: changeit
+    key-alias: selfsigned_localhost_sslserver
+    key-store-type: JKS
+  port: 8080
+```
+
+4. Restart your Spring Boot application using `mvnw`.
+
+5. Open your browser and navigate to `https://localhost:8080`. You might see a warning about the certificate being not secure or not trusted. This is expected since it's a self-signed certificate. Proceed with caution and accept the certificate for development purposes.
+
+If you still face issues, make sure there are no other applications running on port 8080. If the problem persists, you can try changing the port in the `application.properties` or `application.yml` file and restart the application.

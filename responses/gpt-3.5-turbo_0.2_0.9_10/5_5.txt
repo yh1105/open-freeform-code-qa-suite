@@ -1,0 +1,15 @@
+You should modify the `main.ts` file to:
+
+```
+import Logo from 'assets/images/logo.png';
+```
+
+And modify the HTML file `main.html` to:
+
+```
+<img src={Logo.default} alt="" />
+```
+
+This is because the `import` statement in `main.ts` is importing the entire module as an object, not just the value of the module. By using `import Logo from 'assets/images/logo.png'`, you are importing the default export of the module, which is the value of the module. 
+
+In the HTML file, you need to access the value of the module by using `Logo.default`.

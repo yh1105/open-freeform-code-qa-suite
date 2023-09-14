@@ -1,0 +1,24 @@
+Yes, you can create a custom TRIM function in SQL Server to remove leading and trailing spaces from a string. Here's an example implementation:
+
+```
+CREATE FUNCTION TRIM(@str VARCHAR(8000))
+RETURNS VARCHAR(8000)
+BEGIN
+    WHILE CHARINDEX(' ', @str) = 1
+        SET @str = SUBSTRING(@str, 2, LEN(@str) - 1)
+    WHILE CHARINDEX(' ', REVERSE(@str)) = 1
+        SET @str = SUBSTRING(@str, 1, LEN(@str) - 1)
+    RETURN @str
+END
+```
+
+This function takes a string as input and removes any leading or trailing spaces. You can then use it in your code like this:
+
+```
+DECLARE @ss varchar(60)
+SET @ss = ' admin '
+
+SELECT TRIM(@ss)
+```
+
+This will return 'admin' with no leading or trailing spaces.

@@ -1,0 +1,36 @@
+The problem here is that the `setup` function in Vue 3 (or Vue 2 with the Composition API plugin) only runs once when the component is created. This means that when the route changes, the `setup` function is not called again, and the `user` and `username` variables are not updated.
+
+To fix this, you can use a `watch` function to observe changes to the route parameters and update the `user` and `username` variables accordingly. Here's how you can do it:
+
+```vue
+<template>
+  <div>{{username}}</div>
+</template>
+
+<script lang="ts">
+import { computed, defineComponent, ref, watch, getCurrentInstance } from '@vue/composition-api';
+
+export const useUsername = ({ user }) => {
+  return { username: user.name };
+};
+
+export default defineComponent({
+  setup(props, { root }) {
+    const vm = getCurrentInstance();
+
+    const userToLoad = computed(() => root.$route.params.userId);
+    const listOfUsers = [
+      { userId: 1, name: 'user1' },
+      { userId: 2, name: 'user2' },
+    ];
+
+    const user = ref(listOfUsers.find((u) => u.userId === +userToLoad.value));
+    if (!user.value) {
+      return root.$router.push('/404');
+    }
+
+    const { username } = useUsername({ user: user.value });
+
+    // Watch for changes in the route params
+    watch(userToLoad, (newUserId) => {
+      const newUser = listOfUsers.find((u) => u.userId === +newUserId);

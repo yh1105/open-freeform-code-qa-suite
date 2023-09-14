@@ -1,0 +1,7 @@
+There are no official or semi-official guidelines on how to name getters and setters after Java 14. The JavaBeans naming conventions (`getName()`, `setName()`) are still widely used and accepted. 
+
+Java 14 introduced records as a preview feature, and they became standard in Java 16. Records are intended to be simple data carriers, and the `name()` style accessor is part of their simplicity. 
+
+In a mixed codebase, it would be reasonable to continue using the JavaBeans convention for regular classes, and the record-style accessors for records. This would maintain consistency within each type of class.
+
+If you want to have a uniform style across your codebase, you would need to decide on one style and refactor the existing code to match. This could be a significant effort and may not be worth it, especially if you are working with a large codebase or if the code is used by other teams or projects.

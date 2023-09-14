@@ -1,0 +1,43 @@
+It seems like the issue is related to the MongoDB version and platform combination not being available for download. The error message indicates that the requested version-platform combination doesn't exist (Status Code 403).
+
+To fix this issue, you can try the following steps:
+
+1. Update the `mongodb-memory-server` package to the latest version by running:
+
+   ```
+   npm install mongodb-memory-server@latest --save-dev
+   ```
+
+2. Specify a compatible MongoDB version and platform in your project. You can do this by adding the following configuration in your `package.json` file:
+
+   ```json
+   "config": {
+     "mongodbMemoryServer": {
+       "version": "4.0.14",
+       "platform": "win32",
+       "arch": "x64"
+     }
+   }
+   ```
+
+   Make sure to replace the `version`, `platform`, and `arch` values with the appropriate ones for your system. You can find the available MongoDB versions and platforms [here](https://www.mongodb.com/try/download/community).
+
+3. Remove the `node_modules` folder and `package-lock.json` file from your project directory:
+
+   ```
+   rm -rf node_modules package-lock.json
+   ```
+
+4. Reinstall the dependencies:
+
+   ```
+   npm install
+   ```
+
+5. Run the tests again:
+
+   ```
+   npm run test
+   ```
+
+This should resolve the issue and make `mongodb-memory-server` work as intended.

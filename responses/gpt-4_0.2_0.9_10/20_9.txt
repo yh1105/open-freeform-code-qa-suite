@@ -1,0 +1,15 @@
+I'm sorry to hear that you've lost your work. It can be frustrating when this happens. Based on your description, it seems like there might have been an issue with the Jupyter Notebook server, which could have caused the autosave feature to fail.
+
+Here are a few things you can try to recover your work:
+
+1. **Check the browser's local storage**: Jupyter Notebook sometimes stores unsaved changes in the browser's local storage. To access this, open the browser's developer tools (usually by right-clicking on the page and selecting "Inspect" or "Inspect Element"). Then, go to the "Application" or "Storage" tab, and look for "Local Storage" or "Session Storage" in the left sidebar. Check if there's any data related to your notebook there.
+
+2. **Check the terminal output**: If you still have the terminal window open where you ran the Jupyter Notebook server, look for any error messages or warnings. This might give you more information about what went wrong and help you find a solution.
+
+3. **Search for temporary files**: Sometimes, Jupyter Notebook creates temporary files with unsaved changes. Search your computer for files with the `.ipynb` extension, and see if you can find any files that might contain your lost work.
+
+4. **Use a file recovery tool**: If none of the above methods work, you can try using a file recovery tool like [Recuva](https://www.ccleaner.com/recuva) or [Disk Drill](https://www.cleverfiles.com/disk-drill-mac.html) to recover deleted or overwritten files. However, this is not guaranteed to work, and it might not be possible to recover your work.
+
+To prevent this issue from happening in the future, consider using version control systems like Git to track your work and save changes regularly. Additionally, make sure to pay attention to any error messages or warnings in the Jupyter Notebook interface, as they might indicate issues with saving your work.
+
+I hope this helps, and I wish you the best of luck in recovering your work.

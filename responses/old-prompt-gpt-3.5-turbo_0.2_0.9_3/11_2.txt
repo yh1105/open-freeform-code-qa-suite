@@ -1,0 +1,26 @@
+Yes, you can use the following implementation of the TRIM function in SQL Server:
+
+```
+CREATE FUNCTION TRIM (@str VARCHAR(8000))
+RETURNS VARCHAR(8000)
+BEGIN
+    WHILE LEFT(@str, 1) = ' '
+        SET @str = SUBSTRING(@str, 2, LEN(@str) - 1)
+
+    WHILE RIGHT(@str, 1) = ' '
+        SET @str = SUBSTRING(@str, 1, LEN(@str) - 1)
+
+    RETURN @str
+END
+```
+
+Then you can use the TRIM function in your code as follows:
+
+```
+DECLARE @ss varchar(60)
+SET @ss = ' admin '
+
+SELECT TRIM(@ss)
+```
+
+This will return 'admin' as the output.

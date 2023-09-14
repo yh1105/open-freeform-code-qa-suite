@@ -1,0 +1,13 @@
+It seems like Xcode is unable to find the required libraries for your project. Here are a few things you can try:
+
+1. Check if the missing directories exist in the specified paths. If they don't, you may need to check your project settings and make sure the paths are correct.
+
+2. Check if the required libraries are added to your project. If not, you can add them by going to your project settings, selecting your target, and then going to the "Build Phases" tab. Under "Link Binary With Libraries", click the "+" button and add the required libraries.
+
+3. Check if the library search paths are set correctly. You can do this by going to your project settings, selecting your target, and then going to the "Build Settings" tab. Under "Search Paths", make sure the library search paths are set correctly.
+
+4. Try cleaning the build folder by going to "Product" in the menu bar, holding down the "Option" key, and selecting "Clean Build Folder". Then try building your project again.
+
+5. If none of the above solutions work, you can try deleting the derived data folder for your project. You can do this by going to "Preferences" in Xcode, selecting the "Locations" tab, and then clicking the arrow next to the "Derived Data" folder to open it in Finder. Then delete the folder for your project and try building again.
+
+Hopefully, one of these solutions will work for you.

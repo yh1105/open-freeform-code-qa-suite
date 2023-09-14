@@ -1,0 +1,19 @@
+Sure, here's the completed function:
+
+```python
+import plotly.figure_factory as ff
+import kaleido
+
+def plot_confusion_matrix(matrix: list[list[int]], x_labels: list[str], y_labels: list[str]):
+    fig = ff.create_annotated_heatmap(z=matrix, x=x_labels, y=y_labels, colorscale='Viridis')
+    fig.update_layout(title='Confusion Matrix', xaxis_title='Predicted Class', yaxis_title='True Class')
+    fig.update_layout(width=500, height=500)
+    fig.update_traces(showscale=True, reversescale=False)
+    return fig
+```
+
+This function uses the `create_annotated_heatmap` function from `plotly.figure_factory` to create an annotated heatmap from the input confusion matrix. The `x_labels` and `y_labels` are used to label the x and y axes respectively. The `colorscale` parameter is set to 'Viridis' to use the Viridis color scale.
+
+The resulting figure is then updated with a title and axis labels using the `update_layout` function. The width and height of the figure are also set to 500 pixels. Finally, the `showscale` parameter is set to `True` to show the color scale and the `reversescale` parameter is set to `False` to ensure that the color scale is displayed in the correct order.
+
+The resulting `plotly` figure object is then returned by the function.

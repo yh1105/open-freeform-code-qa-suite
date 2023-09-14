@@ -1,0 +1,74 @@
+To set up an alias like `@styles` in VSCode, you need to configure both your project's bundler (e.g., Webpack, Parcel, or Create React App) and the `jsconfig.json` file. I'll provide examples for Webpack and Create React App.
+
+**Webpack**
+
+1. Update your `webpack.config.js` file to include the alias:
+
+```javascript
+const path = require('path');
+
+module.exports = {
+  // ...
+  resolve: {
+    alias: {
+      '@styles': path.resolve(__dirname, 'src/styled/index'),
+    },
+  },
+  // ...
+};
+```
+
+**Create React App**
+
+1. If you're using Create React App, you need to install `react-app-rewired` and `react-app-rewire-alias`:
+
+```bash
+npm install react-app-rewired react-app-rewire-alias --save-dev
+```
+
+2. Create a `config-overrides.js` file in your project root:
+
+```javascript
+const rewireAlias = require('react-app-rewire-alias');
+
+module.exports = function override(config, env) {
+  config = rewireAlias.aliasesOptions({
+    '@styles': 'src/styled/index',
+  })(config, env);
+
+  return config;
+};
+```
+
+3. Update your `scripts` section in `package.json`:
+
+```json
+"scripts": {
+  "start": "react-app-rewired start",
+  "build": "react-app-rewired build",
+  "test": "react-app-rewired test",
+  "eject": "react-scripts eject"
+}
+```
+
+**Configure `jsconfig.json`**
+
+1. Create a `jsconfig.json` file in your project root (if you don't have one already) and add the following configuration:
+
+```json
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@styles/*": ["src/styled/*"]
+    }
+  },
+  "exclude": ["node_modules", "dist"]
+}
+```
+
+Now, you should be able to use the `@styles` alias in your imports, and VSCode will provide IntelliSense for the module path:
+
+```javascript
+import styled from '@styles';
+```

@@ -1,0 +1,49 @@
+The error message suggests that the application is trying to use Ribbon for load balancing, but the necessary dependency is not included in the project.
+
+Starting with Spring Cloud 2020.0.0 (aka Ilford), Spring Cloud Netflix projects entered a maintenance mode, and the majority of the Spring Cloud Netflix modules are deprecated and will be shut down in the future. This includes the Spring Cloud Netflix Ribbon project as well.
+
+If you are using a Spring Cloud version that is still compatible with Netflix Ribbon, you can add the following dependency to your `pom.xml`:
+
+```xml
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
+</dependency>
+```
+
+If you are using a newer version of Spring Cloud, you should switch to the Spring Cloud LoadBalancer which is the successor to Netflix Ribbon. You can do this by adding the following dependency to your `pom.xml`:
+
+```xml
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-loadbalancer</artifactId>
+</dependency>
+```
+
+And then you should configure your `FeignClient` to use the `Spring Cloud LoadBalancer` by setting the `configuration` attribute:
+
+```java
+@FeignClient(name = "user-service", configuration = FeignConfig.class)
+public interface UserFeignClient {
+    //...
+}
+```
+
+And define the `FeignConfig` class:
+
+```java
+@Configuration
+public class FeignConfig {
+
+    @Autowired
+    private LoadBalancerClient loadBalancerClient;
+
+    @Bean
+    public Client feignClient() {
+        return new LoadBalancerFeignClient(new Client.Default(null, null),
+                new CachingSpringLoadBalancerFactory(loadBalancerClient), loadBalancerClient);
+    }
+}
+```
+
+Please note that the `LoadBalancerFeignClient` class is deprecated in newer versions of Spring Cloud, and it's recommended to use `BlockHoundFeignLoadBalancer` instead.

@@ -1,0 +1,1 @@
+This error is related to the signing configuration of your app. Make sure that the signing configuration is correctly set up in your Gradle build file. Also, check if the keystore file and password are correct. If the issue persists, try cleaning and rebuilding your project.

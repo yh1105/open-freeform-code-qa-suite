@@ -1,0 +1,15 @@
+The exception message suggests that you are missing the `spring-cloud-starter-netflix-ribbon` dependency. This is because Feign uses Ribbon for client-side load balancing by default. 
+
+You mentioned that you have already tried adding the `spring-cloud-starter-netflix-ribbon` dependency to your `pom.xml` but it didn't help. In that case, you can try the following:
+
+1. Make sure that the `spring-cloud-starter-netflix-ribbon` dependency is added to the correct module in your project. If you have a multi-module project, make sure that the dependency is added to the module that contains the Feign client interface.
+
+2. Try adding the `@LoadBalanced` annotation to your `RestTemplate` bean definition. This annotation enables client-side load balancing for the `RestTemplate` and may help resolve the issue.
+
+3. If none of the above solutions work, you can try disabling client-side load balancing in Feign by setting the `feign.client.config.default.disableLoadBalancer` property to `true` in your `application.properties` file. However, this is not recommended as it may affect the performance and scalability of your application.
+
+```
+feign.client.config.default.disableLoadBalancer=true
+``` 
+
+I hope this helps you resolve the issue.

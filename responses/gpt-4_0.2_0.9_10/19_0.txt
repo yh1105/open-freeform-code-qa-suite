@@ -1,0 +1,21 @@
+This error occurs when the number of open files exceeds the limit set by your operating system. To resolve this issue, you can try increasing the limit of open files.
+
+For **macOS** and **Linux** users, you can increase the limit by running the following command in your terminal:
+
+```bash
+ulimit -n 4096
+```
+
+After running the command, try running `react-native start` again.
+
+For **Windows** users, you can try using the `watchman` package to handle file watching. First, install `watchman` using the instructions provided on their [official website](https://facebook.github.io/watchman/docs/install.html).
+
+After installing `watchman`, restart your terminal and try running `react-native start` again.
+
+If the issue persists, you can try the following:
+
+1. Delete the `node_modules` folder and `package-lock.json` or `yarn.lock` file in your project directory.
+2. Run `npm install` or `yarn install` to reinstall the dependencies.
+3. Run `react-native start` again.
+
+If none of these solutions work, consider creating a new React Native project and copying your source files into the new project.

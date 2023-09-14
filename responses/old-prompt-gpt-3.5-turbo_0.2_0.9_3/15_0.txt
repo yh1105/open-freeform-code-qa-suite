@@ -1,0 +1,23 @@
+Yes, I can help you with that. Here's the code to complete the `transform` function:
+
+```
+from io import BytesIO
+
+def transform(input: plt.Figure) -> Image:
+    buf = BytesIO()
+    input.savefig(buf, format='png')
+    buf.seek(0)
+    img = Image.open(buf)
+    return img
+```
+
+Explanation:
+
+1. We import `BytesIO` from the `io` module. This allows us to create an in-memory buffer to hold the image data.
+2. In the `transform` function, we create a `BytesIO` object called `buf`.
+3. We call `savefig` on the input `Figure` object, passing in `buf` as the destination buffer and specifying the format as `'png'`.
+4. We reset the buffer position to the beginning using `buf.seek(0)`.
+5. We create a `PIL.Image` object by calling `Image.open` on the buffer.
+6. We return the `PIL.Image` object.
+
+This code saves the `Figure` object as a PNG image in memory, then opens that image as a `PIL.Image` object. This avoids the need to save the image to disk and then read it back in.

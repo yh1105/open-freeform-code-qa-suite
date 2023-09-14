@@ -1,0 +1,30 @@
+This error occurs when the Android Gradle plugin attempts to compare two files that don't share the same root directory.
+
+To fix this, you can try the following steps:
+
+1. Clean your project: `Build -> Clean Project`
+2. Invalidate caches and restart: `File -> Invalidate Caches / Restart... -> Invalidate and Restart`
+3. Check your `keystore` path in your `build.gradle` file. Make sure it's correct and the `keystore` file is actually there.
+4. If you are using relative path for `keystore`, try using absolute path.
+
+Here is an example of how to set the `keystore` path:
+
+```groovy
+android {
+    signingConfigs {
+        release {
+            storeFile file('/absolute/path/to/keystore.jks')
+            storePassword 'password'
+            keyAlias 'keyAlias'
+            keyPassword 'password'
+        }
+    }
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+        }
+    }
+}
+```
+
+Remember to replace `/absolute/path/to/keystore.jks`, `password`, and `keyAlias` with your actual values.

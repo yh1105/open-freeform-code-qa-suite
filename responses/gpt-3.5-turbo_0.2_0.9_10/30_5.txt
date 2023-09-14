@@ -1,0 +1,1 @@
+This error occurs when there is a mismatch between the root directories of the files being signed. You can try cleaning and rebuilding the project, or checking if there are any conflicting files in the project. If the issue persists, try updating your Gradle plugin version to the latest one.

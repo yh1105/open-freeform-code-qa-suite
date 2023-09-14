@@ -1,0 +1,14 @@
+The error message suggests that there is no Feign client for load balancing defined and asks if you have forgotten to include the `spring-cloud-starter-netflix-ribbon` dependency. This is because Feign uses Ribbon for load balancing by default. 
+
+Since you are using Spring Boot version 2.0.8, you can use the `spring-cloud-starter-loadbalancer` dependency instead of `spring-cloud-starter-netflix-ribbon`. 
+
+Try adding the following dependency to your `pom.xml` file:
+
+```
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-loadbalancer</artifactId>
+</dependency>
+```
+
+This should resolve the issue.

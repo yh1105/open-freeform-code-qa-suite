@@ -1,0 +1,23 @@
+This error occurs when the Go language server cannot find the package data for the `github.com/gomodule/redigo/redis` package. This can happen if the package is not installed or if the Go language server is not able to locate it.
+
+To solve this issue, you can try the following steps:
+
+1. Make sure that the `github.com/gomodule/redigo/redis` package is installed. You can do this by running the following command in your terminal:
+
+   ```
+   go get github.com/gomodule/redigo/redis
+   ```
+
+2. If the package is already installed, try restarting your VSCode editor. This will refresh the Go language server and it should be able to locate the package data.
+
+3. If the above steps do not work, you can try adding the following line to your `settings.json` file in VSCode:
+
+   ```
+   "gopls": {
+       "experimentalWorkspaceModule": true
+   }
+   ```
+
+   This will enable the experimental workspace module feature in the Go language server, which should help it locate the package data.
+
+After trying these steps, the error should be resolved and you should be able to use intellisense suggestions for the `github.com/gomodule/redigo/redis` package in your Go project.

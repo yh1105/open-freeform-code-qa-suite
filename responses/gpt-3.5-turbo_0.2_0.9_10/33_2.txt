@@ -1,0 +1,54 @@
+The error message `Plugin project :location_web not found. Please update settings.gradle;` indicates that the `location_web` plugin is not installed or configured properly in your project. To fix this, you can try the following steps:
+
+1. Open the `settings.gradle` file in your project and add the following line:
+
+   ```
+   include ':location_web'
+   ```
+
+2. Save the file and then run the following command in your terminal:
+
+   ```
+   flutter pub get
+   ```
+
+   This will download and install any missing dependencies, including the `location_web` plugin.
+
+3. If the above steps do not work, you can try adding the following line to your `pubspec.yaml` file:
+
+   ```
+   location_web: ^2.0.0
+   ```
+
+   This will explicitly add the `location_web` plugin to your project and ensure that it is installed and configured properly.
+
+Regarding the second error message `Invalid argument(s): No host specified in URI file:///Instance%20of%20'Future%3CString%3E'`, it seems that you are trying to display an image using a `Future` object instead of a `String` URL. To fix this, you can use a `FutureBuilder` widget to asynchronously load the image URL and display it once it is available. Here's an example:
+
+```
+class NearbyScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<String>(
+      future: _getUserLocation(),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return Column(
+            children: <Widget>[
+              Container(
+                height: 170,
+                width: double.infinity,
+                child: Image.network(snapshot.data),
+              ),
+              Text("hello"),
+            ],
+          );
+        } else {
+          return CircularProgressIndicator();
+        }
+      },
+    );
+  }
+}
+```
+
+In this example, the `FutureBuilder` widget takes a `Future<String>` object as its `future` parameter and asynchronously loads the image URL. Once the URL is available, it displays the image using the `Image.network` widget. If the URL is not available yet, it displays a `CircularProgressIndicator` widget instead.

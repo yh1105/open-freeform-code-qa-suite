@@ -15,8 +15,76 @@ import os
 os.environ["HF_ALLOW_CODE_EVAL"] = "1"
 os.environ['PATH'] = '/usr/local/lib/nodejs/node/bin:' + os.environ['PATH']
 os.environ['NODE_PATH'] = '/usr/local/lib/node_modules'
+import contextlib
+import signal
 import json
 from evaluate import load
+
+
+class TimeoutException(Exception):
+    pass
+
+@contextlib.contextmanager
+def time_limit(seconds):
+    def signal_handler(signum, frame):
+        raise TimeoutException("Timed out!")
+
+    signal.setitimer(signal.ITIMER_REAL, seconds)
+    signal.signal(signal.SIGALRM, signal_handler)
+    try:
+        yield
+    finally:
+        signal.setitimer(signal.ITIMER_REAL, 0)
+
+def python_unsafe_executor(references, predictions, timeout):
+
+    check_program = predictions[0][0] + '\n' + references[0]
+
+    result = []
+    try:
+        exec_globals = {}
+        with time_limit(timeout):
+            exec(check_program, exec_globals)
+        result.append("passed")
+    except TimeoutException:
+        result.append("timed out")
+    except BaseException as e:
+        result.append(f"failed: {e}")
+
+    logs = [[(0, dict(
+        task_id=0,
+        passed=result[0] == "passed",
+        result=result[0],
+        completion_id=0,
+    ))]]
+
+    return {'pass@1': float(int(result[0] == "passed"))}, logs
+
+def sql_unsafe_executor(references, predictions, timeout):
+    import sqlite3
+    conn = sqlite3.connect(':memory:')
+    cur = conn.cursor()
+    result = []
+    try:
+        with time_limit(timeout):
+            cur.execute(predictions[0][0] + '\n' + references[0])
+        result.append("passed")
+    except TimeoutException:
+        result.append("timed out")
+    except BaseException as e:
+        result.append(f"failed: {e}")
+
+    conn.close()
+
+    logs = [[(0, dict(
+        task_id=0,
+        passed=result[0] == "passed",
+        result=result[0],
+        completion_id=0,
+    ))]]
+
+    return {'pass@1': float(int(result[0] == "passed"))}, logs
+
 
 # language supported by humanevalpack
 LANGUAGES = ["python", "cpp", "javascript", "java", "go", "rust"]
@@ -52,6 +120,7 @@ LANGUAGE_TO_STOP_WORDS = {
     # https://github.com/THUDM/CodeGeeX/blob/23ee51505a2bcd34d59d2e271b22e5bd91475462/codegeex/benchmark/utils.py#L169
     "java": [],
     "rust": [],
+    "sql": [],
 }
 
 LANGUAGE_TO_TIMEOUT = {
@@ -61,6 +130,7 @@ LANGUAGE_TO_TIMEOUT = {
     "java": 10,
     "go": 20,
     "rust": 300,  # Necessary for first-time compilation of cargo
+    "sql": 10,
 }
 
 # Java sometimes fails with more workers; For JS it's twice as fast with 4 workers
@@ -71,6 +141,7 @@ LANGUAGE_TO_NUM_WORKERS = {
     "java": 1,
     "go": 4,
     "rust": 1,
+    "sql": 1,
 }
 
 # https://github.com/THUDM/CodeGeeX/blob/23ee51505a2bcd34d59d2e271b22e5bd91475462/codegeex/benchmark/utils.py#L6
@@ -192,22 +263,27 @@ def preprocess(generations: list[str], lang: str) -> list[str]:
                     longest_lines_idx = i
             gen = '\n'.join(lines[code_idendifier_lines[longest_lines_idx] + 1:
                                   code_idendifier_lines[longest_lines_idx + 1]])
-        gen = remove_last_block(gen, lang)
+        else:
+            # function-signature form
+            gen = remove_last_block(gen, lang)
         ans.append(gen)
     return ans
 
 
-def get_exec_results(generations: list[str], references: str, lang: str) -> tuple[dict[str, float], dict[int, list]]:
+def get_exec_results(prefix_from_file: str, generations: list[str], references: str, lang: str,
+                     timeout: None) -> tuple[dict[str, float], dict[int, list], str]:
     """Takes the list of LM generations and evaluates them against ground truth references.
 
+    :param prefix_from_file: universal setup code
     :param generations: list(str)
         list of string containing generations
     :param references: str
          str containing the test case
     """
+    generations = [prefix_from_file + gen for gen in generations]
     code_metric = load("Muennighoff/code_eval_octopack")
 
-    timeout = LANGUAGE_TO_TIMEOUT[lang]
+    timeout = LANGUAGE_TO_TIMEOUT[lang] if timeout is None else timeout
     num_workers = LANGUAGE_TO_NUM_WORKERS[lang]
 
     ### CUSTOM PROG LANGUAGE CHANGES ###
@@ -288,13 +364,26 @@ def get_exec_results(generations: list[str], references: str, lang: str) -> tupl
     references = [references]
 
     ### EVALUATION ###
-    results, logs = code_metric.compute(
-        references=references,
-        predictions=generations,
-        language=lang,
-        timeout=timeout,
-        num_workers=num_workers,
-    )
+    if lang == 'python':
+        results, logs = python_unsafe_executor(
+            references=references,
+            predictions=generations,
+            timeout=timeout,
+        )
+    elif lang == 'sql':
+        results, logs = sql_unsafe_executor(
+            references=references,
+            predictions=generations,
+            timeout=timeout,
+        )
+    else:
+        results, logs = code_metric.compute(
+            references=references,
+            predictions=generations,
+            language=lang,
+            timeout=timeout,
+            num_workers=num_workers,
+        )
     # # Write logs to json
     # with open("logs.json", "w") as f:
     #     json.dump(logs, f, indent=4, ensure_ascii=False)
@@ -328,7 +417,7 @@ def get_exec_results(generations: list[str], references: str, lang: str) -> tupl
     print(logs)
     """
 
-    return results, logs
+    return results, logs, generations[0][0]
 
 
 

@@ -1,0 +1,26 @@
+The error message indicates that the MongoDB version you are trying to download does not exist for your platform. The MongoDB version being downloaded is `4.0.14` for `win32` and `ia32` architecture. 
+
+You can try to specify a different MongoDB version in your `package.json` file. Here is an example:
+
+```json
+"config": {
+  "mongodbMemoryServer": {
+    "version": "4.2.6"
+  }
+}
+```
+
+This will make `mongodb-memory-server` download the specified version of MongoDB.
+
+If you are using a 64-bit version of Node.js, you should also change the architecture to `x64`. You can do this by setting the `arch` option:
+
+```json
+"config": {
+  "mongodbMemoryServer": {
+    "version": "4.2.6",
+    "arch": "x64"
+  }
+}
+```
+
+After making these changes, try running your tests again. If you still encounter issues, you might want to check if the MongoDB version you specified is available for your platform. You can do this by visiting the MongoDB download center and checking the available versions for your platform.

@@ -1,0 +1,46 @@
+In React Navigation 5, you can use a callback pattern to achieve this without passing the function as a param. You can use `React Context` or a state management library like `Redux` or `MobX` to manage the state. However, I'll show you a simple solution using React's `useState` and `useEffect` hooks.
+
+First, create a state in the parent component to store the selected country data:
+
+```javascript
+const [selectedCountry, setSelectedCountry] = useState(null);
+```
+
+Then, pass the `selectedCountry` state to the child component as a prop:
+
+```javascript
+<TouchableOpacity
+    style={styles.countrySelector}
+    activeOpacity={0.7}
+    onPress={() => Navigation.navigate("CountrySelect", {
+        countryCode: this.state.country_code,
+    })}
+>
+</TouchableOpacity>
+```
+
+In the child component, when a country is selected, update the `selectedCountry` state in the parent component using the `setSelectedCountry` function:
+
+```javascript
+_onPress = (country, country_code, calling_code) => {
+    const { navigation } = this.props;
+    navigation.goBack();
+    setSelectedCountry({
+        country_name: country,
+        country_code: country_code,
+        calling_code: calling_code
+    });
+};
+```
+
+Finally, in the parent component, use the `useEffect` hook to listen for changes in the `selectedCountry` state and update the parent state accordingly:
+
+```javascript
+useEffect(() => {
+    if (selectedCountry) {
+        this.setState(selectedCountry);
+    }
+}, [selectedCountry]);
+```
+
+This way, you can update the parent state without passing the function as a param and avoid the warning in React Navigation 5.

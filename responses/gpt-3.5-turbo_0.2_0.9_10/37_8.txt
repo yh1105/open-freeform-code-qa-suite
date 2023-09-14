@@ -1,0 +1,20 @@
+To get the screen height in Android with API level above 30, you can use the following code:
+
+```
+val wm = fragmentActivity.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+
+fun getWidthHeight(wm: WindowManager): Int {
+    val windowMetrics = wm.currentWindowMetrics
+    val insets = windowMetrics.windowInsets.getInsetsIgnoringVisibility(WindowInsets.Type.systemBars())
+
+    val insetsHeight = insets.top + insets.bottom
+    val b = windowMetrics.bounds
+    val height = b.height() - insetsHeight
+
+    return height
+}
+```
+
+In this code, we use the `WindowMetrics` class to obtain the screen height. The `WindowMetrics` class provides information about the current window state, including the size of the window. We then subtract the height of the system bars (status bar and navigation bar) from the window height to obtain the actual screen height.
+
+Note that we use the `WindowInsets.Type.systemBars()` flag to obtain the height of the system bars. This flag includes the status bar and navigation bar, but not the display cutout (if present). If you want to include the display cutout in the height calculation, you can use the `WindowInsets.Type.displayCutout()` flag instead.

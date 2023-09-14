@@ -1,0 +1,31 @@
+This error is usually caused by a misconfiguration in your signing configuration in your `build.gradle` file. 
+
+The error message `'other' has different root` usually means that the paths of your keystore file and the project are on different drives or partitions.
+
+To fix this issue, you should move your keystore file to the same drive or partition as your project. 
+
+For example, if your project is located in `C:\Users\YourName\AndroidStudioProjects\YourProject`, you should also place your keystore file somewhere in `C:` drive. 
+
+Then, update the `storeFile` field in your `build.gradle` file to point to the new location of your keystore file.
+
+Here is an example of how your signing configuration might look like:
+
+```groovy
+android {
+    signingConfigs {
+        release {
+            storeFile file('keystore.jks') // Update this to your keystore file path
+            storePassword 'yourStorePassword'
+            keyAlias 'yourKeyAlias'
+            keyPassword 'yourKeyPassword'
+        }
+    }
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+        }
+    }
+}
+```
+
+Remember to replace `'keystore.jks'`, `'yourStorePassword'`, `'yourKeyAlias'`, and `'yourKeyPassword'` with your actual keystore file path and credentials.

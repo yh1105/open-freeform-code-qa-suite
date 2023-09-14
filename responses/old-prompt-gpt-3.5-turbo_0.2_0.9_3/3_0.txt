@@ -1,0 +1,21 @@
+To use `mat-icon-button`, you need to import `MatIconModule` in your `app.module.ts` file. Here's how you can do it:
+
+1. Import `MatIconModule` from `@angular/material/icon`:
+
+```
+import { MatIconModule } from '@angular/material/icon';
+```
+
+2. Add `MatIconModule` to the `imports` array in your `@NgModule` decorator:
+
+```
+imports: [
+  BrowserModule,
+  FormsModule,
+  HttpModule,
+  MatButtonModule,
+  MatIconModule
+],
+```
+
+After making these changes, you should be able to use `mat-icon-button` without any errors.

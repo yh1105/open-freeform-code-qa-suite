@@ -1,0 +1,44 @@
+The error message `Plugin project :location_web not found. Please update settings.gradle;` suggests that the `location_web` plugin is missing or not properly configured in your project. 
+
+To fix this error, you can try the following steps:
+
+1. Open the `settings.gradle` file in your project and add the following line:
+
+   ```
+   include ':location_web'
+   ```
+
+2. Save the file and then run `flutter pub get` in your terminal to install the missing plugin.
+
+3. If the above steps do not work, you can try deleting the `location` package from your `pubspec.yaml` file and then reinstalling it by running `flutter pub get`.
+
+Regarding the second error message `Invalid argument(s): No host specified in URI file:///Instance%20of%20'Future%3CString%3E'`, it seems like you are trying to display a `Future` object as an image. To fix this error, you can use a `FutureBuilder` widget to asynchronously build your UI based on the result of the `_getUserLocation()` function. Here's an example:
+
+```
+class NearbyScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<String>(
+      future: _getUserLocation(),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return Column(
+            children: <Widget>[
+              Container(
+                height: 170,
+                width: double.infinity,
+                child: Image.network(snapshot.data),
+              ),
+              Text("hello"),
+            ],
+          );
+        } else {
+          return CircularProgressIndicator();
+        }
+      },
+    );
+  }
+}
+```
+
+This code uses a `FutureBuilder` widget to display a loading spinner while `_getUserLocation()` is running, and then displays the image once the future completes successfully.

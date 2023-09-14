@@ -1,0 +1,24 @@
+The error message suggests that you are missing the Ribbon dependency in your project. Since you mentioned that you have already tried adding the Ribbon dependency and it didn't help, I suggest you double-check the dependency and also make sure to update the Maven project after adding the dependency.
+
+Add the following dependency to your `pom.xml`:
+
+```xml
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
+</dependency>
+```
+
+After adding the dependency, update your Maven project:
+
+1. In your IDE, right-click on the project.
+2. Select "Maven" from the context menu.
+3. Click on "Update Project" or "Reimport" (depending on your IDE).
+
+If the issue still persists, try the following:
+
+1. Clean your project by running `mvn clean` in the terminal or command prompt.
+2. Rebuild your project by running `mvn install` in the terminal or command prompt.
+3. Restart your application.
+
+If none of these steps resolve the issue, please share more details about your project setup and configuration, so I can provide further assistance.

@@ -1,0 +1,21 @@
+The error message you're seeing suggests that Puppeteer is having trouble launching a new browser session. This could be due to a number of reasons, including missing dependencies or incorrect permissions. Here are a few things you can try:
+
+1. **Install missing dependencies**: Puppeteer requires certain packages to be installed on your system. If you're using a Debian-based system, you can install the necessary dependencies with the following command:
+
+```bash
+sudo apt-get install -y libx11-xcb1 libxcomposite1 libxi6 libxext6 libxtst6 libnss3 libcups2 libxss1 libxrandr2 libasound2 libpangocairo-1.0-0 libatk1.0-0 libatk-bridge2.0-0 libgtk-3-0
+```
+
+2. **Run Puppeteer in headless mode**: By default, Puppeteer runs in headless mode (i.e., without a visible browser UI). If you've changed this setting, try switching back to headless mode:
+
+```javascript
+const browser = await puppeteer.launch({ headless: true });
+```
+
+3. **Use the bundled version of Chromium**: Puppeteer comes with a specific version of Chromium that is guaranteed to work with the library. Make sure you're using this version by setting the `executablePath` option:
+
+```javascript
+const browser = await puppeteer.launch({ executablePath: '/path/to/Chromium' });
+```
+
+4. **Check your permissions**: Make sure that your script has the necessary permissions to launch a new browser session. This might involve changing the permissions of the

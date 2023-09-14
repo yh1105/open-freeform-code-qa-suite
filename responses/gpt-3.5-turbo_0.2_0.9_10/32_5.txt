@@ -1,0 +1,13 @@
+Based on the error message, it seems that the requested version-platform combination does not exist. You can try specifying a different version of MongoDB in your `package.json` file. For example, you can try changing the version to `"mongodb-memory-server": "^6.3.0"` and running `npm install` to install the latest version of `mongodb-memory-server`. 
+
+If that doesn't work, you can try specifying a specific version of MongoDB in the `mongoMemoryServerOpts` object that you pass to the `MongoMemoryServer` constructor. For example, you can try adding the following line to your code:
+
+```
+const mongo = new MongoMemoryServer({
+  binary: {
+    version: '4.0.14'
+  }
+});
+```
+
+This will force `mongodb-memory-server` to use version 4.0.14 of MongoDB. You can try changing the version number to see if that resolves the issue.

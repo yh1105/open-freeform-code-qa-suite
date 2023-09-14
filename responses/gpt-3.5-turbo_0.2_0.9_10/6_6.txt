@@ -1,0 +1,13 @@
+It sounds like you are experiencing an SSL protocol error when trying to access your application on localhost. This could be caused by a few different things, but one possibility is that your application is configured to use HTTPS instead of HTTP, and your browser is not able to establish a secure connection.
+
+Here are a few things you can try:
+
+1. Try accessing your application using HTTP instead of HTTPS. In your browser, try navigating to http://localhost:8080 instead of https://localhost:8080. If your application is configured to use HTTP, this should allow you to access it without any SSL errors.
+
+2. Check your application's configuration. If your application is configured to use HTTPS, you may need to update the configuration to use a valid SSL certificate. You can also try disabling HTTPS temporarily to see if that resolves the issue.
+
+3. Check your browser's security settings. It's possible that your browser is blocking the connection because it does not trust the SSL certificate being used by your application. Try adjusting your browser's security settings to allow connections to localhost.
+
+4. Check for other applications using port 8080. If another application is already using port 8080, this could prevent your application from starting up properly. Try stopping any other applications that might be using this port and then restart your application.
+
+5. Try using a different port. If none of the above solutions work, you can try running your application on a different port. To do this, you'll need to update your application's configuration to use a different port number, and then restart the application. You can then try accessing your application using the new port number (e.g. http://localhost:8888).

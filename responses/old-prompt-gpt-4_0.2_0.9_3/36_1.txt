@@ -1,0 +1,36 @@
+The error message you're seeing suggests that your application is expecting to use Ribbon for load balancing with Feign, but it can't find the necessary classes. This is because Ribbon has been moved to maintenance mode and it's not included by default in the newer versions of Spring Cloud.
+
+However, as you mentioned, you're using Spring Boot version 2.0.8, which should still include Ribbon by default with the `spring-cloud-starter-openfeign` dependency.
+
+Here are a few things you can try:
+
+1. **Explicitly include Ribbon dependency in your pom.xml:**
+
+    ```xml
+    <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
+    </dependency>
+    ```
+
+2. **Ensure that the Ribbon classes are being loaded:**
+
+    You can do this by checking your classpath. If you're using an IDE like IntelliJ IDEA or Eclipse, you can usually find this in the project settings or preferences.
+
+3. **Check your Spring Cloud version:**
+
+    Make sure you're using a compatible version of Spring Cloud. For Spring Boot 2.0.x, the compatible Spring Cloud version is Finchley.
+
+    You can specify the Spring Cloud version in your pom.xml like this:
+
+    ```xml
+    <properties>
+        <spring-cloud.version>Finchley.SR4</spring-cloud.version>
+    </properties>
+    ```
+
+4. **Check your application.properties or application.yml file:**
+
+    Make sure you haven't disabled Ribbon with a property like `ribbon.client.name.ribbon.listOfServers`.
+
+5. **

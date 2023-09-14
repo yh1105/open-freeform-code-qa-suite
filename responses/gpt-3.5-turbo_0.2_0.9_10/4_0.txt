@@ -1,0 +1,18 @@
+Sure! Here's the code to split the dataset into training and validation sets with no overlap:
+
+```
+from torch.utils.data import DataLoader, random_split
+
+# Split dataset into training and validation sets
+train_size = int(0.8 * len(dataset))
+val_size = len(dataset) - train_size
+train_dataset, val_dataset = random_split(dataset, [train_size, val_size])
+
+# Create data loaders for training and validation sets
+train_loader = DataLoader(train_dataset, batch_size=32, shuffle=True)
+validation_loader = DataLoader(val_dataset, batch_size=32, shuffle=True)
+```
+
+This code uses the `random_split` function from PyTorch to split the dataset into training and validation sets with no overlap. The `train_size` variable is set to 80% of the dataset size, and the `val_size` variable is set to the remaining 20%. The `random_split` function then creates two new datasets, `train_dataset` and `val_dataset`, with the specified sizes.
+
+Finally, the code creates data loaders for the training and validation sets using the `DataLoader` class from PyTorch. The `batch_size` parameter is set to 32, and the `shuffle` parameter is set to `True` to ensure that the data is loaded in a random order during training.

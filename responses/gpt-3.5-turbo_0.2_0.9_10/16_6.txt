@@ -1,0 +1,17 @@
+To generate a REST client using Swagger codegen, you can follow these steps:
+
+1. Install Swagger codegen: You can download Swagger codegen from the official website or install it using a package manager like Homebrew.
+
+2. Create a Swagger specification file: You can create a Swagger specification file in YAML or JSON format. This file should describe the REST API that you want to generate a client for.
+
+3. Generate the client: Once you have the Swagger specification file, you can use Swagger codegen to generate the client. The command to generate the client will depend on the programming language that you want to use for the client. For example, if you want to generate a Java client, you can use the following command:
+
+```
+swagger-codegen generate -i <path-to-swagger-spec-file> -l java -o <output-directory>
+```
+
+This command will generate a Java client in the specified output directory.
+
+4. Use the client: Once you have generated the client, you can use it to interact with the REST API. The client will have methods for each endpoint in the API, and you can use these methods to make requests to the server.
+
+That's it! With these steps, you can generate a REST client using Swagger codegen.

@@ -1,0 +1,29 @@
+The error message suggests that there is no Feign Client for load balancing defined. This is usually because the Ribbon library, which is used for load balancing, is not included in your project.
+
+Even though you mentioned that you have added the Ribbon dependency and it didn't help, I would suggest to double-check it. The Ribbon dependency should look like this:
+
+```xml
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
+</dependency>
+```
+
+If you have already added this dependency and the error still persists, then there might be a problem with the configuration of your Feign Client or Ribbon. 
+
+You can try to add the following properties to your `application.properties` or `application.yml` file:
+
+```properties
+user-service.ribbon.listOfServers: localhost:8080
+user-service.ribbon.ServerListRefreshInterval: 15000
+```
+
+Replace `localhost:8080` with the actual address of your `user-service`. This will tell Ribbon to not use Eureka for service discovery and instead use the provided list of servers.
+
+Also, make sure that the `@EnableFeignClients` annotation in your main class is correctly configured. It should either be without any parameters (which will scan all packages), or with the base packages of your Feign clients specified. In your case, it should be:
+
+```java
+@EnableFeignClients(basePackages = {"test.user"})
+```
+
+If none of these solutions work, please provide more details about your project configuration.

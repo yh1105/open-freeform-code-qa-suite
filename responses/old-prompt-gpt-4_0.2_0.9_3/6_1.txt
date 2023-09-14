@@ -1,0 +1,17 @@
+The error message you're seeing is typically related to trying to access a site over HTTPS (secure HTTP) when the site is not set up to handle secure connections. 
+
+In your case, it seems like your application is running on `http://localhost:8080` (HTTP), not `https://localhost:8080` (HTTPS). 
+
+Try accessing `http://localhost:8080` in your browser. 
+
+If you're still having issues, there are a few things you could check:
+
+1. **Firewall or Antivirus Software**: Sometimes, firewall or antivirus software can block certain ports. Make sure that port 8080 is allowed.
+
+2. **Port 8080 is already in use**: You mentioned that port 8080 is being used by `java.exe`. This is expected if your application is running. However, if another application is also using this port, it could cause issues. You can check which applications are using port 8080 and close any that shouldn't be.
+
+3. **SSL Configuration**: If your application is indeed set up to run over HTTPS, there might be an issue with your SSL configuration. Check your application's configuration to make sure everything is set up correctly.
+
+You don't need Apache to run a Spring Boot application. Spring Boot comes with embedded Tomcat, Jetty, or Undertow, so you don't need to install a separate server.
+
+If none of the above solutions work, please provide more details about your application's configuration, especially any related to SSL or HTTPS.

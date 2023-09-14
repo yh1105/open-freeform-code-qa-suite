@@ -1,0 +1,17 @@
+This error occurs when the maximum number of files that can be watched by a user is exceeded. You can try the following solutions:
+
+1. Increase the maximum number of files that can be watched by a user. You can do this by running the following command in your terminal:
+
+   ```
+   sudo sysctl -w fs.inotify.max_user_watches=524288
+   ```
+
+2. If the above solution does not work, you can try increasing the maximum number of files that can be watched globally. You can do this by running the following command in your terminal:
+
+   ```
+   echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+   ```
+
+3. If the above solutions do not work, you can try restarting your computer. This will reset the maximum number of files that can be watched.
+
+4. If none of the above solutions work, you can try upgrading your Node.js version to the latest stable version.

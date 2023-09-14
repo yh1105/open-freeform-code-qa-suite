@@ -1,0 +1,26 @@
+Sure, I can help you with that. You can use the `WindowMetrics` class to get the screen height. Here's the updated function:
+
+```kotlin
+import android.content.Context
+import android.view.WindowInsets
+import android.view.WindowMetrics
+import android.view.WindowManager
+
+val wm = fragmentActivity.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+
+fun getScreenHeight(wm: WindowManager): Int {
+    val windowMetrics: WindowMetrics = wm.currentWindowMetrics
+    val windowInsets: WindowInsets = windowMetrics.windowInsets
+
+    val insets = windowInsets.getInsetsIgnoringVisibility(WindowInsets.Type.navigationBars() or WindowInsets.Type.displayCutout())
+    val insetsHeight = insets.top + insets.bottom
+
+    val bounds = windowMetrics.bounds
+    val origHeight = bounds.height()
+
+    val screenHeight = origHeight - insetsHeight
+    return screenHeight
+}
+```
+
+This function will return the screen height without the insets (such as navigation bars and display cutouts).

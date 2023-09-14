@@ -1,0 +1,18 @@
+Sure, you can use `io.BytesIO` to save the figure to a buffer in memory, then use `PIL.Image.open` to read that buffer. Here is the complete code:
+
+```python
+import io
+from matplotlib import pyplot as plt
+from PIL import Image
+
+def transform(input: plt.Figure) -> Image:
+    buf = io.BytesIO()
+    input.savefig(buf, format='png')
+    buf.seek(0)
+    img = Image.open(buf)
+    return img
+```
+
+This function takes a `matplotlib.figure.Figure` object as input and returns a `PIL.Image` object. The `Figure.savefig` method is used to save the figure to the `BytesIO` buffer in PNG format. The buffer is then rewound to the beginning with `buf.seek(0)`, and `PIL.Image.open` is used to read the image data from the buffer.
+
+Note that the `Figure` object should contain a complete plot (i.e., you should have already called `pyplot.plot` or similar), and you should not call `pyplot.show` before passing the `Figure` to this function, as that would clear the figure.

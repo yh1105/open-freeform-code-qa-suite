@@ -1,0 +1,1 @@
+There is no official or semi-official guideline on how to name getters and setters after Java 14. However, it is recommended to follow the naming conventions of the existing codebase to maintain consistency. If you are starting a new project, you can choose to use either the record style or the Java bean convention, but it is important to be consistent throughout the project.

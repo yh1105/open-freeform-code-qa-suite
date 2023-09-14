@@ -1,0 +1,30 @@
+Yes, you can view the result graphs directly in Visual Studio Code using the built-in Python Interactive Window. Here's how you can do it:
+
+1. Install the Python extension for Visual Studio Code if you haven't already. You can find it in the Extensions view (`Ctrl+Shift+X`) by searching for "Python" and clicking the Install button for the extension by Microsoft.
+
+2. Add the following line at the beginning of your code to enable the `%matplotlib inline` magic command, which will display the plot inline in the Python Interactive Window:
+
+```python
+#%%
+```
+
+Your updated code should look like this:
+
+```python
+#%%
+import matplotlib.pyplot as plt
+import matplotlib as mpl
+import numpy as np
+
+x = np.linspace(0, 20, 100)
+plt.plot(x, np.sin(x))
+plt.show()
+```
+
+3. Save your file with a `.py` extension (e.g., `plot_example.py`).
+
+4. To run the code in the Python Interactive Window, right-click anywhere in the editor and select "Run Current File in Python Interactive Window" from the context menu. Alternatively, you can place the cursor on the line with the `#%%` and click the "Run Cell" button that appears to the left of the line.
+
+The Python Interactive Window will open, and you should see the plot displayed directly in Visual Studio Code.
+
+Remember that you don't need to close the Python Interactive Window each time you make changes to your code. Just click the "Run Cell" button or use the context menu option again to update the plot with your changes.

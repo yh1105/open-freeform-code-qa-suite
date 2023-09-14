@@ -1,0 +1,16 @@
+Sure, I can help you with that. Here's the completed code:
+
+```python
+import io
+from matplotlib import pyplot as plt
+from PIL import Image
+
+def transform(input: plt.Figure) -> Image.Image:
+    buf = io.BytesIO()
+    input.savefig(buf, format='png')
+    buf.seek(0)
+    img = Image.open(buf)
+    return img
+```
+
+This code defines the `transform` function that takes a `plt.Figure` as input and returns a `PIL.Image`. It uses an in-memory bytes buffer (`io.BytesIO`) to save the figure as a PNG image, then opens the buffer as a PIL image.

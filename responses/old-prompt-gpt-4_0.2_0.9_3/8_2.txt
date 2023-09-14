@@ -1,0 +1,16 @@
+Sure, here is a simple JavaScript function that converts a local Date object to a UTC Date object:
+
+```javascript
+function convertToUTC(date) {
+    return new Date(date.getTime() + date.getTimezoneOffset() * 60000);
+}
+```
+
+This function works by getting the time value of the local date in milliseconds (using `getTime()`) and then adding the timezone offset (in minutes) converted to milliseconds. The result is a new Date object that represents the same moment in time, but in UTC rather than the local timezone.
+
+Please note that the returned Date object is still a JavaScript Date object and will be displayed in the local timezone if you print it out directly. If you want to get a string representation of the date in UTC, you can use the `toUTCString()` method:
+
+```javascript
+let utcDate = convertToUTC(new Date());
+console.log(utcDate.toUTCString());
+```

@@ -1,0 +1,23 @@
+I'm sorry to hear about your lost work. It's always frustrating when something like this happens.
+
+The orange box you mentioned might have been a `POST` error, which usually means that the Jupyter notebook server was unable to save your notebook. This can happen if the server crashes or if there's a network issue (if you're using Jupyter through a network). The `Trusted` message is unrelated to saving; it just means that the notebook is allowed to run JavaScript.
+
+Unfortunately, if the checkpoint file is also blank, then it's unlikely that you can recover your work from Jupyter itself. The checkpoint file is essentially a backup that Jupyter creates every time you save your notebook, so if it's blank, then it means the save operation didn't succeed.
+
+However, there are a few things you can try:
+
+1. **Check the `.ipynb_checkpoints` directory again.** Sometimes, Jupyter creates multiple checkpoint files. If you're lucky, there might be an older checkpoint file that contains your work.
+
+2. **Check your system's temporary files.** When Jupyter fails to save a notebook, it sometimes stores a temporary copy of the notebook in your system's temp directory. The location of this directory varies depending on your operating system, but on MacOS, you can find it by typing `open $TMPDIR` in the terminal.
+
+3. **Use a file recovery tool.** If the above methods don't work, you can try using a file recovery tool to recover the deleted temporary files. This is a bit of a long shot, but it might be worth a try if your work is important. There are many file recovery tools available, both free and paid. Some popular ones include Recuva and Disk Drill.
+
+In the future, to avoid this kind of issue, I would recommend the following:
+
+- **Regularly save your work.** It sounds like you were already doing this, but it's worth repeating. Regularly saving your work is the best way to prevent data loss.
+
+- **Use version control.** Tools like Git can help you keep track of changes to your code and revert back to an earlier version if something goes wrong.
+
+- **Backup your work.** Regularly backing up your work to an external drive or a cloud storage service can help you recover your work if your local copy gets lost or corrupted.
+
+I hope this helps, and I'm sorry I couldn't provide a more positive answer. Losing

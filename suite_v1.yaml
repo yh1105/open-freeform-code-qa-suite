@@ -1,4 +1,4 @@
-attempt_reduce_mode: avg
+attempt_reduce_mode: max
 cases:
 - cases/eval_208.yaml
 - cases/eval_310.yaml

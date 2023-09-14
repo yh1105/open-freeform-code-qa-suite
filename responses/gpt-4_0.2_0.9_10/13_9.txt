@@ -1,0 +1,19 @@
+`List` and `ForEach` in SwiftUI serve different purposes:
+
+1. `List`: A container that presents rows of data arranged in a single column. It is similar to a UITableView in UIKit. It supports scrolling, cell recycling, and other built-in features.
+
+```swift
+List(items) { item in
+    Text(item.name)
+}
+```
+
+2. `ForEach`: A structure that computes views on demand from an underlying collection of identified data. It is not a container like `List`, but a way to generate views in a loop. You can use it inside other views, like `List`, `VStack`, or `HStack`.
+
+```swift
+ForEach(items) { item in
+    Text(item.name)
+}
+```
+
+In summary, `List` is a container for displaying rows of data, while `ForEach` is a way to generate views from a collection. You can use `ForEach` inside a `List` to create dynamic rows based on a data collection.

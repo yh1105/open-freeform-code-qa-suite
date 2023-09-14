@@ -1,0 +1,23 @@
+The error message suggests that the requested version-platform combination of MongoDB does not exist. You can try the following steps to make mongodb-memory-server work as intended:
+
+1. Update the version of mongodb-memory-server to the latest version by running `npm install mongodb-memory-server@latest --save-dev`.
+
+2. Clear the cache by running `npm cache clean --force`.
+
+3. Delete the `node_modules` folder and `package-lock.json` file.
+
+4. Reinstall the dependencies by running `npm install`.
+
+5. Run the tests again by running `npm run test`.
+
+If the issue persists, you can try specifying a different version of MongoDB by setting the `binary` option in the `new MongoMemoryServer()` constructor. For example:
+
+```
+mongo = new MongoMemoryServer({
+  binary: {
+    version: '4.0.13'
+  }
+});
+```
+
+This will use version 4.0.13 of MongoDB instead of the latest version.

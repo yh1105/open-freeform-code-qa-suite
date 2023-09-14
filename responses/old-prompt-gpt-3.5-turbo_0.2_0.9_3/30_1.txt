@@ -1,0 +1,11 @@
+This error message indicates that there is a conflict between the root directories of the files that you are trying to sign. This can happen when you have multiple files with the same name in different directories.
+
+To fix this issue, you can try the following steps:
+
+1. Clean your project by going to Build > Clean Project.
+2. Rebuild your project by going to Build > Rebuild Project.
+3. Check if there are any duplicate files in your project and remove them.
+4. Check if there are any conflicting dependencies in your Gradle file and resolve them.
+5. Try to generate the signed bundle again.
+
+If the above steps do not work, you can try to invalidate caches and restart Android Studio by going to File > Invalidate Caches / Restart. This will clear the cache and restart Android Studio, which may help resolve the issue.

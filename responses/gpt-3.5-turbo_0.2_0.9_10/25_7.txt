@@ -1,0 +1,35 @@
+In React Navigation 5, you can pass parameters to a screen using the `route.params` object. However, you cannot pass functions directly as parameters because they cannot be serialized. 
+
+To achieve what you are trying to do, you can pass the necessary data as parameters and then use them to update the state of the parent screen. Here's an example:
+
+```
+// Parent screen
+<TouchableOpacity
+  style={styles.countrySelector}
+  activeOpacity={0.7}
+  onPress={() =>
+    navigation.navigate('CountrySelect', {
+      countryCode: this.state.country_code,
+    })
+  }>
+  <Text>Select Country</Text>
+</TouchableOpacity>
+
+// Child screen
+_onPress = (country, country_code, calling_code) => {
+  const {navigation, route} = this.props;
+  route.params.onSelect({
+    country_name: country,
+    country_code: country_code,
+    calling_code: calling_code,
+  });
+  navigation.goBack();
+};
+
+// In the parent screen, when navigating to the child screen
+navigation.navigate('ChildScreen', {
+  onSelect: (data) => this.setState(data),
+});
+```
+
+In this example, we are passing the `onSelect` function as a parameter to the child screen. When the user selects a country in the child screen, we call this function with the selected data and update the state of the parent screen. We also pass the `countryCode` as a parameter to the child screen, which is used to pre-select the country in the child screen.

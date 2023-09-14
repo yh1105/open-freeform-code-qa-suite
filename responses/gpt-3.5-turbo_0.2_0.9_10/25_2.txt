@@ -1,0 +1,50 @@
+In React Navigation 5, you can pass parameters to a screen using the `route.params` object. However, the `params` object can only contain serializable data types such as strings, numbers, and booleans. Functions cannot be serialized and therefore cannot be passed as parameters.
+
+To achieve the same functionality as in React Navigation 4, you can use the `useCallback` hook to create a memoized function and pass it as a parameter. Here's an example:
+
+```
+import React, { useCallback } from 'react';
+import { TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+
+function ParentScreen() {
+  const navigation = useNavigation();
+
+  const onSelectCountry = useCallback((data) => {
+    // Update parent screen state with selected country data
+  }, []);
+
+  return (
+    <TouchableOpacity
+      style={styles.countrySelector}
+      activeOpacity={0.7}
+      onPress={() => navigation.navigate('CountrySelect', {
+        onSelect: onSelectCountry,
+        countryCode: this.state.country_code,
+      })}
+    />
+  );
+}
+
+function CountrySelectScreen({ route }) {
+  const { onSelect, countryCode } = route.params;
+
+  const onPress = useCallback((country, country_code, calling_code) => {
+    onSelect({
+      country_name: country,
+      country_code: country_code,
+      calling_code: calling_code,
+    });
+  }, [onSelect]);
+
+  return (
+    // Render country select screen UI
+  );
+}
+```
+
+In the above example, we define the `onSelectCountry` function in the parent screen using the `useCallback` hook. This creates a memoized function that will only be recreated if its dependencies change. We then pass this function as a parameter to the `CountrySelect` screen using the `navigation.navigate` method.
+
+In the `CountrySelect` screen, we retrieve the `onSelect` function from the `route.params` object and use it to update the parent screen state when a country is selected. We also define the `onPress` function using the `useCallback` hook to ensure that it is memoized and only recreated if its dependencies change.
+
+Note that we pass the `onSelect` function as a dependency to the `useCallback` hook in the `CountrySelect` screen. This ensures that the `onPress` function always has access to the latest version of the `onSelect` function, even if it changes during the lifetime of the component.

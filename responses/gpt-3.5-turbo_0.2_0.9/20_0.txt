@@ -1,9 +1,0 @@
-I'm sorry to hear that you lost your work. It's always frustrating when that happens. 
-
-First, try opening the original `.ipynb` file again and see if there's any content in it. If not, you can try looking for a backup file. Jupyter Notebook creates backup files with the extension `.ipynb~` in the same directory as the original file. Check if there's a backup file with a recent timestamp and try opening it.
-
-If that doesn't work, you can try looking for temporary files. Jupyter Notebook creates temporary files with the extension `.ipynb_checkpoints` in the same directory as the original file. Check if there's a recent temporary file and try opening it.
-
-If none of these options work, you can try using a file recovery tool to see if you can recover the deleted file. There are several free and paid file recovery tools available for MacOS that you can try.
-
-In the future, it's always a good idea to save your work frequently and make backups regularly. You can also consider using version control tools like Git to keep track of changes to your code and collaborate with others.

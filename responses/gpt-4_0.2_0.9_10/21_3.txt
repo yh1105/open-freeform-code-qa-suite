@@ -1,0 +1,19 @@
+It seems like you are missing the `os` import and the conda initialization step. Here's the modified code for your notebook cell:
+
+```python
+!wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+!bash Miniconda3-latest-Linux-x86_64.sh -b -f -p /usr/local/
+!rm Miniconda3-latest-Linux-x86_64.sh
+!conda init
+!source /usr/local/etc/profile.d/conda.sh
+!conda install -y --prefix /usr/local/ ujson aiohttp tqdm
+
+import sys
+import os
+os.environ['PYTHONPATH'] = "/usr/local/miniconda3"
+os.environ['PATH'] = '/usr/local/miniconda3/bin:' + os.environ['PATH']
+sys.path.append('/usr/local/lib/python3.6/site-packages/')
+import ujson
+```
+
+This should fix the issue and allow you to import the `ujson` module successfully.

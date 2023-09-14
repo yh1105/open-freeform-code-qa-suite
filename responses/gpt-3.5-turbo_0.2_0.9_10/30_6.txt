@@ -1,0 +1,1 @@
+This error occurs when the signing configuration in your Gradle file is incorrect. Make sure that the `storeFile` and `storePassword` properties in your signing configuration are pointing to the correct keystore file and password. Also, check that the `keyAlias` and `keyPassword` properties are correct. If the issue persists, try cleaning and rebuilding your project.

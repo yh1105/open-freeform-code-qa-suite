@@ -1,0 +1,1 @@
+This error usually occurs when there is a mismatch between the signing configuration and the build configuration. Check if the signing configuration is correct and if the keystore file is in the correct location. Also, try cleaning and rebuilding the project before generating the signed bundle.

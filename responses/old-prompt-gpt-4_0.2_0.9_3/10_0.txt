@@ -1,0 +1,18 @@
+Yes, there is a way to do this in Flutter using the `clear()` method provided by the `SharedPreferences` class. This method will delete all the data stored in the shared preferences.
+
+Here is a simple example:
+
+```dart
+import 'package:shared_preferences/shared_preferences.dart';
+
+void logoutUser() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  await prefs.clear();
+}
+```
+
+In the above code, `SharedPreferences.getInstance()` is used to get an instance of `SharedPreferences` and `prefs.clear()` is used to delete all the data stored in the shared preferences. 
+
+Remember to use `await` keyword before `prefs.clear()` because it returns a `Future` that completes when the operation is finished. 
+
+You can call `logoutUser()` function when the logout button is pressed.

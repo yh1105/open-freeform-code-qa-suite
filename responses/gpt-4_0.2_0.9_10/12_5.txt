@@ -1,0 +1,27 @@
+The error `RuntimeError: CUDA error: device-side assert triggered` occurs when there is an assertion failure in the CUDA code running on the GPU. This error is usually caused by invalid values or incorrect operations in the GPU code. The assert is there to catch these issues and prevent the program from continuing with incorrect data or behavior.
+
+To debug the problem, follow these steps:
+
+1. **Enable debug mode**: Enabling debug mode will provide more information about the error. To do this, set the environment variable `CUDA_LAUNCH_BLOCKING=1` before running your code. In Python, you can do this by adding the following line at the beginning of your script:
+
+   ```python
+   import os
+   os.environ['CUDA_LAUNCH_BLOCKING'] = '1'
+   ```
+
+   This will make CUDA operations synchronous, so the error will be raised immediately when it occurs, making it easier to identify the problematic operation.
+
+2. **Identify the problematic operation**: With debug mode enabled, you should now see more information about the error, including the specific operation that caused the assert to trigger. Look for the operation in your code and try to understand what might be causing the issue.
+
+3. **Check for common issues**: Some common issues that can cause device-side asserts are:
+
+   - Accessing out-of-bounds memory: Make sure you're not accessing memory outside the allocated space in your GPU code.
+   - Mismatched tensor dimensions: Ensure that the dimensions of your tensors match the expected dimensions for the operations you're performing.
+   - Invalid values: Check if your code is generating invalid values, such as NaN or infinity, which could cause the assert to trigger.
+   - Incorrect use of CUDA functions: Make sure you're using the correct functions and parameters for your specific use case.
+
+4. **Add print statements**: If you're still having trouble identifying the issue, you can add print statements to your code to help narrow down the problem. In CUDA kernels, you can use `printf` to print values to the console. Note that the output may not be in the order you expect due to the parallel nature of GPU execution.
+
+5. **Use debugging tools**: If you're still unable to identify the issue, consider using debugging tools like NVIDIA Nsight or CUDA-GDB to step through your GPU code and inspect variables and memory.
+
+Remember that debugging GPU code can be more challenging than debugging CPU code due to the parallel nature of GPU execution. Be patient

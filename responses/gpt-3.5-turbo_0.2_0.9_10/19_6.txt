@@ -1,0 +1,17 @@
+This error occurs when the system limit for the number of files that can be watched is exceeded. You can try the following solutions:
+
+1. Increase the limit of the number of files that can be watched by the system. You can do this by running the following command in your terminal:
+
+   ```
+   echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+   ```
+
+2. Close any unnecessary applications or processes that may be using up the file limit.
+
+3. If you are using a virtual machine, try increasing the number of available inotify watches by running the following command in your terminal:
+
+   ```
+   echo 999999 | sudo tee -a /proc/sys/fs/inotify/max_user_watches
+   ```
+
+4. If none of the above solutions work, you can try restarting your computer to reset the file limit.

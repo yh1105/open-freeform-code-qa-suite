@@ -1,0 +1,24 @@
+To use `angular/flex-layout` in a component, you need to import `FlexLayoutModule` in the module where the component is declared. In your case, you need to import `FlexLayoutModule` in your `AuthModule` since the `login-view` component is declared in that module. Here is an updated `AuthModule` with the `FlexLayoutModule` imported:
+
+```
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { LoginComponent } from './login/login.component';
+import { MaterialModule } from 'src/app/material/material.module';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FlexLayoutModule } from '@angular/flex-layout';
+
+@NgModule({
+  declarations: [LoginComponent],
+  imports: [
+    CommonModule,
+    MaterialModule,
+    ReactiveFormsModule,
+    FlexLayoutModule
+  ],
+  exports: [LoginComponent]
+})
+export class AuthModule { }
+```
+
+After importing `FlexLayoutModule`, you should be able to use the flex layout directives in your `login-view` component.

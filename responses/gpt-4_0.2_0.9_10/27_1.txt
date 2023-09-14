@@ -1,0 +1,44 @@
+To use Angular Flex-Layout in your `login-view` component, you need to follow these steps:
+
+1. Make sure you have imported `FlexLayoutModule` in your `app.module.ts` (which you have already done).
+
+2. In your `login-view` component's HTML file, use the Flex-Layout directives to create the desired layout. Here's a basic example:
+
+```html
+<!-- login-view.component.html -->
+<div fxLayout="column" fxLayoutAlign="center center">
+  <h1>Login</h1>
+  <form>
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input matInput type="email" placeholder="Enter your email">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input matInput type="password" placeholder="Enter your password">
+    </mat-form-field>
+    <button mat-raised-button color="primary">Login</button>
+  </form>
+</div>
+```
+
+In this example, I used `fxLayout="column"` to create a column layout and `fxLayoutAlign="center center"` to align the content both horizontally and vertically to the center.
+
+3. If you want to apply responsive styles, you can use the responsive API provided by Angular Flex-Layout. For example:
+
+```html
+<!-- login-view.component.html -->
+<div fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="start center">
+  <!-- ... -->
+</div>
+```
+
+In this example, I used `fxLayout.gt-sm="row"` to change the layout to a row when the screen size is greater than 'sm' (small) breakpoint, and `fxLayoutAlign.gt-sm="start center"` to change the alignment accordingly.
+
+4. If you still face issues, make sure you have the correct version of Angular Flex-Layout installed. Angular 9 is compatible with Angular Flex-Layout version 9.x. You can check the installed version in your `package.json` file. If you need to install the compatible version, run:
+
+```bash
+npm install @angular/flex-layout@9.x
+```
+
+After following these steps, you should be able to use Angular Flex-Layout in your `login-view` component.

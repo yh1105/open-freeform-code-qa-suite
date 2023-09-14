@@ -1,0 +1,18 @@
+Sure, you can use the `hist` function from `matplotlib.pyplot` to draw a histogram. Here is the completed code:
+
+```python
+import numpy as np
+from matplotlib import pyplot as plt
+
+def draw_histogram():
+  x = np.random.randn(100000)
+  plt.hist(x, bins=20, edgecolor='black')
+  plt.title('Histogram of Normal Distribution')
+  plt.xlabel('Value')
+  plt.ylabel('Frequency')
+  plt.savefig('figure.pdf')
+
+draw_histogram()
+```
+
+In this code, `np.random.randn(100000)` generates 100,000 random numbers from a standard normal distribution. `plt.hist(x, bins=20, edgecolor='black')` plots a histogram of these numbers with 20 bins. The `edgecolor='black'` argument makes the edges of the bins black. `plt.savefig('figure.pdf')` saves the figure as a PDF file named 'figure.pdf'.

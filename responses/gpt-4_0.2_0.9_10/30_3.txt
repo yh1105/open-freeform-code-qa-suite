@@ -1,0 +1,28 @@
+This error is often caused by a mismatch between the paths of the keystore file and the project. 
+
+Here are some steps to fix it:
+
+1. Open the `build.gradle` file of your app module.
+2. Check the `signingConfigs` block. It should look something like this:
+
+```groovy
+signingConfigs {
+    release {
+        storeFile file('keystore.jks') // check this line
+        storePassword 'password'
+        keyAlias 'alias'
+        keyPassword 'password'
+    }
+}
+```
+
+3. The `storeFile` line should contain the relative path to your keystore file from the project directory. If it's not, correct it.
+4. If the path is correct, try using an absolute path instead. For example:
+
+```groovy
+storeFile file('/Users/username/path/to/your/keystore.jks')
+```
+
+5. After making changes, sync the project with Gradle files and try to build the signed bundle again.
+
+Remember to replace `/Users/username/path/to/your/keystore.jks` with the actual path to your keystore file.

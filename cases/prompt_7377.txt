@@ -6,3 +6,5 @@ from matplotlib import pyplot as plt
 
 def draw_histogram():
   x = np.random.randn(100000)
+  ...
+```

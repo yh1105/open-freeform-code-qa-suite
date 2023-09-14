@@ -1,0 +1,8 @@
+Yes, you can try the following commands to install the ujson package and import it successfully:
+
+```
+!pip install ujson
+import ujson
+```
+
+This should install the ujson package and import it successfully. Note that you don't need to install the other packages (aiohttp and tqdm) using conda, as they can also be installed using pip.

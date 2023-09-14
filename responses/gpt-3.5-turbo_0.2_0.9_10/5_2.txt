@@ -1,0 +1,22 @@
+You should modify the `main.ts` file to:
+
+```
+import Logo from 'assets/images/logo.png';
+```
+
+And modify the `d.ts` file to:
+
+```
+declare module "*.png" {
+  const value: any;
+  export default value;
+}
+```
+
+Then modify the `main.html` file to:
+
+```
+<img src={Logo.default} alt="" />
+``` 
+
+This should fix the error.

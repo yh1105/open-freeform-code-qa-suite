@@ -1,0 +1,5 @@
+Yes, there are official guidelines for naming getters and setters in Java 14 records. According to the Java Language Specification, the naming convention for record components (fields) is to use lowerCamelCase. The naming convention for accessor methods (getters) is to use the same name as the component, but with the first letter capitalized.
+
+For example, if you have a record with a component named `firstName`, the accessor method should be named `firstName()`. Similarly, if you have a component named `age`, the accessor method should be named `age()`.
+
+It is recommended to follow this convention when writing new code that uses Java 14 records. However, if you have existing code that uses the old Java bean convention, it may be best to stick with that convention for consistency within your codebase.

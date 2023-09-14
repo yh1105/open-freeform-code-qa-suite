@@ -1,0 +1,36 @@
+Yes, you can use the `clear()` method provided by the `SharedPreferences` package to delete all saved shared preferences in a single shot. Here's how you can do it:
+
+1. First, add the `shared_preferences` package to your `pubspec.yaml` file:
+
+```yaml
+dependencies:
+  flutter:
+    sdk: flutter
+  shared_preferences: ^2.0.8
+```
+
+2. Import the package in the file where you want to clear the shared preferences:
+
+```dart
+import 'package:shared_preferences/shared_preferences.dart';
+```
+
+3. Create a function to clear all shared preferences:
+
+```dart
+Future<void> clearAllSharedPreferences() async {
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+  await prefs.clear();
+}
+```
+
+4. Call this function when the user taps on the logout button:
+
+```dart
+onPressed: () async {
+  await clearAllSharedPreferences();
+  // Navigate to the login screen or perform other logout actions
+},
+```
+
+Now, when the user taps on the logout button, all saved shared preferences will be deleted in a single shot.

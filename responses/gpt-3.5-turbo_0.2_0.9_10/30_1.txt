@@ -1,0 +1,1 @@
+This error is related to the signing configuration of your app. You may need to check if the keystore file and passwords are correctly configured in your build.gradle file. Also, make sure that the keystore file is not corrupted.

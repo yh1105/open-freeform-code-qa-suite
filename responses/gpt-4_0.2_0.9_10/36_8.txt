@@ -1,0 +1,32 @@
+It seems like you are missing the `spring-cloud-starter-netflix-ribbon` dependency in your `pom.xml`. Even though you mentioned that you have tried adding it, please make sure you have added it correctly. Here's the dependency you need to add:
+
+```xml
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
+</dependency>
+```
+
+Also, make sure you have the correct version of `spring-cloud-dependencies` in your `pom.xml`. Since you are using Spring Boot version 2.0.8, you should use the `Finchley.SR2` version of `spring-cloud-dependencies`. Add the following to your `pom.xml`:
+
+```xml
+<dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-dependencies</artifactId>
+            <version>Finchley.SR2</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+    </dependencies>
+</dependencyManagement>
+```
+
+After adding these dependencies, clean and rebuild your project:
+
+```sh
+mvn clean install
+```
+
+If you still face the issue, please share the complete `pom.xml` file and any relevant configuration files for further investigation.

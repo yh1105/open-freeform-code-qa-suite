@@ -1,0 +1,21 @@
+The exception message suggests that the Feign client is not able to find a load balancer for load balancing. This is because the `spring-cloud-starter-openfeign` dependency does not include the `spring-cloud-starter-netflix-ribbon` dependency by default.
+
+To resolve this issue, you can add the `spring-cloud-starter-netflix-ribbon` dependency to your project's `pom.xml` file:
+
+```
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
+</dependency>
+```
+
+Alternatively, you can use a different load balancer implementation, such as `spring-cloud-loadbalancer`, which is included in the `spring-cloud-starter-loadbalancer` dependency:
+
+```
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-loadbalancer</artifactId>
+</dependency>
+```
+
+Once you have added the appropriate dependency, the Feign client should be able to find a load balancer and the exception should be resolved.

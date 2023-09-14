@@ -1,0 +1,18 @@
+This error is caused by a misconfiguration in the signing configuration of your project. To fix this issue, follow these steps:
+
+1. Open your project's `build.gradle` file (the one inside the `app` folder).
+2. Locate the `signingConfigs` block.
+3. Make sure that the `storeFile` property is set to the correct path of your keystore file. Use `file()` method to define the path, like this:
+
+```groovy
+signingConfigs {
+    release {
+        storeFile file('path/to/your/keystore.jks')
+        storePassword 'your_store_password'
+        keyAlias 'your_key_alias'
+        keyPassword 'your_key_password'
+    }
+}
+```
+
+4. Sync your project with Gradle files and try generating the signed bundle again.

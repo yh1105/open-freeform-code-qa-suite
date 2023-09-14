@@ -1,0 +1,45 @@
+The error message suggests that you need to include the `spring-cloud-starter-netflix-ribbon` dependency in your `pom.xml`. Since you mentioned that you have already tried adding the dependency and it didn't help, I would recommend checking the following:
+
+1. Make sure you have added the correct dependency in your `pom.xml`:
+
+```xml
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
+</dependency>
+```
+
+2. Ensure that you have the correct version of Spring Cloud in your `pom.xml`. Add or update the `spring-cloud-dependencies` in the `dependencyManagement` section:
+
+```xml
+<dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-dependencies</artifactId>
+            <version>Finchley.SR2</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+    </dependencies>
+</dependencyManagement>
+```
+
+**Note:** Since you are using Spring Boot 2.0.8, you should use the Finchley release train for Spring Cloud. You can find the compatible versions in the [Spring Cloud Release Train](https://spring.io/projects/spring-cloud#overview) documentation.
+
+3. Make sure to clean and rebuild your project after making changes to the `pom.xml` file. You can do this using the following Maven commands:
+
+```bash
+mvn clean install
+```
+
+4. If you still face the issue, try adding the `spring-cloud-starter-netflix-eureka-client` dependency to your `pom.xml`:
+
+```xml
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+</dependency>
+```
+
+After making these changes, clean and rebuild your project again, and then try running your application.

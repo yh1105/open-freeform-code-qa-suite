@@ -1,0 +1,61 @@
+In react-navigation 5, you can pass parameters to a screen using the `route.params` object. However, you cannot pass functions as parameters because they cannot be serialized. 
+
+To achieve what you want, you can use the `useCallback` hook to create a memoized callback function that you can pass as a parameter. Here's an example:
+
+```
+import React, { useCallback } from 'react';
+import { TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+
+const ParentScreen = () => {
+  const navigation = useNavigation();
+
+  const onSelectCountry = useCallback((data) => {
+    // update parent screen state here
+  }, []);
+
+  return (
+    <TouchableOpacity
+      style={styles.countrySelector}
+      activeOpacity={0.7}
+      onPress={() => navigation.navigate('CountrySelect', {
+        onSelect: onSelectCountry,
+        countryCode: this.state.country_code,
+      })}
+    />
+  );
+};
+
+const CountrySelectScreen = ({ route }) => {
+  const { onSelect, countryCode } = route.params;
+
+  const onPress = useCallback((country, country_code, calling_code) => {
+    onSelect({
+      country_name: country,
+      country_code: country_code,
+      calling_code: calling_code,
+    });
+  }, [onSelect]);
+
+  return (
+    // render country select screen here
+  );
+};
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Parent" component={ParentScreen} />
+        <Stack.Screen name="CountrySelect" component={CountrySelectScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
+```
+
+In this example, we use the `useCallback` hook to create a memoized `onSelectCountry` function in the parent screen. We then pass this function as a parameter to the `CountrySelect` screen using the `navigation.navigate` method.
+
+In the `CountrySelect` screen, we retrieve the `onSelect` function from the `route.params` object and create a memoized `onPress` function using the `useCallback` hook. We then call the `onSelect` function with the selected country data when the user presses a button.
+
+Note that we pass the `onSelect` function as a dependency to the `useCallback` hook to ensure that it is not recreated unnecessarily.

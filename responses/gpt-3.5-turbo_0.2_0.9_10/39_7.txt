@@ -1,0 +1,15 @@
+It seems like Xcode is unable to find the required libraries for your project. Here are a few things you can try:
+
+1. Check if the library paths are correct: Go to your project's Build Settings and check if the library search paths are correct. Make sure they point to the correct directories where the libraries are located.
+
+2. Check if the libraries are included in your project: Go to your project's Build Phases and check if the required libraries are included in the "Link Binary With Libraries" section. If they are not included, add them by clicking on the "+" button.
+
+3. Check if the libraries are installed correctly: Make sure the required libraries are installed correctly using CocoaPods. You can try running `pod install` again to reinstall the libraries.
+
+4. Clean your project: Try cleaning your project by going to Product > Clean in Xcode. Then try building your project again.
+
+5. Check if the library files are present: Check if the library files are present in the directories mentioned in the error message. If they are not present, try reinstalling the libraries.
+
+6. Check if the library files are corrupted: Check if the library files are corrupted by deleting them and reinstalling them using CocoaPods.
+
+Hopefully, one of these solutions will work for you.

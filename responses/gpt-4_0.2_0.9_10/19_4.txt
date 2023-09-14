@@ -1,0 +1,61 @@
+This error occurs when the number of open files exceeds the limit set by your operating system. To resolve this issue, you can increase the limit of open files allowed by your system.
+
+**For macOS:**
+
+1. Open Terminal.
+2. Check the current limit by running the command:
+
+```bash
+ulimit -n
+```
+
+3. To increase the limit, run the following command:
+
+```bash
+ulimit -n 2048
+```
+
+4. Now, try running your React Native project again using `react-native start`.
+
+**For Linux:**
+
+1. Open Terminal.
+2. Check the current limit by running the command:
+
+```bash
+ulimit -n
+```
+
+3. To increase the limit, open the `/etc/security/limits.conf` file using a text editor (e.g., `nano` or `vim`):
+
+```bash
+sudo nano /etc/security/limits.conf
+```
+
+4. Add the following lines at the end of the file (replace `username` with your actual username):
+
+```
+username soft nofile 4096
+username hard nofile 8192
+```
+
+5. Save the file and exit the text editor.
+6. Log out and log back in for the changes to take effect.
+7. Now, try running your React Native project again using `react-native start`.
+
+**For Windows:**
+
+The issue is less common on Windows, but if you still encounter it, you can try using a third-party tool like [watchman](https://facebook.github.io/watchman/) to manage file watching. To install and configure watchman, follow these steps:
+
+1. Download the latest [watchman release](https://github.com/facebook/watchman/releases) for Windows.
+2. Extract the contents of the zip file to a folder, e.g., `C:\watchman`.
+3. Add the folder to your `PATH` environment variable.
+4. Open Command Prompt as Administrator and run the following command to install the watchman service:
+
+```bash
+watchman --foreground --logfile=<path_to_logfile> --log-level 2
+```
+
+Replace `<path_to_logfile>` with the path where you want to store the watchman log file, e.g., `C:\watchman\watchman.log`.
+
+5. Now, try running your React Native project again using `react-native start`.

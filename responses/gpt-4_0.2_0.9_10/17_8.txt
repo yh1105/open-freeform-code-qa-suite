@@ -1,0 +1,23 @@
+You can set up path aliases in your `jsconfig.json` file. Here's an example of how you can do it:
+
+```json
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@styles/*": ["src/styled/*"]
+    }
+  },
+  "include": ["src/**/*"]
+}
+```
+
+In this example, `@styles` is the alias for the `src/styled` directory. The `*` after `@styles/` and `src/styled/` allows you to import any file in the `src/styled` directory.
+
+After setting this up, you should be able to import files from the `src/styled` directory like this:
+
+```javascript
+import MyComponent from '@styles/MyComponent';
+```
+
+VSCode should be able to provide IntelliSense for these imports. If it doesn't, try restarting VSCode.

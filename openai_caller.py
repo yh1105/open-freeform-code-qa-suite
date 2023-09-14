@@ -24,38 +24,56 @@ parser.add_argument('--key_path', help='API key to call OpenAI', default='openai
 parser.add_argument('--storage', help='Directory to store the prompting result', default='responses')
 parser.add_argument('--system_prompt', help='Prefix prompt as the system role',
                     default='You are a professional assistant for programmers. '
-                            'By default, questions are answers are in Markdown format.')
+                            'By default, questions and answers are in Markdown format.')
+parser.add_argument('--qa_system_prompt', help='Prefix prompt as the system role for rougeQA questions',
+                    default='You are a professional assistant for programmers. '
+                            'By default, questions and answers are in Markdown format. '
+                            'You are chatting with programmers, so please answer as briefly as possible.')
 
 
-def single_turn(prompt, system_prompt, model_name, temp, top_p, n, max_tokens, timeout, patience):
-    config = {
-        "temperature": temp,
-        "top_p": top_p,
-        "n": n,
-        "timeout": timeout,
-    }
-    if max_tokens is not None:
-        config['max_tokens'] = max_tokens
+def single_turn(prompt, system_prompt, model_name, temp, top_p, n, max_tokens, timeout, patience, batch=2):
+    ans = []
+    orig_patience = patience
 
     attempt = 0
-    while patience > 0:
-        patience -= 1
-        attempt += 1
-        try:
-            response = openai.ChatCompletion.create(
-                engine=model_name,  # supported models: gpt-35-turbo, gpt-4, gpt-4-32k, gpt-4-32k-0613
-                messages=[
-                    {"role": "system", "content": system_prompt},
-                    {"role": "user", "content": prompt}
-                ],
-                **config
-            )
-            print('query success!')
-            return [response['choices'][x]['message']['content'] for x in range(len(response['choices']))]
-        except Exception as e:
-            print(f'attempt {attempt} (remaining: {patience}) error:', e)
-            time.sleep(2 ** attempt + random.random() * 3)
-    return None
+    print('')
+
+    while len(ans) < n and patience > 0:
+        print(f'  finish progress {len(ans)}/{n} atm={attempt}', end='\r', flush=True)
+        patience = orig_patience
+        config = {
+            "temperature": temp,
+            "top_p": top_p,
+            "n": min(batch, n - len(ans)),
+            "timeout": timeout,
+        }
+        if max_tokens is not None:
+            config['max_tokens'] = max_tokens
+
+        while patience > 0:
+            patience -= 1
+            attempt += 1
+            try:
+                response = openai.ChatCompletion.create(
+                    engine=model_name,  # supported models: gpt-35-turbo, gpt-4, gpt-4-32k, gpt-4-32k-0613
+                    messages=[
+                        {"role": "system", "content": system_prompt},
+                        {"role": "user", "content": prompt}
+                    ],
+                    **config
+                )
+                ans.extend([response['choices'][x]['message']['content'] for x in range(len(response['choices']))])
+                break
+            except Exception as e:
+                print(f'attempt {attempt} (remaining: {patience}) error:', e)
+                time.sleep(2 ** attempt + random.random() * 3)
+
+    if len(ans) < n:
+        # means sometimes it hits patience limit
+        print(f'become impatient with {len(ans)} completions')
+        return None
+    else:
+        return ans
 
 
 if __name__ == '__main__':
@@ -71,7 +89,7 @@ if __name__ == '__main__':
 
     # create folder
     suite_basename = os.path.basename(args.suite_path)
-    exp_name = f'{args.model_name}_{args.temp}_{args.top_p}'
+    exp_name = f'{args.model_name}_{args.temp}_{args.top_p}_{args.n}'
     exp_folder = os.path.join(args.storage, exp_name)
     if not os.path.exists(exp_folder):
         os.makedirs(exp_folder)
@@ -84,7 +102,8 @@ if __name__ == '__main__':
         'top_p': args.top_p,
         'sample_n': args.n,
         'max_tokens': args.max_tokens,
-        'system_prompt': args.system_prompt
+        'system_prompt': args.system_prompt,
+        'qa_system_prompt': args.qa_system_prompt
     }
     answer_mapping = {}
 
@@ -98,11 +117,18 @@ if __name__ == '__main__':
             case_fpath = case['path']
         case_fpath = os.path.join(os.path.dirname(args.suite_path), case_fpath)
         with open(case_fpath, 'r') as f:
-            case_promptpath = yaml.load(f, yaml.Loader)['prompt_path']
+            tmp_conf = yaml.load(f, yaml.Loader)
+            case_promptpath = tmp_conf['prompt_path']
+            case_grading_settings = tmp_conf['grading']
+        if 'similarity' in case_grading_settings and len(case_grading_settings) == 1:
+            # primarily rouge-based QA
+            system_prompt = args.qa_system_prompt
+        else:
+            system_prompt = args.system_prompt
         case_promptpath = os.path.join(os.path.dirname(case_fpath), case_promptpath)
         with open(case_promptpath, 'r') as f:
             prompt = f.read()
-        responses = single_turn(prompt, args.system_prompt, args.model_name,
+        responses = single_turn(prompt, system_prompt, args.model_name,
                                 args.temp, args.top_p, args.n,
                                 args.max_tokens, args.timeout, args.patience)
         if responses is not None:

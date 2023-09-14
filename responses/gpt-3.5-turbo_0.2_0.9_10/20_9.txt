@@ -1,0 +1,13 @@
+I'm sorry to hear that you lost your work. It's always a good idea to save your work frequently, especially when working with Jupyter Notebook.
+
+Regarding your issue, it sounds like there was an error in the notebook that prevented it from saving properly. The error message you saw may provide some clues as to what went wrong. However, without more information, it's difficult to say for sure.
+
+As for recovering your work, there are a few things you can try:
+
+1. Check the Jupyter Notebook logs: Jupyter Notebook keeps logs of all activity, including errors. You can try looking through the logs to see if there are any clues as to what went wrong. The logs are located in the `.jupyter` folder in your home directory.
+
+2. Check the autosave file: Jupyter Notebook creates an autosave file (`filename.ipynb.autosave`) that is updated every few minutes. You can try opening this file to see if it contains any of your work.
+
+3. Use a file recovery tool: If the above methods don't work, you can try using a file recovery tool to recover the deleted file. There are many free and paid tools available for this purpose.
+
+In the future, it's a good idea to save your work frequently and make backups of important files. You can also consider using version control software like Git to keep track of changes to your code.

@@ -1,0 +1,25 @@
+You can configure path aliases in VSCode by modifying your `jsconfig.json` or `tsconfig.json` (if you're using TypeScript) file. Here's how you can do it:
+
+1. Open your `jsconfig.json` file. If it doesn't exist, create one in the root of your project.
+
+2. Add a `compilerOptions` object with a `baseUrl` and `paths` properties. The `baseUrl` is usually set to `.` or `./` to denote the root of your project. The `paths` property is an object where keys are your aliases and values are arrays with paths to the directories those aliases should point to.
+
+Here's an example of how your `jsconfig.json` file should look like:
+
+```json
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@styles/*": ["src/styled/*"]
+    }
+  },
+  "exclude": ["node_modules"]
+}
+```
+
+In this example, `@styles` is an alias for the `src/styled` directory. The `*` at the end of both the alias and the path is a wildcard that matches any number of characters. This means that when you import something like `@styles/index`, VSCode will look for a file at `src/styled/index`.
+
+Please note that this configuration only affects the way VSCode resolves modules and provides IntelliSense. It doesn't affect the way your code is run. If you're using a bundler like webpack or a compiler like TypeScript, you'll need to configure them separately to understand these aliases.
+
+For example, if you're using

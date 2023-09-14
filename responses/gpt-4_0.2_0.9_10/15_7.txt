@@ -1,0 +1,16 @@
+Sure! You can use `io.BytesIO` to create an in-memory binary stream and save the figure to that stream. Then, you can open the stream as a `PIL.Image`. Here's the complete code:
+
+```python
+import io
+from matplotlib import pyplot as plt
+from PIL import Image
+
+def transform(input: plt.Figure) -> Image.Image:
+    buf = io.BytesIO()
+    input.savefig(buf, format='png')
+    buf.seek(0)
+    img = Image.open(buf)
+    return img
+```
+
+This function takes a `plt.Figure` as input and returns a `PIL.Image` without saving the figure to disk.

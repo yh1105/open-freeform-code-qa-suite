@@ -1,0 +1,25 @@
+Yes, you can use the personal access token for cloning, committing, and pushing. Here's the process:
+
+1. Clone the repository:
+```
+cd /tmp
+git clone https://<username>:<personal_access_token>@github.com/<username>/<project_name>.git
+```
+
+2. Change to the project directory and make changes:
+```
+cd /tmp/<project_name>
+```
+
+3. Commit the changes:
+```
+git add .
+git commit -m 'Your commit message'
+```
+
+4. Push the changes:
+```
+git push https://<username>:<personal_access_token>@github.com/<username>/<project_name>.git master
+```
+
+Replace `<username>`, `<personal_access_token>`, and `<project_name>` with your GitHub username, personal access token, and project name, respectively.

@@ -1,0 +1,52 @@
+In react-navigation 5, you can pass a function as a parameter while navigating, but you need to use the `setParams` method to update the parent screen state. Here's an example of how you can achieve this:
+
+Parent Screen:
+
+```
+import React, { useState } from 'react';
+import { Button } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+
+const ParentScreen = () => {
+  const [country, setCountry] = useState({ country_name: '', country_code: '', calling_code: '' });
+  const navigation = useNavigation();
+
+  const onSelectCountry = (data) => {
+    setCountry(data);
+  };
+
+  const navigateToCountrySelect = () => {
+    navigation.navigate('CountrySelect', { onSelect: onSelectCountry });
+  };
+
+  return (
+    <>
+      <Button title="Select Country" onPress={navigateToCountrySelect} />
+      <Text>{country.country_name}</Text>
+      <Text>{country.country_code}</Text>
+      <Text>{country.calling_code}</Text>
+    </>
+  );
+};
+
+export default ParentScreen;
+```
+
+Child Screen:
+
+```
+import React, { useState } from 'react';
+import { Button } from 'react-native';
+import { useNavigation, useRoute } from '@react-navigation/native';
+
+const CountrySelectScreen = () => {
+  const [selectedCountry, setSelectedCountry] = useState({ country_name: '', country_code: '', calling_code: '' });
+  const navigation = useNavigation();
+  const route = useRoute();
+
+  const onSelectCountry = () => {
+    route.params.onSelect(selectedCountry);
+    navigation.goBack();
+  };
+
+ 

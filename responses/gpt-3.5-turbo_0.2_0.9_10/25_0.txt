@@ -1,0 +1,41 @@
+In react-navigation 5, you can pass parameters to a screen using the `route.params` object. However, you need to make sure that the parameters are serializable. Functions are not serializable, so you cannot pass a function as a parameter.
+
+To achieve your desired behavior, you can pass the `onSelect` function as a parameter to the child screen and call it with the updated data when the child screen is dismissed. Here's an example:
+
+Parent screen:
+
+```
+_onSelectCountry = (data) => {
+    this.setState(data);
+};
+
+<TouchableOpacity
+    style={ styles.countrySelector }
+    activeOpacity={ 0.7 }
+    onPress={ () => Navigation.navigate("CountrySelect", {
+        onSelect: this._onSelectCountry,
+        countryCode: this.state.country_code,
+    })}
+>
+</TouchableOpacity>
+```
+
+Child screen:
+
+```
+_onPress = (country, country_code, calling_code) => {
+    const { navigation, route } = this.props;
+    route.params.onSelect({
+        country_name: country,
+        country_code: country_code,
+        calling_code: calling_code
+    });
+    navigation.goBack();
+};
+
+<TouchableOpacity onPress={() => this._onPress(country, country_code, calling_code)}>
+    <Text>Select</Text>
+</TouchableOpacity>
+```
+
+In this example, the `onSelect` function is passed as a parameter to the child screen. When the user selects a country and dismisses the child screen, the `_onPress` function is called with the selected data. The `_onPress` function calls the `onSelect` function with the updated data and then navigates back to the parent screen.

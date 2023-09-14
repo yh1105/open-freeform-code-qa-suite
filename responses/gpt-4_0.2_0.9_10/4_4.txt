@@ -1,0 +1,27 @@
+You can use the `random_split` function from `torch.utils.data` to split your dataset into training and validation sets. Here is how you can do it:
+
+```python
+from torch.utils.data import DataLoader, random_split
+
+# Assuming that we have dataset as an instance of CustomDatasetFromCSV
+dataset_size = len(dataset)
+train_size = int(0.8 * dataset_size)
+validation_size = dataset_size - train_size
+
+train_dataset, validation_dataset = random_split(dataset, [train_size, validation_size])
+
+# Create data loaders
+batch_size = 32  # You can change it to whatever value you want
+train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
+validation_loader = DataLoader(validation_dataset, batch_size=batch_size, shuffle=True)
+```
+
+In this code, we first calculate the sizes of the training and validation sets. We then use `random_split` to split the dataset into two parts of the desired sizes. Finally, we create `DataLoader` instances for the training and validation sets. The `DataLoader` class provides an easy way to iterate over datasets in mini-batches.
+
+Please note that `random_split` shuffles the dataset before splitting, so the training and validation sets will not overlap and will be different each time you run the code. If you want to have the same split every time, you can set a seed for the random number generator before calling `random_split`, like this:
+
+```python
+torch.manual_seed(0)
+```
+
+Also, you may want to adjust the `batch_size` parameter to a value that suits your needs.

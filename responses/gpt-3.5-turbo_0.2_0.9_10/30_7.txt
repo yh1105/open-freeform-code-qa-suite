@@ -1,0 +1,1 @@
+This error occurs when there is a mismatch between the root directories of the files being signed. Try cleaning your project and rebuilding it. If that doesn't work, try deleting the .gradle and .idea folders in your project directory and rebuilding the project. If the error persists, try creating a new project and copying your code into it.

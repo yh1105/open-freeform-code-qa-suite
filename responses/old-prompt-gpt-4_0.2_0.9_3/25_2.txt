@@ -1,0 +1,49 @@
+React Navigation 5.x has a different approach to passing functions as parameters. It is not recommended to pass non-serializable values as navigation parameters. Instead, you can use React Context or some form of global state management like Redux or MobX.
+
+However, if you want to keep your current structure, you can use a workaround by using a callback function in your parent component. Here is how you can do it:
+
+First, in your parent component, define a callback function and set it in the state:
+
+```jsx
+constructor(props) {
+    super(props);
+    this.state = {
+        country_name: '',
+        country_code: '',
+        calling_code: '',
+        callback: null,
+    };
+}
+
+_onSelectCountry = (data) => {
+    this.setState(data);
+};
+
+setCallback = (callback) => {
+    this.setState({ callback });
+};
+```
+
+Then, in your `TouchableOpacity` onPress function, instead of passing the function as a parameter, set the callback function in the state:
+
+```jsx
+<TouchableOpacity
+    style={ styles.countrySelector }
+    activeOpacity={ 0.7 }
+    onPress={ () => {
+        this.setCallback(this._onSelectCountry);
+        Navigation.navigate("CountrySelect", { countryCode: this.state.country_code });
+    }}
+>
+</TouchableOpacity>
+```
+
+In your child component, instead of calling the function from the navigation parameters, call the function from the parent component's state:
+
+```jsx
+_onPress = (country, country_code, calling_code) => {
+    const { navigation, route } = this.props;
+    navigation.goBack();
+    route.params.callback({
+        country_name: country,
+        country_code

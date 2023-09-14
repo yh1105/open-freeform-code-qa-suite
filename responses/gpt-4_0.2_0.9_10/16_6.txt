@@ -1,0 +1,23 @@
+To generate a REST client using Swagger Codegen, follow these steps:
+
+1. **Install Swagger Codegen**: First, you need to install Swagger Codegen. You can download the latest version from the [Swagger Codegen GitHub repository](https://github.com/swagger-api/swagger-codegen). You can also install it using package managers like npm, Homebrew, or Docker. For example, to install using npm, run:
+
+   ```
+   npm install -g swagger-codegen
+   ```
+
+2. **Obtain the Swagger/OpenAPI Specification**: You need the Swagger/OpenAPI specification file (in JSON or YAML format) for your REST server. This file describes the API endpoints, request/response formats, and other details. If you don't have this file, you can create one using tools like [Swagger Editor](https://editor.swagger.io/) or generate it from your server's code using libraries like [Swashbuckle](https://github.com/domaindrivendev/Swashbuckle.AspNetCore) (for .NET) or [Springfox](https://github.com/springfox/springfox) (for Java).
+
+3. **Generate the REST Client**: Once you have the Swagger/OpenAPI specification file, you can generate the REST client using the `swagger-codegen` command. You need to specify the input file, the output directory, and the target language or framework. For example, to generate a Java client:
+
+   ```
+   swagger-codegen generate -i path/to/swagger.json -l java -o path/to/output
+   ```
+
+   Replace `path/to/swagger.json` with the path to your Swagger/OpenAPI specification file, `java` with the desired language or framework, and `path/to/output` with the output directory.
+
+   You can find the list of supported languages and frameworks in the [Swagger Codegen documentation](https://github.com/swagger-api/swagger-codegen#overview).
+
+4. **Integrate the Generated Client**: After generating the REST client, you can integrate it into your application. The generated client will include all necessary files, such as source code, build scripts, and dependencies. Follow the instructions in the `README.md` file in the output directory to integrate the client into your project.
+
+That's it! You've successfully generated a REST client using Swagger Codegen. Now you can use the generated client to interact with your REST server.

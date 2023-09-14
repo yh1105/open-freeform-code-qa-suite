@@ -1,0 +1,18 @@
+It seems like there's a small issue with the environment variables and the Python path. Please try the following modified code in your notebook's cell:
+
+```python
+!wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+!bash Miniconda3-latest-Linux-x86_64.sh -b -f -p /usr/local
+!rm Miniconda3-latest-Linux-x86_64.sh
+!conda install -y --prefix /usr/local ujson aiohttp tqdm
+
+import sys
+import os
+
+sys.path.append('/usr/local/lib/python3.7/site-packages/')
+os.environ['PATH'] = '/usr/local/bin:' + os.environ['PATH']
+
+import ujson
+```
+
+This should fix the issue and allow you to import the `ujson` module successfully.

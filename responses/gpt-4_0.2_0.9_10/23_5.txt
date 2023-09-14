@@ -1,0 +1,60 @@
+It seems like you are facing an issue with launching the Puppeteer browser. Here are a few steps you can try to resolve the issue:
+
+1. Make sure you have installed the `puppeteer` package:
+
+   ```
+   npm install puppeteer
+   ```
+
+2. If you are using a version of Puppeteer that doesn't download Chromium by default, you can try installing `puppeteer-core` and `chrome-aws-lambda`:
+
+   ```
+   npm install puppeteer-core chrome-aws-lambda
+   ```
+
+   Then, modify your code to use these packages:
+
+   ```javascript
+   const puppeteer = require('puppeteer-core');
+   const chromium = require('chrome-aws-lambda');
+
+   (async function() {
+      try {
+         const browser = await puppeteer.launch({
+            executablePath: await chromium.executablePath,
+            args: chromium.args,
+            defaultViewport: chromium.defaultViewport,
+            headless: chromium.headless
+         });
+         // rest of the code
+      } catch (e) {
+         console.log("Our Error", e)
+      }
+   })();
+   ```
+
+3. If you are running the code on a Linux server, you might need to install some additional dependencies:
+
+   ```
+   sudo apt-get install -y libx11-xcb1 libxcomposite1 libxdamage1 libxi6 libxext6 libxtst6 libnss3 libcups2 libxss1 libxrandr2 libasound2 libpangocairo-1.0-0 libatk1.0-0 libgtk-3-0
+   ```
+
+4. If you are running the code on a Windows machine, you might need to set the `executablePath` to the local Chrome installation path:
+
+   ```javascript
+   const puppeteer = require('puppeteer');
+
+   (async function() {
+      try {
+         const browser = await puppeteer.launch({
+            executablePath: 'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe',
+            headless: true
+         });
+         // rest of the code
+      } catch (e) {
+         console.log("Our Error", e)
+      }
+   })();
+   ```
+
+Try these steps and see if they resolve the issue. If the problem persists, please provide more information about your environment, such as the operating system and the version of Puppeteer you are using.

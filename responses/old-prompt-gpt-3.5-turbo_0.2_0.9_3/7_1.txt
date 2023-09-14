@@ -1,0 +1,13 @@
+Yes, I can help you with that. The error you are getting is because you are trying to copy the files to a folder instead of a specific file. You need to specify the filename in the destination path as well. Here's the completed function:
+
+```python
+from shutil import copyfile
+
+def copy_from_file_list(fileList, destFolder):
+    for item in fileList:
+        filename = item[0].split("/")[-1]  # get the filename from the path
+        destPath = f"{destFolder}/{filename}"  # create the destination path
+        copyfile(item[0], destPath)  # copy the file to the destination path
+```
+
+This function takes in the `fileList` and `destFolder` as parameters. It loops through each item in the `fileList`, gets the filename from the path using `split("/")[-1]`, creates the destination path by appending the filename to the `destFolder`, and then copies the file using `copyfile()`.

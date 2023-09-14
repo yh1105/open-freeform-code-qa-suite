@@ -1,0 +1,16 @@
+Sure! Here's a function that should do what you're looking for:
+
+```javascript
+function convertToUTC(date) {
+  // Get the timezone offset in minutes
+  var timezoneOffset = date.getTimezoneOffset();
+
+  // Convert the offset to milliseconds and add it to the date
+  var utcDate = new Date(date.getTime() + timezoneOffset * 60 * 1000);
+
+  // Return the UTC date
+  return utcDate;
+}
+```
+
+This function takes a `Date` object as a parameter and returns a new `Date` object representing the same date and time in UTC. It first gets the timezone offset in minutes using the `getTimezoneOffset()` method of the `Date` object. It then converts the offset to milliseconds and adds it to the original date using the `getTime()` method. Finally, it creates a new `Date` object using the resulting timestamp and returns it.

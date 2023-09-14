@@ -1,0 +1,19 @@
+Here's the complete code to generate the data, plot the histogram, and save the figure as `figure.pdf`:
+
+```python
+import numpy as np
+from matplotlib import pyplot as plt
+
+def draw_histogram():
+    x = np.random.randn(100000)
+    plt.hist(x, bins=20, density=True, alpha=0.6, color='g')
+    plt.xlabel('Value')
+    plt.ylabel('Frequency')
+    plt.title('Histogram of Normally Distributed Data')
+    plt.savefig('figure.pdf')
+    plt.show()
+
+draw_histogram()
+```
+
+This code defines the `draw_histogram()` function, which generates 100,000 normally distributed data points using `np.random.randn()`. It then plots a histogram with 20 bins using `plt.hist()`. The `density=True` parameter normalizes the histogram, and `alpha=0.6` sets the transparency of the bars. The `color='g'` parameter sets the color of the bars to green. The `plt.xlabel()`, `plt.ylabel()`, and `plt.title()` functions set the labels and title for the plot. Finally, the `plt.savefig()` function saves the figure as `figure.pdf`, and `plt.show()` displays the plot.

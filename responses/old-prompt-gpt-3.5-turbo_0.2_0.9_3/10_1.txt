@@ -1,0 +1,15 @@
+Yes, you can delete all the saved shared preferences in a single shot using the `clear()` method of the `SharedPreferences` class. Here's an example code snippet:
+
+```dart
+import 'package:shared_preferences/shared_preferences.dart';
+
+// ...
+
+void logout() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  await prefs.clear();
+  // other logout related tasks
+}
+```
+
+In the above code, we first get an instance of the `SharedPreferences` class using the `getInstance()` method. Then we call the `clear()` method on the instance to delete all the saved preferences. Finally, we can perform other logout related tasks.

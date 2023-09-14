@@ -1,0 +1,15 @@
+This error message usually occurs when there is a mismatch between the signing configuration in your Gradle file and the keystore file you are using to sign the app bundle. 
+
+To fix this issue, you can try the following steps:
+
+1. Check if the keystore file you are using is the correct one and make sure it matches the signing configuration in your Gradle file.
+
+2. Try cleaning and rebuilding your project by going to Build > Clean Project and Build > Rebuild Project.
+
+3. If the issue persists, try deleting the .gradle and .idea folders in your project directory and then rebuilding the project.
+
+4. You can also try updating your Gradle version to the latest one by going to File > Project Structure > Project and changing the Gradle version.
+
+5. If none of the above steps work, you can try creating a new keystore file and updating your Gradle file with the new signing configuration.
+
+I hope this helps!

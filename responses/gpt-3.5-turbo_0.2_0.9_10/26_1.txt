@@ -1,0 +1,67 @@
+To fix the issue of the user not updating when the route changes, you can use a watcher to update the `username` computed property whenever the `userToLoad` value changes. Here's an updated version of your code with the watcher added:
+
+```
+<template>
+  <div>{{username}}</div>
+</template>
+
+<script lang="ts">
+import { computed, defineComponent, ref, getCurrentInstance } from '@vue/composition-api';
+
+export const useUsername = ({ user }) => {
+  return { username: user.name };
+};
+
+export default defineComponent({
+  setup(props, { root }) {
+    const vm = getCurrentInstance();
+
+    const userToLoad = computed(() => root.$route.params.userId);
+    const listOfUsers = [
+      { userId: 1, name: 'user1' },
+      { userId: 2, name: 'user2' },
+    ];
+
+    const user = ref(listOfUsers.find((u) => u.userId === +userToLoad.value));
+    if (!user.value) {
+      return root.$router.push('/404');
+    }
+
+    const { username } = useUsername({ user: user.value });
+
+    // Watch for changes to the userToLoad value and update the user and username accordingly
+    const stop = vm.$watch(userToLoad, (newValue) => {
+      const newUser = listOfUsers.find((u) => u.userId === +newValue);
+      if (!newUser) {
+        return root.$router.push('/404');
+      }
+      user.value = newUser;
+    });
+
+    // Cleanup the watcher when the component is unmounted
+    vm.$once('hook:beforeDestroy', stop);
+
+    return { username };
+  },
+});
+
+</script>
+```
+
+As for the redirect issue, you're currently returning the `root.$router.push('/404')` call from within the `setup` function, which won't actually trigger a redirect. Instead, you can use the `beforeRouteEnter` guard to redirect the user before the component is even created. Here's an updated version of your code with the `beforeRouteEnter` guard added:
+
+```
+<template>
+  <div>{{username}}</div>
+</template>
+
+<script lang="ts">
+import { computed, defineComponent, ref, getCurrentInstance } from '@vue/composition-api';
+
+export const useUsername = ({ user }) => {
+  return { username: user.name };
+};
+
+export default defineComponent({
+  setup(props, { root }) {
+    const

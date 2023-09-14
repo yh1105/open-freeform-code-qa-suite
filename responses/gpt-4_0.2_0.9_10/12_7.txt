@@ -1,0 +1,27 @@
+The error `RuntimeError: CUDA error: device-side assert triggered` occurs when there is an assertion failure in the CUDA code running on the GPU. This error is usually caused by invalid memory access, out-of-bounds indexing, or other issues in the GPU code. The assert is there to catch these issues and prevent the program from continuing with incorrect results or causing further damage.
+
+To debug this problem, follow these steps:
+
+1. **Enable CUDA error checking**: By default, CUDA doesn't report errors immediately. To enable immediate error reporting, add the following line at the beginning of your code:
+
+   ```python
+   import os
+   os.environ['CUDA_LAUNCH_BLOCKING'] = "1"
+   ```
+
+   This will make CUDA operations synchronous, and any error will be reported immediately after the corresponding operation.
+
+2. **Identify the problematic operation**: With error checking enabled, you should now get a more specific error message pointing to the exact line of code causing the issue. This will help you narrow down the problem.
+
+3. **Check for common issues**: Some common issues that can cause this error are:
+
+   - **Out-of-bounds indexing**: Ensure that all your tensor indices are within the valid range. This is a common issue when using custom indexing or advanced slicing.
+   - **Mismatched tensor shapes**: Make sure that the shapes of tensors involved in operations are compatible. For example, when using broadcasting, ensure that the dimensions align correctly.
+   - **Invalid values**: Check if your tensors contain any invalid values, such as NaN or Inf, which can cause issues in GPU operations.
+   - **Incorrect use of CUDA functions**: If you're using custom CUDA kernels or libraries, ensure that you're using them correctly and passing the right arguments.
+
+4. **Isolate the issue**: If you're still unable to identify the problem, try to isolate the issue by creating a minimal, self-contained example that reproduces the error. This will help you focus on the specific part of the code causing the problem and make it easier to debug.
+
+5. **Use debugging tools**: You can use debugging tools like `cuda-gdb` (for C++ code) or `cuDNN` and `TensorRT` (for deep learning frameworks) to get more information about the error and the state of your GPU code.
+
+Remember that debugging GPU code can be more challenging than debugging CPU code, as the execution is parallel and asynchronous. Be patient and methodical in your

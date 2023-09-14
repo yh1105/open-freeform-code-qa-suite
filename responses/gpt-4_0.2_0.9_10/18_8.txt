@@ -1,0 +1,13 @@
+This issue might be due to a few reasons:
+
+1. **Go Modules**: If you're using Go modules (which is recommended for Go 1.11 and above), make sure your `go.mod` file includes the `redigo` package. If it doesn't, you can add it manually or by running `go get github.com/gomodule/redigo/redis`.
+
+2. **GOPATH and GOROOT**: Make sure your `GOPATH` and `GOROOT` environment variables are set correctly. `GOROOT` should be the location where Go is installed, and `GOPATH` should be the directory you want to use for your workspace.
+
+3. **VSCode Go Extension**: Make sure you have the Go extension for VSCode installed and it's up to date. The Go extension provides features like auto-import, IntelliSense, code navigation, etc.
+
+4. **Go Tools**: The Go extension relies on several Go tools (like `gocode`, `gopls`, etc.) to provide its features. You can install/update all necessary tools by opening the Command Palette (Ctrl+Shift+P), then select "Go: Install/Update Tools", and select all listed tools.
+
+5. **Language Server**: The Go extension uses `gopls`, the Go language server, which might have issues with some Go modules. You can try to update `gopls` by running `GO111MODULE=on go get golang.org/x/tools/gopls@latest`.
+
+After checking these points, restart VSCode to see if the issue is resolved. If it's not, you might want to check the output of the Go extension for any error messages. You can view it by opening the Output view (View -> Output), and then selecting "Go" in the dropdown on the right.

@@ -1,0 +1,22 @@
+The exception message suggests that you are missing the `spring-cloud-starter-netflix-ribbon` dependency. This is because Feign uses Ribbon for client-side load balancing by default. 
+
+You mentioned that you have tried adding the dependency but it didn't help. Please make sure that you have added the dependency in the correct scope. It should be added as a runtime dependency, not a compile-time dependency. 
+
+Here's an example of how to add the dependency in your `pom.xml` file:
+
+```
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-openfeign</artifactId>
+    <version>2.2.5.RELEASE</version>
+</dependency>
+
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
+    <version>2.2.5.RELEASE</version>
+    <scope>runtime</scope>
+</dependency>
+```
+
+Also, make sure that you have the correct version of the dependency. In your case, since you are using Spring Boot 2.0.8, you should use version 2.0.8.RELEASE of the `spring-cloud-starter-netflix-ribbon` dependency.

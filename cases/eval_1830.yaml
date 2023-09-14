@@ -2,4 +2,7 @@ id: 1830
 prompt_path: prompt_1830.txt
 type: knowledge question-answering
 lang: dart
-grading: {}
+grading:
+  keywords:
+    - 'wrap'
+    - 'SizedBox'

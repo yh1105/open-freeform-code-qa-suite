@@ -1,0 +1,27 @@
+Yes, you can display matplotlib plots directly in the Visual Studio Code editor by using the built-in Python Interactive Window. This feature is provided by the Python extension for Visual Studio Code.
+
+Here are the steps to do it:
+
+1. Install the Python extension for Visual Studio Code if you haven't done so already. You can do this by searching for "Python" in the Extensions view (`Ctrl+Shift+X`).
+
+2. Once the Python extension is installed, you can open the Python Interactive Window by clicking on the Python icon in the activity bar on the side, and then clicking on the "Python Interactive" button at the top of the sidebar.
+
+3. In your Python file, you can use the `#%%` comment to create a new interactive cell. When you run this cell (`Shift+Enter`), the code will be executed in the Python Interactive Window, and any matplotlib plots will be displayed inline.
+
+Here's how your code would look:
+
+```python
+#%%
+
+import matplotlib.pyplot as plt
+import matplotlib as mpl
+import numpy as np
+
+x = np.linspace(0, 20, 100)
+plt.plot(x, np.sin(x))
+plt.show()
+```
+
+Just place your cursor in this cell and press `Shift+Enter` to run the code. The plot will be displayed in the Python Interactive Window within Visual Studio Code.
+
+Remember to save your file with a `.py` extension and select the correct Python interpreter before running the code.

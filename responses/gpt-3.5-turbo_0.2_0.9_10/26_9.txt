@@ -1,0 +1,70 @@
+To fix the issue of the user not changing in the HTML template when the route changes, you can use a watcher to update the computed property `userToLoad` whenever the route changes. Here's how you can modify your code:
+
+```
+<template>
+  <div>{{username}}</div>
+</template>
+
+<script lang="ts">
+import { computed, defineComponent, ref, getCurrentInstance } from '@vue/composition-api';
+
+export const useUsername = ({ user }) => {
+  return { username: user.name };
+};
+
+export default defineComponent({
+  setup(props, { root }) {
+    const vm = getCurrentInstance();
+
+    const userToLoad = ref(root.$route.params.userId);
+    const listOfUsers = [
+      { userId: 1, name: 'user1' },
+      { userId: 2, name: 'user2' },
+    ];
+
+    const user = computed(() => listOfUsers.find((u) => u.userId === +userToLoad.value));
+    if (!user.value) {
+      root.$router.push('/404');
+    }
+
+    const { username } = useUsername({ user: user.value });
+
+    // Watch for route changes and update userToLoad accordingly
+    root.$watch(() => root.$route.params.userId, (newVal) => {
+      userToLoad.value = newVal;
+    });
+
+    return { username };
+  },
+});
+
+</script>
+```
+
+Regarding the issue of not redirecting to the 404 page when the user is not in the list, you need to move the redirection inside the watcher, so that it gets triggered whenever the route changes and the user is not found. Here's the modified code:
+
+```
+<template>
+  <div>{{username}}</div>
+</template>
+
+<script lang="ts">
+import { computed, defineComponent, ref, getCurrentInstance } from '@vue/composition-api';
+
+export const useUsername = ({ user }) => {
+  return { username: user.name };
+};
+
+export default defineComponent({
+  setup(props, { root }) {
+    const vm = getCurrentInstance();
+
+    const userToLoad = ref(root.$route.params.userId);
+    const listOfUsers = [
+      { userId: 1, name: 'user1' },
+      { userId: 2, name: 'user2' },
+    ];
+
+    const user = computed(() => listOfUsers.find((u) => u.userId === +userToLoad.value));
+
+    const { username } = useUsername({ user: user.value

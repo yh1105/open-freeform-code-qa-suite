@@ -1,8 +1,0 @@
-Yes, there are official guidelines for naming getters and setters in Java 14 records. According to the Java Language Specification, the naming convention for the accessor methods in records is as follows:
-
-- For a record component named `foo`, the accessor method should be named `foo()`.
-- For a record component named `isFoo`, the accessor method should be named `isFoo()`.
-
-This means that if you are using Java 14 records, you should use the same name for the accessor method as the name of the record component. However, if you are using traditional Java beans, you should continue to use the `getFoo()` and `setFoo()` naming convention.
-
-If you have a mix of Java 14 records and traditional Java beans in your codebase, you may want to consider using a consistent naming convention across all classes to make your code more readable and maintainable.

@@ -1,0 +1,13 @@
+You should modify the `main.ts` file to:
+
+```
+import Logo from 'assets/images/logo.png';
+```
+
+And modify the HTML file `main.html` to:
+
+```
+<img src={Logo.default} alt="" />
+```
+
+This will ensure that the imported image is of type `string` and can be assigned to the `src` property of the `img` tag.

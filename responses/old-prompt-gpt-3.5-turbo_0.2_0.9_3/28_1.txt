@@ -1,0 +1,14 @@
+Sure! Here's the completed code:
+
+```
+import plotly.figure_factory as ff
+import kaleido
+
+def plot_confusion_matrix(matrix: list[list[int]], x_labels: list[str], y_labels: list[str]):
+    z_text = [[str(y) for y in x] for x in matrix]
+    fig = ff.create_annotated_heatmap(z=matrix, x=x_labels, y=y_labels, annotation_text=z_text, colorscale='Viridis')
+    fig.update_layout(title='Confusion Matrix', xaxis_title='Predicted Class', yaxis_title='True Class')
+    return fig
+```
+
+This function takes in a confusion matrix as a list of lists, along with lists of x and y labels. It creates a `z_text` list of lists to hold the text annotations for each cell of the heatmap, converts the matrix and annotations to a `plotly` figure object using `ff.create_annotated_heatmap()`, and then adds a title and axis labels to the figure. Finally, it returns the completed figure object.

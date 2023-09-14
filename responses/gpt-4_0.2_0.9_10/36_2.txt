@@ -1,0 +1,39 @@
+The error message suggests that you need to include the `spring-cloud-starter-netflix-ribbon` dependency in your `pom.xml`. Since you mentioned that you have already tried adding it but it didn't help, please make sure you have added the correct version of the dependency that is compatible with your Spring Boot version (2.0.8).
+
+First, add the Spring Cloud dependency management to your `pom.xml`:
+
+```xml
+<dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-dependencies</artifactId>
+            <version>Finchley.SR2</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+    </dependencies>
+</dependencyManagement>
+```
+
+Then, add the `spring-cloud-starter-netflix-ribbon` dependency:
+
+```xml
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
+</dependency>
+```
+
+Make sure to clean and rebuild your project after updating the `pom.xml` file.
+
+If the issue still persists, try adding the `spring-cloud-starter-netflix-eureka-client` dependency as well:
+
+```xml
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+</dependency>
+```
+
+Clean and rebuild your project again after adding the dependency.

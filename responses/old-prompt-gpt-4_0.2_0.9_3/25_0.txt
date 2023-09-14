@@ -1,0 +1,36 @@
+In React Navigation 5, passing non-serializable values as parameters is not recommended. This is because the parameters might be used as input for the `toString` method or might be used in a way that requires a string representation of the object.
+
+To solve your problem, you can use React Context or Redux to manage your state. This way, you can update the state from anywhere in your app. However, if you don't want to use any state management libraries, you can use React Navigation's `addListener` function to listen for when the screen comes into focus and then update the state.
+
+Here is an example of how you can do it:
+
+```jsx
+// Parent Screen
+componentDidMount() {
+    this._unsubscribe = this.props.navigation.addListener('focus', () => {
+        // Update the state here
+        this.setState({country_code: 'new value'});
+    });
+}
+
+componentWillUnmount() {
+    this._unsubscribe();
+}
+
+<TouchableOpacity
+    style={ styles.countrySelector }
+    activeOpacity={ 0.7 }
+    onPress={ () => Navigation.navigate("CountrySelect", {countryCode: this.state.country_code})}
+>
+</TouchableOpacity>
+```
+
+```jsx
+// Child Screen
+_onPress = (country, country_code, calling_code) => {
+    const { navigation, route } = this.props;
+    navigation.goBack();
+};
+```
+
+In the child screen, you just navigate back without passing any parameters. In the parent screen, you listen for when the screen comes into focus and then update the state. This way, you can update the state of the parent screen from the child screen without passing a function as a parameter.

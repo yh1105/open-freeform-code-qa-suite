@@ -1,0 +1,24 @@
+The error `RuntimeError: CUDA error: device-side assert triggered` is a generic error message that indicates something went wrong during the execution of a CUDA kernel on the GPU. The assert being triggered is a device-side assertion, which is a safety check within the GPU code to ensure that certain conditions are met.
+
+The assert is there to catch potential issues in the code before they lead to incorrect results or undefined behavior. When a device-side assert is triggered, it means that some condition specified in the code was not met, and the kernel execution was halted to prevent further issues.
+
+To debug the problem, follow these steps:
+
+1. **Enable debug mode**: To get more information about the error, enable the debug mode in your code. In PyTorch, you can do this by setting the environment variable `CUDA_LAUNCH_BLOCKING=1` before running your script. This will force CUDA to run synchronously and provide more detailed error messages.
+
+   ```
+   import os
+   os.environ['CUDA_LAUNCH_BLOCKING'] = '1'
+   ```
+
+2. **Identify the kernel**: Once you have more information about the error, identify which kernel is causing the problem. The error message should now provide the name of the kernel and the location in the code where the assert is triggered.
+
+3. **Check input data**: Inspect the input data being passed to the kernel. Ensure that the data is within the expected range and does not contain any invalid values (e.g., NaN or infinity). Also, verify that the data is of the correct type and shape.
+
+4. **Review the kernel code**: Examine the kernel code to understand the conditions that are being checked by the assert statement. This will help you identify the root cause of the problem. Look for any potential issues, such as incorrect indexing, out-of-bounds memory access, or race conditions.
+
+5. **Test with smaller inputs**: If the problem persists, try running the kernel with smaller input sizes or simpler data. This can help you narrow down the issue and make it easier to debug.
+
+6. **Use debugging tools**: Utilize debugging tools like `cuda-gdb` or NVIDIA Nsight to step through the kernel execution and inspect variables and memory. This can provide valuable insights into the cause of the problem.
+
+Remember that the specific steps to debug the issue may vary depending on the framework and language you are using. The key is to gather as much information as possible about the error and work systematically

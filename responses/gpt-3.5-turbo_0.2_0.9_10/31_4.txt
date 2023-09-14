@@ -1,0 +1,23 @@
+Yes, you can clone, commit, and push using personal access tokens. You can follow the steps you mentioned:
+
+1. Clone the repository using the personal access token:
+```
+git clone https://<username>:<personal_access_token>@github.com/<username>/<project_name>.git
+```
+
+2. Change to the cloned repository directory:
+```
+cd /tmp/auto_tutorial
+```
+
+3. Make a commit with an empty message:
+```
+git commit --allow-empty -m 'Trigger notification'
+```
+
+4. Push the changes to the remote repository using the personal access token:
+```
+git push https://<username>:<personal_access_token>@github.com/<username>/<project_name>.git master
+```
+
+Make sure to replace `<username>`, `<personal_access_token>`, and `<project_name>` with your own values.

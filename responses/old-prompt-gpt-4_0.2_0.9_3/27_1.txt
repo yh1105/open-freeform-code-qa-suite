@@ -1,0 +1,28 @@
+From your `app.module.ts`, it seems like you have imported the `FlexLayoutModule` correctly. However, to use it in your `login-view` component, you need to make sure that you have also imported it in the module where your `login-view` component is declared.
+
+If your `login-view` component is declared in `AuthModule`, then you should import `FlexLayoutModule` in `auth.module.ts` like this:
+
+```typescript
+import { FlexLayoutModule } from '@angular/flex-layout';
+
+@NgModule({
+  declarations: [
+    // your components here
+  ],
+  imports: [
+    // other modules here
+    FlexLayoutModule
+  ]
+})
+export class AuthModule { }
+```
+
+Also, make sure you are using the correct directives from `FlexLayoutModule` in your `login-view` component's template. Here is an example of how you can use it:
+
+```html
+<div fxLayout="row" fxLayoutAlign="center center">
+  <!-- your content here -->
+</div>
+```
+
+In this example, `fxLayout="row"` sets the layout direction to row, and `fxLayoutAlign="center center"` aligns the layout's items in the center both horizontally and vertically.

@@ -1,0 +1,15 @@
+It seems like Xcode is unable to find the required libraries for your project. Here are a few things you can try:
+
+1. Check if the libraries are installed correctly: Make sure that the libraries you are using in your project are installed correctly and are up to date. You can check this by running `pod install` or `pod update` in your project directory.
+
+2. Check the library search paths: Go to your project's Build Settings and check the Library Search Paths. Make sure that the paths to the libraries are correct and that they are included in the search paths.
+
+3. Check the Frameworks and Libraries: Go to your project's Build Phases and check the Frameworks and Libraries section. Make sure that the required libraries are added here.
+
+4. Check the Build Settings: Go to your project's Build Settings and check the Other Linker Flags. Make sure that the flags are set correctly and that they are not conflicting with each other.
+
+5. Clean and Build: Try cleaning your project by going to Product > Clean in Xcode and then build it again by going to Product > Build. 
+
+6. Check the target: Make sure that you have selected the correct target for your project.
+
+If none of the above solutions work, you can try creating a new Xcode project and adding the required libraries again.

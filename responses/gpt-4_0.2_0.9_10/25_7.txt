@@ -1,0 +1,57 @@
+In React Navigation 5, passing non-serializable values as parameters is not recommended because it can lead to bugs and inconsistencies when the state needs to be restored. 
+
+Instead, you can use React Context or Redux to manage your state. Here's an example of how you can do it with React Context:
+
+First, create a context:
+
+```jsx
+export const CountryContext = React.createContext();
+```
+
+Then, wrap your app with this context and provide a function to update the state:
+
+```jsx
+export default function App() {
+  const [country, setCountry] = React.useState(null);
+
+  const onSelectCountry = (data) => {
+    setCountry(data);
+  };
+
+  return (
+    <CountryContext.Provider value={{ country, onSelectCountry }}>
+      <NavigationContainer>{/* your screens here */}</NavigationContainer>
+    </CountryContext.Provider>
+  );
+}
+```
+
+In your parent screen, you can use the context to get the current country and the function to update it:
+
+```jsx
+const { country, onSelectCountry } = React.useContext(CountryContext);
+
+<TouchableOpacity
+  style={ styles.countrySelector }
+  activeOpacity={ 0.7 }
+  onPress={ () => Navigation.navigate("CountrySelect", { countryCode: country.country_code }) }
+>
+</TouchableOpacity>
+```
+
+In your child screen, you can use the context to call the function to update the country:
+
+```jsx
+const { onSelectCountry } = React.useContext(CountryContext);
+
+_onPress = (country, country_code, calling_code) => {
+  onSelectCountry({
+    country_name: country,
+    country_code: country_code,
+    calling_code: calling_code
+  });
+  navigation.goBack();
+};
+```
+
+This way, you're not passing the function as a parameter, but you're still able to update the state from the child screen.

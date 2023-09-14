@@ -1,0 +1,16 @@
+Yes, the error message is because you are trying to copy the files to a directory instead of a file. You need to specify the full path of the destination file for each item in `fileList`. You can use the `os.path.basename()` function to get the filename from the source path and then join it with the destination folder to get the full path of the destination file.
+
+Here's the completed function:
+
+```python
+import os
+from shutil import copyfile
+
+def copy_from_file_list(fileList, destFolder):
+    for item in fileList:
+        filename = os.path.basename(item[0])
+        destPath = os.path.join(destFolder, filename)
+        copyfile(item[0], destPath)
+```
+
+This function takes in the `fileList` and `destFolder` as parameters. It then loops through each item in `fileList`, gets the filename from the source path using `os.path.basename()`, joins it with the destination folder using `os.path.join()`, and then copies the file using `copyfile()`.

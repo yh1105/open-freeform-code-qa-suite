@@ -1,0 +1,40 @@
+The first error message indicates that the `location_web` plugin is missing. You can try adding it to your `pubspec.yaml` file and running `flutter pub get` to install it. Here's an example of how to add it:
+
+```
+dependencies:
+  location: ^4.2.0
+  location_web: ^0.1.0+3
+```
+
+The second error message suggests that the `mapview` variable is a `Future<String>` object, not a `String`. You can use a `FutureBuilder` widget to handle the asynchronous nature of `_getUserLocation()` and display the image once it's available. Here's an example:
+
+```
+class NearbyScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<String>(
+      future: _getUserLocation(),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return Column(
+            children: <Widget>[
+              Container(
+                height: 170,
+                width: double.infinity,
+                child: Image.network(snapshot.data),
+              ),
+              Text("hello"),
+            ],
+          );
+        } else if (snapshot.hasError) {
+          return Text("Error: ${snapshot.error}");
+        } else {
+          return CircularProgressIndicator();
+        }
+      },
+    );
+  }
+}
+``` 
+
+This code uses the `FutureBuilder` widget to display a loading spinner while `_getUserLocation()` is running, and then displays the image once it's available. If an error occurs, it displays an error message.

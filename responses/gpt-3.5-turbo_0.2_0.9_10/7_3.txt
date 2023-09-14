@@ -1,0 +1,32 @@
+Yes, I can help you with that. The error is because you are trying to copy the files to a directory instead of a file. You need to specify the full path of the destination file, not just the directory.
+
+Here's the updated code for the `copy_from_file_list` function:
+
+```python
+from shutil import copyfile
+import os
+
+def copy_from_file_list(fileList, destFolder):
+    if not os.path.exists(destFolder):
+        os.makedirs(destFolder)
+    for item in fileList:
+        filename = os.path.basename(item[0])
+        destFile = os.path.join(destFolder, filename)
+        copyfile(item[0], destFile)
+```
+
+This function creates the destination folder if it doesn't exist and then iterates through each item in `fileList`. For each item, it extracts the filename from the full path using `os.path.basename` and then creates the full path of the destination file using `os.path.join`. Finally, it copies the file using `copyfile`.
+
+You can call this function like this:
+
+```python
+fileList = [['/home/rob/Pictures/some/folder/picture one something.jpg', '143452'],
+            ['/home/rob/Pictures/some/other/folder/pictureBlah.jpg', '473642'],
+            ['/home/rob/Pictures/folder/blahblahpicture filename.jpg', '345345']]
+
+destFolder = "/Users/username/Desktop/testPhotos"
+
+copy_from_file_list(fileList, destFolder)
+```
+
+This will copy all the files in `fileList` to the `destFolder`.

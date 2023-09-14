@@ -1,0 +1,37 @@
+You can use the `valueChanges` method of the `FormControl` to detect changes in the radio group selection. Then, you can use the `ViewChild` decorator to get a reference to the `div` element and use the `ElementRef` to manipulate its style. Here's how you can do it:
+
+In your component class, add the following imports:
+
+```typescript
+import { Component, ElementRef, ViewChild } from '@angular/core';
+import { FormControl } from '@angular/forms';
+```
+
+Then, add the following code to your component class:
+
+```typescript
+export class MyComponent {
+  @ViewChild('divabc') divabc: ElementRef;
+  myform = new FormGroup({
+    Schedule: new FormControl('')
+  });
+
+  ngAfterViewInit() {
+    this.myform.get('Schedule').valueChanges.subscribe(value => {
+      if (value === 'abc') {
+        this.divabc.nativeElement.style.display = 'block';
+      } else {
+        this.divabc.nativeElement.style.display = 'none';
+      }
+    });
+  }
+}
+```
+
+Finally, change the `div` definition to add a template reference variable `#divabc`:
+
+```
+<div #divabc id='divabc'>ABC</div>
+```
+
+This should show the `div` element when the radio selection is "abc" and hide it otherwise.

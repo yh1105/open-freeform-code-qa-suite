@@ -1,0 +1,51 @@
+It seems like you have two issues here. Let's address them one by one.
+
+1. Plugin project :location_web not found. Please update settings.gradle
+
+This error is related to the location package. It seems like the location_web plugin is missing. To fix this issue, open your `pubspec.yaml` file and make sure you have the correct version of the location package:
+
+```yaml
+dependencies:
+  flutter:
+    sdk: flutter
+  location: ^4.3.0 # or the latest version
+```
+
+Then, run `flutter pub get` to update the dependencies.
+
+2. Invalid argument(s): No host specified in URI file:///Instance%20of%20'Future%3CString%3E'
+
+This error is because you are trying to use a `Future<String>` as a URL for the `Image.network()` widget. You should use a `FutureBuilder` to handle the asynchronous call to `_getUserLocation()`.
+
+Update your `NearbyScreen` widget like this:
+
+```dart
+class NearbyScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        Container(
+          height: 170,
+          width: double.infinity,
+          child: FutureBuilder<String>(
+            future: _getUserLocation(),
+            builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Center(child: CircularProgressIndicator());
+              } else if (snapshot.hasError) {
+                return Center(child: Text('Error: ${snapshot.error}'));
+              } else {
+                return Image.network(snapshot.data);
+              }
+            },
+          ),
+        ),
+        Text("hello"),
+      ],
+    );
+  }
+}
+```
+
+This will display a CircularProgressIndicator while the image URL is being fetched, and then display the image once the URL is available. If there's an error, it will display the error message.

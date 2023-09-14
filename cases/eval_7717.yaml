@@ -2,4 +2,8 @@ id: 7717
 prompt_path: prompt_7717.txt
 type: code debugging
 lang: dart
-grading: {}
+grading:
+  keywords:
+    - settings.gradle
+    - .flutter_plugins
+    - .projectDir

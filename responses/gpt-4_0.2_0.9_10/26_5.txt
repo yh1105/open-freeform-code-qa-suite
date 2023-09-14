@@ -1,0 +1,52 @@
+The issue you're facing is due to the fact that the `setup` function is only called once when the component is created. When you navigate to another user, the component is not recreated, so the `setup` function is not called again, and the user data is not updated.
+
+To fix this issue, you can use the `watch` function from the `@vue/composition-api` to reactively update the user data when the route changes. Here's the updated code:
+
+```html
+<template>
+  <div>{{username}}</div>
+</template>
+
+<script lang="ts">
+import { computed, defineComponent, ref, getCurrentInstance, watch } from '@vue/composition-api';
+
+export const useUsername = ({ user }) => {
+  return { username: user.name };
+};
+
+export default defineComponent({
+  setup(props, { root }) {
+    const vm = getCurrentInstance();
+
+    const userToLoad = computed(() => root.$route.params.userId);
+    const listOfUsers = [
+      { userId: 1, name: 'user1' },
+      { userId: 2, name: 'user2' },
+    ];
+
+    const user = ref(null);
+
+    const updateUser = () => {
+      const foundUser = listOfUsers.find((u) => u.userId === +userToLoad.value);
+      if (!foundUser) {
+        root.$router.push('/404');
+      } else {
+        user.value = foundUser;
+      }
+    };
+
+    // Call updateUser initially to set the user data
+    updateUser();
+
+    // Watch for route changes and update the user data accordingly
+    watch(userToLoad, updateUser);
+
+    const { username } = useUsername({ user: user.value });
+
+    return { username };
+  },
+});
+</script>
+```
+
+This code adds a `watch` function that listens for changes in the `userToLoad` computed property. When the route changes and the `userId` parameter is updated, the `updateUser` function is called, which updates the `user` ref and triggers a rerender of the component with the new user data.

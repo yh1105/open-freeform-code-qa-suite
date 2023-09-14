@@ -1,0 +1,25 @@
+You are getting the `IsADirectoryError` because you are trying to copy a file to a directory without specifying the destination filename. You need to extract the filename from the source path and append it to the destination folder path. You can use the `os.path` module to achieve this. Here's the modified function:
+
+```python
+import os
+from shutil import copyfile
+
+def copy_from_file_list(fileList, destFolder):
+    for item in fileList:
+        src = item[0]
+        filename = os.path.basename(src)
+        dest = os.path.join(destFolder, filename)
+        copyfile(src, dest)
+
+# Example usage:
+fileList = [
+    ['/home/rob/Pictures/some/folder/picture one something.jpg', '143452'],
+    ['/home/rob/Pictures/some/other/folder/pictureBlah.jpg', '473642'],
+    ['/home/rob/Pictures/folder/blahblahpicture filename.jpg', '345345']
+]
+
+destFolder = "/Users/username/Desktop/testPhotos"
+copy_from_file_list(fileList, destFolder)
+```
+
+This function will copy all the files from the `fileList` to the specified `destFolder` while preserving their filenames.

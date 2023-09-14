@@ -1,0 +1,17 @@
+Sure, you can use `io.BytesIO` to create a file-like object in memory, and then use `FigureCanvasAgg` to render the figure into a RGBA byte string, which can be read directly into a `PIL.Image`. Here's how you can do it:
+
+```python
+import io
+from matplotlib import pyplot as plt
+from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
+from PIL import Image
+
+def transform(input: plt.Figure) -> Image:
+    canvas = FigureCanvas(input)
+    png_output = io.BytesIO()
+    canvas.print_png(png_output)
+    png_output.seek(0)
+    return Image.open(png_output)
+```
+
+This function will take a `matplotlib.pyplot.Figure` object as input and return a `PIL.Image` object. The `FigureCanvasAgg` is used to render the figure into a byte string, and `io.BytesIO` is used to create a file-like object in memory that this byte string can be written to. Then, the `PIL.Image.open` function is used to read this byte string into a `PIL.Image` object.

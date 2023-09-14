@@ -1,0 +1,7 @@
+It seems like the issue is related to the version-platform combination of MongoDB. The requested version-platform combination does not exist, which is causing the 403 error. 
+
+You can try specifying a different version of MongoDB in your package.json file. For example, if you are currently using version 4.0.14, you can try downgrading to version 4.0.13 or upgrading to version 4.0.15. 
+
+You can also try specifying a different platform in your package.json file. For example, if you are currently using the win32 platform, you can try using the linux platform instead. 
+
+If neither of these solutions work, you can try using a different package for in-memory MongoDB testing, such as mongodb-memory-server-global.

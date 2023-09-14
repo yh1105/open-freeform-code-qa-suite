@@ -1,0 +1,7 @@
+I'm sorry to hear that you lost your work. It sounds like the notebook was experiencing an error and was not able to save your work properly. 
+
+One thing you can try is to look for any temporary files that Jupyter Notebook may have created. You can do this by navigating to the directory where your notebook was saved and looking for files with the extension `.ipynb_checkpoints`. If you find a file with a name similar to your notebook's filename followed by `-checkpoint.ipynb`, try opening it in Jupyter Notebook to see if it contains any of your work.
+
+If that doesn't work, you can try looking for any backup files that may have been created. Jupyter Notebook creates backup files with the extension `.ipynb~` in the same directory as your notebook. If you find a file with a name similar to your notebook's filename followed by `~.ipynb`, try opening it in Jupyter Notebook to see if it contains any of your work.
+
+If neither of these options work, unfortunately, it may not be possible to recover your work. In the future, it's a good idea to save your work frequently and make backups of important files to prevent data loss.

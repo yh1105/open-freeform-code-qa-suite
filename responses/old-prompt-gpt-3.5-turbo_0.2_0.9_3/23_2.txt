@@ -1,0 +1,36 @@
+The error message suggests that the Puppeteer library is unable to launch the browser process. This could be due to a few reasons:
+
+1. Puppeteer is not installed: Make sure that you have installed Puppeteer by running `npm install puppeteer` in your project directory.
+
+2. Chrome/Chromium is not installed: Puppeteer requires a version of Chrome or Chromium to be installed on your system. If you haven't installed it yet, you can download it from the official website: https://www.google.com/chrome/.
+
+3. Chrome/Chromium is not in the default location: If you have installed Chrome/Chromium in a non-default location, you need to specify the path to the executable when launching Puppeteer. You can do this by passing an object with the `executablePath` property to the `puppeteer.launch()` method.
+
+Here's an updated version of your code that includes the `executablePath` property:
+
+```
+const puppeteer = require('puppeteer');
+
+(async function() {
+  try {
+    const browser = await puppeteer.launch({
+      executablePath: '/path/to/chrome' // replace with the path to your Chrome/Chromium executable
+    });
+    const page = await browser.newPage();
+
+    await page.setContent(pdfOutput);
+    await page.emulateMedia("screen");
+    await page.pdf({
+      path: "routes/planiton/pdf/mypdf.pdf",
+      format: "A4",
+      printBackground: true
+    });
+
+    console.log('done');
+    await browser.close();
+  } catch (e) {
+    console.log("Our Error", e)
+  }
+})();
+```
+

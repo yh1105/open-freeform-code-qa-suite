@@ -1,0 +1,21 @@
+Sure, you can use the `WindowMetrics` API to get the screen size. Here's how you can modify your function to get the screen height:
+
+```kotlin
+fun getWidthHeight(wm: WindowManager): Int {
+    val windowMetrics = wm.currentWindowMetrics
+    val windowInsets: WindowInsets = windowMetrics.windowInsets
+
+    val insets = windowInsets.getInsetsIgnoringVisibility(WindowInsets.Type.navigationBars() or WindowInsets.Type.displayCutout())
+    val insetsHeight = insets.top + insets.bottom
+
+    val b = windowMetrics.bounds
+    val orig_height = b.height()
+
+    // Calculate the actual height by subtracting the insets
+    val actualHeight = orig_height - insetsHeight
+
+    return actualHeight
+}
+```
+
+This function will return the height of the screen excluding the system UI such as the navigation bar and the display cutout (if any).

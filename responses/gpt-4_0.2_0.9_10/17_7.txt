@@ -1,0 +1,33 @@
+To make VSCode IntelliSense work with an alias like `@styles`, you need to configure your `jsconfig.json` or `tsconfig.json` (if you're using TypeScript) file.
+
+Here's how you can do it:
+
+1. Open your `jsconfig.json` or `tsconfig.json` file.
+
+2. Add the `paths` and `baseUrl` properties to the `compilerOptions` object. The `baseUrl` is a directory that VSCode uses as a base to resolve your modules. The `paths` property is used to map your aliases to the corresponding paths.
+
+Here's an example of how you can set it up:
+
+```json
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@styles/*": ["src/styled/*"]
+    }
+  },
+  "include": ["src/**/*"]
+}
+```
+
+In this example, `@styles` is an alias for the `src/styled` directory. The `*` after `@styles/` and `src/styled/` is a wildcard that matches any number of characters. It allows you to import any module from the `src/styled` directory by using the `@styles` alias.
+
+For example, if you have a file at `src/styled/index.js`, you can import it like this:
+
+```javascript
+import styles from '@styles/index';
+```
+
+After you've made these changes, VSCode should be able to provide IntelliSense for the `@styles` alias.
+
+Remember to restart your VSCode after these changes, sometimes it's required for the changes to take effect.

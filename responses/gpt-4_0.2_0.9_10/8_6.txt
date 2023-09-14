@@ -1,0 +1,25 @@
+Here's a function `convertToUTC()` that takes a Date object in the local timezone and returns a new Date object in UTC:
+
+```javascript
+function convertToUTC(date) {
+  // Get the local timezone offset in minutes
+  const timezoneOffset = date.getTimezoneOffset();
+
+  // Create a new Date object with the local time adjusted by the timezone offset
+  const utcDate = new Date(date.getTime() - (timezoneOffset * 60 * 1000));
+
+  return utcDate;
+}
+```
+
+You can use this function like this:
+
+```javascript
+const localDate = new Date();
+console.log("Local date:", localDate);
+
+const utcDate = convertToUTC(localDate);
+console.log("UTC date:", utcDate);
+```
+
+This will output the local date and the corresponding UTC date.

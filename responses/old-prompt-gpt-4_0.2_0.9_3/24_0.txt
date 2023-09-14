@@ -1,0 +1,7 @@
+As of now, there are no official or semi-official guidelines on how to name getters and setters after Java 14. The JavaBeans naming conventions (`getName()`, `setName()`) are still widely used and accepted in the Java community.
+
+The introduction of records in Java 14 is a significant change, but it doesn't mean that the old conventions are deprecated or incorrect. Records are a special kind of class that are intended to be used primarily as simple data carriers. They automatically provide several standard methods like `equals()`, `hashCode()`, and `toString()`, and also a public constructor and accessor methods for the fields. The accessor methods are named after the fields, without a `get` prefix.
+
+If you're working in a codebase that uses both records and traditional JavaBeans, it's probably best to stick with the naming conventions that are already in use in that codebase. If you're starting a new project or writing new code, you can choose the naming convention that you prefer, or that you think is most appropriate for the situation.
+
+In general, consistency is more important than the specific naming convention that you choose. If you're working with other developers, it's a good idea to agree on a naming convention and stick to it.

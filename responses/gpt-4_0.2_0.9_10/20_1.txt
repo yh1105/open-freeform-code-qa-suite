@@ -1,0 +1,25 @@
+I'm sorry to hear about your lost work. It's a frustrating experience that many of us have been through. 
+
+The orange box you mentioned might have been a `POST` error, which usually means that the Jupyter notebook server was unable to save your notebook. This could be due to a network issue, or if you're running out of disk space, or some other server issue.
+
+Unfortunately, if the checkpoint file is also blank, it's unlikely that you can recover your work from Jupyter itself. Jupyter's autosave and checkpointing feature is meant to help prevent data loss, but it's not perfect and it's not a replacement for manually saving your work frequently.
+
+Here are a few things you can try:
+
+1. **Check the `.ipynb_checkpoints` directory again**: Make sure you're looking at the correct checkpoint file. There might be more than one checkpoint file if you have multiple notebooks.
+
+2. **Check your system's temporary files**: Sometimes, your system might keep a temporary copy of your file. The location of these files can vary, but on MacOS, you can try looking in `/tmp` or `~/Library/Jupyter/runtime`.
+
+3. **Use a file recovery tool**: If your work was saved to disk at some point, a file recovery tool might be able to recover it. There are many such tools available, both free and paid. However, this should be a last resort, as these tools can be complex to use and there's no guarantee they'll be able to recover your file.
+
+In the future, to avoid such issues, I would recommend the following:
+
+- **Save your work frequently**: Don't rely solely on Jupyter's autosave feature. Make sure to manually save your work frequently.
+
+- **Keep an eye on Jupyter's status messages**: If you see an error message, don't ignore it. Try to resolve it as soon as possible. If you're not sure what the message means, look it up or ask for help.
+
+- **Use version control**: Tools like Git can help you keep track of changes to your files and recover previous versions if something goes wrong.
+
+- **Backup your work**: Make regular backups of your work. This can be as simple as copying your files to a different location, or you could use a dedicated backup tool or service.
+
+I hope this helps, and I wish you the best of luck in recovering your work.

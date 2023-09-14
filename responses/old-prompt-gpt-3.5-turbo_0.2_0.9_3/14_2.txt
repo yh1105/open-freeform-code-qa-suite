@@ -1,0 +1,18 @@
+To deploy a Nuxt.js static website to a public hosting like GitHub pages, you can use the `generate` command provided by Nuxt.js. This command will generate a static version of your website that can be deployed to any static hosting provider.
+
+To generate the static files, run the following command in your project directory:
+
+```
+npm run generate
+```
+
+This will create a `dist` directory in your project root, which contains all the static files that need to be deployed to your hosting provider.
+
+To deploy your website to GitHub pages, you can follow these steps:
+
+1. Create a new repository on GitHub and name it `<username>.github.io`, where `<username>` is your GitHub username.
+2. Push the contents of the `dist` directory to the `master` branch of your new repository.
+3. Wait a few minutes for GitHub to process your files and deploy your website.
+4. Visit `https://<username>.github.io` in your web browser to view your deployed website.
+
+Note that if you have content that depends on user input, you will need to use client-side JavaScript to fetch and display that content. You can use a JavaScript framework like Vue.js or React to build a single-page application that can handle user input and fetch data from an API.

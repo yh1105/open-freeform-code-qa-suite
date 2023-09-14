@@ -1,0 +1,17 @@
+Sure, I can help you with that. Here is the modified version of your code:
+
+```python
+!wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+!chmod +x Miniconda3-latest-Linux-x86_64.sh
+!bash ./Miniconda3-latest-Linux-x86_64.sh -b -f -p /usr/local
+!conda install --channel defaults conda python=3.6 --yes
+!conda update --channel defaults --all --yes
+!conda install -c anaconda ujson --yes
+import sys
+sys.path.append('/usr/local/lib/python3.6/site-packages/')
+import ujson
+```
+
+This script will download and install Miniconda, then use conda to install the ujson package. After that, it appends the path to the site-packages directory (where ujson is installed) to the system path, and finally imports the ujson module.
+
+Please note that the `!` at the beginning of each line is used to run shell commands in the Jupyter notebook. You don't need to use it if you're running the script in a regular Python environment.

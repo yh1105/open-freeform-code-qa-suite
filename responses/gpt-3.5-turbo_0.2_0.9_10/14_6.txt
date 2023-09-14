@@ -1,0 +1,20 @@
+To deploy a Nuxt.js static website to a public hosting like GitHub pages, you can use the following npm command:
+
+```
+npm run generate
+```
+
+This command will generate a static version of your website in the `dist` directory. You can then push the contents of this directory to your GitHub repository.
+
+To ensure that your website works as a single page application, you will need to configure your router to use the `history` mode. You can do this by adding the following code to your `nuxt.config.js` file:
+
+```
+export default {
+  mode: 'spa',
+  router: {
+    mode: 'history'
+  }
+}
+```
+
+This will ensure that your website uses the HTML5 history API for navigation, which is required for a single page application.

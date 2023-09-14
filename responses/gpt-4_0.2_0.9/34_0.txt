@@ -1,9 +1,0 @@
-You can use Angular's built-in `*ngIf` directive to conditionally show or hide your div based on the selected value of the radio group. Here's how you can modify your div:
-
-```html
-<div id='divabc' *ngIf="myform.get('Schedule').value === 'abc'">ABC</div>
-```
-
-This will only display the div when the selected value of the radio group (which is bound to the `Schedule` form control) is "abc". 
-
-Please note that this assumes that the `abc` is the `ID` of the selected radio button, as you're assigning `[value]="sch_item.ID"` in your radio button. If `abc` is the `Name` of the radio button, you need to adjust your radio button value assignment accordingly.

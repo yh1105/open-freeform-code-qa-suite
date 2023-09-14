@@ -1,0 +1,21 @@
+Yes, you can use the Matplotlib inline backend to display the plots directly in the Visual Studio Code editor. Here's how you can modify your code to achieve this:
+
+```
+import matplotlib.pyplot as plt
+import matplotlib as mpl
+import numpy as np
+
+%matplotlib inline
+
+x = np.linspace(0, 20, 100)
+plt.plot(x, np.sin(x))
+plt.show()
+```
+
+The `%matplotlib inline` command tells Matplotlib to display the plots directly in the output cell of the Jupyter notebook or in the Visual Studio Code editor.
+
+Note that you need to have the Matplotlib library installed in your Python environment for this to work. You can install it using pip:
+
+```
+pip install matplotlib
+```

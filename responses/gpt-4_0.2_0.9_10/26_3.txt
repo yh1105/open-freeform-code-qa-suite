@@ -1,0 +1,53 @@
+The issue is that the `setup` function is only called once when the component is created. When you navigate to another user, the component is not recreated, so the `setup` function is not called again. To fix this, you can use a `watch` to react to route changes.
+
+Here's the updated code:
+
+```html
+<template>
+  <div>{{username}}</div>
+</template>
+
+<script lang="ts">
+import { computed, defineComponent, ref, getCurrentInstance, watch } from '@vue/composition-api';
+
+export const useUsername = ({ user }) => {
+  return { username: user.name };
+};
+
+export default defineComponent({
+  setup(props, { root }) {
+    const vm = getCurrentInstance();
+
+    const userToLoad = computed(() => root.$route.params.userId);
+    const listOfUsers = [
+      { userId: 1, name: 'user1' },
+      { userId: 2, name: 'user2' },
+    ];
+
+    const username = ref('');
+
+    const loadUser = () => {
+      const user = listOfUsers.find((u) => u.userId === +userToLoad.value);
+      if (!user) {
+        return root.$router.push('/404');
+      }
+
+      const { username: newUsername } = useUsername({ user });
+      username.value = newUsername;
+    };
+
+    // Call loadUser initially
+    loadUser();
+
+    // Watch for route changes and call loadUser when the route changes
+    watch(userToLoad, () => {
+      loadUser();
+    });
+
+    return { username };
+  },
+});
+</script>
+```
+
+In this updated code, I've created a `loadUser` function that finds the user and updates the `username` ref. I've also added a `watch` to react to changes in the `userToLoad` computed property, which will call `loadUser` when the route changes. This will ensure that the username is updated when navigating to another user.

@@ -1,0 +1,17 @@
+Sure, the error you're getting is because you're trying to copy a file to a directory without specifying a filename in the destination. You need to join the destination directory with the filename from the source. Here's how you can do it:
+
+```python
+from shutil import copyfile
+import os
+
+def copy_from_file_list(fileList, destFolder):
+    for item in fileList:
+        # Get the base name of the source file
+        base_name = os.path.basename(item[0])
+        # Join the destination folder with the base name
+        dest_file = os.path.join(destFolder, base_name)
+        # Copy the file
+        copyfile(item[0], dest_file)
+```
+
+This function will copy all files from `fileList` to `destFolder` preserving the original filenames. If a file with the same name already exists in the destination folder, it will be overwritten. If you want to avoid this, you could add a check to see if the file already exists and rename it if necessary.

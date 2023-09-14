@@ -1,0 +1,40 @@
+The error message `Failed to launch the browser process puppeteer` usually means that Puppeteer is unable to start the Chromium instance. This could be due to a number of reasons, such as missing dependencies on the system where the code is running, or incorrect permissions.
+
+Here are some steps you can take to resolve this issue:
+
+1. **Install missing dependencies**: Puppeteer requires certain packages to be installed on your system. If you're running on a Debian-based system, you can install these dependencies using the following command:
+
+```bash
+sudo apt-get install -y libx11-xcb1 libxcomposite1 libxi6 libxext6 libxtst6 libnss3 libcups2 libxss1 libxrandr2 libasound2 libpangocairo-1.0-0 libatk1.0-0 libatk-bridge2.0-0 libgtk-3-0
+```
+
+2. **Use Puppeteer with bundled Chromium**: By default, Puppeteer downloads and uses a specific version of Chromium. If you're having issues with this, you can try using Puppeteer with bundled Chromium. This can be done by installing `puppeteer-core` and `chrome-aws-lambda` packages:
+
+```bash
+npm i puppeteer-core chrome-aws-lambda
+```
+
+Then, in your code, you can launch the browser like this:
+
+```javascript
+const puppeteer = require('puppeteer-core');
+const chromium = require('chrome-aws-lambda');
+
+(async function() {
+  try {
+    const browser = await puppeteer.launch({
+      executablePath: await chromium.executablePath,
+      args: chromium.args,
+    });
+    // rest of your code
+  } catch (e) {
+    console.log("Our Error", e)
+  }
+})();
+```
+
+3. **Check your permissions**: Make sure that the user running the script has the necessary permissions to launch Puppeteer and create new files (for the PDF output).
+
+4. **Update Puppeteer**: If you're using an older version of Puppeteer, you might want to update to the latest version, as the issue might have been fixed in a newer release.
+
+If none of these steps work, please provide more information about your environment (OS, Node.js version, Puppeteer version, etc.) for more specific help.

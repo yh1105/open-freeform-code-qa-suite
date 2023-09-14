@@ -1,0 +1,23 @@
+Yes, you can use personal access tokens to clone, commit, and push to a GitHub repository. The steps you provided are correct. Here's a summary:
+
+1. Clone the repository using the personal access token:
+```
+git clone https://<username>:<personal_access_token>@github.com/<username>/<project_name>.git
+```
+
+2. Navigate to the local repository:
+```
+cd /path/to/local/repository
+```
+
+3. Make changes to the code and commit the changes:
+```
+git commit --allow-empty -m 'Commit message'
+```
+
+4. Push the changes to the remote repository using the personal access token:
+```
+git push https://<username>:<personal_access_token>@github.com/<username>/<project_name>.git master
+```
+
+Make sure to replace `<username>`, `<personal_access_token>`, and `<project_name>` with your own values.

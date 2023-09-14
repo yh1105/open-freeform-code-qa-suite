@@ -1,0 +1,13 @@
+I should modify `main.ts` file to 
+
+```typescript
+import Logo from 'assets/images/logo.png';
+```
+
+And I should modify `main.html` file to 
+
+```html
+<img src="${Logo}" alt="" />
+```
+
+The type definition in `d.ts` file is correct.

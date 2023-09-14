@@ -1,0 +1,21 @@
+The error message `Failed to launch the browser process` is quite common when using Puppeteer. It usually means that Puppeteer is unable to start the Chromium browser for some reason. Here are a few things you can try:
+
+1. **Install Puppeteer with bundled Chromium**: If you didn't install Puppeteer with the bundled Chromium, you might want to try that. You can do this by running `npm install puppeteer` or `yarn add puppeteer`.
+
+2. **Check your system dependencies**: Puppeteer requires certain system dependencies. If these are not met, Puppeteer might fail to launch. You can check the Puppeteer documentation for a list of these dependencies.
+
+3. **Try running Puppeteer in no-sandbox mode**: This is not recommended for production environments as it can pose a security risk, but it can help you determine if sandboxing is the issue. You can do this by passing `--no-sandbox` to the `args` option when launching Puppeteer:
+
+   ```javascript
+   const browser = await puppeteer.launch({
+     args: ['--no-sandbox', '--disable-setuid-sandbox'],
+   });
+   ```
+
+4. **Check your path**: Make sure the path where you are trying to save the PDF exists. In your case, the path is `routes/planiton/pdf/mypdf.pdf`.
+
+5. **Check for any active instances of Puppeteer**: If there are any active instances of Puppeteer running, try closing them and running your script again.
+
+6. **Update Puppeteer**: If you're using an older version of Puppeteer, try updating to the latest version.
+
+The `checked failed crashForExceptionInNonABIComplianceCodeRange` error is a bit more obscure, but it might be related to the above issue. If none of the above solutions work, you might want to try searching for this specific error message or posting a question on a site like Stack Overflow.

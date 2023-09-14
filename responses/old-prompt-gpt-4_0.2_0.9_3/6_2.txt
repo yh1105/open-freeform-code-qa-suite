@@ -1,0 +1,13 @@
+Based on the error message `ERR_SSL_PROTOCOL_ERROR`, it seems like your application is trying to use HTTPS (secure HTTP) but there's an issue with the SSL setup. 
+
+Here are a few things you can try:
+
+1. **Check your application's SSL configuration**: Ensure that your application is properly configured to use SSL. This usually involves setting up a keystore and truststore and configuring your application to use them. Check your application's properties file (usually `application.properties` or `application.yml`) for any SSL-related configuration.
+
+2. **Try using HTTP instead of HTTPS**: If your application doesn't need to use HTTPS (for example, if it's just a local development environment), you can try changing the URL to `http://localhost:8080` instead of `https://localhost:8080`.
+
+3. **Check if the port is already in use**: Although you mentioned that port 8080 is being used by `java.exe`, it's worth double-checking if there's any other process using the same port. You can do this by running the command `netstat -ano | findstr :8080` in the command prompt.
+
+4. **Try a different port**: If the above steps don't work, you can try changing the port your application runs on. You can usually do this by changing the `server.port` property in your application's properties file.
+
+5. **Check your system's hosts file**: Ensure that `localhost` is correctly mapped to `127.0.0.1` in your system's hosts file. On Windows, this file is usually located at `C:\Windows\System32\

@@ -1,0 +1,64 @@
+To fix the issue of the user not changing in the HTML template when the route changes, you need to make sure that the `username` computed property is reactive to changes in the `user` object. You can achieve this by making `user` a reactive object using the `reactive` function from `@vue/composition-api`. Here's how you can modify your code:
+
+```
+<template>
+  <div>{{username}}</div>
+</template>
+
+<script lang="ts">
+import { computed, defineComponent, ref, getCurrentInstance, reactive } from '@vue/composition-api';
+
+export const useUsername = ({ user }) => {
+  return { username: user.name };
+};
+
+export default defineComponent({
+  setup(props, { root }) {
+    const vm = getCurrentInstance();
+
+    const userToLoad = computed(() => root.$route.params.userId);
+    const listOfUsers = [
+      { userId: 1, name: 'user1' },
+      { userId: 2, name: 'user2' },
+    ];
+
+    const user = reactive(listOfUsers.find((u) => u.userId === +userToLoad.value));
+    if (!user) {
+      return root.$router.push('/404');
+    }
+
+    const { username } = useUsername({ user });
+
+    return { username };
+  },
+});
+
+</script>
+```
+
+Regarding the issue of not redirecting to the 404 page when the user is not in the list, you need to move the check for the existence of the user inside the `computed` function for `username`. This way, the check will be performed every time the `user` object changes, which includes when the route changes. Here's how you can modify your code:
+
+```
+<template>
+  <div>{{username}}</div>
+</template>
+
+<script lang="ts">
+import { computed, defineComponent, ref, getCurrentInstance, reactive } from '@vue/composition-api';
+
+export const useUsername = ({ user }) => {
+  if (!user) {
+    root.$router.push('/404');
+    return { username: '' };
+  }
+  return { username: user.name };
+};
+
+export default defineComponent({
+  setup(props, { root }) {
+    const vm = getCurrentInstance();
+
+    const userToLoad = computed(() => root.$route.params.userId);
+    const listOfUsers = [
+      { userId: 1, name: 'user1' },
+      { userId: 2, name: 'user2'

@@ -1,0 +1,13 @@
+It seems like you are encountering an SSL protocol error when trying to access your app at `https://localhost:8080`. This error can occur due to various reasons, such as an invalid SSL certificate or an outdated browser.
+
+Here are a few things you can try to resolve the issue:
+
+1. Try accessing the app using `http://localhost:8080` instead of `https://localhost:8080`. This will bypass the SSL protocol and allow you to access the app over an unsecured connection.
+
+2. Check if your browser is up-to-date and supports the latest SSL protocols. If not, try updating your browser to the latest version.
+
+3. Check if your SSL certificate is valid and not expired. If it is expired, you can generate a new SSL certificate and install it on your server.
+
+4. Check if there are any firewalls or antivirus software blocking the connection to your app. You can try disabling them temporarily and see if it resolves the issue.
+
+Regarding your question about Apache, it is not necessary to install Apache to access your app at `localhost`. Spring Boot has an embedded web server that can serve your app on `localhost`. The issue you are facing is most likely related to SSL protocol and port configuration.

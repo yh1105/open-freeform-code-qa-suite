@@ -1,0 +1,34 @@
+Based on the exception message and your provided code, it seems that you are missing the Ribbon dependency in your project. Since you mentioned that you have already tried adding the Ribbon dependency and it didn't help, I would recommend double-checking the dependency and making sure it's the correct one.
+
+Add the following dependency to your `pom.xml`:
+
+```xml
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
+</dependency>
+```
+
+After adding the dependency, make sure to clean and rebuild your project:
+
+```sh
+mvn clean install
+```
+
+If you still face the issue, try updating your Spring Cloud version to a compatible one with your Spring Boot version. You can do this by adding or updating the `spring-cloud.version` property in your `pom.xml`:
+
+```xml
+<properties>
+    <spring-cloud.version>Finchley.SR2</spring-cloud.version>
+</properties>
+```
+
+Make sure to use a compatible Spring Cloud version with your Spring Boot version. For Spring Boot 2.0.8, you can use Spring Cloud Finchley.SR2.
+
+Finally, clean and rebuild your project again:
+
+```sh
+mvn clean install
+```
+
+This should resolve the issue you are facing.

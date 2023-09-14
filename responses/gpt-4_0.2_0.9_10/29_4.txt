@@ -1,0 +1,23 @@
+Sure, here is the complete Python code to generate the data and plot the histogram:
+
+```python
+import numpy as np
+from matplotlib import pyplot as plt
+
+def draw_histogram():
+  x = np.random.randn(100000)
+  
+  # Create the histogram using matplotlib, bins must be integer
+  plt.hist(x, bins=20, edgecolor='black')
+
+  # Show the plot
+  plt.show()
+
+  # Save the figure
+  plt.savefig('figure.pdf')
+
+# Call the function
+draw_histogram()
+```
+
+Please note that the `plt.show()` function will open a window with the plot. If you are running this code in a script, you might want to comment out this line. The `plt.savefig('figure.pdf')` function will save the plot as a PDF file in the same directory where your Python script is located.

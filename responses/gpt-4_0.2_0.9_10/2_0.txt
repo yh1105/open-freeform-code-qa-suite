@@ -1,0 +1,24 @@
+Yes, you can see the result graphs directly in Visual Studio Code itself by using the "Python Interactive Window" feature. This feature is provided by the Python extension for Visual Studio Code.
+
+Here's how you can do it:
+
+1. First, make sure you have installed the Python extension for Visual Studio Code. You can install it from the Visual Studio Code marketplace.
+
+2. Then, you can use the `#%%` comment to create a new cell in your Python file. The Python Interactive Window will execute the code in the cell when you click the "Run Cell" button.
+
+Here's your code modified to use this feature:
+
+```python
+#%%
+import matplotlib.pyplot as plt
+import matplotlib as mpl
+import numpy as np
+
+x = np.linspace(0, 20, 100)
+plt.plot(x, np.sin(x))
+plt.show()
+```
+
+After you've added the `#%%` comment, you should see a "Run Cell" button above the comment. Click this button to run the code in the cell and display the graph in the Python Interactive Window.
+
+Please note that the Python Interactive Window is similar to Jupyter notebooks, but it's integrated into Visual Studio Code and doesn't require you to install Jupyter.

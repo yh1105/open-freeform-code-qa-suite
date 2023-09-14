@@ -1,0 +1,48 @@
+To make sure that the component updates when the route changes, you can use the `watch` function from `@vue/composition-api` to watch for changes in the `userToLoad` computed property. When the value changes, you can update the `user` variable and the `username` computed property.
+
+Here's an updated version of your code:
+
+```
+<template>
+  <div>{{username}}</div>
+</template>
+
+<script lang="ts">
+import { computed, defineComponent, ref, getCurrentInstance, watch } from '@vue/composition-api';
+
+export const useUsername = ({ user }) => {
+  return { username: user.name };
+};
+
+export default defineComponent({
+  setup(props, { root }) {
+    const vm = getCurrentInstance();
+
+    const userToLoad = computed(() => root.$route.params.userId);
+    const listOfUsers = [
+      { userId: 1, name: 'user1' },
+      { userId: 2, name: 'user2' },
+    ];
+
+    let user = listOfUsers.find((u) => u.userId === +userToLoad.value);
+    if (!user) {
+      return root.$router.push('/404');
+    }
+
+    watch(userToLoad, (newValue) => {
+      user = listOfUsers.find((u) => u.userId === +newValue);
+      if (!user) {
+        return root.$router.push('/404');
+      }
+    });
+
+    const { username } = useUsername({ user });
+
+    return { username };
+  },
+});
+
+</script>
+```
+
+With this code, the `user` variable is updated whenever the `userToLoad` computed property changes. If the new value of `userToLoad` doesn't match any user in the `listOfUsers`, the component will redirect to the 404 page.

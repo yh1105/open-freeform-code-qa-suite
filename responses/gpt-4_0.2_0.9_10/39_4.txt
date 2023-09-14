@@ -1,0 +1,29 @@
+Based on the error messages and the solutions you've already tried, it seems like there might be an issue with the library search paths in your project settings. Here are a few more suggestions to try:
+
+1. **Check the Library Search Paths in your project settings:**
+
+   - Go to your project settings by selecting the project in the Project Navigator.
+   - Select your target and go to the "Build Settings" tab.
+   - Search for "Library Search Paths" and make sure the paths are correct and include the necessary libraries.
+
+2. **Remove any unnecessary search paths:**
+
+   - In the "Library Search Paths" settings, remove any paths that are not needed or are incorrect.
+   - Clean and build the project again.
+
+3. **Check the Podfile:**
+
+   - Make sure your Podfile includes all the necessary libraries and their correct versions.
+   - Run `pod install` and `pod update` again to ensure the libraries are properly installed.
+
+4. **Recreate the Xcode project:**
+
+   - If none of the above solutions work, you can try creating a new Xcode project and migrating your source files and resources to the new project.
+   - Make sure to properly set up the new project with the necessary libraries and settings.
+
+5. **Check for any issues with the libraries themselves:**
+
+   - It's possible that there might be an issue with the libraries themselves, such as a compatibility issue with your current Xcode version or iOS SDK.
+   - Check the library documentation and GitHub issues for any known issues and potential solutions.
+
+Remember to clean and build your project after each change to see if the issue is resolved. Good luck!

@@ -1,0 +1,15 @@
+Yes, I can help you with that. The error message indicates that you are trying to copy a file to a directory that already exists. To fix this, you need to specify the full path of the destination file, not just the directory.
+
+Here's the completed function:
+
+```python
+from shutil import copyfile
+
+def copy_from_file_list(fileList, destFolder):
+    for item in fileList:
+        filename = item[0].split("/")[-1]  # get the filename from the full path
+        destPath = f"{destFolder}/{filename}"  # create the full path for the destination file
+        copyfile(item[0], destPath)
+```
+
+In this function, we first extract the filename from the full path using `split("/")[-1]`. Then we create the full path for the destination file by concatenating `destFolder` and `filename`. Finally, we use `copyfile` to copy the file from the source to the destination.

@@ -1,0 +1,18 @@
+To get the screen height, you can use the following code:
+
+```
+val wm = fragmentActivity.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+
+fun getScreenHeight(wm: WindowManager): Int {
+    val windowMetrics = wm.currentWindowMetrics
+    val insets = windowMetrics.windowInsets.getInsetsIgnoringVisibility(WindowInsets.Type.systemBars())
+
+    return windowMetrics.bounds.height() - insets.top - insets.bottom
+}
+```
+
+This code uses the `WindowMetrics` class to get the height of the screen. The `WindowMetrics` class provides information about the current window, including its size and position on the screen. 
+
+The `getInsetsIgnoringVisibility()` method is used to get the insets of the screen, which are the areas that are not part of the main display area, such as the navigation bar and status bar. 
+
+Finally, the height of the screen is calculated by subtracting the top and bottom insets from the height of the window bounds.

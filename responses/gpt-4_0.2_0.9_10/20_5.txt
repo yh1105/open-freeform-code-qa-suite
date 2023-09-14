@@ -1,0 +1,22 @@
+I'm sorry to hear about your lost work, it can be very frustrating. 
+
+The orange box you mentioned might have been a `Connection Failed` or `Not Trusted` message, which can occur when the Jupyter notebook server loses connection with the browser, or when the notebook isn't trusted (respectively). In such cases, the notebook may not be able to autosave your work.
+
+Unfortunately, if the checkpoint file is also blank, it's unlikely that you can recover your work from Jupyter itself. The checkpoint file is essentially a backup that Jupyter creates every time you manually save your work (or every few minutes if autosave is enabled).
+
+However, you might be able to recover a previous version of your file using MacOS's built-in file versioning system. Here's how:
+
+1. Open Finder and navigate to the directory containing your notebook file.
+2. Right-click on your notebook file and select `Revert To > Browse All Versions...`.
+3. You'll be taken to a Time Machine-like interface where you can browse and recover previous versions of your file.
+
+If you don't see the `Revert To` option, or if no previous versions are available, then unfortunately it's unlikely that you can recover your work.
+
+To prevent this from happening in the future, I recommend the following:
+
+- Regularly save your work manually using `File > Save and Checkpoint`.
+- Make sure that your notebook is always connected to the Jupyter server. If you see a `Connection Failed` message, try to resolve the issue before continuing with your work.
+- Consider using a version control system like Git to track changes to your notebook. This can provide an additional layer of protection against data loss.
+- Regularly backup your work to an external drive or a cloud storage service.
+
+I hope this helps, and I'm sorry I couldn't provide a more positive answer.

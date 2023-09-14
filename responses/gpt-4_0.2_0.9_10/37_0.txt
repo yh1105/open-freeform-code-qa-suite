@@ -1,0 +1,21 @@
+Sure, you can subtract the `insetsHeight` from the `orig_height` to get the actual screen height. Here is the completed function:
+
+```kotlin
+fun getWidthHeight(wm: WindowManager): Int {
+    val windowMetrics = wm.currentWindowMetrics
+    val windowInsets: WindowInsets = windowMetrics.windowInsets
+
+    val insets = windowInsets.getInsetsIgnoringVisibility(WindowInsets.Type.navigationBars() or WindowInsets.Type.displayCutout())
+    val insetsHeight = insets.top + insets.bottom
+
+    val b = windowMetrics.bounds
+    val orig_height = b.height()
+
+    // Subtract insetsHeight from orig_height to get actual screen height
+    val actual_height = orig_height - insetsHeight
+
+    return actual_height
+}
+```
+
+This function will return the actual screen height excluding the navigation bars and display cutout (if any).

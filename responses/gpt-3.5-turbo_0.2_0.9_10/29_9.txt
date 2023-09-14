@@ -1,0 +1,13 @@
+Sure, here's the completed code:
+
+```
+import numpy as np
+from matplotlib import pyplot as plt
+
+def draw_histogram():
+    x = np.random.randn(100000)
+    plt.hist(x, bins=20)
+    plt.savefig('figure.pdf')
+```
+
+This code generates 100,000 random numbers from a normal distribution using `np.random.randn()`, then plots a histogram with 20 bins using `plt.hist()`. Finally, it saves the histogram figure into `figure.pdf` using `plt.savefig()`.

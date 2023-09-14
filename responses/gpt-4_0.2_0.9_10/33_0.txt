@@ -1,0 +1,41 @@
+The error message `Plugin project :location_web not found. Please update settings.gradle;` usually occurs when the Flutter project is not properly configured for web support. However, since you're developing an Android app, this error might be irrelevant. 
+
+The second error `Invalid argument(s): No host specified in URI file:///Instance%20of%20'Future%3CString%3E'` is because you're trying to use a `Future<String>` as a `String`. The `_getUserLocation()` method is asynchronous, which means it returns a `Future<String>`, not a `String`. 
+
+You need to use a `FutureBuilder` to handle the `Future` returned by `_getUserLocation()`. Here's how you can modify your `NearbyScreen` widget:
+
+```dart
+class NearbyScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        Container(
+          height: 170, 
+          width: double.infinity,
+          child: FutureBuilder(
+            future: _getUserLocation(),
+            builder: (ctx, snapshot) {
+              // Check if the Future is resolved
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Center(child: CircularProgressIndicator());
+              } else {
+                if (snapshot.error != null) {
+                  // Handle error...
+                  return Center(child: Text('An error occurred!'));
+                } else {
+                  // If the Future is complete, display the image
+                  return Image.network(snapshot.data);
+                }
+              }
+            },
+          ),
+        ),
+        Text("hello"),
+      ],
+    );
+  }
+}
+```
+
+In this code, `FutureBuilder` takes a `Future` and a `builder` function. The `builder` function is called every time the `Future`'s state changes. If the `Future` is still waiting to complete, a loading spinner is shown. If the `Future` completes with an error, an error message is shown. If the `Future` completes successfully, the image is displayed.

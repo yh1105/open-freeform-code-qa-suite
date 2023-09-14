@@ -1,0 +1,9 @@
+I'm sorry to hear that you lost your work. It's always a good practice to save your work frequently, especially when working on important projects.
+
+Regarding your issue, it's possible that the error message you saw was related to the notebook's kernel. The kernel is the engine that runs the code in the notebook, and if it encounters an error, it may stop working properly. In this case, the notebook may still be open and editable, but any changes you make won't be saved.
+
+One thing you can try is to restart the kernel and see if that resolves the issue. To do this, click on the `Kernel` menu and select `Restart Kernel and Clear All Outputs`. This will clear the output of all cells and reset the kernel. Then, try running your code again and see if the error message reappears.
+
+If the error message persists, you can try to troubleshoot the issue by looking at the error message more closely and searching for solutions online. You can also try to create a new notebook and copy and paste your code into it.
+
+Unfortunately, if none of these solutions work, it's unlikely that you'll be able to recover your work. It's always a good idea to back up your work regularly to prevent data loss in the future.

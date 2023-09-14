@@ -1,0 +1,11 @@
+I should modify `main.ts` file to:
+
+```typescript
+import Logo from 'assets/images/logo.png';
+```
+
+And modify `main.html` file to:
+
+```html
+<img src={Logo.default} alt="" />
+```

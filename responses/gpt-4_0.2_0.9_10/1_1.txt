@@ -1,0 +1,14 @@
+Here's the `getCurrentDate` function in JavaScript:
+
+```javascript
+function getCurrentDate() {
+  const today = new Date();
+  const month = String(today.getMonth() + 1).padStart(2, '0');
+  const day = String(today.getDate()).padStart(2, '0');
+  const year = today.getFullYear();
+
+  return `${month}/${day}/${year}`;
+}
+```
+
+This function creates a new Date object, extracts the month, day, and year, and formats them as a string in the `MM/DD/YYYY` format.

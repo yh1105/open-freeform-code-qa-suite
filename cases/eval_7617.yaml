@@ -2,4 +2,8 @@ id: 7617
 prompt_path: prompt_7617.txt
 type: code debugging
 lang: javascript
-grading: {}
+grading:
+  keywords:
+    - package.json
+    - mongodbMemoryServer
+    - version

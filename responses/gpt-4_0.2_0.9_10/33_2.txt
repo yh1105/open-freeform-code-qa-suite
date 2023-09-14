@@ -1,0 +1,46 @@
+The error `Plugin project :location_web not found. Please update settings.gradle;` is related to the Flutter project configuration. It seems like the Flutter project is trying to use the `location_web` plugin, but it can't find it. 
+
+You can try the following steps to resolve this issue:
+
+1. Open the `settings.gradle` file in the android directory of your Flutter project.
+2. Add the following lines:
+
+```gradle
+include ':location_web'
+project(':location_web').projectDir = new File('../flutter/.pub-cache/hosted/pub.dartlang.org/location_web-0.0.1+2/android')
+```
+
+Replace `0.0.1+2` with the version of `location_web` you are using.
+
+As for the second error `Invalid argument(s): No host specified in URI file:///Instance%20of%20'Future%3CString%3E'`, it's because you're trying to use a `Future<String>` as a `String` directly. 
+
+In Flutter, you can't directly use the value of a `Future` because it's not available at the time of the execution of the code. You need to wait for the `Future` to complete. You can use a `FutureBuilder` for this:
+
+```dart
+class NearbyScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        FutureBuilder(
+          future: _getUserLocation(),
+          builder: (ctx, snapshot) {
+            // Show a loading spinner while waiting for the future to complete
+            if (!snapshot.hasData) {
+              return CircularProgressIndicator();
+            }
+            return Container(
+              height: 170,
+              width: double.infinity,
+              child: Image.network(snapshot.data),
+            );
+          },
+        ),
+        Text("hello"),
+      ],
+    );
+  }
+}
+```
+
+In this code, `FutureBuilder` will take care of waiting for the `Future` to complete and then build the widget with the data. If the `Future` is not complete, it will show a loading spinner.

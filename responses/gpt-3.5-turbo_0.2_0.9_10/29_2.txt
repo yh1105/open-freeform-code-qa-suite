@@ -1,0 +1,15 @@
+You can use the `plt.hist()` function to plot the histogram with 20 bins. Here's the complete code:
+
+```
+import numpy as np
+from matplotlib import pyplot as plt
+
+def draw_histogram():
+  x = np.random.randn(100000)
+  plt.hist(x, bins=20)
+  plt.savefig('figure.pdf')
+
+draw_histogram()
+```
+
+This code generates 100,000 random numbers from a normal distribution using `np.random.randn()`. Then, it plots a histogram of the data using `plt.hist()`, with 20 bins specified by the `bins` parameter. Finally, it saves the figure as a PDF using `plt.savefig()`.

@@ -1,0 +1,43 @@
+It seems like the issue is related to the MongoDB version and platform combination not being available for download. The error message `Status Code is 403 (MongoDB's 404)` indicates that the requested version-platform combination does not exist.
+
+To fix this issue, you can try the following steps:
+
+1. Update the `mongodb-memory-server` package to the latest version by running:
+
+   ```
+   npm install --save-dev mongodb-memory-server@latest
+   ```
+
+2. If you still face the issue, you can try specifying a different MongoDB version in your `package.json` file. Add the following configuration under the `config` key:
+
+   ```json
+   "config": {
+     "mongodbMemoryServer": {
+       "version": "4.2.0"
+     }
+   }
+   ```
+
+   Replace `4.2.0` with the desired MongoDB version that is compatible with your platform. You can find the available versions [here](https://www.mongodb.com/download-center/community/releases).
+
+3. If the issue persists, you can try using a different platform or architecture. Update the `mongodbMemoryServer` configuration in your `package.json` file:
+
+   ```json
+   "config": {
+     "mongodbMemoryServer": {
+       "platform": "win32",
+       "arch": "x64",
+       "version": "4.2.0"
+     }
+   }
+   ```
+
+   Replace `win32`, `x64`, and `4.2.0` with the desired platform, architecture, and MongoDB version, respectively.
+
+After making the changes, run your tests again:
+
+```
+npm run test
+```
+
+If everything is set up correctly, the tests should run without any issues.

@@ -1,0 +1,48 @@
+The error message you're seeing suggests that Puppeteer is having trouble launching a headless Chrome instance. This can be due to a variety of reasons, but here are a few potential solutions:
+
+1. **Install Chromium in your system**: Puppeteer requires a version of Chromium to run. You can install it using npm:
+
+    ```bash
+    npm i puppeteer
+    ```
+
+    This will download a recent version of Chromium that Puppeteer can use.
+
+2. **Use the `puppeteer-core` package**: If you have Google Chrome or Chromium installed to a location that Puppeteer can't auto-detect, you can use `puppeteer-core` instead. `puppeteer-core` is a lighter version of Puppeteer that doesn't download Chromium by default.
+
+    ```bash
+    npm i puppeteer-core
+    ```
+
+    Then, you can point `puppeteer-core` to your installed Chrome or Chromium like so:
+
+    ```javascript
+    const puppeteer = require('puppeteer-core');
+
+    (async function() {
+      try {
+        const browser = await puppeteer.launch({executablePath: '/path/to/your/Chrome'});
+        // rest of your code...
+      } catch (e) {
+        console.log("Our Error", e)
+      }
+    })();
+    ```
+
+    Replace `'/path/to/your/Chrome'` with the actual path to your Chrome or Chromium executable.
+
+3. **Add `--no-sandbox` flag**: If you're running this on a server or a Docker container, you might need to disable the Chrome sandbox. This is less secure and not recommended for browsing, but it's usually fine for generating PDFs or screenshots.
+
+    ```javascript
+    const browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox']});
+    ```
+
+4. **Update Puppeteer**: If you're using an older version of Puppeteer, you might be running into a bug that's been fixed in a newer version. Try updating Puppeteer to the latest version:
+
+    ```bash
+    npm i puppeteer@latest
+    ```
+
+5. **Check your system resources**: If your system is low on resources (CPU, RAM, etc.), Puppeteer might fail to launch. Try closing unnecessary programs or upgrading your system.
+
+Remember to replace `puppeteer` with `puppeteer-core` in your code if you decide to use `puppet

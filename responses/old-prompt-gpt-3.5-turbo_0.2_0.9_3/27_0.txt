@@ -1,0 +1,39 @@
+Make sure that you have imported `FlexLayoutModule` in your `login-view` module. Here is an example:
+
+```
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { MaterialModule } from '../../material/material.module';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+
+@NgModule({
+  declarations: [LoginComponent, RegisterComponent],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    RouterModule.forChild([
+      { path: 'login', component: LoginComponent },
+      { path: 'register', component: RegisterComponent },
+    ]),
+    MaterialModule,
+    FlexLayoutModule
+  ],
+})
+export class AuthModule {}
+```
+
+Also, make sure that you have added the `fxLayout` directive to the HTML template of your `login-view` component. Here is an example:
+
+```
+<div fxLayout="column" fxLayoutAlign="center center">
+  <h1>Login</h1>
+  <form>
+    <!-- form fields here -->
+  </form>
+</div>
+```

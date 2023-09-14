@@ -1,0 +1,21 @@
+I'm sorry to hear about your lost work. It's a frustrating experience that many of us have been through. 
+
+The orange box you mentioned might have been a `Connection Failed` or `Not Trusted` message, which means that Jupyter Notebook was unable to save your work. This can happen if the server running your notebook crashes or if there's a network issue.
+
+Here are a few things you can try to recover your work:
+
+1. **Check the .ipynb_checkpoints directory**: You've already done this, but it's worth mentioning for completeness. Jupyter Notebook automatically creates a checkpoint every time you save your notebook. These checkpoints are stored in a directory named `.ipynb_checkpoints` in the same directory as your notebook. If you can find a recent checkpoint, you may be able to recover some of your work.
+
+2. **Check your browser's local storage**: Jupyter Notebook also stores unsaved changes in your browser's local storage. If you haven't cleared your browser cache or used a different browser/computer to access the notebook, you might be able to recover your work this way. Here's how:
+
+   - Reopen the notebook in the same browser.
+   - When the notebook is loaded, Jupyter will check the notebook's last save time against the most recent autosave data in your browser's local storage. If the autosave data is more recent, Jupyter will display a dialog box asking if you want to recover the autosave data.
+   - Click `Yes` to load the autosave data.
+
+3. **Check the terminal output**: If you started Jupyter Notebook from a terminal, it might have printed some error messages or other information that could help you recover your work. For example, if the notebook server crashed, it might have printed a stack trace or other error message that could give you a clue about what went wrong.
+
+4. **Use a file recovery tool**: If all else fails, you might be able to recover the lost data using a file recovery tool. This is a bit of a long shot, but it's worth a try if the data is important.
+
+In the future, to avoid losing work, it's a good idea to save and checkpoint your work frequently. You might also want to consider using a version control system like Git to keep track of changes to your notebooks.
+
+I hope this helps, and I wish you the best of luck in recovering your work.

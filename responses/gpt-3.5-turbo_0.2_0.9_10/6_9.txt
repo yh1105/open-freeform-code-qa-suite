@@ -1,0 +1,32 @@
+It seems like the issue is related to SSL protocol error. You can try accessing the application using HTTP instead of HTTPS by using the following URL: http://localhost:8080. If this works, then the issue is related to SSL configuration.
+
+If you want to access the application using HTTPS, you need to make sure that the SSL certificate is properly configured. You can check if the SSL certificate is properly configured by running the following command:
+
+```
+mvnw keytool:check -keystore src/main/resources/config/tls/keystore.p12
+```
+
+If the SSL certificate is not properly configured, you can generate a new one using the following command:
+
+```
+mvnw keytool:generate -i -alias localhost -keyalg RSA -keysize 2048 -validity 365 -keystore src/main/resources/config/tls/keystore.p12
+```
+
+Once you have generated the SSL certificate, you need to configure your application to use it. You can do this by adding the following configuration to your application.properties file:
+
+```
+server.ssl.key-store=classpath:config/tls/keystore.p12
+server.ssl.key-store-password=changeit
+server.ssl.keyStoreType=PKCS12
+server.ssl.keyAlias=localhost
+```
+
+Make sure to replace the keystore password with your own password.
+
+If the issue is related to port, you can try changing the port number to a different one by adding the following configuration to your application.properties file:
+
+```
+server.port=8081
+```
+
+This will change the port number to 8081. You can then access the application using the following URL: http://localhost:8081.

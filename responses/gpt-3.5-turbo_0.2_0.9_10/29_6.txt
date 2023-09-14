@@ -1,0 +1,15 @@
+You can use the `plt.hist()` function to plot the histogram. Here's the complete code:
+
+```
+import numpy as np
+from matplotlib import pyplot as plt
+
+def draw_histogram():
+    x = np.random.randn(100000)
+    plt.hist(x, bins=20)
+    plt.savefig('figure.pdf')
+
+draw_histogram()
+```
+
+The `plt.hist()` function takes the data `x` as the first argument and the number of bins as the `bins` argument. The `plt.savefig()` function saves the figure as a PDF file named `figure.pdf`.

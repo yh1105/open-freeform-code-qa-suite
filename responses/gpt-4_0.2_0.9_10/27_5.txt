@@ -1,0 +1,39 @@
+To make sure that Angular Flex-Layout is working in your `login-view` component, please follow these steps:
+
+1. First, ensure that you have imported the `FlexLayoutModule` in the module where your `login-view` component is declared. If your `login-view` component is part of the `AuthModule`, you should import the `FlexLayoutModule` in the `auth.module.ts` file:
+
+```typescript
+import { FlexLayoutModule } from '@angular/flex-layout';
+
+@NgModule({
+  imports: [
+    // other imports
+    FlexLayoutModule,
+  ],
+  declarations: [
+    // your components
+  ],
+})
+export class AuthModule { }
+```
+
+2. In your `login-view` component's HTML template, you can now use Angular Flex-Layout directives like `fxLayout`, `fxLayoutAlign`, `fxLayoutGap`, and `fxFlex`. Here's a simple example:
+
+```html
+<div fxLayout="column" fxLayoutAlign="center center">
+  <h1>Login</h1>
+  <form>
+    <mat-form-field>
+      <input matInput placeholder="Email">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Password" type="password">
+    </mat-form-field>
+    <button mat-raised-button color="primary">Login</button>
+  </form>
+</div>
+```
+
+In this example, we're using `fxLayout="column"` to create a column layout, and `fxLayoutAlign="center center"` to center the content both horizontally and vertically.
+
+If you still face issues, please provide more details about the `login-view` component and any error messages you might be encountering.

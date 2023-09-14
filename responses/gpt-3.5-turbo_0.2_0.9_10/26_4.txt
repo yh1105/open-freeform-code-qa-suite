@@ -1,0 +1,50 @@
+To make sure that the component updates when the `userId` changes, you can use a watcher on the `userToLoad` computed property. This will trigger the component to recompute the `user` variable and update the template accordingly. Here's an updated version of your code with the watcher added:
+
+```
+<template>
+  <div>{{username}}</div>
+</template>
+
+<script lang="ts">
+import { computed, defineComponent, ref, getCurrentInstance } from '@vue/composition-api';
+
+export const useUsername = ({ user }) => {
+  return { username: user.name };
+};
+
+export default defineComponent({
+  setup(props, { root }) {
+    const vm = getCurrentInstance();
+
+    const userToLoad = computed(() => root.$route.params.userId);
+    const listOfUsers = [
+      { userId: 1, name: 'user1' },
+      { userId: 2, name: 'user2' },
+    ];
+
+    const user = computed(() => listOfUsers.find((u) => u.userId === +userToLoad.value));
+    if (!user.value) {
+      root.$router.push('/404');
+    }
+
+    const { username } = useUsername({ user: user.value });
+
+    // Watch for changes to the userToLoad computed property
+    // and update the user variable accordingly
+    watch(userToLoad, () => {
+      const newUser = listOfUsers.find((u) => u.userId === +userToLoad.value);
+      if (!newUser) {
+        root.$router.push('/404');
+      } else {
+        user.value = newUser;
+      }
+    });
+
+    return { username };
+  },
+});
+
+</script>
+```
+
+Note that I also moved the check for a valid user inside the watcher, so that it runs every time the `userId` changes. This ensures that the component will redirect to the 404 page if the user doesn't exist, even if the component is already mounted.

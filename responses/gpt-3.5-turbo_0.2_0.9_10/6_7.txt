@@ -1,0 +1,22 @@
+It seems like the issue is related to SSL protocol. You can try accessing the application using `http` instead of `https` by typing `http://localhost:8080` in your browser. If this works, then the issue is related to SSL configuration.
+
+If you want to access the application using `https`, you need to configure SSL properly. You can generate a self-signed SSL certificate using the following command:
+
+```
+keytool -genkey -alias tomcat -keyalg RSA -keystore keystore.jks -validity 365
+```
+
+This will generate a keystore file named `keystore.jks` in your current directory. You need to copy this file to your project's `src/main/resources` directory.
+
+Then, you need to configure SSL in your Spring Boot application by adding the following properties to your `application.properties` file:
+
+```
+server.port=8443
+server.ssl.key-store=classpath:keystore.jks
+server.ssl.key-store-password=changeit
+server.ssl.key-password=changeit
+```
+
+This will configure your application to use SSL on port 8443. You can access your application using `https://localhost:8443`.
+
+Note that this is a self-signed certificate and may not be trusted by your browser. You can either add an exception in your browser or use a trusted SSL certificate.

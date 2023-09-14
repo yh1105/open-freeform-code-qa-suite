@@ -1,0 +1,11 @@
+I'm sorry to hear that you lost your work. It sounds like the notebook was experiencing an error and was not able to save your work properly. 
+
+Unfortunately, if the `.ipynb_checkpoints` file is blank, it's unlikely that you'll be able to recover your work. However, there are a few things you can try:
+
+1. Check if there are any backup files in the same directory as your notebook. Jupyter Notebook creates backup files with the extension `.ipynb~` that you may be able to recover your work from.
+
+2. Check if your text editor has a "recovery" feature. Some text editors, like Sublime Text, automatically save recovery files that you may be able to recover your work from.
+
+3. If you're using a cloud-based service like Google Colab or JupyterHub, check if there are any previous versions of your notebook that you can restore.
+
+In the future, it's a good idea to save your work frequently and make backups of important files. You can also consider using version control software like Git to track changes to your code and collaborate with others.

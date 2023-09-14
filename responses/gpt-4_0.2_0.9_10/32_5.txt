@@ -1,0 +1,43 @@
+The error message indicates that the MongoDB version you're trying to download does not exist for your platform. The MongoDB version is `4.0.14` and the platform is `win32` with architecture `ia32`.
+
+The MongoDB Memory Server is trying to download the MongoDB binary from the MongoDB's official FastDL server, but it seems like the specific version for your platform does not exist or is not available.
+
+Here are a few solutions you can try:
+
+1. **Change MongoDB version**: You can try to use a different MongoDB version that is compatible with your platform. You can specify the version in your `package.json` file like this:
+
+    ```json
+    "config": {
+        "mongodbMemoryServer": {
+            "version": "4.0.3"
+        }
+    }
+    ```
+
+    Replace `4.0.3` with the version you want to use.
+
+2. **Change the download mirror**: If the problem is with the FastDL server, you can try to use a different download mirror. You can specify the download mirror in your `package.json` file like this:
+
+    ```json
+    "config": {
+        "mongodbMemoryServer": {
+            "downloadMirror": "https://npm.taobao.org/mirrors/mongodb"
+        }
+    }
+    ```
+
+    This will use the Taobao mirror, which is a popular choice in China. You can replace the URL with the mirror you want to use.
+
+3. **Download the binary manually**: If none of the above solutions work, you can download the MongoDB binary manually and specify the path to the binary in your `package.json` file like this:
+
+    ```json
+    "config": {
+        "mongodbMemoryServer": {
+            "downloadDir": "/path/to/your/binary"
+        }
+    }
+    ```
+
+    Replace `/path/to/your/binary` with the actual path to your MongoDB binary.
+
+Remember to run `npm install` after modifying your `package.json` file.

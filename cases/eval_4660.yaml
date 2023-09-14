@@ -2,4 +2,9 @@ id: 4660
 prompt_path: prompt_4660.txt
 type: code debugging
 lang: javascript
-grading: {}
+grading:
+  keywords:
+    - content:
+        or:
+          - watchman
+          - content: "node(.js|js) upgrade"

@@ -1,0 +1,15 @@
+You should modify `main.ts` file to 
+
+```typescript
+import Logo from 'assets/images/logo.png';
+```
+
+And `main.html` file to 
+
+```html
+<img src={Logo.default} alt="" />
+```
+
+The type definition in `d.ts` file is correct. 
+
+The error is because you are trying to import the entire module (which is an object) instead of the default export (which is a string). The `src` attribute of an `img` tag expects a string, not an object. So you should import the default export from the module, which is the string URL of the image.

@@ -1,0 +1,13 @@
+This issue might be due to a few reasons:
+
+1. **GOPATH and GOROOT are not set properly**: Make sure you have set the GOPATH and GOROOT environment variables correctly. You can check them by running `go env` in the terminal.
+
+2. **VSCode Go extension is not configured properly**: Make sure you have installed the Go extension for VSCode and it's configured correctly. You might need to set the `go.gopath` and `go.goroot` settings in your VSCode settings.json file.
+
+3. **The package is not installed**: You might not have the package installed. You can install it by running `go get github.com/gomodule/redigo/redis` in the terminal.
+
+4. **The package is not in your GOPATH**: If you installed the package but it's not in your GOPATH, VSCode might not be able to find it. You can check where the package is installed by running `go list -f '{{.Dir}}' github.com/gomodule/redigo/redis` in the terminal. If it's not in your GOPATH, you might need to move it there or add its location to your GOPATH.
+
+5. **The Go tools are not up to date**: The Go tools used by the VSCode Go extension might be out of date. You can update them by running `Go: Install/Update Tools` in the VSCode command palette.
+
+6. **The VSCode Go extension is not using the correct Go version**: If you have multiple versions of Go installed, the VSCode Go extension might not be using the correct one. You

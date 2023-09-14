@@ -1,0 +1,44 @@
+Sure, here is the completed function:
+
+```python
+import plotly.figure_factory as ff
+import kaleido
+
+def plot_confusion_matrix(matrix: list[list[int]], x_labels: list[str], y_labels: list[str]):
+    # Create a heatmap
+    fig = ff.create_annotated_heatmap(matrix, x=x_labels, y=y_labels, colorscale='Viridis')
+
+    # Add title
+    fig.update_layout(title_text='<i><b>Confusion matrix</b></i>',
+                      xaxis = dict(title='Predicted label'),
+                      yaxis = dict(title='True label'))
+
+    # Add custom xaxis title
+    fig.add_annotation(dict(font=dict(color="black",size=14),
+                            x=0.5,
+                            y=-0.15,
+                            showarrow=False,
+                            text="Predicted value",
+                            xref="paper",
+                            yref="paper"))
+
+    # Add custom yaxis title
+    fig.add_annotation(dict(font=dict(color="black",size=14),
+                            x=-0.35,
+                            y=0.5,
+                            showarrow=False,
+                            text="Real value",
+                            textangle=-90,
+                            xref="paper",
+                            yref="paper"))
+
+    # Adjust margins to make room for yaxis title
+    fig.update_layout(margin=dict(t=50, l=200))
+
+    # Add colorbar
+    fig['data'][0]['showscale'] = True
+
+    return fig
+```
+
+This function creates an annotated heatmap using the `create_annotated_heatmap` function from `plotly.figure_factory`. The heatmap is annotated with the values from the confusion matrix. The x-axis and y-axis are labeled with the provided `x_labels` and `y_labels`, respectively. The color scale is set to 'Viridis'. The function also adds a title to the plot and custom x-axis and y-axis titles. The margins are adjusted to make room for the y-axis title. Finally, a colorbar is added to the plot. The function returns the `plotly` figure object.

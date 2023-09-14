@@ -1,0 +1,46 @@
+It seems like the issue is related to the MongoDB version and platform combination not being available for download. The error message indicates that the requested version-platform combination doesn't exist:
+
+```
+Error: Status Code is 403 (MongoDB's 404)
+This means that the requested version-platform combination dosnt exist
+```
+
+To fix this issue, you can try the following steps:
+
+1. Update the `mongodb-memory-server` package to the latest version:
+
+```bash
+npm install --save-dev mongodb-memory-server@latest
+```
+
+2. Specify a different MongoDB version in your `package.json` file:
+
+```json
+"config": {
+  "mongodbMemoryServer": {
+    "version": "4.2.0"
+  }
+}
+```
+
+Replace `4.2.0` with the desired MongoDB version that is compatible with your platform. You can check the available versions and platforms on the [MongoDB download page](https://www.mongodb.com/try/download/community).
+
+3. Remove the `node_modules` folder and `package-lock.json` file:
+
+```bash
+rm -rf node_modules package-lock.json
+```
+
+4. Reinstall the dependencies:
+
+```bash
+npm install
+```
+
+5. Run the tests again:
+
+```bash
+npm run test
+```
+
+If the issue persists, try using a different MongoDB version or platform in the `package.json` configuration.

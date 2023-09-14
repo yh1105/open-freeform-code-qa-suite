@@ -1,0 +1,21 @@
+The error `EMFILE: too many open files, watch` means that the system ran out of file descriptors, which are used by processes to track open files and sockets. 
+
+This error is common in applications that open a lot of files or sockets at the same time, such as a file watcher in a large project. 
+
+There are a few ways to fix this:
+
+1. **Increase the limit of open files in your system.** This is a temporary solution and the limit will reset after a system reboot. 
+
+   - On Unix-based systems (like Linux or MacOS), you can use the `ulimit` command to increase the limit. For example, to set the limit to 4096, you can use the following command:
+
+     ```bash
+     ulimit -n 4096
+     ```
+
+   - On Windows, the process is a bit more complicated and involves modifying the Registry. You can find more information in this [StackOverflow thread](https://stackoverflow.com/questions/19790698/windows-and-socket-fd-max-limit).
+
+2. **Use a different file watcher.** The error message suggests that you're using `sane`'s `NodeWatcher`, which is known to have issues with large numbers of files. You can try using a different file watcher, like `Chokidar`, which is more efficient and has fewer issues with file descriptor limits.
+
+3. **Exclude unnecessary files from the watcher.** If your project contains a lot of files that don't need to be watched (like `node_modules`), you can exclude them from the watcher to reduce the number of open file descriptors.
+
+Remember to always restart your terminal after making these changes to ensure they take effect.

@@ -1,0 +1,66 @@
+To fix the issue of the user not changing in the HTML template when the route changes, you need to make use of the `watch` function from `@vue/composition-api`. This function allows you to watch for changes in a reactive property and perform some action when it changes.
+
+In your case, you can watch for changes in the `userToLoad` computed property and update the `user` variable accordingly. Here's how you can modify your code to achieve this:
+
+```
+<template>
+  <div>{{username}}</div>
+</template>
+
+<script lang="ts">
+import { computed, defineComponent, ref, getCurrentInstance, watch } from '@vue/composition-api';
+
+export const useUsername = ({ user }) => {
+  return { username: user.name };
+};
+
+export default defineComponent({
+  setup(props, { root }) {
+    const vm = getCurrentInstance();
+
+    const userToLoad = computed(() => root.$route.params.userId);
+    const listOfUsers = [
+      { userId: 1, name: 'user1' },
+      { userId: 2, name: 'user2' },
+    ];
+
+    let user = listOfUsers.find((u) => u.userId === +userToLoad.value);
+    if (!user) {
+      return root.$router.push('/404');
+    }
+
+    watch(userToLoad, (newVal) => {
+      user = listOfUsers.find((u) => u.userId === +newVal);
+      if (!user) {
+        root.$router.push('/404');
+      }
+    });
+
+    const { username } = useUsername({ user });
+
+    return { username };
+  },
+});
+
+</script>
+```
+
+As for the issue of not redirecting to `/404` when the user is not in the list, you need to move the check for the user's existence inside the `watch` function. This is because the `setup` function is only called once when the component is mounted, and the `user` variable is not updated when the route changes. Here's the modified code:
+
+```
+<template>
+  <div>{{username}}</div>
+</template>
+
+<script lang="ts">
+import { computed, defineComponent, ref, getCurrentInstance, watch } from '@vue/composition-api';
+
+export const useUsername = ({ user }) => {
+  return { username: user.name };
+};
+
+export default defineComponent({
+  setup(props, { root }) {
+    const vm = getCurrentInstance();
+
+    const userToLoad =

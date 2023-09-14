@@ -1,0 +1,11 @@
+This error message usually occurs when the Go language server is unable to find the package in the GoPath. Here are some steps you can try to solve this issue:
+
+1. Make sure that the Redigo package is installed in your GoPath. You can do this by running the following command in your terminal: `go get github.com/gomodule/redigo/redis`
+
+2. Check that your GoPath is set correctly. You can do this by running the following command in your terminal: `echo $GOPATH`. This should return the path to your GoPath.
+
+3. If the above steps do not work, try restarting VSCode and rebuilding your project.
+
+4. If the issue still persists, try adding the following line to your `go.mod` file: `replace github.com/gomodule/redigo => github.com/gomodule/redigo v2.0.0`. This will force the use of version 2.0.0 of the Redigo package.
+
+Hopefully, one of these steps will solve the issue and allow VSCode to recognize the Redigo package.

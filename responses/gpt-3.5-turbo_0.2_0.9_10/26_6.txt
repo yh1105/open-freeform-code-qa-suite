@@ -1,0 +1,52 @@
+To fix the issue of the user not changing when navigating to another user, you need to use a watcher on the `userToLoad` computed property. This will allow you to update the `user` object and `username` whenever the route changes. Here's an updated version of your code with the watcher added:
+
+```
+<template>
+  <div>{{username}}</div>
+</template>
+
+<script lang="ts">
+import { computed, defineComponent, ref, getCurrentInstance } from '@vue/composition-api';
+
+export const useUsername = ({ user }) => {
+  return { username: user.name };
+};
+
+export default defineComponent({
+  setup(props, { root }) {
+    const vm = getCurrentInstance();
+
+    const userToLoad = computed(() => root.$route.params.userId);
+    const listOfUsers = [
+      { userId: 1, name: 'user1' },
+      { userId: 2, name: 'user2' },
+    ];
+
+    let user = listOfUsers.find((u) => u.userId === +userToLoad.value);
+    if (!user) {
+      return root.$router.push('/404');
+    }
+
+    const { username } = useUsername({ user });
+
+    // Add a watcher to update the user and username when the route changes
+    const stop = vm.$watch(userToLoad, (newVal) => {
+      user = listOfUsers.find((u) => u.userId === +newVal);
+      if (!user) {
+        return root.$router.push('/404');
+      }
+      const { username } = useUsername({ user });
+      state.username = username;
+    });
+
+    // Cleanup the watcher when the component is unmounted
+    vm.$once('hook:beforeDestroy', stop);
+
+    return { username };
+  },
+});
+
+</script>
+```
+
+As for the redirect issue, you're already doing it correctly by using `root.$router.push('/404')` when the user is not found in the `listOfUsers`.

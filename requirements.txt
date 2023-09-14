@@ -8,3 +8,10 @@ evaluate>=0.3.0
 absl-py
 nltk
 rouge-score
+pandas
+torch
+opencv-python
+matplotlib
+Pillow
+plotly
+kaleido

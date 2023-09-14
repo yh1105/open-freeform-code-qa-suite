@@ -1,0 +1,20 @@
+Sure! Here's one way to do it:
+
+```
+from io import BytesIO
+from matplotlib import pyplot as plt
+from PIL import Image
+
+def transform(input: plt.Figure) -> Image:
+    # Save the figure to a bytes buffer
+    buf = BytesIO()
+    input.savefig(buf, format='png')
+    buf.seek(0)
+
+    # Open the image from the buffer using PIL
+    img = Image.open(buf)
+
+    return img
+```
+
+This code saves the `fig` to a `BytesIO` buffer as a PNG image, then opens the image from the buffer using PIL. The resulting `PIL.Image` can be returned from the function.

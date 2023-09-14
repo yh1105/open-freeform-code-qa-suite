@@ -1,0 +1,13 @@
+The error message `RuntimeError: CUDA error: device-side assert triggered` is a general error message from CUDA, which means that somewhere in your CUDA code, a condition is being checked and that condition is not being met, causing the program to throw an error and stop executing.
+
+The assert that is being triggered is a device-side assert. In CUDA, you can use assertions in device code, just like in normal C/C++ code. Assertions are conditions that the programmer believes must be true at a certain point in a program. If the condition in the assert statement is false, the program will stop and throw an error message.
+
+The assert is there to help catch bugs in the program. If the condition in the assert statement is not met, it means that there is a bug somewhere in the code that needs to be fixed. The assert helps to catch this bug early, before it causes further problems down the line.
+
+To debug the problem, you would need to find out where the assert is being triggered. This can be done by running the program in a debugger and checking the stack trace when the error is thrown. The stack trace will show you where in the code the error occurred.
+
+Once you know where the error is occurring, you can start to work backwards to find out why the condition in the assert statement is not being met. This will involve looking at the values of variables and the flow of control in the program leading up to the assert statement.
+
+Here are some common reasons for this error:
+
+1. **Indexing**: You might be trying to access an index that is out of range. This is one of the most common reasons for this error.

@@ -1,0 +1,44 @@
+The error message `EMFILE: too many open files, watch` indicates that the number of files that the Metro Bundler is trying to watch exceeds the maximum number of files that your system allows a single process to watch.
+
+This is a common issue on systems with a lot of files and a low limit on the number of files that can be watched. It's especially common in large React Native projects, where there may be a large number of node modules.
+
+Here are a few ways to fix this issue:
+
+**1. Increase the limit of open files:**
+
+You can increase the limit of open files in your system. The way to do this depends on your operating system.
+
+- On Linux, you can use the `ulimit` command:
+
+    ```bash
+    ulimit -n 10240
+    ```
+
+- On macOS, you can create a file at `/etc/sysctl.conf` and add the following line:
+
+    ```bash
+    kern.maxfiles=5242880
+    kern.maxfilesperproc=524288
+    ```
+
+    Then, run `sudo sysctl -p` to apply the changes.
+
+**2. Use watchman:**
+
+[Watchman](https://facebook.github.io/watchman/) is a tool by Facebook for watching file changes. It's more efficient than the default Node.js file watcher and can handle larger numbers of files. You can install it using Homebrew:
+
+```bash
+brew install watchman
+```
+
+**3. Exclude node_modules from being watched:**
+
+You can configure Metro Bundler to exclude the `node_modules` directory from being watched. This can significantly reduce the number of files being watched. You can do this by adding a `watchFolders` configuration to your `metro.config.js` file:
+
+```javascript
+module.exports = {
+  watchFolders: ['node_modules'],
+};
+```
+
+Remember to restart your Metro Bundler after making these changes.

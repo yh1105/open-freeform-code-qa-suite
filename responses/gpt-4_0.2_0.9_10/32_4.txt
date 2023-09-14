@@ -1,0 +1,25 @@
+The error message suggests that the MongoDB version you're trying to download does not exist for your platform. The MongoDB version being downloaded is `4.0.14` for `win32` and `ia32` architecture.
+
+The MongoDB's download page does not have a version `4.0.14` for `win32` and `ia32` architecture. That's why you're getting a `403` error.
+
+To fix this issue, you can specify a different MongoDB version in your `package.json` file that exists for your platform. For example, you can use version `4.0.3` which exists for `win32` and `ia32` architecture.
+
+Here is how you can specify the MongoDB version in your `package.json` file:
+
+```json
+"config": {
+  "mongodbMemoryServer": {
+    "version": "4.0.3"
+  }
+}
+```
+
+After adding this to your `package.json` file, run `npm install` to install the specified MongoDB version.
+
+If you're using `yarn`, you can specify the MongoDB version using an environment variable:
+
+```bash
+MONGOMS_VERSION=4.0.3 yarn test
+```
+
+This will download and use MongoDB version `4.0.3` for your tests.

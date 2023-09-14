@@ -1,0 +1,21 @@
+To make VSCode IntelliSense work with an alias, you need to configure your `jsconfig.json` or `tsconfig.json` (if you're using TypeScript) file. 
+
+Here is an example of how to do it:
+
+```json
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@styles/*": ["src/styled/*"]
+    }
+  },
+  "exclude": ["node_modules"]
+}
+```
+
+In this configuration, `baseUrl` is set to the current directory (`"."`), and `paths` is an object that maps aliases to actual paths in your project. The `@styles/*` key means that whenever you import something from `@styles`, VSCode will look for it in the `src/styled` directory.
+
+After you've made these changes, you should restart VSCode to make sure the new configuration is picked up.
+
+Please note that this only makes VSCode understand your aliases. Your build system (like webpack or Parcel) also needs to be configured to understand these aliases. For webpack, you can use the `resolve.alias` configuration option. For Parcel, aliases can be set in the `.babelrc` file.

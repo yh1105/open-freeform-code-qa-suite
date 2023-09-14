@@ -1,0 +1,451 @@
+answer_paths:
+  cases/eval_1443.yaml:
+  - 6_0.txt
+  - 6_1.txt
+  - 6_2.txt
+  - 6_3.txt
+  - 6_4.txt
+  - 6_5.txt
+  - 6_6.txt
+  - 6_7.txt
+  - 6_8.txt
+  - 6_9.txt
+  cases/eval_1493.yaml:
+  - 7_0.txt
+  - 7_1.txt
+  - 7_2.txt
+  - 7_3.txt
+  - 7_4.txt
+  - 7_5.txt
+  - 7_6.txt
+  - 7_7.txt
+  - 7_8.txt
+  - 7_9.txt
+  cases/eval_1799.yaml:
+  - 8_0.txt
+  - 8_1.txt
+  - 8_2.txt
+  - 8_3.txt
+  - 8_4.txt
+  - 8_5.txt
+  - 8_6.txt
+  - 8_7.txt
+  - 8_8.txt
+  - 8_9.txt
+  cases/eval_1830.yaml:
+  - 9_0.txt
+  - 9_1.txt
+  - 9_2.txt
+  - 9_3.txt
+  - 9_4.txt
+  - 9_5.txt
+  - 9_6.txt
+  - 9_7.txt
+  - 9_8.txt
+  - 9_9.txt
+  cases/eval_2073.yaml:
+  - 10_0.txt
+  - 10_1.txt
+  - 10_2.txt
+  - 10_3.txt
+  - 10_4.txt
+  - 10_5.txt
+  - 10_6.txt
+  - 10_7.txt
+  - 10_8.txt
+  - 10_9.txt
+  cases/eval_2079.yaml:
+  - 11_0.txt
+  - 11_1.txt
+  - 11_2.txt
+  - 11_3.txt
+  - 11_4.txt
+  - 11_5.txt
+  - 11_6.txt
+  - 11_7.txt
+  - 11_8.txt
+  - 11_9.txt
+  cases/eval_208.yaml:
+  - 0_0.txt
+  - 0_1.txt
+  - 0_2.txt
+  - 0_3.txt
+  - 0_4.txt
+  - 0_5.txt
+  - 0_6.txt
+  - 0_7.txt
+  - 0_8.txt
+  - 0_9.txt
+  cases/eval_2748.yaml:
+  - 12_0.txt
+  - 12_1.txt
+  - 12_2.txt
+  - 12_3.txt
+  - 12_4.txt
+  - 12_5.txt
+  - 12_6.txt
+  - 12_7.txt
+  - 12_8.txt
+  - 12_9.txt
+  cases/eval_310.yaml:
+  - 1_0.txt
+  - 1_1.txt
+  - 1_2.txt
+  - 1_3.txt
+  - 1_4.txt
+  - 1_5.txt
+  - 1_6.txt
+  - 1_7.txt
+  - 1_8.txt
+  - 1_9.txt
+  cases/eval_3142.yaml:
+  - 13_0.txt
+  - 13_1.txt
+  - 13_2.txt
+  - 13_3.txt
+  - 13_4.txt
+  - 13_5.txt
+  - 13_6.txt
+  - 13_7.txt
+  - 13_8.txt
+  - 13_9.txt
+  cases/eval_3401.yaml:
+  - 14_0.txt
+  - 14_1.txt
+  - 14_2.txt
+  - 14_3.txt
+  - 14_4.txt
+  - 14_5.txt
+  - 14_6.txt
+  - 14_7.txt
+  - 14_8.txt
+  - 14_9.txt
+  cases/eval_3651.yaml:
+  - 15_0.txt
+  - 15_1.txt
+  - 15_2.txt
+  - 15_3.txt
+  - 15_4.txt
+  - 15_5.txt
+  - 15_6.txt
+  - 15_7.txt
+  - 15_8.txt
+  - 15_9.txt
+  cases/eval_3790.yaml:
+  - 16_0.txt
+  - 16_1.txt
+  - 16_2.txt
+  - 16_3.txt
+  - 16_4.txt
+  - 16_5.txt
+  - 16_6.txt
+  - 16_7.txt
+  - 16_8.txt
+  - 16_9.txt
+  cases/eval_4310.yaml:
+  - 17_0.txt
+  - 17_1.txt
+  - 17_2.txt
+  - 17_3.txt
+  - 17_4.txt
+  - 17_5.txt
+  - 17_6.txt
+  - 17_7.txt
+  - 17_8.txt
+  - 17_9.txt
+  cases/eval_4548.yaml:
+  - 18_0.txt
+  - 18_1.txt
+  - 18_2.txt
+  - 18_3.txt
+  - 18_4.txt
+  - 18_5.txt
+  - 18_6.txt
+  - 18_7.txt
+  - 18_8.txt
+  - 18_9.txt
+  cases/eval_4660.yaml:
+  - 19_0.txt
+  - 19_1.txt
+  - 19_2.txt
+  - 19_3.txt
+  - 19_4.txt
+  - 19_5.txt
+  - 19_6.txt
+  - 19_7.txt
+  - 19_8.txt
+  - 19_9.txt
+  cases/eval_4741.yaml:
+  - 20_0.txt
+  - 20_1.txt
+  - 20_2.txt
+  - 20_3.txt
+  - 20_4.txt
+  - 20_5.txt
+  - 20_6.txt
+  - 20_7.txt
+  - 20_8.txt
+  - 20_9.txt
+  cases/eval_5174.yaml:
+  - 21_0.txt
+  - 21_1.txt
+  - 21_2.txt
+  - 21_3.txt
+  - 21_4.txt
+  - 21_5.txt
+  - 21_6.txt
+  - 21_7.txt
+  - 21_8.txt
+  - 21_9.txt
+  cases/eval_5460.yaml:
+  - 22_0.txt
+  - 22_1.txt
+  - 22_2.txt
+  - 22_3.txt
+  - 22_4.txt
+  - 22_5.txt
+  - 22_6.txt
+  - 22_7.txt
+  - 22_8.txt
+  - 22_9.txt
+  cases/eval_5747.yaml:
+  - 23_0.txt
+  - 23_1.txt
+  - 23_2.txt
+  - 23_3.txt
+  - 23_4.txt
+  - 23_5.txt
+  - 23_6.txt
+  - 23_7.txt
+  - 23_8.txt
+  - 23_9.txt
+  cases/eval_5749.yaml:
+  - 24_0.txt
+  - 24_1.txt
+  - 24_2.txt
+  - 24_3.txt
+  - 24_4.txt
+  - 24_5.txt
+  - 24_6.txt
+  - 24_7.txt
+  - 24_8.txt
+  - 24_9.txt
+  cases/eval_5864.yaml:
+  - 25_0.txt
+  - 25_1.txt
+  - 25_2.txt
+  - 25_3.txt
+  - 25_4.txt
+  - 25_5.txt
+  - 25_6.txt
+  - 25_7.txt
+  - 25_8.txt
+  - 25_9.txt
+  cases/eval_6407.yaml:
+  - 26_0.txt
+  - 26_1.txt
+  - 26_2.txt
+  - 26_3.txt
+  - 26_4.txt
+  - 26_5.txt
+  - 26_6.txt
+  - 26_7.txt
+  - 26_8.txt
+  - 26_9.txt
+  cases/eval_6436.yaml:
+  - 27_0.txt
+  - 27_1.txt
+  - 27_2.txt
+  - 27_3.txt
+  - 27_4.txt
+  - 27_5.txt
+  - 27_6.txt
+  - 27_7.txt
+  - 27_8.txt
+  - 27_9.txt
+  cases/eval_6495.yaml:
+  - 28_0.txt
+  - 28_1.txt
+  - 28_2.txt
+  - 28_3.txt
+  - 28_4.txt
+  - 28_5.txt
+  - 28_6.txt
+  - 28_7.txt
+  - 28_8.txt
+  - 28_9.txt
+  cases/eval_652.yaml:
+  - 2_0.txt
+  - 2_1.txt
+  - 2_2.txt
+  - 2_3.txt
+  - 2_4.txt
+  - 2_5.txt
+  - 2_6.txt
+  - 2_7.txt
+  - 2_8.txt
+  - 2_9.txt
+  cases/eval_703.yaml:
+  - 3_0.txt
+  - 3_1.txt
+  - 3_2.txt
+  - 3_3.txt
+  - 3_4.txt
+  - 3_5.txt
+  - 3_6.txt
+  - 3_7.txt
+  - 3_8.txt
+  - 3_9.txt
+  cases/eval_7377.yaml:
+  - 29_0.txt
+  - 29_1.txt
+  - 29_2.txt
+  - 29_3.txt
+  - 29_4.txt
+  - 29_5.txt
+  - 29_6.txt
+  - 29_7.txt
+  - 29_8.txt
+  - 29_9.txt
+  cases/eval_7500.yaml:
+  - 30_0.txt
+  - 30_1.txt
+  - 30_2.txt
+  - 30_3.txt
+  - 30_4.txt
+  - 30_5.txt
+  - 30_6.txt
+  - 30_7.txt
+  - 30_8.txt
+  - 30_9.txt
+  cases/eval_7582.yaml:
+  - 31_0.txt
+  - 31_1.txt
+  - 31_2.txt
+  - 31_3.txt
+  - 31_4.txt
+  - 31_5.txt
+  - 31_6.txt
+  - 31_7.txt
+  - 31_8.txt
+  - 31_9.txt
+  cases/eval_7617.yaml:
+  - 32_0.txt
+  - 32_1.txt
+  - 32_2.txt
+  - 32_3.txt
+  - 32_4.txt
+  - 32_5.txt
+  - 32_6.txt
+  - 32_7.txt
+  - 32_8.txt
+  - 32_9.txt
+  cases/eval_7717.yaml:
+  - 33_0.txt
+  - 33_1.txt
+  - 33_2.txt
+  - 33_3.txt
+  - 33_4.txt
+  - 33_5.txt
+  - 33_6.txt
+  - 33_7.txt
+  - 33_8.txt
+  - 33_9.txt
+  cases/eval_789.yaml:
+  - 4_0.txt
+  - 4_1.txt
+  - 4_2.txt
+  - 4_3.txt
+  - 4_4.txt
+  - 4_5.txt
+  - 4_6.txt
+  - 4_7.txt
+  - 4_8.txt
+  - 4_9.txt
+  cases/eval_8143.yaml:
+  - 34_0.txt
+  - 34_1.txt
+  - 34_2.txt
+  - 34_3.txt
+  - 34_4.txt
+  - 34_5.txt
+  - 34_6.txt
+  - 34_7.txt
+  - 34_8.txt
+  - 34_9.txt
+  cases/eval_8412.yaml:
+  - 35_0.txt
+  - 35_1.txt
+  - 35_2.txt
+  - 35_3.txt
+  - 35_4.txt
+  - 35_5.txt
+  - 35_6.txt
+  - 35_7.txt
+  - 35_8.txt
+  - 35_9.txt
+  cases/eval_8897.yaml:
+  - 36_0.txt
+  - 36_1.txt
+  - 36_2.txt
+  - 36_3.txt
+  - 36_4.txt
+  - 36_5.txt
+  - 36_6.txt
+  - 36_7.txt
+  - 36_8.txt
+  - 36_9.txt
+  cases/eval_8917.yaml:
+  - 37_0.txt
+  - 37_1.txt
+  - 37_2.txt
+  - 37_3.txt
+  - 37_4.txt
+  - 37_5.txt
+  - 37_6.txt
+  - 37_7.txt
+  - 37_8.txt
+  - 37_9.txt
+  cases/eval_9098.yaml:
+  - 38_0.txt
+  - 38_1.txt
+  - 38_2.txt
+  - 38_3.txt
+  - 38_4.txt
+  - 38_5.txt
+  - 38_6.txt
+  - 38_7.txt
+  - 38_8.txt
+  - 38_9.txt
+  cases/eval_938.yaml:
+  - 5_0.txt
+  - 5_1.txt
+  - 5_2.txt
+  - 5_3.txt
+  - 5_4.txt
+  - 5_5.txt
+  - 5_6.txt
+  - 5_7.txt
+  - 5_8.txt
+  - 5_9.txt
+  cases/eval_9533.yaml:
+  - 39_0.txt
+  - 39_1.txt
+  - 39_2.txt
+  - 39_3.txt
+  - 39_4.txt
+  - 39_5.txt
+  - 39_6.txt
+  - 39_7.txt
+  - 39_8.txt
+  - 39_9.txt
+max_tokens: null
+model_name: gpt-3.5-turbo
+qa_system_prompt: You are a professional assistant for programmers. By default, questions
+  and answers are in Markdown format. You are chatting with programmers, so please
+  answer as briefly as possible.
+sample_n: 10
+system_prompt: You are a professional assistant for programmers. By default, questions
+  and answers are in Markdown format.
+temp: 0.2
+top_p: 0.9

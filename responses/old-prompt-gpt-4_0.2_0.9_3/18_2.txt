@@ -1,0 +1,23 @@
+This issue could be due to a few reasons. Here are some steps you can take to resolve it:
+
+1. **Ensure that the package is installed**: You can install the package by running the following command in your terminal:
+
+    ```bash
+    go get github.com/gomodule/redigo/redis
+    ```
+
+2. **Check your GOPATH and GOROOT**: Make sure that your `GOPATH` and `GOROOT` environment variables are set correctly. You can check them by running `echo $GOPATH` and `echo $GOROOT` in your terminal.
+
+3. **Update your Go tools**: The Go tools might be outdated. You can update them by running the following command in your terminal:
+
+    ```bash
+    go get -u all
+    ```
+
+4. **Reload VSCode**: Sometimes, simply reloading VSCode can solve the issue. You can do this by closing and reopening VSCode, or by pressing `F1`, typing `>Reload Window`, and pressing `Enter`.
+
+5. **Check your `go.mod` file**: If you're using Go modules, make sure that the `go.mod` file is correct and that it includes the `redigo` package.
+
+6. **Reinstall the Go extension in VSCode**: If none of the above solutions work, try reinstalling the Go extension in VSCode. You can do this by going to the Extensions view (`Ctrl+Shift+X`), searching for the Go extension, clicking on the gear icon, and selecting `Uninstall`. After uninstalling, you can install it again by clicking on the `Install` button.
+
+Remember

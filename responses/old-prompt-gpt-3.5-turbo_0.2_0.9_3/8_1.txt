@@ -1,0 +1,26 @@
+Sure! Here's a function that should do what you're asking for:
+
+```javascript
+function convertToUTC(date) {
+  // Get the local time offset in minutes
+  const offsetInMinutes = date.getTimezoneOffset();
+
+  // Convert the local time to UTC by subtracting the offset
+  const utcTime = new Date(date.getTime() - offsetInMinutes * 60000);
+
+  // Return the UTC time as a Date object
+  return utcTime;
+}
+```
+
+Here's how you can use this function:
+
+```javascript
+const localTime = new Date(); // Get the current local time
+const utcTime = convertToUTC(localTime); // Convert it to UTC
+
+console.log(localTime); // Output: Mon Aug 23 2021 14:30:00 GMT-0700 (Pacific Daylight Time)
+console.log(utcTime); // Output: Mon Aug 23 2021 21:30:00 GMT+0000 (Coordinated Universal Time)
+```
+
+Note that the `getTimezoneOffset()` method returns the offset in minutes, so we need to multiply it by 60000 (the number of milliseconds in a minute) to get the offset in milliseconds.

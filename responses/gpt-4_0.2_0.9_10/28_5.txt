@@ -1,0 +1,49 @@
+Here's the completed function using `plotly.graph_objects` to create an annotated heatmap:
+
+```python
+import plotly.graph_objects as go
+
+def plot_confusion_matrix(matrix: list[list[int]], x_labels: list[str], y_labels: list[str]):
+    # Create the heatmap
+    heatmap = go.Heatmap(
+        z=matrix,
+        x=x_labels,
+        y=y_labels,
+        colorscale='Viridis',
+        showscale=True
+    )
+
+    # Create the annotations
+    annotations = []
+    for i, row in enumerate(matrix):
+        for j, value in enumerate(row):
+            annotations.append(
+                go.layout.Annotation(
+                    text=str(value),
+                    x=x_labels[j],
+                    y=y_labels[i],
+                    xref='x1',
+                    yref='y1',
+                    showarrow=False,
+                    font=dict(size=14, color='white')
+                )
+            )
+
+    # Create the layout
+    layout = go.Layout(
+        title='Confusion Matrix',
+        xaxis=dict(title='Predicted', side='bottom'),
+        yaxis=dict(title='Actual', autorange='reversed'),
+        annotations=annotations,
+        margin=dict(l=100, r=100, t=100, b=100),
+        width=600,
+        height=600
+    )
+
+    # Create the figure
+    fig = go.Figure(data=[heatmap], layout=layout)
+
+    return fig
+```
+
+This function creates an annotated heatmap using the `plotly.graph_objects` module. The heatmap is created using the `go.Heatmap` trace, and the annotations are added using `go.layout.Annotation`. The layout is then set up with appropriate axis titles and margins, and the figure is created using `go.Figure`.

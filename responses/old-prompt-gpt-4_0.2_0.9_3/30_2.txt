@@ -1,0 +1,21 @@
+This error is caused by a bug in Android Gradle Plugin 4.0.0. The bug is related to the way the plugin handles the signing configuration for the app bundle. 
+
+Here is a workaround for this issue:
+
+1. Open your `build.gradle` (Project: Your_Project_Name) file.
+
+2. Change the `classpath` for the Gradle plugin to downgrade it to version 3.6.3:
+
+```groovy
+dependencies {
+    classpath 'com.android.tools.build:gradle:3.6.3'
+    // NOTE: Do not place your application dependencies here; they belong
+    // in the individual module build.gradle files
+}
+```
+
+3. Sync your project with Gradle files.
+
+4. Try to generate the signed bundle again.
+
+This should resolve the issue. You can also wait for a new version of the Android Gradle Plugin that fixes this bug.

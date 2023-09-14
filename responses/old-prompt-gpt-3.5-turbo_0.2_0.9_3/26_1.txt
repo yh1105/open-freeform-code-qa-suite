@@ -1,0 +1,48 @@
+To fix the issue of the user not updating when the route changes, you can use a `watch` function to update the `username` value whenever the `userToLoad` computed property changes. Here's an updated version of your code with the `watch` function added:
+
+```
+<template>
+  <div>{{username}}</div>
+</template>
+
+<script lang="ts">
+import { computed, defineComponent, ref, getCurrentInstance } from '@vue/composition-api';
+
+export const useUsername = ({ user }) => {
+  return { username: user.name };
+};
+
+export default defineComponent({
+  setup(props, { root }) {
+    const vm = getCurrentInstance();
+
+    const userToLoad = computed(() => root.$route.params.userId);
+    const listOfUsers = [
+      { userId: 1, name: 'user1' },
+      { userId: 2, name: 'user2' },
+    ];
+
+    const user = ref(listOfUsers.find((u) => u.userId === +userToLoad.value));
+    if (!user.value) {
+      return root.$router.push('/404');
+    }
+
+    const { username } = useUsername({ user: user.value });
+
+    // watch for changes to the userToLoad computed property
+    // and update the user and username values accordingly
+    watch(userToLoad, (newVal) => {
+      const newUser = listOfUsers.find((u) => u.userId === +newVal);
+      if (!newUser) {
+        return root.$router.push('/404');
+      }
+      user.value = newUser;
+    });
+
+    return { username };
+  },
+});
+
+</script>
+```
+

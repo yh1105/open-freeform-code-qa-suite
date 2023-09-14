@@ -1,0 +1,29 @@
+In Flutter, the `BottomNavigationBar` widget does not have a direct property to change its height. The height of the `BottomNavigationBar` is defined by the Material Design specifications, and Flutter adheres to these specifications.
+
+However, if you want to customize the height, you can use a workaround by wrapping your `BottomNavigationBar` inside a `Container` widget and then give the `Container` a height. But this approach may lead to undesired UI effects, as it's not recommended to change the default height of the `BottomNavigationBar`.
+
+Here's an example:
+
+```dart
+Container(
+  height: 60, // Set this properly for your use case.
+  child: BottomNavigationBar(
+    items: const <BottomNavigationBarItem>[
+      BottomNavigationBarItem(
+        icon: Icon(Icons.home),
+        label: 'Home',
+      ),
+      BottomNavigationBarItem(
+        icon: Icon(Icons.business),
+        label: 'Business',
+      ),
+      BottomNavigationBarItem(
+        icon: Icon(Icons.school),
+        label: 'School',
+      ),
+    ],
+  ),
+)
+```
+
+Remember, this is not a recommended approach as it might lead to undesired UI effects. If you want to have more control over the design of your bottom navigation bar, you might want to consider creating a custom widget.

@@ -1,0 +1,25 @@
+Sure, here is the complete code for your requirement:
+
+```python
+import numpy as np
+from matplotlib import pyplot as plt
+
+def draw_histogram():
+  x = np.random.randn(100000)
+  plt.hist(x, bins=20, edgecolor='black')
+  plt.title('Histogram of np.random.randn')
+  plt.xlabel('Value')
+  plt.ylabel('Frequency')
+  plt.grid(True)
+  plt.savefig('figure.pdf')
+
+draw_histogram()
+```
+
+In this code, `np.random.randn(100000)` generates 100,000 random numbers from a standard normal distribution. `plt.hist(x, bins=20, edgecolor='black')` creates a histogram with 20 bins. The `edgecolor='black'` argument makes the edges of the bins black for better visibility. 
+
+The `plt.title`, `plt.xlabel`, and `plt.ylabel` functions are used to set the title of the histogram and the labels of the x and y axes, respectively. 
+
+`plt.grid(True)` adds a grid to the histogram for better readability. 
+
+Finally, `plt.savefig('figure.pdf')` saves the figure as a PDF file named 'figure.pdf'. The `draw_histogram()` function is then called to execute the code.

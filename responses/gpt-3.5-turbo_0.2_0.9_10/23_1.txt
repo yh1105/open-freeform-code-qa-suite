@@ -1,0 +1,15 @@
+The error message indicates that the Puppeteer library is unable to launch a browser process. This can happen for a variety of reasons, but one common cause is that the necessary dependencies are not installed on your system.
+
+To fix this, you can try installing the dependencies by running the following command in your terminal:
+
+```
+sudo apt-get install -y libgbm-dev
+```
+
+If that doesn't work, you can also try installing the Chromium browser manually by running the following command:
+
+```
+sudo apt-get install -y chromium-browser
+```
+
+Once you have installed the necessary dependencies, try running your code again and see if the error persists.

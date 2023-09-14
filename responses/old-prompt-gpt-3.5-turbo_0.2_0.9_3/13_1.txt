@@ -1,0 +1,25 @@
+In SwiftUI, `List` and `ForEach` are both used for displaying a collection of views, but they serve different purposes.
+
+`List` is a container view that displays a scrollable list of views. It is used to display a collection of views that can be scrolled through, selected, and manipulated. `List` is similar to a `UITableView` in UIKit.
+
+`ForEach` is a view that iterates over a collection of data and creates a view for each element in the collection. It is used to create a dynamic list of views based on the data in the collection. `ForEach` is similar to a `for` loop in other programming languages.
+
+You can use `ForEach` inside a `List` to create a dynamic list of views based on the data in the collection. For example, if you have an array of strings, you can use `ForEach` to create a list of `Text` views, where each `Text` view displays one of the strings in the array.
+
+Here's an example:
+
+```
+struct ContentView: View {
+    let names = ["Alice", "Bob", "Charlie"]
+    
+    var body: some View {
+        List {
+            ForEach(names, id: \.self) { name in
+                Text(name)
+            }
+        }
+    }
+}
+```
+
+In this example, we create a `List` and use `ForEach` to iterate over the `names` array and create a `Text` view for each name in the array. The `id` parameter is used to identify each element in the collection, and it must be unique. In this case, we use `\.self

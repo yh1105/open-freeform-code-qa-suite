@@ -1,0 +1,13 @@
+It seems like Xcode is unable to find the required libraries for your project. Here are some additional steps you can try:
+
+1. Check if the missing directories exist in the specified paths. If they don't, try to locate the missing libraries and add them to your project.
+
+2. Make sure that the libraries are added to your project's "Linked Frameworks and Libraries" section. To do this, go to your project's target settings, select "Build Phases", and check if the libraries are listed under "Link Binary With Libraries". If they are not listed, add them by clicking the "+" button.
+
+3. Check if the libraries are included in your project's search paths. To do this, go to your project's target settings, select "Build Settings", and search for "Library Search Paths". Make sure that the paths to the libraries are included in this list.
+
+4. Try cleaning your project's build folder. To do this, hold down the "Option" key and select "Product" from the Xcode menu, then select "Clean Build Folder". This will delete all of the build artifacts and force Xcode to rebuild everything from scratch.
+
+5. Try resetting your Xcode preferences. To do this, quit Xcode, then delete the "com.apple.dt.Xcode.plist" file from your "~/Library/Preferences" folder. This will reset all of your Xcode preferences to their default values.
+
+Hopefully, one of these steps will help you resolve the issue.

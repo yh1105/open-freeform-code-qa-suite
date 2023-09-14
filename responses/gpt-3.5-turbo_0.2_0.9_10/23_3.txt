@@ -1,0 +1,31 @@
+The error message suggests that the Puppeteer library is unable to launch a browser instance. This can happen due to various reasons, such as missing dependencies or incorrect configuration.
+
+Here are some steps you can take to troubleshoot the issue:
+
+1. Make sure that you have installed the required dependencies for Puppeteer. You can do this by running the following command in your project directory:
+
+   ```
+   npm install puppeteer
+   ```
+
+2. Check if you have installed the necessary dependencies for running a headless browser. For example, on Ubuntu, you may need to install the following packages:
+
+   ```
+   sudo apt-get install libx11-xcb1 libxcb1 libxcb-dri3-0 libxcomposite1 libxcursor1 libxdamage1 libxi6 libxtst6 libnss3 libcups2 libxss1 libxrandr2 libgconf-2-4 libasound2 libatk1.0-0 libgtk-3-0
+   ```
+
+3. If you are running the code on a server, make sure that you have sufficient permissions to launch a browser instance. You may need to run the code as a superuser or add your user to the appropriate group.
+
+4. Try passing the `args` option to the `puppeteer.launch()` method with the `--no-sandbox` flag. This can help if you are running the code in a restricted environment:
+
+   ```
+   const browser = await puppeteer.launch({ args: ['--no-sandbox'] });
+   ```
+
+5. If none of the above steps work, try running the code with the `--disable-dev-shm-usage` flag:
+
+   ```
+   const browser = await puppeteer.launch({ args: ['--disable-dev-shm-usage'] });
+   ```
+
+This should help you resolve the issue. If you are still facing problems, please provide more details about your environment and the error message.

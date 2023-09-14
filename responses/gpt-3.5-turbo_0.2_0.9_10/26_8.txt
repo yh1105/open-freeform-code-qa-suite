@@ -1,0 +1,67 @@
+To fix the issue of the user not changing when navigating to another user, you need to use a watcher to update the computed property `userToLoad` whenever the route parameter `userId` changes. Here's how you can do it:
+
+```
+<script lang="ts">
+import { computed, defineComponent, ref, getCurrentInstance } from '@vue/composition-api';
+
+export const useUsername = ({ user }) => {
+  return { username: user.name };
+};
+
+export default defineComponent({
+  setup(props, { root }) {
+    const vm = getCurrentInstance();
+
+    const userToLoad = ref(root.$route.params.userId);
+    const listOfUsers = [
+      { userId: 1, name: 'user1' },
+      { userId: 2, name: 'user2' },
+    ];
+
+    const user = computed(() => listOfUsers.find((u) => u.userId === +userToLoad.value));
+    if (!user.value) {
+      root.$router.push('/404');
+    }
+
+    const { username } = useUsername({ user: user.value });
+
+    // Watch for changes in the route parameter 'userId'
+    root.$watch(() => root.$route.params.userId, (newUserId) => {
+      userToLoad.value = newUserId;
+    });
+
+    return { username };
+  },
+});
+
+</script>
+```
+
+To handle the case where the user is not in the list, you can move the check for `user` inside the `computed` property and return `null` if the user is not found. Then, in the template, you can use a `v-if` directive to show a message when `username` is `null`. Here's the updated code:
+
+```
+<template>
+  <div>
+    <div v-if="username">{{ username }}</div>
+    <div v-else>User not found</div>
+  </div>
+</template>
+
+<script lang="ts">
+import { computed, defineComponent, ref, getCurrentInstance } from '@vue/composition-api';
+
+export const useUsername = ({ user }) => {
+  return { username: user.name };
+};
+
+export default defineComponent({
+  setup(props, { root }) {
+    const vm = getCurrentInstance();
+
+    const userToLoad = ref(root.$route.params.userId);
+    const listOfUsers = [
+      { userId: 1, name: 'user1' },
+      { userId: 2, name: 'user2' },
+    ];
+
+    const user = computed

@@ -1,0 +1,11 @@
+It looks like the issue is with the version-platform combination of MongoDB. The requested version-platform combination does not exist. 
+
+You can try specifying a different version of MongoDB in your package.json file. For example, you can try using version 4.2.8 by adding the following line to your package.json file:
+
+```
+"mongodb-memory-server-core": "^6.6.0",
+"mongodb-memory-server": "^6.6.0",
+"mongodb": "^4.2.8"
+```
+
+Then, run `npm install` to install the updated packages and try running your tests again.

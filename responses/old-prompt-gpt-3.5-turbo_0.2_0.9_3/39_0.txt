@@ -1,0 +1,13 @@
+It seems like Xcode is unable to find the required libraries for your project. Here are a few things you can try:
+
+1. Check if the library paths are correct: Go to your project's Build Settings and check if the paths for the missing libraries are correct. If not, update the paths to the correct locations.
+
+2. Check if the libraries are included in your project: Go to your project's Build Phases and check if the missing libraries are included in the "Link Binary With Libraries" section. If not, add them by clicking the "+" button.
+
+3. Check if the libraries are installed correctly: Check if the missing libraries are installed correctly by running `pod install` or `pod update` in your project directory. If the libraries are not installed correctly, try removing the `Podfile.lock` file and running `pod install` again.
+
+4. Clean and rebuild your project: Clean your project by going to Product > Clean in Xcode and then rebuild it by going to Product > Build.
+
+5. Check if the library is compatible with your Xcode version: Check if the library is compatible with your Xcode version. If not, try updating your Xcode version or using a different library.
+
+Hopefully, one of these solutions will work for you.

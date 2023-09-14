@@ -1,0 +1,75 @@
+To fix the issue of the user not changing when the route changes, you need to wrap the code that retrieves the user inside a `computed` property. This way, the code will be re-executed whenever the `userToLoad` value changes. Here's an updated version of your code:
+
+```
+<template>
+  <div>{{username}}</div>
+</template>
+
+<script lang="ts">
+import { computed, defineComponent, ref, getCurrentInstance } from '@vue/composition-api';
+
+export const useUsername = ({ user }) => {
+  return { username: user.name };
+};
+
+export default defineComponent({
+  setup(props, { root }) {
+    const vm = getCurrentInstance();
+
+    const userToLoad = computed(() => root.$route.params.userId);
+    const listOfUsers = [
+      { userId: 1, name: 'user1' },
+      { userId: 2, name: 'user2' },
+    ];
+
+    const user = computed(() => listOfUsers.find((u) => u.userId === +userToLoad.value));
+    if (!user.value) {
+      return root.$router.push('/404');
+    }
+
+    const { username } = useUsername({ user: user.value });
+
+    return { username };
+  },
+});
+
+</script>
+```
+
+As for the redirection issue, you can't use `return` to redirect the user. Instead, you need to call `root.$router.push` directly. Here's an updated version of the code that handles redirection correctly:
+
+```
+<template>
+  <div>{{username}}</div>
+</template>
+
+<script lang="ts">
+import { computed, defineComponent, ref, getCurrentInstance } from '@vue/composition-api';
+
+export const useUsername = ({ user }) => {
+  return { username: user.name };
+};
+
+export default defineComponent({
+  setup(props, { root }) {
+    const vm = getCurrentInstance();
+
+    const userToLoad = computed(() => root.$route.params.userId);
+    const listOfUsers = [
+      { userId: 1, name: 'user1' },
+      { userId: 2, name: 'user2' },
+    ];
+
+    const user = computed(() => listOfUsers.find((u) => u.userId === +userToLoad.value));
+    if (!user.value) {
+      root.$router.push('/404');
+      return {};
+    }
+
+    const { username } = useUsername({ user: user.value });
+
+    return { username };
+  },
+});
+
+</script

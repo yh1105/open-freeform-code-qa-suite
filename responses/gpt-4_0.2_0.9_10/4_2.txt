@@ -1,0 +1,18 @@
+You can use the `random_split` function from PyTorch to split the dataset into training and validation sets. Here's the code to do that:
+
+```python
+from torch.utils.data import DataLoader, random_split
+
+# Assuming the dataset is already created as 'dataset'
+train_size = int(0.8 * len(dataset))
+validation_size = len(dataset) - train_size
+
+train_dataset, validation_dataset = random_split(dataset, [train_size, validation_size])
+
+batch_size = 64  # You can change the batch size as needed
+
+train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
+validation_loader = DataLoader(validation_dataset, batch_size=batch_size, shuffle=False)
+```
+
+This code first calculates the sizes of the training and validation sets based on the given proportions (80% and 20%). Then, it uses the `random_split` function to split the dataset into two parts. Finally, it creates `DataLoader` objects for both the training and validation sets with the specified batch size.

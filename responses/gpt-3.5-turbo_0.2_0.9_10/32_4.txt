@@ -1,0 +1,12 @@
+Based on the error message, it seems that the requested version-platform combination does not exist. You can try specifying a different version of MongoDB in your `package.json` file, or try specifying a different platform if you are not running on a standard platform. 
+
+For example, you can try adding the following to your `package.json` file:
+
+```
+"mongodb-memory-server": {
+    "version": "latest",
+    "platform": "win32"
+}
+```
+
+This will ensure that the latest version of mongodb-memory-server is used, and that it is downloaded for the win32 platform. You can replace "win32" with your platform if you are not running on Windows.

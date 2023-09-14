@@ -1,0 +1,50 @@
+To set up an alias like `@styles` in VSCode, you need to configure both your project's bundler (e.g., Webpack, Parcel, or Create React App) and the `jsconfig.json` or `tsconfig.json` file for VSCode.
+
+Here's how to do it for a typical Webpack setup:
+
+1. Install `babel-plugin-module-resolver`:
+
+```bash
+npm install --save-dev babel-plugin-module-resolver
+```
+
+2. Configure the plugin in your `.babelrc` or `babel.config.js` file:
+
+```json
+// .babelrc
+{
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "alias": {
+          "@styles": "./src/styled"
+        }
+      }
+    ]
+  ]
+}
+```
+
+3. Update your `jsconfig.json` or `tsconfig.json` file to include the `paths` and `baseUrl` options:
+
+```json
+// jsconfig.json
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@styles/*": ["src/styled/*"]
+    }
+  },
+  "exclude": ["node_modules", "dist"]
+}
+```
+
+Now, you should be able to use the `@styles` alias in your imports, and VSCode will provide IntelliSense for the module path:
+
+```javascript
+import MyStyledComponent from '@styles/MyStyledComponent';
+```
+
+If you're using a different bundler like Parcel or Create React App, the configuration steps will be slightly different. Please let me know if you need help with a specific bundler.

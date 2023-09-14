@@ -1,0 +1,15 @@
+This error occurs when there are too many files being watched by the system. You can try increasing the maximum number of files that can be watched by the system.
+
+On macOS or Linux, you can run the following command in your terminal:
+
+```
+echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+```
+
+On Windows, you can try running the following command in an elevated command prompt:
+
+```
+echo fs.inotify.max_user_watches=524288 | Out-File -FilePath 'C:\ProgramData\Docker\windowsfilter\fs\watchman\\daemon.json' -Encoding ascii -Append
+```
+
+After running these commands, try running `react-native start` again and see if the issue is resolved.

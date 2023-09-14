@@ -1,0 +1,47 @@
+It seems like you are facing an issue with Puppeteer launching the browser. There could be multiple reasons for this error. Here are a few possible solutions to try:
+
+1. Make sure you have installed Puppeteer correctly:
+
+```bash
+npm install puppeteer
+```
+
+2. If you are running your code on a server or in an environment without a graphical interface, you might need to run Puppeteer in headless mode:
+
+```javascript
+const browser = await puppeteer.launch({ headless: true });
+```
+
+3. If you are running your code in a Linux environment, you might need to install additional dependencies for Puppeteer to work correctly. You can find the list of dependencies [here](https://github.com/puppeteer/puppeteer/blob/main/docs/troubleshooting.md#chrome-headless-doesnt-launch-on-unix).
+
+For example, if you are using Ubuntu, you can install the dependencies with the following command:
+
+```bash
+sudo apt-get install -y libx11-xcb1 libxcomposite1 libxdamage1 libxi6 libxtst6 libnss3 libcups2 libxss1 libxrandr2 libasound2 libpangocairo-1.0-0 libatk1.0-0 libatk-bridge2.0-0 libgtk-3-0
+```
+
+4. If you are running your code in a Docker container, you might need to use a Docker image that includes all the necessary dependencies for Puppeteer. You can find an example Dockerfile and instructions in the [Puppeteer repository](https://github.com/puppeteer/puppeteer/blob/main/docs/troubleshooting.md#running-puppeteer-in-docker).
+
+5. If none of the above solutions work, you can try to use the `puppeteer-core` package and provide a path to an installed version of Chrome or Chromium:
+
+```bash
+npm install puppeteer-core
+```
+
+```javascript
+const puppeteer = require('puppeteer-core');
+
+(async function() {
+  try {
+    const browser = await puppeteer.launch({
+      executablePath: '/path/to/your/Chrome-or-Chromium',
+      headless: true
+    });
+    // ... rest of your code
+  } catch (e) {
+    console.log("Our Error", e)
+  }
+})();
+```
+
+Replace `/path/to/your/Chrome-or-Chromium` with the actual path to your Chrome or Chromium installation

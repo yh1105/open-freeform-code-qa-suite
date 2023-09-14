@@ -1,0 +1,45 @@
+In react-navigation 5, passing functions as params is not recommended as it can cause issues with serialization. Instead, you can use the `useCallback` hook to create a memoized callback function and pass it as a param. Here's how you can modify your code to use `useCallback`:
+
+```
+import { useCallback } from 'react';
+
+// ...
+
+const onSelectCountry = useCallback((data) => {
+  this.setState(data);
+}, []);
+
+// ...
+
+<TouchableOpacity
+  style={ styles.countrySelector }
+  activeOpacity={ 0.7 }
+  onPress={ () => Navigation.navigate("CountrySelect", {
+    onSelect: onSelectCountry,
+    countryCode: this.state.country_code,
+  })}
+>
+</TouchableOpacity>
+```
+
+And in the child screen:
+
+```
+const onPress = useCallback((country, country_code, calling_code) => {
+  const { navigation, route } = this.props;
+  navigation.goBack();
+  route.params.onSelect({
+    country_name: country,
+    country_code: country_code,
+    calling_code: calling_code
+  });
+}, []);
+
+// ...
+
+<TouchableOpacity onPress={() => onPress(country, country_code, calling_code)}>
+  {/* ... */}
+</TouchableOpacity>
+```
+
+By using `useCallback`, you ensure that the callback function is only created once and won't cause unnecessary re-renders.

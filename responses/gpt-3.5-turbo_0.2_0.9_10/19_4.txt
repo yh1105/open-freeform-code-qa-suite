@@ -1,0 +1,29 @@
+This error occurs when the number of files that are being watched by the system exceeds the limit set by the operating system. You can try the following solutions:
+
+1. Increase the limit of the number of files that can be watched by the system. You can do this by running the following command in your terminal:
+
+   ```
+   echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+   ```
+
+   This command will increase the limit to 524288. If you still face the same issue, you can try increasing the limit to a higher value.
+
+2. If the above solution does not work, you can try to close some of the open applications and processes that are running on your system. This will free up some resources and reduce the number of files being watched by the system.
+
+3. Another solution is to exclude some directories from being watched by the system. You can do this by adding the following code to your `metro.config.js` file:
+
+   ```
+   const blacklist = require('metro-config/src/defaults/blacklist');
+
+   module.exports = {
+     resolver: {
+       blacklistRE: blacklist([
+         /node_modules\/.*\/node_modules\/react-native\/.*/,
+       ]),
+     },
+   };
+   ```
+
+   This will exclude the `node_modules` directory from being watched by the system.
+
+4. You can also try to upgrade your `react-native-cli` and `metro` versions to the latest ones. This may fix the issue as well.

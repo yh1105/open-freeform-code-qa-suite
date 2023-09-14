@@ -1,0 +1,24 @@
+From the `app.module.ts` you provided, it seems like you have imported the `FlexLayoutModule` correctly. However, to use it in your `login-view` component, you also need to import it in the module that declares your `login-view` component.
+
+For example, if your `login-view` component is declared in `AuthModule`, you should import `FlexLayoutModule` in `auth.module.ts` like this:
+
+```typescript
+import { FlexLayoutModule } from '@angular/flex-layout';
+
+@NgModule({
+  declarations: [
+    // your components here
+  ],
+  imports: [
+    // other modules here
+    FlexLayoutModule
+  ],
+  providers: [],
+  bootstrap: []
+})
+export class AuthModule { }
+```
+
+After importing `FlexLayoutModule` in the module that declares your `login-view` component, you should be able to use Angular Flex Layout directives (like `fxLayout`, `fxFlex`, etc.) in your `login-view` component's template.
+
+If you have already done this and it's still not working, please provide more details about the issue.

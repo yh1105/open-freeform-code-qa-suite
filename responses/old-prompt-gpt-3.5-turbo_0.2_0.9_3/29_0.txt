@@ -1,0 +1,18 @@
+Here is the complete code to generate the histogram and save it as a PDF file:
+
+```
+import numpy as np
+from matplotlib import pyplot as plt
+
+def draw_histogram():
+    x = np.random.randn(100000)
+    plt.hist(x, bins=20)
+    plt.xlabel('Value')
+    plt.ylabel('Frequency')
+    plt.title('Normal Distribution Histogram')
+    plt.savefig('figure.pdf')
+
+draw_histogram()
+```
+
+This code generates 100,000 random numbers from a normal distribution using `np.random.randn()`. It then creates a histogram with 20 bins using `plt.hist()`. The `xlabel()`, `ylabel()`, and `title()` functions are used to label the axes and title of the plot. Finally, the `savefig()` function is used to save the plot as a PDF file named `figure.pdf`.

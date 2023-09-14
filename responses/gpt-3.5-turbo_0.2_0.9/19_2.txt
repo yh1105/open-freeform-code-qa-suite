@@ -1,9 +1,0 @@
-This error occurs when the system limit for the number of files that can be watched is reached. You can try increasing the limit by running the following command in your terminal:
-
-```
-echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
-```
-
-This will increase the limit to 524288. If the issue persists, you can try increasing the limit further by changing the number in the command above. 
-
-Alternatively, you can try closing any unnecessary applications or processes that may be using up the system's resources.

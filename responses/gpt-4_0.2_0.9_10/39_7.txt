@@ -1,0 +1,22 @@
+The error message you're seeing is indicating that the linker is unable to find the libraries it needs. This is often due to incorrect paths being specified in the project's settings.
+
+Here are a few more things you can try:
+
+1. **Check the Library Search Paths:** Go to your project settings -> Build Settings -> Search Paths -> Library Search Paths. Make sure the paths listed here are correct and the libraries exist at these locations. If there are incorrect paths, you can delete them.
+
+2. **Check the Other Linker Flags:** In the same Build Settings, check the Other Linker Flags. Make sure there are no flags referring to the missing libraries. If there are, you can remove them.
+
+3. **Re-add the Libraries:** If the libraries are present in your project but the linker can't find them, try removing and re-adding them. Go to your target settings -> Build Phases -> Link Binary With Libraries. Remove the missing libraries and then add them back.
+
+4. **Reinstall the Pods:** If the missing libraries are part of a CocoaPods, try deintegrating and reinstalling the pods. You can do this by running the following commands in the terminal:
+
+```bash
+pod deintegrate
+pod install
+```
+
+5. **Check the Architectures:** Make sure the architectures of your libraries match the architectures of your project. You can check this in the Build Settings -> Architectures.
+
+6. **Check the Derived Data:** Sometimes, cleaning the project isn't enough and you need to manually delete the derived data. You can do this by going to Window -> Projects -> Your Project -> Delete next to Derived Data.
+
+Remember to clean and rebuild your project after each step to see if the problem is resolved. If none of these steps work, there might be a more complex issue at hand, and you might need to consider creating a new project and migrating your code.

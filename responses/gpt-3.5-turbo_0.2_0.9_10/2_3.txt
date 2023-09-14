@@ -1,0 +1,35 @@
+Yes, you can use the built-in Jupyter Notebook support in Visual Studio Code to display the plots directly in the editor.
+
+First, make sure you have the Python extension installed in Visual Studio Code. Then, open your Python file and click on the "New Editor" button in the top right corner of the editor. This will open a new editor tab.
+
+In the new editor tab, click on the "Jupyter" button in the top right corner. This will open a Jupyter Notebook interface in the new tab.
+
+In the Jupyter Notebook interface, create a new cell by clicking on the "+" button in the top left corner. Then, copy and paste your code into the new cell.
+
+To display the plot directly in the editor, add the following line of code to the end of your code:
+
+```
+%matplotlib inline
+```
+
+This will tell Matplotlib to display the plot inline in the Jupyter Notebook interface.
+
+Your final code should look like this:
+
+```
+import matplotlib.pyplot as plt
+import matplotlib as mpl
+import numpy as np
+
+%matplotlib inline
+
+x = np.linspace(0, 20, 100)
+plt.plot(x, np.sin(x))
+plt.show()
+```
+
+Now, you can run the code by clicking on the "Run Cell" button in the top left corner of the cell. The plot will be displayed directly in the editor, below the cell.
+
+If you need to make changes to the code, simply edit the code in the cell and run it again. The plot will be updated automatically.
+
+I hope this helps!

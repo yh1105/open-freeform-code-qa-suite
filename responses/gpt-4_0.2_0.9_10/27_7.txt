@@ -1,0 +1,35 @@
+It seems like you have imported the `FlexLayoutModule` correctly in your `app.module.ts`. To use it in your `login-view` component, you need to make sure that you have added the appropriate directives in the component's HTML template.
+
+Here's an example of how to use Angular Flex Layout in your `login-view` component:
+
+1. Open your `login-view.component.html` file.
+
+2. Add the Flex Layout directives to your HTML elements, for example:
+
+```html
+<div fxLayout="column" fxLayoutAlign="center center" fxFlex="100">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Login</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <!-- Your login form goes here -->
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary">Login</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+```
+
+In this example, I have used the `fxLayout`, `fxLayoutAlign`, and `fxFlex` directives to create a simple login card that is centered both horizontally and vertically.
+
+3. Save the changes and check if the layout is working as expected in your `login-view` component.
+
+If you still face any issues, make sure that you have installed the `@angular/flex-layout` package using the following command:
+
+```
+npm install @angular/flex-layout
+```
+
+Also, ensure that you have the latest version of Angular Flex Layout that is compatible with Angular 9. You can check the compatibility table in the [official documentation](https://github.com/angular/flex-layout/blob/master/README.md#installation).

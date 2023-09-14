@@ -2,4 +2,8 @@ id: 5749
 prompt_path: prompt_5749.txt
 type: knowledge question-answering
 lang: java
-grading: {}
+grading:
+  similarity:
+    - metric: rougeLsum
+      references:
+        - path: answer_5749_0.txt

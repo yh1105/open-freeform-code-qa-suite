@@ -1,0 +1,72 @@
+In React Navigation 5, you can't pass functions as params because the params need to be serialized. This is because the state of the navigator needs to be serializable so it can be stored and rehydrated.
+
+Instead, you can use React Context or Redux to share functions and state between screens. Here's an example of how you could do it with React Context:
+
+First, create a context:
+
+```jsx
+import React from 'react';
+
+export const CountryContext = React.createContext();
+```
+
+Then, wrap your navigator in a context provider:
+
+```jsx
+import { CountryContext } from './CountryContext';
+
+function App() {
+  const [country, setCountry] = React.useState(null);
+
+  return (
+    <CountryContext.Provider value={{ country, setCountry }}>
+      <NavigationContainer>{/* your navigator here */}</NavigationContainer>
+    </CountryContext.Provider>
+  );
+}
+```
+
+In your parent screen, you can now use the `setCountry` function from the context:
+
+```jsx
+import { CountryContext } from './CountryContext';
+
+function ParentScreen() {
+  const { setCountry } = React.useContext(CountryContext);
+
+  return (
+    <TouchableOpacity
+      style={styles.countrySelector}
+      activeOpacity={0.7}
+      onPress={() => Navigation.navigate('CountrySelect')}
+    >
+      {/* your content here */}
+    </TouchableOpacity>
+  );
+}
+```
+
+And in your child screen, you can use both `country` and `setCountry`:
+
+```jsx
+import { CountryContext } from './CountryContext';
+
+function ChildScreen() {
+  const { country, setCountry } = React.useContext(CountryContext);
+
+  const _onPress = (country, country_code, calling_code) => {
+    navigation.goBack();
+    setCountry({
+      country_name: country,
+      country_code: country_code,
+      calling_code: calling_code
+    });
+  };
+
+  return (
+    // your content here
+  );
+}
+```
+
+This way, you can share both state and functions between screens without passing them as params.

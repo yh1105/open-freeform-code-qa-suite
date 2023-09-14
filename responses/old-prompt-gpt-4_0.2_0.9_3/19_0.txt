@@ -1,0 +1,36 @@
+The error message `EMFILE: too many open files, watch` is indicating that the system has reached its limit for the number of files it can monitor. This is a common issue when working with large projects in Node.js, especially on systems with low default limits.
+
+Here are a few solutions you can try:
+
+**1. Increase the limit of open files:**
+
+This solution depends on your operating system.
+
+- **For macOS**, you can increase the limit of open files by running the following command in your terminal:
+
+```bash
+echo kern.maxfiles=524288 | sudo tee -a /etc/sysctl.conf
+echo kern.maxfilesperproc=524288 | sudo tee -a /etc/sysctl.conf
+sudo sysctl -w kern.maxfiles=524288
+sudo sysctl -w kern.maxfilesperproc=524288
+ulimit -n 524288 524288    
+```
+
+- **For Linux**, you can increase the limit of open files by editing the `/etc/security/limits.conf` file and adding the following lines:
+
+```bash
+* soft nofile 4096
+* hard nofile 4096
+```
+
+Then, you need to log out and log back in for the changes to take effect.
+
+**2. Use watchman:**
+
+[Watchman](https://facebook.github.io/watchman/) is a tool by Facebook for watching file changes. It's more efficient than Node's built-in `fs.watch` and doesn't have the same limit on the number of files. You can install it using Homebrew:
+
+```bash
+brew install watchman
+```
+
+**3. Exclude unnecessary directories

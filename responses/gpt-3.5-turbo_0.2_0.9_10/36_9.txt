@@ -1,0 +1,19 @@
+The exception message suggests that the Feign client is not defined for load balancing and asks if you have forgotten to include the `spring-cloud-starter-netflix-ribbon` dependency. However, you have already added the dependency and it did not help.
+
+One possible reason for this issue could be that you are using a different version of Spring Cloud in your project. The `spring-cloud-starter-openfeign` version 2.0.3.RELEASE is compatible with Spring Cloud Finchley, while version 2.0.8.RELEASE is compatible with Spring Cloud Greenwich. If you are using a different version of Spring Cloud, it may cause compatibility issues.
+
+To resolve this issue, you can try adding the `spring-cloud-starter-netflix-ribbon` dependency explicitly in your pom.xml file. You can also try downgrading the version of `spring-cloud-starter-openfeign` to 2.0.3.RELEASE if you are using Spring Cloud Finchley.
+
+Additionally, you can try adding the `@LoadBalanced` annotation to your Feign client interface to enable load balancing. For example:
+
+```
+@FeignClient(value = "user-service", decode404 = true)
+@LoadBalanced
+public interface UserFeignClient {
+
+    @PostMapping("/do-something")
+    void doSomething();
+}
+```
+
+This annotation will enable the use of Ribbon load balancing for your Feign client.

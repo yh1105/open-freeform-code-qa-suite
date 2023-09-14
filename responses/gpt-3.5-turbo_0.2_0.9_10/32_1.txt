@@ -1,0 +1,11 @@
+The error message suggests that the requested version-platform combination does not exist. This could be due to a few reasons:
+
+1. The version of mongodb-memory-server you are using is outdated and does not support the requested version-platform combination.
+2. There is an issue with the mirror being used to download the MongoDB binary.
+3. There is an issue with the configuration of your system that is preventing the MongoDB binary from being downloaded or installed correctly.
+
+To troubleshoot this issue, you can try the following steps:
+
+1. Check the version of mongodb-memory-server you are using and make sure it supports the version-platform combination you are requesting. You can check the supported versions in the mongodb-memory-server documentation.
+2. Try changing the mirror being used to download the MongoDB binary. You can do this by setting the `MONGOMS_DOWNLOAD_URL` environment variable to a different mirror URL before running your tests.
+3. Check your system configuration to make sure there are no issues with downloading or installing the MongoDB binary. You can try manually downloading and installing the MongoDB binary to see if there are any issues.

@@ -1,0 +1,33 @@
+The error `EMFILE: too many open files, watch` means that the system ran out of file descriptors. This is a common issue on systems with small limits on the number of files a process can open simultaneously.
+
+Here are a few solutions you can try:
+
+1. **Increase the limit of open files in your system**
+
+   For Unix-based systems, you can temporarily increase the limit of open files with the `ulimit` command:
+
+   ```bash
+   ulimit -n 4096
+   ```
+
+   This command will increase the limit to 4096. You may need to adjust the number based on your system and needs.
+
+   For permanent changes, you may need to edit system configuration files, which can vary based on your specific OS and version.
+
+2. **Use watchman**
+
+   [Watchman](https://facebook.github.io/watchman/) is a tool by Facebook for watching file changes. It's more efficient and can handle more files than Node's built-in `fs.watch`.
+
+   To install watchman, you can use Homebrew if you're on a Mac:
+
+   ```bash
+   brew install watchman
+   ```
+
+   If you're on a Linux or Windows, please follow the installation instructions on the [official Watchman documentation](https://facebook.github.io/watchman/docs/install.html).
+
+3. **Exclude unnecessary directories**
+
+   If your project is large, the file watcher might be watching too many files. You can exclude unnecessary directories (like `node_modules`) from being watched.
+
+   If you're using `watchman`, create a file named `.watchmanconfig` in your project root with the following

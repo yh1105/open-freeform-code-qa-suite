@@ -1,0 +1,29 @@
+It seems like the issue is related to SSL/TLS configuration. Your application is trying to serve content over HTTPS, but there might be a problem with the SSL certificate or its configuration.
+
+Here are a few steps you can try to resolve the issue:
+
+1. Check your application's SSL configuration: Make sure you have a valid SSL certificate and it's properly configured in your Spring Boot application. You can refer to [Spring Boot's documentation on configuring SSL](https://docs.spring.io/spring-boot/docs/current/reference/html/howto.html#howto-configure-ssl) for more information.
+
+2. Try accessing the application over HTTP instead of HTTPS: If you don't need HTTPS for your local development, you can try accessing the application using `http://localhost:8080` instead of `https://localhost:8080`. If your application is configured to redirect HTTP to HTTPS, you might need to disable that configuration temporarily for local development.
+
+3. Change the port: If you suspect a port issue, you can try changing the port your application is running on. In your `application.properties` or `application.yml` file, add or modify the following line:
+
+   ```
+   server.port=8081
+   ```
+
+   Then, try accessing your application at `http://localhost:8081` or `https://localhost:8081`, depending on your SSL configuration.
+
+4. Check your hosts file: Make sure your `hosts` file has an entry for `localhost`. The file is usually located at `C:\Windows\System32\drivers\etc\hosts` on Windows. The entry should look like this:
+
+   ```
+   127.0.0.1       localhost
+   ```
+
+5. Disable SSL for local development: If you don't need SSL for local development, you can disable it in your Spring Boot application. In your `application.properties` or `application.yml` file, add or modify the following line:
+
+   ```
+   server.ssl.enabled=false
+   ```
+
+Remember that using HTTPS is important for security reasons, especially in production environments. Make sure to re-enable SSL and use a valid certificate when deploying your application to a production environment.

@@ -1,0 +1,69 @@
+In react-navigation 5, passing functions as params is not supported because it can cause issues with serialization. Instead, you can pass a callback function as a screen option and call it from the child screen.
+
+Here's an example of how you can implement it:
+
+In the parent screen:
+
+```
+import { useNavigation } from '@react-navigation/native';
+
+const ParentScreen = () => {
+  const navigation = useNavigation();
+
+  const onSelectCountry = (data) => {
+    // update parent state with data
+  };
+
+  const navigateToCountrySelect = () => {
+    navigation.navigate('CountrySelect', {
+      onSelectCountry: onSelectCountry,
+      countryCode: this.state.country_code,
+    });
+  };
+
+  return (
+    <TouchableOpacity
+      style={styles.countrySelector}
+      activeOpacity={0.7}
+      onPress={navigateToCountrySelect}>
+      // ...
+    </TouchableOpacity>
+  );
+};
+```
+
+In the child screen:
+
+```
+const CountrySelect = ({ navigation, route }) => {
+  const { onSelectCountry, countryCode } = route.params;
+
+  const onPress = (country, country_code, calling_code) => {
+    onSelectCountry({
+      country_name: country,
+      country_code: country_code,
+      calling_code: calling_code,
+    });
+    navigation.goBack();
+  };
+
+  return (
+    // ...
+  );
+};
+
+CountrySelect.navigationOptions = ({ route }) => {
+  return {
+    title: 'Country Select',
+    headerRight: () => (
+      <TouchableOpacity onPress={route.params.onSelectCountry}>
+        <Text>Save</Text>
+      </TouchableOpacity>
+    ),
+  };
+};
+```
+
+In the child screen, we extract the `onSelectCountry` and `countryCode` from the `route.params` object. We then use `onSelectCountry` to update the parent state and `navigation.goBack()` to go back to the parent screen.
+
+We also define a `navigationOptions` function to add a "Save" button to the header. When the button is pressed, it calls the `onSelectCountry` callback function.

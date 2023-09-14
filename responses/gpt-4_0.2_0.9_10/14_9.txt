@@ -1,0 +1,52 @@
+To deploy your Nuxt.js static website as a single page application (SPA) to a public hosting like GitHub Pages, you need to follow these steps:
+
+1. First, you need to set your Nuxt.js application to SPA mode. You can do this by editing your `nuxt.config.js` file:
+
+```javascript
+export default {
+  mode: 'spa', // can be 'universal' for server-side rendering
+  // ...
+}
+```
+
+2. Then, you need to build your application for production. You can do this by running the following npm command:
+
+```bash
+npm run build
+```
+
+3. After building your application, you need to generate your static website. You can do this by running the following npm command:
+
+```bash
+npm run generate
+```
+
+4. The `generate` command will create a `dist` directory, which contains your static website. You can deploy this directory to GitHub Pages.
+
+Please note that GitHub Pages doesn't support server-side rendering (SSR). Therefore, you need to set your Nuxt.js application to SPA mode.
+
+Also, please note that you need to set the `base` option in your `nuxt.config.js` file to match the repository name on GitHub:
+
+```javascript
+export default {
+  router: {
+    base: '/<repository-name>/'
+  }
+}
+```
+
+5. Finally, you can use a package like `push-dir` to push the `dist` directory to gh-pages branch. Install it using:
+
+```bash
+npm install --save-dev push-dir
+```
+
+And add a deploy script to your `package.json`:
+
+```json
+"scripts": {
+  "deploy": "push-dir --dir=dist --branch=gh-pages --cleanup"
+}
+```
+
+Then you can run `npm run deploy` to deploy your site to GitHub Pages.

@@ -1,0 +1,50 @@
+It seems that you have already imported the `FlexLayoutModule` in your `app.module.ts`. To use Angular Flex-Layout in your `login-view` component, follow these steps:
+
+1. Make sure you have the latest version of Angular Flex-Layout installed. You can check the version in your `package.json` file or run the following command to install the latest version:
+
+   ```
+   npm install @angular/flex-layout@latest
+   ```
+
+2. In your `login-view` component's HTML file, use the Flex-Layout directives like `fxLayout`, `fxLayoutAlign`, `fxLayoutGap`, and `fxFlex` to create the desired layout. For example:
+
+   ```html
+   <div fxLayout="column" fxLayoutAlign="center center" fxFlexFill>
+     <mat-card>
+       <mat-card-header>
+         <mat-card-title>Login</mat-card-title>
+       </mat-card-header>
+       <mat-card-content>
+         <!-- Add your login form here -->
+       </mat-card-content>
+       <mat-card-actions>
+         <button mat-button>Login</button>
+       </mat-card-actions>
+     </mat-card>
+   </div>
+   ```
+
+   This example creates a simple login card that is centered both horizontally and vertically on the page.
+
+3. If you want to apply responsive styles, you can use the responsive API provided by Angular Flex-Layout. For example:
+
+   ```html
+   <div fxLayout="column" fxLayoutAlign="center center" fxFlexFill>
+     <mat-card fxFlex.gt-sm="50" fxFlex.sm="75" fxFlex.xs="100">
+       <!-- Add your login card content here -->
+     </mat-card>
+   </div>
+   ```
+
+   This example sets the width of the login card to 50% on screens larger than the small breakpoint, 75% on small screens, and 100% on extra-small screens.
+
+4. If you still face issues, make sure that your project's styles include the Angular Material and Angular Flex-Layout styles. In your `styles.scss` or `styles.css` file, add the following imports:
+
+   ```scss
+   @import '~@angular/material/prebuilt-themes/indigo-pink.css';
+   @import '~@angular/flex-layout/mq';
+   ```
+
+   Replace `indigo-pink.css` with the theme of your choice.
+
+By following

@@ -1,0 +1,37 @@
+It seems like you are missing the `spring-cloud-starter-netflix-ribbon` dependency in your `pom.xml`. You mentioned that you tried adding it, but it didn't help. Please make sure you have added the correct dependency and also have the appropriate version of `spring-cloud-dependencies` in your `pom.xml`. Here's an example of how your `pom.xml` should look like:
+
+```xml
+<dependencies>
+    <!-- Other dependencies -->
+
+    <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-starter-openfeign</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
+    </dependency>
+</dependencies>
+
+<dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-dependencies</artifactId>
+            <version>Finchley.SR2</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+    </dependencies>
+</dependencyManagement>
+```
+
+Make sure to replace `Finchley.SR2` with the appropriate version that matches your Spring Boot version. You can find the compatible versions in the [Spring Cloud documentation](https://spring.io/projects/spring-cloud#overview).
+
+After updating your `pom.xml`, clean and rebuild your project. If the issue still persists, try the following steps:
+
+1. Invalidate caches and restart your IDE.
+2. Delete the `.m2/repository` folder and re-download the dependencies by running `mvn clean install` or `mvn dependency:resolve`.
+
+If the issue still persists, please share more details about your project setup, such as the complete `pom.xml` and any relevant configuration files.

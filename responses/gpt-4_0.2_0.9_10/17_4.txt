@@ -1,0 +1,27 @@
+To make Visual Studio Code IntelliSense work with module path aliases, you need to configure your `jsconfig.json` or `tsconfig.json` (if you're using TypeScript) file.
+
+Here's an example of how you can set it up:
+
+```json
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@styles/*": ["src/styled/*"]
+    }
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
+}
+```
+
+In this configuration:
+
+- `"baseUrl": "."` sets the base directory for resolving non-relative module names.
+- `"paths"` object is used to map module names to file locations. The key is the alias you want to use, and the value is an array of paths that the alias should resolve to.
+- `"@styles/*": ["src/styled/*"]` means that `@styles` will resolve to `src/styled`.
+- `"include"` and `"exclude"` are used to specify which files should be included and excluded from the configuration.
+
+After you've made these changes, you should restart VSCode to make sure the new configuration is picked up.
+
+Now, when you type `@styles`, VSCode IntelliSense should suggest files from your `src/styled` directory.

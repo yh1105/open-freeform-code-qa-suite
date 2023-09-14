@@ -1,0 +1,26 @@
+Sure! Here's an example implementation of the `convertToUTC()` function in JavaScript:
+
+```javascript
+function convertToUTC(date) {
+  // Get the timezone offset in minutes
+  var timezoneOffset = date.getTimezoneOffset();
+
+  // Convert the offset to milliseconds and add to the date
+  var utcTime = date.getTime() + (timezoneOffset * 60 * 1000);
+
+  // Return a new Date object with the UTC time
+  return new Date(utcTime);
+}
+```
+
+Here's an example usage of the function:
+
+```javascript
+var localDate = new Date(); // Create a new Date object with the local time
+var utcDate = convertToUTC(localDate); // Convert the local time to UTC
+
+console.log(localDate); // Output: Wed Aug 18 2021 11:30:00 GMT-0400 (Eastern Daylight Time)
+console.log(utcDate); // Output: Wed Aug 18 2021 15:30:00 GMT+0000 (Coordinated Universal Time)
+```
+
+In this example, we create a new `Date` object with the local time, then pass it to the `convertToUTC()` function to convert it to UTC. The function returns a new `Date` object with the UTC time, which we can then use as needed.

@@ -1,0 +1,22 @@
+Yes, you can create a custom TRIM function in SQL Server using the following code:
+
+```
+CREATE FUNCTION dbo.TRIM(@string VARCHAR(8000))
+RETURNS VARCHAR(8000)
+BEGIN
+    WHILE CHARINDEX('  ', @string) > 0
+        SET @string = REPLACE(@string, '  ', ' ')
+    RETURN LTRIM(RTRIM(@string))
+END
+```
+
+This function replaces all double spaces with single spaces and then trims the string from both sides. You can then use it in your code as follows:
+
+```
+DECLARE @ss varchar(60)
+SET @ss = ' admin '
+
+SELECT dbo.TRIM(@ss)
+``` 
+
+This will return 'admin' with leading and trailing spaces removed.

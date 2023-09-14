@@ -1,0 +1,58 @@
+In React Navigation 5, passing functions as params is not recommended because it is not serializable. Instead, you can use React Context or Redux to manage your state. 
+
+However, if you want to keep your code simple and don't want to use state management libraries, you can use React's built-in callback pattern. Here's how you can do it:
+
+First, create a new state in your parent component that will hold the value you want to update:
+
+```jsx
+state = {
+    country_name: '',
+    country_code: '',
+    calling_code: ''
+};
+```
+
+Then, pass the function that updates this state to the child component:
+
+```jsx
+<TouchableOpacity
+    style={ styles.countrySelector }
+    activeOpacity={ 0.7 }
+    onPress={ () => Navigation.navigate("CountrySelect",
+        {
+             countryCode: this.state.country_code,
+        })
+    }
+>
+</TouchableOpacity>
+```
+
+In your child component, instead of calling `route.params.onSelect`, you can use the `useEffect` hook to detect when the values you want to pass back to the parent component change:
+
+```jsx
+useEffect(() => {
+    if (country && country_code && calling_code) {
+        navigation.setParams({
+            country_name: country,
+            country_code: country_code,
+            calling_code: calling_code
+        });
+    }
+}, [country, country_code, calling_code]);
+```
+
+Finally, in your parent component, you can use the `useEffect` hook to listen for changes in the navigation state and update your local state accordingly:
+
+```jsx
+useEffect(() => {
+    if (route.params?.country_name) {
+        this.setState({
+            country_name: route.params?.country_name,
+            country_code: route.params?.country_code,
+            calling_code: route.params?.calling_code
+        });
+    }
+}, [route.params?.country_name, route.params?.country_code, route.params?.calling_code]);
+```
+
+This way, you can pass data from the child component back to the parent component without passing functions as params.

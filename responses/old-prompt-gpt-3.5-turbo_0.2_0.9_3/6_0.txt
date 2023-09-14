@@ -1,0 +1,12 @@
+It sounds like the issue might be related to SSL. By default, jHipster generates a self-signed SSL certificate for development purposes. When you access the app through https, your browser might not trust the certificate and therefore block the connection.
+
+To bypass this issue, you can try accessing the app through http instead of https. Simply go to `http://localhost:8080` in your browser and see if you can access the app.
+
+If you still want to access the app through https, you can try importing the jHipster SSL certificate into your browser's trusted certificates. To do this, follow these steps:
+
+1. Open your browser and go to `https://localhost:8080`.
+2. You should see a warning message saying that the connection is not secure. Click on "Advanced" or "Details" to expand the message.
+3. Look for an option to "Proceed to localhost (unsafe)" or "Add exception". Click on it.
+4. Follow the instructions to add the jHipster SSL certificate to your browser's trusted certificates.
+
+Once you have added the certificate, you should be able to access the app through https without any issues.

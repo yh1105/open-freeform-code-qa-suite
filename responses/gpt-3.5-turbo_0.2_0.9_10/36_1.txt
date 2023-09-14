@@ -1,0 +1,29 @@
+The exception message suggests that you are missing the `spring-cloud-starter-netflix-ribbon` dependency. Although you have mentioned that you have already added the dependency, it seems like it is not being picked up by your project.
+
+Here are a few things you can try:
+
+1. Check if the dependency is present in your project's classpath. You can do this by running the following command in your project's root directory:
+```
+mvn dependency:tree
+```
+This will show you the complete dependency tree of your project. Look for the `spring-cloud-starter-netflix-ribbon` dependency and make sure it is present.
+
+2. Try adding the `spring-cloud-starter-netflix-ribbon` dependency explicitly in your `pom.xml` file:
+```
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
+</dependency>
+```
+
+3. Make sure that your `UserRegistrationApplication` class is in the root package of your project. If it is not, you may need to add the `@ComponentScan` annotation to your `UserRegistrationApplication` class to specify the base package(s) to scan for components:
+```
+@ComponentScan(basePackages = {"test.user"})
+```
+
+4. If none of the above solutions work, try cleaning your project and rebuilding it:
+```
+mvn clean install
+```
+
+I hope one of these solutions helps you resolve the issue.

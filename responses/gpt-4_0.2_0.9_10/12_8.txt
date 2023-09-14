@@ -1,0 +1,23 @@
+The `RuntimeError: CUDA error: device-side assert triggered` error occurs when there is an assertion failure in the CUDA code running on the GPU. This error is raised to alert you that something went wrong during the execution of your GPU code, and it's usually related to incorrect input values, out-of-bounds memory access, or other similar issues.
+
+To understand and debug this error, let's break it down:
+
+1. **Assert**: An assert is a debugging aid that tests a condition and triggers an error if the condition is not met. In the context of CUDA, it's a way to check for invalid values or conditions that should not occur during the execution of the GPU code.
+
+2. **Device-side**: This refers to the code running on the GPU (the device) as opposed to the CPU (the host). The error is triggered within the GPU code.
+
+3. **Triggered**: The assert condition was not met, causing the error to be raised.
+
+To debug the problem, follow these steps:
+
+1. **Check the error message**: Sometimes, the error message provides more information about the specific assert that failed. This can give you a clue about where to start looking for the issue.
+
+2. **Review your GPU code**: Look for any potential issues in your GPU code, such as incorrect input values, out-of-bounds memory access, or incorrect use of CUDA functions. Pay special attention to any recent changes you made to the code.
+
+3. **Add more asserts**: If you're still having trouble identifying the issue, consider adding more assert statements in your GPU code to narrow down the problem. This can help you pinpoint the exact location where the error is occurring.
+
+4. **Test with smaller inputs**: Sometimes, the error might be related to the size or complexity of the input data. Try running your code with smaller inputs to see if the error persists. This can help you identify if the problem is related to the input data or the GPU code itself.
+
+5. **Use a debugger**: If you're still having trouble, consider using a GPU debugger, such as NVIDIA's Nsight or CUDA-GDB. These tools can help you step through your GPU code and identify the exact location where the error is occurring.
+
+Remember that the error might not always be in your code. It could also be caused by a bug in a library you're using or even in the CUDA runtime itself. In such cases, make sure to update your libraries and CUDA toolkit to

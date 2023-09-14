@@ -1,0 +1,19 @@
+It seems like the issue is related to SSL protocol error. You can try accessing the application using HTTP instead of HTTPS by using the URL http://localhost:8080. If this works, then the issue is related to SSL configuration.
+
+If you want to access the application using HTTPS, you need to make sure that the SSL certificate is properly configured. You can check if the SSL certificate is properly configured by running the following command:
+
+```
+keytool -list -keystore server.p12
+```
+
+Replace `server.p12` with the name of your keystore file. If the command returns a list of certificates, then the keystore is properly configured.
+
+If the keystore is properly configured, then you can try adding the SSL certificate to your browser's trusted certificates. This will allow your browser to trust the SSL certificate and establish a secure connection.
+
+If you still cannot access the application, then it might be a port issue. You can try changing the port number in the application.properties file and run the application again. For example, you can change the port number to 8081 by adding the following line to the application.properties file:
+
+```
+server.port=8081
+```
+
+Then run the application using mvnw and try accessing it using the URL http://localhost:8081.

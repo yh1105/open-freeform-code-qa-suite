@@ -1,0 +1,45 @@
+It seems like the MongoDB version you are trying to download is not available for your platform (win32 and ia32). The error message indicates that the requested version-platform combination does not exist.
+
+To fix this issue, you can try the following steps:
+
+1. Update the `mongodb-memory-server` package to the latest version:
+
+```
+npm install mongodb-memory-server@latest --save-dev
+```
+
+2. If you are using a 64-bit version of Windows, you can try to change the architecture to `x64` in your `package.json` file:
+
+```json
+"config": {
+  "mongodbMemoryServer": {
+    "arch": "x64"
+  }
+}
+```
+
+3. If you still face issues, you can try to use a different version of MongoDB by specifying the version in your `package.json` file:
+
+```json
+"config": {
+  "mongodbMemoryServer": {
+    "version": "4.2.0"
+  }
+}
+```
+
+Make sure to replace "4.2.0" with the desired version of MongoDB that is compatible with your platform.
+
+4. If none of the above solutions work, you can try to download the MongoDB binary manually and set the `MONGOMS_DOWNLOAD_MIRROR` environment variable to point to the local path of the downloaded binary.
+
+For example, if you have downloaded the MongoDB binary and placed it in the `C:\mongodb-binaries` folder, you can set the environment variable like this:
+
+```json
+"config": {
+  "mongodbMemoryServer": {
+    "downloadMirror": "file:///C:/mongodb-binaries"
+  }
+}
+```
+
+After trying these steps, run the tests again and see if the issue is resolved.

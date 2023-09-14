@@ -1,0 +1,15 @@
+This issue might be due to a few reasons:
+
+1. **Go Modules**: If you're using Go modules (which is recommended for Go 1.11 and later), make sure your `go.mod` file includes the Redigo package. If not, you can add it by running `go get github.com/gomodule/redigo/redis` in your terminal.
+
+2. **GOPATH and GOROOT**: Ensure your `GOPATH` and `GOROOT` are set correctly. `GOROOT` is where Go is installed, and `GOPATH` is your workspace. You can check these by running `go env` in your terminal.
+
+3. **VSCode Go Extension**: Make sure you have the Go extension for VSCode installed and updated. This extension provides features like auto-import, IntelliSense, code navigation, etc.
+
+4. **Go Tools**: The Go extension relies on several Go tools (like `gocode`, `gopls`, etc.) to provide its features. You can update these tools by opening the Command Palette (Ctrl+Shift+P), and running the `Go: Install/Update Tools` command. Select all the tools and click `OK`.
+
+5. **Language Server**: The Go extension uses a language server (`gopls` by default) for features like IntelliSense. If you're having issues, you can try disabling the language server by setting `"go.useLanguageServer": false` in your settings.json file.
+
+6. **VSCode Settings**: Check your VSCode settings (`.vscode/settings.json` in your workspace, or the global settings). Make sure the `go.gopath` setting is correct, and that the `go.inferGopath` setting is `true` if you want VSCode to infer your `GOPATH` from your workspace.
+
+After making any changes, it's a good idea to reload VSCode to make sure the changes take effect. You can do this by opening the Command Palette and running the `Developer: Reload Window` command.

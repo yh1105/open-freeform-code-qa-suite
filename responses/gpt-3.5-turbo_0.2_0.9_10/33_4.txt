@@ -1,0 +1,33 @@
+The first error message `Plugin project :location_web not found. Please update settings.gradle;` indicates that the `location_web` plugin is missing from your project. You can try adding it to your `pubspec.yaml` file and running `flutter pub get` to install it. If that doesn't work, you may need to update your `settings.gradle` file to include the plugin.
+
+The second error message `Invalid argument(s): No host specified in URI file:///Instance%20of%20'Future%3CString%3E'` is because you are trying to use a `Future` object as a `String`. In your code, `mapview` is a `Future<String>` object, not a `String`. To fix this, you can use a `FutureBuilder` widget to asynchronously build your UI when the `Future` completes. Here's an example:
+
+```
+class NearbyScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<String>(
+      future: _getUserLocation(),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return Column(
+            children: <Widget>[
+              Container(
+                height: 170,
+                width: double.infinity,
+                child: Image.network(snapshot.data),
+              ),
+              Text("hello"),
+            ],
+          );
+        } else if (snapshot.hasError) {
+          return Text("${snapshot.error}");
+        }
+        return CircularProgressIndicator();
+      },
+    );
+  }
+}
+```
+
+This code uses a `FutureBuilder` widget to asynchronously build the UI when the `Future` completes. If the `Future` has data, it displays the image using the `Image.network` widget. If the `Future` has an error, it displays the error message. If the `Future` is still loading, it displays a `CircularProgressIndicator`.

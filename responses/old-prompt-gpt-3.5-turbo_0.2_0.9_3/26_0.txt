@@ -1,0 +1,42 @@
+To fix the issue of the user not changing when navigating to another user, you need to use a watcher to update the `user` variable whenever the `userToLoad` computed property changes. You can do this by adding the following code inside the `setup` function:
+
+```
+watch(userToLoad, (newVal) => {
+  const newUser = listOfUsers.find((u) => u.userId === +newVal);
+  if (!newUser) {
+    return root.$router.push('/404');
+  }
+  user.value = newUser;
+});
+```
+
+This will update the `user` variable whenever the `userToLoad` computed property changes, and also redirect to the 404 page if the user is not found in the `listOfUsers`.
+
+Here is the updated code:
+
+```
+<template>
+  <div>{{username}}</div>
+</template>
+
+<script lang="ts">
+import { computed, defineComponent, ref, getCurrentInstance, watch } from '@vue/composition-api';
+
+export const useUsername = ({ user }) => {
+  return { username: user.name };
+};
+
+export default defineComponent({
+  setup(props, { root }) {
+    const vm = getCurrentInstance();
+
+    const userToLoad = computed(() => root.$route.params.userId);
+    const listOfUsers = [
+      { userId: 1, name: 'user1' },
+      { userId: 2, name: 'user2' },
+    ];
+
+    const user = ref(null);
+    watch(userToLoad, (newVal) => {
+      const newUser = listOfUsers.find((u) => u.userId === +newVal);
+      if (!newUser

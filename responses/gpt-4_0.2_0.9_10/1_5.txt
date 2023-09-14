@@ -1,0 +1,14 @@
+Sure, here is a simple JavaScript function that returns the current date in the format `MM/DD/YYYY`.
+
+```javascript
+function getCurrentDate() {
+    var date = new Date();
+    var day = String(date.getDate()).padStart(2, '0');
+    var month = String(date.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var year = date.getFullYear();
+
+    return month + '/' + day + '/' + year;
+}
+```
+
+This function first creates a new `Date` object which by default contains the current date and time. Then it extracts the day, month, and year from the date. The `padStart` method is used to ensure that the day and month are always two digits long. Finally, it constructs a string in the format `MM/DD/YYYY` and returns it.

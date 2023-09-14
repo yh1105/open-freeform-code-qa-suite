@@ -1,0 +1,48 @@
+The error `Plugin project :location_web not found. Please update settings.gradle;` is related to the Flutter plugin system. It seems like the `location` package is trying to use the `location_web` package, which is not found. 
+
+To fix this, you can try to add the `location_web` package to your `pubspec.yaml`:
+
+```yaml
+dependencies:
+  flutter:
+    sdk: flutter
+  location_web: ^1.0.0
+```
+
+Then run `flutter pub get` to fetch the package.
+
+The second error `Invalid argument(s): No host specified in URI file:///Instance%20of%20'Future%3CString%3E'` is because you are trying to use a `Future<String>` as a `String`. The `Image.network` function expects a `String` as the URL, but you are passing a `Future<String>`.
+
+You can use a `FutureBuilder` to handle this:
+
+```dart
+class NearbyScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        Container(
+          height:170, 
+          width: double.infinity,
+          child: FutureBuilder<String>(
+            future: _getUserLocation(),
+            builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return CircularProgressIndicator();
+              } else {
+                if (snapshot.hasError)
+                  return Text('Error: ${snapshot.error}');
+                else
+                  return Image.network(snapshot.data);  // snapshot.data  <-- here
+              }
+            },
+          ),
+        ),
+        Text("hello"),
+      ],
+    );
+  }
+}
+```
+
+In this code, `FutureBuilder` will handle the `Future` and rebuild the widget when the future completes. If the future is still loading, it will show a loading spinner. If the future has completed, it will show the image. If there was an error, it will show the error message.

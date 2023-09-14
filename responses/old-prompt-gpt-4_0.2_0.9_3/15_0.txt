@@ -1,0 +1,16 @@
+Sure, you can use `io.BytesIO` to create a file-like object in memory, then save your figure to this object using `fig.savefig()`. After that, you can use `PIL.Image.open()` to convert this object to a PIL image. Here is the completed code:
+
+```python
+import io
+from matplotlib import pyplot as plt
+from PIL import Image
+
+def transform(input: plt.Figure) -> Image:
+    buf = io.BytesIO()
+    input.savefig(buf, format='png')
+    buf.seek(0)
+    img = Image.open(buf)
+    return img
+```
+
+This function will take a `matplotlib` figure as input and return a `PIL` image. The figure is saved to a `BytesIO` object in memory as a PNG image, which is then opened as a `PIL` image.

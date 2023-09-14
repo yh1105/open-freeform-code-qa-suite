@@ -1,0 +1,28 @@
+This error occurs when the operating system's limit for the number of files that can be watched is exceeded. You can try the following solutions:
+
+1. Increase the limit for the number of files that can be watched by the operating system. You can do this by running the following command in your terminal:
+
+   ```
+   echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+   ```
+
+2. If you are using a macOS, you can try increasing the limit for the number of files that can be watched by the system by running the following command in your terminal:
+
+   ```
+   sudo sysctl -w kern.maxfiles=5242880
+   sudo sysctl -w kern.maxfilesperproc=524288
+   ```
+
+3. If the above solutions do not work, you can try closing any unnecessary applications or processes that may be using up the file watcher limit.
+
+4. Another solution is to use the `watchman` file watcher instead of the default file watcher. You can install `watchman` by running the following command in your terminal:
+
+   ```
+   brew install watchman
+   ```
+
+   Once installed, you can start the Metro bundler with the `--watcher` flag set to `watchman`:
+
+   ```
+   react-native start --watcher watchman
+   ```

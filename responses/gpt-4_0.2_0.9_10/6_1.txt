@@ -1,0 +1,15 @@
+The error message you're seeing is typically due to a problem with the SSL/TLS setup on the server. However, since you're running a local server, it's likely that the problem is with your local setup.
+
+Here are a few things you can try:
+
+1. **Check if your application is running over HTTPS:** If your application is running over HTTP and you're trying to access it over HTTPS, you'll get an SSL protocol error. Try accessing your application over HTTP by going to http://localhost:8080.
+
+2. **Check your application's SSL/TLS configuration:** If your application is supposed to be running over HTTPS, there might be a problem with your SSL/TLS configuration. You'll need to check your application's configuration to make sure it's set up correctly. This might involve checking your Spring Boot configuration, your JHipster configuration, or your application's code.
+
+3. **Check your system's SSL/TLS configuration:** If your application's SSL/TLS configuration is correct, there might be a problem with your system's SSL/TLS configuration. This could be due to a problem with your Java installation, your system's SSL/TLS libraries, or your system's certificate store.
+
+4. **Check if another process is using port 8080:** If another process is using port 8080, your application won't be able to bind to it. You can check if another process is using port 8080 by running `netstat -ano | findstr :8080` in the command prompt. If another process is using port 8080, you'll need to stop it or configure your application to use a different port.
+
+You don't need to install Apache to run a Spring Boot application. Spring Boot includes an embedded server (Tomcat by default), so you don't need to install a separate server.
+
+If none of the above solutions work, please provide more information about your application's configuration and the exact steps you're taking to run your application.

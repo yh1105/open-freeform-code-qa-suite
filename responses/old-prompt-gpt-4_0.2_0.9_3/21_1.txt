@@ -1,0 +1,12 @@
+The error you're encountering is due to the fact that the `ujson` module is not being installed in the correct Python environment. The Python interpreter in Google Colab is not the same as the one installed by Miniconda, so the packages installed by Conda are not available to the Colab environment.
+
+You can install `ujson` directly using pip, which will make it available in the current Colab environment. Here is the corrected code:
+
+```python
+!pip install ujson
+import ujson
+```
+
+If you still want to use Conda for some reason, you need to make sure that the Python interpreter used by the notebook is the one installed by Conda. However, this is not recommended because it can lead to conflicts and unexpected behavior. 
+
+If you want to use Conda packages in Colab, a better approach might be to create a Conda environment, install the packages there, and then use that environment's Python interpreter in the notebook. However, this is a more complex setup and might not be necessary if you just need to install a few packages.

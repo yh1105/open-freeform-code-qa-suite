@@ -1,0 +1,17 @@
+Sure, I can help you with that. Here is a function that converts a `matplotlib.figure.Figure` to a `PIL.Image`:
+
+```python
+from matplotlib import pyplot as plt
+from PIL import Image
+import io
+
+def transform(input: plt.Figure) -> Image:
+    # Convert plt.Figure to PIL.Image
+    buf = io.BytesIO()
+    input.savefig(buf, format='png')
+    buf.seek(0)
+    img = Image.open(buf)
+    return img
+```
+
+This function works by saving the figure to a `BytesIO` object (which is like a file in memory), then opening that object as an image. The `buf.seek(0)` is necessary to reset the position of the `BytesIO` object to the beginning after saving the figure.

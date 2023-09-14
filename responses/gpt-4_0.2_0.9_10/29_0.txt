@@ -1,0 +1,26 @@
+Here's the completed code for the `draw_histogram` function that generates 100,000 data points using `np.random.randn`, plots a histogram with 20 bins, and saves the figure as `figure.pdf`.
+
+```python
+import numpy as np
+from matplotlib import pyplot as plt
+
+def draw_histogram():
+    x = np.random.randn(100000)
+    
+    # Plot the histogram
+    plt.hist(x, bins=20, density=True, alpha=0.6, color='g')
+    
+    # Set the title and labels
+    plt.title('Histogram of Normal Distribution')
+    plt.xlabel('Value')
+    plt.ylabel('Frequency')
+    
+    # Save the figure as 'figure.pdf'
+    plt.savefig('figure.pdf')
+    plt.show()
+
+# Call the function to draw the histogram
+draw_histogram()
+```
+
+This code will generate a histogram of the 100,000 data points from a normal distribution and save the figure as `figure.pdf`.

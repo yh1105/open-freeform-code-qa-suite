@@ -1,0 +1,25 @@
+Sure! Here's the code to split the dataset into training and validation sets:
+
+```
+from torch.utils.data import DataLoader, SubsetRandomSampler
+
+# Set seed for reproducibility
+np.random.seed(42)
+
+# Split dataset into train and validation sets
+dataset_size = len(dataset)
+indices = list(range(dataset_size))
+split = int(np.floor(0.2 * dataset_size))
+np.random.shuffle(indices)
+train_indices, val_indices = indices[split:], indices[:split]
+
+# Define samplers for obtaining training and validation batches
+train_sampler = SubsetRandomSampler(train_indices)
+val_sampler = SubsetRandomSampler(val_indices)
+
+# Define data loaders for training and validation sets
+train_loader = DataLoader(dataset, batch_size=32, sampler=train_sampler)
+validation_loader = DataLoader(dataset, batch_size=32, sampler=val_sampler)
+```
+
+You can adjust the `batch_size` parameter in the `DataLoader` constructor to your desired batch size.

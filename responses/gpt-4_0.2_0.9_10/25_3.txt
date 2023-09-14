@@ -1,0 +1,63 @@
+In React Navigation 5, you can use a callback pattern to achieve this without passing a function as a param. You can use `React.Context` or a state management library like Redux or MobX to manage the state between the parent and child screens. However, I'll show you a simple example using `React.Context`.
+
+First, create a context:
+
+```javascript
+import React from 'react';
+
+const CountryContext = React.createContext();
+
+export default CountryContext;
+```
+
+Wrap your parent component with the `CountryContext.Provider`:
+
+```javascript
+import CountryContext from './CountryContext';
+
+class ParentScreen extends React.Component {
+  state = {
+    country_name: '',
+    country_code: '',
+    calling_code: ''
+  };
+
+  _onSelectCountry = (data) => {
+    this.setState(data);
+  };
+
+  render() {
+    return (
+      <CountryContext.Provider value={{ onSelectCountry: this._onSelectCountry }}>
+        {/* Your parent component code */}
+      </CountryContext.Provider>
+    );
+  }
+}
+```
+
+Now, in your child component, you can use the `useContext` hook to access the `_onSelectCountry` function:
+
+```javascript
+import React, { useContext } from 'react';
+import CountryContext from './CountryContext';
+
+const ChildScreen = ({ navigation }) => {
+  const { onSelectCountry } = useContext(CountryContext);
+
+  const _onPress = (country, country_code, calling_code) => {
+    navigation.goBack();
+    onSelectCountry({
+      country_name: country,
+      country_code: country_code,
+      calling_code: calling_code
+    });
+  };
+
+  return (
+    // Your child component code
+  );
+};
+```
+
+This way, you can update the parent state from the child screen without passing a function as a param.

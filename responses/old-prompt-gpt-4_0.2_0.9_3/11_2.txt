@@ -1,0 +1,12 @@
+In earlier versions of SQL Server where the `TRIM` function is not available, you can use a combination of `LTRIM` and `RTRIM` functions to achieve the same result. `LTRIM` removes leading spaces and `RTRIM` removes trailing spaces.
+
+Here's how you can implement it:
+
+```sql
+DECLARE @ss varchar(60)
+SET @ss = ' admin '
+
+SELECT LTRIM(RTRIM(@ss)) AS TrimmedString
+```
+
+In this code, `LTRIM(RTRIM(@ss))` first applies `RTRIM` to remove any trailing spaces from `@ss`, and then `LTRIM` is applied to remove any leading spaces from the result. The final result is a string without leading or trailing spaces, which is the same as what `TRIM` would return.

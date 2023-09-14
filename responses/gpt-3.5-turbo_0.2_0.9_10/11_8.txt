@@ -1,0 +1,30 @@
+Yes, you can create a custom TRIM function in SQL Server. Here's an example implementation:
+
+```
+CREATE FUNCTION TRIM(@string VARCHAR(8000))
+RETURNS VARCHAR(8000)
+BEGIN
+    WHILE CHARINDEX(' ', @string) = 1
+    BEGIN
+        SET @string = SUBSTRING(@string, 2, LEN(@string))
+    END
+
+    WHILE CHARINDEX(' ', @string, LEN(@string) - 1) = LEN(@string)
+    BEGIN
+        SET @string = SUBSTRING(@string, 1, LEN(@string) - 1)
+    END
+
+    RETURN @string
+END
+```
+
+You can then use this function in your code like this:
+
+```
+DECLARE @ss varchar(60)
+SET @ss = ' admin '
+
+SELECT TRIM(@ss)
+```
+
+This will return 'admin' with no leading or trailing spaces.

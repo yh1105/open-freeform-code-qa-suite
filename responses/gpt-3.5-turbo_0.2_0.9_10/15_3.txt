@@ -1,0 +1,22 @@
+Certainly! Here's an implementation of the `transform` function that should do what you're looking for:
+
+```
+from io import BytesIO
+from matplotlib import pyplot as plt
+from PIL import Image
+
+def transform(input: plt.Figure) -> Image:
+    # Save the figure to an in-memory buffer
+    buf = BytesIO()
+    input.savefig(buf, format='png')
+    buf.seek(0)
+
+    # Open the buffer as an image with PIL
+    img = Image.open(buf)
+
+    return img
+```
+
+This function saves the `Figure` object to an in-memory buffer using the `savefig` method with the `format` parameter set to `'png'`. It then seeks back to the beginning of the buffer and opens it as an image using the `Image.open` method from PIL. Finally, it returns the resulting `Image` object.
+
+Note that this implementation assumes that you want to save the figure as a PNG image. If you want to use a different image format, you'll need to adjust the `format` parameter accordingly.

@@ -1,0 +1,15 @@
+The error message suggests that the Puppeteer library is unable to launch a browser instance. This can happen for a number of reasons, but the most common one is that the required dependencies are not installed on your system.
+
+To fix this issue, you can try the following steps:
+
+1. Install the required dependencies: Puppeteer requires some system-level dependencies to run, such as `libx11-xcb1`, `libxcb1`, `libxcomposite1`, `libxdamage1`, `libxi6`, `libxtst6`, `libnss3`, `libcups2`, `libxss1`, `libxrandr2`, `libasound2`, and `libatk1.0-0`. You can install these dependencies on Ubuntu/Debian using the following command:
+
+   ```
+   sudo apt-get install libx11-xcb1 libxcb1 libxcomposite1 libxdamage1 libxi6 libxtst6 libnss3 libcups2 libxss1 libxrandr2 libasound2 libatk1.0-0
+   ```
+
+   If you are using a different operating system, you can refer to the Puppeteer documentation for the list of required dependencies.
+
+2. Update Puppeteer: Make sure you are using the latest version of Puppeteer by running `npm update puppeteer`.
+
+3. Use a different browser: By default, Puppeteer uses Google Chrome as the browser. If you are having issues with Chrome, you can try using a different browser such as Firefox or Chromium. You can do this by passing the `executablePath` option to the `p

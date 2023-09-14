@@ -1,0 +1,49 @@
+To set up an alias like `@styles` in VSCode, you need to configure both your project's bundler (e.g., Webpack, Parcel, or Create React App) and the `jsconfig.json` or `tsconfig.json` file.
+
+Here's how to do it for a typical Webpack project:
+
+1. Configure Webpack:
+
+Open your `webpack.config.js` file and add the `resolve.alias` configuration:
+
+```javascript
+const path = require('path');
+
+module.exports = {
+  // ...
+  resolve: {
+    alias: {
+      '@styles': path.resolve(__dirname, 'src/styled/index'),
+    },
+  },
+  // ...
+};
+```
+
+Make sure to adjust the path according to your project structure.
+
+2. Configure `jsconfig.json` or `tsconfig.json`:
+
+Create a `jsconfig.json` file in your project's root directory (or modify the existing one) and add the `compilerOptions.paths` configuration:
+
+```json
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@styles": ["src/styled/index"]
+    }
+  },
+  "exclude": ["node_modules", "dist"]
+}
+```
+
+Again, adjust the path according to your project structure.
+
+Now, VSCode should recognize the `@styles` alias and provide IntelliSense for it. You can import it like this:
+
+```javascript
+import { MyStyledComponent } from '@styles';
+```
+
+If you're using a different bundler or setup (e.g., Create React App, Parcel), the configuration might be slightly different. Let me know if you need help with a specific setup.

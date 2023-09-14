@@ -1,0 +1,17 @@
+The `RuntimeError: CUDA error: device-side assert triggered` error occurs when there is an assertion failure in the GPU code. This error is raised by the CUDA runtime to indicate that something went wrong during the execution of a kernel or a device function on the GPU. The assert is there to check for certain conditions that must be true for the code to execute correctly.
+
+To debug this problem, follow these steps:
+
+1. **Identify the kernel or device function causing the error**: Look for any recent changes in your code, specifically in the GPU-related parts. If you have multiple kernels or device functions, try to isolate the one causing the issue by commenting them out one by one and re-running the code.
+
+2. **Check for out-of-bounds memory access**: One common cause of this error is accessing memory outside the allocated range. Make sure that your kernel or device function does not read or write to memory locations beyond the allocated size. Check the indices used in accessing arrays or other memory structures.
+
+3. **Verify the correctness of your kernel launch parameters**: Ensure that the number of threads per block and the number of blocks in the grid are set correctly. Also, make sure that the shared memory size is within the allowed limits.
+
+4. **Inspect the input data**: Check if the input data to the kernel or device function is valid and within the expected range. Invalid or out-of-range data can cause the assert to be triggered.
+
+5. **Enable device-side assert**: By default, device-side asserts are disabled in CUDA. To enable them, compile your code with the `-g` and `-G` flags, and run your program with the environment variable `CUDA_LAUNCH_BLOCKING=1`. This will give you more information about the specific assert that is being triggered and help you pinpoint the issue.
+
+6. **Use a debugger**: If the issue persists, use a CUDA debugger like `cuda-gdb` or NVIDIA Nsight to step through your code and identify the exact location of the assert. This will help you understand the root cause of the problem and fix it.
+
+Remember that the error message might not always point to the exact line of code causing the issue, as the error might be detected at a later point in the execution. Therefore, it is important to carefully inspect your code and follow these debugging steps to identify and fix the problem.

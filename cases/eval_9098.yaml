@@ -2,4 +2,9 @@ id: 9098
 prompt_path: prompt_9098.txt
 type: knowledge question-answering
 lang: php
-grading: {}
+grading:
+  keywords:
+    - php artisan inertia:middleware
+    - $rootView
+    - rootView
+    - index

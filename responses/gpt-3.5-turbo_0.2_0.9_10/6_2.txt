@@ -1,0 +1,15 @@
+It seems like the issue is related to SSL protocol error. This error occurs when the browser is unable to establish a secure connection with the server. 
+
+To resolve this issue, you can try the following steps:
+
+1. Clear your browser cache and cookies and try accessing the app again.
+
+2. Check if the SSL certificate is valid and not expired. If it is expired, you can generate a new SSL certificate and configure it in your application.
+
+3. Check if the SSL configuration is correct in your application. You can check the SSL configuration in the application.properties file.
+
+4. If you are running the application behind a proxy server, make sure that the proxy server is configured correctly.
+
+Regarding the Apache installation, it is not necessary to install Apache to access the app in localhost. The app should be accessible through the localhost URL without any additional configuration.
+
+Regarding the port issue, it seems like the port 8080 is already in use by another process. You can try changing the port number in the application.properties file and restart the application.

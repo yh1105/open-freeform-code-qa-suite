@@ -1,0 +1,10 @@
+Sure, you can use a combination of LTRIM and RTRIM functions to achieve the same result as TRIM in earlier versions of SQL Server. Here's the modified code:
+
+```sql
+DECLARE @ss varchar(60)
+SET @ss = ' admin '
+
+SELECT LTRIM(RTRIM(@ss)) AS TrimmedValue
+```
+
+This code will remove both leading and trailing spaces from the `@ss` variable.

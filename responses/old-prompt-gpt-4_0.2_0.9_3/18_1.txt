@@ -1,0 +1,29 @@
+This issue is likely due to the Go tools not being able to find the package. Here are a few steps you can take to resolve this:
+
+1. **Install the package**: If you haven't installed the package, you can do so by running the following command in your terminal:
+
+```bash
+go get github.com/gomodule/redigo/redis
+```
+
+2. **Update the package**: If the package is already installed, it might be outdated. You can update it by running:
+
+```bash
+go get -u github.com/gomodule/redigo/redis
+```
+
+3. **Check your GOPATH and GOROOT**: Make sure your `GOPATH` and `GOROOT` environment variables are set correctly. `GOROOT` is where Go is installed, and `GOPATH` is where your Go projects live. You can check these by running `echo $GOPATH` and `echo $GOROOT` in your terminal.
+
+4. **Check your Go version**: Make sure you're using a version of Go that's compatible with the package. You can check your Go version by running `go version` in your terminal.
+
+5. **Reload VSCode**: Sometimes, VSCode might not pick up changes immediately. Try reloading VSCode to see if the error persists.
+
+6. **Check your import statement**: Make sure you're importing the package correctly in your Go files. The import statement should look like this:
+
+```go
+import (
+    "github.com/gomodule/redigo/redis"
+)
+```
+
+7. **Reinstall Go tools**: If none of the above steps work, you might need to reinstall

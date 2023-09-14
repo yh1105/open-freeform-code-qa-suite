@@ -1,0 +1,13 @@
+There are no official or semi-official guidelines specifically addressing getter and setter naming conventions after Java 14. However, it's recommended to follow the existing Java Bean naming conventions (i.e., `getName()`, `setName()`) for consistency in your codebase, especially when dealing with non-record classes.
+
+For records, you can use the automatically generated accessor methods (e.g., `person.name()`). If you want to maintain consistency with the Java Bean naming convention, you can create additional methods in the record that follow the convention:
+
+```java
+record Person(String name) {
+    public String getName() {
+        return name();
+    }
+}
+```
+
+This way, you can use both `person.name()` and `person.getName()` in your code.

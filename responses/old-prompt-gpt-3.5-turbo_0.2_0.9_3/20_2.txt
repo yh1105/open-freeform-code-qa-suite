@@ -1,0 +1,13 @@
+I'm sorry to hear that you lost your work. It's always a good idea to save your work frequently, especially when working with Jupyter Notebook.
+
+Regarding the error message you saw, it's difficult to say without more information. However, it's possible that the error message was related to a kernel error, which can occur when there's an issue with the Python kernel that Jupyter Notebook uses to run code. If this is the case, it's possible that the kernel was not able to save your work properly.
+
+As for recovering your work, there are a few things you can try:
+
+1. Check the Jupyter Notebook autosave directory: By default, Jupyter Notebook autosaves your work to a directory called `autosave/` in the same directory as your notebook. You can check if there are any autosave files in this directory that contain your work.
+
+2. Check the Jupyter Notebook backup directory: Jupyter Notebook also creates backup files of your notebook in a directory called `.ipynb_checkpoints/` in the same directory as your notebook. You can check if there are any backup files in this directory that contain your work.
+
+3. Use a file recovery tool: If the above options don't work, you can try using a file recovery tool to recover the deleted or lost files. There are many file recovery tools available for MacOS, such as Disk Drill, EaseUS Data Recovery Wizard, and Stellar Data Recovery.
+
+I hope one of these options helps you recover your work. In the future, it's a good idea to save your work frequently and make backups of important files.

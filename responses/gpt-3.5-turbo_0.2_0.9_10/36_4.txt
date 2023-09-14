@@ -1,0 +1,20 @@
+The exception message suggests that you are missing the `spring-cloud-starter-netflix-ribbon` dependency. Although you have mentioned that you have already added it to your `pom.xml`, it is possible that there is some issue with the dependency resolution.
+
+You can try the following steps to resolve the issue:
+
+1. Check if the `spring-cloud-starter-netflix-ribbon` dependency is present in your local Maven repository. You can navigate to the `.m2/repository` folder in your system and search for the dependency.
+
+2. If the dependency is not present, try deleting the `.m2/repository` folder and rebuilding your project. This will force Maven to download all the dependencies again.
+
+3. If the dependency is present, try running the `mvn clean install` command to rebuild your project and resolve any dependency issues.
+
+4. If the issue still persists, try adding the `spring-cloud-starter-netflix-eureka-client` dependency to your `pom.xml`. This should ensure that the Feign client is able to discover the service instance using Eureka.
+
+```
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+</dependency>
+```
+
+5. If none of the above steps work, try upgrading your Spring Boot version to the latest stable release and see if the issue is resolved.

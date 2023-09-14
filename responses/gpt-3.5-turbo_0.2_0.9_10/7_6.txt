@@ -1,0 +1,26 @@
+Yes, I can help you with that. The error message is telling you that you are trying to copy a file to a folder that already exists. You need to specify the full path of the destination file, not just the folder.
+
+Here's the completed function:
+
+```python
+from shutil import copyfile
+
+def copy_from_file_list(fileList, destFolder):
+    for item in fileList:
+        # Get the filename from the full path
+        filename = item[0].split("/")[-1]
+        # Create the full path of the destination file
+        destFile = destFolder + "/" + filename
+        # Copy the file
+        copyfile(item[0], destFile)
+```
+
+This function takes in the `fileList` and `destFolder` as parameters. It loops through each item in the `fileList`, gets the filename from the full path, creates the full path of the destination file by concatenating the `destFolder` and the filename, and then copies the file using `copyfile()`.
+
+You can call this function like this:
+
+```python
+copy_from_file_list(fileList, "/Users/username/Desktop/testPhotos")
+```
+
+This will copy all the files in `fileList` to the `testPhotos` folder on your desktop.

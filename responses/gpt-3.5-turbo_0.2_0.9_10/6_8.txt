@@ -1,0 +1,15 @@
+It seems like the issue is related to SSL protocol error. This error occurs when the browser is unable to establish a secure connection with the server. 
+
+You can try accessing the application using http instead of https by typing `http://localhost:8080` in the browser. If this works, then the issue is related to SSL configuration in your application.
+
+If you still want to access the application using https, then you need to configure SSL in your application. You can follow the steps mentioned in this [link](https://www.baeldung.com/spring-boot-https-self-signed-certificate) to configure SSL in your Spring Boot application.
+
+Regarding the Apache installation, it is not required to access the application in localhost. The application can be accessed using the localhost URL without any web server like Apache. 
+
+Regarding the port issue, it seems like the port 8080 is already in use by another process. You can try stopping the process that is using port 8080 or you can change the port number in your application by modifying the `application.properties` file. You can add the following line to change the port number to 9090:
+
+```
+server.port=9090
+``` 
+
+Then, you can access the application using `http://localhost:9090`.

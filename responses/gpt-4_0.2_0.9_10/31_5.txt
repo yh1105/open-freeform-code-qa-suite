@@ -1,0 +1,13 @@
+Yes, you can use the personal access token to clone, commit, and push. Here's a brief version of your example:
+
+```
+cd /tmp
+git clone https://<username>:<personal_access_token>@github.com/<username>/<project_name>.git
+cd <project_name>
+# Make changes to the files
+git add .
+git commit -m 'Your commit message'
+git push https://<username>:<personal_access_token>@github.com/<username>/<project_name>.git master
+```
+
+Replace `<username>`, `<personal_access_token>`, and `<project_name>` with your actual values.

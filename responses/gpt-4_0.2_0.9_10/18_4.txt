@@ -1,0 +1,36 @@
+This issue might be caused by a few reasons, such as incorrect Go environment setup, missing dependencies, or issues with the Go extension in VSCode. Here are some steps to help you resolve the issue:
+
+1. **Check your Go environment**:
+   Make sure your `GOPATH` and `GOROOT` environment variables are set correctly. You can check them by running the following commands in your terminal:
+
+   ```bash
+   echo $GOPATH
+   echo $GOROOT
+   ```
+
+   If they are not set, you can set them in your `.bashrc`, `.bash_profile`, or `.zshrc` file (depending on your shell) like this:
+
+   ```bash
+   export GOPATH=$HOME/go
+   export GOROOT=/usr/local/go
+   ```
+
+   Replace the paths with the correct ones for your system.
+
+2. **Install the Redigo package**:
+   Make sure the Redigo package is installed in your `GOPATH`. You can install it by running:
+
+   ```bash
+   go get -u github.com/gomodule/redigo/redis
+   ```
+
+3. **Reload VSCode**:
+   Sometimes, the issue might be caused by the Go extension in VSCode. Try reloading the window by pressing `Ctrl+Shift+P` (or `Cmd+Shift+P` on macOS) to open the command palette, then type "Reload Window" and press Enter.
+
+4. **Check your Go extension settings**:
+   Make sure the Go extension is using the correct `GOPATH` and `GOROOT`. Open your VSCode settings (File > Preferences > Settings or `Ctrl+,`), search for "Go:", and check the values for `Go: Gopath` and `Go: Goroot`. Make sure they match the values you set in your environment.
+
+5. **Update your Go tools**:
+   It's possible that your Go tools are outdated. You can update them by pressing `Ctrl+Shift+P` (or `Cmd+Shift+P` on macOS) to open the command palette, then type "Go: Install/Update Tools" and press Enter. Select all the tools and click "OK" to update them.
+
+After trying these steps, the issue should be resolved, and you should get IntelliSense suggestions for the Redigo package in VSCode.

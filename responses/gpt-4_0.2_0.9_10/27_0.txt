@@ -1,0 +1,39 @@
+To use Angular Flex-Layout in your `login-view` component, you need to follow these steps:
+
+1. Make sure you have imported the `FlexLayoutModule` in your `app.module.ts` (which you have already done).
+
+2. In your `login-view` component's HTML file, use the Flex-Layout directives to create your layout. Here's a basic example:
+
+```html
+<!-- login-view.component.html -->
+<div fxLayout="column" fxLayoutAlign="center center">
+  <h1>Login</h1>
+  <form>
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input matInput type="email" required>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input matInput type="password" required>
+    </mat-form-field>
+    <button mat-raised-button color="primary">Login</button>
+  </form>
+</div>
+```
+
+In this example, I used the `fxLayout` directive to set the layout direction to `column`, and the `fxLayoutAlign` directive to align the content to the center both horizontally and vertically.
+
+3. If you want to apply custom styles to your `login-view` component, you can do so in the component's CSS file:
+
+```css
+/* login-view.component.css */
+:host {
+  display: flex;
+  height: 100vh;
+}
+```
+
+This will make the `login-view` component take up the full height of the viewport.
+
+Now, your `login-view` component should be using Angular Flex-Layout. If you still face any issues, please provide more information about your `login-view` component, such as its HTML and CSS files, and any error messages you might be encountering.

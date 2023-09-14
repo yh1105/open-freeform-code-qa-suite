@@ -1,0 +1,24 @@
+The error message suggests that the application is trying to use Ribbon for client-side load balancing, but the required dependencies are not found. Ribbon is a client-side load balancer that works well with Spring Cloud and service discovery tools like Eureka.
+
+Although you mentioned that you have added the Ribbon dependency and it didn't help, please ensure that you have added the correct dependency. Here is the correct Ribbon dependency:
+
+```xml
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
+</dependency>
+```
+
+If you have already added this dependency and still facing the issue, then there might be a problem with the Ribbon configuration or it might be a compatibility issue.
+
+Since you are using Spring Boot 2.0.8, you should use the Spring Cloud version compatible with it. For Spring Boot 2.0.x, the compatible Spring Cloud version is Finchley.
+
+Also, ensure that you have `@EnableDiscoveryClient` annotation in your main application class to enable service discovery which is required for Ribbon to work.
+
+If you don't want to use Ribbon and want to disable it, you can do so by setting the following property in your `application.properties` or `application.yml` file:
+
+```properties
+feign.ribbon.enabled=false
+```
+
+This will disable Ribbon and the application will no longer try to use Ribbon for load balancing.

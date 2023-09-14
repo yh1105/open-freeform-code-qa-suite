@@ -1,0 +1,17 @@
+The error message you're seeing is typically associated with a problem related to SSL/TLS, which are protocols used for securing network connections. 
+
+Given that you're trying to access your application over HTTPS (as indicated by the `https://` in the URL), it's likely that your application is configured to use SSL/TLS. However, for some reason, the SSL/TLS handshake between your browser and the application is failing, which is why you're seeing this error.
+
+Here are a few things you can try to resolve this issue:
+
+1. **Check your application's SSL/TLS configuration**: Ensure that your application is correctly configured to use SSL/TLS. This would typically involve specifying the path to a keystore file that contains the SSL/TLS certificate and private key for your application. If you're not sure how to do this, you can refer to the Spring Boot documentation on how to configure SSL/TLS.
+
+2. **Try accessing the application over HTTP**: If your application is running in a development environment and you don't need the connection to be secured, you can try accessing the application over HTTP instead of HTTPS. To do this, simply replace `https://` with `http://` in the URL.
+
+3. **Check if the port is already in use**: Although you mentioned that port 8080 is being used by `java.exe`, it's worth double-checking if this is the case. If another application is already using port 8080, this could be causing the issue. You can check which application is using a particular port by running the following command in the command prompt: `netstat -ano | findstr :8080`.
+
+4. **Try using a different port**: If port 8080 is already in use, you can try configuring your application to use a different port. You can do this by adding the following line to your `application.properties` file: `server.port = 8081` (replace `8081` with the desired port number).
+
+5. **Disable SSL/TLS in your application**: If you're running your application in a development environment and don't need the connection to be secured, you can try disabling SSL/TLS in your application. This would involve removing or commenting out any SSL/TLS-related configuration in your `application.properties` file.
+
+Remember, you don't need to install Apache to run a Spring Boot application. Spring Boot comes with an embedded Tomcat server, so you can run your application without

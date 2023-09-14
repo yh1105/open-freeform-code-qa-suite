@@ -1,0 +1,10 @@
+This error message usually occurs when the Go module cache is corrupted or outdated. To solve this issue, you can try the following steps:
+
+1. Open a terminal and navigate to your project directory.
+2. Run the command `go clean -modcache` to clean the Go module cache.
+3. Run the command `go mod tidy` to update the Go module dependencies.
+4. Restart VSCode and try importing the package again.
+
+If the issue persists, you can try updating the Redigo package to the latest version by running the command `go get -u github.com/gomodule/redigo/redis`. This will update the package to the latest version and also update the Go module cache.
+
+If none of the above steps work, you can try deleting the `go.mod` and `go.sum` files from your project directory and running `go mod init` to recreate them. This will create a new Go module and update the dependencies.

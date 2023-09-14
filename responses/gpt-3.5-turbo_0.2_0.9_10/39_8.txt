@@ -1,0 +1,15 @@
+It seems like Xcode is unable to find the required libraries for your project. Here are some additional steps you can try:
+
+1. Check if the library paths mentioned in the error message actually exist on your system. If not, you may need to update your project settings to point to the correct paths.
+
+2. Check if the libraries are actually installed on your system. You can do this by running `pod list` in your project directory and checking if the required libraries are listed.
+
+3. Try cleaning your project by deleting the `DerivedData` folder. You can do this by going to `Xcode -> Preferences -> Locations` and clicking on the arrow next to `Derived Data`. Then, delete the folder for your project.
+
+4. Try deleting the `Podfile.lock` file and running `pod install` again.
+
+5. Check if there are any conflicting library versions in your project. You can do this by running `pod outdated` in your project directory.
+
+6. Try updating Xcode to the latest version.
+
+Hopefully, one of these steps will help resolve the issue.

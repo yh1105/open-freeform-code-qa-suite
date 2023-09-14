@@ -1,0 +1,3 @@
+There are no official guidelines specifically addressing getter and setter naming conventions after Java 14. However, the general consensus is to continue using the JavaBean naming conventions (i.e., `getName()` and `setName()`) for regular classes, and use the shorter syntax (i.e., `name()`) for records.
+
+This approach maintains consistency within each type of class (regular vs. record) and allows for a clear distinction between them.

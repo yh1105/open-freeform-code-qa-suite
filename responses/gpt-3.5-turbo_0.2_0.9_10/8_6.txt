@@ -1,0 +1,26 @@
+Sure! Here's a function that should do what you're looking for:
+
+```javascript
+function convertToUTC(date) {
+  // Get the timezone offset in minutes
+  var timezoneOffset = date.getTimezoneOffset();
+
+  // Convert the offset to milliseconds and add it to the timestamp
+  var timestamp = date.getTime() + (timezoneOffset * 60 * 1000);
+
+  // Create a new Date object using the adjusted timestamp
+  var utcDate = new Date(timestamp);
+
+  // Return the UTC date object
+  return utcDate;
+}
+```
+
+To use this function, simply pass in a Date object with the date and time in the local timezone:
+
+```javascript
+var localDate = new Date(); // Current date and time in local timezone
+var utcDate = convertToUTC(localDate); // Convert to UTC
+```
+
+The `utcDate` variable will now contain a Date object with the equivalent date and time in UTC.

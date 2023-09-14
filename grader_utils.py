@@ -37,7 +37,7 @@ def keyword_match(rule: Union[str, dict], to_lower: bool, regex: bool, response:
             # available variables:
             #   context: ["unmatch", "match", "match", ....]
             #   ans: current judged sat status in bool
-            ans = eval(rule['cond'])
+            ans = ans and eval(rule['cond'])
         return ans
 
 @njit
@@ -150,6 +150,9 @@ def unit_test_execution(lang: str, response: str, unit_tests: list[str, dict], c
     for no, unit_test in enumerate(unit_tests):
         prefix = ''
         weight = 1.0
+        prefix_from_file = ''
+        timeout = None
+        clean_up_code = ''
         if isinstance(unit_test, str):
             reference = unit_test
         else:
@@ -160,16 +163,30 @@ def unit_test_execution(lang: str, response: str, unit_tests: list[str, dict], c
                 assert 'content' in unit_test
                 reference = unit_test['content']
             prefix = unit_test.get('prefix', '')
+            prefix_path = unit_test.get('prefix_path', None)
+            timeout = unit_test.get('timeout', None)
+            if prefix_path is not None:
+                with open(os.path.join(case_dir, prefix_path), 'r') as f:
+                    prefix_from_file = f.read()
+            if 'cleanup_path' in unit_test:
+                with open(os.path.join(case_dir, unit_test['cleanup_path']), 'r') as f:
+                    clean_up_code = f.read()
             weight = unit_test.get('weight', 1.0)
         combined_response = prefix + response
 
         tot_score += weight
 
         preprocessed_code = preprocess([combined_response], lang)
-        exec_passks, exec_details = get_exec_results(preprocessed_code, reference, lang)
+        exec_passks, exec_details, code = get_exec_results(prefix_from_file, preprocessed_code, reference, lang, timeout)
+
+        # cleanup
+        if len(clean_up_code) > 0:
+            exec(clean_up_code)
 
         now_score += float(exec_passks['pass@1']) * weight
-        grading_details.append(exec_details[0][0])
+        now_grading_detail = exec_details[0][0][1]
+        now_grading_detail['code'] = code
+        grading_details.append(now_grading_detail)
 
     return now_score, tot_score, grading_details
 
@@ -189,7 +206,7 @@ def similarity_assessment(response: str, similarity_metrics: list[dict], case_di
             else:
                 with open(os.path.join(case_dir, item['path']), 'r') as f:
                     passages.append(f.read())
-        results = rouge.compute(predictions=[response], references=passages)
+        results = rouge.compute(predictions=[response], references=[passages])
         results = dict([(k, float(v)) for k, v in results.items()])
         raw_score = results[metric['metric']]
 

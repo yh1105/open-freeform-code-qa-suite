@@ -1,0 +1,60 @@
+In React Navigation 5, you can use the `useCallback` hook to create a callback function and pass it as a param. However, to avoid the warning about serializing params, you can use a different approach by using React context or a state management library like Redux or MobX.
+
+Here's an example using React context:
+
+1. Create a context for the parent state:
+
+```javascript
+import React from 'react';
+
+const ParentContext = React.createContext();
+
+export default ParentContext;
+```
+
+2. Wrap your parent component with the context provider and pass the state and the update function:
+
+```javascript
+import React, { useState } from 'react';
+import ParentContext from './ParentContext';
+
+const ParentScreen = () => {
+  const [countryData, setCountryData] = useState({});
+
+  return (
+    <ParentContext.Provider value={{ countryData, setCountryData }}>
+      {/* Your parent component content */}
+    </ParentContext.Provider>
+  );
+};
+
+export default ParentScreen;
+```
+
+3. In the child component, use the `useContext` hook to access the parent state and update function:
+
+```javascript
+import React, { useContext } from 'react';
+import ParentContext from './ParentContext';
+
+const ChildScreen = () => {
+  const { countryData, setCountryData } = useContext(ParentContext);
+
+  const _onPress = (country, country_code, calling_code) => {
+    setCountryData({
+      country_name: country,
+      country_code: country_code,
+      calling_code: calling_code,
+    });
+    navigation.goBack();
+  };
+
+  return (
+    // Your child component content
+  );
+};
+
+export default ChildScreen;
+```
+
+This way, you can update the parent state from the child component without passing functions as params.

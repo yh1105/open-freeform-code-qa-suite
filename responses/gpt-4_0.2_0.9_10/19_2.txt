@@ -1,0 +1,56 @@
+The error message `EMFILE: too many open files, watch` means that the number of files that the system's kernel is trying to watch is exceeding the limit. This is a common issue on systems with a lot of files and a low limit set for file watchers.
+
+You can increase the limit of file watchers in your system to solve this issue. Here is how you can do it:
+
+**For Linux:**
+
+1. Check the current limit on your system:
+
+```bash
+cat /proc/sys/fs/inotify/max_user_watches
+```
+
+2. To increase the limit to a higher number (like 524288), use the following command:
+
+```bash
+echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf
+```
+
+3. Then run this command to apply the change:
+
+```bash
+sudo sysctl -p
+```
+
+**For macOS:**
+
+1. Check the current limit on your system:
+
+```bash
+launchctl limit maxfiles
+```
+
+2. To increase the limit, you can use the following commands:
+
+```bash
+sudo launchctl limit maxfiles 524288 524288
+sudo sysctl -w kern.maxfiles=524288
+```
+
+**For Windows:**
+
+Windows does not have a built-in command to increase the limit of file watchers. However, you can use a package like `chokidar-cli` to watch files in your project. Install it using the following command:
+
+```bash
+npm install -g chokidar-cli
+```
+
+Then, in your `package.json`, change your start script to use `chokidar-cli`. Here's an example:
+
+```json
+"scripts": {
+  "start": "chokidar '**/*.js' -c 'npm run build'"
+}
+```
+
+This will watch all `.js` files in your project and run `npm run build` whenever a file changes.

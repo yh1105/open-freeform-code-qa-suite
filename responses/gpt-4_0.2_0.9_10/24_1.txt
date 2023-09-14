@@ -1,0 +1,11 @@
+There are no official guidelines specifically for naming getters and setters after Java 14. However, you can follow these general recommendations:
+
+1. For new code using records, stick to the record conventions, i.e., `person.name()`.
+
+2. For existing JavaBeans, continue using the JavaBean convention, i.e., `getName()` and `setName()`.
+
+3. When working with a mixed codebase, try to be consistent within each class or module. If you need to interact between JavaBeans and records, consider using adapter patterns or utility methods to bridge the naming differences.
+
+4. If you find records too limited, you can continue using the JavaBean convention for new code as well. This will maintain consistency across your codebase.
+
+Remember, consistency and readability are key. Choose a convention that works best for your team and project.

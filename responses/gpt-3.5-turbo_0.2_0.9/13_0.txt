@@ -1,7 +1,0 @@
-In SwiftUI, a List is a container view that displays a scrollable list of rows, while ForEach is a view that iterates over a collection of data and creates a view for each element in the collection.
-
-A List is typically used to display a collection of data in a scrollable list, where each row in the list represents an item in the collection. You can customize the appearance of each row using the ListRowBackground modifier and add swipe actions to each row using the swipeActions modifier.
-
-On the other hand, ForEach is used to create a view for each element in a collection of data. You can use it to create a list of views, or to create a grid of views, or to create any other layout that requires iterating over a collection of data.
-
-In summary, List is a container view that displays a scrollable list of rows, while ForEach is a view that iterates over a collection of data and creates a view for each element in the collection. You can use List to display a collection of data in a scrollable list, and you can use ForEach to create a list of views or any other layout that requires iterating over a collection of data.

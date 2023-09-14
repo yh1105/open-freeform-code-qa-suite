@@ -1,0 +1,25 @@
+Swagger Codegen is a powerful tool that allows you to generate server stubs, client SDKs, and API documentation from your OpenAPI Specification. Here's a step-by-step guide on how to generate a REST client using Swagger Codegen:
+
+1. **Install Swagger Codegen**: If you haven't installed Swagger Codegen yet, you can do so by using Homebrew if you're on a Mac:
+
+    ```bash
+    brew install swagger-codegen
+    ```
+
+    If you're on Windows, you can download the JAR file directly from its GitHub repository.
+
+2. **Get the Swagger Specification for your API**: You need to have the Swagger specification for your API. This is usually a JSON or YAML file that describes your API according to the OpenAPI specification.
+
+3. **Generate the Client Code**: Use the following command to generate the client code:
+
+    ```bash
+    swagger-codegen generate -i /path/to/swagger.json -l java -o /path/to/output
+    ```
+
+    Replace `/path/to/swagger.json` with the path to your Swagger specification file, `java` with the language you want to generate the client in, and `/path/to/output` with the directory where you want the generated code to be placed.
+
+    Swagger Codegen supports a wide range of languages including Java, Python, Ruby, PHP, C#, Node.js, and many others.
+
+4. **Build and Use the Generated Client**: The generated code includes a library for your API and also includes a README.md with instructions on how to build and use it.
+
+Remember that Swagger Codegen is a tool to generate boilerplate code. The generated code

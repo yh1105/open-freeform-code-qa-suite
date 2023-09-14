@@ -1,0 +1,62 @@
+Here's the completed function using `plotly.graph_objects`:
+
+```python
+import plotly.graph_objects as go
+
+def plot_confusion_matrix(matrix: list[list[int]], x_labels: list[str], y_labels: list[str]):
+    # Create the heatmap
+    heatmap = go.Heatmap(
+        x=x_labels,
+        y=y_labels,
+        z=matrix,
+        colorscale='Viridis',
+        showscale=True
+    )
+
+    # Create the annotations
+    annotations = []
+    for i, row in enumerate(matrix):
+        for j, value in enumerate(row):
+            annotations.append(
+                go.layout.Annotation(
+                    text=str(value),
+                    x=x_labels[j],
+                    y=y_labels[i],
+                    xref='x1',
+                    yref='y1',
+                    showarrow=False,
+                    font=dict(size=14, color='white')
+                )
+            )
+
+    # Create the layout
+    layout = go.Layout(
+        title='Confusion Matrix',
+        xaxis=dict(title='Predicted', side='bottom'),
+        yaxis=dict(title='Actual', autorange='reversed'),
+        annotations=annotations
+    )
+
+    # Create the figure
+    fig = go.Figure(data=[heatmap], layout=layout)
+
+    return fig
+```
+
+You can use this function to create a confusion matrix plot and display it using `plotly`:
+
+```python
+# Example usage
+matrix = [
+    [10, 2, 3],
+    [4, 15, 6],
+    [7, 8, 9]
+]
+x_labels = ['A', 'B', 'C']
+y_labels = ['A', 'B', 'C']
+
+fig = plot_confusion_matrix(matrix, x_labels, y_labels)
+fig.show()
+```
+
+This will create a heatmap with the given confusion matrix and display it with the specified labels. The annotations will show the exact number of corresponding matrix cell values.

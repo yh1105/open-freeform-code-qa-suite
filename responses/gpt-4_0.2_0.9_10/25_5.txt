@@ -1,0 +1,79 @@
+In React Navigation 5, you can achieve this by using React Context or a state management library like Redux or MobX. However, I'll show you how to do it using React Context.
+
+First, create a context for your parent screen:
+
+```javascript
+import React from 'react';
+
+const ParentScreenContext = React.createContext();
+
+export default ParentScreenContext;
+```
+
+Wrap your parent screen with the context provider:
+
+```javascript
+import ParentScreenContext from './ParentScreenContext';
+
+class ParentScreen extends React.Component {
+  state = {
+    country_name: '',
+    country_code: '',
+    calling_code: ''
+  };
+
+  _onSelectCountry = (data) => {
+    this.setState(data);
+  };
+
+  render() {
+    return (
+      <ParentScreenContext.Provider value={this._onSelectCountry}>
+        {/* Your parent screen components */}
+        <TouchableOpacity
+          style={styles.countrySelector}
+          activeOpacity={0.7}
+          onPress={() =>
+            this.props.navigation.navigate('CountrySelect', {
+              countryCode: this.state.country_code
+            })
+          }
+        >
+          {/* Your TouchableOpacity content */}
+        </TouchableOpacity>
+      </ParentScreenContext.Provider>
+    );
+  }
+}
+```
+
+Now, in your child screen, you can access the `_onSelectCountry` function from the context:
+
+```javascript
+import React, { useContext } from 'react';
+import ParentScreenContext from './ParentScreenContext';
+
+class ChildScreen extends React.Component {
+  _onPress = (country, country_code, calling_code) => {
+    const { navigation } = this.props;
+    const onSelectCountry = this.context;
+
+    navigation.goBack();
+    onSelectCountry({
+      country_name: country,
+      country_code: country_code,
+      calling_code: calling_code
+    });
+  };
+
+  render() {
+    // Your child screen components
+  }
+}
+
+ChildScreen.contextType = ParentScreenContext;
+
+export default ChildScreen;
+```
+
+This way, you can pass the `_onSelectCountry` function from the parent screen to the child screen without passing it through navigation params, and update the parent screen state when needed.

@@ -1,0 +1,20 @@
+You can use the following function to get the screen height in API level 30 and above:
+
+```kotlin
+fun getWidthHeight(wm: WindowManager): Int {
+    val windowMetrics = wm.currentWindowMetrics
+    val windowInsets: WindowInsets = windowMetrics.windowInsets
+
+    val insets = windowInsets.getInsetsIgnoringVisibility(WindowInsets.Type.navigationBars() or WindowInsets.Type.displayCutout())
+    val insetsHeight = insets.top + insets.bottom
+
+    val b = windowMetrics.bounds
+    val orig_height = b.height()
+
+    // Calculate the actual screen height by subtracting the insets height from the original height
+    val screenHeight = orig_height - insetsHeight
+    return screenHeight
+}
+```
+
+This function first gets the `WindowMetrics` and `WindowInsets` from the `WindowManager`. Then, it calculates the height of the insets (such as navigation bars and display cutouts) and subtracts it from the original height of the window bounds to get the actual screen height. Finally, it returns the calculated screen height.

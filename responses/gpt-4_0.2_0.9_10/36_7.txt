@@ -1,0 +1,26 @@
+The error message you're seeing suggests that your application is expecting to use Ribbon for load balancing with Feign, but it can't find the necessary Ribbon classes. This is likely because you haven't included the `spring-cloud-starter-netflix-ribbon` dependency in your `pom.xml`.
+
+You mentioned that you have tried adding the Ribbon dependency, but it didn't help. It's possible that there might be a version mismatch issue or some other configuration problem.
+
+Here's the dependency you should add to your `pom.xml`:
+
+```xml
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
+</dependency>
+```
+
+If adding the Ribbon dependency doesn't solve the problem, you might want to check the following:
+
+1. Make sure you're using compatible versions of Spring Boot, Spring Cloud, and the Netflix OSS components. You can check the [Spring Cloud Release Train](https://spring.io/projects/spring-cloud#overview) page for compatibility information.
+
+2. Check your application's configuration. If you're using Ribbon, you should have a `@RibbonClient` annotation somewhere in your code, and you might need to configure a `@LoadBalanced` `RestTemplate` bean.
+
+3. If you're not actually intending to use Ribbon, you might need to adjust your configuration to use a different load balancing strategy. For example, if you're using Spring Cloud's DiscoveryClient abstraction, you might need to include the `spring-cloud-starter-netflix-eureka-client` dependency instead of the Ribbon one.
+
+4. If you're using Spring Cloud OpenFeign, make sure you have `@EnableFeignClients` in your main application class or a configuration class.
+
+5. Make sure the service name in your `@FeignClient` annotation matches the name of the service you're trying to call. The service name is case-sensitive and should match exactly the name registered with your service discovery server.
+
+6. If you're using Spring Cloud OpenFeign, you might need to set `spring.cloud.loadbalancer.ribbon.enabled=false` in your `application.properties` or `application.yml` file to disable Ribbon.

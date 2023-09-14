@@ -1,0 +1,15 @@
+It seems like the issue is related to SSL/TLS configuration. Your application is trying to serve content over HTTPS, but there might be a problem with the SSL certificate or configuration. Here are a few steps you can try to resolve the issue:
+
+1. Check your application configuration files (e.g., `application.yml` or `application.properties`) and look for any SSL/TLS related settings. Make sure the settings are correct, and the paths to the SSL certificate and key files are valid.
+
+2. If you are using a self-signed certificate, you might need to add it to your browser's trusted certificates list or accept the security warning when accessing the site.
+
+3. If you don't need HTTPS for local development, you can try disabling SSL/TLS in your application configuration. Look for settings like `server.ssl.enabled` and set it to `false`.
+
+4. If you suspect a port issue, try changing the port your application is running on. In your application configuration, look for a setting like `server.port` and change it to a different value (e.g., `8081`). Then, update the URL in your browser accordingly.
+
+5. Make sure you have the latest version of Java installed on your new computer. You can check your Java version by running `java -version` in the command prompt.
+
+6. If none of the above steps work, you can try running your application with the `--debug` flag to get more detailed logs. This might help you identify the issue. For example, run `./mvnw spring-boot:run --debug` or `mvnw.cmd spring-boot:run --debug`, depending on your operating system.
+
+Note that you don't need to install Apache for running a Spring Boot application, as it comes with an embedded web server (Tomcat, by default).

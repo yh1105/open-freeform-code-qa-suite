@@ -1,0 +1,60 @@
+In Flutter, the `BottomNavigationBar` widget doesn't provide a direct way to change its height. The height is determined by the Material Design specifications, which Flutter adheres to.
+
+However, you can create a custom widget that mimics the behavior of `BottomNavigationBar` and allows you to customize the height. Here's a simple example:
+
+```dart
+class CustomNavigationBar extends StatelessWidget {
+  final List<BottomNavigationBarItem> items;
+  final double height;
+  final ValueChanged<int> onTap;
+  final int currentIndex;
+
+  CustomNavigationBar({
+    @required this.items,
+    @required this.height,
+    @required this.onTap,
+    @required this.currentIndex,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: height,
+      child: Row(
+        children: items.map((item) {
+          var index = items.indexOf(item);
+          return Expanded(
+            child: GestureDetector(
+              onTap: () => onTap(index),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  IconTheme(
+                    data: IconThemeData(
+                      color: currentIndex == index
+                          ? Theme.of(context).primaryColor
+                          : Theme.of(context).textTheme.caption.color,
+                    ),
+                    child: item.icon,
+                  ),
+                  Text(
+                    item.label,
+                    style: TextStyle(
+                      color: currentIndex == index
+                          ? Theme.of(context).primaryColor
+                          : Theme.of(context).textTheme.caption.color,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        }).toList(),
+      ),
+    );
+  }
+}
+```
+
+You can use

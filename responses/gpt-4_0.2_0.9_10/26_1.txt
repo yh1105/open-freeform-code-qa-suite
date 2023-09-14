@@ -1,0 +1,54 @@
+The issue you're facing is because the `setup` function is only called once when the component is created. When the route changes, the `setup` function is not called again, so the user data is not updated.
+
+To fix this issue, you can use a `watch` to observe changes in the route params and update the user data accordingly. Also, you should move the user finding logic and redirection inside the `watch` function.
+
+Here's the updated code:
+
+```html
+<template>
+  <div>{{username}}</div>
+</template>
+
+<script lang="ts">
+import { computed, defineComponent, ref, getCurrentInstance, watch } from '@vue/composition-api';
+
+export const useUsername = ({ user }) => {
+  return { username: user.name };
+};
+
+export default defineComponent({
+  setup(props, { root }) {
+    const vm = getCurrentInstance();
+
+    const userToLoad = computed(() => root.$route.params.userId);
+    const listOfUsers = [
+      { userId: 1, name: 'user1' },
+      { userId: 2, name: 'user2' },
+    ];
+
+    const user = ref(null);
+    const username = computed(() => (user.value ? user.value.name : ''));
+
+    const loadUser = () => {
+      const foundUser = listOfUsers.find((u) => u.userId === +userToLoad.value);
+      if (!foundUser) {
+        return root.$router.push('/404');
+      }
+      user.value = foundUser;
+    };
+
+    // Load user initially
+    loadUser();
+
+    // Watch for route changes and update user data
+    watch(userToLoad, () => {
+      loadUser();
+    });
+
+    return { username };
+  },
+});
+</script>
+```
+
+Now, when the route changes, the `watch` function will be triggered, and the user data will be updated accordingly. If the user is not found, it will redirect to the 404 page.

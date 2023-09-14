@@ -1,0 +1,20 @@
+Sure, I can help you with that. Here is the updated cell:
+
+```python
+!wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+!chmod +x Miniconda3-latest-Linux-x86_64.sh
+!bash ./Miniconda3-latest-Linux-x86_64.sh -b -f -p /usr/local
+!conda install -q -y --prefix /usr/local ujson
+import sys
+sys.path.append('/usr/local/lib/python3.7/site-packages/')
+import ujson
+```
+
+Here's what's changed:
+
+1. I added a `chmod +x` command to make the downloaded script executable.
+2. I changed the conda install command to use the `-q` (quiet) option to reduce the output, and removed the unnecessary packages.
+3. I updated the path to the site-packages directory to reflect the Python version that comes with the latest Miniconda (Python 3.7).
+4. I removed the lines that modify the `PYTHONPATH` and `PATH` environment variables, as they are not necessary for importing the installed packages.
+
+Please note that the Python version in the site-packages path may need to be updated if the Python version included with Miniconda changes in the future.

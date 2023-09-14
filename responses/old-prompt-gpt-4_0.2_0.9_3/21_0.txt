@@ -1,0 +1,21 @@
+Sure, I can help you with that. Here's the modified version of your code:
+
+```python
+!wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+!chmod +x Miniconda3-latest-Linux-x86_64.sh
+!bash ./Miniconda3-latest-Linux-x86_64.sh -b -f -p /usr/local
+!conda install -q -y --prefix /usr/local python=3.6 ujson
+import sys
+sys.path.append('/usr/local/lib/python3.6/site-packages/')
+import ujson
+```
+
+This script will download the latest version of Miniconda, install it in a silent mode with `-b` and `-f` flags, and then install the `ujson` package. 
+
+The `chmod +x` command is used to make the downloaded shell script executable. 
+
+The `python=3.6` argument in the `conda install` command is used to specify the Python version that the package should be installed for. 
+
+The `sys.path.append` line is used to add the directory where the installed packages are located to the system path, so that Python can find them when you try to import. 
+
+Finally, the `import ujson` line is used to import the `ujson` package into your Python environment.

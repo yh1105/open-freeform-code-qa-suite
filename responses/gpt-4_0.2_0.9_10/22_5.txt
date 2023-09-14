@@ -1,0 +1,27 @@
+It looks like you're not destructuring the `booksRefresh` prop in the `AddBookForm` component. You should change the function definition to include curly braces `{}` around `booksRefresh` like this:
+
+```jsx
+import React, {useState} from "react";
+import {Redirect} from "react-router";
+import {addBook} from "../api/api";
+import {Button} from "react-bootstrap";
+
+const AddBookForm = ({booksRefresh}) => {
+    const [title, setTitle] = useState();
+    const [description, setDescription] = useState();
+    const [submitted, setSubmitted] = useState(false);
+
+    const postRequestHandler = () => {
+        addBook(title, description);
+        booksRefresh();
+    }
+...
+ return (
+        ...
+            <Button type="submit" onClick={postRequestHandler} variant="outline-success">Add</Button>
+        </div>
+    )
+}
+```
+
+Now, the `booksRefresh` prop should be correctly passed to the child component, and you shouldn't get the "TypeError: booksRefresh is not a function" error.

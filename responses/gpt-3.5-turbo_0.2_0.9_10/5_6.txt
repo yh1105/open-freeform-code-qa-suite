@@ -1,0 +1,13 @@
+You should modify the `main.ts` file to:
+
+```
+import Logo from 'assets/images/logo.png';
+```
+
+And modify the HTML file `main.html` to:
+
+```
+<img src={Logo.default} alt="" />
+```
+
+This should fix the error.

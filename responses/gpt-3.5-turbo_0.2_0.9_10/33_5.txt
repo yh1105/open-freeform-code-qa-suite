@@ -1,0 +1,42 @@
+The first error message `Plugin project :location_web not found. Please update settings.gradle` is related to the `location` package. It seems like you are missing the `location_web` plugin in your project. To fix this, you can add the following line to your `settings.gradle` file:
+
+```
+include ':location_web'
+```
+
+If the `settings.gradle` file does not exist, create it in the same directory as your `build.gradle` file.
+
+The second error message `Invalid argument(s): No host specified in URI file:///Instance%20of%20'Future%3CString%3E'` is because you are trying to convert a `Future` object to a `String` using the `toString()` method. Instead, you should wait for the `Future` to complete and then use the result.
+
+To fix this, you can use a `FutureBuilder` widget to asynchronously build your UI based on the result of the `_getUserLocation()` function. Here's an example:
+
+```
+class NearbyScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<String>(
+      future: _getUserLocation(),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return Column(
+            children: <Widget>[
+              Container(
+                height: 170,
+                width: double.infinity,
+                child: Image.network(snapshot.data),
+              ),
+              Text("hello"),
+            ],
+          );
+        } else if (snapshot.hasError) {
+          return Text("Error: ${snapshot.error}");
+        } else {
+          return CircularProgressIndicator();
+        }
+      },
+    );
+  }
+}
+```
+
+This code uses a `FutureBuilder` widget to build the UI based on the result of the `_getUserLocation()` function. If the `Future` completes successfully, it displays the image using the URL returned by the function. If there is an error, it displays an error message. If the `Future` is still running, it displays a loading indicator.

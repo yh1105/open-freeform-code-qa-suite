@@ -1,0 +1,84 @@
+In React Navigation 5, you can use React Context to achieve this functionality without passing functions as params. Here's how you can do it:
+
+1. Create a context for your data:
+
+```javascript
+import React from 'react';
+
+const CountryContext = React.createContext();
+
+export default CountryContext;
+```
+
+2. Wrap your parent component with the context provider and pass the state and the update function:
+
+```javascript
+import React, { useState } from 'react';
+import { TouchableOpacity, StyleSheet } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import CountrySelect from './CountrySelect';
+import CountryContext from './CountryContext';
+
+const Stack = createStackNavigator();
+
+const ParentScreen = () => {
+  const [countryData, setCountryData] = useState({});
+
+  return (
+    <CountryContext.Provider value={{ countryData, setCountryData }}>
+      <TouchableOpacity
+        style={styles.countrySelector}
+        activeOpacity={0.7}
+        onPress={() => Navigation.navigate('CountrySelect')}
+      >
+        {/* Your content */}
+      </TouchableOpacity>
+    </CountryContext.Provider>
+  );
+};
+
+const App = () => {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Parent" component={ParentScreen} />
+        <Stack.Screen name="CountrySelect" component={CountrySelect} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+};
+
+export default App;
+```
+
+3. In your child component, use the context to update the parent state:
+
+```javascript
+import React, { useContext } from 'react';
+import { TouchableOpacity } from 'react-native';
+import CountryContext from './CountryContext';
+
+const CountrySelect = ({ navigation }) => {
+  const { setCountryData } = useContext(CountryContext);
+
+  const onPress = (country, country_code, calling_code) => {
+    setCountryData({
+      country_name: country,
+      country_code: country_code,
+      calling_code: calling_code,
+    });
+    navigation.goBack();
+  };
+
+  return (
+    <TouchableOpacity onPress={() => onPress('USA', 'US', '+1')}>
+      {/* Your content */}
+    </TouchableOpacity>
+  );
+};
+
+export default CountrySelect;
+```
+
+This way, you can update the parent state from the child component without passing functions as params in React Navigation 5.

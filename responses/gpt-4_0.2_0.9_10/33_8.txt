@@ -1,0 +1,44 @@
+It seems like there are two issues here. Let's address them one by one.
+
+1. Plugin project :location_web not found. Please update settings.gradle
+
+This error is related to the location package. To fix this, open the `settings.gradle` file in the `android` folder of your Flutter project and add the following line inside the `include` block:
+
+```gradle
+include ':location_web'
+```
+
+2. Invalid argument(s): No host specified in URI file:///Instance%20of%20'Future%3CString%3E'
+
+This error is caused by trying to use a `Future<String>` as a URL for the `Image.network()` widget. You need to use a `FutureBuilder` to handle the asynchronous nature of the `_getUserLocation()` function. Update your `NearbyScreen` class as follows:
+
+```dart
+class NearbyScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        Container(
+          height: 170,
+          width: double.infinity,
+          child: FutureBuilder(
+            future: _getUserLocation(),
+            builder: (ctx, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Center(child: CircularProgressIndicator());
+              }
+              if (snapshot.hasError) {
+                return Center(child: Text('An error occurred!'));
+              }
+              return Image.network(snapshot.data);
+            },
+          ),
+        ),
+        Text("hello"),
+      ],
+    );
+  }
+}
+```
+
+This will display a `CircularProgressIndicator` while the map URL is being fetched and then display the image once the URL is available. If there's an error, it will display an error message.

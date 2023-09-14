@@ -1,0 +1,5 @@
+A `List` is a container view that displays a scrollable list of data whereas `ForEach` is a view that iterates over a collection of data and displays a view for each element in the collection. 
+
+In other words, `List` is a pre-built view that displays a list of data, while `ForEach` is a view that you can use to create a custom list by iterating over a collection of data and displaying a view for each element. 
+
+You can use `ForEach` inside a `List` to customize the appearance of each row in the list.

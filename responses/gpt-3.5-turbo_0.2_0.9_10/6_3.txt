@@ -1,0 +1,13 @@
+It seems like the issue is related to SSL protocol error. You can try accessing the application using HTTP instead of HTTPS by using the following URL: http://localhost:8080. If the application is accessible using HTTP, then the issue is related to SSL configuration.
+
+If you want to access the application using HTTPS, you can try the following steps:
+
+1. Check if the SSL certificate is installed correctly. You can check this by opening the URL https://localhost:8080 in a web browser and checking if the SSL certificate is valid.
+
+2. If the SSL certificate is valid, try clearing the browser cache and cookies and then try accessing the application again.
+
+3. If the issue persists, try adding the SSL certificate to the trusted certificates list in your browser.
+
+4. If none of the above steps work, you can try disabling SSL in your application by setting the property `server.ssl.enabled` to `false` in the `application.properties` file.
+
+Regarding the Apache installation, it is not necessary to install Apache to access the application in localhost. The application can be accessed directly using the URL http://localhost:8080.

@@ -1,0 +1,44 @@
+In React Navigation 5, you can't pass functions as params because the params are serialized and sent to the native side on Android and iOS, and functions can't be serialized. 
+
+Instead, you can use React Context or Redux to share functions and data between screens. 
+
+Here's an example of how you can do this using React Context:
+
+First, create a context:
+
+```jsx
+export const CountryContext = React.createContext();
+```
+
+Then, wrap your navigator with this context and pass the function you want to share:
+
+```jsx
+<CountryContext.Provider value={this._onSelectCountry}>
+    <Stack.Navigator>
+        {/* Your screens */}
+    </Stack.Navigator>
+</CountryContext.Provider>
+```
+
+In your screen, you can get this function using `useContext` hook:
+
+```jsx
+import { CountryContext } from './context';
+
+function CountrySelectScreen() {
+    const onSelectCountry = React.useContext(CountryContext);
+
+    const _onPress = (country, country_code, calling_code) => {
+        navigation.goBack();
+        onSelectCountry({
+            country_name: country,
+            country_code: country_code,
+            calling_code: calling_code
+        });
+    };
+
+    // ...
+}
+```
+
+This way, you can share the function between screens without passing it as a param.

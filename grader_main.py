@@ -1,9 +1,13 @@
 import os
 import argparse
 import importlib
+import traceback
+
 import yaml
 from typing import Optional
 import numpy as np
+
+from tqdm import tqdm
 
 import grader_utils as utils
 
@@ -50,17 +54,19 @@ def grade_response(config: dict, case_dir: str, response: str, full_score: float
                 rule_content = rule
                 rule_weight = default_weight
                 to_lower = False
+                neg = False
             else:
                 rule_content = rule['content']
                 rule_weight = float(rule.get('weight', default_weight))
                 to_lower = bool(rule.get('to_lower', False))
+                neg = bool(rule.get('neg', False))
 
             if utils.keyword_match(rule_content, to_lower, False, response, status['keywords']):
                 status['keywords'].append('match')
-                now_ans += rule_weight
+                now_ans += rule_weight if not neg else -rule_weight
             else:
                 status['keywords'].append('unmatch')
-            now_tot += rule_weight
+            now_tot += rule_weight if not neg else 0.
 
         status['keywords_score'] = now_ans
         status['keywords_totscore'] = now_tot
@@ -95,7 +101,7 @@ def grade_response(config: dict, case_dir: str, response: str, full_score: float
 
         blank_filling_config = config['grading']['blank_filling']
 
-        default_escape = ' \'"'
+        default_escape = ' \'"`'
 
         template = blank_filling_config['template']
         blank_str = blank_filling_config.get('blank_str', '[blank]')
@@ -153,7 +159,7 @@ def grade_response(config: dict, case_dir: str, response: str, full_score: float
                     - xxxx
                     - path: xxxx
                     - ...
-                  *max_score: 0.xx (default 0.51 for rougeL, 0.53 for rouge1)
+                  *max_score: 0.xx (default 0.51 for others, 0.53 for rouge1)
                   *min_score: 0.xx (default 0.30 for rougeL, and same for rouge1)
                   *weight: xxx (default 1.0)
             min/max score set according to https://docs.oneai.com/docs/rouge-metrics-for-summary-headline
@@ -183,6 +189,12 @@ def grade_response(config: dict, case_dir: str, response: str, full_score: float
         status['custom_detail'] = now_detail
 
         ans, tot = ans + now_ans, tot + now_tot
+
+    if 'max_score' in config['grading']:
+        tot = config['grading']['max_score']
+        ans = min(ans, tot)
+    if 'min_score' in config['grading']:
+        ans = max(ans, config['grading']['min_score'])
 
     print(f'Score: {ans} / {tot} -> {(ans / tot) * full_score:.3f}')
     return (ans / tot) * full_score, status
@@ -224,9 +236,9 @@ parser = argparse.ArgumentParser()
 parser.add_argument('suite_path', help='file path to the test suite definition')
 parser.add_argument('responses_dir', help='directory path to the responses to grade')
 parser.add_argument('--result_detail_path', help='path to store the detailed evaluation result in yaml format',
-                    default='result.yaml')
+                    default=None)
 parser.add_argument('--result_summary_path', help='path to store the printing friendly report in txt format',
-                    default='result.txt')
+                    default=None)
 parser.add_argument('--select', help='select cases to evaluate according to case name in the suite',
                     nargs='*')
 if __name__ == '__main__':
@@ -248,8 +260,8 @@ if __name__ == '__main__':
     tot_full_score = 0.
     tot_now_score = 0.
     results = {}
-    for case in suite_defs['cases']:
-        if len(args.select) > 0 and case not in args.select: continue
+    for case in tqdm(suite_defs['cases']):
+        if args.select and len(args.select) > 0 and case not in args.select: continue
 
         tot_cases += 1
 
@@ -274,18 +286,34 @@ if __name__ == '__main__':
             case_config = yaml.load(f, yaml.Loader)
         case_dir = os.path.dirname(rebased_case_fname)
 
-        now_score, full_score, detail_info = grade_responses(
-            case_config, case_dir, now_responses,
-            attempt_reduce_mode, full_score_per_question, null_score_per_question)
-        tot_full_score += full_score
-        tot_now_score += now_score
-        results[case_fname] = {'full_score': full_score, 'now_score': now_score, 'detail': detail_info}
+        try:
+            now_score, full_score, detail_info = grade_responses(
+                case_config, case_dir, now_responses,
+                attempt_reduce_mode, full_score_per_question, null_score_per_question)
+            tot_full_score += full_score
+            tot_now_score += now_score
+            results[case_fname] = {'full_score': full_score, 'now_score': now_score, 'detail': detail_info}
+        except BaseException as e:
+            results[case_fname] = {'full_score': 0., 'now_score': 0.,
+                                   'detail': {'info': 'error encountered', 'error_obj': str(e)}}
+            print(traceback.format_exc())
+        for field in case_config:
+            # add other fields to detail results for later statistics
+            if field != 'grading':
+                results[case_fname][field] = case_config[field]
 
     summary_txt = f"""Total score: {tot_now_score} / {tot_full_score}
 Total cases: {tot_cases}
 Total cases with response: {tot_cases_with_response}
     """
     print(summary_txt)
+    if args.result_summary_path is None:
+        stem_filename = f'results/{os.path.basename(args.suite_path).rsplit(".", 1)[0]}_{os.path.basename(args.responses_dir)}'
+        print(f'Output to {stem_filename}.txt/yaml')
+        args.result_summary_path = stem_filename + '.txt'
+        args.result_detail_path = stem_filename + '.yaml'
+        if not os.path.exists(os.path.dirname(args.result_detail_path)):
+            os.makedirs(os.path.dirname(args.result_detail_path))
     with open(args.result_summary_path, 'w') as f:
         f.write(summary_txt)
     with open(args.result_detail_path, 'w') as f:

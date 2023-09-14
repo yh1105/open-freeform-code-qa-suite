@@ -2,6 +2,28 @@
 
 ----
 
+## How to run?
+
+Prompt for each case is in `cases/`.
+You can read all `*.yaml` and parse `prompt_path` field to get the prompt path.
+
+Then, for generated responses, store them in a folder in `responses/`.
+In the folder, `params.yaml` is the index from case file name to response text files.
+
+Then, run `python grader_main.py suite_v1.yaml responses/[your dir]`
+
+Results will be printed and stored in `result/`.
+
+For example, for GPT-4:
+
+`python grader_main.py suite_v1.yaml responses/gpt-4_0.2_0.9_10`
+
+For GPT-3.5-Turbo:
+
+`python grader_main.py suite_v1.yaml responses/gpt-3.5-turbo_0.2_0.9_10`
+
+---
+
 This repo stores a benchmark for code model's freeform QA.
 The evaluation metric focuses on answer correctness, which is instance-specific to encode domain knowledge requirements and combines both unit-test-based and natural-language-based evaluation.
 The benchmark is generated from randomly-sampled popular questions from StackOverflow, covering a broad range of domains and languages.

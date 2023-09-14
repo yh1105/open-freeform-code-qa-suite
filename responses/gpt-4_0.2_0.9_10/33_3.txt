@@ -1,0 +1,44 @@
+The error `Plugin project :location_web not found. Please update settings.gradle;` is related to the location package. It seems like the location package is not properly installed or there is a version conflict. 
+
+To fix this, you can try the following steps:
+
+1. Update your `pubspec.yaml` file to use the latest version of the location package.
+2. Run `flutter pub get` to fetch the latest packages.
+3. Run `flutter clean` to clean your build.
+4. Finally, rebuild your project.
+
+For the second error `Invalid argument(s): No host specified in URI file:///Instance%20of%20'Future%3CString%3E'`, it seems like you're trying to convert a Future into a String directly which is not possible. 
+
+The `_getUserLocation()` function is asynchronous and returns a Future. You cannot use it directly as a String. You need to `await` the Future to complete and then use the result.
+
+You can use a `FutureBuilder` to handle this:
+
+```dart
+class NearbyScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        Container(
+          height: 170,
+          width: double.infinity,
+          child: FutureBuilder(
+            future: _getUserLocation(),
+            builder: (ctx, snapshot) {
+              // While the Future is not completed show a loading spinner
+              if (!snapshot.hasData) {
+                return Center(child: CircularProgressIndicator());
+              }
+              // When the Future completes, show the image
+              return Image.network(snapshot.data);
+            },
+          ),
+        ),
+        Text("hello"),
+      ],
+    );
+  }
+}
+```
+
+In this code, `FutureBuilder` will handle the Future and rebuild the widget when the Future completes. If the Future is not completed, it will show a loading spinner. When the Future completes, it will show the image.

@@ -1,0 +1,25 @@
+This error occurs when the number of files that are being watched by the system exceeds the limit set by the operating system. You can try the following solutions:
+
+1. Increase the limit of the number of files that can be watched by the system. On macOS or Linux, you can run the following command in the terminal:
+
+   ```
+   echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+   ```
+
+   This will increase the limit to 524288. You can try increasing it further if needed.
+
+2. If the above solution doesn't work, you can try closing unnecessary applications and processes that may be using up the file watcher limit.
+
+3. Another solution is to use a different file watcher. You can try switching to the watchman file watcher by installing it and then running the following command in the terminal:
+
+   ```
+   brew install watchman
+   ```
+
+   After installing watchman, you can run the following command to start the project:
+
+   ```
+   react-native start --reset-cache
+   ```
+
+   This should start the project with the watchman file watcher.

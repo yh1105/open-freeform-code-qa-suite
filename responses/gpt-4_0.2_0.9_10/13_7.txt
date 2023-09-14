@@ -1,0 +1,5 @@
+`List` is a container view that displays a collection of data in a scrollable, single-column format. It's similar to a UITableView in UIKit.
+
+`ForEach` is a struct that computes views on demand from an underlying collection of identified data. It's used to create dynamic views based on the data, but it's not a container view itself.
+
+In short, `List` is a container view for displaying data, while `ForEach` is a way to generate views based on data. You can use `ForEach` inside a `List` to create dynamic rows based on your data.

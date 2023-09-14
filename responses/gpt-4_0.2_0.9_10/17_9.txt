@@ -1,0 +1,27 @@
+To configure VSCode to recognize your module path aliases, you need to modify your `jsconfig.json` or `tsconfig.json` file (if you're using TypeScript) to include a `paths` property in the `compilerOptions` object.
+
+Here's an example of how you can set it up:
+
+```json
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@styles/*": ["src/styled/*"]
+    }
+  },
+  "exclude": ["node_modules"]
+}
+```
+
+In this example, `@styles` is the alias for the `src/styled` directory. The `*` after `@styles/` and `src/styled/` allows you to import any file in the `src/styled` directory.
+
+After you've saved your changes, you may need to restart VSCode for the changes to take effect.
+
+Now, you should be able to import from `@styles` like this:
+
+```javascript
+import MyStyledComponent from '@styles/MyStyledComponent';
+```
+
+And VSCode will provide IntelliSense for the `@styles` path.

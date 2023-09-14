@@ -1,0 +1,57 @@
+The error you're encountering is likely due to missing dependencies or incorrect installation of Puppeteer. Here are a few steps you can try to resolve the issue:
+
+1. Make sure you have installed Puppeteer in your project:
+
+```bash
+npm install puppeteer
+```
+
+2. If you're running your script on a server or in a Docker container, you might need to install additional dependencies. For example, if you're using a Debian-based system, you can install the required dependencies with:
+
+```bash
+sudo apt-get install -y libx11-xcb1 libxcomposite1 libxdamage1 libxi6 libxtst6 libnss3 libcups2 libxss1 libxrandr2 libasound2 libpangocairo-1.0-0 libatk1.0-0 libgtk-3-0
+```
+
+3. If you're still encountering issues, you can try running Puppeteer with the `--no-sandbox` and `--disable-setuid-sandbox` flags. However, be aware that this can pose a security risk, so use it with caution:
+
+```javascript
+const browser = await puppeteer.launch({
+  args: ['--no-sandbox', '--disable-setuid-sandbox']
+});
+```
+
+4. Make sure you have required the `puppeteer` module in your script:
+
+```javascript
+const puppeteer = require('puppeteer');
+```
+
+After trying these steps, your code should look like this:
+
+```javascript
+const puppeteer = require('puppeteer');
+
+(async function() {
+  try {
+    const browser = await puppeteer.launch({
+      args: ['--no-sandbox', '--disable-setuid-sandbox']
+    });
+    const page = await browser.newPage();
+
+    await page.setContent(pdfOutput);
+    await page.emulateMedia("screen");
+    await page.pdf({
+      path: "routes/planiton/pdf/mypdf.pdf",
+      format: "A4",
+      printBackground: true
+    });
+
+    console.log('done');
+    await browser.close();
+  } catch (e) {
+    console.log("Our Error", e)
+  }
+})();
+```
+
+If you still encounter issues, please provide more information about your environment, such as the operating system and version, Node.js version, and any additional details that might be relevant.

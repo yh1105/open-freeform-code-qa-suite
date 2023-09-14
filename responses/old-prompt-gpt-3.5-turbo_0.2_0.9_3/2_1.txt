@@ -1,0 +1,23 @@
+Yes, you can see the result graphs in Visual Studio Code itself by using the Matplotlib interactive mode. You can enable it by adding the following line of code at the beginning of your script:
+
+```python
+plt.ion()
+```
+
+This will enable interactive mode, which will display the plot inline in the VS Code editor.
+
+Here is the modified code:
+
+```python
+import matplotlib.pyplot as plt
+import matplotlib as mpl
+import numpy as np
+
+plt.ion() # enable interactive mode
+
+x = np.linspace(0, 20, 100)
+plt.plot(x, np.sin(x))
+plt.show()
+```
+
+Now, when you run this code, you should see the plot displayed inline in the VS Code editor. If you make any changes to the code, the plot will update automatically.

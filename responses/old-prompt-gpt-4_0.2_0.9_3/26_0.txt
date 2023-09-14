@@ -1,0 +1,40 @@
+The problem is that the `setup` function in Vue 3 (or the Composition API backported to Vue 2) only runs once when the component is created. So when the route changes, the `setup` function is not called again and the user is not updated.
+
+To solve this, you can use a `watch` function to observe changes in the route parameters and update the user accordingly. Also, you need to make sure that the `user` is a reactive object so that changes to it will be reflected in the template.
+
+Here is the updated code:
+
+```vue
+<template>
+  <div>{{username}}</div>
+</template>
+
+<script lang="ts">
+import { computed, defineComponent, ref, getCurrentInstance, watch, reactive } from '@vue/composition-api';
+
+export const useUsername = ({ user }) => {
+  return { username: user.name };
+};
+
+export default defineComponent({
+  setup(props, { root }) {
+    const vm = getCurrentInstance();
+
+    const userToLoad = computed(() => root.$route.params.userId);
+    const listOfUsers = [
+      { userId: 1, name: 'user1' },
+      { userId: 2, name: 'user2' },
+    ];
+
+    const user = reactive({ name: '' });
+
+    watch(userToLoad, (newUserId) => {
+      const foundUser = listOfUsers.find((u) => u.userId === +newUserId);
+      if (!foundUser) {
+        root.$router.push('/404');
+      } else {
+        user.name = foundUser.name;
+      }
+    }, { immediate: true });
+
+    const { username } =

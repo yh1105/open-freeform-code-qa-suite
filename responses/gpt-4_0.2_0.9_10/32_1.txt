@@ -1,0 +1,31 @@
+The error message indicates that the MongoDB version you're trying to download does not exist for your platform. The MongoDB version being downloaded is `4.0.14` for `win32` and `ia32` (32-bit Intel architecture).
+
+The MongoDB download URL is constructed as follows: `https://fastdl.mongodb.org/win32/mongodb-win32-i386-2008plus-ssl-4.0.14.zip`.
+
+However, MongoDB stopped providing 32-bit versions for Windows starting from version `3.4`. Therefore, the download fails with a `403` status code, which means "Forbidden".
+
+To fix this issue, you can either:
+
+1. Change your MongoDB version to `3.2.22` which is the last version that supports `win32` and `ia32`. You can do this by setting the `MONGOMS_VERSION` environment variable to `3.2.22`.
+
+2. Switch to a 64-bit version of MongoDB. You can do this by setting the `MONGOMS_ARCH` environment variable to `x64`.
+
+Here is how you can set these environment variables in your `package.json`:
+
+```json
+"scripts": {
+  "test": "cross-env MONGOMS_VERSION=3.2.22 jest --watchAll --no-cache"
+}
+```
+
+or
+
+```json
+"scripts": {
+  "test": "cross-env MONGOMS_ARCH=x64 jest --watchAll --no-cache"
+}
+```
+
+Note: `cross-env` is a library that allows you to set environment variables in a cross-platform way. If you don't have it installed, you can add it to your project with `npm install --save-dev cross-env`.
+
+Remember to run `npm install` after modifying your `package.json` to install any new dependencies.

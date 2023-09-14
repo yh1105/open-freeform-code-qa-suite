@@ -1,0 +1,25 @@
+Yes, you can use the VS Code extension called "Python Interactive" to see the result graphs directly in the VS Code itself. Here are the steps to follow:
+
+1. Install the "Python Interactive" extension in VS Code.
+2. Open the Python file that contains the code you want to run.
+3. Click on the "Python Interactive" button in the bottom left corner of the VS Code window.
+4. A new tab will open with the Python Interactive window. Click on the "+" button to create a new Interactive window.
+5. Copy and paste your code into the new Interactive window.
+6. Run the code by clicking on the "Run Cell" button or by pressing "Shift+Enter".
+7. The result graph will be displayed in the same window.
+
+Here is the modified code that you can use:
+
+```
+import matplotlib.pyplot as plt
+import matplotlib as mpl
+import numpy as np
+
+%matplotlib inline
+
+x = np.linspace(0, 20, 100)
+plt.plot(x, np.sin(x))
+plt.show()
+```
+
+Note that the `%matplotlib inline` command is added to the code to display the result graph in the same window.

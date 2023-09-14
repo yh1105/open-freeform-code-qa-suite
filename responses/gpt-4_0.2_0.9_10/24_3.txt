@@ -1,0 +1,7 @@
+There are no official or semi-official guidelines on how to name getters and setters after Java 14. The JavaBeans naming conventions (`getName()`, `setName()`) are still widely used and accepted. 
+
+Java 14 introduced records as a way to reduce boilerplate code for data carrier classes, not as a replacement for the JavaBeans convention. The `name()` style getter is specific to records and is not meant to replace the `getName()` style in all classes.
+
+In a mixed codebase, it's recommended to stick with the JavaBeans convention for regular classes and use the record-specific style only for records. This way, the type of class (record vs regular class) can be inferred from the getter style. 
+
+If you want to make your codebase more consistent, you could consider using Lombok's `@Data` or `@Value` annotations, which generate getters in the JavaBeans style for you, even for records.

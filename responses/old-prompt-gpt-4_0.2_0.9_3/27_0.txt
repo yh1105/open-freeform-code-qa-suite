@@ -1,0 +1,17 @@
+From your `app.module.ts`, it seems like you have correctly imported the `FlexLayoutModule` in your application. However, to use Angular Flex Layout in your `login-view` component, you need to ensure a few things:
+
+1. **Import FlexLayoutModule in the module of your component:** If your `login-view` component is declared in a different module (other than `app.module.ts`), you need to import `FlexLayoutModule` in that module as well.
+
+2. **Use Flex Layout directives in your component's template:** In your `login-view` component's HTML template, you should use Flex Layout directives like `fxLayout`, `fxFlex`, etc. Here is an example:
+
+```html
+<div fxLayout="row" fxLayoutAlign="center center">
+  <div fxFlex="50%">
+    <!-- Your login form goes here -->
+  </div>
+</div>
+```
+
+3. **Check for any console errors:** If you have done the above steps and it's still not working, check your browser's console for any errors. It might give you a clue about what's going wrong.
+
+If you're still facing issues, please provide more details about your `login-view` component and the problem you're facing.

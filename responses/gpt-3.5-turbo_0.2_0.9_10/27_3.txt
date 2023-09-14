@@ -1,0 +1,44 @@
+Make sure that you have imported `FlexLayoutModule` in the `login-view` module as well. Here is an example:
+
+```
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { LoginComponent } from './login/login.component';
+import { MaterialModule } from 'src/app/material/material.module';
+import { FlexLayoutModule } from '@angular/flex-layout';
+
+@NgModule({
+  declarations: [LoginComponent],
+  imports: [
+    CommonModule,
+    MaterialModule,
+    FlexLayoutModule
+  ]
+})
+export class AuthModule { }
+```
+
+Also, make sure that you have added the necessary flex layout directives in your HTML template. Here is an example:
+
+```
+<div fxLayout="row" fxLayoutAlign="center center">
+  <mat-card>
+    <mat-card-title>Login</mat-card-title>
+    <mat-card-content>
+      <form>
+        <mat-form-field>
+          <input matInput placeholder="Username">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Password">
+        </mat-form-field>
+      </form>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary">Login</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+```
+
+Hope this helps!

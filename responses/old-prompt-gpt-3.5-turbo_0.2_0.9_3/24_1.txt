@@ -1,0 +1,13 @@
+Yes, there are official guidelines for naming getters and setters in Java 14 records. According to the Java Language Specification, the naming convention for the accessor methods in a record is to use the same name as the component. 
+
+For example, if you have a record with a component named `name`, the accessor method should be named `name()`. This is the default behavior of records.
+
+However, if you prefer to use the traditional JavaBean naming convention, you can annotate the record component with `@java.beans.ConstructorProperties` and specify the name of the accessor method as an argument. For example:
+
+```
+public record Person(@java.beans.ConstructorProperties("name") String name, int age) {}
+```
+
+In this case, the accessor method for the `name` component will be named `getName()`, while the accessor method for the `age` component will be named `age()`. 
+
+Keep in mind that using the traditional JavaBean naming convention may make your code less concise and more verbose, so it's recommended to use the default naming convention for records whenever possible.

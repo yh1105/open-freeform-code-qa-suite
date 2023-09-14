@@ -1,0 +1,19 @@
+The error message indicates that the MongoDB version you're trying to download doesn't exist for your platform. The MongoDB version is `4.0.14` and your platform is `win32` with architecture `ia32`.
+
+The MongoDB Memory Server is trying to download the MongoDB binary from the official MongoDB download site. However, it seems like the specific version for your platform doesn't exist or is not available anymore.
+
+You can try to fix this issue by specifying a different MongoDB version that is available for your platform. You can do this by setting the `MONGOMS_VERSION` environment variable to the version you want to use.
+
+Here is an example of how you can set this environment variable in your `package.json` file:
+
+```json
+"scripts": {
+  "test": "cross-env MONGOMS_VERSION=4.2.6 jest --watchAll --no-cache"
+}
+```
+
+In this example, the MongoDB version is set to `4.2.6`. You can replace this with any version that is available for your platform.
+
+You will need to install the `cross-env` package to set environment variables in this way. You can install it by running `npm install --save-dev cross-env`.
+
+If you're still having issues, you can try to download the MongoDB binary manually and then point the MongoDB Memory Server to the path of the binary by setting the `MONGOMS_DOWNLOAD_DIR` environment variable.

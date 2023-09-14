@@ -1,0 +1,39 @@
+It seems like the issue is related to SSL/TLS configuration. Your application is running on HTTPS, which requires a valid SSL certificate. There are a few things you can try to resolve this issue:
+
+1. **Use HTTP instead of HTTPS**: If you don't need HTTPS for local development, you can update your application configuration to use HTTP instead of HTTPS. Look for the configuration file (usually `application.yml` or `application.properties`) and change the server port and protocol to HTTP. For example:
+
+   ```yaml
+   server:
+     port: 8080
+     ssl:
+       enabled: false
+   ```
+
+   After making the changes, restart your application and try accessing it at `http://localhost:8080`.
+
+2. **Create a self-signed SSL certificate**: If you need HTTPS for local development, you can create a self-signed SSL certificate and configure your application to use it. Here's how you can do it:
+
+   - Generate a self-signed certificate using OpenSSL or Java keytool. For example, using keytool:
+
+     ```
+     keytool -genkey -alias myapp -storetype PKCS12 -keyalg RSA -keysize 2048 -keystore keystore.p12 -validity 3650
+     ```
+
+   - Update your application configuration to use the generated certificate. For example, in `application.yml`:
+
+     ```yaml
+     server:
+       port: 8080
+       ssl:
+         enabled: true
+         key-store: keystore.p12
+         key-store-password: your_password
+         key-store-type: PKCS12
+         key-alias: myapp
+     ```
+
+   - Restart your application and try accessing it at `https://localhost:8080`. You might need to accept the self-signed certificate in your browser since it's not trusted by default.
+
+3. **Check for port conflicts**: Although it seems unlikely based on your description, it's still a good idea to make sure there are no port conflicts. You can try changing the port your application runs on by updating the `server.port` configuration in your application configuration file.
+
+If none of these solutions work, please provide more information about your application configuration, especially the server and SSL settings.

@@ -1,0 +1,17 @@
+It seems like the issue is with the version of MongoDB that is being downloaded by `mongodb-memory-server`. The error message indicates that the requested version-platform combination does not exist. 
+
+You can try specifying a different version of MongoDB to download by setting the `MONGOMS_DOWNLOAD_URL` environment variable before running your tests. For example, you can try setting it to the following URL:
+
+```
+MONGOMS_DOWNLOAD_URL=https://fastdl.mongodb.org/win32/mongodb-win32-x86_64-2012plus-ssl-4.0.14.zip
+```
+
+This URL specifies a different version of MongoDB that should be compatible with your system. You can replace the URL with a different one that corresponds to a version of MongoDB that you want to use.
+
+Alternatively, you can try updating `mongodb-memory-server` to the latest version, as newer versions may have fixed this issue. You can do this by running the following command:
+
+```
+npm install mongodb-memory-server@latest
+``` 
+
+After updating, try running your tests again and see if the issue has been resolved.

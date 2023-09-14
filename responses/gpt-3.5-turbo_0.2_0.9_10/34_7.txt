@@ -1,0 +1,9 @@
+You can use the `valueChanges` method of the `FormControl` to detect changes in the radio group selection and then show or hide the `div` based on the selected value. Here's an example of how you can achieve this:
+
+```
+<div [hidden]="myform.get('Schedule').value !== 'abc'" id='divabc'>ABC</div>
+```
+
+In this example, we're using the `[hidden]` attribute to conditionally hide the `div` based on the selected value of the radio group. The `myform.get('Schedule').value` expression gets the current value of the `Schedule` form control, and we're checking if it's equal to `'abc'`. If it is, the `div` is shown, otherwise it's hidden.
+
+Make sure to replace `'abc'` with the actual value of the radio button that should trigger the show/hide behavior.

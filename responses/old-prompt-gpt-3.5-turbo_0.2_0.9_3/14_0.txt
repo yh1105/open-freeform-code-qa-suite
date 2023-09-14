@@ -1,0 +1,49 @@
+To deploy a Nuxt.js static website to GitHub pages, you can use the `nuxt generate` command to generate a static version of your website, and then push the generated files to a GitHub repository.
+
+Here are the steps to deploy a Nuxt.js static website to GitHub pages:
+
+1. Make sure you have a GitHub account and a repository set up for your website.
+
+2. Install the `gh-pages` package as a dev dependency by running the following command:
+
+   ```
+   npm install --save-dev gh-pages
+   ```
+
+3. In your `nuxt.config.js` file, add the following configuration:
+
+   ```
+   export default {
+     // ...
+     generate: {
+       dir: 'docs'
+     }
+   }
+   ```
+
+   This will generate the static files in a `docs` directory instead of the default `dist` directory.
+
+4. In your `package.json` file, add the following scripts:
+
+   ```
+   "scripts": {
+     // ...
+     "deploy": "nuxt generate && gh-pages -d docs"
+   }
+   ```
+
+   This script will generate the static files and deploy them to GitHub pages.
+
+5. Commit and push your changes to the GitHub repository.
+
+6. Run the following command to deploy your website:
+
+   ```
+   npm run deploy
+   ```
+
+   This will generate the static files and deploy them to the `gh-pages` branch of your GitHub repository.
+
+7. Finally, go to your GitHub repository settings and set the GitHub pages source to the `gh-pages` branch.
+
+   Your website should now be live at `https://<username>.github.io/<repository>/`.

@@ -1,0 +1,18 @@
+Sure, you can use `io.BytesIO` to save the figure to a byte stream, and then use `Image.open` to convert the byte stream to a PIL image. Here is the completed code:
+
+```python
+import io
+from matplotlib import pyplot as plt
+from PIL import Image
+
+def transform(input: plt.Figure) -> Image:
+    buf = io.BytesIO()
+    input.savefig(buf, format='png')
+    buf.seek(0)
+    img = Image.open(buf)
+    return img
+```
+
+In this code, `input.savefig(buf, format='png')` saves the figure to the byte stream `buf` in PNG format. `buf.seek(0)` resets the position of the byte stream to the beginning. `Image.open(buf)` opens the byte stream as a PIL image.
+
+Please note that you need to have the figure fully created before you pass it to this function. This function does not display the figure. If you want to display the figure as well, you should do so before calling this function.

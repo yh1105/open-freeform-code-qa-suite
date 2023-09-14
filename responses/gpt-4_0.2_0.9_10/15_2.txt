@@ -1,0 +1,16 @@
+You can achieve this by using `io.BytesIO` to create an in-memory buffer and save the figure to that buffer. Then, you can open the buffer as a `PIL.Image`. Here's the complete code:
+
+```python
+import io
+from matplotlib import pyplot as plt
+from PIL import Image
+
+def transform(input: plt.Figure) -> Image.Image:
+    buf = io.BytesIO()
+    input.savefig(buf, format='png')
+    buf.seek(0)
+    img = Image.open(buf)
+    return img
+```
+
+This function takes a `plt.Figure` as input and returns a `PIL.Image`. The figure is saved to an in-memory buffer in PNG format, and then the buffer is opened as a `PIL.Image`.

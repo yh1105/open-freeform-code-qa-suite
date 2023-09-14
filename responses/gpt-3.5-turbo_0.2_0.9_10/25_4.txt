@@ -1,0 +1,39 @@
+In react-navigation 5, you can pass parameters to a screen using the `route.params` object. However, you need to make sure that the parameters are serializable. 
+
+In your case, instead of passing a function as a parameter, you can pass the name of the function as a string and call it in the child screen using `eval()`. Here's an example:
+
+Parent screen:
+
+```
+_onSelectCountry = (data) => {
+    this.setState(data);
+};
+
+<TouchableOpacity
+    style={ styles.countrySelector }
+    activeOpacity={ 0.7 }
+    onPress={ () => Navigation.navigate("CountrySelect", {
+             onSelect: '_onSelectCountry',
+             countryCode: this.state.country_code,
+        })
+    }
+>
+</TouchableOpacity>
+```
+
+Child screen:
+
+```
+_onPress = (country, country_code, calling_code) => {
+    const { navigation, route } = this.props;
+    navigation.goBack();
+    const onSelect = eval(route.params.onSelect);
+    onSelect({
+        country_name: country,
+        country_code: country_code,
+        calling_code: calling_code
+    });
+};
+```
+
+Note that using `eval()` can be risky if the string passed as a parameter is not trusted. In this case, it should be safe since you are passing a function name defined in the same file.

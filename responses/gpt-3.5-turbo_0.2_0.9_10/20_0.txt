@@ -1,0 +1,9 @@
+I'm sorry to hear that you lost your work. It's always a good practice to save your work frequently and make backups to avoid losing important data.
+
+Regarding your issue, it seems that the notebook was not able to save your work due to an error. The error message you saw might provide some clues as to what went wrong. However, without more information, it's difficult to determine the exact cause of the error.
+
+One thing you can try is to look for any temporary files that Jupyter Notebook might have created. You can do this by searching for files with the `.ipynb` extension in your computer's temporary folder. On MacOS, the temporary folder is usually located at `/private/var/folders/`. Look for a file with a name similar to your notebook's filename, but with a different extension, such as `.ipynb.tmp`. If you find such a file, try renaming it to have the `.ipynb` extension and opening it in Jupyter Notebook.
+
+If that doesn't work, you can try using a third-party tool to recover the deleted file. One such tool is called "EaseUS Data Recovery Wizard". It's a free tool that can recover deleted files from your computer's hard drive. You can download it from their website and follow the instructions to recover your deleted notebook file.
+
+I hope this helps you recover your work.

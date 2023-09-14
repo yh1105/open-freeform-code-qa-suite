@@ -1,0 +1,1 @@
+There are no official guidelines specifically addressing getter and setter naming conventions after Java 14. However, it's recommended to follow the Java Bean convention for classes and use the record style for records. Mixing both styles in the same codebase might be inevitable, but it's important to maintain consistency within each type (class or record).

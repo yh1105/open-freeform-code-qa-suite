@@ -1,0 +1,14 @@
+It seems like the environment variables are not set correctly. Please try the following code in your notebook's cell:
+
+```python
+!wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+!chmod +x Miniconda3-latest-Linux-x86_64.sh
+!bash ./Miniconda3-latest-Linux-x86_64.sh -b -f -p /usr/local
+!conda install -q -y --prefix /usr/local -c conda-forge ujson aiohttp tqdm
+import sys
+import os
+sys.path.append('/usr/local/lib/python3.7/site-packages/')
+import ujson
+```
+
+This should install Miniconda, set the correct environment variables, and import the ujson module successfully.

@@ -1,0 +1,32 @@
+It seems like the issue is related to SSL/TLS configuration. Your application is running on HTTPS, which requires a valid SSL certificate. There are a few things you can try to resolve this issue:
+
+1. **Check your application configuration**: Make sure your application is configured correctly to use SSL. Check your `application.properties` or `application.yml` file for any SSL-related configurations. If you don't need HTTPS, you can disable it by removing or commenting out the SSL configurations.
+
+2. **Use a self-signed certificate**: If you need HTTPS for development purposes, you can create a self-signed certificate and configure your application to use it. Here's how to create a self-signed certificate using Java's keytool:
+
+   ```
+   keytool -genkey -alias myapp -storetype PKCS12 -keyalg RSA -keysize 2048 -keystore keystore.p12 -validity 3650
+   ```
+
+   After creating the certificate, update your `application.properties` or `application.yml` file with the following configurations:
+
+   ```
+   server.ssl.key-store=classpath:keystore.p12
+   server.ssl.key-store-password=<your-password>
+   server.ssl.key-store-type=PKCS12
+   server.ssl.key-alias=myapp
+   ```
+
+   Replace `<your-password>` with the password you used while creating the self-signed certificate.
+
+3. **Allow insecure connections in your browser**: This is not recommended for production environments, but for development purposes, you can allow insecure connections in your browser. For example, in Chrome, you can navigate to `chrome://flags/#allow-insecure-localhost` and enable "Allow invalid certificates for resources loaded from localhost".
+
+4. **Check for port conflicts**: Although it seems like Java is using port 8080, it's still a good idea to make sure there are no conflicts. You can try changing the port in your `application.properties` or `application.yml` file:
+
+   ```
+   server.port=8081
+   ```
+
+   Then, access your application at `https://localhost:8081`.
+
+If none of these solutions work, please provide more information about your application's configuration, especially any SSL-related settings.

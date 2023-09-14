@@ -1,0 +1,18 @@
+Sure! Here's a function that should do what you're looking for:
+
+```javascript
+function convertToUTC(date) {
+  var newDate = new Date(date.getTime() + date.getTimezoneOffset() * 60 * 1000);
+  newDate.setUTCHours(0, 0, 0, 0);
+  return newDate;
+}
+```
+
+Here's how it works:
+
+1. We start by creating a new `Date` object based on the input `date`.
+2. We add the timezone offset (in minutes) to the timestamp of the input `date`. This effectively converts the date to UTC time.
+3. We then set the hours, minutes, seconds, and milliseconds of the new `Date` object to 0, effectively removing any time component from the date.
+4. Finally, we return the new `Date` object.
+
+Note that this function assumes that you want to convert the date to midnight UTC time. If you want to preserve the time component of the input date, you can modify the function accordingly.

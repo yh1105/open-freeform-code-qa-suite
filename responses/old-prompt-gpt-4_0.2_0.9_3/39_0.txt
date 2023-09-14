@@ -1,0 +1,15 @@
+The error message you're seeing is a linker error, indicating that the linker cannot find the libraries specified. The solutions you've tried are all valid, but if they didn't work, here are a few more things you can try:
+
+1. **Check your Podfile**: Make sure that the libraries that are causing the errors are correctly included in your Podfile. If they are not, add them and run `pod install` again.
+
+2. **Check your project's Library Search Paths**: Go to your project settings, select your target, go to Build Settings, and look for "Library Search Paths". Make sure that the paths to the libraries are correctly set here.
+
+3. **Check the libraries' compatibility**: It's possible that the libraries you're using are not compatible with the version of iOS you're targeting. Check the libraries' documentation to make sure they are compatible.
+
+4. **Reinstall the libraries**: If none of the above solutions work, you might want to try uninstalling and reinstalling the libraries. You can do this by removing them from your Podfile, running `pod install`, adding them back to your Podfile, and running `pod install` again.
+
+5. **Check your Xcode version**: Sometimes, these kinds of errors can be caused by using an outdated version of Xcode. Make sure you're using the latest stable version of Xcode.
+
+6. **Check your project's architecture settings**: Go to your project settings, select your target, go to Build Settings, and look for "Architectures". Make sure that the architectures here match the architectures of the libraries you're using.
+
+If none of these solutions

@@ -1,0 +1,24 @@
+Sure, here is the completed function:
+
+```python
+import plotly.figure_factory as ff
+import kaleido
+
+def plot_confusion_matrix(matrix: list[list[int]], x_labels: list[str], y_labels: list[str]):
+    # Create the heatmap
+    fig = ff.create_annotated_heatmap(matrix, x=x_labels, y=y_labels, colorscale='Viridis')
+
+    # Update layout
+    fig.update_layout(
+        title='Confusion Matrix',
+        xaxis=dict(title='Predicted Label'),
+        yaxis=dict(title='True Label'),
+        autosize=False,
+        width=500, height=500,
+        margin=dict(l=65, r=50, b=65, t=90)
+    )
+
+    return fig
+```
+
+This function will create an annotated heatmap using the provided matrix, x_labels, and y_labels. The heatmap will be colored using the 'Viridis' colorscale. The layout of the figure is updated to include a title and labels for the x and y axes. The size of the figure is also set to be 500x500 pixels, and the margins are adjusted to ensure that the labels fit within the figure.

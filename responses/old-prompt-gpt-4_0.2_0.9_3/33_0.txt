@@ -1,0 +1,33 @@
+The error `Plugin project :location_web not found. Please update settings.gradle;` is because the location package you are using is trying to find its web implementation which is not found. This is because the location package has a federated architecture, meaning it has a separate package for each platform it supports (Android, iOS, Web, etc.). 
+
+To fix this, you can ignore the error if you are not targeting the web platform or you can add the web implementation of the location package in your `pubspec.yaml` file:
+
+```yaml
+dependencies:
+  flutter:
+    sdk: flutter
+
+  location_web: ^1.0.0
+```
+
+The second error `Invalid argument(s): No host specified in URI file:///Instance%20of%20'Future%3CString%3E'` is because you are trying to load an image from a Future. The `Image.network` widget expects a String URL, but you are providing a Future that will eventually contain a String.
+
+To fix this, you can use a FutureBuilder to wait for the Future to complete and then load the image:
+
+```dart
+class NearbyScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        Container(
+          height: 170, 
+          width: double.infinity,
+          child: FutureBuilder<String>(
+            future: _getUserLocation(),
+            builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Center(child: CircularProgressIndicator());
+              } else {
+                if (snapshot.hasError)
+                  return Center(child:

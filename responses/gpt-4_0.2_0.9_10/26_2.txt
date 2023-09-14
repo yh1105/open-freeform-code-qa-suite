@@ -1,0 +1,50 @@
+The issue you're facing is because the `setup` function is only called once when the component is created. When you navigate to another user, the component is not recreated, so the `setup` function is not called again. To fix this, you can use a `watch` to observe changes in the route params and update the user accordingly. Also, you should use `async` and `await` when using `router.push` to handle the promise correctly.
+
+Here's the updated code:
+
+```html
+<template>
+  <div>{{username}}</div>
+</template>
+
+<script lang="ts">
+import { computed, defineComponent, ref, getCurrentInstance, watch } from '@vue/composition-api';
+
+export const useUsername = ({ user }) => {
+  return { username: user.name };
+};
+
+export default defineComponent({
+  async setup(props, { root }) {
+    const vm = getCurrentInstance();
+
+    const userToLoad = computed(() => root.$route.params.userId);
+    const listOfUsers = [
+      { userId: 1, name: 'user1' },
+      { userId: 2, name: 'user2' },
+    ];
+
+    const user = ref(listOfUsers.find((u) => u.userId === +userToLoad.value));
+    if (!user.value) {
+      await root.$router.push('/404');
+    }
+
+    const { username } = useUsername({ user: user.value });
+
+    watch(userToLoad, async (newUserId) => {
+      const newUser = listOfUsers.find((u) => u.userId === +newUserId);
+      if (!newUser) {
+        await root.$router.push('/404');
+      } else {
+        user.value = newUser;
+        username.value = newUser.name;
+      }
+    });
+
+    return { username };
+  },
+});
+</script>
+```
+
+Now, when the route changes to another `userId`, the `watch` function will be triggered, and it will update the user and username accordingly. If the user is not in the list, it will redirect to the 404 page.
