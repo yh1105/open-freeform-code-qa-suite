@@ -28,6 +28,8 @@ For example:
     
     **Best @ 10: 22.906 / 40**
 
+Optionally, you can then analyze and get statistics of the results with `result_stat.ipynb`
+
 ---
 
 This repo stores a benchmark for code model's freeform QA.
