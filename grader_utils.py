@@ -1,9 +1,10 @@
 import re
-from typing import Union
+from typing import Union, Optional
 import numpy as np
 from numba import njit
 import time
 import os
+import importlib
 import evaluate
 
 from execution_utils import preprocess, get_exec_results
@@ -80,7 +81,8 @@ def LCS(template: str, tgt: str) -> tuple[np.ndarray, np.ndarray]:
     return f, s
 
 
-def blank_filling_match(template: str, blank_str: str, escape: str, targets: list[Union[dict, str]], response: str) \
+def blank_filling_match(template: str, blank_str: str, escape: str, targets: list[Union[dict, str]], response: str,
+                        post_handler: Optional[dict] = None) \
         -> tuple[float, float, list[str]]:
 
     f, s = LCS(template, response)
@@ -138,7 +140,18 @@ def blank_filling_match(template: str, blank_str: str, escape: str, targets: lis
             else:
                 grading_details.append('unmatched: ' + now_status)
 
-    return now_score, tot_score, grading_details
+    post_handler_detail = None
+    if post_handler is not None:
+        # post_process the score
+        module_name = post_handler['module']
+        func_name = post_handler['func']
+
+        custom_module = importlib.import_module(module_name)
+        new_ans, new_tot, post_handler_detail = custom_module.__call__(func_name)(now_ans, now_tot, grading_details)
+        now_ans = new_ans
+        now_tot = new_tot
+
+    return now_score, tot_score, grading_details, post_handler_detail
 
 
 def unit_test_execution(lang: str, response: str, unit_tests: list[str, dict], case_dir: str) \

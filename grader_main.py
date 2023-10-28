@@ -48,6 +48,8 @@ def grade_response(config: dict, case_dir: str, response: str, full_score: float
 
         default_weight = 1.0
 
+        post_handler = None
+
         status['keywords'] = list()
         for rule in config['grading']['keywords']:
             if isinstance(rule, str):
@@ -56,6 +58,9 @@ def grade_response(config: dict, case_dir: str, response: str, full_score: float
                 to_lower = False
                 neg = False
             else:
+                if 'post_handler' in rule:
+                    post_handler = rule['post_handler']
+                    continue
                 rule_content = rule['content']
                 rule_weight = float(rule.get('weight', default_weight))
                 to_lower = bool(rule.get('to_lower', False))
@@ -67,6 +72,17 @@ def grade_response(config: dict, case_dir: str, response: str, full_score: float
             else:
                 status['keywords'].append('unmatch')
             now_tot += rule_weight if not neg else 0.
+
+        if post_handler is not None:
+            # post_process the score
+            module_name = post_handler['module']
+            func_name = post_handler['func']
+
+            custom_module = importlib.import_module(module_name)
+            new_ans, new_tot, new_detail = custom_module.__call__(func_name)(now_ans, now_tot, status['keywords'])
+            status['post_handler_detail'] = new_detail
+            now_ans = new_ans
+            now_tot = new_tot
 
         status['keywords_score'] = now_ans
         status['keywords_totscore'] = now_tot
@@ -108,12 +124,15 @@ def grade_response(config: dict, case_dir: str, response: str, full_score: float
         escape = blank_filling_config.get('escape', default_escape)
         targets = blank_filling_config['targets']
         prefix = blank_filling_config.get('prefix', '')
+        post_handler = blank_filling_config.get('post_handler', None)
 
-        now_ans, now_tot, now_detail = utils.blank_filling_match(template, blank_str, escape, targets, prefix + response)
+        now_ans, now_tot, now_detail, post_handler_detail = utils.blank_filling_match(template, blank_str, escape, targets, prefix + response, post_handler)
 
         status['blank_filling_score'] = now_ans
         status['blank_filling_totscore'] = now_tot
         status['blank_filling_detail'] = now_detail
+        if post_handler_detail is not None:
+            status['blank_filling_post_handler_detail'] = post_handler_detail
         ans, tot = ans + now_ans, tot + now_tot
 
     if 'unit_test' in config['grading']:
@@ -309,7 +328,7 @@ Total cases with response: {tot_cases_with_response}
     print(summary_txt)
     if args.result_summary_path is None:
         stem_filename = f'results/{os.path.basename(args.suite_path).rsplit(".", 1)[0]}_{os.path.basename(args.responses_dir)}'
-        print(f'Output to {stem_filename}.txt/yaml')
+        print(f'Output to {stem_filename}.(txt/yaml)')
         args.result_summary_path = stem_filename + '.txt'
         args.result_detail_path = stem_filename + '.yaml'
         if not os.path.exists(os.path.dirname(args.result_detail_path)):

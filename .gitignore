@@ -6,3 +6,7 @@ result.*
 results/
 .idea/
 tmp.csv
+responses/
+!responses/gpt-3.5-turbo_0.2_0.9_10
+!responses/gpt-4_0.2_0.9_10
+batched_responses/

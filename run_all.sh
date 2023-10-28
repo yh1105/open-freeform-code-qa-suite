@@ -6,3 +6,7 @@ python openai_caller.py suite_v1.yaml gpt-3.5-turbo --n 10
 # Compute scores of best@10, saved to results/
 python grader_main.py suite_v1.yaml responses/gpt-4_0.2_0.9_10
 python grader_main.py suite_v1.yaml responses/gpt-3.5-turbo_0.2_0.9_10
+
+# Compute result statistics
+python print_result_stat.py results/suite_v1_gpt-4_0.2_0.9_10.yaml results/suite_v1_gpt-4_0.2_0.9_10_stats_table.txt --model_name gpt4
+python print_result_stat.py results/suite_v1_gpt-3.5-turbo_0.2_0.9_10.yaml results/suite_v1_gpt-3.5-turbo_0.2_0.9_10_stats_table.txt --model_name gpt3.5
