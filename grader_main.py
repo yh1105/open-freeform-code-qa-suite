@@ -331,8 +331,10 @@ Total cases with response: {tot_cases_with_response}
         print(f'Output to {stem_filename}.(txt/yaml)')
         args.result_summary_path = stem_filename + '.txt'
         args.result_detail_path = stem_filename + '.yaml'
-        if not os.path.exists(os.path.dirname(args.result_detail_path)):
-            os.makedirs(os.path.dirname(args.result_detail_path))
+    if not os.path.exists(os.path.dirname(args.result_detail_path)):
+        os.makedirs(os.path.dirname(args.result_detail_path))
+    if not os.path.exists(os.path.dirname(args.result_summary_path)):
+        os.makedirs(os.path.dirname(args.result_summary_path))
     with open(args.result_summary_path, 'w') as f:
         f.write(summary_txt)
     with open(args.result_detail_path, 'w') as f:
