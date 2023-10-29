@@ -282,7 +282,7 @@ def get_exec_results(prefix_from_file: str, generations: List[str], references: 
          str containing the test case
     """
     generations = [prefix_from_file + gen for gen in generations]
-    code_metric = load("Muennighoff/code_eval_octopack")
+    code_metric = load("code_eval_octopack")
 
     timeout = LANGUAGE_TO_TIMEOUT[lang] if timeout is None else timeout
     num_workers = LANGUAGE_TO_NUM_WORKERS[lang]

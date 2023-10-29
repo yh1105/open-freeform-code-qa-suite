@@ -2,6 +2,12 @@
 
 ----
 
+## Dependency
+
+- https://huggingface.co/spaces/Muennighoff/code_eval_octopack
+
+- https://huggingface.co/spaces/evaluate-metric/rouge
+
 ## How to run?
 
 Prompt for each case is in `cases/`.
