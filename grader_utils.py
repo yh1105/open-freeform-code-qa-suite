@@ -154,7 +154,7 @@ def blank_filling_match(template: str, blank_str: str, escape: str, targets: Lis
     return now_score, tot_score, grading_details, post_handler_detail
 
 
-def unit_test_execution(lang: str, response: str, unit_tests: List[str, Dict], case_dir: str) \
+def unit_test_execution(lang: str, response: str, unit_tests: List[Union[str, Dict]], case_dir: str) \
         -> Tuple[float, float, List[Dict[str, str]]]:
 
     grading_details = []
