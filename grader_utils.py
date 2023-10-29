@@ -1,5 +1,5 @@
 import re
-from typing import Union, Optional
+from typing import Union, Optional, List, Dict, Tuple
 import numpy as np
 from numba import njit
 import time
@@ -10,7 +10,7 @@ import evaluate
 from execution_utils import preprocess, get_exec_results
 
 
-def keyword_match(rule: Union[str, dict], to_lower: bool, regex: bool, response: str, context: list[str]) -> bool:
+def keyword_match(rule: Union[str, Dict], to_lower: bool, regex: bool, response: str, context: List[str]) -> bool:
     if isinstance(rule, str):
         if to_lower:
             rule, response = rule.lower(), response.lower()
@@ -154,8 +154,8 @@ def blank_filling_match(template: str, blank_str: str, escape: str, targets: lis
     return now_score, tot_score, grading_details, post_handler_detail
 
 
-def unit_test_execution(lang: str, response: str, unit_tests: list[str, dict], case_dir: str) \
-        -> tuple[float, float, list[dict[str, str]]]:
+def unit_test_execution(lang: str, response: str, unit_tests: List[str, Dict], case_dir: str) \
+        -> Tuple[float, float, List[Dict[str, str]]]:
 
     grading_details = []
     now_score = 0.
@@ -204,8 +204,8 @@ def unit_test_execution(lang: str, response: str, unit_tests: list[str, dict], c
     return now_score, tot_score, grading_details
 
 
-def similarity_assessment(response: str, similarity_metrics: list[dict], case_dir: str) \
-        -> tuple[float, float, list[dict[str, float]]]:
+def similarity_assessment(response: str, similarity_metrics: List[Dict], case_dir: str) \
+        -> tuple[float, float, List[Dict[str, float]]]:
     now_score, tot_score = 0.0, 0.0
     grading_details = []
 

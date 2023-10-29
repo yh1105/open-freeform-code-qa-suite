@@ -12,6 +12,7 @@ From https://github.com/bigcode-project/bigcode-evaluation-harness/blob/main/lm_
 """
 
 import os
+from typing import Dict, List, Tuple
 os.environ["HF_ALLOW_CODE_EVAL"] = "1"
 os.environ['PATH'] = '/usr/local/lib/nodejs/node/bin:' + os.environ['PATH']
 os.environ['NODE_PATH'] = '/usr/local/lib/node_modules'
@@ -242,7 +243,7 @@ def remove_last_block(code, lang):
     return code
 
 
-def preprocess(generations: list[str], lang: str) -> list[str]:
+def preprocess(generations: List[str], lang: str) -> List[str]:
     """
         Extract code blocks from the generations
     :param generations:
@@ -270,8 +271,8 @@ def preprocess(generations: list[str], lang: str) -> list[str]:
     return ans
 
 
-def get_exec_results(prefix_from_file: str, generations: list[str], references: str, lang: str,
-                     timeout: None) -> tuple[dict[str, float], dict[int, list], str]:
+def get_exec_results(prefix_from_file: str, generations: List[str], references: str, lang: str,
+                     timeout: None) -> Tuple[Dict[str, float], Dict[int, List], str]:
     """Takes the list of LM generations and evaluates them against ground truth references.
 
     :param prefix_from_file: universal setup code

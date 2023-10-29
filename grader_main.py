@@ -4,7 +4,7 @@ import importlib
 import traceback
 
 import yaml
-from typing import Optional
+from typing import Optional, List, Dict
 import numpy as np
 
 from tqdm import tqdm
@@ -219,8 +219,8 @@ def grade_response(config: dict, case_dir: str, response: str, full_score: float
     return (ans / tot) * full_score, status
 
 
-def grade_responses(config: dict, case_dir: str, responses: Optional[list[str]],
-                    reduce_mode: str, suite_full_score: float, suite_null_score: float) -> tuple[float, float, list[dict]]:
+def grade_responses(config: dict, case_dir: str, responses: Optional[List[str]],
+                    reduce_mode: str, suite_full_score: float, suite_null_score: float) -> tuple[float, float, List[dict]]:
     """
 
     :param config:
