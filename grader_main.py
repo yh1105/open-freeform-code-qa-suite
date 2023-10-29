@@ -312,6 +312,9 @@ if __name__ == '__main__':
             tot_full_score += full_score
             tot_now_score += now_score
             results[case_fname] = {'full_score': full_score, 'now_score': now_score, 'detail': detail_info}
+        except KeyboardInterrupt as e:
+            # User interrupted
+            break
         except BaseException as e:
             results[case_fname] = {'full_score': 0., 'now_score': 0.,
                                    'detail': {'info': 'error encountered', 'error_obj': str(e)}}
