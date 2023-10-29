@@ -144,8 +144,9 @@ if __name__ == '__main__':
     args = parser.parse_args()
     in_path = args.result_yaml_path
     out_path = args.result_table_path
-    if not os.path.exists(os.path.dirname(out_path)):
-        os.makedirs(os.path.dirname(out_path))
+    if os.path.dirname(out_path):
+        if not os.path.exists(os.path.dirname(out_path)):
+            os.makedirs(os.path.dirname(out_path))
     
     stats = compute_stats(in_path)
     tab = tab_gen([stats], [args.model_name])
