@@ -81,9 +81,9 @@ def LCS(template: str, tgt: str) -> Tuple[np.ndarray, np.ndarray]:
     return f, s
 
 
-def blank_filling_match(template: str, blank_str: str, escape: str, targets: list[Union[dict, str]], response: str,
+def blank_filling_match(template: str, blank_str: str, escape: str, targets: List[Union[dict, str]], response: str,
                         post_handler: Optional[dict] = None) \
-        -> Tuple[float, float, list[str]]:
+        -> Tuple[float, float, List[str]]:
 
     f, s = LCS(template, response)
     n_blank = template.count(blank_str)
