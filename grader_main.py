@@ -279,6 +279,7 @@ if __name__ == '__main__':
     tot_full_score = 0.
     tot_now_score = 0.
     results = {}
+    keyboard_interrupt = False
     for case in tqdm(suite_defs['cases']):
         if args.select and len(args.select) > 0 and case not in args.select: continue
 
@@ -314,6 +315,7 @@ if __name__ == '__main__':
             results[case_fname] = {'full_score': full_score, 'now_score': now_score, 'detail': detail_info}
         except KeyboardInterrupt as e:
             # User interrupted
+            keyboard_interrupt = True
             break
         except BaseException as e:
             results[case_fname] = {'full_score': 0., 'now_score': 0.,
@@ -329,6 +331,9 @@ Total cases: {tot_cases}
 Total cases with response: {tot_cases_with_response}
     """
     print(summary_txt)
+    if keyboard_interrupt:
+        print('Keyboard interrupted')
+        exit(1)
     if args.result_summary_path is None:
         stem_filename = f'results/{os.path.basename(args.suite_path).rsplit(".", 1)[0]}_{os.path.basename(args.responses_dir)}'
         print(f'Output to {stem_filename}.(txt/yaml)')
