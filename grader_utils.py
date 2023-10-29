@@ -42,7 +42,7 @@ def keyword_match(rule: Union[str, Dict], to_lower: bool, regex: bool, response:
         return ans
 
 @njit
-def LCS(template: str, tgt: str) -> tuple[np.ndarray, np.ndarray]:
+def LCS(template: str, tgt: str) -> Tuple[np.ndarray, np.ndarray]:
     '''
         Longest Common Subsequence via dynamic programming
     :param template:
@@ -83,7 +83,7 @@ def LCS(template: str, tgt: str) -> tuple[np.ndarray, np.ndarray]:
 
 def blank_filling_match(template: str, blank_str: str, escape: str, targets: list[Union[dict, str]], response: str,
                         post_handler: Optional[dict] = None) \
-        -> tuple[float, float, list[str]]:
+        -> Tuple[float, float, list[str]]:
 
     f, s = LCS(template, response)
     n_blank = template.count(blank_str)
@@ -205,7 +205,7 @@ def unit_test_execution(lang: str, response: str, unit_tests: List[str, Dict], c
 
 
 def similarity_assessment(response: str, similarity_metrics: List[Dict], case_dir: str) \
-        -> tuple[float, float, List[Dict[str, float]]]:
+        -> Tuple[float, float, List[Dict[str, float]]]:
     now_score, tot_score = 0.0, 0.0
     grading_details = []
 
