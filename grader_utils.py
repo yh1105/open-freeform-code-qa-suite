@@ -1,16 +1,15 @@
 import re
-from typing import Union, Optional, List, Dict, Tuple
+from typing import Union
 import numpy as np
 from numba import njit
 import time
 import os
-import importlib
 import evaluate
 
 from execution_utils import preprocess, get_exec_results
 
 
-def keyword_match(rule: Union[str, Dict], to_lower: bool, regex: bool, response: str, context: List[str]) -> bool:
+def keyword_match(rule: Union[str, dict], to_lower: bool, regex: bool, response: str, context: list[str]) -> bool:
     if isinstance(rule, str):
         if to_lower:
             rule, response = rule.lower(), response.lower()
@@ -42,7 +41,7 @@ def keyword_match(rule: Union[str, Dict], to_lower: bool, regex: bool, response:
         return ans
 
 @njit
-def LCS(template: str, tgt: str) -> Tuple[np.ndarray, np.ndarray]:
+def LCS(template: str, tgt: str) -> tuple[np.ndarray, np.ndarray]:
     '''
         Longest Common Subsequence via dynamic programming
     :param template:
@@ -81,9 +80,8 @@ def LCS(template: str, tgt: str) -> Tuple[np.ndarray, np.ndarray]:
     return f, s
 
 
-def blank_filling_match(template: str, blank_str: str, escape: str, targets: List[Union[dict, str]], response: str,
-                        post_handler: Optional[dict] = None) \
-        -> Tuple[float, float, List[str]]:
+def blank_filling_match(template: str, blank_str: str, escape: str, targets: list[Union[dict, str]], response: str) \
+        -> tuple[float, float, list[str]]:
 
     f, s = LCS(template, response)
     n_blank = template.count(blank_str)
@@ -140,23 +138,11 @@ def blank_filling_match(template: str, blank_str: str, escape: str, targets: Lis
             else:
                 grading_details.append('unmatched: ' + now_status)
 
-    post_handler_detail = None
-    if post_handler is not None:
-        # post_process the score
-        module_name = post_handler['module']
-        func_name = post_handler['func']
-
-        custom_module = importlib.import_module(module_name)
-        new_ans, new_tot, post_handler_detail = custom_module.__call__(func_name)(now_ans, now_tot, grading_details)
-        now_ans = new_ans
-        now_tot = new_tot
-
-    return now_score, tot_score, grading_details, post_handler_detail
+    return now_score, tot_score, grading_details
 
 
-def unit_test_execution(lang: str, response: str, unit_tests: List[Union[str, Dict]], case_dir: str) \
-        -> Tuple[float, float, List[Dict[str, str]]]:
-
+def unit_test_execution(lang: str, response: str, unit_tests: list[str, dict], case_dir: str) \
+        -> tuple[float, float, list[dict[str, str]]]:
     grading_details = []
     now_score = 0.
     tot_score = 0.
@@ -204,8 +190,8 @@ def unit_test_execution(lang: str, response: str, unit_tests: List[Union[str, Di
     return now_score, tot_score, grading_details
 
 
-def similarity_assessment(response: str, similarity_metrics: List[Dict], case_dir: str) \
-        -> Tuple[float, float, List[Dict[str, float]]]:
+def similarity_assessment(response: str, similarity_metrics: list[dict], case_dir: str) \
+        -> tuple[float, float, list[dict[str, float]]]:
     now_score, tot_score = 0.0, 0.0
     grading_details = []
 

@@ -12,7 +12,6 @@ From https://github.com/bigcode-project/bigcode-evaluation-harness/blob/main/lm_
 """
 
 import os
-from typing import Dict, List, Tuple
 os.environ["HF_ALLOW_CODE_EVAL"] = "1"
 os.environ['PATH'] = '/usr/local/lib/nodejs/node/bin:' + os.environ['PATH']
 os.environ['NODE_PATH'] = '/usr/local/lib/node_modules'
@@ -36,6 +35,28 @@ def time_limit(seconds):
         yield
     finally:
         signal.setitimer(signal.ITIMER_REAL, 0)
+
+def r_executor(references, predictions, timeout):
+    program = predictions[0][0] + '\n' + references[0]
+    result = []
+    try:
+        with time_limit(timeout):
+            import rpy2.robjects as robjects
+            robjects.r(program)
+        result.append('passed')
+    except TimeoutException:
+        result.append("timed out")
+    except BaseException as e:
+        result.append(f"failed: {e}")
+    logs = [[(0, dict(
+        task_id=0,
+        passed=result[0] == "passed",
+        result=result[0],
+        completion_id=0,
+    ))]]
+
+    return {'pass@1': float(int(result[0] == "passed"))}, logs
+
 
 def python_unsafe_executor(references, predictions, timeout):
 
@@ -132,6 +153,7 @@ LANGUAGE_TO_TIMEOUT = {
     "go": 20,
     "rust": 300,  # Necessary for first-time compilation of cargo
     "sql": 10,
+    'r': 10
 }
 
 # Java sometimes fails with more workers; For JS it's twice as fast with 4 workers
@@ -143,6 +165,7 @@ LANGUAGE_TO_NUM_WORKERS = {
     "go": 4,
     "rust": 1,
     "sql": 1,
+    "r": 4
 }
 
 # https://github.com/THUDM/CodeGeeX/blob/23ee51505a2bcd34d59d2e271b22e5bd91475462/codegeex/benchmark/utils.py#L6
@@ -200,6 +223,10 @@ IMPORT_HELPER = {
         "#include<sstream>",
         "#include<fstream>",
     ],
+    'r': [
+        'rm(list=ls())',
+        'library(assert)',
+    ]
 }
 
 
@@ -243,7 +270,7 @@ def remove_last_block(code, lang):
     return code
 
 
-def preprocess(generations: List[str], lang: str) -> List[str]:
+def preprocess(generations: list[str], lang: str) -> list[str]:
     """
         Extract code blocks from the generations
     :param generations:
@@ -258,7 +285,7 @@ def preprocess(generations: List[str], lang: str) -> List[str]:
             code_idendifier_lines = [no for no, text in enumerate(lines) if text.startswith("```")]
             longest_lines = 0
             longest_lines_idx = 0
-            for i in range(0, len(code_idendifier_lines)-1, 2):
+            for i in range(0, len(code_idendifier_lines), 2):
                 if code_idendifier_lines[i+1] - code_idendifier_lines[i] > longest_lines:
                     longest_lines = code_idendifier_lines[i+1] - code_idendifier_lines[i]
                     longest_lines_idx = i
@@ -271,8 +298,8 @@ def preprocess(generations: List[str], lang: str) -> List[str]:
     return ans
 
 
-def get_exec_results(prefix_from_file: str, generations: List[str], references: str, lang: str,
-                     timeout: None) -> Tuple[Dict[str, float], Dict[int, List], str]:
+def get_exec_results(prefix_from_file: str, generations: list[str], references: str, lang: str,
+                     timeout: None) -> tuple[dict[str, float], dict[int, list], str]:
     """Takes the list of LM generations and evaluates them against ground truth references.
 
     :param prefix_from_file: universal setup code
@@ -282,7 +309,7 @@ def get_exec_results(prefix_from_file: str, generations: List[str], references: 
          str containing the test case
     """
     generations = [prefix_from_file + gen for gen in generations]
-    code_metric = load("code_eval_octopack")
+    code_metric = load("Muennighoff/code_eval_octopack")
 
     timeout = LANGUAGE_TO_TIMEOUT[lang] if timeout is None else timeout
     num_workers = LANGUAGE_TO_NUM_WORKERS[lang]
@@ -304,6 +331,12 @@ def get_exec_results(prefix_from_file: str, generations: List[str], references: 
         generations = [
             g.replace("public class Main {\n    }", "").strip() for g in generations
         ]
+    elif lang == 'r':
+        r_imports = '\n'.join(IMPORT_HELPER['r'])
+        generations = [
+            (r_imports + "\n" + g).strip() for g in generations
+        ]
+
     # elif language == "go":
     #     ds = self.get_dataset().select(range(len(generations)))
     #     for gen, ref, doc in zip(generations, references, ds):
@@ -376,6 +409,12 @@ def get_exec_results(prefix_from_file: str, generations: List[str], references: 
             references=references,
             predictions=generations,
             timeout=timeout,
+        )
+    elif lang == 'r':
+        results, logs = r_executor(
+            references=references,
+            predictions=generations,
+            timeout=timeout
         )
     else:
         results, logs = code_metric.compute(
