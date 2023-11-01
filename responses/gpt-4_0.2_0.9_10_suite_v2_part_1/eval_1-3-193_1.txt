@@ -1,0 +1,30 @@
+The error message you're seeing is because Selenium can't find the Firefox binary on its default location. This can happen if Firefox is not installed or if it's installed in a non-default location.
+
+Here's what you can do to solve this:
+
+1. **Check if Firefox is installed**: Selenium requires the browser to be installed in the system. If you haven't installed Firefox, please download it from the [official website](https://www.mozilla.org/en-US/firefox/new/) and install it.
+
+2. **Provide the path to the Firefox binary**: If Firefox is installed but not in the default location, you can tell Selenium where to find it. Here's how you can do it:
+
+```python
+from selenium import webdriver
+from selenium.webdriver.firefox.service import Service
+from selenium.webdriver.common.by import By
+from selenium.webdriver.firefox.options import Options as FirefoxOptions
+
+# Set the location of the Firefox binary
+firefox_path = '/path/to/your/firefox'  # Replace with your Firefox path
+
+options = FirefoxOptions()
+options.binary_location = firefox_path
+
+# Set the location of the geckodriver
+webdriver_service = Service('/path/to/your/geckodriver')  # Replace with your geckodriver path
+
+driver = webdriver.Firefox(service=webdriver_service, options=options)
+driver.get('http://www.seleniumhq.org')
+```
+
+3. **Check your geckodriver**: Selenium uses a driver to interface with the chosen browser. Firefox requires geckodriver, which needs to be installed before the above script can be run. Make sure it's installed and available in the system PATH, or provide its location by setting the `webdriver_service` variable.
+
+Remember to replace `'/path/to/your/firefox'` and `'/path/to/your/geckodriver'` with the actual paths in your system.

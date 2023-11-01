@@ -1,0 +1,24 @@
+You can use the `loc` function in pandas to filter rows in your DataFrame based on a condition. Here's how you can do it:
+
+```python
+data_pass_test = data_useless.loc[data_useless['TEST_STATUS'] == 'PASS TEST']
+```
+
+This will give you a new DataFrame `data_pass_test` that only contains the rows where `TEST_STATUS` is 'PASS TEST'.
+
+If you want to group by `TEST_STATUS` after that (although it might not be very useful since all rows have the same `TEST_STATUS` in this new DataFrame), you can do:
+
+```python
+data_pass_test_grouped = data_pass_test.groupby('TEST_STATUS').count()
+```
+
+This will give you a DataFrame with the count of rows for each `TEST_STATUS` (which should be only 'PASS TEST' in this case).
+
+So, the complete code would be:
+
+```python
+data_pass_test = data_useless.loc[data_useless['TEST_STATUS'] == 'PASS TEST']
+data_pass_test_grouped = data_pass_test.groupby('TEST_STATUS').count()
+```
+
+This will give you the same result as your SQL query.

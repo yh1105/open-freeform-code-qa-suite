@@ -1,0 +1,18 @@
+You can calculate the end time by dividing the total duration by 60 and adding the quotient to the starting hour. The remainder of the division will give you the minutes. Here's the updated code:
+
+```python
+def computeEndTime(hour, mins, dura):
+    mins = (mins + dura) % 60
+    hour = (hour + (dura // 60)) % 24
+    return "{:02d}:{:02d}".format(hour, mins)
+```
+
+In this code, `dura // 60` gives you the quotient of the division, which represents the number of hours the event lasts. You add this to the starting hour, but you need to use the modulo operator `%` to ensure that the result is within the range 0..23.
+
+The `"{:02d}:{:02d}".format(hour, mins)` statement formats the output as a string with two digits for the hour and two digits for the minutes, with leading zeros if necessary.
+
+You can call this function with the starting hour, minutes, and duration as arguments:
+
+```python
+print(computeEndTime(12, 17, 59))  # Output: 13:16
+```

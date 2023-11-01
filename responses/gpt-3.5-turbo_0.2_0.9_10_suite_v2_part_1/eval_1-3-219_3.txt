@@ -1,0 +1,13 @@
+Here are some steps you can try to solve the issue:
+
+1. Check if the Jupyter package is installed in your virtual environment "da38". You can do this by activating the environment and running the command `conda list`. If Jupyter is not installed, you can install it by running `conda install jupyter`.
+
+2. Check if the IPython kernel is installed in your virtual environment "da38". You can do this by activating the environment and running the command `conda list`. If IPython kernel is not installed, you can install it by running `conda install ipykernel`.
+
+3. Check if the correct Python interpreter is selected in VS Code. You can do this by opening the command palette (Ctrl+Shift+P) and searching for "Python: Select Interpreter". Make sure that the interpreter for your virtual environment "da38" is selected.
+
+4. Try restarting the Jupyter server by opening the command palette (Ctrl+Shift+P) and searching for "Jupyter: Restart Kernel". This will restart the Jupyter server and may solve the issue.
+
+5. If none of the above steps work, try uninstalling and reinstalling the Python extension in VS Code. You can do this by opening the Extensions panel (Ctrl+Shift+X), searching for "Python", and clicking on the uninstall and install buttons.
+
+Hopefully, one of these steps will solve the issue and you will be able to launch Jupyter notebook from within VS Code.

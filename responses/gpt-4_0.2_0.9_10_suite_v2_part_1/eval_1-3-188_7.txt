@@ -1,0 +1,32 @@
+Here is a Python function that uses the pandas library to achieve your requirements:
+
+```python
+import pandas as pd
+
+def extractCellValue(df, matchedString):
+    # Convert matchedString to int as instrument_token is int
+    matchedString = int(matchedString)
+    
+    # Search for matchedString in instrument_token column
+    matchedRow = df[df['instrument_token'] == matchedString]
+    
+    # If matchedRow is not empty, return the tradingsymbol
+    if not matchedRow.empty:
+        return matchedRow['tradingsymbol'].values[0]
+    else:
+        return "No match found"
+```
+
+This function first converts the `matchedString` to an integer, because the `instrument_token` column contains integers. Then, it uses the pandas DataFrame method `df[df['instrument_token'] == matchedString]` to get the row where `instrument_token` equals `matchedString`. If such a row is found, it returns the `tradingsymbol` from that row. If no such row is found, it returns the string "No match found".
+
+You can use this function like this:
+
+```python
+df = pd.DataFrame({
+    'instrument_token': [123, 555, 34, 189],
+    'tradingsymbol': ['xyz', 'aaa', 'rst', 'op'],
+    'lot_size': [1000, 200, 2400, 780]
+})
+
+print(extractCellValue(df, '123'))  # Output: 'xyz'
+```

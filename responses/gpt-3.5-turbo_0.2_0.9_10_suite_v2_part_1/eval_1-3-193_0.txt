@@ -1,0 +1,24 @@
+This error message indicates that the Firefox browser binary location is not set or not found. You can try the following solutions:
+
+1. Install Firefox browser on your system if it is not already installed.
+
+2. Set the path to the Firefox binary location in your code. You can do this by adding the following line of code before creating the `webdriver` object:
+
+   ```python
+   from selenium.webdriver.firefox.options import Options
+   options = Options()
+   options.binary_location = '/path/to/firefox/binary'
+   browser = webdriver.Firefox(options=options)
+   ```
+
+   Replace `/path/to/firefox/binary` with the actual path to the Firefox binary location on your system.
+
+3. If you have already installed Firefox and it is in the default location, you can try adding the `executable_path` parameter to the `webdriver.Firefox()` method:
+
+   ```python
+   browser = webdriver.Firefox(executable_path='/usr/local/bin/geckodriver')
+   ```
+
+   Replace `/usr/local/bin/geckodriver` with the actual path to the `geckodriver` executable on your system.
+
+4. If none of the above solutions work, you can try downloading the latest version of `geckodriver` from the official Mozilla website and adding its location to your system's PATH environment variable.

@@ -1,0 +1,21 @@
+You can achieve this by using the `split()` function in R, which divides the data into subsets based on the levels of a factor. Here is the function `myConvert`:
+
+```r
+library(tidyverse)
+
+myConvert <- function(my_data) {
+  # Group the data by list_names and then summarise it into a list of list_values
+  my_data <- my_data %>% 
+    group_by(list_names) %>% 
+    summarise(list_values = list(list_values))
+  
+  # Convert the tibble to a named list
+  my_list <- split(my_data$list_values, my_data$list_names)
+  
+  return(my_list)
+}
+```
+
+This function first groups the data by `list_names` and then summarises it into a list of `list_values`. After that, it converts the tibble to a named list using the `split()` function. The `split()` function splits the `list_values` based on the `list_names`, resulting in a named list where the names are the unique values of `list_names` and the list elements are all the values of `list_values`.
+
+Please note that the `summarise()` function will remove the grouping, so there is no need to ungroup the data after summarising it.

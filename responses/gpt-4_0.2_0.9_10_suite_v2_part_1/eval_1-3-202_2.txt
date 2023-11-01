@@ -1,0 +1,13 @@
+The error message you're seeing is due to `conda` trying to remove or downgrade packages that are essential for its operation. In this case, `requests` and `setuptools` are dependencies of `conda` and cannot be removed.
+
+This issue can occur if the environment file you're using (`python3.6-environment-windows.yml`) specifies versions of `requests` and `setuptools` that are different from those currently installed in your base `conda` environment.
+
+Here are a few things you can try to resolve this issue:
+
+1. **Update Conda**: Make sure you're using the latest version of `conda`. You can update it by running the command `conda update -n base -c defaults conda`.
+
+2. **Check the Environment File**: Open the `python3.6-environment-windows.yml` file and check if it contains `requests` and `setuptools`. If it does, try removing these lines or updating the versions to match those in your base `conda` environment.
+
+3. **Create a New Environment Without the File**: Try creating a new environment without using the environment file. You can do this with the command `conda create --name myenv python=3.6`. After the environment is created, activate it with `conda activate myenv`, and then manually install the packages you need.
+
+Remember to replace `myenv` with the name you want for your environment.

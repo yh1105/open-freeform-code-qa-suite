@@ -89,7 +89,7 @@ if __name__ == '__main__':
 
     # create folder
     suite_basename = os.path.basename(args.suite_path)
-    exp_name = f'{args.model_name}_{args.temp}_{args.top_p}_{args.n}'
+    exp_name = f'{args.model_name}_{args.temp}_{args.top_p}_{args.n}_{suite_basename.split(".")[0]}'
     exp_folder = os.path.join(args.storage, exp_name)
     if not os.path.exists(exp_folder):
         os.makedirs(exp_folder)
@@ -116,6 +116,7 @@ if __name__ == '__main__':
         else:
             case_fpath = case['path']
         case_fpath = os.path.join(os.path.dirname(args.suite_path), case_fpath)
+        case_stemname = case_fpath.split('/')[-1].split('.')[0]
         with open(case_fpath, 'r') as f:
             tmp_conf = yaml.load(f, yaml.Loader)
             case_promptpath = tmp_conf['prompt_path']
@@ -134,7 +135,7 @@ if __name__ == '__main__':
         if responses is not None:
             answer_mapping[case_fpath] = []
             for j, item in enumerate(responses):
-                outpath = f'{no}_{j}.txt'
+                outpath = f'{case_stemname}_{j}.txt'
                 answer_mapping[case_fpath].append(outpath)
                 outpath = os.path.join(exp_folder, outpath)
                 with open(outpath, 'w') as f:

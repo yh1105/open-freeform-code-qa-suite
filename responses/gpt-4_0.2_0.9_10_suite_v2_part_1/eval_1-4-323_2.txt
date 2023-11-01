@@ -1,0 +1,28 @@
+Here is a function that should do what you want. It uses `apply` to iterate over each column of the data frame, and for each column it uses `which` to find the indices of the minimum and maximum values. It then uses `table` to count the frequencies of these indices. The results are combined into a data frame.
+
+```r
+myMaxMin <- function(cars) {
+  results <- do.call(rbind, lapply(names(cars), function(name) {
+    column <- cars[[name]]
+    min.indices <- which(column == min(column))
+    max.indices <- which(column == max(column))
+    min.freq <- table(min.indices)
+    max.freq <- table(max.indices)
+    data.frame(
+      min.value = min(column),
+      max.value = max(column),
+      column = name,
+      min.rowname = toString(min.indices),
+      max.rowname = toString(max.indices),
+      min.freq.times = length(min.indices),
+      max.freq.times = length(max.indices)
+    )
+  }))
+  row.names(results) <- NULL
+  results
+}
+```
+
+This function will return a data frame with one row for each column in the input data frame. Each row will contain the minimum and maximum values for that column, the column name, the row names where the minimum and maximum values occur, and the frequency of the minimum and maximum values.
+
+Please note that the row names are returned as a comma-separated string. If you want them as a list of integers, you can replace `toString(min.indices)` and `toString(max.indices)` with `list(min.indices)` and `list(max.indices)`, respectively. However, this will make the resulting data frame a bit harder to read and manipulate.

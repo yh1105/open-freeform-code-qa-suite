@@ -1,0 +1,9 @@
+The `match/case` statement in Python is not implemented as a hash table or lookup table, but rather as a sequence of checks. This is because the `match/case` statement is not limited to simple equality checks, but can also handle more complex pattern matching.
+
+In your example, the `match/case` statement checks each `case` in the order they are written. If the input matches the `case`, it executes the corresponding code and then exits the `match/case` statement. If the input does not match the `case`, it moves on to the next `case`.
+
+This means that the time it takes to execute the `match/case` statement depends on the position of the matching `case`. If the matching `case` is the first one, the `match/case` statement will execute quickly. If the matching `case` is the last one, the `match/case` statement will take longer to execute because it has to check all the preceding `cases` first.
+
+This is why you see different times for different inputs. The inputs that match `cases` near the start of the `match/case` statement execute faster than the inputs that match `cases` near the end of the `match/case` statement.
+
+In contrast, a hash table or lookup table would have constant time access for each case, because it does not need to check each case in sequence. However, a hash table or lookup table cannot handle the complex pattern matching that the `match/case` statement can.

@@ -1,0 +1,12 @@
+This error message indicates that the Firefox browser binary is not found in the default location. You can solve this issue by providing the path to the Firefox binary explicitly.
+
+You can do this by adding the following line of code before creating the `webdriver` object:
+
+```python
+from selenium.webdriver.firefox.options import Options
+firefox_options = Options()
+firefox_options.binary_location = '/path/to/firefox/binary'
+browser = webdriver.Firefox(firefox_options=firefox_options)
+```
+
+Replace `/path/to/firefox/binary` with the actual path to the Firefox binary on your system.

@@ -1,0 +1,19 @@
+Sure, here is a function that will return the shape of each tensor in your list:
+
+```python
+def getSize(t):
+    sizes = [tensor.shape for tensor in t]
+    return sizes
+```
+
+This function uses a list comprehension to iterate over each tensor in the list `t` and get its shape. The shapes are stored in a new list, `sizes`, which is then returned by the function.
+
+You can use this function like this:
+
+```python
+t = [tensor1, tensor2, tensor3]  # your list of tensors
+sizes = getSize(t)
+print(sizes)
+```
+
+This will print a list of tuples, where each tuple represents the shape of a tensor in your list. For example, if your tensors are 2D with dimensions 3x3, 4x4, and 5x5, the output will be `[(3, 3), (4, 4), (5, 5)]`.

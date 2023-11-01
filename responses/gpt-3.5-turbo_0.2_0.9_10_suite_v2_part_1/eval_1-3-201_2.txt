@@ -1,0 +1,24 @@
+You can use multiprocessing to run both scripts simultaneously. Here's an example of how you can modify your code to use multiprocessing:
+
+```python
+import multiprocessing
+
+app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
+database=db.dataBase()
+homepage=hp.homepage(database)
+homepage.timeUpdateCallback(app)
+homepage.gaugeRefreshCallback(app)
+dataMiningScript= fd.financeData(database,1600)
+
+app.layout = homepage.layoutMaker()
+
+if __name__ == "__main__":
+    p1 = multiprocessing.Process(target=dataMiningScript.run)
+    p2 = multiprocessing.Process(target=app.run_server, args=(dict(debug=True),))
+    p1.start()
+    p2.start()
+    p1.join()
+    p2.join()
+```
+
+In this code, we create two processes `p1` and `p2`. `p1` runs the `run()` method of `dataMiningScript`, and `p2` runs the `run_server()` method of `app`. We start both processes using the `start()` method, and then wait for them to finish using the `join()` method. This way, both scripts can run simultaneously without blocking each other.

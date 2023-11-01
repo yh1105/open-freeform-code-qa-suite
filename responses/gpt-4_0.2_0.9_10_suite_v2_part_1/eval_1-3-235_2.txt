@@ -1,0 +1,11 @@
+The error you're seeing is because the 'year' column contains float values represented as strings (e.g., '2021.0'). When you try to convert this to an integer using `int()`, it fails because '2021.0' is not a valid integer literal.
+
+To fix this, you can first convert the 'year' column to float, and then to int. Here's how you can do it:
+
+```python
+def transformation(data_h_df):
+    data_h_df['year'] = data_h_df['year'].astype(float).astype(int)
+    return data_h_df
+```
+
+This function first converts the 'year' column to float, which works because '2021.0' is a valid float literal. Then, it converts the float to int, which also works because 2021.0 is a valid integer. The function then returns the modified dataframe.

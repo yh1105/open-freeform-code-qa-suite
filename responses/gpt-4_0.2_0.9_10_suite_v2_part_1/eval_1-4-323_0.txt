@@ -1,0 +1,42 @@
+Here is a function that should do what you want. It uses `lapply` to iterate over each column of the data frame, find the min and max values, and the row names where these values occur. It then combines these into a new data frame.
+
+```r
+myMaxMin <- function(cars) {
+  # Apply a function to each column of the data frame
+  results <- lapply(names(cars), function(col) {
+    # Get the column data
+    data <- cars[[col]]
+    
+    # Find the min and max values
+    min_val <- min(data)
+    max_val <- max(data)
+    
+    # Find the row names where these values occur
+    min_rows <- which(data == min_val)
+    max_rows <- which(data == max_val)
+    
+    # Return a data frame with the results for this column
+    data.frame(
+      min.value = min_val,
+      max.value = max_val,
+      column = col,
+      min.rowname = list(min_rows),
+      max.rowname = list(max_rows),
+      min.freq.times = length(min_rows),
+      max.freq.times = length(max_rows)
+    )
+  })
+  
+  # Combine the results into a single data frame
+  do.call(rbind, results)
+}
+```
+
+You can use this function like this:
+
+```r
+result <- myMaxMin(cars)
+print(result)
+```
+
+This will give you a data frame where each row corresponds to a column in the original data frame, and the columns give the min and max values, the column name, the row names where the min and max values occur, and the frequency of these values.

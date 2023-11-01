@@ -1,0 +1,30 @@
+Here is a function that uses the `strsplit` function to split the `segment_stemming` column by comma and parenthesis, and then uses the `melt` function from the `data.table` package to reshape the data into the desired format.
+
+```r
+mySplit <- function(x) {
+  # Split the segment_stemming column by comma and parenthesis
+  x[, segment_stemming := strsplit(gsub("[\\[\\]()']", "", segment_stemming), ", ")]
+  
+  # Reshape the data
+  x <- melt(x, id.vars = "id", value.name = "segment_stemming")
+  
+  # Remove NA rows
+  x <- x[!is.na(segment_stemming)]
+  
+  # Remove empty string rows
+  x <- x[segment_stemming != ""]
+  
+  # Add back the parenthesis
+  x[, segment_stemming := paste0("('", segment_stemming, "')")]
+  
+  return(x)
+}
+```
+
+You can use this function on your data like this:
+
+```r
+x <- mySplit(x)
+```
+
+This will modify `x` in place and return the desired output. Note that this function assumes that the `segment_stemming` column is a character vector where each element is a string representation of a list of tuples. If the `segment_stemming` column is actually a list column where each element is a list of tuples, you would need to modify the function accordingly.

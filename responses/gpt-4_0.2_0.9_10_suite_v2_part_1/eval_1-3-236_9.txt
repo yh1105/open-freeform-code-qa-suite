@@ -1,0 +1,16 @@
+It seems like you are trying to disable Jedi in Visual Studio Code. The setting you are trying to use is not correct. The correct setting to disable Jedi is `"python.jediEnabled": false`.
+
+However, starting from the version 2020.5.78807 of the Python extension, the Python Language Server has been replaced with Pylance, and the `python.jediEnabled` setting is no longer supported.
+
+If you want to use Pylint as your linter, you should set it up in your settings.json file like this:
+
+```json
+{
+    "python.linting.pylintEnabled": true,
+    "python.linting.enabled": true
+}
+```
+
+This will enable Pylint and make sure linting is turned on.
+
+If you still see error messages from Jedi, it might be that you have another extension installed that is using Jedi. Try to disable other Python related extensions to see if that helps.

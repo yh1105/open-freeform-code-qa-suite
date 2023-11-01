@@ -1,0 +1,8 @@
+This error occurs when the psycopg2 module is not able to load the required DLL files. One possible solution is to install the psycopg2-binary package instead of the psycopg2 package. 
+
+You can install it using the following command:
+```
+conda install psycopg2-binary
+```
+
+Then, replace `import psycopg2` with `import psycopg2-binary` in your code and try running it again. This should resolve the issue.

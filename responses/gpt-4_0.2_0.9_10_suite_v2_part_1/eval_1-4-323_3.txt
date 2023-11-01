@@ -1,0 +1,51 @@
+Here is a function that should do what you want. It uses `apply` to iterate over the columns of the data frame, and for each column it finds the minimum and maximum values, the row names where these values occur, and the number of times they occur.
+
+```r
+myMaxMin <- function(cars) {
+  # Initialize an empty data frame to store the results
+  results <- data.frame(column = character(),
+                        min.value = numeric(),
+                        max.value = numeric(),
+                        min.rowname = character(),
+                        max.rowname = character(),
+                        min.freq.times = integer(),
+                        max.freq.times = integer(),
+                        stringsAsFactors = FALSE)
+  
+  # Iterate over the columns of the data frame
+  for (col in names(cars)) {
+    # Find the minimum and maximum values
+    min.value <- min(cars[[col]])
+    max.value <- max(cars[[col]])
+    
+    # Find the row names where these values occur
+    min.rowname <- which(cars[[col]] == min.value)
+    max.rowname <- which(cars[[col]] == max.value)
+    
+    # Find the number of times these values occur
+    min.freq.times <- length(min.rowname)
+    max.freq.times <- length(max.rowname)
+    
+    # Add the results to the data frame
+    results <- rbind(results, data.frame(column = col,
+                                         min.value = min.value,
+                                         max.value = max.value,
+                                         min.rowname = toString(min.rowname),
+                                         max.rowname = toString(max.rowname),
+                                         min.freq.times = min.freq.times,
+                                         max.freq.times = max.freq.times,
+                                         stringsAsFactors = FALSE))
+  }
+  
+  # Return the results
+  return(results)
+}
+```
+
+You can use this function on your `cars` data frame like this:
+
+```r
+myMaxMin(cars)
+```
+
+This will return a data frame with the minimum and maximum values for each column, the row names where these values occur, and the number of times they occur.

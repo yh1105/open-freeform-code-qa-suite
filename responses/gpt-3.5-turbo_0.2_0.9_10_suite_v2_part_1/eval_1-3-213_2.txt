@@ -1,0 +1,19 @@
+You can try using the `tz_localize` method to set the timezone to UTC and then use the `tz_convert` method to convert it to a timezone-unaware datetime object. Here's the updated code:
+
+```python
+df['time'] = df['time'].dt.tz_localize(None).dt.tz_convert('UTC').dt.tz_localize(None)
+```
+
+This should remove the timezone information from the "time" column.
+
+And here's the `removeTimezone` function:
+
+```python
+import pandas as pd
+
+def removeTimezone(df):
+    df['time'] = df['time'].dt.tz_localize(None).dt.tz_convert('UTC').dt.tz_localize(None)
+    return df
+```
+
+You can call this function on your DataFrame before saving it to Excel.

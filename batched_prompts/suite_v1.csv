@@ -1,0 +1,1613 @@
+,idx,filename,question_type,system_prompt,content_prompt,prompt,n_token
+0,0,cases/eval_208.yaml,knowledge question-answering,"You are a professional assistant for programmers. By default, questions and answers are in Markdown format.","To share cookies cross origin, what settings are needed in back-end and front-end?
+Specifically, pelase don't add other text and repeat the following paragraph with [blank] filled:
+
+For back-end settings, please set HTTP header [blank] value to True. There are two other settings need to be set: Access-Control-[blank] and Access-Control-[blank].
+
+For front-end settings, Chrome deliver cookies with cross-site requests only with [blank]=[blank] and [blank]. Then, the request code, if written in Angular, need to set [blank]: true.
+
+Answer:
+For back-end settings, please set HTTP header","You are a professional assistant for programmers. By default, questions and answers are in Markdown format.
+To share cookies cross origin, what settings are needed in back-end and front-end?
+Specifically, pelase don't add other text and repeat the following paragraph with [blank] filled:
+
+For back-end settings, please set HTTP header [blank] value to True. There are two other settings need to be set: Access-Control-[blank] and Access-Control-[blank].
+
+For front-end settings, Chrome deliver cookies with cross-site requests only with [blank]=[blank] and [blank]. Then, the request code, if written in Angular, need to set [blank]: true.
+
+Answer:
+For back-end settings, please set HTTP header",148
+1,1,cases/eval_310.yaml,code completion,"You are a professional assistant for programmers. By default, questions and answers are in Markdown format.","Please write a function `getCurrentDate` in Javascript, which returns the current date in string of the format `MM/DD/YYYY`.
+
+Function signature is: `function getCurrentDate()`","You are a professional assistant for programmers. By default, questions and answers are in Markdown format.
+Please write a function `getCurrentDate` in Javascript, which returns the current date in string of the format `MM/DD/YYYY`.
+
+Function signature is: `function getCurrentDate()`",56
+2,2,cases/eval_652.yaml,knowledge question-answering,"You are a professional assistant for programmers. By default, questions and answers are in Markdown format.","When I try to run this example:
+
+```
+import matplotlib.pyplot as plt
+import matplotlib as mpl
+import numpy as np
+
+x = np.linspace(0, 20, 100)
+plt.plot(x, np.sin(x))
+plt.show()
+```
+
+I see the result in a new window. Is there any way to see the result graphs in the Visual Studio Code itself directly? If changes to code are needed, could you reply with the full changed code to me? I don't want to install Jupyter notebooks.","You are a professional assistant for programmers. By default, questions and answers are in Markdown format.
+When I try to run this example:
+
+```
+import matplotlib.pyplot as plt
+import matplotlib as mpl
+import numpy as np
+
+x = np.linspace(0, 20, 100)
+plt.plot(x, np.sin(x))
+plt.show()
+```
+
+I see the result in a new window. Is there any way to see the result graphs in the Visual Studio Code itself directly? If changes to code are needed, could you reply with the full changed code to me? I don't want to install Jupyter notebooks.",125
+3,3,cases/eval_703.yaml,code debugging,"You are a professional assistant for programmers. By default, questions and answers are in Markdown format.","
+I'm working with Angular CLI and angular material v.5.2.5
+and trying to use `mat-icon-button` but such an error produced by the console:
+> Uncaught Error: Template parse errors: 'mat-icon' is not a known
+element...
+
+if I use `mat-raised-button` everything works fine cannot figure out how to solve that
+
+index.html
+```
+<!doctype html>
+<html lang=""en"">
+<head>
+  <meta charset=""utf-8"">
+  <title>Todo</title>
+  <base href=""/"">
+
+  <meta name=""viewport"" content=""width=device-width, initial-scale=1"">
+  <link href=""https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic""
+    rel=""stylesheet"">
+  <link href=""https://fonts.googleapis.com/icon?family=Material+Icons"" rel=""stylesheet"">
+</head>
+<body>
+  <app-root></app-root>
+</body>
+</html>
+```
+
+main.ts
+```
+import { enableProdMode } from '@angular/core';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+
+import { AppModule } from './app/app.module';
+import { environment } from './environments/environment';
+
+if (environment.production) {
+  enableProdMode();
+}
+
+platformBrowserDynamic().bootstrapModule(AppModule)
+  .catch(err => console.log(err));
+```
+
+app.module.ts
+```
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
+import { MatButtonModule } from '@angular/material/button';
+
+
+import { AppComponent } from './app.component';
+
+
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    HttpModule,
+    MatButtonModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+```
+
+Could you tell me what is missing in which file?","You are a professional assistant for programmers. By default, questions and answers are in Markdown format.
+
+I'm working with Angular CLI and angular material v.5.2.5
+and trying to use `mat-icon-button` but such an error produced by the console:
+> Uncaught Error: Template parse errors: 'mat-icon' is not a known
+element...
+
+if I use `mat-raised-button` everything works fine cannot figure out how to solve that
+
+index.html
+```
+<!doctype html>
+<html lang=""en"">
+<head>
+  <meta charset=""utf-8"">
+  <title>Todo</title>
+  <base href=""/"">
+
+  <meta name=""viewport"" content=""width=device-width, initial-scale=1"">
+  <link href=""https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic""
+    rel=""stylesheet"">
+  <link href=""https://fonts.googleapis.com/icon?family=Material+Icons"" rel=""stylesheet"">
+</head>
+<body>
+  <app-root></app-root>
+</body>
+</html>
+```
+
+main.ts
+```
+import { enableProdMode } from '@angular/core';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+
+import { AppModule } from './app/app.module';
+import { environment } from './environments/environment';
+
+if (environment.production) {
+  enableProdMode();
+}
+
+platformBrowserDynamic().bootstrapModule(AppModule)
+  .catch(err => console.log(err));
+```
+
+app.module.ts
+```
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
+import { MatButtonModule } from '@angular/material/button';
+
+
+import { AppComponent } from './app.component';
+
+
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    HttpModule,
+    MatButtonModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+```
+
+Could you tell me what is missing in which file?",439
+4,4,cases/eval_789.yaml,code completion,"You are a professional assistant for programmers. By default, questions and answers are in Markdown format.","How do I split a custom dataset into training and test datasets?
+
+The dataset is created with following code:
+
+
+```
+import pandas as pd
+import numpy as np
+from torch.utils.data.dataset import Dataset
+
+
+class CustomDatasetFromCSV(Dataset):
+    def __init__(self, csv_path, transform=None):
+        self.data = pd.read_csv(csv_path)
+        try:
+            self.labels = pd.get_dummies(self.data['emotion']).as_matrix()
+        except Exception:
+            self.labels = pd.get_dummies(self.data['emotion']).values
+        self.height = 48
+        self.width = 48
+        self.transform = transform
+
+    def __getitem__(self, index):
+        pixels = self.data['pixels'][index]
+        faces = []
+        face = np.asarray(eval(pixels)).reshape(self.width, self.height)
+        faces.append(face.astype('float32'))
+        faces = np.asarray(faces)
+        faces = np.expand_dims(faces, -1)
+        return faces, self.labels[index]
+
+    def __len__(self):
+        return len(self.data)
+
+dataset = CustomDatasetFromCSV(my_path)
+```
+
+Could you split the dataset into training set and validation set with no overlap? The training set has 80% samples and validation set has 20% samples. You should only output the appended code. Store the training set in variable `train_loader` and the validation set in variable `validation_loader`.","You are a professional assistant for programmers. By default, questions and answers are in Markdown format.
+How do I split a custom dataset into training and test datasets?
+
+The dataset is created with following code:
+
+
+```
+import pandas as pd
+import numpy as np
+from torch.utils.data.dataset import Dataset
+
+
+class CustomDatasetFromCSV(Dataset):
+    def __init__(self, csv_path, transform=None):
+        self.data = pd.read_csv(csv_path)
+        try:
+            self.labels = pd.get_dummies(self.data['emotion']).as_matrix()
+        except Exception:
+            self.labels = pd.get_dummies(self.data['emotion']).values
+        self.height = 48
+        self.width = 48
+        self.transform = transform
+
+    def __getitem__(self, index):
+        pixels = self.data['pixels'][index]
+        faces = []
+        face = np.asarray(eval(pixels)).reshape(self.width, self.height)
+        faces.append(face.astype('float32'))
+        faces = np.asarray(faces)
+        faces = np.expand_dims(faces, -1)
+        return faces, self.labels[index]
+
+    def __len__(self):
+        return len(self.data)
+
+dataset = CustomDatasetFromCSV(my_path)
+```
+
+Could you split the dataset into training set and validation set with no overlap? The training set has 80% samples and validation set has 20% samples. You should only output the appended code. Store the training set in variable `train_loader` and the validation set in variable `validation_loader`.",309
+5,5,cases/eval_938.yaml,code debugging,"You are a professional assistant for programmers. By default, questions and answers are in Markdown format.","I want to import an image in Typescript. Here is the `main.ts` file: 
+
+```
+import * as Logo from 'assets/images/logo.png';
+```
+
+HTML file `main.html`:
+
+```
+<img src={Logo} alt="""" />
+```
+
+
+The type definition in `d.ts` file is:
+
+```
+declare module ""*.png"" {
+  const value: string;
+  export default value;
+}
+```
+
+I get the error: 
+```
+[ts] Types of property 'src' are incompatible. Type 'typeof import(""*.png"")' is not assignable to type 'string | undefined'. Type 'typeof import(""*.png"")' is not assignable to type 'string'. 
+```
+
+Please answer in the following format: I should modity [name] file to ```[code]```","You are a professional assistant for programmers. By default, questions and answers are in Markdown format.
+I want to import an image in Typescript. Here is the `main.ts` file: 
+
+```
+import * as Logo from 'assets/images/logo.png';
+```
+
+HTML file `main.html`:
+
+```
+<img src={Logo} alt="""" />
+```
+
+
+The type definition in `d.ts` file is:
+
+```
+declare module ""*.png"" {
+  const value: string;
+  export default value;
+}
+```
+
+I get the error: 
+```
+[ts] Types of property 'src' are incompatible. Type 'typeof import(""*.png"")' is not assignable to type 'string | undefined'. Type 'typeof import(""*.png"")' is not assignable to type 'string'. 
+```
+
+Please answer in the following format: I should modity [name] file to ```[code]```",183
+6,6,cases/eval_1443.yaml,code debugging,"You are a professional assistant for programmers. By default, questions and answers are in Markdown format.","I have a project in my local created with springBoot, java, jHipster, Angular, etc and I want to run it. Usually I have used mvnw to run the project. Now I changed computer so when running mvnw in cmd it says app running in https://localhost:8080 and when I go to this link I cannot have access to the app.
+
+This is the message:
+
+```
+This site can’t provide a secure connection
+localhost sent an invalid response.
+Try running Windows Network Diagnostics.
+ERR_SSL_PROTOCOL_ERROR
+```
+
+Maybe I need to install apache so I can access to the projects in localhost? I do not remember if I had apache installed in my old pc wheer I could access to the app.
+
+I did `netstat -ano | findstr 8080` in cmd and found in task manager that port 8080 is used by java.exe. Maybe it is a port issue?","You are a professional assistant for programmers. By default, questions and answers are in Markdown format.
+I have a project in my local created with springBoot, java, jHipster, Angular, etc and I want to run it. Usually I have used mvnw to run the project. Now I changed computer so when running mvnw in cmd it says app running in https://localhost:8080 and when I go to this link I cannot have access to the app.
+
+This is the message:
+
+```
+This site can’t provide a secure connection
+localhost sent an invalid response.
+Try running Windows Network Diagnostics.
+ERR_SSL_PROTOCOL_ERROR
+```
+
+Maybe I need to install apache so I can access to the projects in localhost? I do not remember if I had apache installed in my old pc wheer I could access to the app.
+
+I did `netstat -ano | findstr 8080` in cmd and found in task manager that port 8080 is used by java.exe. Maybe it is a port issue?",209
+7,7,cases/eval_1493.yaml,code debugging,"You are a professional assistant for programmers. By default, questions and answers are in Markdown format.","I have a list called `fileList` containing thousands of filenames and sizes like this:
+
+```
+['/home/rob/Pictures/some/folder/picture one something.jpg', '143452']
+['/home/rob/Pictures/some/other/folder/pictureBlah.jpg', '473642']
+['/home/rob/Pictures/folder/blahblahpicture filename.jpg', '345345']
+```
+
+I want to copy the files using item[0] for each item in `fileList` as the source but to another folder destination. I use
+```
+for item in fileList:
+    copyfile(item[0], ""/Users/username/Desktop/testPhotos"")
+```
+
+but get an error
+
+```
+IsADirectoryError: [Errno 21] Is a directory: '/Users/username/Desktop/testPhotos'
+```
+
+Could you complete the function `copy_from_file_list` below to finish the task?
+
+```
+from shutil import copyfile
+
+def copy_from_file_list(fileList, destFolder):
+```
+","You are a professional assistant for programmers. By default, questions and answers are in Markdown format.
+I have a list called `fileList` containing thousands of filenames and sizes like this:
+
+```
+['/home/rob/Pictures/some/folder/picture one something.jpg', '143452']
+['/home/rob/Pictures/some/other/folder/pictureBlah.jpg', '473642']
+['/home/rob/Pictures/folder/blahblahpicture filename.jpg', '345345']
+```
+
+I want to copy the files using item[0] for each item in `fileList` as the source but to another folder destination. I use
+```
+for item in fileList:
+    copyfile(item[0], ""/Users/username/Desktop/testPhotos"")
+```
+
+but get an error
+
+```
+IsADirectoryError: [Errno 21] Is a directory: '/Users/username/Desktop/testPhotos'
+```
+
+Could you complete the function `copy_from_file_list` below to finish the task?
+
+```
+from shutil import copyfile
+
+def copy_from_file_list(fileList, destFolder):
+```
+",222
+8,8,cases/eval_1799.yaml,code completion,"You are a professional assistant for programmers. By default, questions and answers are in Markdown format.","In Javascript, I would like to convert a Date object with date and time in local timeszone to UTC date. Could you write a function to accomplish this? The function name is `convertToUTC()`. It receices a Date object and returns a Date object too.","You are a professional assistant for programmers. By default, questions and answers are in Markdown format.
+In Javascript, I would like to convert a Date object with date and time in local timeszone to UTC date. Could you write a function to accomplish this? The function name is `convertToUTC()`. It receices a Date object and returns a Date object too.",74
+9,9,cases/eval_1830.yaml,knowledge question-answering,"You are a professional assistant for programmers. By default, questions and answers are in Markdown format.","In Flutter, is there a way to customize `BottomNavigationBar`'s height?
+I currently have a `BottomNavigationBar` with tabs to taps/swipe navigate, however the default height (even after reducing the text and icon) is too high.","You are a professional assistant for programmers. By default, questions and answers are in Markdown format.
+In Flutter, is there a way to customize `BottomNavigationBar`'s height?
+I currently have a `BottomNavigationBar` with tabs to taps/swipe navigate, however the default height (even after reducing the text and icon) is too high.",72
+10,10,cases/eval_2073.yaml,knowledge question-answering,"You are a professional assistant for programmers. By default, questions and answers are in Markdown format.","In Flutter, I want to delete all saved shared preferences when the user taps on logout. Are there any ways to do this in a single shot without deleting one by one?","You are a professional assistant for programmers. By default, questions and answers are in Markdown format.
+In Flutter, I want to delete all saved shared preferences when the user taps on logout. Are there any ways to do this in a single shot without deleting one by one?",55
+11,11,cases/eval_2079.yaml,code debugging,"You are a professional assistant for programmers. By default, questions and answers are in Markdown format.","In SQL, I use an early version of SQL server which does not have TRIM function. Could you write down a TRIM function implementation to so the following code works:
+
+```
+DECLARE @ss varchar(60)
+  SET @ss = 'admin'
+
+  select TRIM(@ss)
+```","You are a professional assistant for programmers. By default, questions and answers are in Markdown format.
+In SQL, I use an early version of SQL server which does not have TRIM function. Could you write down a TRIM function implementation to so the following code works:
+
+```
+DECLARE @ss varchar(60)
+  SET @ss = 'admin'
+
+  select TRIM(@ss)
+```",78
+12,12,cases/eval_2748.yaml,knowledge question-answering,"You are a professional assistant for programmers. By default, questions and answers are in Markdown format.","I have seen a lot of specific posts to particular case-specific problems, but no fundamental motivating explanation. What does this error:
+```RuntimeError: CUDA error: device-side assert triggered``` mean? Specifically, what is the assert that is being triggered, why is the assert there, and how do we work backwards to debug the problem?","You are a professional assistant for programmers. By default, questions and answers are in Markdown format.
+I have seen a lot of specific posts to particular case-specific problems, but no fundamental motivating explanation. What does this error:
+```RuntimeError: CUDA error: device-side assert triggered``` mean? Specifically, what is the assert that is being triggered, why is the assert there, and how do we work backwards to debug the problem?",87
+13,13,cases/eval_3142.yaml,knowledge question-answering,"You are a professional assistant for programmers. By default, questions and answers are in Markdown format. You are chatting with programmers, so please answer as briefly as possible.","What is the difference between List and ForEach in SwiftUI? 
+I know SwiftUI does not support currently regular for loops but instead provide something called ForEach but what is the difference between that and a List?","You are a professional assistant for programmers. By default, questions and answers are in Markdown format. You are chatting with programmers, so please answer as briefly as possible.
+What is the difference between List and ForEach in SwiftUI? 
+I know SwiftUI does not support currently regular for loops but instead provide something called ForEach but what is the difference between that and a List?",76
+14,14,cases/eval_3401.yaml,knowledge question-answering,"You are a professional assistant for programmers. By default, questions and answers are in Markdown format.","What npm command needs to be run if I would like to deploy my nuxtjs static website to some public hosting like GitHub pages? I have some content depended from the user, so it is better to deploy as a single page application.","You are a professional assistant for programmers. By default, questions and answers are in Markdown format.
+What npm command needs to be run if I would like to deploy my nuxtjs static website to some public hosting like GitHub pages? I have some content depended from the user, so it is better to deploy as a single page application.",67
+15,15,cases/eval_3651.yaml,code completion,"You are a professional assistant for programmers. By default, questions and answers are in Markdown format.","I would like to convert a `matploblib.fig` to a `PIL.Image` without saving the `fig` to disk and then opening that file. Could you help me complete the following code:
+
+```
+from matplotlib import pyplot as plt
+from PIL import Image
+
+def transform(input: plt.Figure) -> PIL.Image
+```
+
+","You are a professional assistant for programmers. By default, questions and answers are in Markdown format.
+I would like to convert a `matploblib.fig` to a `PIL.Image` without saving the `fig` to disk and then opening that file. Could you help me complete the following code:
+
+```
+from matplotlib import pyplot as plt
+from PIL import Image
+
+def transform(input: plt.Figure) -> PIL.Image
+```
+
+",89
+16,16,cases/eval_3790.yaml,knowledge question-answering,"You are a professional assistant for programmers. By default, questions and answers are in Markdown format.","How to generate REST Client using Swagger codegen? For example, I have a simple app, it's a REST server and I want to generate REST client. How can I do?","You are a professional assistant for programmers. By default, questions and answers are in Markdown format.
+How to generate REST Client using Swagger codegen? For example, I have a simple app, it's a REST server and I want to generate REST client. How can I do?",55
+17,17,cases/eval_4310.yaml,code debugging,"You are a professional assistant for programmers. By default, questions and answers are in Markdown format.","I would like VSCode to IntelliSense the module path so I can access it by click.
+
+For example, after configurating `jsconfig.json` I'm able to access `./src/styled/index` by importing its global path.
+
+But I couldn't figure out how to make it work with an alias `@styles`
+
+What should I do?","You are a professional assistant for programmers. By default, questions and answers are in Markdown format.
+I would like VSCode to IntelliSense the module path so I can access it by click.
+
+For example, after configurating `jsconfig.json` I'm able to access `./src/styled/index` by importing its global path.
+
+But I couldn't figure out how to make it work with an alias `@styles`
+
+What should I do?",92
+18,18,cases/eval_4548.yaml,code debugging,"You are a professional assistant for programmers. By default, questions and answers are in Markdown format.","
+I'm writing a Go project inside my GoPath, and i'm using the Redigo package for connecting to a Redis Server. The application runs fine, however in VSCode there is this annoying error on package import, which is preventing VSCode from giving intellisense suggestions:
+
+> Could not import github.com/gomodule/redigo/redis (no package data for import path github.com/gomodule/redigo/redis)
+
+How to solve this?","You are a professional assistant for programmers. By default, questions and answers are in Markdown format.
+
+I'm writing a Go project inside my GoPath, and i'm using the Redigo package for connecting to a Redis Server. The application runs fine, however in VSCode there is this annoying error on package import, which is preventing VSCode from giving intellisense suggestions:
+
+> Could not import github.com/gomodule/redigo/redis (no package data for import path github.com/gomodule/redigo/redis)
+
+How to solve this?",112
+19,19,cases/eval_4660.yaml,code debugging,"You are a professional assistant for programmers. By default, questions and answers are in Markdown format.","I try to run a react-native-cli project using react-native start, and the metro bundler fails, saying the following:  
+
+```
+events.js 187
+throw er; //Unhandled 'error' event
+
+Error: EMFILE: too many open files, watch
+
+Emitted 'error' event on NodeWatcher isntance at:
+     at NodeWatcher: checkedEmitError (.../react-native-project/node_modules/sane/src/node_watcher.js:143:12)
+     at FSWatcher.emit (events.js:210:5)
+     at FSEvent.FSWatcher:_handle onchange (internal/fs/watchers.js:129:12) {
+   errno: -24,
+   syscall: 'watch',
+   code : 'EMFILE',
+   filename: null
+)
+Process terminated. Press <enter> to close the window
+```","You are a professional assistant for programmers. By default, questions and answers are in Markdown format.
+I try to run a react-native-cli project using react-native start, and the metro bundler fails, saying the following:  
+
+```
+events.js 187
+throw er; //Unhandled 'error' event
+
+Error: EMFILE: too many open files, watch
+
+Emitted 'error' event on NodeWatcher isntance at:
+     at NodeWatcher: checkedEmitError (.../react-native-project/node_modules/sane/src/node_watcher.js:143:12)
+     at FSWatcher.emit (events.js:210:5)
+     at FSEvent.FSWatcher:_handle onchange (internal/fs/watchers.js:129:12) {
+   errno: -24,
+   syscall: 'watch',
+   code : 'EMFILE',
+   filename: null
+)
+Process terminated. Press <enter> to close the window
+```",187
+20,20,cases/eval_4741.yaml,code debugging,"You are a professional assistant for programmers. By default, questions and answers are in Markdown format.","I've lost a day's work in Jupyter Notebook because it didn't autosave. As I was working, I would click on `File` > `Save and Checkpoint` to be safe. I closed the notebook when I finished working and when I tried reopening it, I see that essentially all my work is gone and it says `Last Checkpoint: a day ago (autosaved)` next to the filename. I now realize that I had been working for a long time on the notebook with an orange box with some kind of error message. I'm sorry that I can't remember the specific message right now, but I think it was something involving `POS` or `POST` or `POSIT` ...?. I saw `Trusted` next to the error message, so I must've thought things were OK.
+
+I tried opening the `filename-checkpoint.ipynb` file within the `.ipynb_checkpoints` folder but it's blank. I looked up a possible solution but it requires SQL, which I don't know. Is there any hope for recovering my work? I realize that this is probably a rookie mistake, but I'm pretty new at this.
+
+Thanks.
+
+PS: I'm running Python3 on MacOS","You are a professional assistant for programmers. By default, questions and answers are in Markdown format.
+I've lost a day's work in Jupyter Notebook because it didn't autosave. As I was working, I would click on `File` > `Save and Checkpoint` to be safe. I closed the notebook when I finished working and when I tried reopening it, I see that essentially all my work is gone and it says `Last Checkpoint: a day ago (autosaved)` next to the filename. I now realize that I had been working for a long time on the notebook with an orange box with some kind of error message. I'm sorry that I can't remember the specific message right now, but I think it was something involving `POS` or `POST` or `POSIT` ...?. I saw `Trusted` next to the error message, so I must've thought things were OK.
+
+I tried opening the `filename-checkpoint.ipynb` file within the `.ipynb_checkpoints` folder but it's blank. I looked up a possible solution but it requires SQL, which I don't know. Is there any hope for recovering my work? I realize that this is probably a rookie mistake, but I'm pretty new at this.
+
+Thanks.
+
+PS: I'm running Python3 on MacOS",270
+21,21,cases/eval_5174.yaml,code debugging,"You are a professional assistant for programmers. By default, questions and answers are in Markdown format.","
+I try to install packages from anaconda to google's colab.
+
+But it doesn't work. The whole thing is voodoo magic.
+
+The following code is in one cell.
+
+Notebook's cell:
+
+```
+!wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+!bash Miniconda3-latest-Linux-x86_64.sh -b -f -p /usr/local/
+!rm Miniconda3-latest-Linux-x86_64.sh
+!conda install -y --prefix /usr/local/ ujson aiohttp tqdm
+import sys
+os.environ['PYTHONPATH'] = ""/usr/local/miniconda3""
+os.environ['PATH'] = '/usr/local/miniconda3/bin:' + os.environ['PATH']
+sys.path.append('/usr/local/lib/python3.6/site-packages/')
+import ujson
+```
+
+Result:
+
+```
+ModuleNotFoundError: No module named 'ujson'
+```
+
+Could you change the commands in above notebook's cell to successfully import ujson module?","You are a professional assistant for programmers. By default, questions and answers are in Markdown format.
+
+I try to install packages from anaconda to google's colab.
+
+But it doesn't work. The whole thing is voodoo magic.
+
+The following code is in one cell.
+
+Notebook's cell:
+
+```
+!wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+!bash Miniconda3-latest-Linux-x86_64.sh -b -f -p /usr/local/
+!rm Miniconda3-latest-Linux-x86_64.sh
+!conda install -y --prefix /usr/local/ ujson aiohttp tqdm
+import sys
+os.environ['PYTHONPATH'] = ""/usr/local/miniconda3""
+os.environ['PATH'] = '/usr/local/miniconda3/bin:' + os.environ['PATH']
+sys.path.append('/usr/local/lib/python3.6/site-packages/')
+import ujson
+```
+
+Result:
+
+```
+ModuleNotFoundError: No module named 'ujson'
+```
+
+Could you change the commands in above notebook's cell to successfully import ujson module?",236
+22,22,cases/eval_5460.yaml,code debugging,"You are a professional assistant for programmers. By default, questions and answers are in Markdown format.","I call the function 'booksRefresh()' from the parent in the child component, but I get the error:
+
+> TypeError: booksRefresh is not a function
+
+I don't know why, because `booksRefresh` is a function. Can you show a fixed definition of `AddBookForm`?
+
+Here is my code:
+
+```
+import React, {useState} from ""react"";
+import {Redirect} from ""react-router"";
+import {addBook} from ""../api/api"";
+import {Button} from ""react-bootstrap"";
+
+const AddBookForm = (booksRefresh) => {
+    const [title, setTitle] = useState();
+    const [description, setDescription] = useState();
+    const [submitted, setSubmitted] = useState(false);
+
+    const postRequestHandler = () => {
+        addBook(title, description);
+        booksRefresh();
+    }
+...
+ return (
+        ...
+            <Button type=""submit"" onClick={postRequestHandler} variant=""outline-success"">Add</Button>
+        </div>
+    )
+```
+
+
+Parent:
+
+```
+function App({history}) {
+  ...
+    const [changeInBooks, setChangeInBooks] = useState(0)
+
+    const booksRefresh = () => {
+        let incrementChangeInBook = changeInBooks + 1;
+        setChangeInBooks(incrementChangeInBook)
+    }
+return (
+        <div className=""App"">
+            <header className=""App-header"">
+                ...
+                            <Button variant=""outline-success"" onClick={() => history.push(""/new-book"")}>
+                                {ADD_BOOK}</Button>
+                ...
+            </header>
+            <Switch>
+                ...
+                <Route path=""/new-book"" exact render={() =>
+                    <AddBookForm
+                        booksRefresh={booksRefresh}/>
+                }/>
+               ...
+            </Switch>
+        </div>
+    );
+}
+
+export default withRouter(App);
+```","You are a professional assistant for programmers. By default, questions and answers are in Markdown format.
+I call the function 'booksRefresh()' from the parent in the child component, but I get the error:
+
+> TypeError: booksRefresh is not a function
+
+I don't know why, because `booksRefresh` is a function. Can you show a fixed definition of `AddBookForm`?
+
+Here is my code:
+
+```
+import React, {useState} from ""react"";
+import {Redirect} from ""react-router"";
+import {addBook} from ""../api/api"";
+import {Button} from ""react-bootstrap"";
+
+const AddBookForm = (booksRefresh) => {
+    const [title, setTitle] = useState();
+    const [description, setDescription] = useState();
+    const [submitted, setSubmitted] = useState(false);
+
+    const postRequestHandler = () => {
+        addBook(title, description);
+        booksRefresh();
+    }
+...
+ return (
+        ...
+            <Button type=""submit"" onClick={postRequestHandler} variant=""outline-success"">Add</Button>
+        </div>
+    )
+```
+
+
+Parent:
+
+```
+function App({history}) {
+  ...
+    const [changeInBooks, setChangeInBooks] = useState(0)
+
+    const booksRefresh = () => {
+        let incrementChangeInBook = changeInBooks + 1;
+        setChangeInBooks(incrementChangeInBook)
+    }
+return (
+        <div className=""App"">
+            <header className=""App-header"">
+                ...
+                            <Button variant=""outline-success"" onClick={() => history.push(""/new-book"")}>
+                                {ADD_BOOK}</Button>
+                ...
+            </header>
+            <Switch>
+                ...
+                <Route path=""/new-book"" exact render={() =>
+                    <AddBookForm
+                        booksRefresh={booksRefresh}/>
+                }/>
+               ...
+            </Switch>
+        </div>
+    );
+}
+
+export default withRouter(App);
+```",392
+23,23,cases/eval_5747.yaml,code debugging,"You are a professional assistant for programmers. By default, questions and answers are in Markdown format.","I wrote the following node.js code to create a PDF file:
+
+```
+(async function() {
+
+      try {
+
+      const browser = await puppeteer.launch();
+      const page = await browser.newPage();
+
+      await page.setContent(pdfOutput);
+      await page.emulateMedia(""screen"");
+      await page.pdf({
+        path: ""routes/planiton/pdf/mypdf.pdf"",
+        format: ""A4"",
+        printBackground: true
+      });
+
+      console.log('done');
+      await browser.close();
+      //process.exit();
+
+    } catch (e) {
+      console.log(""Our Error"", e)
+    }
+  })();
+```
+
+However, the code reports `Error: Failed to launch the browser process puppeteer` and `checked failed crashForExceptionInNonABIComplianceCodeRange`. What should I do?","You are a professional assistant for programmers. By default, questions and answers are in Markdown format.
+I wrote the following node.js code to create a PDF file:
+
+```
+(async function() {
+
+      try {
+
+      const browser = await puppeteer.launch();
+      const page = await browser.newPage();
+
+      await page.setContent(pdfOutput);
+      await page.emulateMedia(""screen"");
+      await page.pdf({
+        path: ""routes/planiton/pdf/mypdf.pdf"",
+        format: ""A4"",
+        printBackground: true
+      });
+
+      console.log('done');
+      await browser.close();
+      //process.exit();
+
+    } catch (e) {
+      console.log(""Our Error"", e)
+    }
+  })();
+```
+
+However, the code reports `Error: Failed to launch the browser process puppeteer` and `checked failed crashForExceptionInNonABIComplianceCodeRange`. What should I do?",184
+24,24,cases/eval_5749.yaml,knowledge question-answering,"You are a professional assistant for programmers. By default, questions and answers are in Markdown format. You are chatting with programmers, so please answer as briefly as possible.","Java 14 introduced records feature. Record creates getter with the same name as field, so one would write `print(person.name())` for example. But old Java bean convention dictates that one should name this method as `getName()`.
+
+Using both styles in the same code base does not look very nice. Migrating everything to records is not possible, as they are too limited to replace all use-cases.
+
+Is there any official or semi-official guidelines how to name getters and setters after Java 14 in new code?","You are a professional assistant for programmers. By default, questions and answers are in Markdown format. You are chatting with programmers, so please answer as briefly as possible.
+Java 14 introduced records feature. Record creates getter with the same name as field, so one would write `print(person.name())` for example. But old Java bean convention dictates that one should name this method as `getName()`.
+
+Using both styles in the same code base does not look very nice. Migrating everything to records is not possible, as they are too limited to replace all use-cases.
+
+Is there any official or semi-official guidelines how to name getters and setters after Java 14 in new code?",139
+25,25,cases/eval_5864.yaml,knowledge question-answering,"You are a professional assistant for programmers. By default, questions and answers are in Markdown format.","This query is for react-navigation 5.  
+
+In react navigation 4 we could pass a function as a param while navigating but in react navigation 5, it throws a warning about serializing params.  
+
+Basically, what I am trying to do is, navigate to a child screen from parent screen, get a new value and update the state of the parent screen.  
+
+Following is the way I am currently implementing:  
+  
+
+```
+_onSelectCountry = (data) => {
+    this.setState(data);
+};
+.
+.
+.
+.
+<TouchableOpacity
+    style={ styles.countrySelector }
+    activeOpacity={ 0.7 }
+    onPress={ () => Navigation.navigate(""CountrySelect"",
+        {
+             onSelect: this._onSelectCountry,
+             countryCode: this.state.country_code,
+        })
+    }
+>
+</TouchableOpacity>
+```
+  
+
+```
+_onPress = (country, country_code, calling_code) => {
+    const { navigation, route } = this.props;
+    navigation.goBack();
+    route.params.onSelect({
+        country_name: country,
+        country_code: country_code,
+        calling_code: calling_code
+    });
+};
+```","You are a professional assistant for programmers. By default, questions and answers are in Markdown format.
+This query is for react-navigation 5.  
+
+In react navigation 4 we could pass a function as a param while navigating but in react navigation 5, it throws a warning about serializing params.  
+
+Basically, what I am trying to do is, navigate to a child screen from parent screen, get a new value and update the state of the parent screen.  
+
+Following is the way I am currently implementing:  
+  
+
+```
+_onSelectCountry = (data) => {
+    this.setState(data);
+};
+.
+.
+.
+.
+<TouchableOpacity
+    style={ styles.countrySelector }
+    activeOpacity={ 0.7 }
+    onPress={ () => Navigation.navigate(""CountrySelect"",
+        {
+             onSelect: this._onSelectCountry,
+             countryCode: this.state.country_code,
+        })
+    }
+>
+</TouchableOpacity>
+```
+  
+
+```
+_onPress = (country, country_code, calling_code) => {
+    const { navigation, route } = this.props;
+    navigation.goBack();
+    route.params.onSelect({
+        country_name: country,
+        country_code: country_code,
+        calling_code: calling_code
+    });
+};
+```",252
+26,26,cases/eval_6407.yaml,code debugging,"You are a professional assistant for programmers. By default, questions and answers are in Markdown format.","I defined a route in vue: 
+
+```
+/users/:userId
+```
+
+which point to UserComponent:
+
+```
+<template>
+ <div>{{username}}</div>
+</template>
+```
+
+and I use `computed` from `@vue/composition-api` to get the data. 
+
+the problem is when the route change to another `userId`, by navigate to another user, the user in the html template not changed as what I expected. also it doesn't do redirect when the the user is not in the list.
+
+So what I can do to fix that?
+
+Here is my code:
+
+```
+<template>
+  <div>{{username}}</div>
+</template>
+
+<script lang=""ts"">
+import { computed, defineComponent, ref, getCurrentInstance } from '@vue/composition-api';
+
+export const useUsername = ({ user }) => {
+  return { username: user.name };
+};
+
+export default defineComponent({
+  setup(props, { root }) {
+    const vm = getCurrentInstance();
+
+    const userToLoad = computed(() => root.$route.params.userId);
+    const listOfUsers = [
+      { userId: 1, name: 'user1' },
+      { userId: 2, name: 'user2' },
+    ];
+
+    const user = listOfUsers.find((u) => u.userId === +userToLoad.value);
+    if (!user) {
+      return root.$router.push('/404');
+    }
+
+    const { username } = useUsername({ user });
+
+    return { username };
+  },
+});
+
+</script>
+```","You are a professional assistant for programmers. By default, questions and answers are in Markdown format.
+I defined a route in vue: 
+
+```
+/users/:userId
+```
+
+which point to UserComponent:
+
+```
+<template>
+ <div>{{username}}</div>
+</template>
+```
+
+and I use `computed` from `@vue/composition-api` to get the data. 
+
+the problem is when the route change to another `userId`, by navigate to another user, the user in the html template not changed as what I expected. also it doesn't do redirect when the the user is not in the list.
+
+So what I can do to fix that?
+
+Here is my code:
+
+```
+<template>
+  <div>{{username}}</div>
+</template>
+
+<script lang=""ts"">
+import { computed, defineComponent, ref, getCurrentInstance } from '@vue/composition-api';
+
+export const useUsername = ({ user }) => {
+  return { username: user.name };
+};
+
+export default defineComponent({
+  setup(props, { root }) {
+    const vm = getCurrentInstance();
+
+    const userToLoad = computed(() => root.$route.params.userId);
+    const listOfUsers = [
+      { userId: 1, name: 'user1' },
+      { userId: 2, name: 'user2' },
+    ];
+
+    const user = listOfUsers.find((u) => u.userId === +userToLoad.value);
+    if (!user) {
+      return root.$router.push('/404');
+    }
+
+    const { username } = useUsername({ user });
+
+    return { username };
+  },
+});
+
+</script>
+```",326
+27,27,cases/eval_6436.yaml,code debugging,"You are a professional assistant for programmers. By default, questions and answers are in Markdown format.","I had setup a basic project with angular9, angular material and angular/flex-layout. How ever I cannot get angular/flex-layout working in `login-view` component. Here is `app.module.ts`:
+
+
+```
+import { reducers } from './ngrx/app-reducer';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './material/material.module';
+import { CoreModule } from './core/core.module';
+import { State, StoreModule } from '@ngrx/store';
+import { environment } from 'src/environments/environment';
+import { StoreDevtoolsModule  } from '@ngrx/store-devtools';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreRouterConnectingModule, RouterState } from '@ngrx/router-store';
+import { metaReducers } from './ngrx/app-reducer'
+import { AuthModule } from './features/auth/auth.module';
+import { FlexLayoutModule } from '@angular/flex-layout';
+
+@NgModule({
+  declarations: [
+    AppComponent,
+  ],
+  imports: [  
+    CoreModule,
+    AuthModule,
+    AppRoutingModule,
+    MaterialModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+    FlexLayoutModule,
+    StoreModule.forRoot(
+      reducers, { 
+        metaReducers,
+        runtimeChecks:{
+          strictStateImmutability:true,
+          strictActionImmutability: true,
+          strictActionSerializability:true,
+          strictStateSerializability: true
+        } 
+      }
+    ),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    // this is going to initialize the global services for ngrx and add them to the application
+    EffectsModule.forRoot([]),
+    StoreRouterConnectingModule.forRoot({
+      stateKey: 'router',
+      routerState:RouterState.Minimal
+    })
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+```","You are a professional assistant for programmers. By default, questions and answers are in Markdown format.
+I had setup a basic project with angular9, angular material and angular/flex-layout. How ever I cannot get angular/flex-layout working in `login-view` component. Here is `app.module.ts`:
+
+
+```
+import { reducers } from './ngrx/app-reducer';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './material/material.module';
+import { CoreModule } from './core/core.module';
+import { State, StoreModule } from '@ngrx/store';
+import { environment } from 'src/environments/environment';
+import { StoreDevtoolsModule  } from '@ngrx/store-devtools';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreRouterConnectingModule, RouterState } from '@ngrx/router-store';
+import { metaReducers } from './ngrx/app-reducer'
+import { AuthModule } from './features/auth/auth.module';
+import { FlexLayoutModule } from '@angular/flex-layout';
+
+@NgModule({
+  declarations: [
+    AppComponent,
+  ],
+  imports: [  
+    CoreModule,
+    AuthModule,
+    AppRoutingModule,
+    MaterialModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+    FlexLayoutModule,
+    StoreModule.forRoot(
+      reducers, { 
+        metaReducers,
+        runtimeChecks:{
+          strictStateImmutability:true,
+          strictActionImmutability: true,
+          strictActionSerializability:true,
+          strictStateSerializability: true
+        } 
+      }
+    ),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    // this is going to initialize the global services for ngrx and add them to the application
+    EffectsModule.forRoot([]),
+    StoreRouterConnectingModule.forRoot({
+      stateKey: 'router',
+      routerState:RouterState.Minimal
+    })
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+```",468
+28,28,cases/eval_6495.yaml,code completion,"You are a professional assistant for programmers. By default, questions and answers are in Markdown format.","Could you write me a Python function `plot_confusion_matrix(matrix: list[list[int]], x_labels: list[str], y_labels: list[str])` that returns a `plotly` figure object containing an annotated heatmap. The annotation within each cell is exactly the number of corresponding matrix cell value.
+
+Please start by completing the following function:
+
+```
+import plotly.figure_factory as ff
+import kaleido
+
+def plot_confusion_matrix(matrix: list[list[int]], x_labels: list[str], y_labels: list[str])
+```
+","You are a professional assistant for programmers. By default, questions and answers are in Markdown format.
+Could you write me a Python function `plot_confusion_matrix(matrix: list[list[int]], x_labels: list[str], y_labels: list[str])` that returns a `plotly` figure object containing an annotated heatmap. The annotation within each cell is exactly the number of corresponding matrix cell value.
+
+Please start by completing the following function:
+
+```
+import plotly.figure_factory as ff
+import kaleido
+
+def plot_confusion_matrix(matrix: list[list[int]], x_labels: list[str], y_labels: list[str])
+```
+",127
+29,29,cases/eval_7377.yaml,code completion,"You are a professional assistant for programmers. By default, questions and answers are in Markdown format.","I would like to use the NumPy functions np.random.randn to generate data x for a normal distribution for 100,000 points. Then plot a histogram with 20 bins. Please help me to finish the following Python code. The function draw_histogram should save the histogram figure into `figure.pdf`.
+
+```
+import numpy as np
+from matplotlib import pyplot as plt
+
+def draw_histogram():
+  x = np.random.randn(100000)
+  ...
+```","You are a professional assistant for programmers. By default, questions and answers are in Markdown format.
+I would like to use the NumPy functions np.random.randn to generate data x for a normal distribution for 100,000 points. Then plot a histogram with 20 bins. Please help me to finish the following Python code. The function draw_histogram should save the histogram figure into `figure.pdf`.
+
+```
+import numpy as np
+from matplotlib import pyplot as plt
+
+def draw_histogram():
+  x = np.random.randn(100000)
+  ...
+```",110
+30,30,cases/eval_7500.yaml,code debugging,"You are a professional assistant for programmers. By default, questions and answers are in Markdown format. You are chatting with programmers, so please answer as briefly as possible.","The following error occur when I tried to Generate Signed Bundle. Note: Error occurs after I updated my android studio 3.6.3 to version 4.0 and Gradle build to 6.1.1.
+What went wrong:
+Execution failed for task ':app:signReleaseBundle'.
+
+> A failure occurred while executing com.android.build.gradle.internal.tasks.Workers$ActionFacade
+  'other' has different root","You are a professional assistant for programmers. By default, questions and answers are in Markdown format. You are chatting with programmers, so please answer as briefly as possible.
+The following error occur when I tried to Generate Signed Bundle. Note: Error occurs after I updated my android studio 3.6.3 to version 4.0 and Gradle build to 6.1.1.
+What went wrong:
+Execution failed for task ':app:signReleaseBundle'.
+
+> A failure occurred while executing com.android.build.gradle.internal.tasks.Workers$ActionFacade
+  'other' has different root",120
+31,31,cases/eval_7582.yaml,knowledge question-answering,"You are a professional assistant for programmers. By default, questions and answers are in Markdown format. You are chatting with programmers, so please answer as briefly as possible.","
+I made all permission reserved personal access token on github.I saw that```git clone https://<username>:<personal_access_token>@github.com/<username>/<project_name>.git```
+works.So How can I clone, commit, and push using personal access tokens?Like this```cd /tmpgit clone https://<username>:<personal_access_token>@github.com/<username>/<project_name>.git
+cd /tmp/auto_tutorialgit commit --allow-empty -m 'Trigger notification'git push https://<username>:<personal_access_token>@github.com/<username>/<project_name>.git master```","You are a professional assistant for programmers. By default, questions and answers are in Markdown format. You are chatting with programmers, so please answer as briefly as possible.
+
+I made all permission reserved personal access token on github.I saw that```git clone https://<username>:<personal_access_token>@github.com/<username>/<project_name>.git```
+works.So How can I clone, commit, and push using personal access tokens?Like this```cd /tmpgit clone https://<username>:<personal_access_token>@github.com/<username>/<project_name>.git
+cd /tmp/auto_tutorialgit commit --allow-empty -m 'Trigger notification'git push https://<username>:<personal_access_token>@github.com/<username>/<project_name>.git master```",151
+32,32,cases/eval_7617.yaml,code debugging,"You are a professional assistant for programmers. By default, questions and answers are in Markdown format.","
+```
+beforeAll(async () => {
+    mongo = new MongoMemoryServer();
+    const mongoURI = await mongo.getConnectionString();
+
+    await mongoose.connect(mongoURI, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    });
+});
+```
+
+
+For some reason mongodb-memory-server, doesn't work. Is there a way to make it work as it's intended?
+
+```
+$ npm run test
+
+> auth@1.0.0 test C:\Users\admin\Desktop\projects\react-node-docker-kubernetes-app-two\auth
+> jest --watchAll --no-cache
+
+2020-06-06T03:12:45.207Z MongoMS:MongoMemoryServer Called MongoMemoryServer.ensureInstance() method:
+2020-06-06T03:12:45.207Z MongoMS:MongoMemoryServer  - no running instance, call `start()` command
+2020-06-06T03:12:45.207Z MongoMS:MongoMemoryServer Called MongoMemoryServer.start() method
+2020-06-06T03:12:45.214Z MongoMS:MongoMemoryServer Starting MongoDB instance with following options: {""port"":51830,""dbName"":""b67a9bfd-d8af-4d7f-85c7-c2fd37832f59"",""ip"":""127.0.0.1"",""storageEngine"":""ephemeralForTest"",""dbPath"":""C:\\Users\\admin\\AppData\\Local\\Temp\\mongo-mem-205304KB93HW36L9ZD"",""tmpDir"":{""name"":""C:\\Users\\admin\\AppData\\Local\\Temp\\mongo-mem-205304KB93HW36L9ZD""},""uri"":""mongodb://127.0.0.1:51830/b67a9bfd-d8af-4d7f-85c7-c2fd37832f59?""}
+2020-06-06T03:12:45.217Z MongoMS:MongoBinary MongoBinary options: {""downloadDir"":""C:\\Users\\admin\\Desktop\\projects\\react-node-docker-kubernetes-app-two\\auth\\node_modules\\.cache\\mongodb-memory-server\\mongodb-binaries"",""platform"":""win32"",""arch"":""ia32"",""version"":""4.0.14""}
+2020-06-06T03:12:45.233Z MongoMS:MongoBinaryDownloadUrl Using ""mongodb-win32-i386-2008plus-ssl-4.0.14.zip"" as the Archive String
+2020-06-06T03:12:45.233Z MongoMS:MongoBinaryDownloadUrl Using ""https://fastdl.mongodb.org"" as the mirror
+2020-06-06T03:12:45.235Z MongoMS:MongoBinaryDownload Downloading: ""https://fastdl.mongodb.org/win32/mongodb-win32-i386-2008plus-ssl-4.0.14.zip""
+2020-06-06T03:14:45.508Z MongoMS:MongoMemoryServer Called MongoMemoryServer.stop() method
+2020-06-06T03:14:45.508Z MongoMS:MongoMemoryServer Called MongoMemoryServer.ensureInstance() method:
+FAIL src/test/__test___/Routes.test.ts
+  ● Test suite failed to run
+
+    Error: Status Code is 403 (MongoDB's 404)
+
+    This means that the requested version-platform combination dosnt exist
+
+      at ClientRequest.<anonymous> (node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:321:17)
+
+Test Suites: 1 failed, 1 total
+Tests:       0 total
+Snapshots:   0 total
+Time:        127.136s
+Ran all test suites.
+```","You are a professional assistant for programmers. By default, questions and answers are in Markdown format.
+
+```
+beforeAll(async () => {
+    mongo = new MongoMemoryServer();
+    const mongoURI = await mongo.getConnectionString();
+
+    await mongoose.connect(mongoURI, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    });
+});
+```
+
+
+For some reason mongodb-memory-server, doesn't work. Is there a way to make it work as it's intended?
+
+```
+$ npm run test
+
+> auth@1.0.0 test C:\Users\admin\Desktop\projects\react-node-docker-kubernetes-app-two\auth
+> jest --watchAll --no-cache
+
+2020-06-06T03:12:45.207Z MongoMS:MongoMemoryServer Called MongoMemoryServer.ensureInstance() method:
+2020-06-06T03:12:45.207Z MongoMS:MongoMemoryServer  - no running instance, call `start()` command
+2020-06-06T03:12:45.207Z MongoMS:MongoMemoryServer Called MongoMemoryServer.start() method
+2020-06-06T03:12:45.214Z MongoMS:MongoMemoryServer Starting MongoDB instance with following options: {""port"":51830,""dbName"":""b67a9bfd-d8af-4d7f-85c7-c2fd37832f59"",""ip"":""127.0.0.1"",""storageEngine"":""ephemeralForTest"",""dbPath"":""C:\\Users\\admin\\AppData\\Local\\Temp\\mongo-mem-205304KB93HW36L9ZD"",""tmpDir"":{""name"":""C:\\Users\\admin\\AppData\\Local\\Temp\\mongo-mem-205304KB93HW36L9ZD""},""uri"":""mongodb://127.0.0.1:51830/b67a9bfd-d8af-4d7f-85c7-c2fd37832f59?""}
+2020-06-06T03:12:45.217Z MongoMS:MongoBinary MongoBinary options: {""downloadDir"":""C:\\Users\\admin\\Desktop\\projects\\react-node-docker-kubernetes-app-two\\auth\\node_modules\\.cache\\mongodb-memory-server\\mongodb-binaries"",""platform"":""win32"",""arch"":""ia32"",""version"":""4.0.14""}
+2020-06-06T03:12:45.233Z MongoMS:MongoBinaryDownloadUrl Using ""mongodb-win32-i386-2008plus-ssl-4.0.14.zip"" as the Archive String
+2020-06-06T03:12:45.233Z MongoMS:MongoBinaryDownloadUrl Using ""https://fastdl.mongodb.org"" as the mirror
+2020-06-06T03:12:45.235Z MongoMS:MongoBinaryDownload Downloading: ""https://fastdl.mongodb.org/win32/mongodb-win32-i386-2008plus-ssl-4.0.14.zip""
+2020-06-06T03:14:45.508Z MongoMS:MongoMemoryServer Called MongoMemoryServer.stop() method
+2020-06-06T03:14:45.508Z MongoMS:MongoMemoryServer Called MongoMemoryServer.ensureInstance() method:
+FAIL src/test/__test___/Routes.test.ts
+  ● Test suite failed to run
+
+    Error: Status Code is 403 (MongoDB's 404)
+
+    This means that the requested version-platform combination dosnt exist
+
+      at ClientRequest.<anonymous> (node_modules/mongodb-memory-server-core/src/util/MongoBinaryDownload.ts:321:17)
+
+Test Suites: 1 failed, 1 total
+Tests:       0 total
+Snapshots:   0 total
+Time:        127.136s
+Ran all test suites.
+```",816
+33,33,cases/eval_7717.yaml,code debugging,"You are a professional assistant for programmers. By default, questions and answers are in Markdown format.","
+I was using the google maps api and location pub,dev package in my android flutter app, and tried to bring up an image using the url from the api.
+This was the url with some code:
+```
+class LocationHelper{
+  static String mapviewpointer({double latitude, double longitude}){
+    return ""https://maps.googleapis.com/maps/api/staticmap?center=$latitude,$longitude&zoom=13&size=600x300&maptype=roadmap&markers=color:pink%7Clabel:C%7C$latitude,$longitude&key=$GOOGLE_API_KEY"";
+  }
+}
+```
+
+it threw the following error message:
+`Plugin project :location_web not found. Please update settings.gradle;`
+I'm not sure how to fix this error.
+This was the other error I received in my terminal:
+```
+I/flutter (21880): Invalid argument(s): No host specified in URI file:///Instance%20of%20'Future%3CString%3E'
+```
+
+The Area in which I get the error message above is here in my code:
+```
+Future <String> _getUserLocation() async{
+  final locData = await Location().getLocation();
+  final staticMapUrl = LocationHelper.mapviewpointer(
+    latitude: locData.latitude, 
+    longitude: locData.longitude,
+    );
+    return staticMapUrl;
+}
+
+final mapview = _getUserLocation();
+
+
+class NearbyScreen extends StatelessWidget {
+  @override
+  //LocationHelper.mapviewpointer(latitude: )
+  
+  Widget build(BuildContext context) {
+    return  Column(
+            children: <Widget>[
+              Container(height:170, width: double.infinity,
+              child:Image.network(mapview.toString())
+              ),
+              Text(""hello""),
+            ],
+          );
+  }
+}
+```","You are a professional assistant for programmers. By default, questions and answers are in Markdown format.
+
+I was using the google maps api and location pub,dev package in my android flutter app, and tried to bring up an image using the url from the api.
+This was the url with some code:
+```
+class LocationHelper{
+  static String mapviewpointer({double latitude, double longitude}){
+    return ""https://maps.googleapis.com/maps/api/staticmap?center=$latitude,$longitude&zoom=13&size=600x300&maptype=roadmap&markers=color:pink%7Clabel:C%7C$latitude,$longitude&key=$GOOGLE_API_KEY"";
+  }
+}
+```
+
+it threw the following error message:
+`Plugin project :location_web not found. Please update settings.gradle;`
+I'm not sure how to fix this error.
+This was the other error I received in my terminal:
+```
+I/flutter (21880): Invalid argument(s): No host specified in URI file:///Instance%20of%20'Future%3CString%3E'
+```
+
+The Area in which I get the error message above is here in my code:
+```
+Future <String> _getUserLocation() async{
+  final locData = await Location().getLocation();
+  final staticMapUrl = LocationHelper.mapviewpointer(
+    latitude: locData.latitude, 
+    longitude: locData.longitude,
+    );
+    return staticMapUrl;
+}
+
+final mapview = _getUserLocation();
+
+
+class NearbyScreen extends StatelessWidget {
+  @override
+  //LocationHelper.mapviewpointer(latitude: )
+  
+  Widget build(BuildContext context) {
+    return  Column(
+            children: <Widget>[
+              Container(height:170, width: double.infinity,
+              child:Image.network(mapview.toString())
+              ),
+              Text(""hello""),
+            ],
+          );
+  }
+}
+```",387
+34,34,cases/eval_8143.yaml,code completion,"You are a professional assistant for programmers. By default, questions and answers are in Markdown format.","I have an Angular application and I have an Augular Material Radio Group as below. The form name is `myform`.
+
+```
+<div>
+  <mat-radio-group aria-labelledby=""theschedule"" formControlName=""Schedule"" >
+            <mat-radio-button id=""{{sch_item.Name}}""  *ngFor=""let sch_item of schedule"" class=""example-radio-button""  [value]=""sch_item.ID"" >
+                {{sch_item.Name}} &nbsp;
+            </mat-radio-button>
+  </mat-radio-group>
+</div>
+```
+
+I have a div as below.
+
+```
+<div id='divabc'>ABC</div>
+```
+
+I want to show and hide the div if the radio selection is ""abc"". How should I change the div definition? Please output the changed div.","You are a professional assistant for programmers. By default, questions and answers are in Markdown format.
+I have an Angular application and I have an Augular Material Radio Group as below. The form name is `myform`.
+
+```
+<div>
+  <mat-radio-group aria-labelledby=""theschedule"" formControlName=""Schedule"" >
+            <mat-radio-button id=""{{sch_item.Name}}""  *ngFor=""let sch_item of schedule"" class=""example-radio-button""  [value]=""sch_item.ID"" >
+                {{sch_item.Name}} &nbsp;
+            </mat-radio-button>
+  </mat-radio-group>
+</div>
+```
+
+I have a div as below.
+
+```
+<div id='divabc'>ABC</div>
+```
+
+I want to show and hide the div if the radio selection is ""abc"". How should I change the div definition? Please output the changed div.",178
+35,35,cases/eval_8412.yaml,knowledge question-answering,"You are a professional assistant for programmers. By default, questions and answers are in Markdown format.","I'm using Windows Subsystem for Linux (WSL 2) with Oh My Zsh to pimp my bash, but I can't make the Ubuntu terminal render the Powerline fonts properly. Should I install the font on Windows or Linux? Please answer ""Windows"" or ""Linux"" without any other explanation.
+
+Answer:","You are a professional assistant for programmers. By default, questions and answers are in Markdown format.
+I'm using Windows Subsystem for Linux (WSL 2) with Oh My Zsh to pimp my bash, but I can't make the Ubuntu terminal render the Powerline fonts properly. Should I install the font on Windows or Linux? Please answer ""Windows"" or ""Linux"" without any other explanation.
+
+Answer:",85
+36,36,cases/eval_8897.yaml,code debugging,"You are a professional assistant for programmers. By default, questions and answers are in Markdown format.","I am getting exception:
+```
+FactoryBean threw exception on object creation; nested exception is java.lang.IllegalStateException: No Feign Client for loadBalancing defined. Did you forget to include spring-cloud-starter-netflix-ribbon?
+    at org.springframework.beans.factory.support.FactoryBeanRegistrySupport.doGetObjectFromFactoryBean(FactoryBeanRegistrySupport.java:178)
+    at org.springframework.beans.factory.support.FactoryBeanRegistrySupport.getObjectFromFactoryBean(FactoryBeanRegistrySupport.java:101)
+    at org.springframework.beans.factory.support.AbstractBeanFactory.getObjectForBeanInstance(AbstractBeanFactory.java:1654)
+    at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.getObjectForBeanInstance(AbstractAutowireCapableBeanFactory.java:1174)
+    at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:257)
+    at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:224)
+    at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveNamedBean(DefaultListableBeanFactory.java:1012)
+    at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBean(DefaultListableBeanFactory.java:338)
+    at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBean(DefaultListableBeanFactory.java:333)
+    at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1105)
+    at com.hsbc.gbgcf.spartan.referencedatabase.UserRegistrationApplication.main(UserRegistrationApplication.java:57)
+```
+
+when executing my project. My pom.xml contains
+```
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-openfeign</artifactId>
+  </dependency>
+```
+
+I am using feign client in other projects of mine as well without any additional dependency of ribbon and these are working with same spring-boot version 2.0.8
+I have referred StackOverflow for same issue and they have asked to add additional dependency of ribbon. I have tried adding same in my pom.xml but it didn't helped.
+FeignClient interface is,
+```
+@FeignClient(value = ""user-service"", decode404 = true)
+public interface UserFeignClient {
+
+    @PostMapping(""/do-something"")
+    void doSomething();
+}
+```
+
+Main class code:
+```
+@Configuration
+@EnableAspectJAutoProxy
+@EnableFeignClients
+@EnableDiscoveryClient
+@SpringBootApplication(scanBasePackages = {""test.user""})
+public class UserRegistrationApplication{
+ public static void main(String[] args) {
+        UserFeignClient userFeignClient = applicationContext.getBean(UserFeignClient.class);
+        userFeignClient.doSomething();
+        System.exit(SpringApplication.exit(applicationContext));
+    }
+}
+```
+
+I am using Sprint Boot version 2.0.8.","You are a professional assistant for programmers. By default, questions and answers are in Markdown format.
+I am getting exception:
+```
+FactoryBean threw exception on object creation; nested exception is java.lang.IllegalStateException: No Feign Client for loadBalancing defined. Did you forget to include spring-cloud-starter-netflix-ribbon?
+    at org.springframework.beans.factory.support.FactoryBeanRegistrySupport.doGetObjectFromFactoryBean(FactoryBeanRegistrySupport.java:178)
+    at org.springframework.beans.factory.support.FactoryBeanRegistrySupport.getObjectFromFactoryBean(FactoryBeanRegistrySupport.java:101)
+    at org.springframework.beans.factory.support.AbstractBeanFactory.getObjectForBeanInstance(AbstractBeanFactory.java:1654)
+    at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.getObjectForBeanInstance(AbstractAutowireCapableBeanFactory.java:1174)
+    at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:257)
+    at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:224)
+    at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveNamedBean(DefaultListableBeanFactory.java:1012)
+    at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBean(DefaultListableBeanFactory.java:338)
+    at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBean(DefaultListableBeanFactory.java:333)
+    at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1105)
+    at com.hsbc.gbgcf.spartan.referencedatabase.UserRegistrationApplication.main(UserRegistrationApplication.java:57)
+```
+
+when executing my project. My pom.xml contains
+```
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-openfeign</artifactId>
+  </dependency>
+```
+
+I am using feign client in other projects of mine as well without any additional dependency of ribbon and these are working with same spring-boot version 2.0.8
+I have referred StackOverflow for same issue and they have asked to add additional dependency of ribbon. I have tried adding same in my pom.xml but it didn't helped.
+FeignClient interface is,
+```
+@FeignClient(value = ""user-service"", decode404 = true)
+public interface UserFeignClient {
+
+    @PostMapping(""/do-something"")
+    void doSomething();
+}
+```
+
+Main class code:
+```
+@Configuration
+@EnableAspectJAutoProxy
+@EnableFeignClients
+@EnableDiscoveryClient
+@SpringBootApplication(scanBasePackages = {""test.user""})
+public class UserRegistrationApplication{
+ public static void main(String[] args) {
+        UserFeignClient userFeignClient = applicationContext.getBean(UserFeignClient.class);
+        userFeignClient.doSomething();
+        System.exit(SpringApplication.exit(applicationContext));
+    }
+}
+```
+
+I am using Sprint Boot version 2.0.8.",576
+37,37,cases/eval_8917.yaml,code completion,"You are a professional assistant for programmers. By default, questions and answers are in Markdown format.","I am developing an Android app with Kotlin, and I would like to use getSize() method to get the screen height. However, with API level above 30 the method getSize() is declared deprecaed. What can be used instead of getSize() for obtain screen heights? Could you help me finish the following functon?
+
+```
+val wm = fragmentActivity.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+
+fun getWidthHeight(wm: WindowManager): Int {
+    val windowMetrics = wm.currentWindowMetrics
+    val windowInsets: WindowInsets = windowMetrics.windowInsets
+
+    val insets = windowInsets.getInsetsIgnoringVisibility(WindowInsets.Type.navigationBars() or WindowInsets.Type.displayCutout())
+    val insetsHeight = insets.top + insets.bottom
+
+    val b = windowMetrics.bounds
+    val orig_height = b.height()","You are a professional assistant for programmers. By default, questions and answers are in Markdown format.
+I am developing an Android app with Kotlin, and I would like to use getSize() method to get the screen height. However, with API level above 30 the method getSize() is declared deprecaed. What can be used instead of getSize() for obtain screen heights? Could you help me finish the following functon?
+
+```
+val wm = fragmentActivity.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+
+fun getWidthHeight(wm: WindowManager): Int {
+    val windowMetrics = wm.currentWindowMetrics
+    val windowInsets: WindowInsets = windowMetrics.windowInsets
+
+    val insets = windowInsets.getInsetsIgnoringVisibility(WindowInsets.Type.navigationBars() or WindowInsets.Type.displayCutout())
+    val insetsHeight = insets.top + insets.bottom
+
+    val b = windowMetrics.bounds
+    val orig_height = b.height()",193
+38,38,cases/eval_9098.yaml,knowledge question-answering,"You are a professional assistant for programmers. By default, questions and answers are in Markdown format.","I am using Laravel 8 and I have installed InertiaJS, but in my directory `resources/views/` I have a single file called `index.blade.php` which I plan to use with InertiaJS. By default, InertiaJS looks for a file inside that directory called `app.blade.php`. Here I search an answer with middleware but keywords are hidden by [blank]. Could you repeat the answer below exactly but with [blank] filled?
+
+Inertia introduced middleware to handle your Inertia requests.
+As described in the answers below, you can use the command [blank] to generate this middleware. You can set the root index with:
+```
+// Set root template via property protected 
+[blank] = 'index'; 
+
+// OR 
+// Set root template via method 
+public function [blank](Request $request) {
+  return '[blank]';
+}
+```","You are a professional assistant for programmers. By default, questions and answers are in Markdown format.
+I am using Laravel 8 and I have installed InertiaJS, but in my directory `resources/views/` I have a single file called `index.blade.php` which I plan to use with InertiaJS. By default, InertiaJS looks for a file inside that directory called `app.blade.php`. Here I search an answer with middleware but keywords are hidden by [blank]. Could you repeat the answer below exactly but with [blank] filled?
+
+Inertia introduced middleware to handle your Inertia requests.
+As described in the answers below, you can use the command [blank] to generate this middleware. You can set the root index with:
+```
+// Set root template via property protected 
+[blank] = 'index'; 
+
+// OR 
+// Set root template via method 
+public function [blank](Request $request) {
+  return '[blank]';
+}
+```",197
+39,39,cases/eval_9533.yaml,code debugging,"You are a professional assistant for programmers. By default, questions and answers are in Markdown format.","I encountered a problem with ios developemnt on xcode.
+
+```
+ld: warning: directory not found for option '-L/Users/kh/Library/Developer/Xcode/DerivedData/om-euxqzibzllbcmndwqrgthdeotiro/Build/Products/Debug-iphonesimulator/AFNetworking' ld: warning: directory not found for option '-L/Users/kh/Library/Developer/Xcode/DerivedData/om-euxqzibzllbcmndwqrgthdeotiro/Build/Products/Debug-iphonesimulator/JSONModel' ld: warning: directory not found for option '-L/Users/kh/Library/Developer/Xcode/DerivedData/om-euxqzibzllbcmndwqrgthdeotiro/Build/Products/Debug-iphonesimulator/ReactiveCocoa' ld: warning: directory not found for option '-L/Users/kh/Library/Developer/Xcode/DerivedData/om-euxqzibzllbcmndwqrgthdeotiro/Build/Products/Debug-iphonesimulator/Realm' ld: warning: directory not found for option '-L/Users/kh/Library/Developer/Xcode/DerivedData/dom-euxqzibzllbcmndwqrgthdeotiro/Build/Products/Debug-iphonesimulator/SAMKeychain' ld: warning: directory not found for option '-L/Users/kh/Library/Developer/Xcode/DerivedData/om-euxqzibzllbcmndwqrgthdeotiro/Build/Products/Debug-iphonesimulator/Sentry' ld: library not found for -lAFNetworking clang: error: linker command failed with exit code 1 (use -v to see invocation) 
+```
+
+Some Solutions I tried , and all of below didn't work which was previously suggested on StackOverflow.
+
+- Opening xcworkspace, yes I am opening that. Not the project
+- Restart xcode
+- Clean & Build multiple times.
+- Deleted pods folder, and installed pods again.
+- pod update multiple times
+- set Build Active architecture Only to Yes
+- Selected my Target, went to ""Build Phases"" in ""Link Binary With Libraries"" removed "".a"" file of that library. Clean and Build.
+- Target -> Build Settings ->Other Linker Flags = $(inherited)
+- Target -> Build Settings ->Library Search Path = $(inherited)
+
+What should I do?","You are a professional assistant for programmers. By default, questions and answers are in Markdown format.
+I encountered a problem with ios developemnt on xcode.
+
+```
+ld: warning: directory not found for option '-L/Users/kh/Library/Developer/Xcode/DerivedData/om-euxqzibzllbcmndwqrgthdeotiro/Build/Products/Debug-iphonesimulator/AFNetworking' ld: warning: directory not found for option '-L/Users/kh/Library/Developer/Xcode/DerivedData/om-euxqzibzllbcmndwqrgthdeotiro/Build/Products/Debug-iphonesimulator/JSONModel' ld: warning: directory not found for option '-L/Users/kh/Library/Developer/Xcode/DerivedData/om-euxqzibzllbcmndwqrgthdeotiro/Build/Products/Debug-iphonesimulator/ReactiveCocoa' ld: warning: directory not found for option '-L/Users/kh/Library/Developer/Xcode/DerivedData/om-euxqzibzllbcmndwqrgthdeotiro/Build/Products/Debug-iphonesimulator/Realm' ld: warning: directory not found for option '-L/Users/kh/Library/Developer/Xcode/DerivedData/dom-euxqzibzllbcmndwqrgthdeotiro/Build/Products/Debug-iphonesimulator/SAMKeychain' ld: warning: directory not found for option '-L/Users/kh/Library/Developer/Xcode/DerivedData/om-euxqzibzllbcmndwqrgthdeotiro/Build/Products/Debug-iphonesimulator/Sentry' ld: library not found for -lAFNetworking clang: error: linker command failed with exit code 1 (use -v to see invocation) 
+```
+
+Some Solutions I tried , and all of below didn't work which was previously suggested on StackOverflow.
+
+- Opening xcworkspace, yes I am opening that. Not the project
+- Restart xcode
+- Clean & Build multiple times.
+- Deleted pods folder, and installed pods again.
+- pod update multiple times
+- set Build Active architecture Only to Yes
+- Selected my Target, went to ""Build Phases"" in ""Link Binary With Libraries"" removed "".a"" file of that library. Clean and Build.
+- Target -> Build Settings ->Other Linker Flags = $(inherited)
+- Target -> Build Settings ->Library Search Path = $(inherited)
+
+What should I do?",516

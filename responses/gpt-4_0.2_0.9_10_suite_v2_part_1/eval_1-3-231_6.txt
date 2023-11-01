@@ -1,0 +1,19 @@
+Sure, you can use the `size()` method of PyTorch tensor to get the shape of each tensor in the list. Here is a function that does this:
+
+```python
+def getSize(t):
+    sizes = [x.size() for x in t]
+    return sizes
+```
+
+This function iterates over each tensor in the list `t` and appends its size to the `sizes` list. The `size()` method returns the shape of the tensor as a `torch.Size` object, which is a subclass of Python's tuple.
+
+You can use this function like this:
+
+```python
+t = [your list of tensors]
+sizes = getSize(t)
+print(sizes)
+```
+
+This will print a list of shapes for each tensor in your list.

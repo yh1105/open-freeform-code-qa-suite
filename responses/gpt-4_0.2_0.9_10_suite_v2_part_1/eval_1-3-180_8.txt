@@ -1,0 +1,24 @@
+The error you're seeing is because you're trying to use a boolean condition (`['TEST_STATUS'] == 'PASS TEST'`) as a key to group by, which is not valid in pandas. 
+
+To filter your DataFrame for rows where `TEST_STATUS` equals `'PASS TEST'` and then group by `TEST_STATUS`, you can do the following:
+
+```python
+data_pass_test = data_useless[data_useless['TEST_STATUS'] == 'PASS TEST']
+grouped_data = data_pass_test.groupby('TEST_STATUS')
+```
+
+This will give you a DataFrameGroupBy object. If you want to see the count of each `TEST_TYPE` for the `PASS TEST`, you can do:
+
+```python
+grouped_data['TEST_TYPE'].value_counts()
+```
+
+This will give you the count of each `TEST_TYPE` for the `PASS TEST` status. 
+
+If you want to see the count of all columns, you can use:
+
+```python
+grouped_data.count()
+```
+
+This will give you the count of all non-null values in each column for the `PASS TEST` status.

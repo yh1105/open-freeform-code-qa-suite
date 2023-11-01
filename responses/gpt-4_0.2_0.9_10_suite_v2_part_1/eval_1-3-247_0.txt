@@ -1,0 +1,30 @@
+The error message you're seeing is `NoReverseMatch at / Reverse for 'profile' with arguments '('',)' not found. 1 pattern(s) tried: ['profile/(?P[^/]+)/$']`. This error is usually raised when Django is unable to reverse a URL pattern. In your case, it's trying to reverse the URL for the 'profile' view with an empty string as the argument, but it can't find a match.
+
+The issue is likely in your `index.html` file, specifically in this line:
+
+```html
+<a href="{% url 'profile' post.author.username %}">
+```
+
+The error is indicating that `post.author.username` is empty. This could be because the `author` of the `post` is `None` or the `username` of the `author` is not set.
+
+To fix this, you need to ensure that every `post` has an `author` and that every `author` has a `username`. You can add checks in your template to only display the link if the `username` is available:
+
+```html
+{% for post in posts %}
+    <div class="card">
+        <div class="card-body"> Title: {{post.title}} </div>
+        <div class="card-body"> Description: {{post.description}}</div>
+        {% if post.author and post.author.username %}
+            <p> {{post.author.username}} </p>
+            <div class="card-body">
+                <a href="{% url 'profile' post.author.username %}">
+                    @{{post.author.username}}
+                </a>
+            </div>
+        {% endif %}
+    </div>
+{% endfor %}
+```
+
+This will prevent the `NoReverseMatch` error from occurring when a `post` has no `author` or the `author` has no `username`.

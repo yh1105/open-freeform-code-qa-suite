@@ -1,0 +1,26 @@
+The error you are getting is due to a version incompatibility between pandas and pandas-profiling. The `join_axes` parameter was removed in pandas version 1.0, but some versions of pandas-profiling still use it.
+
+To solve this issue, you can try downgrading pandas to a version that is compatible with pandas-profiling. You can do this by running the following command in your conda environment:
+
+```
+conda install pandas=0.25.3
+```
+
+Alternatively, you can try upgrading pandas-profiling to the latest version, which should be compatible with pandas 1.0. You can do this by running the following command:
+
+```
+pip install pandas-profiling[notebook]
+```
+
+Once you have resolved the version incompatibility, you can try running the `ProfileReport` function again. Here is an example of how to use it:
+
+```python
+import pandas as pd
+import pandas_profiling
+
+data = pd.read_csv('data.csv')
+profile = pandas_profiling.ProfileReport(data)
+profile.to_file(output_file="output.html")
+```
+
+This will generate an HTML report that you can view in your browser.

@@ -1,0 +1,20 @@
+You can try using the `tz_localize` method to set the timezone to None and then use the `tz_convert` method to convert it to the desired timezone. Here's how you can modify your code:
+
+```python
+df['time'] = df['time'].dt.tz_localize(None) # remove timezone
+df['time'] = df['time'].dt.tz_convert('desired_timezone') # convert to desired timezone
+```
+
+Replace `'desired_timezone'` with the timezone you want to convert the column to.
+
+Here's the complete `removeTimezone` function:
+
+```python
+import pandas as pd
+
+def removeTimezone(df):
+    df['time'] = df['time'].dt.tz_localize(None) # remove timezone
+    return df
+```
+
+You can call this function with your DataFrame as the argument and it will return the modified DataFrame with the timezone removed from the "time" column.

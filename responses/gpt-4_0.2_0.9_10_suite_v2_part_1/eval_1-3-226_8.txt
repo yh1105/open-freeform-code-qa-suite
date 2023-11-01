@@ -1,0 +1,16 @@
+Sure, you can achieve this by using the `split()` function with a maximum split parameter of 1. This will ensure that the string is only split at the first occurrence of '_'. Here is the function `splitOne(s)`:
+
+```python
+def splitOne(s):
+    split_string = s.split('_', 1)
+    if len(split_string) > 1:
+        return split_string[1]
+    else:
+        return split_string[0]
+```
+
+This function works as follows:
+
+1. It splits the string `s` at the first occurrence of '_'. The `split()` function returns a list of strings.
+2. If the length of the list `split_string` is greater than 1, it means that the string `s` contained '_', so it returns the second element of the list (i.e., everything after the first '_').
+3. If the length of the list `split_string` is not greater than 1, it means that the string `s` did not contain '_', so it returns the first (and only) element of the list (i.e., the original string `s`).

@@ -1,0 +1,22 @@
+The reason why the access times are different in your example is because the `match` statement in Python is not optimized with a lookup table. Instead, it is implemented as a series of `if`/`elif` statements under the hood. This means that the time it takes to match a case depends on the position of that case in the `match` statement.
+
+In your example, the first case (`case '0'`) is matched the fastest because it is the first one in the `match` statement. The last case (`case _:`) is matched the slowest because it is the last one in the `match` statement and has to go through all the previous cases before reaching it.
+
+If you want to have equal access times for each case, you can use a dictionary instead of a `match` statement. Here's an example:
+
+```python
+def match_case(decimal):
+    cases = {
+        '0': "000",
+        '1': "001",
+        '2': "010",
+        '3': "011",
+        '4': "100",
+        '5': "101",
+        '6': "110",
+        '7': "111"
+    }
+    return cases.get(decimal, "NA")
+```
+
+This implementation uses a dictionary to map each case to its corresponding value. The `get` method of the dictionary is used to retrieve the value for a given key (i.e. case). If the key is not found in the dictionary, it returns the default value ("NA" in this case). This implementation should have equal access times for each case.

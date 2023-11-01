@@ -1,0 +1,20 @@
+You can modify your code to handle the cases you mentioned. Here's the modified code:
+
+```python
+def splitOne(s):
+    split_string = s.split('_')
+    if len(split_string) == 1:
+        return s
+    else:
+        return '_'.join(split_string[1:])
+```
+
+This function first splits the input string `s` based on `_`. If the resulting list has only one element, it means there is no `_` in the string, so the function returns the original string `s`. Otherwise, the function joins all elements of the list except the first one (which is the part before the first `_`) using `_` as the separator and returns the resulting string.
+
+You can call this function with any input string and it will return the expected output. For example:
+
+```python
+print(splitOne('testing_abc')) # Output: abc
+print(splitOne('xyz')) # Output: xyz
+print(splitOne('testing_abc_bbc')) # Output: abc_bbc
+```

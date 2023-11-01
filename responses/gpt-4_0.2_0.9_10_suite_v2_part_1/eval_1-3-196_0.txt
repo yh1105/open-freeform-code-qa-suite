@@ -1,0 +1,19 @@
+Unfortunately, there is no direct `conda` command to list the sizes of installed packages. However, you can use the `conda-pack` package to get the size of a specific environment. Here are the steps:
+
+1. Install `conda-pack` using the following command:
+
+```markdown
+conda install -c conda-forge conda-pack
+```
+
+2. Use `conda-pack` to pack your environment (replace `my_env` with your environment name):
+
+```markdown
+conda pack -n my_env
+```
+
+This will create a `.tar.gz` file in your current directory. You can check the size of this file to get an idea of your environment size.
+
+If you want to check the size of individual packages, you may need to go to the `pkgs` directory in your Anaconda installation and check the sizes manually. In Windows, it's usually in `C:\Users\YourUsername\Anaconda3\pkgs`.
+
+Remember to replace `YourUsername` with your actual username. Each package is stored in its own directory, and you can check the size of these directories to get an idea of the size of each package.

@@ -1,0 +1,61 @@
+The error you're encountering is an HTTP 410 error, which means the resource you're trying to access is no longer available at the server, and no forwarding address is known. This condition is expected to be considered permanent.
+
+This error is often encountered when using the `pytube` library because YouTube changes their system frequently, and the library needs to be updated to accommodate these changes.
+
+Here are a few things you can try to solve this issue:
+
+1. **Update pytube:** Make sure you have the latest version of `pytube`. You can update it using pip:
+
+    ```bash
+    pip install pytube --upgrade
+    ```
+
+2. **Try pytube3:** If updating `pytube` doesn't work, you can try using `pytube3`, which is a fork of `pytube` that is sometimes more up-to-date. You can install it using pip:
+
+    ```bash
+    pip install pytube3
+    ```
+
+    Then, you can use `pytube3` in your code like this:
+
+    ```python
+    from pytube import YouTube
+
+    link = input("Enter the link of YouTube video you want to download:  ")
+    yt = YouTube(link)
+
+    print("Title: ",yt.title)
+    print("Number of views: ",yt.views)
+    print("Length of video: ",yt.length)
+    print("Rating of video: ",yt.rating)
+
+    ys = yt.streams.get_highest_resolution()
+
+    print("Downloading...")
+    ys.download()
+    print("Download completed!!")
+    ```
+
+3. **Try youtube_dl:** If neither of the above solutions work, you can try using `youtube_dl`, which is another library for downloading YouTube videos. It's more robust and less likely to break due to YouTube updates. You can install it using pip:
+
+    ```bash
+    pip install youtube_dl
+    ```
+
+    Then, you can use `youtube_dl` in your code like this:
+
+    ```python
+    import youtube_dl
+
+    link = input("Enter the link of YouTube video you want to download:  ")
+
+    ydl_opts = {'format': 'best'}
+
+    with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+        info_dict = ydl.extract_info(link, download=False)
+        video_title = info_dict.get('title', None)
+
+        path = f"{video_title}.mp4"
+        ydl.download([link])
+
+    print

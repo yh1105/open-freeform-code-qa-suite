@@ -1,0 +1,28 @@
+Here is a function that uses `openpyxl` to open the Excel file, iterate over the rows in the specified sheet, and check if the `matchedString` is in any cell in the row. If it is, the function adds the row index to a list. The function then returns this list.
+
+```python
+from openpyxl import load_workbook
+
+def filterExcelRows(filePath, matchedString):
+    # Load the workbook and select the first sheet
+    wb = load_workbook(filename=filePath)
+    sheet = wb['Sheet1']
+
+    # List to hold row indexes
+    matched_rows = []
+
+    # Iterate over the rows
+    for i, row in enumerate(sheet.iter_rows(values_only=True), start=1):
+        # Check if the matchedString is in the row
+        if any(matchedString in str(cell) for cell in row):
+            # If it is, add the row index to the list
+            matched_rows.append(i)
+
+    return matched_rows
+```
+
+This function starts counting rows from 1, as it is common in Excel. If you want to start from 0, change `start=1` to `start=0` in the `enumerate` function.
+
+Please note that this function checks if `matchedString` is a substring of the cell content. If you want to check for exact match, replace `matchedString in str(cell)` with `matchedString == str(cell)`.
+
+Also, this function only checks the first sheet in the workbook. If you want to check other sheets, you need to replace `'Sheet1'` with the name of the sheet you want to check.

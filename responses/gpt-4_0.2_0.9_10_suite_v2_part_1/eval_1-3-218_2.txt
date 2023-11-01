@@ -1,0 +1,26 @@
+You can use the `str.replace()` function in pandas to replace the special characters with an empty string. Here is the function `remove` that you requested:
+
+```python
+def remove(df):
+    df['LGA'] = df['LGA'].str.replace(r"\(.*\)", "")
+    return df
+```
+
+This function uses a regular expression (`r"\(.*\)"`) to match any characters within parentheses and replace them with an empty string. The `.*` in the regular expression matches any character (except a newline) 0 or more times.
+
+Please note that this function will remove all characters within parentheses, not just at the end of the string. If you want to specifically remove characters in parentheses at the end of the string, you can use the regular expression `r"\(.*\)$"` instead. The `$` character signifies the end of the string.
+
+Here is the modified function:
+
+```python
+def remove(df):
+    df['LGA'] = df['LGA'].str.replace(r"\(.*\)$", "")
+    return df
+```
+
+Remember to import pandas and regex before using these functions:
+
+```python
+import pandas as pd
+import re
+```

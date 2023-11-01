@@ -1,0 +1,37 @@
+You can use the `tstrsplit()` function from the `data.table` package to split the `segment_stemming` column into two separate columns, one for the word and one for the part of speech. Then, you can use the `melt()` function from the `reshape2` package to convert the resulting wide format table to a long format table. Here's the code for the `mySplit()` function:
+
+```r
+library(data.table)
+library(reshape2)
+
+mySplit <- function(x) {
+  # split the segment_stemming column into two separate columns
+  x[, c("word", "pos") := tstrsplit(gsub("[\\[\\]\\(\\)']", "", segment_stemming), ", ")]
+  # melt the resulting wide format table to a long format table
+  melt(x, id.vars = "id", measure.vars = c("word", "pos"), variable.name = "segment", value.name = "segment_stemming")[, segment := NULL]
+}
+```
+
+You can then call the function with your example dataset:
+
+```r
+x <- structure(list(id = c("A", "B" ),
+segment_stemming = c("[('Brownie', 'Noun'), ('From', 'Josa'), ('Pi', 'Noun')]",
+"[('Dung-caroon-gye', 'Noun'), ('in', 'Josa'), ('innovation', 'Noun')]" )),
+row.names = c(NA, -2L),
+class = c("data.table", "data.frame" ))
+
+mySplit(x)
+```
+
+This will return the following output:
+
+```
+   id       segment_stemming
+1:  A        ('Brownie', 'Noun')
+2:  B ('Dung-caroon-gye', 'Noun')
+3:  A            ('From', 'Josa')
+4:  B                ('in', 'Josa')
+5:  A              ('Pi', 'Noun')
+6:  B       ('innovation', 'Noun')
+```

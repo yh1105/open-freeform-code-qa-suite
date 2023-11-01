@@ -1,0 +1,23 @@
+Sure, you can create a function that checks if a year is a leap year or not. If it is a leap year, it will return 366, otherwise it will return 365. Here is a simple function that does that:
+
+```python
+def DaysInYear(year):
+    if (year % 4) == 0:
+        if (year % 100) == 0:
+            if (year % 400) == 0:
+                return 366  # It is a leap year
+            else:
+                return 365  # It is not a leap year
+        else:
+            return 366  # It is a leap year
+    else:
+        return 365  # It is not a leap year
+```
+
+This function works by following the rules for determining if a year is a leap year:
+
+- The year is evenly divisible by 4;
+- If the year can be evenly divided by 100, it is NOT a leap year, unless;
+- The year is also evenly divisible by 400. Then it is a leap year.
+
+This means that in the Gregorian calendar, the years 2000 and 2400 are leap years, while 1800, 1900, 2100, 2200, 2300 and 2500 are NOT leap years.

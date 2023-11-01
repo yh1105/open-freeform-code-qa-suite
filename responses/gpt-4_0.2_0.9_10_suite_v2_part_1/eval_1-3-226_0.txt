@@ -1,0 +1,13 @@
+You can achieve this by checking if the string contains `_` and then splitting accordingly. Here is the function `splitOne`:
+
+```python
+def splitOne(s):
+    if '_' in s:
+        return s.split('_', 1)[1]
+    else:
+        return s
+```
+
+This function first checks if the string `s` contains `_`. If it does, it splits the string at the first occurrence of `_` and returns everything after it. If the string does not contain `_`, it simply returns the string as is.
+
+The `split` function in Python can take a second argument which specifies the maximum number of splits to do. By passing `1` as the second argument, we ensure that the string is split at most once, which means that everything after the first `_` is included in the second part of the split.

@@ -1,0 +1,33 @@
+It seems like there is an issue with removing the `requests` and `setuptools` packages from the conda environment. One solution to this problem is to create a new conda environment and install the required packages in that environment. You can follow these steps to create a new environment:
+
+1. Open the Anaconda prompt.
+2. Type the following command to create a new environment:
+
+   ```
+   conda create --name myenv python=3.6
+   ```
+
+   Replace `myenv` with the name of your new environment.
+3. Activate the new environment by typing:
+
+   ```
+   activate myenv
+   ```
+
+   Replace `myenv` with the name of your new environment.
+4. Install the required packages in the new environment by typing:
+
+   ```
+   conda install --file python3.6-environment-windows.yml
+   ```
+
+   Replace `python3.6-environment-windows.yml` with the name of the file that contains the list of required packages.
+5. Once the installation is complete, you can deactivate the environment by typing:
+
+   ```
+   deactivate
+   ```
+
+   This will return you to the base environment.
+
+You can now use the new environment to work with the required packages.

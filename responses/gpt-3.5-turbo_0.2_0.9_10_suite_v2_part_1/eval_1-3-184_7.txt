@@ -1,0 +1,51 @@
+Sure, here's a function that should do what you're asking for using `openpyxl`:
+
+```python
+import openpyxl
+
+def filterExcelRows(filePath, matchedString):
+    # Load the workbook
+    wb = openpyxl.load_workbook(filePath)
+
+    # Select the sheet
+    sheet = wb['Sheet1']
+
+    # Initialize an empty list to store the row indexes
+    row_indexes = []
+
+    # Iterate over all the rows in the sheet
+    for row in sheet.iter_rows():
+        # Iterate over all the cells in the row
+        for cell in row:
+            # Check if the cell contains the matched string
+            if cell.value == matchedString:
+                # If it does, add the row index to the list
+                row_indexes.append(row[0].row)
+                break
+
+    # Initialize an empty list to store the cell contents
+    cell_contents = []
+
+    # Iterate over all the rows in the sheet
+    for row in sheet.iter_rows():
+        # Check if the row index is in the list of row indexes
+        if row[0].row in row_indexes:
+            # If it is, iterate over all the cells in the row
+            for cell in row:
+                # Append the cell contents to the list
+                cell_contents.append(cell.value)
+
+    # Return the list of cell contents
+    return cell_contents
+```
+
+You can call this function with the file path and the matched string as arguments, like this:
+
+```python
+matchedString = 'ABC'
+filePath = 'path/to/your/file.xlsx'
+result = filterExcelRows(filePath, matchedString)
+print(result)
+```
+
+This will print a list of the contents of all the cells in the rows that contain the matched string.

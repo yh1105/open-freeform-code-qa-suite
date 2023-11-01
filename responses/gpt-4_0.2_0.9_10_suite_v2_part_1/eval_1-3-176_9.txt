@@ -1,0 +1,26 @@
+The error message indicates that the Pillow library could not be installed because it could not find the headers or library files for zlib, which is a required dependency when compiling Pillow from source.
+
+Here are a few steps you can take to resolve this issue:
+
+1. **Update pip, setuptools, and wheel**: Sometimes, these packages become outdated and cause errors when trying to install other packages. You can update them using the following commands:
+
+```bash
+python -m pip install --upgrade pip
+python -m pip install --upgrade setuptools wheel
+```
+
+2. **Install zlib**: As the error message suggests, zlib is a required dependency for Pillow. You can download zlib from its [official website](https://zlib.net/). After downloading, you can install it using the instructions provided on the website.
+
+3. **Install a precompiled Pillow package**: If you're still having trouble, you can try installing a precompiled version of Pillow. These versions are already compiled and do not require zlib. You can download a precompiled version of Pillow from [this website](https://www.lfd.uci.edu/~gohlke/pythonlibs/#pillow). Choose the version that corresponds to your Python version and system architecture (32-bit or 64-bit).
+
+After downloading the .whl file, navigate to the directory where you downloaded the file and run the following command to install it:
+
+```bash
+pip install <filename>.whl
+```
+
+Replace `<filename>` with the name of the downloaded .whl file.
+
+4. **Use a different Python version**: The error message also mentions that Pillow does not yet support Python 3.8. If you're using Python 3.8, you might want to consider downgrading to an earlier version of Python that is supported by Pillow.
+
+Remember to activate your virtual environment before running these commands if you're using one.

@@ -1,0 +1,9 @@
+The `match/case` statement in Python is not implemented as a lookup table or hash map, but rather as a sequence of checks. This is why the time it takes to reach each case increases with the number of preceding cases.
+
+In your example, the `match/case` statement checks each case in order until it finds a match. For the first case (`'0'`), it only needs to make one check. For the second case (`'1'`), it needs to make two checks: first it checks `'0'`, then `'1'`. For the third case (`'2'`), it needs to make three checks: `'0'`, `'1'`, and `'2'`. And so on.
+
+This is why the time it takes to reach each case increases linearly with the number of preceding cases. The more cases there are before the matching case, the more checks Python needs to make, and the longer it takes.
+
+This behavior is different from a lookup table or hash map, where access time is constant regardless of the number of entries. In a lookup table, Python would compute a hash of the input and use that to directly access the corresponding entry, without needing to check any other entries. This is why access times in a dictionary are constant.
+
+However, the `match/case` statement is more flexible than a lookup table. It can match on more than just equality, and it can perform complex pattern matching. This flexibility comes at the cost of linear access time.

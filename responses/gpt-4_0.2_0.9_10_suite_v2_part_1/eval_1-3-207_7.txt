@@ -1,0 +1,20 @@
+Sure, I can help with that. The key is to add the duration to the minutes, then divide by 60 to find out how many hours to add to the starting hour. The remainder of the division will be the new minutes. Here is the function:
+
+```python
+def computeEndTime(hour, mins, dura):
+    mins += dura
+    hour += mins // 60
+    mins %= 60
+    hour %= 24
+    return "{:02d}:{:02d}".format(hour, mins)
+```
+
+This function first adds the duration to the current minutes. Then it adds the integer division of the total minutes by 60 to the current hour. The remainder of the division (using the modulus operator `%`) is the new minutes. The hour is also taken modulo 24 to ensure it stays within the 0-23 range. Finally, it returns a string formatted with two digits for the hour and two digits for the minutes.
+
+Let's test the function with your example:
+
+```python
+print(computeEndTime(12, 17, 59))  # Expected output: 13:16
+```
+
+This should give you the expected output.

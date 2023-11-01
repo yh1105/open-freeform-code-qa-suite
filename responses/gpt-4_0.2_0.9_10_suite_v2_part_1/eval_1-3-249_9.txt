@@ -1,0 +1,26 @@
+Sure, here is a Python function that generates a random string according to your requirements:
+
+```python
+import random
+import string
+
+def generateRandomString():
+    # Generate a random string of length 11 without digits
+    letters = string.ascii_letters
+    random_string = ''.join(random.choice(letters) for i in range(11))
+    
+    # Insert "NAA3U" at a random position
+    pos = random.randint(0, 10)
+    random_string = random_string[:pos] + "NAA3U" + random_string[pos:]
+    
+    # Replace two random characters with digits
+    for i in range(2):
+        pos = random.randint(0, 15)
+        while random_string[pos].isdigit():
+            pos = random.randint(0, 15)
+        random_string = random_string[:pos] + str(random.randint(0, 9)) + random_string[pos+1:]
+    
+    return random_string
+```
+
+This function first generates a random string of length 11 without digits. Then it inserts "NAA3U" at a random position in the string. Finally, it replaces two random characters in the string with digits, making sure that the final string has exactly 3 digits.

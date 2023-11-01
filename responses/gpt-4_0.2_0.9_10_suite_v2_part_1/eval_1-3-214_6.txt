@@ -1,0 +1,25 @@
+The error message you're seeing is due to a change in the pandas library. The `join_axes` parameter was deprecated in pandas 0.25 and removed in pandas 1.0. 
+
+The `pandas_profiling` library you're using seems to be not compatible with the version of pandas you have installed. 
+
+You can try to downgrade your pandas version to 0.25.3 or upgrade your pandas_profiling to the latest version.
+
+To downgrade pandas, you can use the following command:
+
+```bash
+conda install pandas=0.25.3
+```
+
+To upgrade pandas_profiling, you can use the following command:
+
+```bash
+pip install --upgrade pandas_profiling
+```
+
+If you still encounter the same problem after upgrading pandas_profiling, you can try to use the latest version from the GitHub repository:
+
+```bash
+pip install https://github.com/pandas-profiling/pandas-profiling/archive/master.zip
+```
+
+Remember to restart your Jupyter notebook after installing or upgrading the packages.

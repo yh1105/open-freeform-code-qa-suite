@@ -1,0 +1,9 @@
+To find out the size of conda packages, you can use the `conda list --size` command. However, this feature is not available in all versions of conda. If it's not available in your version, you can upgrade conda to the latest version using the command `conda update conda`.
+
+If the `--size` option is still not available after the update, you can use the following workaround:
+
+1. Navigate to the directory where conda packages are stored. For a standard Anaconda installation on Windows, this is usually `C:\Users\YourUsername\Anaconda3\pkgs`.
+
+2. Use the Windows `dir` command to list the files and their sizes. The command `dir /s` will list all files in all subdirectories and display their sizes.
+
+Please note that this will give you the size of the package files, not the size they take up when installed. The installed size can be larger, especially for packages that include compiled code.

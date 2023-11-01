@@ -1,0 +1,11 @@
+Sure, I can help with that. The calculation for the hours should take into account the total minutes (start time minutes + duration), divide by 60 to get the hours, and then add to the start time hours. However, since we are dealing with a 24-hour format, we should also take the modulus of 24 to ensure the hours stay within the 0-23 range. Here is the corrected code:
+
+```python
+def computeEndTime(hour, mins, dura):
+    total_mins = mins + dura
+    end_hour = (hour + total_mins // 60) % 24
+    end_mins = total_mins % 60
+    return "{:02d}:{:02d}".format(end_hour, end_mins)
+```
+
+In this function, `//` is used for integer division (i.e., discarding the remainder), `%` is used for modulus operation (i.e., getting the remainder), and `{:02d}` is used in the format string to ensure that the hours and minutes are always printed with two digits.

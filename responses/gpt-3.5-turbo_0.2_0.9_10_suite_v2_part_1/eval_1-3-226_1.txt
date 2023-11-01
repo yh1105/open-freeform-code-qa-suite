@@ -1,0 +1,12 @@
+You can modify your code to handle the cases you mentioned. Here's a modified version of your code that should work:
+
+```python
+def splitOne(s):
+    split_string = s.split('_')
+    if len(split_string) > 1:
+        return '_'.join(split_string[1:])
+    else:
+        return s
+```
+
+This function first splits the input string `s` based on `_` and stores the result in the `split_string` variable. If the length of `split_string` is greater than 1, it means that the input string contains `_`. In this case, the function joins all the elements of `split_string` except the first one (which is the string before the first `_`) using `_` as the separator and returns the resulting string. If the length of `split_string` is 1, it means that the input string does not contain `_`, so the function simply returns the input string `s`.

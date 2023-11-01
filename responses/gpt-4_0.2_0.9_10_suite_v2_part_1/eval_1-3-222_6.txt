@@ -1,0 +1,22 @@
+Here is the Python function `func` that computes the number of ways to form a string of length `n` using `k` characters such that at most two adjacent characters can be the same.
+
+```python
+def func(n, k):
+    if n == 0:
+        return 0
+    elif n == 1:
+        return k
+    elif n == 2:
+        return k * k
+    else:
+        dp = [0] * (n+1)
+        dp[1] = k
+        dp[2] = k * k
+
+        for i in range(3, n+1):
+            dp[i] = (dp[i-1] + dp[i-2]) * (k-1)
+
+        return dp[n]
+```
+
+This function uses dynamic programming to solve the problem. The base cases are when `n` is 0, 1, or 2. For `n` greater than 2, the function calculates the number of ways by considering the number of ways for the previous two lengths, and multiplying by `k-1` (since we can't have more than two adjacent characters the same).

@@ -1,0 +1,20 @@
+You can calculate the end time by first adding the duration to the starting time in minutes, and then converting the total minutes back to hours and minutes.
+
+Here's the updated code with the missing calculation:
+
+```python
+def computeEndTime(hour, mins, dura):
+    total_mins = hour * 60 + mins + dura
+    end_hour = total_mins // 60
+    end_mins = total_mins % 60
+    return f"{end_hour:02d}:{end_mins:02d}"
+
+# Example usage
+print(computeEndTime(12, 17, 59)) # Output: 13:16
+```
+
+In the `computeEndTime` function, we first calculate the total number of minutes by adding the starting time in minutes (`hour * 60 + mins`) to the duration (`dura`). 
+
+Then, we calculate the end hour by dividing the total minutes by 60 (`total_mins // 60`), and the end minutes by taking the remainder of the total minutes divided by 60 (`total_mins % 60`).
+
+Finally, we format the end time as a string with the desired format using f-strings. The `:02d` format specifier ensures that the hour and minute values are zero-padded to two digits.

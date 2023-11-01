@@ -1,0 +1,61 @@
+Here is a function that should do what you want. It loops over each column in the data frame, finds the minimum and maximum values, and then finds the row indices where these values occur. It also counts the frequency of these values. The results are stored in a list, which is then converted to a data frame.
+
+```r
+myMaxMin <- function(cars) {
+  # Initialize an empty list to store the results
+  results <- list()
+  
+  # Loop over each column in the data frame
+  for (i in seq_along(cars)) {
+    # Get the column name
+    column_name <- names(cars)[i]
+    
+    # Get the column data
+    column_data <- cars[[i]]
+    
+    # Find the minimum and maximum values
+    min_value <- min(column_data)
+    max_value <- max(column_data)
+    
+    # Find the row indices where these values occur
+    min_rows <- which(column_data == min_value)
+    max_rows <- which(column_data == max_value)
+    
+    # Count the frequency of these values
+    min_freq <- length(min_rows)
+    max_freq <- length(max_rows)
+    
+    # Store the results in the list
+    results[[i]] <- list(min_value = min_value, 
+                         max_value = max_value, 
+                         min_rows = paste(min_rows, collapse = ","), 
+                         max_rows = paste(max_rows, collapse = ","), 
+                         min_freq = min_freq, 
+                         max_freq = max_freq, 
+                         column_name = column_name)
+  }
+  
+  # Convert the list to a data frame
+  results_df <- do.call(rbind, results)
+  rownames(results_df) <- NULL
+  
+  return(results_df)
+}
+```
+
+This function returns a data frame with the following columns:
+
+- `min_value`: The minimum value in the column.
+- `max_value`: The maximum value in the column.
+- `min_rows`: The row indices where the minimum value occurs, as a comma-separated string.
+- `max_rows`: The row indices where the maximum value occurs, as a comma-separated string.
+- `min_freq`: The frequency of the minimum value.
+- `max_freq`: The frequency of the maximum value.
+- `column_name`: The name of the column.
+
+You can use this function like this:
+
+```r
+result <- myMaxMin(cars)
+print(result)
+```

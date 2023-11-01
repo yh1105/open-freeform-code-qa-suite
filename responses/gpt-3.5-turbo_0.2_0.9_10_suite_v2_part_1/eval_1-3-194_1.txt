@@ -1,0 +1,15 @@
+Sure, here's the function `writeToExcel()` that creates an excel file named "data.xlsx" and writes the contents of the `new_list` variable into the file.
+
+```python
+import openpyxl
+
+def writeToExcel():
+    new_list = [["first", "second"], ["third", "fourth"]]
+    wb = openpyxl.Workbook()
+    sheet = wb.active
+    for row in new_list:
+        sheet.append(row)
+    wb.save("data.xlsx")
+```
+
+This function uses the `openpyxl` library to create an excel workbook, adds a new sheet to the workbook, and then writes the contents of the `new_list` variable into the sheet. Finally, it saves the workbook as "data.xlsx".

@@ -1,0 +1,24 @@
+Sure, you can achieve this by checking if the string contains `_` and then using the `split` function accordingly. Here is the function `splitOne`:
+
+```python
+def splitOne(s):
+    if '_' in s:
+        return s.split('_', 1)[1]
+    else:
+        return s
+```
+
+This function works as follows:
+
+- If the string `s` contains `_`, it splits the string at the first `_` and returns everything after it.
+- If the string `s` does not contain `_`, it returns the string as it is.
+
+The `split` function with the second argument as `1` splits the string at the first occurrence of `_`. The `[1]` at the end of the `split` function is used to get the second part of the split string.
+
+You can use this function like this:
+
+```python
+print(splitOne('testing_abc_bbc'))  # abc_bbc
+print(splitOne('xyz'))  # xyz
+print(splitOne('testing_abc'))  # abc
+```

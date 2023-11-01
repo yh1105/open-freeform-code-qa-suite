@@ -1,0 +1,27 @@
+To filter the data based on a specific value of a column and group it by that column, you can use the following code:
+
+```python
+pass_tests = data_useless[data_useless['TEST_STATUS'] == 'PASS TEST'].groupby('TEST_STATUS')
+```
+
+This will create a new DataFrame called `pass_tests` that contains only the rows where the `TEST_STATUS` column is equal to `'PASS TEST'`, and then group the data by the `TEST_STATUS` column.
+
+You can then perform operations on this new DataFrame, such as counting the number of rows in each group:
+
+```python
+pass_tests.count()
+```
+
+Or getting the mean value of a specific column:
+
+```python
+pass_tests['TEST_DATE'].mean()
+```
+
+Note that you can also chain these operations together:
+
+```python
+data_useless[data_useless['TEST_STATUS'] == 'PASS TEST'].groupby('TEST_STATUS').count()
+```
+
+This will give you the same result as the first example, but in a single line of code.

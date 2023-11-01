@@ -1,0 +1,19 @@
+Sure, you can use the `loc` function in pandas to locate the row and then extract the value of the `tradingsymbol` column. Here is the function you requested:
+
+```python
+def extractCellValue(df, matchedString):
+    try:
+        # Find the row where instrument_token matches the string
+        row = df.loc[df['instrument_token'] == int(matchedString)]
+        # Extract the tradingsymbol value
+        tradingsymbol = row['tradingsymbol'].values[0]
+        return tradingsymbol
+    except IndexError:
+        return "No match found"
+    except Exception as e:
+        return str(e)
+```
+
+This function first tries to find the row where `instrument_token` matches the `matchedString` (converted to integer). If a match is found, it extracts the `tradingsymbol` value and returns it. If no match is found, it returns "No match found". If any other error occurs, it returns the error message.
+
+Please note that this function assumes that `instrument_token` values are integers. If they are not, you should remove the `int()` conversion.

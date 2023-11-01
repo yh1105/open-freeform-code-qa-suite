@@ -1,0 +1,11 @@
+Here are a few steps you can try to solve the issue:
+
+1. Check if the Jupyter notebook is working outside of VS Code. Open the Anaconda prompt and activate the "da38" environment by running `conda activate da38`. Then, run the command `jupyter notebook` to see if it launches successfully. If it does, then the issue might be with VS Code.
+
+2. Check if the Jupyter extension is installed and enabled in VS Code. Go to the Extensions tab on the left-hand side of the VS Code window and search for "Jupyter". If it is not installed, install it and restart VS Code. If it is installed, make sure it is enabled.
+
+3. Check if the correct Python interpreter is selected in VS Code. Open the Command Palette by pressing `Ctrl+Shift+P` (Windows) or `Cmd+Shift+P` (Mac) and search for "Python: Select Interpreter". Make sure that the correct interpreter for the "da38" environment is selected.
+
+4. Try resetting the Jupyter kernel. Open the Command Palette and search for "Jupyter: Specify local or remote Jupyter server for connections". Select "Local" and then select "Python 3.8.5 64-bit ('da38':conda)" as the kernel. Then, try launching the Jupyter notebook again.
+
+5. If none of the above steps work, try uninstalling and reinstalling the Jupyter extension in VS Code. Go to the Extensions tab, search for "Jupyter", and click on the "Uninstall" button. Then, restart VS Code and install the extension again.

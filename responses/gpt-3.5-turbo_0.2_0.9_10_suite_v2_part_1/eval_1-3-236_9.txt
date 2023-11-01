@@ -1,0 +1,15 @@
+If the `"python.linting.jediEnabled": false` line is greyed out, it means that it is being overridden by another setting. To find out which setting is overriding it, you can try the following steps:
+
+1. Open the Command Palette by pressing `Ctrl+Shift+P` (Windows, Linux) or `Cmd+Shift+P` (macOS).
+2. Type "Preferences: Open User Settings" and select it.
+3. In the search bar at the top, type "jediEnabled".
+4. Look for any settings that have "jediEnabled" set to "true" and try setting them to "false".
+
+If you still can't find the setting that is overriding `"python.linting.jediEnabled": false`, you can try the following steps:
+
+1. Open the Command Palette.
+2. Type "Preferences: Open Workspace Settings" and select it.
+3. In the search bar at the top, type "jediEnabled".
+4. Look for any settings that have "jediEnabled" set to "true" and try setting them to "false".
+
+If you don't have a workspace open, you can try opening a folder in VS Code and then following the above steps. If none of these steps work, you can try disabling the Jedi extension by going to the Extensions view (Ctrl+Shift+X) and searching for "Jedi" and then disabling it.

@@ -1,0 +1,7 @@
+The Python `match/case` statement, introduced in Python 3.10, is not implemented as a hash table or lookup table, but rather as a sequence of checks. This is why you're seeing different access times for different cases.
+
+When the `match` statement is executed, Python checks each `case` in order, from top to bottom. If the value being matched is equal to the value in a `case`, Python executes the code block associated with that `case` and then exits the `match` statement. If none of the `case` values match, Python executes the code block associated with the `_` case, if one is provided.
+
+This is why the time it takes to execute the `match` statement increases with the value of `decimal`. For larger values of `decimal`, Python has to check more `case` statements before it finds a match.
+
+This behavior is different from a hash table or lookup table, which would provide constant-time access to each case. However, the `match/case` statement is more flexible than a hash table because it can match on patterns and types, not just values. This makes it a powerful tool for writing expressive and readable code, even though it may not be the most efficient choice for large numbers of cases.

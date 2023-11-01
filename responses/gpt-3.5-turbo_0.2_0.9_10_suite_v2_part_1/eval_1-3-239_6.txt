@@ -1,0 +1,8 @@
+Here's the bash script to install Python 3.6.5 using brew:
+
+```
+brew update
+brew install python@3.6
+```
+
+This will update brew and then install Python 3.6.5.

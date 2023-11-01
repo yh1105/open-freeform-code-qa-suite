@@ -1,0 +1,17 @@
+If the `"python.linting.jediEnabled": false` line is greyed out, it means that it is being overridden by another setting. 
+
+To find out which setting is overriding it, you can try the following steps:
+
+1. Open the Command Palette by pressing `Ctrl+Shift+P` (Windows, Linux) or `Cmd+Shift+P` (macOS).
+2. Type "Preferences: Open User Settings" and select it.
+3. In the search bar, type "jediEnabled" to filter the settings.
+4. Look for any settings that have "jediEnabled" set to `true`. These settings may be overriding your `"python.linting.jediEnabled": false` setting.
+5. If you find any conflicting settings, either remove them or set them to `false`.
+
+If you still can't get rid of the Jedi error messages, you can try disabling the Jedi language server by adding the following line to your settings.json file:
+
+```
+"python.jediEnabled": false
+```
+
+This should completely disable Jedi and prevent it from interfering with your linter.

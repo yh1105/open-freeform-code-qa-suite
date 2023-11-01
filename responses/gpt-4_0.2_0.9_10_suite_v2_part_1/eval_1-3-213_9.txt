@@ -1,0 +1,19 @@
+Sure, here is a function that will remove the timezone information from a datetime column in a pandas DataFrame:
+
+```python
+def removeTimezone(df):
+    df['time'] = df['time'].dt.tz_convert(None)
+    return df
+```
+
+This function takes a DataFrame `df` as an argument, converts the 'time' column to a timezone-unaware datetime object using the `dt.tz_convert(None)` method, and then returns the modified DataFrame.
+
+Please replace `'time'` with your actual datetime column name.
+
+Here's how you can use this function:
+
+```python
+df = removeTimezone(df)
+```
+
+After running this line, your DataFrame `df` should have the timezone information removed from the 'time' column. You can then proceed to write it to an Excel file without encountering the ValueError.

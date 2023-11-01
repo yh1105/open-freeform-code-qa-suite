@@ -1,0 +1,26 @@
+Sure, here's a possible implementation using the `random` module in Python:
+
+```python
+import random
+import string
+
+def generateRandomString():
+    # Define the characters to choose from
+    chars = string.ascii_letters + string.digits
+    
+    # Generate a random string of length 9
+    rand_str = ''.join(random.choice(chars) for i in range(9))
+    
+    # Insert the sub-string "NAA3U" at a random position
+    rand_str = rand_str[:random.randint(0, 5)] + "NAA3U" + rand_str[random.randint(5, 8):]
+    
+    # Generate a random 3-digit number
+    rand_num = random.randint(100, 999)
+    
+    # Combine the random string and number to form the final code
+    code = rand_str + str(rand_num)
+    
+    return code
+```
+
+This function generates a random string of length 9, inserts the sub-string "NAA3U" at a random position, generates a random 3-digit number, and combines everything to form the final code. The `random` module is used to generate the random components.

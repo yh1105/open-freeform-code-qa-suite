@@ -1,0 +1,36 @@
+You can use `group_split` to split the tibble by `list_names` and then use `map` to extract the `list_values` column for each group. Finally, use `set_names` to set the names of the resulting list.
+
+Here's the implementation of the `myConvert` function:
+
+```r
+library(tidyverse)
+
+myConvert <- function(my_data) {
+  my_data %>%
+    group_split(list_names) %>%
+    map(~ .x$list_values) %>%
+    set_names(unique(my_data$list_names))
+}
+```
+
+You can test the function with the sample data:
+
+```r
+my_data <- tibble(list_names = c("Ford", "Chevy", "Ford", "Dodge", "Dodge", "Ford"),
+                  list_values = c("Ranger", "Equinox", "F150", "Caravan", "Ram", "Explorer"))
+
+myConvert(my_data)
+```
+
+This should output the desired list:
+
+```r
+$Ford
+[1] "Ranger"   "F150"     "Explorer"
+
+$Chevy
+[1] "Equinox"
+
+$Dodge
+[1] "Caravan" "Ram"
+```

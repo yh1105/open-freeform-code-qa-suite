@@ -1,0 +1,4 @@
+```python
+def colored(background_r, background_g, background_b, text):
+    return "\033[48;2;{};{};{}m{} \033[49m".format(background_r, background_g, background_b, text)
+```

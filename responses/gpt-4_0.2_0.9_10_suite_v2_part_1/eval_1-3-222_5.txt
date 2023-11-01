@@ -1,0 +1,21 @@
+Here is a Python function that calculates the number of ways to form a string of length `n` using `k` characters such that at most two adjacent characters can be same.
+
+```python
+def func(n, k):
+    if n == 0:
+        return 0
+    if n == 1:
+        return k
+    same, diff = k, k*(k-1)
+    for _ in range(3, n+1):
+        same, diff = diff, (same + diff) * (k-1)
+    return same + diff
+```
+
+This function works by keeping track of two variables: `same` and `diff`. `same` is the number of ways to form a string where the last two characters are the same, and `diff` is the number of ways to form a string where the last two characters are different.
+
+Initially, when `n` is 1, there are `k` ways to form a string (since we can use any of the `k` characters). When `n` is 2, there are `k` ways to form a string where the last two characters are the same (since we can use any of the `k` characters), and `k*(k-1)` ways to form a string where the last two characters are different (since we can use any of the `k` characters for the first character, and any of the remaining `k-1` characters for the second character).
+
+For `n` greater than 2, the number of ways to form a string where the last two characters are the same is equal to the number of ways to form a string of length `n-1` where the last two characters are different (since we can just add the same character at the end). The number of ways to form a string where the last two characters are different is equal to the total number of ways to form a string of length `n-1` (both `same` and `diff`), multiplied by `k-1` (since we can use any of the remaining `k-1` characters for the new character).
+
+Finally, the total number of ways to form a string of length `n` is the sum of `same` and `diff`.

@@ -1,0 +1,33 @@
+The error message suggests that the `join_axes` argument is not recognized by the `concat()` function. This is likely due to a version mismatch between Pandas and pandas-profiling.
+
+To solve this problem, you can try the following steps:
+
+1. Upgrade pandas-profiling to the latest version using the following command:
+
+   ```
+   !pip install pandas-profiling[notebook]
+   ```
+
+2. Upgrade pandas to the latest version using the following command:
+
+   ```
+   !pip install pandas --upgrade
+   ```
+
+3. Restart the Jupyter notebook kernel and try running the Profile Report code again.
+
+If the issue persists, you can try downgrading pandas to version 0.25.3 using the following command:
+
+```
+!pip install pandas==0.25.3
+```
+
+Then, restart the Jupyter notebook kernel and try running the Profile Report code again.
+
+Alternatively, you can try using the `pandas_profiling.ProfileReport()` function with the `minimal=True` argument, which generates a report without using the `join_axes` argument:
+
+```python
+profile = pandas_profiling.ProfileReport(data, minimal=True)
+```
+
+I hope this helps!

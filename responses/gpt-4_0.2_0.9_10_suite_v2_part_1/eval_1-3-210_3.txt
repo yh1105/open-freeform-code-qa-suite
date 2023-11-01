@@ -1,0 +1,7 @@
+The `match/case` structure in Python 3.10 and later is not implemented as a hash table or lookup table, but rather as a linear sequence of comparisons. This is why the time it takes to reach each case increases with the position of the case in the sequence.
+
+In your example, the `match_case` function checks each case in order, from top to bottom. If the input is '0', it matches the first case and immediately returns. If the input is '1', it checks the first case, finds no match, then checks the second case and returns. This process continues, with each additional case requiring an additional comparison.
+
+This is why the time it takes to match each case increases linearly with the position of the case in the sequence. The later the case appears in the sequence, the more comparisons the function has to make before it finds a match.
+
+This behavior is different from a hash table or lookup table, where the time to access each entry is constant, regardless of its position in the table. However, the `match/case` structure provides more flexibility than a simple lookup table, as it allows for more complex pattern matching and destructuring.

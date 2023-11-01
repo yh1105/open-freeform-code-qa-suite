@@ -1,0 +1,13 @@
+You can use the `conda list --show-channel-urls` command to display the size of each package in your current environment. This command will show the package size in bytes, so you may want to convert it to a more readable format like megabytes (MB) or gigabytes (GB).
+
+Here's an example of how to use the command:
+
+1. Open the Anaconda Prompt or your terminal.
+2. Activate the environment you want to check the package size for using the command `conda activate <environment_name>`.
+3. Run the command `conda list --show-channel-urls`.
+
+This will display a list of all packages installed in the current environment, along with their version numbers, build numbers, and sizes in bytes. You can sort the list by size using the `--reverse` flag to see the largest packages first.
+
+For example, to sort the list by size in descending order, you can use the command `conda list --show-channel-urls --reverse`.
+
+Note that the package size displayed includes all dependencies, so some packages may appear larger than expected.

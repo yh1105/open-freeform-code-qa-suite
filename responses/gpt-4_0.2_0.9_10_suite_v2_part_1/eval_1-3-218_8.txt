@@ -1,0 +1,19 @@
+Sure, you can use the `str.replace()` function in pandas to replace the special characters with an empty string. Here is the function `remove`:
+
+```python
+def remove(df):
+    df['LGA'] = df['LGA'].str.replace(r"\(.*\)", "")
+    df['LGA'] = df['LGA'].str.rstrip()  # to remove any trailing white spaces
+    return df
+```
+
+This function uses a regular expression `\(.*\)` to match any characters enclosed in parentheses and replace them with an empty string. The `str.rstrip()` function is used to remove any trailing white spaces after removing the special characters.
+
+Please note that this function will replace all occurrences of characters enclosed in parentheses, not just at the end of the strings. If you want to only remove them at the end of the strings, you can use the regular expression `\(.*\)$` instead. The `$` character denotes the end of the string.
+
+```python
+def remove(df):
+    df['LGA'] = df['LGA'].str.replace(r"\(.*\)$", "")
+    df['LGA'] = df['LGA'].str.rstrip()  # to remove any trailing white spaces
+    return df
+```

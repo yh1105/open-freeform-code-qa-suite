@@ -1,0 +1,14 @@
+You can use the PyTorch `torch.cat()` function to concatenate the two tensors along the last dimension. Here's the implementation of the `addTensor()` function:
+
+```python
+import torch
+
+def addTensor(inps, d):
+    # Reshape d to [64, 161, 1]
+    d = d.unsqueeze(-1)
+    # Concatenate inps and d along the last dimension
+    out = torch.cat((inps, d), dim=-1)
+    return out
+```
+
+Here, we first use the `unsqueeze()` function to add a new dimension to `d` along the last axis, so that its size becomes [64, 161, 1]. Then, we use the `torch.cat()` function to concatenate `inps` and `d` along the last dimension, resulting in a tensor of size [64, 161, 2].

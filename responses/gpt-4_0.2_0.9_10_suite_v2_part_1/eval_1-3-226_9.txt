@@ -1,0 +1,14 @@
+You can achieve this by using the `split()` function with a maximum split parameter of 1. This will split the string into two parts at most. If the string doesn't contain `_`, the whole string will be in the first part. If the string contains `_`, everything after the first `_` will be in the second part.
+
+Here is the function `splitOne(s)`:
+
+```python
+def splitOne(s):
+    parts = s.split('_', 1)
+    if len(parts) > 1:
+        return parts[1]
+    else:
+        return parts[0]
+```
+
+This function splits the string `s` into at most two parts. If there are two parts, it returns the second part. If there is only one part (which means the string doesn't contain `_`), it returns the first part.

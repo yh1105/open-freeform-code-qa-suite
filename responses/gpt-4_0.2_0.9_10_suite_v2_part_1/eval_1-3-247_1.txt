@@ -1,0 +1,32 @@
+The error message you're seeing, `NoReverseMatch`, is raised by Django when it is unable to match a URL pattern for a view. In your case, it's failing to find a match for the 'profile' view with the arguments you're providing.
+
+The error message is indicating that the argument being passed to the 'profile' URL pattern is an empty string. This is likely because `post.author.username` is empty or `None` for at least one of your `NewPost` instances.
+
+In your `index.html` template, you have the following line:
+
+```html
+<a href="{% url 'profile' post.author.username %}">
+```
+
+This line is trying to generate a URL for the 'profile' view, passing `post.author.username` as an argument. If `post.author.username` is empty or `None`, Django will not be able to match the URL pattern and will raise a `NoReverseMatch` error.
+
+To fix this, you need to ensure that `post.author.username` is not empty or `None` for any of your `NewPost` instances. You can do this by adding a check in your template like so:
+
+```html
+{% for post in posts %}
+    <div class="card">
+        <div class="card-body"> Title: {{post.title}} </div>
+        <div class="card-body"> Description: {{post.description}}</div>
+        {% if post.author.username %}
+            <p> {{post.author.username}} </p>
+            <div class="card-body">
+                <a href="{% url 'profile' post.author.username %}">
+                    @{{post.author.username}}
+                </a>
+            </div>
+        {% endif %}
+    </div>
+{% endfor %}
+```
+
+This will only generate the link if `post.author.username` is not empty.

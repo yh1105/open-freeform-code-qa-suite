@@ -1,0 +1,31 @@
+Here is a function `mySplit` that uses the `strsplit` function to split the `segment_stemming` column on the comma character. Then it uses the `unnest` function from the `tidyverse` package to expand the list column into multiple rows.
+
+```r
+library(data.table)
+library(tidyverse)
+
+mySplit <- function(x) {
+  # Convert data.table to data.frame
+  x <- as.data.frame(x)
+  
+  # Remove brackets and split on comma
+  x$segment_stemming <- strsplit(gsub("\\[|\\]", "", x$segment_stemming), ", ")
+  
+  # Unnest the list column into multiple rows
+  x <- x %>% unnest(segment_stemming)
+  
+  # Convert back to data.table
+  x <- as.data.table(x)
+  
+  return(x)
+}
+```
+
+You can use this function on your data like this:
+
+```r
+x <- mySplit(x)
+print(x)
+```
+
+Please note that this function assumes that the `segment_stemming` column is a character column where tuples are represented as strings. If the tuples are actual R objects, you would need a different approach.

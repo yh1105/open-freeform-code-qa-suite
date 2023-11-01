@@ -1,0 +1,12 @@
+Sure, I can help with that. You need to add the duration to the minutes, then divide by 60 to get the number of hours to add to the start hour. The modulus operator `%` can be used to ensure the hour stays within the 24-hour format. Here is the function:
+
+```python
+def computeEndTime(hour, mins, dura):
+    mins += dura
+    hour += mins // 60
+    hour %= 24
+    mins %= 60
+    return "{:02d}:{:02d}".format(hour, mins)
+```
+
+This function first adds the duration to the minutes. Then it adds the integer division of minutes by 60 to the hour. The modulus operator is used to ensure the hour and minutes are within their respective ranges. Finally, it returns a string in the format "xx:xx". The `{:02d}` in the format string ensures that the hour and minutes are always two digits long, padding with zeros if necessary.

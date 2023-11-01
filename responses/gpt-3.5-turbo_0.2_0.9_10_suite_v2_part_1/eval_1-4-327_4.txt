@@ -1,0 +1,13 @@
+To select the second column by name, you can use the `[[` operator with quotes around the column name. In this case, since both columns have the same name, you can use backticks to specify the column name as `a.1`. Here's the code to select the second column by name and assign it to a variable named `second_col`:
+
+```r
+second_col <- d3[["a.1"]]
+``` 
+
+Alternatively, you can use the `$` operator with backticks to select the second column by name:
+
+```r
+second_col <- d3$`a.1`
+``` 
+
+Both of these methods will select the second column with the name `a` from the `d3` data frame and assign it to the variable `second_col`.

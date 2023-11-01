@@ -1,0 +1,30 @@
+You can create a dictionary to map the elements in `b` to the elements in `rest`. Then, you can iterate over the `last` list and replace the elements using the dictionary. Here is the function `ReplaceElementsByIndex`:
+
+```python
+def ReplaceElementsByIndex(rest, b, last):
+    # Create a dictionary to map b to rest
+    map_dict = {b[i]: rest[i] for i in range(len(rest))}
+
+    # Replace elements in last
+    last = [map_dict.get(i, i) for i in last]
+
+    return last
+```
+
+You can use this function like this:
+
+```python
+rest=[5, 7, 11, 4]
+b=[21, 22, 33, 31, 23, 15, 19, 13, 6]
+last=[33, 19, 40, 21, 31, 22, 6, 15, 13, 23]
+
+print(ReplaceElementsByIndex(rest, b, last))
+```
+
+This will output:
+
+```python
+[11, 19, 40, 5, 4, 7, 6, 15, 13, 23]
+```
+
+This function works by creating a dictionary where the keys are the elements in `b` and the values are the corresponding elements in `rest`. Then, it iterates over the `last` list and uses the `get` method of the dictionary to replace the elements. If an element is not in the dictionary (i.e., it's not in the first four elements of `b`), it's left unchanged.

@@ -1,0 +1,40 @@
+This issue might be due to several reasons, but here are a few steps you can take to troubleshoot:
+
+1. **Check if Jupyter and ipykernel are installed in your environment:**
+
+    Open a terminal in VS Code, activate your conda environment, and try to start a Jupyter notebook server manually:
+
+    ```bash
+    conda activate da38
+    jupyter notebook
+    ```
+
+    If this doesn't work, you might need to install Jupyter:
+
+    ```bash
+    conda install jupyter
+    ```
+
+    And also ensure that ipykernel is installed:
+
+    ```bash
+    conda install ipykernel
+    ```
+
+2. **Check your Python interpreter in VS Code:**
+
+    Make sure that the Python interpreter you're using in VS Code matches the one in your conda environment. You can select the interpreter by clicking on the Python version in the bottom-left corner of the VS Code window, or by using the "Python: Select Interpreter" command in the Command Palette (`Ctrl+Shift+P`).
+
+3. **Check your Jupyter server settings in VS Code:**
+
+    VS Code allows you to specify the Jupyter server URI to connect to. Make sure this is set to the default (which is to start a local Jupyter server), unless you have a specific reason to do otherwise. You can check this setting by opening the Command Palette (`Ctrl+Shift+P`), and running the "Jupyter: Specify local or remote Jupyter server for connections" command.
+
+4. **Check your VS Code settings:**
+
+    There might be some settings in your VS Code that are causing this issue. You can try resetting your settings to the default and see if this resolves the issue.
+
+5. **Check for any error messages:**
+
+    If none of the above steps work, check the VS Code output for any error messages. You can view the output by opening the Command Palette (`Ctrl+Shift+P`), and running the "Python: Show Output" command. The error messages might give you a clue as to what's going wrong.
+
+If none of these steps work, you might need to provide more information or consider reaching out to the VS Code community for help.

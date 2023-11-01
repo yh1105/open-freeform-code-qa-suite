@@ -1,0 +1,35 @@
+Here is the function `aggregation(df)` that will achieve your requirement:
+
+```python
+def aggregation(df):
+    # Convert 'value' column to numeric
+    df['value'] = pd.to_numeric(df['value'])
+    
+    # Create a new column 'balance' where 'type' is 'deposit', else NaN
+    df['balance'] = df.loc[df['type'] == 'deposit', 'value']
+    
+    # Group by 'exchange' and calculate cumulative sum, then forward fill the NaN values
+    df['balance'] = df.groupby('exchange')['balance'].cumsum().ffill()
+    
+    return df
+```
+
+This function first converts the 'value' column to numeric type. Then it creates a new column 'balance' where it copies the 'value' if 'type' is 'deposit', else it puts NaN. Then it groups the DataFrame by 'exchange' and calculates the cumulative sum in 'balance' column. The `ffill()` function is used to forward fill the NaN values in 'balance' column.
+
+You can use this function like this:
+
+```python
+df = aggregation(df)
+print(df)
+```
+
+This will print:
+
+```python
+   exchange     type  value  balance
+0         1  deposit     10     10.0
+1         1  deposit     10     20.0
+2         1    trade     30     20.0
+3         2  deposit     40     40.0
+4         3  deposit    100    100.0
+```

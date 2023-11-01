@@ -1,0 +1,10 @@
+If the `"python.linting.jediEnabled": false` line is greyed out, it means that it is being overridden by another setting. 
+
+To fix this, you can try the following steps:
+
+1. Open the VS Code settings by clicking on the gear icon in the bottom left corner and selecting "Settings" or by using the shortcut `Ctrl + ,` (Windows) or `Cmd + ,` (Mac).
+2. In the search bar at the top of the settings page, type "jedi" to filter the settings related to Jedi.
+3. Look for any settings that enable Jedi and disable them. For example, you might see `"python.jediEnabled": true`. Change this to `"python.jediEnabled": false`.
+4. Save the changes and try running your linter again.
+
+If you still encounter issues, you can try disabling all Python-related extensions except for the one that provides your linter. This can help to isolate the issue and determine if there is a conflict between extensions.

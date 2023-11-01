@@ -1,0 +1,9 @@
+Here is a Python function `splitOne(s)` that should meet your requirements:
+
+```python
+def splitOne(s):
+    split_string = s.split('_', 1)
+    return split_string[1] if len(split_string) > 1 else split_string[0]
+```
+
+This function splits the input string `s` at the first occurrence of `_` and returns the second part if it exists, otherwise it returns the original string. The second parameter `1` in `split('_', 1)` ensures that the split operation stops after the first occurrence of `_`.

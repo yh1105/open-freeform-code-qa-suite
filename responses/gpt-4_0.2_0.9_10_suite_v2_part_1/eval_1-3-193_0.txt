@@ -1,0 +1,28 @@
+The error message you're seeing suggests that Selenium can't find the Firefox binary in its default location. This could be due to several reasons, such as Firefox not being installed, or installed in a non-default location, or the PATH not being set correctly.
+
+Here are a few things you can try:
+
+1. **Check if Firefox is installed**: Selenium requires the browser to be installed on the machine where the tests are running. If Firefox is not installed, you can download it from the [official website](https://www.mozilla.org/en-US/firefox/new/).
+
+2. **Specify the path to Firefox binary**: If Firefox is installed but not in its default location, you can specify the path to the Firefox binary in your code. Here's how you can do it:
+
+```python
+from selenium import webdriver
+from selenium.webdriver.firefox.service import Service
+from selenium.webdriver.common.by import By
+from selenium.webdriver.firefox.options import Options as FirefoxOptions
+
+options = FirefoxOptions()
+options.binary_location = "/path/to/your/firefox/binary"  # Update this path
+
+driver = webdriver.Firefox(service=Service("/path/to/your/geckodriver"), options=options)
+driver.get('http://www.seleniumhq.org')
+```
+
+Replace `"/path/to/your/firefox/binary"` with the actual path to your Firefox binary.
+
+3. **Check your PATH**: If Firefox is installed in a default location, make sure that the directory containing the Firefox binary is in your system's PATH. You can add it to the PATH in your shell's configuration file (like `.bashrc` or `.bash_profile` for bash, or `.zshrc` for zsh), or in your system's environment variables.
+
+4. **Update your Geckodriver**: The Geckodriver is the link between Selenium and the Firefox browser. Make sure you have the latest version of Geckodriver and it's in your system's PATH. You can download the latest version from the [Geckodriver's GitHub page](https://github.com/mozilla/geckodriver/releases).
+
+Remember to replace `"/path/to/your/geckodriver"` with the actual path to your Geckodriver binary in the code above.

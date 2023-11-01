@@ -1,0 +1,21 @@
+Unfortunately, `conda` does not provide a built-in command to directly list the sizes of installed packages. However, you can use a workaround to achieve this. 
+
+You can find the size of the packages in the `pkgs` directory of your Anaconda installation. On Windows, this is typically located at `C:\Users\YourUsername\Anaconda3\pkgs`.
+
+You can use the `du` command in Unix-based systems to check the size of each directory (which corresponds to a package). Since you're using Windows, you can use PowerShell to achieve the same result.
+
+Here is a PowerShell command that will list the sizes of the directories in the `pkgs` directory:
+
+```powershell
+Get-ChildItem 'C:\Users\YourUsername\Anaconda3\pkgs' | ForEach-Object { 
+    $size = (Get-ChildItem $_.FullName -Recurse | Measure-Object -Property Length -Sum).Sum / 1MB
+    [PSCustomObject]@{
+        Name = $_.Name
+        Size = "{0:N2} MB" -f $size
+    }
+} | Sort-Object {[double]($_.Size -replace ' MB', '')} -Descending
+```
+
+Replace `'C:\Users\YourUsername\Anaconda3\pkgs'` with the actual path to your `pkgs` directory. This command will list all the packages along with their sizes in descending order.
+
+Please note that this will give you the size of the package files on disk, not the amount of memory they use when loaded.

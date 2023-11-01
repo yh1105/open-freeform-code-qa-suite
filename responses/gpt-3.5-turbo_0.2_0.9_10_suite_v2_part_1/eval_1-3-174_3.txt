@@ -1,0 +1,15 @@
+The error message suggests that there might be an issue with the installation of psycopg2. One possible solution is to try installing psycopg2-binary instead of psycopg2. 
+
+You can install it using the following command:
+
+```
+conda install psycopg2-binary
+```
+
+Then, modify your import statement to:
+
+```python
+import psycopg2-binary as psycopg2
+```
+
+This should resolve the DLL load error.

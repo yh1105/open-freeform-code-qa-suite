@@ -1,0 +1,26 @@
+Sure, I can help you with that. Here's a function that should do what you're looking for:
+
+```python
+import openpyxl
+
+def filterExcelRows(filePath, matchedString):
+    wb = openpyxl.load_workbook(filePath)
+    sheet = wb['Sheet1']
+    rows = []
+    for row in sheet.iter_rows():
+        for cell in row:
+            if cell.value == matchedString:
+                rows.append(row)
+                break
+    return rows
+```
+
+This function loads the Excel file specified by `filePath`, and then iterates over all the cells in the sheet named `Sheet1`. If a cell contains the string specified by `matchedString`, the entire row is added to the `rows` list. Finally, the function returns the `rows` list.
+
+You can then call this function like this:
+
+```python
+rows = filterExcelRows('example.xlsx', 'ABC')
+```
+
+This will return a list of rows that contain the string 'ABC'. You can then access the contents of each cell in each row using the `value` attribute of each cell. For example, to get the value of the first cell in the first row, you would use `rows[0][0].value`.

@@ -1,0 +1,7 @@
+To select the second column by name, you can use the `[[` operator with quotes around the column name. Here's the code to select the second column named "a" from `d3` and assign it to a variable named `second_col`:
+
+```r
+second_col <- d3[["a.1"]]
+```
+
+Note that the second column has a modified name "a.1" to avoid having two columns with the same name.

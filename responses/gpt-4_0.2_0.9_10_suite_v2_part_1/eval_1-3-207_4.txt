@@ -1,0 +1,17 @@
+Sure, I can help with that. The calculation for the hours should take into account the total minutes (start time minutes + duration), divide it by 60 to get the hours, and add it to the start time hours. Also, we need to use the modulus operator to ensure the hour is within the 24-hour format. Here is the function:
+
+```python
+def computeEndTime(hour, mins, dura):
+    total_mins = mins + dura
+    end_hour = (hour + total_mins // 60) % 24
+    end_mins = total_mins % 60
+    return "{:02d}:{:02d}".format(end_hour, end_mins)
+```
+
+In this function, `total_mins` is the total minutes, `end_hour` is the end hour, and `end_mins` is the end minutes. The `"{:02d}:{:02d}".format(end_hour, end_mins)` part is used to format the output as "xx:xx". The `:02d` inside the format function means to format the number as a 2-digit integer, padding with zeros if necessary.
+
+You can use the function like this:
+
+```python
+print(computeEndTime(12, 17, 59))  # Output: 13:16
+```

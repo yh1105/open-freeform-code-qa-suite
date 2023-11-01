@@ -1,0 +1,41 @@
+Here is a function `mySplit` that uses the `strsplit` function to split the strings and then `sapply` to apply the function to each element of the list. It also uses the `gsub` function to remove the unwanted characters.
+
+```r
+mySplit <- function(df) {
+  # Split the strings by comma
+  split_strings <- strsplit(df$col1, split = ",")
+  
+  # Function to split each string by colon and remove unwanted characters
+  split_colon <- function(x) {
+    s <- strsplit(x, split = ":")[[1]]
+    gsub(" ", "", s[2])
+  }
+  
+  # Apply the function to each element of the list
+  split_data <- sapply(split_strings, function(x) sapply(x, split_colon))
+  
+  # Convert the matrix to a data frame and set the column names
+  df_new <- as.data.frame(t(split_data))
+  colnames(df_new) <- c("name", "Age", "City")
+  
+  return(df_new)
+}
+```
+
+You can use this function like this:
+
+```r
+df <- data.frame(col1 = c("name:Michael,Age:31,City:NYC", "name:Tom,Age:25,City:NA"))
+df_new <- mySplit(df)
+print(df_new)
+```
+
+This will print:
+
+```r
+     name Age City
+1 Michael  31  NYC
+2     Tom  25   NA
+```
+
+Please note that this function assumes that the order of the elements in the strings is always the same (i.e., name, age, city). If the order can vary, you would need a more complex function that also takes into account the names of the elements (i.e., the parts before the colons).

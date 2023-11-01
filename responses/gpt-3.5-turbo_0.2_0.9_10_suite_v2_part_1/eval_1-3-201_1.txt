@@ -1,0 +1,24 @@
+One solution to this problem is to use multiprocessing instead of threading. Multiprocessing allows you to run multiple processes simultaneously, which is useful when you have two infinite while loops that need to run simultaneously.
+
+Here's an example of how you can use multiprocessing to run both functions simultaneously:
+
+```python
+import multiprocessing
+
+if __name__ == "__main__":
+    database = db.dataBase()
+    homepage = hp.homepage(database)
+    data_mining_process = multiprocessing.Process(target=fd.financeData, args=(database, 1600))
+    data_mining_process.start()
+    app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
+    homepage.timeUpdateCallback(app)
+    homepage.gaugeRefreshCallback(app)
+    app.layout = homepage.layoutMaker()
+    app.run_server(debug=True)
+```
+
+In this example, we create a new process for the `financeData` function using the `multiprocessing.Process` class. We pass the `database` and `1600` arguments to the function using the `args` parameter. We then start the process using the `start` method.
+
+The rest of the code remains the same, except that we move it inside the `if __name__ == "__main__":` block to ensure that it only runs when the script is executed directly.
+
+With this solution, both the `financeData` function and the `app.run_server` function will run simultaneously in separate processes.

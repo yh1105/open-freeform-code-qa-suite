@@ -1,0 +1,26 @@
+You can modify your code to check if the string contains `_` or not. If it contains `_`, then split the string and return everything after the first `_`. If it doesn't contain `_`, then return the original string.
+
+Here's the modified code:
+
+```python
+def splitOne(s):
+    if '_' in s:
+        return '_'.join(s.split('_')[1:])
+    else:
+        return s
+```
+
+This function first checks if `_` is present in the string `s`. If it is present, then it splits the string using `_` as the separator and returns everything after the first `_`. If `_` is not present in the string, then it simply returns the original string.
+
+Here are some examples of how this function works:
+
+```python
+>>> splitOne('testing_abc')
+'abc'
+>>> splitOne('xyz')
+'xyz'
+>>> splitOne('testing_abc_bbc')
+'abc_bbc'
+>>> splitOne('no_underscore')
+'no_underscore'
+```

@@ -1,0 +1,38 @@
+Here is a function in R that concatenates every two columns starting from `X2`:
+
+```r
+concat <- function(df) {
+  # Create a new data frame with the column X1
+  new_df <- data.frame(X1 = df$X1)
+  
+  # Concatenate every two columns starting from X2
+  new_df$X2 <- paste(df$X2, df$X3, sep = "")
+  new_df$X3 <- paste(df$X4, df$X5, sep = "")
+  new_df$X4 <- paste(df$X6, df$X7, sep = "")
+  
+  return(new_df)
+}
+```
+
+This function works by first creating a new data frame with the column `X1` from the original data frame. Then, it concatenates every two columns starting from `X2` using the `paste` function with `sep = ""` to remove any spaces between the concatenated strings. The concatenated strings are then added to the new data frame. The function finally returns the new data frame.
+
+You can use this function on your data frame like this:
+
+```r
+# Your data frame
+df <- data.frame(
+  X1 = c("p1", "p2", "p3", "p4"),
+  X2 = c("H", "H", "J", "K"),
+  X3 = c("I", "K", "K", "I"),
+  X4 = c("K", "J", "H", "H"),
+  X5 = c("J", "K", "I", "J"),
+  X6 = c("K", "I", "J", "I"),
+  X7 = c("H", "J", "K", "J")
+)
+
+# Use the function
+new_df <- concat(df)
+
+# Print the new data frame
+print(new_df)
+```

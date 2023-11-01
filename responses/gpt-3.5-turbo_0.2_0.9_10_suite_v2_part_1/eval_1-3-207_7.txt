@@ -1,0 +1,18 @@
+You can calculate the end time by adding the duration to the starting time and then adjusting the hours and minutes accordingly. Here's the updated code with the missing calculation:
+
+```python
+def computeEndTime(hour, mins, dura):
+    mins = (mins + dura) % 60
+    hour = (hour + (mins + dura) // 60) % 24
+    return f"{hour:02d}:{mins:02d}"
+```
+
+In this code, we first calculate the end minutes by adding the duration to the starting minutes and taking the modulo 60 to get the minutes within the hour. Then, we calculate the end hour by adding the duration in minutes to the starting hour, and adding any extra hours that result from the minutes calculation. Finally, we take the modulo 24 to get the hour within the day.
+
+The `f"{hour:02d}:{mins:02d}"` format string is used to format the output with leading zeros for single-digit hours and minutes.
+
+You can call this function with the starting hour, minutes, and duration as arguments, like this:
+
+```python
+print(computeEndTime(12, 17, 59))  # Output: 13:16
+```

@@ -1,0 +1,30 @@
+Sure, here is a Python function that does exactly what you need:
+
+```python
+import numpy as np
+
+def getMax(matrix):
+    # Convert the input to a NumPy array (if it's not already)
+    matrix = np.array(matrix)
+    # Select the third column from each 2D sub-array, find the max, and reshape the result to a 2D array
+    result = matrix[:,:,2].max(axis=1).reshape(-1,1)
+    return result
+```
+
+This function works by first converting the input to a NumPy array (if it's not already). It then selects the third column from each 2D sub-array in the 3D array using the `[:,:,2]` indexing. The `max(axis=1)` function is then used to find the maximum value of each of these selected columns. Finally, the `reshape(-1,1)` function is used to convert the result to a 2D array.
+
+Here is how you can use this function with your example data:
+
+```python
+matrix = np.array([
+    [[4, 1, 5, 2, 5, 5, 7, 8, 9, 7],
+     [7, 4, 2, 4, 7, 8, 4, 1, 3, 5],
+     [6, 1, 2, 1, 1, 1, 2, 3, 7, 6],
+     [5, 5, 5, 0, 5, 4, 3, 8, 7, 1],
+     [2, 8, 6, 7, 4, 7, 5, 5, 5, 1]],
+
+    [[9, 9, 5, 8, 0, 7, 3, 9, 8, 1],
+     [9, 1, 9, 5, 7, 4, 5, 4, 7, 0],
+     [1, 0, 4, 8, 7, 3, 4, 3, 8, 8],
+     [8, 1, 3, 1, 7, 0, 9, 9, 3, 8],
+    

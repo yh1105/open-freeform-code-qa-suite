@@ -1,0 +1,38 @@
+You can use the `merge` function in `data.table` to join the two tables together, and then use the `coalesce` function from `dplyr` to replace the values in `big` with the corresponding values in `new_big` where they exist.
+
+Here is the function:
+
+```r
+library(data.table)
+library(dplyr)
+
+myReplace <- function(big, new_big) {
+  # Merge the two tables together
+  merged <- merge(big, new_big, by = "id", all.x = TRUE)
+  
+  # Use coalesce to replace the values in big with the corresponding values in new_big
+  merged[, col := coalesce(col.y, col.x)]
+  
+  # Remove the extra column
+  merged[, col.y := NULL]
+  
+  return(merged)
+}
+```
+
+You can then call this function with your `big` and `new_big` tables:
+
+```r
+big <- structure(list(id = c("B", "C", "D", "E", "F", "G", "H", "I",
+"J", "K"), col = c(103L, 103L, 102L, 105L, 104L, 103L, 104L, 104L,
+104L, 103L)), row.names = c(NA, -10L), class = c("data.table",
+"data.frame"))
+
+new_big <- structure(list(id = c("B", "E", "G"), col = c(1, 11, 111)), row.names = c(NA,
+-3L), class = c("data.table", "data.frame"))
+
+result <- myReplace(big, new_big)
+print(result)
+```
+
+This will give you the desired output.

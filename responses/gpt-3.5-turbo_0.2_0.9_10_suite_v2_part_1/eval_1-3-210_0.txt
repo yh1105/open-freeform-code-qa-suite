@@ -1,0 +1,7 @@
+The reason why the access times are different is because the `match` statement in Python is not implemented as a lookup table. Instead, it is implemented as a series of if-else statements under the hood. 
+
+When you use the `match` statement, Python will evaluate each case in order until it finds a match. This means that if the first case matches, it will return immediately without evaluating the other cases. 
+
+In your example, the first case matches for the inputs 0 and 1, which is why they are faster than the other cases. As the input value increases, the time to evaluate the cases also increases because Python has to evaluate more cases before finding a match.
+
+If you need equal access times, you can use a lookup table such as a dictionary. This will give you constant time access to each case regardless of the input value.

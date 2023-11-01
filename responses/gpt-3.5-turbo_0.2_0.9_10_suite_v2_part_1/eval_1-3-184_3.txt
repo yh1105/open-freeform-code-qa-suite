@@ -1,0 +1,24 @@
+Sure, I can help you with that. Here's a function that should do what you're looking for:
+
+```python
+import openpyxl
+
+def filterExcelRows(filePath, matchedString):
+    wb = openpyxl.load_workbook(filePath)
+    sheet = wb['Sheet1']
+    rows = []
+    for row in sheet.iter_rows():
+        for cell in row:
+            if cell.value == matchedString:
+                rows.append(row)
+                break
+    return rows
+```
+
+This function takes in the file path of the Excel file and the string you want to match as arguments. It then loads the workbook and selects the `Sheet1` sheet.
+
+The function then iterates over every row in the sheet and checks if any cell in that row contains the matched string. If it does, the entire row is appended to a list of rows.
+
+Finally, the function returns the list of rows that contain the matched string.
+
+Note that this function assumes that the first row of the sheet contains column headers and should not be included in the search. If you want to include the first row, you can remove the `break` statement in the inner loop.

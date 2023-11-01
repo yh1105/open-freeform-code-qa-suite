@@ -1,0 +1,16 @@
+You can use the `tidyr` package to split the tuples into separate rows. Here's the `mySplit` function that should do what you want:
+
+```r
+library(tidyr)
+
+mySplit <- function(x) {
+  x %>%
+    separate_rows(segment_stemming, sep = ", ") %>%
+    separate(segment_stemming, into = c("word", "pos"), sep = "'\\s*,\\s*'", remove = FALSE) %>%
+    mutate(word = gsub("\\(|\\)", "", word), pos = gsub("\\(|\\)", "", pos)) %>%
+    select(id, segment_stemming = word) %>%
+    arrange(id)
+}
+```
+
+This function first uses `separate_rows` to split the tuples into separate rows, and then uses `separate` to split the words and parts of speech into separate columns. The `gsub` function is used to remove the parentheses from the resulting columns. Finally, the function selects the `id` and `segment_stemming` columns, arranges the rows by `id`, and returns the resulting table.

@@ -1,0 +1,44 @@
+The error message you're seeing is because Selenium can't locate the Firefox binary on your system. This could be due to a few reasons:
+
+1. Firefox is not installed on your system.
+2. Firefox is installed, but not in the default location that Selenium is looking in.
+
+Here are a few things you can do to resolve this issue:
+
+1. **Install Firefox**: If Firefox is not installed on your system, you should install it.
+
+2. **Provide the path to Firefox binary**: If Firefox is installed but not in the default location, you need to provide the path to the Firefox binary in your script. Here's how you can do it:
+
+```python
+from selenium import webdriver
+from selenium.webdriver.firefox.service import Service
+from selenium.webdriver.common.by import By
+from selenium.webdriver.firefox.options import Options
+from selenium.webdriver.common.keys import Keys
+from webdriver_manager.firefox import GeckoDriverManager
+
+options = Options()
+options.binary_location = "/path/to/your/firefox/binary" # replace with your path
+driver = webdriver.Firefox(service=Service(GeckoDriverManager().install()), options=options)
+driver.get('http://www.seleniumhq.org')
+```
+
+Replace `"/path/to/your/firefox/binary"` with the actual path to your Firefox binary.
+
+3. **Use WebDriver Manager**: WebDriver Manager can help to manage driver related settings automatically. Here's how you can use it:
+
+```python
+from selenium import webdriver
+from webdriver_manager.firefox import GeckoDriverManager
+
+driver = webdriver.Firefox(executable_path=GeckoDriverManager().install())
+driver.get('http://www.seleniumhq.org')
+```
+
+This will automatically download the latest compatible Firefox driver and use it.
+
+Remember to install WebDriver Manager using pip:
+
+```
+pip install webdriver_manager
+```

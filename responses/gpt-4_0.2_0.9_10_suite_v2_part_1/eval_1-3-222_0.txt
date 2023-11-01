@@ -1,0 +1,26 @@
+Here is a Python function that uses dynamic programming to solve the problem:
+
+```python
+def func(n, k):
+    if n == 0 or k == 0:
+        return 0
+    if n == 1:
+        return k
+
+    # dp[i][0] stores number of ways to form a string of length i with no consecutive characters
+    # dp[i][1] stores number of ways to form a string of length i with two consecutive characters
+    dp = [[0, 0] for _ in range(n+1)]
+    dp[1][0], dp[1][1] = k, 0
+
+    for i in range(2, n+1):
+        dp[i][0] = (dp[i-1][0] + dp[i-1][1]) * (k-1)
+        dp[i][1] = dp[i-1][0]
+
+    return dp[n][0] + dp[n][1]
+```
+
+This function works by creating a 2D dynamic programming table `dp` where `dp[i][0]` stores the number of ways to form a string of length `i` with no consecutive characters and `dp[i][1]` stores the number of ways to form a string of length `i` with two consecutive characters.
+
+For each length `i`, the number of ways to form a string with no consecutive characters is the sum of the number of ways to form a string of length `i-1` with no consecutive characters and the number of ways to form a string of length `i-1` with two consecutive characters, multiplied by `k-1` (since we can choose any character except the last one). The number of ways to form a string with two consecutive characters is the number of ways to form a string of length `i-1` with no consecutive characters (since we can just append the last character to these strings).
+
+Finally, the function returns the sum of the number of ways to form a string of length `n` with no consecutive characters and the number of ways to form a string of length `n` with two consecutive characters.

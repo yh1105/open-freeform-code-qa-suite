@@ -1,0 +1,15 @@
+Here is a Python function that uses the `re` module to split the input string at underscores and dashes, then uses the `str.join()` method to combine the words into camel case:
+
+```python
+import re
+
+def to_camel_case(text):
+    words = re.split('-|_', text)
+    return words[0] + ''.join(word.title() for word in words[1:])
+```
+
+This function works by first splitting the input string into a list of words. The `re.split()` function is used with a regular expression that matches either a dash or an underscore, effectively splitting the string at each dash or underscore.
+
+The function then uses a list comprehension to capitalize the first letter of each word in the list (except for the first word), using the `str.title()` method. The `str.join()` method is used to combine the words back into a single string, with no spaces or other separators between them.
+
+This results in a string in camel case, where the first word is in the same case as in the original string, and each subsequent word starts with a capital letter.
