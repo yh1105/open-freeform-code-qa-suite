@@ -1,0 +1,15 @@
+Unfortunately, there is no direct `conda` command to list the size of the packages. However, you can use the `du` (disk usage) command in Unix-based systems to find out the size of each package. 
+
+Since you're using Windows, you can use the `dir` command to find out the size of each package. Here is how you can do it:
+
+1. Open Command Prompt.
+2. Navigate to the directory where your conda packages are installed. Usually, it's in the `pkgs` directory under your Anaconda installation. For example, if you installed Anaconda in `C:\Users\YourUsername\Anaconda3`, then the packages are in `C:\Users\YourUsername\Anaconda3\pkgs`.
+3. Use the `dir` command to list the size of each package. Here is the command:
+
+```cmd
+dir /s /w /o:-s
+```
+
+This command will list all files and directories, including their size, in a wide list format (`/w`), sorted by size in descending order (`/o:-s`). The size of each directory (which corresponds to a package) is shown at the end of each directory listing.
+
+Please note that this method only gives you an approximation of the package size, because some files might be shared between packages.

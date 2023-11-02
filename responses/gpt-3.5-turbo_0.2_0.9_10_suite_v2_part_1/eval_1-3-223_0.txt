@@ -1,0 +1,52 @@
+You can use the `pip` package to check if a package is at its latest version programmatically. Here's a function `checkVersion` in Python that takes the package name `pkgName` as the argument and returns a boolean value indicating whether the package is at its latest version or not:
+
+```python
+import pip
+
+def checkVersion(pkgName):
+    # Get the latest version of the package
+    latest_version = None
+    try:
+        package = pip.get_installed_distributions()
+        package_list = sorted(["%s==%s" % (i.key, i.version) for i in package])
+        for p in package_list:
+            if p.startswith(pkgName):
+                latest_version = p.split('==')[1]
+                break
+    except:
+        pass
+
+    # Check if the installed version is the latest version
+    if latest_version is not None:
+        try:
+            pip_version = pip.get_installed_distributions()["pip"].version
+            pip_version = tuple(map(int, pip_version.split(".")[:2]))
+            latest_version = tuple(map(int, latest_version.split(".")[:2]))
+            if pip_version >= (10, 0, 0) and pip_version < (19, 0, 0):
+                # pip version 10.x.x and below have a bug where they don't return the latest version
+                # for packages that have a pre-release version (e.g. 1.0.0rc1)
+                # so we need to use the --pre flag to get the latest version
+                latest_version = pip.get_installed_distributions().get_distribution(pkgName).version
+            else:
+                latest_version = pip.get_latest_version(pkgName)
+        except:
+            pass
+
+        # Compare the installed version with the latest version
+        installed_version = pip.get_installed_distributions().get_distribution(pkgName).version
+        if installed_version == latest_version:
+            return True
+        else:
+            return False
+    else:
+        return False
+```
+
+You can call this function with the package name as the argument, like this:
+
+```python
+if checkVersion('gekko'):
+    print('Package is at its latest version')
+else:
+    print('Package is not at its latest version')
+```

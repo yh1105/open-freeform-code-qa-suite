@@ -1,0 +1,27 @@
+You can use the `tstrsplit()` function from the `data.table` package to split the `segment_stemming` column by the comma and then again by the parentheses. Here's the code for the `mySplit()` function:
+
+```r
+mySplit <- function(x) {
+  x[, lapply(tstrsplit(segment_stemming, ", "), function(y) tstrsplit(gsub("[\\[\\]()']", "", y), ", ")), by = id][, -1]
+}
+```
+
+Here's how the function works:
+
+1. `tstrsplit(segment_stemming, ", ")` splits the `segment_stemming` column by comma and returns a list of character vectors.
+2. `lapply()` applies a function to each element of the list. The function `tstrsplit(gsub("[\\[\\]()']", "", y), ", ")` removes the square brackets, parentheses, and single quotes from each element of the list and then splits it by comma. This returns a list of character vectors.
+3. The `by = id` argument groups the resulting table by the `id` column.
+4. `[, -1]` removes the first column, which is the `id` column that we grouped by.
+
+Here's how you can use the function:
+
+```r
+mySplit(x)
+#    id                 V1        V2
+# 1:  A ('Brownie', 'Noun') ('From', 'Josa')
+# 2:  A       ('Pi', 'Noun')         NA
+# 3:  B ('Dung-caroon-gye', 'Noun') ('in', 'Josa')
+# 4:  B    ('innovation', 'Noun')         NA
+```
+
+Note that the function returns a table with three columns, where the first column is the `id` and the second and third columns are the split values. You can further process the table to get the desired output format.

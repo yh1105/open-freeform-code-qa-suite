@@ -1,0 +1,19 @@
+The `f` before the quotation marks in a `print` statement in Python is used to denote an f-string, which is a type of string formatting. It was introduced in Python 3.6.
+
+F-strings provide a concise and convenient way to embed expressions inside string literals for formatting. 
+
+Here's how it works:
+
+```python
+print(f"Input directory: {args.input_directory}")
+```
+
+In this line, `{args.input_directory}` is a placeholder for the actual value of `args.input_directory`. The `f` before the string tells Python to replace the placeholder with its value.
+
+So if `args.input_directory` was `/home/user/documents`, the output of the print statement would be:
+
+```
+Input directory: /home/user/documents
+```
+
+This is a very handy feature in Python, especially when you need to include the values of variables in strings.

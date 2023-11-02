@@ -1,0 +1,8 @@
+Yes, it is possible to print with RGB colored background. Here's the modified function that takes RGB values for the background color and returns the colored text with the specified background color:
+
+```python
+def colored(background_r, background_g, background_b, text):
+    return "\033[48;2;{};{};{}m{}\033[0m".format(background_r, background_g, background_b, text)
+```
+
+This function sets the background color using the RGB values provided and returns the colored text with the specified background color. The `"\033[0m"` at the end resets the color to the default color.

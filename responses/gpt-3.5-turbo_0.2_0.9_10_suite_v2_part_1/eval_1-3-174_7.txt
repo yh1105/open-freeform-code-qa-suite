@@ -1,0 +1,7 @@
+The error message suggests that there might be a problem with the installation of psycopg2. One possible solution is to try reinstalling psycopg2 using pip instead of conda. You can do this by activating your conda environment and running the following command in your terminal:
+
+```
+pip install psycopg2-binary
+```
+
+This will install the binary version of psycopg2, which is precompiled and does not require any additional dependencies. Once the installation is complete, try running your sample app again and see if the error persists.

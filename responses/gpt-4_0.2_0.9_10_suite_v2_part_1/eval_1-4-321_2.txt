@@ -1,0 +1,38 @@
+Here's a function `mySplit` that uses `strsplit` and `lapply` to split the `segment_stemming` column into separate rows. It also uses `unnest_longer` from the `tidyverse` package to expand the list column into multiple rows.
+
+```r
+library(data.table)
+library(tidyverse)
+
+mySplit <- function(x) {
+  # Convert to tibble for easier manipulation
+  x <- as_tibble(x)
+  
+  # Remove brackets and split by comma
+  x$segment_stemming <- str_replace_all(x$segment_stemming, "\\[|\\]", "")
+  x$segment_stemming <- strsplit(x$segment_stemming, "),")
+  
+  # Unnest the list column into multiple rows
+  x <- x %>% unnest_longer(segment_stemming)
+  
+  # Remove leading and trailing whitespaces
+  x$segment_stemming <- str_trim(x$segment_stemming)
+  
+  # Add back the closing bracket
+  x$segment_stemming <- paste0(x$segment_stemming, ")")
+  
+  # Convert back to data.table
+  x <- as.data.table(x)
+  
+  return(x)
+}
+```
+
+You can use this function on your data like this:
+
+```r
+result <- mySplit(x)
+print(result)
+```
+
+Please note that this function assumes that the tuples in the `segment_stemming` column are always separated by "),". If the tuples are separated by a different character, you will need to adjust the `strsplit` function accordingly.

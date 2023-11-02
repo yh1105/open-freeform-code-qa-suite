@@ -1,0 +1,38 @@
+The error you're encountering is a known issue with the `pytube` library. The HTTP 410 error means that the resource you're trying to access is no longer available at the requested URL. This is often due to changes in YouTube's backend.
+
+As of now, the issue has been fixed in the latest version of `pytube`. You can upgrade `pytube` to the latest version using pip:
+
+```bash
+pip install pytube --upgrade
+```
+
+If you're still encountering the issue after upgrading, you can try using `pytube3` which is a fork of `pytube` with some additional fixes:
+
+```bash
+pip install pytube3
+```
+
+Then, you can use `pytube3` in your code like this:
+
+```python
+from pytube import YouTube
+
+#ask for the link from user
+link = input("Enter the link of YouTube video you want to download:  ")
+yt = YouTube(link)
+
+#Showing details
+print("Title: ",yt.title)
+print("Number of views: ",yt.views)
+print("Length of video: ",yt.length)
+print("Rating of video: ",yt.rating)
+#Getting the highest resolution possible
+ys = yt.streams.get_highest_resolution()
+
+#Starting download
+print("Downloading...")
+ys.download()
+print("Download completed!!")
+```
+
+If none of the above solutions work, you may want to consider using another library for downloading YouTube videos, such as `youtube_dl`.

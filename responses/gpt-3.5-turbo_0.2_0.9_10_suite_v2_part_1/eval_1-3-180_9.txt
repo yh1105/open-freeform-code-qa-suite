@@ -1,0 +1,15 @@
+To filter the data based on a specific value in a column, you can use the `loc` method in pandas. Here's an example of how you can filter the data for rows where the `TEST_STATUS` column has the value "PASS TEST":
+
+```python
+pass_test_data = data_useless.loc[data_useless['TEST_STATUS'] == 'PASS TEST']
+```
+
+This will create a new DataFrame called `pass_test_data` that only contains rows where the `TEST_STATUS` column has the value "PASS TEST".
+
+To group the data by `TEST_STATUS` and count the number of occurrences of each value, you can use the `groupby` method like you did before:
+
+```python
+pass_test_counts = pass_test_data.groupby('TEST_STATUS').size()
+```
+
+This will create a new Series called `pass_test_counts` that contains the count of rows for each unique value in the `TEST_STATUS` column, but only for the rows where `TEST_STATUS` is "PASS TEST".

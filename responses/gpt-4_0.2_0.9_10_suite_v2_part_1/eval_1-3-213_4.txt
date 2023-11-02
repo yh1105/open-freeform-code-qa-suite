@@ -1,0 +1,18 @@
+Here is a function `removeTimezone(df)` that will remove timezone information from all datetime columns in a DataFrame. This function will iterate over each column in the DataFrame, check if it is a datetime column with timezone information, and if so, it will remove the timezone information.
+
+```python
+def removeTimezone(df):
+    for col in df.columns:
+        if df[col].dtype == 'datetime64[ns, UTC]':
+            df[col] = df[col].dt.tz_convert(None)
+    return df
+```
+
+You can use this function before saving your DataFrame to Excel:
+
+```python
+df = removeTimezone(df)
+df.to_excel(writer, header = True, index = True)
+```
+
+This function will convert all datetime columns with timezone information to timezone unaware datetime columns, which can be written to Excel without any issues.

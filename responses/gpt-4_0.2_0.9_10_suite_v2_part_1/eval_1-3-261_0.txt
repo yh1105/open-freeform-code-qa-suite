@@ -1,0 +1,45 @@
+The error you're encountering is a `HTTPError: HTTP Error 410: Gone`. This error is an HTTP status code that means the resource you were trying to reach is no longer available, and no forwarding address is known. This condition is expected to be considered permanent.
+
+This error is often encountered when using the `pytube` library due to changes in the YouTube website that `pytube` has not yet accounted for. The maintainers of `pytube` are usually quick to fix these issues, but there can be a delay between when the issue arises and when the fix is released.
+
+Here are a few things you can try to solve the problem:
+
+1. **Update `pytube` to the latest version**: You mentioned you've tried upgrading `pytube`, but make sure you're using the latest version. You can upgrade `pytube` using pip:
+
+    ```bash
+    pip install --upgrade pytube
+    ```
+
+2. **Try using `pytube3`**: `pytube3` is a fork of `pytube` with some additional fixes and features. You can install it using pip:
+
+    ```bash
+    pip install pytube3
+    ```
+
+    Then, you can use `pytube3` in your code like this:
+
+    ```python
+    from pytube import YouTube
+
+    link = input("Enter the link of YouTube video you want to download:  ")
+    yt = YouTube(link)
+
+    print("Title: ",yt.title)
+    print("Number of views: ",yt.views)
+    print("Length of video: ",yt.length)
+    print("Rating of video: ",yt.rating)
+
+    ys = yt.streams.get_highest_resolution()
+
+    print("Downloading...")
+    ys.download()
+    print("Download completed!!")
+    ```
+
+3. **Try using a different library**: If `pytube` and `pytube3` are not working for you, you might want to try a different library for downloading YouTube videos, such as `youtube_dl`.
+
+Remember to uninstall the previous `pytube` before installing `pytube3` or `youtube_dl` to avoid any conflicts. You can uninstall it using pip:
+
+```bash
+pip uninstall pytube
+```

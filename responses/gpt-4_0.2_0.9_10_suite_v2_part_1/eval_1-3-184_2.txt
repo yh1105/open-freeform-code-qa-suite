@@ -1,0 +1,25 @@
+Sure, here is a function that does exactly what you asked for. It uses `openpyxl` to open the Excel file, then it iterates over all the rows and cells in the specified worksheet. If a cell contains the `matchedString`, it adds the row index to the list. Finally, it returns the list of row indexes.
+
+```python
+from openpyxl import load_workbook
+
+def filterExcelRows(filePath, matchedString):
+    # Load the workbook and select the first sheet
+    wb = load_workbook(filename=filePath)
+    sheet = wb['Sheet1']
+
+    matched_rows = []
+
+    # Iterate over the rows
+    for i, row in enumerate(sheet.iter_rows(values_only=True), start=1):
+        # Iterate over the cells in the row
+        for cell in row:
+            # Check if the cell contains the matched string
+            if matchedString in str(cell):
+                matched_rows.append(i)
+                # Break the inner loop as we found a match in this row
+                break
+
+    return matched_rows
+```
+This function returns the row indexes (1-based) where the `matchedString` is found. If you want to get 0-based indexes, you can simply subtract 1 from `i` when appending to `matched_rows`.

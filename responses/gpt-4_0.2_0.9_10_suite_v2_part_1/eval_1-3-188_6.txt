@@ -1,0 +1,35 @@
+Here is a function that does what you want. It uses the `loc` function from pandas to locate the row where `instrument_token` is equal to `matchedString`. Then it extracts the `tradingsymbol` value from that row.
+
+```python
+def extractCellValue(df, matchedString):
+    try:
+        # Convert matchedString to int as instrument_token is int
+        matchedString = int(matchedString)
+        # Locate the row and extract the tradingsymbol
+        symbol = df.loc[df['instrument_token'] == matchedString, 'tradingsymbol'].values[0]
+        return symbol
+    except IndexError:
+        # If no match is found, return a message
+        return "No match found"
+    except Exception as e:
+        # If any other error occurs, return the error
+        return str(e)
+```
+
+You can use this function like this:
+
+```python
+import pandas as pd
+
+# Create the DataFrame
+df = pd.DataFrame({
+    'instrument_token': [123, 555, 34, 189],
+    'tradingsymbol': ['xyz', 'aaa', 'rst', 'op'],
+    'lot_size': [1000, 200, 2400, 780]
+})
+
+# Call the function
+print(extractCellValue(df, '123'))  # Output: 'xyz'
+```
+
+Please note that the `instrument_token` column is of integer type, so the `matchedString` should be converted to integer before comparison. If the `instrument_token` is of string type in your actual data, you can remove the line that converts `matchedString` to integer.

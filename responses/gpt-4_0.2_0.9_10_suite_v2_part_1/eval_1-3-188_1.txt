@@ -1,0 +1,20 @@
+Here is a function that does what you want:
+
+```python
+def extractCellValue(df, matchedString):
+    # Find the row where 'instrument_token' matches the 'matchedString'
+    matched_row = df[df['instrument_token'] == int(matchedString)]
+    
+    # If there is no match, return an empty string
+    if matched_row.empty:
+        return ''
+    
+    # Extract the 'tradingsymbol' from the matched row
+    tradingsymbol = matched_row['tradingsymbol'].values[0]
+    
+    return tradingsymbol
+```
+
+This function works by first filtering the DataFrame `df` to only include rows where the `instrument_token` column matches the `matchedString`. If no such row exists, the function returns an empty string. Otherwise, it extracts the `tradingsymbol` from the matched row and returns it.
+
+Please note that the `matchedString` is converted to integer before comparison because the `instrument_token` column in your DataFrame appears to be of integer type. If it's actually a string, you can remove the `int()` conversion.

@@ -1,0 +1,32 @@
+Here are the modified classes `M` and `M3D` that allow method chaining with correct return types:
+
+```python
+from __future__ import annotations
+from typing import TypeVar, Generic
+
+T = TypeVar('T', bound='M')
+
+class M(Generic[T]):
+    def set_width(self: T, width: int) -> T:
+        self.width = width
+        return self
+
+    def set_height(self: T, height: int) -> T:
+        self.height = height
+        return self
+
+
+class M3D(M[M3D]):
+    def set_depth(self, depth: int) -> M3D:
+        self.depth = depth
+        return self
+```
+
+Now, `cube = M3D().set_width(2).set_height(3).set_depth(5)` will work without any errors. 
+
+Explanation: 
+
+- We define a type variable `T` that is bound to the class `M`. This allows us to specify the return type of `set_width()` and `set_height()` as `T`, which is the type of the current instance of the class.
+- We make `M` a generic class by inheriting from `Generic[T]`. This allows us to use `T` as a type variable in the class definition.
+- In `M3D`, we inherit from `M[M3D]`, which means that `T` is now bound to `M3D`. This allows us to use `set_width()` and `set_height()` with the correct return type of `M3D`.
+- We specify the return type of `set_depth()` as `M3D`, which is the type of the current instance of the class.

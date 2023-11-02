@@ -1,0 +1,29 @@
+Here are the modified classes `M` and `M3D`:
+
+```python
+from __future__ import annotations
+from typing import TypeVar, Generic
+
+T = TypeVar('T', bound='M')
+
+class M(Generic[T]):
+    def set_width(self: T, width: int) -> T:
+        self.width = width
+        return self
+
+    def set_height(self: T, height: int) -> T:
+        self.height = height
+        return self
+
+
+class M3D(M[M3D]):
+    def set_depth(self, depth: int) -> M3D:
+        self.depth = depth
+        return self
+```
+
+The key change is to make `M` a generic class that takes a type parameter `T` that is bound to `M` or one of its subclasses. This allows the return type of `set_width()` and `set_height()` to be `T` instead of `M`, which means that when these methods are called on an instance of `M3D`, the return type will be `M3D` instead of `M`.
+
+In `M3D`, we specify that `M3D` is a subclass of `M[M3D]`, which means that the type parameter `T` in `M` is bound to `M3D`. This ensures that the return types of `set_width()` and `set_height()` are `M3D` instead of `M` when called on an instance of `M3D`.
+
+With these changes, we can now call `cube = M3D().set_width(2).set_height(3).set_depth(5)` without any errors.

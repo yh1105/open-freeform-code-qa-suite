@@ -1,0 +1,17 @@
+You can filter the DataFrame first for the rows where `TEST_STATUS` is `PASS TEST`, then apply the `groupby` function. Here's how you can do it:
+
+```python
+data_pass_test = data_useless[data_useless['TEST_STATUS'] == 'PASS TEST']
+grouped_data = data_pass_test.groupby('TEST_STATUS').count()
+```
+
+In the first line, we filter the DataFrame to only include rows where `TEST_STATUS` is `PASS TEST`. In the second line, we group this filtered DataFrame by `TEST_STATUS` and count the number of occurrences.
+
+However, since you're filtering the DataFrame to only include rows where `TEST_STATUS` is `PASS TEST`, the `groupby` operation might not be necessary, as all rows will have the same `TEST_STATUS`. If you want to count the number of `PASS TEST` in each `TEST_TYPE`, you can do:
+
+```python
+data_pass_test = data_useless[data_useless['TEST_STATUS'] == 'PASS TEST']
+grouped_data = data_pass_test.groupby('TEST_TYPE').count()
+```
+
+This will give you a count of `PASS TEST` for each `TEST_TYPE`.

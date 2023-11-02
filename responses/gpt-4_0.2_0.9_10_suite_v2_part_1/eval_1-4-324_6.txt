@@ -1,0 +1,32 @@
+Here is a function `mySplit` that uses the `strsplit` function to split the strings in `col1` by comma and colon, and then reshapes the data into a data frame:
+
+```r
+mySplit <- function(df) {
+  # Split the strings in col1 by comma and colon
+  split_data <- strsplit(as.character(df$col1), ",|:")
+  
+  # Reshape the data into a data frame
+  df_new <- do.call(rbind, lapply(split_data, function(x) {
+    data.frame(matrix(x, ncol = 2, byrow = TRUE)[, 2])
+  }))
+  
+  # Set the column names
+  colnames(df_new) <- c("name", "Age", "City")
+  
+  return(df_new)
+}
+```
+
+This function works by first splitting the strings in `col1` by comma and colon, which separates the data into a list of vectors. Each vector contains the alternating keys and values from the original string.
+
+Then, it uses `lapply` to apply a function to each vector in the list. This function reshapes the vector into a 2-column matrix and then converts it into a data frame, keeping only the second column (the values).
+
+Finally, it uses `do.call` and `rbind` to combine all the data frames in the list into a single data frame, and sets the column names.
+
+You can use this function on your data frame `df` like this:
+
+```r
+df_new <- mySplit(df)
+```
+
+This will return a new data frame `df_new` with the split data.

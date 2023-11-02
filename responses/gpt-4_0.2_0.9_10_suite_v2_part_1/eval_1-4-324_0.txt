@@ -1,0 +1,36 @@
+Here is a function `mySplit` that uses the `strsplit` function from base R and the `separate_rows` and `separate` functions from the `tidyverse` package to split the column into separate columns:
+
+```r
+# Load necessary library
+library(tidyverse)
+
+mySplit <- function(df) {
+  # Split the column into separate rows
+  df <- df %>% 
+    separate_rows(col1, sep = ",") 
+  
+  # Split the rows into separate columns
+  df <- df %>% 
+    separate(col1, into = c("Variable", "Value"), sep = ":")
+  
+  # Spread the data into a wide format
+  df <- df %>% 
+    spread(Variable, Value)
+  
+  return(df)
+}
+```
+
+You can use this function as follows:
+
+```r
+# Create a data frame
+df <- data.frame(col1 = c("name:Michael,Age:31,City:NYC", "name:Tom,Age:25,City:NA"))
+
+# Use the function
+mySplit(df)
+```
+
+This will return a data frame with separate columns for `name`, `Age`, and `City`.
+
+Please note that this function assumes that the input data frame has a column named `col1` and that the values in this column are strings that can be split into separate rows and columns as described. If your data frame has a different structure, you may need to adjust the function accordingly.

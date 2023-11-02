@@ -1,0 +1,50 @@
+Here is a function that should do what you want. It uses `apply` to iterate over each column of the data frame, and for each column it finds the minimum and maximum values, the row names where those values occur, and the frequency of those values. It then combines all this information into a new data frame.
+
+```r
+myMaxMin <- function(cars) {
+  # Initialize empty data frame to store results
+  results <- data.frame(column = character(),
+                        min.value = numeric(),
+                        max.value = numeric(),
+                        min.rowname = character(),
+                        max.rowname = character(),
+                        min.freq.times = integer(),
+                        max.freq.times = integer(),
+                        stringsAsFactors = FALSE)
+  
+  # Iterate over each column
+  for (col in names(cars)) {
+    # Find min and max values
+    min.value <- min(cars[[col]])
+    max.value <- max(cars[[col]])
+    
+    # Find row names where min and max values occur
+    min.rowname <- which(cars[[col]] == min.value)
+    max.rowname <- which(cars[[col]] == max.value)
+    
+    # Find frequency of min and max values
+    min.freq.times <- length(min.rowname)
+    max.freq.times <- length(max.rowname)
+    
+    # Combine results into a data frame
+    results <- rbind(results, data.frame(column = col,
+                                         min.value = min.value,
+                                         max.value = max.value,
+                                         min.rowname = toString(min.rowname),
+                                         max.rowname = toString(max.rowname),
+                                         min.freq.times = min.freq.times,
+                                         max.freq.times = max.freq.times,
+                                         stringsAsFactors = FALSE))
+  }
+  
+  return(results)
+}
+```
+
+You can use this function like this:
+
+```r
+myMaxMin(cars)
+```
+
+This will return a data frame with the column names, minimum and maximum values, row names where those values occur, and the frequency of those values for each column in the `cars` data frame.

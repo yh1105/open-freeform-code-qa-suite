@@ -1,0 +1,33 @@
+The error message you're seeing is due to the Django URL dispatcher not being able to find a match for the URL pattern you've specified in your template. 
+
+The problem is in your `index.html` file:
+
+```html
+<a href="{% url 'profile' post.author.username %}">
+    @{{post.author.username}}
+</a>
+```
+
+The error is occurring because `post.author.username` is empty or `None` for at least one of your `post` objects. The URL dispatcher is trying to reverse match the URL pattern for 'profile' with an empty string, which it can't do, hence the `NoReverseMatch` error.
+
+To fix this, you need to ensure that `post.author.username` is not empty or `None`. You can do this by adding a check in your template before trying to create the URL:
+
+```html
+{% if post.author.username %}
+    <a href="{% url 'profile' post.author.username %}">
+        @{{post.author.username}}
+    </a>
+{% else %}
+    <p>No author</p>
+{% endif %}
+```
+
+This will only try to create the URL if `post.author.username` is not empty, otherwise it will display "No author". 
+
+Also, make sure that you are correctly setting the `author` when you create a `NewPost` object in your `views.py`:
+
+```python
+post = NewPost(title=title, description=description, author=request.user)
+```
+
+Ensure that `request.user` is not `None` and that it has a `username`.

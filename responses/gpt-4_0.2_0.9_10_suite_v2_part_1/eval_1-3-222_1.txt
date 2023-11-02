@@ -1,0 +1,29 @@
+Here is a Python function that calculates the number of ways to form a string of length `n` using `k` characters such that at most two adjacent characters can be the same.
+
+```python
+def func(n, k):
+    # If n is 1, the number of ways is k
+    if n == 1:
+        return k
+    # If n is 2, the number of ways is k*k
+    if n == 2:
+        return k*k
+
+    # Initialize the two-dimensional dp array
+    dp = [[0 for _ in range(n+1)] for _ in range(2)]
+    dp[0][1] = k
+    dp[1][2] = k*k
+
+    # Fill the dp array
+    for i in range(3, n+1):
+        dp[0][i] = dp[0][i-1]*k + dp[1][i-1]*(k-1)
+        dp[1][i] = dp[0][i-1]*k
+
+    return dp[0][n] + dp[1][n]
+```
+
+The function uses dynamic programming to solve the problem. It maintains a two-dimensional dp array where `dp[0][i]` represents the number of ways to form a string of length `i` ending with different characters and `dp[1][i]` represents the number of ways to form a string of length `i` ending with the same characters. 
+
+For each `i` from `3` to `n`, `dp[0][i]` is calculated as the sum of `dp[0][i-1]*k` (the number of ways to form a string of length `i-1` ending with different characters and append a different character) and `dp[1][i-1]*(k-1)` (the number of ways to form a string of length `i-1` ending with the same characters and append a different character), and `dp[1][i]` is calculated as `dp[0][i-1]*k` (the number of ways to form a string of length `i-1` ending with different characters and append the same character).
+
+Finally, the function returns the sum of `dp[0][n]` and `dp[1][n]` which represents the total number of ways to form a string of length

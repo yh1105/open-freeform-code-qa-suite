@@ -1,0 +1,18 @@
+Sure, here is a function that will return the size of each tensor in the list:
+
+```python
+def getSize(t):
+    sizes = [tensor.size() for tensor in t]
+    return sizes
+```
+
+This function uses a list comprehension to iterate over each tensor in the list `t`, calling the `.size()` method on each tensor to get its size. The sizes are stored in a new list, which is then returned by the function.
+
+You can use this function like this:
+
+```python
+sizes = getSize(list_of_tensors)
+print(sizes)
+```
+
+This will print a list of the sizes of each tensor in the list `list_of_tensors`. Each size will be a tuple, where the first element is the number of rows in the tensor and the second element is the number of columns.

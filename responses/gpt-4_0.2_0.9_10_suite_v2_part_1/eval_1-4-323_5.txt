@@ -1,0 +1,31 @@
+Here is a function `myMaxMin` that should do what you want. It uses `lapply` to apply a function to each column of the input data frame. The function finds the minimum value of the column, the row names where this minimum value occurs, and the frequency of this minimum value. It then returns a data frame with these values. The results for each column are combined into a single data frame.
+
+```r
+myMaxMin <- function(cars) {
+  # Apply a function to each column of the input data frame
+  results <- lapply(names(cars), function(name) {
+    # Get the column
+    column <- cars[[name]]
+    
+    # Find the minimum value
+    min.value <- min(column)
+    
+    # Find the row names where this minimum value occurs
+    rowname <- which(column == min.value)
+    
+    # Find the frequency of this minimum value
+    freq.times <- sum(column == min.value)
+    
+    # Return a data frame with these values
+    data.frame(min.value = min.value, column = name, rowname = toString(rowname), freq.times = freq.times)
+  })
+  
+  # Combine the results into a single data frame
+  do.call(rbind, results)
+}
+
+# Test the function
+myMaxMin(cars)
+```
+
+This function will return a data frame where each row corresponds to a column of the input data frame. The `min.value` column contains the minimum value of the corresponding column, the `column` column contains the name of the column, the `rowname` column contains the row names where the minimum value occurs, and the `freq.times` column contains the frequency of the minimum value.

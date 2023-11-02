@@ -1,0 +1,20 @@
+The error you're seeing is likely due to the way your Dockerfile is copying files. You're copying your `app` directory into an `/app` directory in your Docker image, but then you're trying to run `uvicorn` from the root directory, where it can't find your `app` module.
+
+Here's a revised version of your Dockerfile:
+
+```Dockerfile
+FROM python:3.8
+WORKDIR /app
+
+COPY requirements.txt .
+RUN pip install --requirement requirements.txt
+
+COPY ./app .
+
+EXPOSE 8000
+CMD ["uvicorn", "main:app", "--host=0.0.0.0" , "--reload" , "--port", "8000"]
+```
+
+This Dockerfile changes the `WORKDIR` to `/app`, so everything is run from that directory. It also changes the `COPY` commands to copy to the current directory (which is `/app`), and changes the `uvicorn` command to look for `main:app` instead of `app.main:app`.
+
+If you still encounter issues, please ensure that your project structure matches what you've described and that your `docker-compose` file is correctly set up.

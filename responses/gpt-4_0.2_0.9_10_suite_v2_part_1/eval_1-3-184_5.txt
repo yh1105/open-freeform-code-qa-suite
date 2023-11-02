@@ -1,0 +1,26 @@
+Here is a Python function that uses `openpyxl` to open an Excel file, search for a specific string in all cells, and return the indexes of the rows that contain that string.
+
+```python
+from openpyxl import load_workbook
+
+def filterExcelRows(filePath, matchedString):
+    # Load the workbook and select the first sheet
+    wb = load_workbook(filename=filePath)
+    sheet = wb.active
+
+    # List to store the indexes of the rows that contain the matched string
+    matched_rows = []
+
+    # Iterate over all the rows in the sheet
+    for row in sheet.iter_rows():
+        # Iterate over all cells in the row
+        for cell in row:
+            # If the cell contains the matched string, add the row index to the list
+            if cell.value is not None and matchedString in str(cell.value):
+                matched_rows.append(cell.row)
+                break  # No need to check the rest of the cells in this row
+
+    return matched_rows
+```
+
+This function will return a list of row indexes. If the string is not found in any cell, it will return an empty list. Note that `openpyxl` uses 1-based indexing for rows and columns, so the first row is row 1, not row 0.

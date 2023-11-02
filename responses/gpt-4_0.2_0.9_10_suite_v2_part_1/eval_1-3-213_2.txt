@@ -1,0 +1,24 @@
+Here is a function that removes timezone information from all datetime columns in a DataFrame:
+
+```python
+def removeTimezone(df):
+    for col in df.columns:
+        if df[col].dtype == 'datetime64[ns, UTC]':
+            df[col] = df[col].dt.tz_convert(None)
+    return df
+```
+
+This function iterates over all columns in the DataFrame. If the column's data type is 'datetime64[ns, UTC]', it uses the `dt.tz_convert(None)` method to remove the timezone information.
+
+Please note that this function modifies the DataFrame in-place. If you do not want the original DataFrame to be modified, you can create a copy of the DataFrame before removing the timezone information:
+
+```python
+def removeTimezone(df):
+    df_copy = df.copy()
+    for col in df_copy.columns:
+        if df_copy[col].dtype == 'datetime64[ns, UTC]':
+            df_copy[col] = df_copy[col].dt.tz_convert(None)
+    return df_copy
+```
+
+In this version of the function, a copy of the DataFrame is created and the timezone information is removed from the copy. The original DataFrame remains unchanged.

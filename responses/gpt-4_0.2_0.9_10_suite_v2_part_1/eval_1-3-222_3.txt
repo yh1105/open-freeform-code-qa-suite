@@ -1,0 +1,33 @@
+Here is a Python function that solves the problem using dynamic programming. The idea is to keep track of the number of ways to form a string of length `i` using `k` characters such that the last character is repeated once or not repeated at all.
+
+```python
+def func(n, k):
+    # dp[i][0] stores the number of ways to form a string of length i
+    # using k characters such that the last character is not repeated
+    # dp[i][1] stores the number of ways to form a string of length i
+    # using k characters such that the last character is repeated once
+    dp = [[0, 0] for _ in range(n+1)]
+    
+    # base cases
+    dp[1][0] = k
+    dp[1][1] = 0
+    
+    for i in range(2, n+1):
+        # if the last character is not repeated, it can be any character
+        # except the last character of the previous string
+        dp[i][0] = (dp[i-1][0] + dp[i-1][1]) * (k-1)
+        
+        # if the last character is repeated, it must be the same as
+        # the last character of the previous string
+        dp[i][1] = dp[i-1][0]
+    
+    return dp[n][0] + dp[n][1]
+```
+
+This function works by first initializing a 2D list `dp` where `dp[i][0]` and `dp[i][1]` represent the number of ways to form a string of length `i` using `k` characters such that the last character is not repeated and repeated once, respectively.
+
+The base cases are when the string length is 1. In this case, there are `k` ways to form the string if the last character is not repeated, and 0 ways if the last character is repeated (since the string length is 1).
+
+For each string length `i` from 2 to `n`, the function calculates the number of ways to form the string if the last character is not repeated and if the last character is repeated. If the last character is not repeated, it can be any character except the last character of the previous string. If the last character is repeated, it must be the same as the last character of the previous string.
+
+Finally, the

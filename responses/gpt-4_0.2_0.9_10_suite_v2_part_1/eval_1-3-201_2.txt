@@ -1,0 +1,40 @@
+You can use multiprocessing instead of threading to run these two tasks simultaneously. The multiprocessing module in Python is used for creating processes, and it offers a way to sidestep the Global Interpreter Lock by using subprocesses instead of threads. 
+
+Here's how you can modify your code to use multiprocessing:
+
+```python
+import multiprocessing
+from dash import Dash
+import dash_bootstrap_components as dbc
+import db
+import hp
+import fd
+
+def run_dash():
+    app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
+    database=db.dataBase()
+    homepage=hp.homepage(database)
+    homepage.timeUpdateCallback(app)
+    homepage.gaugeRefreshCallback(app)
+    app.layout = homepage.layoutMaker()
+    app.run_server(debug=True)
+
+def run_data_mining():
+    database=db.dataBase()
+    fd.financeData(database,1600)
+
+if __name__ == "__main__":
+    # Create processes
+    p1 = multiprocessing.Process(target=run_dash)
+    p2 = multiprocessing.Process(target=run_data_mining)
+
+    # Start processes
+    p1.start()
+    p2.start()
+
+    # Join processes
+    p1.join()
+    p2.join()
+```
+
+In this code, `run_dash` and `run_data_mining` are two separate functions that are run as separate processes. The `multiprocessing.Process` class is used to create a new process for each function, and the `start` method is used to start each process. The `join` method is used to ensure that the main process waits for both subprocesses to finish before it continues.

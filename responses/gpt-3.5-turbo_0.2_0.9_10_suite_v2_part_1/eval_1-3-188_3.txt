@@ -1,0 +1,23 @@
+Here's the Python function `extractCellValue` that should do what you're asking for:
+
+```python
+def extractCellValue(df, matchedString):
+    row = df.loc[df['instrument_token'] == matchedString]
+    return row.iloc[0]['tradingsymbol']
+```
+
+This function first filters the DataFrame `df` to only include rows where the `instrument_token` column matches the `matchedString` argument. It then selects the first row of the filtered DataFrame and returns the value in the `tradingsymbol` column as a string.
+
+You can call this function like this:
+
+```python
+df = pd.DataFrame({
+    'instrument_token': [123, 555, 34, 189],
+    'tradingsymbol': ['xyz', 'aaa', 'rst', 'op'],
+    'lot_size': [1000, 200, 2400, 780]
+})
+
+extractCellValue(df, 123) # returns 'xyz'
+```
+
+Note that the `matchedString` argument should be an integer, since the `instrument_token` column is of integer type.

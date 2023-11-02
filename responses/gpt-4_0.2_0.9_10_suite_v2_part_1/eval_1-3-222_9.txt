@@ -1,0 +1,26 @@
+Sure, here is a Python function that uses dynamic programming to solve this problem.
+
+```python
+def func(n, k):
+    # dp[i][0] stores number of ways with no consecutive same characters
+    # dp[i][1] stores number of ways with two consecutive same characters
+    dp = [[0, 0] for _ in range(n+1)]
+    
+    # Initialization
+    dp[1][0], dp[1][1] = k, 0
+
+    for i in range(2, n+1):
+        # If we add a different character, it could be any of the (k-1) characters
+        dp[i][0] = (dp[i-1][0] + dp[i-1][1]) * (k-1)
+        
+        # If we add the same character, it must be the last character of the previous string
+        dp[i][1] = dp[i-1][0]
+
+    return dp[n][0] + dp[n][1]
+```
+
+This function works by maintaining two states for each length `i`: `dp[i][0]` for the number of ways to form a string of length `i` with no consecutive same characters, and `dp[i][1]` for the number of ways with two consecutive same characters. 
+
+For each length `i`, if we add a different character, it could be any of the (k-1) characters, so we multiply the total number of ways to form a string of length `i-1` by (k-1). If we add the same character, it must be the last character of the previous string, so we just copy the number of ways to form a string of length `i-1` with no consecutive same characters.
+
+Finally, we return the sum of `dp[n][0]` and `dp[n][1]` as the total number of ways to form a string of length `n`.

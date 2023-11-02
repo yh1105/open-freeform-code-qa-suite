@@ -1,0 +1,19 @@
+Here's a possible implementation:
+
+```python
+import random
+import string
+
+def generateRandomString():
+    while True:
+        # Generate a random string of length 13
+        rand_str = ''.join(random.choices(string.ascii_letters + string.digits, k=13))
+        # Insert "NAA3U" at a random position
+        pos = random.randint(0, 13)
+        rand_str = rand_str[:pos] + "NAA3U" + rand_str[pos:]
+        # Check if the string has exactly 3 digits
+        if sum(c.isdigit() for c in rand_str) == 3:
+            return rand_str
+```
+
+The function generates a random string of length 13 using `random.choices` and concatenates it with the sub-string "NAA3U" at a random position. It then checks if the resulting string has exactly 3 digits using a generator expression and the `sum` function. If the condition is satisfied, the function returns the string. If not, it repeats the process until a valid string is generated.

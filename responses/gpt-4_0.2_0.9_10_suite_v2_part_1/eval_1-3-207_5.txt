@@ -1,0 +1,18 @@
+Sure, I can help with that. The calculation for the hours should add the initial hour to the integer division of the sum of the initial minutes and the duration by 60. This will give the total number of hours, including those possibly "hidden" in the minutes. However, we should also apply a modulo 24 operation to ensure the hour is in the 0-23 range. Here's how you can do it:
+
+```python
+def computeEndTime(hour, mins, dura):
+    mins = (mins + dura) % 60
+    hour = (hour + (mins + dura) // 60) % 24
+    return "{:02d}:{:02d}".format(hour, mins)
+```
+
+In this function, `{:02d}` is used to format the hours and minutes as two digits, adding a leading zero if necessary. The `//` operator performs integer (floor) division, and `%` is the modulo operator, which returns the remainder of the division.
+
+You can use this function like this:
+
+```python
+print(computeEndTime(12, 17, 59))  # Output: 13:16
+```
+
+This will print the end time of an event that starts at 12:17 and lasts 59 minutes.

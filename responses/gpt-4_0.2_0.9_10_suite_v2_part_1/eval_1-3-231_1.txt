@@ -1,0 +1,9 @@
+Sure, you can use the `size()` method provided by PyTorch to get the size of each tensor in the list. Here is a function that does that:
+
+```python
+def getSize(t):
+    sizes = [tensor.size() for tensor in t]
+    return sizes
+```
+
+This function iterates over each tensor in the list `t` and appends its size to the `sizes` list. The `sizes` list is then returned. The size of a tensor is a tuple that represents the dimensions of the tensor. For example, a tensor with size `(3, 4)` is a 2-dimensional tensor with 3 rows and 4 columns.

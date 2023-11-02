@@ -1,0 +1,16 @@
+Yes, it is possible to print with RGB colored background using ANSI escape codes. Here's the modified function that takes RGB values for background color:
+
+```python
+def colored(background_r, background_g, background_b, text):
+    return "\033[48;2;{};{};{}m{}\033[0m".format(background_r, background_g, background_b, text)
+```
+
+This function will return the text with the specified RGB colored background. You can use it like this:
+
+```python
+text = "Hello, World"
+colored_text = colored(132, 204, 247, text)
+print(colored_text)
+```
+
+This will print the text with a background color of RGB(132, 204, 247).

@@ -1,0 +1,23 @@
+Yes, we can achieve this using pandas' `groupby` and `cumsum` functions. Here's the `aggregation` function that you can use:
+
+```python
+def aggregation(df):
+    # Convert 'value' column to numeric
+    df['value'] = pd.to_numeric(df['value'], errors='coerce')
+    
+    # Group by 'exchange' and 'type', then calculate cumulative sum of 'value' for 'deposit' type
+    df['balance'] = df.groupby(['exchange', 'type'])['value'].cumsum().fillna(method='ffill')
+    
+    return df
+```
+
+This function first converts the 'value' column to numeric using `pd.to_numeric` function. Then it groups the DataFrame by 'exchange' and 'type' columns using `groupby` function and calculates the cumulative sum of 'value' column for 'deposit' type using `cumsum` function. Finally, it fills the missing values using the previous value using `fillna` function with `method='ffill'`.
+
+You can call this function with your DataFrame `df` as follows:
+
+```python
+df = aggregation(df)
+print(df)
+```
+
+This will print the DataFrame with the 'balance' column added.

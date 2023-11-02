@@ -1,0 +1,15 @@
+To filter the data by a specific value in a column, you can use the `.loc` method in pandas. Here's an example of how you can filter the data by the `TEST_STATUS` column for only the rows where the value is "PASS TEST":
+
+```python
+pass_tests = data_useless.loc[data_useless['TEST_STATUS'] == 'PASS TEST']
+```
+
+This will create a new DataFrame called `pass_tests` that only contains the rows where `TEST_STATUS` is "PASS TEST".
+
+If you want to group the data by `TEST_STATUS` and then filter for only the rows where `TEST_STATUS` is "PASS TEST", you can do it in one line like this:
+
+```python
+pass_tests_grouped = data_useless.groupby('TEST_STATUS').get_group('PASS TEST')
+```
+
+This will create a new DataFrame called `pass_tests_grouped` that is grouped by `TEST_STATUS` and then filtered for only the rows where `TEST_STATUS` is "PASS TEST".

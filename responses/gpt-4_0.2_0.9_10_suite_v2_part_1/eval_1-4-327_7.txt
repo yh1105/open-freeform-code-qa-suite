@@ -1,0 +1,15 @@
+In R, when you bind two data frames with the same column names, R will automatically make the names unique by appending a suffix to the duplicate names. In your case, the two columns will be named `a` and `a.1`.
+
+You can select the second column by its name `a.1` like this:
+
+```r
+second_col <- d3$a.1
+```
+
+If for some reason the names are not automatically made unique, you can select the second column by its index like this:
+
+```r
+second_col <- d3[,2]
+```
+
+This will select the second column regardless of its name.

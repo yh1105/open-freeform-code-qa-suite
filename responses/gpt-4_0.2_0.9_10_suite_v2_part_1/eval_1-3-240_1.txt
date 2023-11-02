@@ -1,0 +1,23 @@
+You can use the `merge` function in pandas to merge two data frames and then select the rows that are only present in the first data frame. Here is a function that does this:
+
+```python
+import pandas as pd
+
+def getDifference(df1, df2):
+    # Merge the data frames
+    df = pd.merge(df1, df2, how='outer', indicator=True)
+
+    # Select the rows that are only in the first data frame
+    df3 = df[df['_merge'] == 'left_only']
+
+    # Drop the merge indicator column
+    df3 = df3.drop(columns=['_merge'])
+
+    return df3
+```
+
+This function works by merging `df1` and `df2` using an outer join, which includes all rows from both data frames. The `indicator=True` argument adds a column called `_merge` to the resulting data frame, which indicates whether each row comes from `df1` only, `df2` only, or both.
+
+The function then selects the rows that are only in `df1` by checking where `_merge` is `'left_only'`. Finally, it drops the `_merge` column and returns the resulting data frame.
+
+Please note that this function assumes that `df1` and `df2` have the same columns. If they don't, you'll need to adjust the function accordingly.

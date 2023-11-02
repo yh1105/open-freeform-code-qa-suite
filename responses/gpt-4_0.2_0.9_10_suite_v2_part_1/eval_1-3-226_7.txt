@@ -1,0 +1,8 @@
+You can achieve this by using the `split()` function with a maximum split parameter of 1. This will split the string into two parts at most. If there is no `_` in the string, it will return the original string. Here is the function:
+
+```python
+def splitOne(s):
+    return s.split('_', 1)[-1]
+```
+
+This function splits the string `s` at the first occurrence of `_` and returns the last element of the resulting list. If there is no `_` in the string, `split()` returns a list containing the original string, so `[-1]` will still give you the original string. If there is at least one `_`, `split()` returns a list of two strings, and `[-1]` gives you the second one, which is everything after the first `_`.

@@ -1,0 +1,19 @@
+The error message suggests that there are some non-integer values in the "year" column. To convert the column to integer, we need to remove the non-integer values first. We can do this by converting the column to string, removing the non-numeric characters, and then converting it to integer.
+
+Here's the function `transformation` that should do the job:
+
+```python
+def transformation(data_h_df):
+    data_h_df['year'] = data_h_df['year'].astype(str).str.replace(r'\D+', '').astype(int)
+    return data_h_df
+```
+
+This function first converts the "year" column to string using `astype(str)`. Then, it uses the `str.replace()` method to remove all non-numeric characters from the string using the regular expression `\D+`. Finally, it converts the resulting string to integer using `astype(int)`.
+
+You can call this function with your `data_h_df` dataframe as follows:
+
+```python
+transformed_df = transformation(data_h_df)
+``` 
+
+This will return the `data_h_df` dataframe with the "year" column transformed to integer.

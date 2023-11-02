@@ -1,0 +1,38 @@
+You can achieve this by using the `tidyverse` package in R. The `tidyverse` package includes several packages for data manipulation including `dplyr` and `purrr` which can be used to solve this problem.
+
+Here is the function `myConvert`:
+
+```r
+library(tidyverse)
+
+myConvert <- function(my_data) {
+  my_data %>%
+    group_by(list_names) %>%
+    summarise(list_values = list(list_values)) %>%
+    deframe()
+}
+```
+
+In this function, we first group the data by `list_names` using `group_by()`. Then, we summarise the `list_values` into a list for each `list_names` using `summarise()`. Finally, we convert the dataframe to a named list using `deframe()`.
+
+Let's test this function with your data:
+
+```r
+my_data <- tibble(list_names = c("Ford", "Chevy", "Ford", "Dodge", "Dodge", "Ford"),
+                  list_values = c("Ranger", "Equinox", "F150", "Caravan", "Ram", "Explorer"))
+
+myConvert(my_data)
+```
+
+This will return the desired output:
+
+```r
+$Chevy
+[1] "Equinox"
+
+$Dodge
+[1] "Caravan" "Ram"    
+
+$Ford
+[1] "Ranger"   "F150"     "Explorer"
+```

@@ -1,0 +1,25 @@
+Here is a simple function that uses the `merge` function in pandas to find the difference between two dataframes. This function will return a new dataframe that contains only the rows in `df1` that are not present in `df2`.
+
+```python
+import pandas as pd
+
+def getDifference(df1, df2):
+    # Merge the dataframes, indicator=True adds a '_merge' column
+    df = pd.merge(df1, df2, how='outer', indicator=True)
+
+    # Filter on the '_merge' column
+    df3 = df[df['_merge'] == 'left_only']
+
+    # Drop the '_merge' column
+    df3 = df3.drop(columns=['_merge'])
+
+    return df3
+```
+
+This function works by merging `df1` and `df2` using an outer join, which includes all rows from both dataframes. The `indicator=True` argument adds a new column to the resulting dataframe that indicates whether each row came from `df1` only, `df2` only, or both.
+
+Then, the function filters out the rows that came from `df2` only or both dataframes, leaving only the rows that are in `df1` but not `df2`.
+
+Finally, the function drops the '_merge' column and returns the resulting dataframe.
+
+Please note that this function assumes that `df1` and `df2` have the same columns. If they don't, you'll need to modify the function to handle this.

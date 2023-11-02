@@ -1,0 +1,28 @@
+The error message indicates that the zlib library, which is a required dependency for Pillow, could not be found. This is a common issue when trying to install Pillow on Windows.
+
+Here are a few steps you can take to solve this problem:
+
+1. **Upgrade pip, setuptools and wheel**:
+
+    Sometimes this issue can be resolved by upgrading pip, setuptools and wheel using the following commands:
+
+    ```bash
+    python -m pip install --upgrade pip
+    python -m pip install --upgrade setuptools wheel
+    ```
+
+2. **Install Pillow using a precompiled binary**:
+
+    If the above step doesn't work, you can try installing Pillow using a precompiled binary. You can download the appropriate binary for your system from [this page](https://www.lfd.uci.edu/~gohlke/pythonlibs/#pillow).
+
+    Once you've downloaded the appropriate `.whl` file, you can install it using pip:
+
+    ```bash
+    pip install /path/to/your/downloaded/file.whl
+    ```
+
+3. **Install zlib manually**:
+
+    If none of the above steps work, you may need to install zlib manually. You can download zlib from [here](http://www.zlib.net/). After downloading and extracting the files, you can build and install zlib using the instructions provided.
+
+After following these steps, you should be able to install Pillow without any issues. If you're still having trouble, please let me know and I'll be happy to help you further.

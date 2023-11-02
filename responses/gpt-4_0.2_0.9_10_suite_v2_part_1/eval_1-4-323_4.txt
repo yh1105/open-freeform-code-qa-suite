@@ -1,0 +1,29 @@
+Here is a function that should do what you want. This function uses `lapply` to iterate over each column in the data frame. For each column, it calculates the minimum and maximum values, identifies the row indices where these values occur, and counts the frequency of these values. The results are combined into a data frame.
+
+```r
+myMaxMin <- function(cars) {
+  res <- do.call(rbind, lapply(names(cars), function(x) {
+    min_val <- min(cars[[x]])
+    max_val <- max(cars[[x]])
+    min_rows <- which(cars[[x]] == min_val)
+    max_rows <- which(cars[[x]] == max_val)
+    data.frame(column = x, 
+               min.value = min_val, 
+               max.value = max_val, 
+               min.rowname = paste(min_rows, collapse = ","), 
+               max.rowname = paste(max_rows, collapse = ","), 
+               min.freq.times = length(min_rows), 
+               max.freq.times = length(max_rows))
+  }))
+  row.names(res) <- NULL
+  return(res)
+}
+```
+
+You can use this function on your `cars` data frame like this:
+
+```r
+myMaxMin(cars)
+```
+
+This will return a data frame with the column names, minimum and maximum values, row names where these values occur, and the frequency of these values for each column in the `cars` data frame.

@@ -1,0 +1,19 @@
+The `f` before the string in the `print` statement is used to denote a formatted string literal, also known as an f-string. This is a feature introduced in Python 3.6.
+
+F-strings provide a concise and convenient way to embed expressions inside string literals for formatting. The expressions inside the curly braces `{}` are evaluated at runtime and then formatted using the format specification language.
+
+In your example:
+
+```python
+print(f"Input directory: {args.input_directory}")
+print(f"Output directory: {args.output_directory}")
+```
+
+The expressions inside the curly braces are `args.input_directory` and `args.output_directory`. These are variables that hold the input and output directory paths respectively. The f-string will replace `{args.input_directory}` and `{args.output_directory}` with the values of these variables.
+
+So, if `args.input_directory` is `/home/user/input` and `args.output_directory` is `/home/user/output`, the print statements will output:
+
+```
+Input directory: /home/user/input
+Output directory: /home/user/output
+```

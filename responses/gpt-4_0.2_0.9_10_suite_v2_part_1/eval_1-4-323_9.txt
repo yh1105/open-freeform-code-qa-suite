@@ -1,0 +1,38 @@
+Here is a function that should do what you want. It uses `apply` to iterate over each column of the data frame, and for each column it finds the minimum and maximum values, the row names where these values occur, and the frequency of these values.
+
+```r
+myMaxMin <- function(cars) {
+  # Initialize an empty data frame to store the results
+  result <- data.frame(min.value = numeric(), max.value = numeric(), column = character(), 
+                       min.rowname = character(), max.rowname = character(), 
+                       min.freq.times = integer(), max.freq.times = integer())
+  
+  # Iterate over each column
+  for (col in names(cars)) {
+    # Get the column data
+    data <- cars[[col]]
+    
+    # Find the min and max values
+    min.value <- min(data)
+    max.value <- max(data)
+    
+    # Find the row names where these values occur
+    min.rowname <- which(data == min.value)
+    max.rowname <- which(data == max.value)
+    
+    # Find the frequency of these values
+    min.freq.times <- length(min.rowname)
+    max.freq.times <- length(max.rowname)
+    
+    # Add the results to the data frame
+    result <- rbind(result, data.frame(min.value = min.value, max.value = max.value, column = col, 
+                                        min.rowname = toString(min.rowname), max.rowname = toString(max.rowname), 
+                                        min.freq.times = min.freq.times, max.freq.times = max.freq.times))
+  }
+  
+  # Return the result
+  return(result)
+}
+```
+
+This function will return a data frame where each row corresponds to a column in the input data frame, and the columns of the result data frame are the minimum and maximum values, the column name, the row names where the min and max values occur, and the frequency of the min and max values.

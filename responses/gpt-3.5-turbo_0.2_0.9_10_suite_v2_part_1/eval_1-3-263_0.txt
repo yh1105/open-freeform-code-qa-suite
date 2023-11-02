@@ -1,0 +1,12 @@
+The "f" in `print(f"...")` is used to create a formatted string literal, also known as an f-string. It allows you to embed expressions inside string literals, using curly braces `{}`. 
+
+In your example, the expressions inside the curly braces are `args.input_directory` and `args.output_directory`. The values of these expressions will be evaluated and inserted into the string at runtime.
+
+For example, if `args.input_directory` is `"/path/to/input"` and `args.output_directory` is `"/path/to/output"`, the output of the two print statements would be:
+
+```
+Input directory: /path/to/input
+Output directory: /path/to/output
+```
+
+Using f-strings can make your code more readable and concise, especially when you need to include variables or expressions in your strings.

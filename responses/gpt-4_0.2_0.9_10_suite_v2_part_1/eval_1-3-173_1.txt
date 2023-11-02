@@ -1,0 +1,22 @@
+Sure, you can create a function to calculate the total number of days in a year by checking if the year is a leap year or not. Here's how you can do it:
+
+```python
+def DaysInYear(year):
+    if (year % 4) == 0:
+        if (year % 100) == 0:
+            if (year % 400) == 0:
+                return 366  # It's a leap year
+            else:
+                return 365  # It's not a leap year
+        else:
+            return 366  # It's a leap year
+    else:
+        return 365  # It's not a leap year
+```
+
+This function works by checking if the year is evenly divisible by 4, 100, and 400. According to the Gregorian calendar, a year is a leap year if:
+
+- It is evenly divisible by 4;
+- Except for end-of-century years which must be divisible by 400. This means that the year 2000 was a leap year, although 1900 was not.
+
+So, if you call `DaysInYear(2020)`, it will return `366`. If you call `DaysInYear(2019)`, it will return `365`.

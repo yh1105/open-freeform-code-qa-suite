@@ -1,0 +1,19 @@
+The `rename()` method in Pandas is used to rename the columns of a DataFrame. However, it does not accept the `columns` parameter. Instead, you can use the `rename()` method with a dictionary that maps the old column names to the new column names.
+
+Here's the modified code that should work:
+
+```python
+import pandas as pd
+import numpy as np
+
+def renameDataFrame(df):
+    datain = np.loadtxt(datafile)
+    df = pd.DataFrame(data = datain, columns = ["t","p","x","y","z"])
+    avg = df.groupby(["t"], sort=False)["p"].mean().reset_index()
+    avg = avg.rename(columns={"p":"mean"})
+    return avg
+```
+
+In this code, we first group the DataFrame by the "t" column and calculate the mean of the "p" column. Then, we reset the index of the resulting DataFrame and rename the "p" column to "mean" using the `rename()` method with a dictionary. Finally, we return the modified DataFrame.
+
+Note that the `reset_index()` method is used to convert the grouped DataFrame back to a regular DataFrame with a new index.

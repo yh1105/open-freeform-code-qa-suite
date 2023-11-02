@@ -1,0 +1,17 @@
+The error message you are getting suggests that there is a compatibility issue between the version of pandas_profiling you are using and the version of pandas you have installed. 
+
+One solution is to downgrade pandas to version 0.25.3, which is compatible with pandas_profiling version 2.3.0. You can do this by running the following command in your conda environment:
+
+```
+conda install pandas=0.25.3
+```
+
+Alternatively, you can upgrade pandas_profiling to the latest version (currently 2.11.0), which is compatible with pandas 1.0 and above. You can do this by running the following command:
+
+```
+pip install pandas-profiling[notebook]
+```
+
+This will install the latest version of pandas_profiling along with the necessary dependencies for running it in a Jupyter notebook.
+
+Once you have either downgraded pandas or upgraded pandas_profiling, you should be able to run the ProfileReport without any errors.

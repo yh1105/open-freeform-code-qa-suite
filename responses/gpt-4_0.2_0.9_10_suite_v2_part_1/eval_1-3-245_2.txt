@@ -1,0 +1,40 @@
+Your Dockerfile seems to be correct. The error `ModuleNotFoundError: No module named 'app'` is likely due to the Python interpreter not being able to find your `app` module. This could be due to a few reasons:
+
+1. The `app` directory is not in the Python path.
+2. The `app` directory does not contain an `__init__.py` file.
+
+Here are a few things you could try:
+
+1. Make sure that your `app` directory contains an `__init__.py` file. This file can be empty, but it must be present in the directory for Python to recognize the directory as a package.
+
+2. Check your project structure. The `app` directory should be in the root directory of your project. If it's nested inside another directory, you'll need to adjust the `COPY` command in your Dockerfile to reflect the correct path.
+
+3. Try to change your CMD command in Dockerfile to point directly to your `main.py` file:
+
+```Dockerfile
+CMD ["uvicorn", "main:app", "--host=0.0.0.0" , "--reload" , "--port", "8000"]
+```
+
+4. If none of the above solutions work, you might want to try using a Python script to start your application instead of starting it directly from the Dockerfile. This script would set the Python path correctly and then start the application. Here's an example:
+
+```python
+# start.py
+import os
+import sys
+from uvicorn import run
+
+sys.path.insert(0, os.path.dirname(__file__))
+
+from app.main import app  # noqa
+
+if __name__ == "__main__":
+    run("main:app", host="0.0.0.0", port=8000, reload=True)
+```
+
+And in your Dockerfile:
+
+```Dockerfile
+CMD ["python", "start.py"]
+```
+
+Remember to adjust the paths in the examples above to match your project structure.

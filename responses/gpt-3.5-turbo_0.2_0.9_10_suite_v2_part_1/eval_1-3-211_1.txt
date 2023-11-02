@@ -1,0 +1,18 @@
+Yes, we can achieve this using pandas' `groupby`, `apply`, and `cumsum` functions. Here's the `aggregation` function that should do what you want:
+
+```python
+def aggregation(df):
+    df['value'] = pd.to_numeric(df['value'], errors='coerce')
+    df['balance'] = df.groupby('exchange')['value'].apply(lambda x: x.mask(x.eq('deposit')).cumsum().fillna(method='ffill'))
+    return df
+```
+
+Here's how it works:
+
+- First, we convert the "value" column to numeric using `pd.to_numeric` to ensure that we can perform mathematical operations on it.
+- Next, we group the DataFrame by "exchange" using `groupby`.
+- We then apply a lambda function to the "value" column of each group using `apply`. The lambda function replaces all non-"deposit" values with NaN using `mask`, and then calculates the cumulative sum of the remaining "deposit" values using `cumsum`. Finally, we forward-fill the resulting series using `fillna(method='ffill')` to fill in the NaN values with the previous non-NaN value.
+- The resulting series is then assigned to a new "balance" column in the original DataFrame.
+- Finally, we return the modified DataFrame.
+
+Note that we use `pd.to_numeric` to convert the "value" column to numeric because the original DataFrame has mixed data types in that column (i.e. both integers and strings). If your actual data is consistently formatted, you may not need to do this step.

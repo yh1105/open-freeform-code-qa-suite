@@ -1,0 +1,31 @@
+One solution to this problem is to use multiprocessing instead of threading. Multiprocessing allows you to run multiple processes in parallel, which can be useful when dealing with infinite loops.
+
+Here's an example of how you can modify your code to use multiprocessing:
+
+```python
+import multiprocessing as mp
+
+def run_data_mining(database):
+    dataMiningScript = fd.financeData(database, 1600)
+    while True:
+        # do data mining stuff
+        pass
+
+if __name__ == "__main__":
+    database = db.dataBase()
+    homepage = hp.homepage(database)
+    homepage.timeUpdateCallback(app)
+    homepage.gaugeRefreshCallback(app)
+
+    # start data mining process
+    data_mining_process = mp.Process(target=run_data_mining, args=(database,))
+    data_mining_process.start()
+
+    # start web server
+    app.layout = homepage.layoutMaker()
+    app.run_server(debug=True)
+```
+
+In this modified code, we define a new function `run_data_mining` that runs the data mining script in an infinite loop. We then start this function in a separate process using `mp.Process`. This allows the web server to run in the main process while the data mining script runs in a separate process.
+
+Note that you may need to modify the `run_data_mining` function to properly handle exceptions and shutdown signals, depending on your specific use case.

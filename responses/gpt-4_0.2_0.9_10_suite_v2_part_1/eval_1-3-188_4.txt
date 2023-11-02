@@ -1,0 +1,31 @@
+Here is a function `extractCellValue` that fulfills your requirements. This function uses the `loc` function from pandas to locate the row where `instrument_token` matches the `matchedString`, and then selects the `tradingsymbol` from that row.
+
+```python
+def extractCellValue(df, matchedString):
+    try:
+        result = df.loc[df['instrument_token'] == int(matchedString), 'tradingsymbol'].values[0]
+    except IndexError:
+        result = "No match found"
+    return result
+```
+
+This function will return the `tradingsymbol` associated with the `instrument_token` that matches the `matchedString`. If no match is found, it will return "No match found".
+
+Please note that this function assumes that the `instrument_token` column in your DataFrame is of integer type. If it's not, you may need to adjust the function to cast `matchedString` to the appropriate type.
+
+You can use this function like this:
+
+```python
+import pandas as pd
+
+# Create a sample DataFrame
+data = {
+    'instrument_token': [123, 555, 34, 189],
+    'tradingsymbol': ['xyz', 'aaa', 'rst', 'op'],
+    'lot_size': [1000, 200, 2400, 780]
+}
+df = pd.DataFrame(data)
+
+# Use the function
+print(extractCellValue(df, '123'))  # Output: 'xyz'
+```

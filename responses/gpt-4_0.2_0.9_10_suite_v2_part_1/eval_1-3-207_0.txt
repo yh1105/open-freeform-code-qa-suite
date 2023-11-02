@@ -1,0 +1,23 @@
+Sure, I can help with that. The calculation for the hours should take into account both the original hour and the additional hours from the duration. The additional hours can be calculated by integer division of the duration by 60. The total hours should then be taken modulo 24 to ensure it's within the 0..23 range. Here's the function:
+
+```python
+def computeEndTime(hour, mins, dura):
+    mins += dura
+    hour += mins // 60
+    hour %= 24
+    mins %= 60
+    return "{:02d}:{:02d}".format(hour, mins)
+```
+
+This function first adds the duration to the minutes. Then it adds the integer division of the total minutes by 60 to the hours (this is the number of full hours in the total minutes). Then it takes the hours modulo 24 to ensure it's in the range 0..23. Finally, it takes the minutes modulo 60 to ensure they're in the range 0..59. The function returns a string formatted with two digits for the hours and minutes.
+
+You can use this function in your code like this:
+
+```python
+hour = int(input("Starting time (hours): "))
+mins = int(input("Starting time (minutes): "))
+dura = int(input("Event duration (minutes): "))
+print(computeEndTime(hour, mins, dura))
+```
+
+This will print the end time in the format "xx:xx".

@@ -1,0 +1,42 @@
+Here is a function `mySplit` that uses the `strsplit` function to split the `segment_stemming` column by comma and then uses the `unnest` function from the `tidyverse` package to expand the list column into multiple rows.
+
+```r
+library(data.table)
+library(tidyverse)
+
+mySplit <- function(x) {
+  # Convert data.table to data.frame
+  x <- as.data.frame(x)
+  
+  # Remove the square brackets and spaces
+  x$segment_stemming <- gsub("\\[|\\]| ", "", x$segment_stemming)
+  
+  # Split the segment_stemming column by comma
+  x$segment_stemming <- strsplit(x$segment_stemming, "),\\(")
+  
+  # Unnest the list column into multiple rows
+  x <- x %>% unnest(segment_stemming)
+  
+  # Add back the parentheses
+  x$segment_stemming <- paste0("(", x$segment_stemming, ")")
+  
+  # Convert back to data.table
+  x <- as.data.table(x)
+  
+  return(x)
+}
+```
+
+You can use this function on your data like this:
+
+```r
+x <- structure(list(id = c("A", "B" ),
+segment_stemming = c("[('Brownie', 'Noun'), ('From', 'Josa'), ('Pi', 'Noun')]",
+"[('Dung-caroon-gye', 'Noun'), ('in', 'Josa'), ('innovation', 'Noun')]" )),
+row.names = c(NA, -2L),
+class = c("data.table", "data.frame" ))
+
+mySplit(x)
+```
+
+This will give you the desired output.

@@ -1,0 +1,36 @@
+The error message suggests that Selenium can't find the Firefox binary in its default location. This could be due to several reasons:
+
+1. Firefox is not installed on your system.
+2. Firefox is installed but not in the default location.
+3. The Firefox binary path is not set in the system's PATH environment variable.
+
+Here are a few solutions to fix this issue:
+
+**Solution 1: Install Firefox**
+
+If Firefox is not installed on your system, you can download it from the official website and install it.
+
+**Solution 2: Provide the Firefox Binary Path**
+
+If Firefox is installed but not in the default location, you can specify the path to the Firefox binary in your script. Here's how you can do it:
+
+```python
+from selenium import webdriver
+from selenium.webdriver.firefox.service import Service
+from selenium.webdriver.common.by import By
+from selenium.webdriver.firefox.options import Options
+from webdriver_manager.firefox import GeckoDriverManager
+
+options = Options()
+options.binary_location = "/path/to/your/firefox/binary" # replace with your path
+driver = webdriver.Firefox(service=Service(GeckoDriverManager().install()), options=options)
+driver.get('http://www.seleniumhq.org')
+```
+
+Replace `"/path/to/your/firefox/binary"` with the actual path to your Firefox binary.
+
+**Solution 3: Set the Firefox Binary Path in the System's PATH Variable**
+
+If the Firefox binary path is not set in the system's PATH environment variable, you can add it. The process to do this varies depending on your operating system. Once you've added the path, you may need to restart your system for the changes to take effect.
+
+Remember to replace the path in the solutions with the actual path of your Firefox installation.

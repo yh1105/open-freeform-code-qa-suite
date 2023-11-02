@@ -1,0 +1,17 @@
+If the `"python.linting.jediEnabled": false` line is greyed out in your `settings.json` file, it means that the setting is being overridden by another setting. 
+
+To fix this, you can try the following steps:
+
+1. Open the Command Palette in VS Code by pressing `Ctrl+Shift+P` (Windows/Linux) or `Cmd+Shift+P` (macOS).
+2. Type "Preferences: Open Workspace Settings" and select it.
+3. In the "Search settings" box, type "jediEnabled".
+4. If there is a setting called "Python › Jedi Enabled", set it to false.
+5. Save the changes to your workspace settings file.
+
+If this doesn't work, you can also try disabling Jedi in your user settings file. To do this, follow the same steps as above, but select "Preferences: Open User Settings" instead. Then, add the following line to your user settings file:
+
+```
+"python.jediEnabled": false
+```
+
+Save the changes to your user settings file and restart VS Code. This should disable Jedi and prevent it from interfering with your Pylint linter.

@@ -1,0 +1,22 @@
+Sure, here is a Python function that generates a random string according to your requirements:
+
+```python
+import random
+import string
+
+def generateRandomString():
+    # Define the characters to choose from
+    letters = string.ascii_letters
+    digits = string.digits
+
+    # Generate a random string of 11 characters (16 - length of "NAA3U")
+    random_str = ''.join(random.choice(letters) for _ in range(7)) + ''.join(random.choice(digits) for _ in range(2)) + ''.join(random.choice(letters) for _ in range(2))
+
+    # Insert "NAA3U" at a random position in the string
+    insert_pos = random.randint(0, len(random_str))
+    final_str = random_str[:insert_pos] + "NAA3U" + random_str[insert_pos:]
+
+    return final_str
+```
+
+This function first generates a random string of 11 characters, with 7 letters and 2 digits. Then it inserts the substring "NAA3U" at a random position in the string. The final string will be 16 characters long, contain exactly 3 digits, and include the substring "NAA3U".

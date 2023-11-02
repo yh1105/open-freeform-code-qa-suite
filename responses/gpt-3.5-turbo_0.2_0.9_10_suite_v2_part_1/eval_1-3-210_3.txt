@@ -1,0 +1,23 @@
+The reason why the access times are different is because the `match` statement in Python is not implemented as a lookup table. Instead, it is implemented as a series of if-else statements. When you use the `match` statement, Python will evaluate each case in order until it finds a match. This means that the time it takes to execute the `match` statement will depend on the order of the cases.
+
+In your example, the first case (`case '0'`) is the fastest because it is evaluated first. The last case (`case _:`) is the slowest because it is evaluated last and only executed if none of the other cases match.
+
+If you want to have equal access times for each case, you can use a lookup table, such as a dictionary. Here's an example:
+
+```python
+lookup_table = {
+    '0': "000",
+    '1': "001",
+    '2': "010",
+    '3': "011",
+    '4': "100",
+    '5': "101",
+    '6': "110",
+    '7': "111"
+}
+
+def lookup(decimal):
+    return lookup_table.get(decimal, "NA")
+```
+
+This implementation uses a dictionary to map each decimal value to its corresponding binary value. The `get` method of the dictionary is used to retrieve the value, with a default value of "NA" if the key is not found. This implementation will have equal access times for each case, regardless of the order of the cases.

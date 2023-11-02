@@ -1,0 +1,32 @@
+You can use multiprocessing to run both scripts simultaneously. Here's an example of how you can modify your code to use multiprocessing:
+
+```python
+import multiprocessing as mp
+
+if __name__ == "__main__":
+    database = db.dataBase()
+    homepage = hp.homepage(database)
+    homepage.timeUpdateCallback(app)
+    homepage.gaugeRefreshCallback(app)
+    dataMiningScript = fd.financeData(database, 1600)
+
+    app.layout = homepage.layoutMaker()
+
+    # Create two processes to run the scripts
+    p1 = mp.Process(target=dataMiningScript.run)
+    p2 = mp.Process(target=app.run_server, kwargs={"debug": True})
+
+    # Start the processes
+    p1.start()
+    p2.start()
+
+    # Wait for the processes to finish
+    p1.join()
+    p2.join()
+```
+
+In this code, we create two processes using the `mp.Process` class. The `target` parameter specifies the function to run in each process, and any additional parameters can be passed using the `args` or `kwargs` parameters.
+
+We then start both processes using the `start` method, and wait for them to finish using the `join` method.
+
+Note that you may need to modify your `financeData` class to include a `run` method that contains the infinite loop.

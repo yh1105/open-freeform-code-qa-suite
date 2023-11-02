@@ -1,0 +1,26 @@
+The error message you're seeing is due to a change in the pandas library. The `join_axes` parameter was deprecated in pandas 0.25 and removed in pandas 1.0. 
+
+The `pandas_profiling` library you're using seems to be using this deprecated feature, hence the error. 
+
+To solve this issue, you can try the following steps:
+
+1. Uninstall the current `pandas_profiling` library.
+2. Install a specific version of `pandas_profiling` that is compatible with your pandas version.
+
+Here's how you can do it:
+
+```bash
+pip uninstall pandas_profiling
+pip install pandas_profiling==2.7.1
+```
+
+After this, you should be able to generate the profile report as follows:
+
+```python
+from pandas_profiling import ProfileReport
+
+profile = ProfileReport(data, explorative=True)
+profile.to_widgets()
+```
+
+If you still encounter the error `'DataFrame' object has no attribute 'profile_report'`, it means that the `pandas_profiling` library is not properly installed or imported. Make sure you have installed it correctly and imported it in your script.

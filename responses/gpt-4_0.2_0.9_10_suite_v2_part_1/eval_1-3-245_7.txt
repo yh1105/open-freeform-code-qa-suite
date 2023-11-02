@@ -1,0 +1,11 @@
+Your Dockerfile seems to be correct. The issue might be with the way you're referencing your FastAPI application in the CMD command. 
+
+In your CMD command, you're using `app.main:app`. This means Docker is looking for a Python module named `app` inside an `app` directory, and then it's looking for an object named `app` inside that `app` module.
+
+If your `main.py` file is directly under the `app` directory and your FastAPI application is named `app` inside that `main.py` file, then your CMD command should be correct.
+
+However, if your FastAPI application is named something else, you'll need to adjust the CMD command accordingly. For example, if your FastAPI application is named `myapp`, your CMD command should be `["uvicorn", "app.main:myapp", "--host=0.0.0.0" , "--reload" , "--port", "8000"]`.
+
+Also, make sure that your `main.py` file is correctly importing the `app` object. For example, if you're using `from fastapi import FastAPI` and then `app = FastAPI()`, that should be correct.
+
+If you're still having issues, please provide more information about the structure of your `main.py` file and how you're defining your FastAPI application.

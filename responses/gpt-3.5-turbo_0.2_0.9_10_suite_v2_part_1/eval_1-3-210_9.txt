@@ -1,0 +1,22 @@
+The reason why the access times are different is because the `match` statement in Python is not optimized with a lookup table. Instead, it uses a linear search to find the matching case. This means that as the number of cases increases, the time it takes to find a match also increases linearly.
+
+In your example, you have 8 cases, so the worst-case scenario is that it takes 8 comparisons to find a match. This is why the access times are different, with the first few cases being faster than the later ones.
+
+If you want to have equal access times for each case, you can use a dictionary instead of a `match` statement. This will give you constant-time access to each case, regardless of the number of cases. For example:
+
+```python
+def match_case(decimal):
+    cases = {
+        '0': "000",
+        '1': "001",
+        '2': "010",
+        '3': "011",
+        '4': "100",
+        '5': "101",
+        '6': "110",
+        '7': "111"
+    }
+    return cases.get(decimal, "NA")
+```
+
+This will give you equal access times for each case, regardless of the number of cases.

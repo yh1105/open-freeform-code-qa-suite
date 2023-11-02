@@ -1,0 +1,7 @@
+The Python `match/case` statement, introduced in Python 3.10, is not implemented as a hash table or lookup table, but rather as a linear sequence of comparisons. This means that the time complexity of a `match/case` statement is O(n), where n is the number of `case` clauses. 
+
+In your example, the `match_case` function checks each `case` clause in order until it finds a match. This is why the time taken increases with the value of the input: the higher the input, the more `case` clauses the function needs to check before it finds a match.
+
+This behavior is different from that of a dictionary, which has a time complexity of O(1) for lookups, because it uses a hash table internally. However, the `match/case` statement is more flexible than a dictionary, because it allows for more complex patterns and conditions. 
+
+In conclusion, the `match/case` statement in Python is not optimized for equal access time to each case. If equal access time is a requirement for your use case, you might want to consider using a different data structure or approach.

@@ -1,0 +1,23 @@
+You can use list slicing to replace the first 4 elements of `b` with the elements of `rest`. Then, you can iterate over the elements of `last` and replace the elements that match with the elements of `b` with the corresponding elements of `rest`.
+
+Here's the implementation of the `ReplaceElementsByIndex` function:
+
+```python
+def ReplaceElementsByIndex(rest, b, last):
+    b[:4] = rest
+    for i, val in enumerate(last):
+        if val in b:
+            last[i] = rest[b.index(val)]
+    return last
+```
+
+You can call this function with the given lists as arguments:
+
+```python
+rest=[5, 7, 11, 4]
+b=[21, 22, 33, 31, 23, 15, 19, 13, 6]
+last=[33, 19, 40, 21, 31, 22, 6, 15, 13, 23]
+
+result = ReplaceElementsByIndex(rest, b, last)
+print(result)  # Output: [11, 19, 40, 5, 4, 7, 6, 15, 13, 23]
+```

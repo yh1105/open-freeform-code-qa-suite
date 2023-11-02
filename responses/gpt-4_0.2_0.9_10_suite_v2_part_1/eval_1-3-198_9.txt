@@ -1,0 +1,20 @@
+Sure, here is a function that processes the Google Drive URL and returns a direct download link. This function works for public files. If the file requires authentication, you'll need to use the Google Drive API.
+
+```python
+def processURL(url):
+    file_id = url.split('/')[-2]
+    dwn_url='https://drive.google.com/uc?export=download&id=' + file_id
+    return dwn_url
+```
+
+You can use this function to get the direct download link and then use `pandas` to read the CSV file from this URL.
+
+```python
+import pandas as pd
+
+url = 'https://drive.google.com/file/d/0B6GhBwm5vaB2ekdlZW5WZnppb28/view?usp=sharing'
+url = processURL(url)
+data = pd.read_csv(url)
+```
+
+Please note that this method might not work for large files. Google Drive can prevent large files from being downloaded without user confirmation, which can't be bypassed with this method. For large files, you'll need to use the Google Drive API.

@@ -1,0 +1,19 @@
+The error message indicates that the headers or library files for zlib are missing, which is a required dependency for Pillow. Here are the steps you can follow to install Pillow:
+
+1. Install zlib:
+
+   On Windows, you can download the pre-built binaries from the zlib website and install them manually. Alternatively, you can use a package manager like Chocolatey or Scoop to install zlib.
+
+   On Linux, you can use your distribution's package manager to install zlib. For example, on Ubuntu, you can run `sudo apt-get install zlib1g-dev`.
+
+2. Install Pillow:
+
+   After installing zlib, you can try installing Pillow again using pip. Open PyCharm terminal and run the following command:
+
+   ```
+   pip install pillow
+   ```
+
+   If you still encounter errors, try upgrading pip by running `pip install --upgrade pip` and then try installing Pillow again.
+
+   If the above steps still don't work, you can try installing Pillow from source by downloading the source code from the Pillow GitHub repository and following the installation instructions in the README file.

@@ -1,0 +1,27 @@
+You can modify your code to handle the cases where the string does not contain an underscore by checking the length of the split list.
+
+Here's the modified code:
+
+```python
+def splitOne(s):
+    split_string = s.split('_')
+    if len(split_string) > 1:
+        return '_'.join(split_string[1:])
+    else:
+        return s
+```
+
+This function first splits the string by underscore and checks if the resulting list has more than one element. If it does, it joins all the elements after the first one with underscores and returns the resulting string. If the list has only one element, it returns the original string.
+
+Here are some examples of how this function works:
+
+```python
+>>> splitOne('testing_abc')
+'abc'
+>>> splitOne('xyz')
+'xyz'
+>>> splitOne('testing_abc_bbc')
+'abc_bbc'
+>>> splitOne('no_underscore')
+'no_underscore'
+```

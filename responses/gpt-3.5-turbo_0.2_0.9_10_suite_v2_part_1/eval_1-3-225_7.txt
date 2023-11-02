@@ -1,0 +1,25 @@
+Here's the revised code for the `pig_latin` function:
+
+```python
+def pig_latin(text):
+  words = text.split()
+  pig_words = []
+  for word in words:
+    endString = word[1:].lower()
+    startString = word[0].lower()
+    pig_word = endString + startString + 'ay'
+    pig_words.append(pig_word)
+  return ' '.join(pig_words)
+```
+
+The changes made are:
+
+1. Instead of initializing an empty string `say`, we initialize an empty list `pig_words` to store the pig Latin words.
+2. We iterate through each word in the `words` list and perform the pig Latin transformation.
+3. We split the word into two parts: `endString` which is the word from the second character to the end, and `startString` which is the first character of the word.
+4. We concatenate `endString`, `startString`, and `'ay'` to form the pig Latin word.
+5. We append the pig Latin word to the `pig_words` list.
+6. After all words have been transformed, we join the `pig_words` list into a string with spaces between each word using the `join` method.
+7. We return the resulting pig Latin string.
+
+Now, when you run the code with the test cases, it should output the correct pig Latin translations.

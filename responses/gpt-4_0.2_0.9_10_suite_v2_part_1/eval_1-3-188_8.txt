@@ -1,0 +1,36 @@
+Sure, you can use the `loc` function in pandas to locate the row and then select the column you want. Here is the function you asked for:
+
+```python
+def extractCellValue(df, matchedString):
+    try:
+        # Convert matchedString to int for comparison
+        matchedString = int(matchedString)
+        # Use loc to find the row and select 'tradingsymbol' column
+        result = df.loc[df['instrument_token'] == matchedString, 'tradingsymbol'].values[0]
+        return result
+    except IndexError:
+        # If no match is found, return an empty string or any suitable value
+        return ''
+    except Exception as e:
+        # Handle any other exceptions
+        print(f"An error occurred: {e}")
+        return ''
+```
+
+You can use the function like this:
+
+```python
+import pandas as pd
+
+data = {
+    'instrument_token': [123, 555, 34, 189],
+    'tradingsymbol': ['xyz', 'aaa', 'rst', 'op'],
+    'lot_size': [1000, 200, 2400, 780]
+}
+
+df = pd.DataFrame(data)
+
+print(extractCellValue(df, '123'))  # Output: 'xyz'
+```
+
+Please note that the `matchedString` is converted to integer for comparison as your `instrument_token` column contains integer values. If it contains string values, you can remove the conversion.

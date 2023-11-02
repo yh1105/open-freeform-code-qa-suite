@@ -1,0 +1,27 @@
+Here is a function `mySplit` that uses the `strsplit` function to split the `segment_stemming` column into separate tuples, and then uses the `unnest` function from the `tidyverse` package to expand these tuples into separate rows.
+
+```r
+library(data.table)
+library(tidyverse)
+
+mySplit <- function(x) {
+  # Convert the data.table to a tibble for compatibility with tidyverse functions
+  x <- as_tibble(x)
+  
+  # Use strsplit to split the segment_stemming column into separate tuples
+  x <- x %>% mutate(segment_stemming = strsplit(segment_stemming, "),", fixed = TRUE))
+  
+  # Use unnest to expand these tuples into separate rows
+  x <- x %>% unnest(segment_stemming)
+  
+  # Clean up the segment_stemming column to remove unwanted characters
+  x <- x %>% mutate(segment_stemming = str_replace_all(segment_stemming, "\\[|\\]|'", ""))
+  
+  # Convert the tibble back to a data.table
+  x <- as.data.table(x)
+  
+  return(x)
+}
+```
+
+Please note that this function assumes that the tuples in the `segment_stemming` column are separated by "),". If the tuples are separated by a different character or string, you will need to adjust the `strsplit` function accordingly. Also, this function removes all square brackets and single quotes from the `segment_stemming` column. If you want to keep these characters, you can remove or adjust the `str_replace_all` function.

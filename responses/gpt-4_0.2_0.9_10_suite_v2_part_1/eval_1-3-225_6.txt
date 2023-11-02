@@ -1,0 +1,13 @@
+Sure, here is the revised version of your function:
+
+```python
+def pig_latin(text):
+    words = text.split()
+    result = []
+    for word in words:
+        endString = word[1:] + word[0].lower() + 'ay'
+        result.append(endString)
+    return ' '.join(result)
+```
+
+In your original code, you were returning the first transformed word immediately in the first iteration of the loop, which is why you were not getting the expected result. The revised function creates a list of transformed words and then joins them into a single string with spaces in between.

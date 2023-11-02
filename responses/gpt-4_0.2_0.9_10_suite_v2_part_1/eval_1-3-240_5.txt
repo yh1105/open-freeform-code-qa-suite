@@ -1,0 +1,23 @@
+Sure, you can use the `merge` function in pandas to get the difference between two data frames. Here is a function that does this:
+
+```python
+import pandas as pd
+
+def getDifference(df1, df2):
+    # Ensure the dataframes are sorted in the same way
+    df1 = df1.sort_values(df1.columns.tolist())
+    df2 = df2.sort_values(df2.columns.tolist())
+
+    # Reset the index
+    df1 = df1.reset_index(drop=True)
+    df2 = df2.reset_index(drop=True)
+
+    # Find rows which are different
+    df3 = pd.concat([df1,df2]).drop_duplicates(keep=False)
+
+    return df3
+```
+
+This function first sorts both data frames in the same way and resets their index. Then it concatenates the two data frames and drops the duplicates. The `drop_duplicates` function with `keep=False` will drop all duplicates, so only the rows that are unique to `df1` will remain.
+
+Please note that this function assumes that the columns in `df1` and `df2` are the same and in the same order. If this is not the case, you may need to adjust the function accordingly.

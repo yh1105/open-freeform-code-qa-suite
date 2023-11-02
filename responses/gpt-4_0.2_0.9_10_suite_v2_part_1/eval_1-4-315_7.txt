@@ -1,0 +1,47 @@
+Here is a function `concat` that does what you want:
+
+```r
+concat <- function(df) {
+  # Create a new data frame with column X1
+  new_df <- data.frame(X1 = df$X1)
+  
+  # Concatenate every two columns starting from X2
+  new_df$X2 <- paste0(df$X2, df$X3)
+  new_df$X3 <- paste0(df$X4, df$X5)
+  new_df$X4 <- paste0(df$X6, df$X7)
+  
+  return(new_df)
+}
+```
+
+This function works by first creating a new data frame with the column `X1` from the input data frame. Then it concatenates every two columns starting from `X2` using the `paste0` function, which concatenates strings without a separator. The results are added to the new data frame as new columns. Finally, the new data frame is returned. 
+
+You can use this function like this:
+
+```r
+# Your data frame
+df <- data.frame(X1 = c("p1", "p2", "p3", "p4"),
+                 X2 = c("H", "H", "J", "K"),
+                 X3 = c("I", "K", "K", "I"),
+                 X4 = c("K", "J", "H", "H"),
+                 X5 = c("J", "K", "I", "J"),
+                 X6 = c("K", "I", "J", "I"),
+                 X7 = c("H", "J", "K", "J"),
+                 stringsAsFactors = FALSE)
+
+# Use the function
+new_df <- concat(df)
+
+# Print the new data frame
+print(new_df)
+```
+
+This will print:
+
+```r
+  X1 X2 X3 X4
+1 p1 HI KJ KH
+2 p2 HK JK IJ
+3 p3 JK HI JK
+4 p4 KI HJ IJ
+```

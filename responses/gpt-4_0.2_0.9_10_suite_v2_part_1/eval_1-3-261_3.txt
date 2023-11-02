@@ -1,0 +1,21 @@
+The error you're seeing is an HTTP 410 error, which means the resource you're trying to access is no longer available at the provided URL. This error is often returned when YouTube changes its internal API, and the pytube library hasn't been updated to accommodate these changes.
+
+As of the time of writing, the pytube library has some issues with YouTube's recent changes. The maintainers of the library are actively working on a fix, but it might take some time.
+
+In the meantime, you can try the following workaround:
+
+1. Uninstall the current version of pytube.
+
+```bash
+pip uninstall pytube pytube3 pytubex
+```
+
+2. Install an unofficial fixed version of pytube.
+
+```bash
+pip install git+https://github.com/yt-dlp/pytube@master
+```
+
+This version is a fork of the original pytube library, which includes some fixes for the recent YouTube changes.
+
+Please note that this is a temporary solution and might not work in the future if YouTube changes its API again. Always consider using the official release of libraries for production code.

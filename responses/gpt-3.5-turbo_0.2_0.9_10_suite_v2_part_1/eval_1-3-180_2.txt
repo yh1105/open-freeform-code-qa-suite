@@ -1,0 +1,16 @@
+To filter the data based on a specific value in a column, you can use the `.loc` method in pandas. Here's an example code snippet that should work for you:
+
+```python
+pass_test_data = data_useless.loc[data_useless['TEST_STATUS'] == 'PASS TEST']
+pass_test_data_grouped = pass_test_data.groupby('TEST_TYPE').count()
+```
+
+This code first filters the `data_useless` DataFrame to only include rows where the `TEST_STATUS` column is equal to `'PASS TEST'`. It then groups the resulting DataFrame by the `TEST_TYPE` column and counts the number of occurrences of each value in that column.
+
+Note that you can also chain the filtering and grouping operations together in a single line of code, like this:
+
+```python
+pass_test_data_grouped = data_useless.loc[data_useless['TEST_STATUS'] == 'PASS TEST'].groupby('TEST_TYPE').count()
+```
+
+This will produce the same result as the previous code snippet.

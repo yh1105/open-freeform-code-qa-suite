@@ -1,0 +1,20 @@
+Here is a Python function `splitOne(s)` that should meet your requirements:
+
+```python
+def splitOne(s):
+    split_string = s.split('_', 1)
+    if len(split_string) > 1:
+        return split_string[1]
+    else:
+        return split_string[0]
+```
+
+This function splits the input string `s` at the first occurrence of `_`. If the split results in more than one element, it returns the second element (i.e., everything after the first `_`). If the split results in only one element (i.e., the string does not contain `_`), it returns the original string.
+
+Here's how you can use this function:
+
+```python
+print(splitOne('testing_abc'))  # Outputs: abc
+print(splitOne('xyz'))  # Outputs: xyz
+print(splitOne('testing_abc_bbc'))  # Outputs: abc_bbc
+```

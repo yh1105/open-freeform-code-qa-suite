@@ -1,0 +1,40 @@
+You can use the `tstrsplit` function from the `data.table` package to split the `segment_stemming` column by comma and then use `tstrsplit` again to split the resulting columns by parentheses. Here's the `mySplit` function that does this:
+
+```r
+mySplit <- function(x) {
+  x[, lapply(tstrsplit(segment_stemming, ","), tstrsplit, "\\(|\\)"), by = id][, -1]
+}
+```
+
+Here's how it works:
+
+1. `tstrsplit(segment_stemming, ",")` splits the `segment_stemming` column by comma, resulting in a list of character vectors.
+2. `lapply(..., tstrsplit, "\\(|\\)")` applies the `tstrsplit` function to each element of the list, splitting each character vector by parentheses and returning a list of matrices.
+3. `by = id` groups the resulting table by the `id` column.
+4. `[, -1]` removes the first column, which is the `segment_stemming` column that we no longer need.
+
+You can call the function like this:
+
+```r
+mySplit(x)
+```
+
+This should return the expected output:
+
+```
+   id                 V1       V2
+1:  A   ('Brownie', 'Noun')  'From'
+2:  A           ('Pi', 'Noun')    <NA>
+3:  B ('Dung-caroon-gye', 'Noun')   'in'
+4:  B     ('innovation', 'Noun')    <NA>
+```
+
+Note that the output has an extra column (`V2`) that contains the second element of each tuple. If you want to remove this column, you can modify the function like this:
+
+```r
+mySplit <- function(x) {
+  x[, lapply(tstrsplit(segment_stemming, ","), tstrsplit, "\\(|\\)"), by = id][, -c(1, 4)]
+}
+```
+
+This version of the function removes the first and fourth columns of the resulting table, which correspond to the `id` and `V2` columns, respectively.

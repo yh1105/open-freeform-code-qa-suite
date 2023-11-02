@@ -1,0 +1,18 @@
+In pandas, you can use the `loc` function to filter rows based on a condition, and then use `groupby` to group the data. Here's how you can do it:
+
+```python
+data_pass_test = data_useless.loc[data_useless['TEST_STATUS'] == 'PASS TEST']
+grouped_data = data_pass_test.groupby('TEST_STATUS').count()
+```
+
+In the first line, `data_useless.loc[data_useless['TEST_STATUS'] == 'PASS TEST']` filters the rows where `TEST_STATUS` is 'PASS TEST'. The result is a new DataFrame containing only the rows where `TEST_STATUS` is 'PASS TEST'.
+
+In the second line, `groupby('TEST_STATUS').count()` groups the data by `TEST_STATUS` and counts the number of occurrences of each `TEST_STATUS`.
+
+If you want to see the result, you can print `grouped_data`:
+
+```python
+print(grouped_data)
+```
+
+This will give you the count of 'PASS TEST' in your dataset.

@@ -1,0 +1,34 @@
+Here is a Python function that should do what you want. It first divides the number into parts of size `num//n`, then distributes the remainder by adding 2 to each part in succession until the remainder is exhausted.
+
+```python
+def divideNumber(num, n):
+    # Calculate the base size of each part and the initial remainder
+    base, remainder = divmod(num, n)
+    
+    # If base is not a multiple of 2, decrease it by 1 and increase the remainder accordingly
+    if base % 2 != 0:
+        base -= 1
+        remainder += n
+
+    # Create the initial list of parts
+    parts = [base] * n
+
+    # Distribute the remainder
+    i = 0
+    while remainder > 0:
+        parts[i] += 2
+        remainder -= 2
+        i = (i + 1) % n
+
+    return parts
+```
+
+This function first calculates the base size of each part and the initial remainder. If the base size is not a multiple of 2, it decreases the base size by 1 and increases the remainder accordingly. It then creates the initial list of parts and distributes the remainder by adding 2 to each part in succession until the remainder is exhausted.
+
+Here is how you can use this function:
+
+```python
+print(divideNumber(100, 3))  # Output: [34, 34, 32]
+```
+
+This will divide 100 into 3 parts, each of which is a multiple of 2, and the sum of the parts is equal to the original number.

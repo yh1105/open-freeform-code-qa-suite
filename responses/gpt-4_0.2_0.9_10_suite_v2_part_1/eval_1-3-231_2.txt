@@ -1,0 +1,18 @@
+Here is a Python function that will do exactly what you need. It iterates over each tensor in the list and appends its shape to a new list. This new list is then returned.
+
+```python
+def getSize(t):
+    sizes = []
+    for tensor in t:
+        sizes.append(tensor.shape)
+    return sizes
+```
+
+You can use this function like this:
+
+```python
+sizes = getSize(list_of_tensors)
+print(sizes)
+```
+
+This will print a list of tuples, where each tuple represents the shape of a tensor in the original list.

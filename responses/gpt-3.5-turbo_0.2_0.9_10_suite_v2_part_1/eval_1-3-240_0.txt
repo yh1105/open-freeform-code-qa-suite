@@ -1,0 +1,37 @@
+You can use the `merge()` function in pandas to merge the two data frames and then use the `indicator` parameter to get the difference.
+
+Here's the implementation of the `getDifference` function:
+
+```python
+import pandas as pd
+
+def getDifference(df1, df2):
+    merged = pd.merge(df1, df2, how='outer', indicator=True)
+    diff = merged.loc[merged['_merge'] == 'left_only']
+    diff.drop('_merge', axis=1, inplace=True)
+    return diff
+```
+
+Here, we first merge the two data frames using the `merge()` function with the `how` parameter set to `'outer'`. This ensures that all the rows from both data frames are included in the merged data frame.
+
+Next, we use the `indicator` parameter to add a column `_merge` to the merged data frame. This column indicates whether a row is present in both data frames (`'both'`), only in the left data frame (`'left_only'`), or only in the right data frame (`'right_only'`).
+
+Finally, we filter the merged data frame to get only the rows that are present in the left data frame (`'left_only'`) and drop the `_merge` column before returning the result.
+
+You can call this function as follows:
+
+```python
+df1 = pd.DataFrame({'A': [1, 2, 3], 'B': [4, 5, 6]})
+df2 = pd.DataFrame({'A': [2], 'B': [5]})
+
+df3 = getDifference(df1, df2)
+print(df3)
+```
+
+This will output:
+
+```
+   A  B
+0  1  4
+2  3  6
+```

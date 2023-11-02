@@ -1,0 +1,10 @@
+This error occurs when you try to remove a package that is a dependency of conda itself. In this case, it seems that you are trying to remove either `requests` or `setuptools`, which are both dependencies of conda. 
+
+To fix this issue, you can try the following steps:
+
+1. Update conda by running `conda update conda`.
+2. Try creating the environment again by running `conda env create -f python3.6-environment-windows.yml`.
+
+If the issue persists, you can try creating a new environment with a different name and installing the required packages in that environment. 
+
+To create a new environment, run `conda create --name new_env_name`. Once the environment is created, activate it by running `conda activate new_env_name`. Then, install the required packages by running `conda install package_name`.

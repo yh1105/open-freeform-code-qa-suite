@@ -1,0 +1,40 @@
+There could be several reasons why you're unable to start a Jupyter notebook on VS Code. Here are a few steps you can take to troubleshoot this issue:
+
+1. **Check your Python and IPyKernel versions**: Make sure you have the correct versions of Python and IPyKernel installed. You can do this by running the following commands in your terminal:
+
+    ```bash
+    python --version
+    ipython kernel --version
+    ```
+
+    If you don't have the correct versions installed, you can install them using the following commands:
+
+    ```bash
+    conda install python=3.8
+    conda install ipykernel
+    ```
+
+2. **Check your Jupyter server logs**: If you're still having issues, you can check your Jupyter server logs for any error messages. You can do this by running the following command in your terminal:
+
+    ```bash
+    jupyter notebook --debug
+    ```
+
+3. **Reinstall the Python extension in VS Code**: If you're still having issues, you can try reinstalling the Python extension in VS Code. You can do this by going to the Extensions view in VS Code (View -> Extensions), searching for the Python extension, and clicking on the uninstall button. Once the extension is uninstalled, you can reinstall it by clicking on the install button.
+
+4. **Check your VS Code settings**: If you're still having issues, you can check your VS Code settings to make sure they're correctly configured. You can do this by going to the Settings view in VS Code (File -> Preferences -> Settings), and checking the following settings:
+
+    - `python.pythonPath`: This should be set to the path of your Python interpreter.
+    - `python.jupyter.jupyterPath`: This should be set to the path of your Jupyter notebook.
+
+5. **Create a new conda environment**: If you're still having issues, you can try creating a new conda environment and installing Jupyter notebook in that environment. You can do this by running the following commands in your terminal:
+
+    ```bash
+    conda create --name new_env python=3.8
+    conda activate new_env
+    conda install jupyter
+    ```
+
+    Then, in VS Code, you can select this new environment as your Python interpreter by clicking on the Python version in the bottom left corner of the status bar, and selecting the new environment from the list.
+
+If none

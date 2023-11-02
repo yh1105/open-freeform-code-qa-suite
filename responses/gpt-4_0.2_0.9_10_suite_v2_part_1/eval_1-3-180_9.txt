@@ -1,0 +1,21 @@
+You can use the `loc` function in pandas to filter rows by column value. Here's how you can do it:
+
+```python
+data_pass_test = data_useless.loc[data_useless['TEST_STATUS'] == 'PASS TEST']
+```
+
+This will give you a new DataFrame `data_pass_test` that only contains rows where `TEST_STATUS` is 'PASS TEST'.
+
+If you want to group by `TEST_STATUS` after that (although it might not be very useful since all the values will be 'PASS TEST'), you can do:
+
+```python
+grouped_data = data_pass_test.groupby('TEST_STATUS')
+```
+
+If you want to count the number of 'PASS TEST' for each 'TEST_TYPE', you can do:
+
+```python
+grouped_data = data_pass_test.groupby('TEST_TYPE').size()
+```
+
+This will give you a Series where the index is the 'TEST_TYPE' and the value is the count of 'PASS TEST' for that type.

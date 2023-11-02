@@ -1,0 +1,31 @@
+The error message is indicating that the `profile` URL pattern is not able to match the argument passed to it. Looking at your code, the issue is with the `author` field in the `NewPost` model. You have set `null=True` which means that the `author` field can be null. However, in your `index` view, you are not checking if the `author` field is null before passing it to the `profile` URL. 
+
+To fix this, you can add a check in your `index` view to only display posts where the `author` field is not null. Here's an updated version of your `index` view:
+
+```python
+def index(request):
+    if request.method == "POST":
+        form = NewPostForm(request.POST)
+        if form.is_valid():
+            title = form.cleaned_data['title']
+            description = form.cleaned_data['description']
+            author = request.user
+
+            post = NewPost(title=title, description=description, author=author)
+            post.save()
+            return HttpResponseRedirect(reverse("index"))
+        else:
+            return render(request, "network/index.html", {
+                "form": form
+            })
+
+    # Only display posts where the author field is not null
+    posts = NewPost.objects.exclude(author=None)
+
+    return render(request, "network/index.html", {
+        "form": NewPostForm(),
+        "posts": posts
+    })
+```
+
+This should fix the error you are seeing.

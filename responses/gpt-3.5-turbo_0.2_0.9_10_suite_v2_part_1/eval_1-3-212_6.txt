@@ -1,0 +1,24 @@
+Here are the modified classes `M` and `M3D`:
+
+```python
+from __future__ import annotations
+from typing import TypeVar, Generic
+
+T = TypeVar('T', bound='M')
+
+class M(Generic[T]):
+    def set_width(self: T, width: int) -> T:
+        self.width = width
+        return self
+
+    def set_height(self: T, height: int) -> T:
+        self.height = height
+        return self
+
+class M3D(M[M3D]):
+    def set_depth(self, depth: int) -> M3D:
+        self.depth = depth
+        return self
+```
+
+The key change is to make `M` a generic class that takes a type parameter `T` that is bound to `M` itself. This allows us to specify the return type of `set_width()` and `set_height()` as `T` instead of `M`. Then, we make `M3D` a subclass of `M` that is parameterized with `M3D` itself. This means that `set_width()` and `set_height()` will return `M3D` instead of `M`, and we can chain them with `set_depth()` without any issues.

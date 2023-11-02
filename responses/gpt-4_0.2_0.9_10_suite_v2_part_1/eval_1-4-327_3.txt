@@ -1,0 +1,15 @@
+In R, it's not recommended to have two columns with the same name in a data frame. However, if you find yourself in this situation, you can select the second column by its index. Here is how you can do it:
+
+```r
+second_col <- d3[,2]
+```
+
+This will select the second column of the data frame `d3` and assign it to the variable `second_col`.
+
+If you have many columns and you are not sure about the index of the second 'a' column, you can use the following code:
+
+```r
+second_col <- d3[,which(colnames(d3) == 'a')[2]]
+```
+
+This will find the indices of all columns named 'a' and select the second one.
