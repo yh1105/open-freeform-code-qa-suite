@@ -1,0 +1,11 @@
+Laravel was displaying to me "Access denied for user 'homestead'@'localhost' (using password: YES)". One solution for this was clearing the cache and the config cache stored, all this with these three commands:
+```
+php artisan cache:clear
+php artisan config:clear
+php artisan config:cache
+```
+After php artisan cache:clear, terminal says:
+
+Failed to clear cache. Make sure you have the appropriate permissions. (with red background)
+
+Doing the second and third code (php artisan config:clear and php artisan config:cache) works fine! But it still gives me the error when typing the first line. Can anyone explain why?

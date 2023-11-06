@@ -1,0 +1,7 @@
+id: 380
+prompt_path: prompt_380.txt
+type: code completion
+lang: java
+grading:
+  keywords:
+    - 'getClass'
