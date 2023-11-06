@@ -1,5 +1,5 @@
-id: 451
-prompt_path: prompt_451.txt
+id: 469
+prompt_path: prompt_469.txt
 type: code completion
 lang: go
 grading:
@@ -8,5 +8,3 @@ grading:
     escape: " '\"\n`"
     targets:
       - 'TBD'
-
-
