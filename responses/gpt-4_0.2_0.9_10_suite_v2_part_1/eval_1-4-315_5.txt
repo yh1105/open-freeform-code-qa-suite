@@ -1,0 +1,26 @@
+Here is the function `concat` that takes a dataframe `df` as an argument and returns a new dataframe with concatenated columns:
+
+```r
+concat <- function(df) {
+  # Create a new dataframe with the first column
+  new_df <- data.frame(X1 = df$X1)
+  
+  # Loop over the columns in pairs
+  for (i in seq(2, ncol(df), by = 2)) {
+    # Concatenate the two columns
+    new_col <- paste0(df[,i], df[,i+1])
+    
+    # Add the new column to the dataframe
+    new_df <- cbind(new_df, new_col)
+  }
+  
+  # Rename the columns
+  colnames(new_df) <- c("X1", "X2", "X3", "X4")
+  
+  return(new_df)
+}
+```
+
+This function works by first creating a new dataframe with the first column of the input dataframe. Then it loops over the columns of the input dataframe in pairs, concatenating each pair of columns and adding the result to the new dataframe. Finally, it renames the columns of the new dataframe to match the desired output.
+
+Please note that this function assumes that the input dataframe has an odd number of columns and that the first column should not be concatenated with any other. If this is not the case, you may need to adjust the function accordingly.

@@ -1,0 +1,23 @@
+You can use the `conda list --size` command to list all packages along with their sizes. This command will show the size of each package in human-readable format (i.e., in KB, MB, GB).
+
+Here is an example of how to use this command:
+
+```bash
+conda list --size
+```
+
+This command will output a list of all installed packages in the current environment, along with their sizes.
+
+Please note that this feature is available in conda 4.5.0 and later. If you are using an older version of conda, you might need to upgrade it to use this feature. You can upgrade conda using the following command:
+
+```bash
+conda update conda
+```
+
+After running the `conda list --size` command, you can sort the output by size to easily see the largest packages. Unfortunately, conda does not provide a built-in way to sort the output by size. However, you can use the `sort` command in the Windows PowerShell to sort the output. Here is an example:
+
+```bash
+conda list --size | sort -k2 -n
+```
+
+This command will sort the output of `conda list --size` by the second column (i.e., the size column) in numerical order. The largest packages will be at the bottom of the output.

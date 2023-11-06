@@ -1,0 +1,23 @@
+Here is a function in R that accomplishes this task:
+
+```r
+concat <- function(df) {
+  # Create a new data frame with the first column
+  new_df <- data.frame(X1 = df$X1)
+  
+  # Iterate over the columns in pairs
+  for (i in seq(2, ncol(df), by = 2)) {
+    # Concatenate the two columns and add them to the new data frame
+    new_df <- cbind(new_df, paste0(df[,i], df[,i+1]))
+  }
+  
+  # Rename the columns
+  colnames(new_df) <- c("X1", "X2", "X3", "X4")
+  
+  return(new_df)
+}
+```
+
+This function works by first creating a new data frame with the first column of the input data frame. Then, it iterates over the columns of the input data frame in pairs, concatenating each pair of columns and adding the result to the new data frame. Finally, it renames the columns of the new data frame to match the desired output.
+
+Please note that this function assumes that the input data frame has an even number of columns (excluding the first column). If the number of columns is odd, the last column will be ignored.

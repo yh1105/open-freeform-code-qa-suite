@@ -1,0 +1,16 @@
+You can filter the DataFrame first for the rows where `TEST_STATUS` is `PASS TEST` and then apply the `groupby` function. Here is how you can do it:
+
+```python
+data_pass_test = data_useless[data_useless['TEST_STATUS'] == 'PASS TEST']
+grouped_data = data_pass_test.groupby('TEST_STATUS').count()
+```
+
+This will give you a DataFrame grouped by `TEST_STATUS` where `TEST_STATUS` is `PASS TEST`.
+
+If you want to see the count of `TEST_TYPE` for each `TEST_STATUS`, you can do:
+
+```python
+grouped_data = data_pass_test.groupby('TEST_STATUS')['TEST_TYPE'].count()
+```
+
+This will give you the count of `TEST_TYPE` for `PASS TEST` status.

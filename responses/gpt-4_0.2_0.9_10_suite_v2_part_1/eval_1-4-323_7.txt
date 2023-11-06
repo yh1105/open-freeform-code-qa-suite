@@ -1,0 +1,38 @@
+Here is a function that should do what you want. It uses the `apply` function to iterate over the columns of the data frame. For each column, it calculates the minimum and maximum values, and then finds the row names where these values occur. It also counts the frequency of these min and max values.
+
+```r
+myMaxMin <- function(cars) {
+  # Initialize an empty data frame to store the results
+  result <- data.frame(column = character(), min.value = numeric(), min.rowname = character(), min.freq.times = numeric(), max.value = numeric(), max.rowname = character(), max.freq.times = numeric(), stringsAsFactors = FALSE)
+
+  # Iterate over the columns of the data frame
+  for (col in names(cars)) {
+    # Calculate the minimum and maximum values
+    min.value <- min(cars[[col]])
+    max.value <- max(cars[[col]])
+
+    # Find the row names where these values occur
+    min.rowname <- which(cars[[col]] == min.value)
+    max.rowname <- which(cars[[col]] == max.value)
+
+    # Count the frequency of these values
+    min.freq.times <- length(min.rowname)
+    max.freq.times <- length(max.rowname)
+
+    # Add the results to the data frame
+    result <- rbind(result, data.frame(column = col, min.value = min.value, min.rowname = paste(min.rowname, collapse = ","), min.freq.times = min.freq.times, max.value = max.value, max.rowname = paste(max.rowname, collapse = ","), max.freq.times = max.freq.times, stringsAsFactors = FALSE))
+  }
+
+  return(result)
+}
+```
+
+This function returns a data frame where each row corresponds to a column in the input data frame. The columns of the output data frame are:
+
+- `column`: the name of the column in the input data frame
+- `min.value`: the minimum value in the column
+- `min.rowname`: the row names where the minimum value occurs, separated by commas
+- `min.freq.times`: the frequency of the minimum value
+- `max.value`: the maximum value in the column
+- `max.rowname`: the row names where the maximum value occurs, separated by commas
+- `max.freq.times`: the frequency of the maximum value

@@ -1,0 +1,9 @@
+Here is the function `splitOne(s)` that you requested:
+
+```python
+def splitOne(s):
+    split_string = s.split('_', 1)
+    return split_string[1] if len(split_string) > 1 else split_string[0]
+```
+
+This function works by splitting the string `s` at the first occurrence of `_`. If `_` is present in the string, it will return everything after the first `_`. If `_` is not present in the string, it will return the original string. The `1` in `split('_', 1)` ensures that the string is split at the first `_` only.

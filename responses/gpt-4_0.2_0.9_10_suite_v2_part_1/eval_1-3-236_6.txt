@@ -1,0 +1,15 @@
+It seems like you are trying to disable Jedi in Visual Studio Code. However, the setting you are trying to use is not correct. The setting `"python.linting.jediEnabled": false` is not valid for disabling Jedi.
+
+To disable Jedi, you should use the `"python.jediEnabled": false` setting. Here's how you can do it:
+
+1. Open your settings.json file in Visual Studio Code. You can do this by pressing `Ctrl + ,` on Windows or `Cmd + ,` on Mac, then clicking on the `{}` icon in the top right corner to open the JSON file.
+
+2. Add the following line to your settings.json file:
+
+    ```json
+    "python.jediEnabled": false
+    ```
+
+3. Save the settings.json file and restart Visual Studio Code.
+
+This should disable Jedi and stop the error messages you are seeing. If you are still seeing error messages, it might be due to another extension or setting. You should check your other settings and extensions to make sure they are not causing the issue.

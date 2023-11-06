@@ -1,0 +1,22 @@
+Sure, you can read a CSV file from Google Drive using pandas, but you need to modify the URL a bit. Google Drive URLs are not directly readable, so you need to replace the `/file/d/` part with `/uc?export=download&id=`.
+
+Here is the function you requested:
+
+```python
+def processURL(url):
+    file_id = url.split('/')[-2]
+    dwn_url='https://drive.google.com/uc?export=download&id=' + file_id
+    return dwn_url
+```
+
+You can use this function to process the URL and then read the CSV file as follows:
+
+```python
+import pandas as pd
+
+url = 'https://drive.google.com/file/d/0B6GhBwm5vaB2ekdlZW5WZnppb28/view?usp=sharing'
+url = processURL(url)
+df = pd.read_csv(url)
+```
+
+Please note that this will only work if the file is shared publicly. If the file isn't public, you'll need to make it public or use the Google Drive API to authenticate and access the file.

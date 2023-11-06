@@ -1,0 +1,20 @@
+Here's a solution using `tidyverse` functions:
+
+```r
+library(tidyverse)
+
+myConvert <- function(my_data) {
+  my_data %>%
+    group_by(list_names) %>%
+    summarise(list_values = list(list_values)) %>%
+    deframe()
+}
+```
+
+Explanation:
+
+1. Group the data by `list_names` using `group_by`.
+2. For each group, create a list of `list_values` using `summarise`.
+3. Convert the resulting tibble to a named list using `deframe`.
+
+This solution avoids using a `for-loop` and instead uses the `tidyverse` functions `group_by`, `summarise`, and `deframe` to achieve the desired result.

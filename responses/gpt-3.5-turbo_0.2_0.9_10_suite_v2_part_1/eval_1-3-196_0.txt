@@ -1,0 +1,9 @@
+You can use the following command to display the size of each installed package in Conda:
+
+```
+conda list --show-channel-urls | awk '{print $1"=="$2}' | xargs conda search | awk '/\*/{print $1" "$NF}' | sort | awk '{print $1"="$2}' | xargs conda list --show-channel-urls | awk '{print $1" "$2" "$3}' | awk '{printf "%-30s %s\n", $1, $3}' | sort -k2 -n
+```
+
+This command will display the package name and its size in a sorted order based on the package size. The largest packages will be displayed at the bottom of the list.
+
+Note: This command may take some time to run, depending on the number of packages installed in your Conda environment.

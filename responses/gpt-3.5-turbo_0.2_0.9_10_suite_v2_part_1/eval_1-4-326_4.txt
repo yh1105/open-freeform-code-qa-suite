@@ -1,0 +1,47 @@
+Here's a possible implementation of the `removeComma` function in R:
+
+```r
+removeComma <- function(s) {
+  # Find all quoted substrings
+  quoted <- regmatches(s, gregexpr("\"[^\"]*\"", s))[[1]]
+  
+  # Replace commas inside quoted substrings with a placeholder
+  for (i in seq_along(quoted)) {
+    quoted[i] <- gsub(",", "##COMMA##", quoted[i])
+  }
+  
+  # Replace the original quoted substrings with the modified ones
+  for (i in seq_along(quoted)) {
+    s <- gsub(sprintf("\"%s\"", quoted[i]), quoted[i], s)
+  }
+  
+  # Split the string by commas
+  s <- strsplit(s, ",")[[1]]
+  
+  # Replace the placeholders with commas
+  s <- gsub("##COMMA##", ",", s)
+  
+  # Trim leading/trailing whitespace
+  s <- trimws(s)
+  
+  # Combine the elements into a single string
+  s <- paste(s, collapse = ", ")
+  
+  return(s)
+}
+```
+
+This function first finds all quoted substrings in the input string using regular expressions. It then replaces all commas inside these substrings with a placeholder (`##COMMA##`). After that, it replaces the original quoted substrings with the modified ones. This ensures that commas outside the quoted substrings are not affected. The function then splits the string by commas, replaces the placeholders with commas, and trims leading/trailing whitespace. Finally, it combines the elements into a single string and returns it.
+
+Here's how you can use the function with the example input:
+
+```r
+string <- c("1, 2, \"something, else\"", "3, 5, \"more, more, more\"", "6, \"commas, are fun\", \"no, they are not\"")
+
+output <- sapply(string, removeComma)
+
+output
+#[1] "1, 2, \"something else\""                  
+#[2] "3, 5, \"more more more\""                  
+#[3] "6, \"commas are fun\", \"no they are not\""
+```

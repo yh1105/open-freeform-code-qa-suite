@@ -1,0 +1,32 @@
+Here is a function `mySplit` that uses the `strsplit` function to split the `segment_stemming` column into individual tuples, and then uses the `unnest` function from the `tidyverse` package to convert the list of tuples into individual rows.
+
+```r
+library(data.table)
+library(tidyverse)
+
+mySplit <- function(x) {
+  # Convert the segment_stemming column into a character vector
+  x$segment_stemming <- as.character(x$segment_stemming)
+  
+  # Use strsplit to split the segment_stemming column into individual tuples
+  x$segment_stemming <- strsplit(x$segment_stemming, "),")
+  
+  # Use unnest to convert the list of tuples into individual rows
+  x <- x %>% unnest(segment_stemming)
+  
+  # Remove the leading and trailing parentheses and spaces
+  x$segment_stemming <- gsub("^\\[\\('", "", x$segment_stemming)
+  x$segment_stemming <- gsub("'\\)$", "", x$segment_stemming)
+  x$segment_stemming <- gsub("\\('", "", x$segment_stemming)
+  
+  return(x)
+}
+```
+
+You can use this function on your data table `x` as follows:
+
+```r
+x <- mySplit(x)
+```
+
+This will modify `x` in-place to have the desired format. Note that this function assumes that the `segment_stemming` column is a character vector where each element is a string representation of a list of tuples. If the `segment_stemming` column is actually a list of tuples, you would need to modify the function accordingly.

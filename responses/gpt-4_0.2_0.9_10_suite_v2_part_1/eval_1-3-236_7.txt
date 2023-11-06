@@ -1,0 +1,22 @@
+It seems like you're trying to disable Jedi in Visual Studio Code. The setting you're trying to use, `"python.linting.jediEnabled": false`, is actually deprecated in the newer versions of the Python extension for VS Code.
+
+Instead, you should use the `"python.languageServer"` setting. Here's how you can do it:
+
+1. Open your settings.json file in VS Code.
+2. Add the following line to your settings.json file:
+
+```json
+"python.languageServer": "Pylance"
+```
+
+This will set Pylance as your language server instead of Jedi. Pylance is the new language server from Microsoft that's supposed to be faster and more feature-rich than Jedi. It also integrates well with Pylint.
+
+If you still want to use Jedi as your language server, you can set it like this:
+
+```json
+"python.languageServer": "Jedi"
+```
+
+But remember, if you set Jedi as your language server, it doesn't mean it will lint your code. For linting, you have already set Pylint, which is a good choice.
+
+After making these changes, you might need to reload your VS Code window or restart VS Code.

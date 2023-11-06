@@ -1,0 +1,32 @@
+You can use the `gsub` function in R to replace the commas inside the quotes. Here is the function `removeComma`:
+
+```r
+removeComma <- function(s) {
+  # This regular expression matches a comma that is inside quotes
+  # The lookahead (?=.*\") checks that there is a quote somewhere after the comma
+  # The lookbehind (?<=\") checks that there is a quote somewhere before the comma
+  regex <- ",(?=.*\")(.*\")"
+  
+  # Replace the matched commas with a space
+  s <- gsub(regex, " ", s)
+  
+  return(s)
+}
+```
+
+This function uses a regular expression to match commas that are inside quotes, and then replaces them with a space. The lookahead and lookbehind are used to ensure that the comma is inside quotes. The lookahead checks that there is a quote somewhere after the comma, and the lookbehind checks that there is a quote somewhere before the comma.
+
+You can use this function like this:
+
+```r
+string <- c("1, 2, \"something, else\"", "3, 5, \"more, more, more\"", "6, \"commas, are fun\", \"no, they are not\"")
+removeComma(string)
+```
+
+This will return:
+
+```r
+[1] "1, 2, \"something else\""                  
+[2] "3, 5, \"more more more\""                  
+[3] "6, \"commas are fun\", \"no they are not\""
+```

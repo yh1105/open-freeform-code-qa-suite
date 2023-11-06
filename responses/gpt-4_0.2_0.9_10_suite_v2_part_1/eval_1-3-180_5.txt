@@ -1,0 +1,23 @@
+In pandas, you can filter rows using boolean indexing. Here is how you can do it:
+
+```python
+data_pass_test = data_useless[data_useless['TEST_STATUS'] == 'PASS TEST']
+```
+
+This will give you a new DataFrame `data_pass_test` which only contains the rows where `TEST_STATUS` is 'PASS TEST'.
+
+If you want to group by `TEST_STATUS` after filtering, you can do:
+
+```python
+data_pass_test_grouped = data_pass_test.groupby('TEST_STATUS').count()
+```
+
+This will give you the count of 'PASS TEST' for each `TEST_TYPE`.
+
+So, the equivalent of your SQL query in pandas would be:
+
+```python
+data_useless[data_useless['TEST_STATUS'] == 'PASS TEST'].groupby('TEST_STATUS').count()
+```
+
+This will select rows where `TEST_STATUS` is 'PASS TEST', group by `TEST_STATUS`, and count the number of rows in each group.

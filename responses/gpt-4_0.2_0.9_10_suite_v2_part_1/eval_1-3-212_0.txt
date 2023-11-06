@@ -1,0 +1,20 @@
+```python
+from __future__ import annotations
+from typing import TypeVar, Type
+
+T = TypeVar('T', bound='M')
+
+class M:
+    def set_width(self: T, width: int) -> T:
+        self.width = width
+        return self
+
+    def set_height(self: T, height: int) -> T:
+        self.height = height
+        return self
+
+class M3D(M):
+    def set_depth(self: 'M3D', depth: int) -> 'M3D':
+        self.depth = depth
+        return self
+```

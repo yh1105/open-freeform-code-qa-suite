@@ -1,0 +1,41 @@
+The error message you're seeing is due to a change in the `pandas.concat` function in pandas 1.0.0. The `join_axes` argument was removed, which is causing the `TypeError` you're seeing.
+
+The `pandas_profiling` library you're using hasn't been updated to reflect this change in pandas. You can solve this problem by downgrading your pandas version to a version that still supports the `join_axes` argument. 
+
+You can do this by running the following command in your terminal:
+
+```bash
+conda install pandas=0.25.3
+```
+
+Alternatively, you can try to upgrade your `pandas_profiling` to the latest version, which should be compatible with the latest pandas version. You can do this by running:
+
+```bash
+pip install --upgrade pandas_profiling
+```
+
+or
+
+```bash
+conda update pandas_profiling
+```
+
+For the second error, the `profile_report()` function is a method of the `pandas_profiling` module, not the `DataFrame` object. You should use it like this:
+
+```python
+import pandas_profiling
+
+profile = pandas_profiling.ProfileReport(data)
+profile.to_widgets()
+```
+
+or
+
+```python
+import pandas_profiling
+
+profile = pandas_profiling.ProfileReport(data)
+profile.to_file("your_report.html")
+```
+
+This will generate the profile report and display it in Jupyter notebook widgets or save it to an HTML file respectively.

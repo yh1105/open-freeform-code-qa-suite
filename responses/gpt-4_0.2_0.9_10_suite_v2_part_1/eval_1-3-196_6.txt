@@ -1,0 +1,11 @@
+Unfortunately, there is no direct command in conda to list the size of the packages. However, you can use a workaround by checking the size of the directories in the `pkgs` directory of your conda installation.
+
+Here is a PowerShell command you can use to list the sizes of the directories in the `pkgs` directory:
+
+```powershell
+Get-ChildItem "C:\Users\YourUserName\Anaconda3\pkgs" | ForEach-Object { $_.Name + ": " + "{0:N2}" -f ((Get-ChildItem $_.FullName -Recurse | Measure-Object -Property Length -Sum).Sum / 1MB) + " MB" }
+```
+
+Replace `"C:\Users\YourUserName\Anaconda3\pkgs"` with the path to your `pkgs` directory. This command will output the size of each directory (which corresponds to a package) in MB.
+
+Please note that this method gives you the size of the package files on disk, but not the size of the package when it's installed. The installed size can be larger due to files being uncompressed during installation.

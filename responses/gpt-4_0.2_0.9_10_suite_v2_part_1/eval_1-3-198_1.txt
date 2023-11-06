@@ -1,0 +1,26 @@
+Sure, I can help with that. The problem is that the URL you are using is for the Google Drive viewer, not the actual CSV file. You need to modify the URL so that it points directly to the CSV file. Here is a function that does that:
+
+```python
+def processURL(url):
+    # Get the id of the file
+    file_id = url.split('/')[-2]
+    
+    # Create the new url
+    new_url = f'https://drive.google.com/uc?export=download&id={file_id}'
+    
+    return new_url
+```
+
+This function works by splitting the URL on the '/' character and taking the second to last element, which is the file id. It then inserts this id into a new URL that points directly to the file.
+
+You can then use this function in your code like this:
+
+```python
+import pandas as pd
+
+url = 'https://drive.google.com/file/d/0B6GhBwm5vaB2ekdlZW5WZnppb28/view?usp=sharing'
+url = processURL(url)
+dfs = pd.read_csv(url)
+```
+
+This will read the CSV file directly from the new URL.

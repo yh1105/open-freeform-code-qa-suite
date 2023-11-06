@@ -1,0 +1,49 @@
+The error message you're seeing is because Django is trying to reverse the URL for the 'profile' view with an empty string as the 'name' argument. This is happening because `post.author.username` is empty for at least one of your `NewPost` instances.
+
+This is likely because you have a `NewPost` instance where the `author` field is `None`. Since you have `null=True` in your `NewPost` model for the `author` field, Django allows this. However, when you try to access `post.author.username` in your template, it results in an error because `None` has no attribute `username`.
+
+To fix this, you need to ensure that every `NewPost` instance has an author. You can do this by removing `null=True` from the `author` field in your `NewPost` model:
+
+```python
+class NewPost(models.Model):
+    title = models.CharField(max_length=32)
+    description = models.CharField(max_length=256)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+```
+
+After making this change, you will need to create a new database migration and apply it:
+
+```bash
+python manage.py makemigrations
+python manage.py migrate
+```
+
+Then, in your `index` view, you need to check if the user is authenticated before trying to save a new post:
+
+```python
+def index(request):
+    if request.method == "POST":
+        form = NewPostForm(request.POST)
+        if form.is_valid():
+            title = form.cleaned_data['title']
+            description = form.cleaned_data['description']
+            if request.user.is_authenticated:
+                author = request.user
+
+                post = NewPost(title=title, description=description, author=author)
+                post.save()
+                return HttpResponseRedirect(reverse("index"))
+            else:
+                return HttpResponseRedirect(reverse("login"))
+        else:
+            return render(request, "network/index.html", {
+                "form": form
+            })
+
+    return render(request, "network/index.html", {
+        "form": NewPostForm(),
+        "posts": NewPost.objects.all()
+    })
+```
+
+This will redirect unauthenticated users to the login page when they try to submit a post.

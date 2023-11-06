@@ -1,0 +1,20 @@
+Sure, I can help with that. The calculation for the hours should take into account the total minutes (start minutes + duration), divide it by 60 to get the hours, and then add it to the start hour. The result should be taken modulo 24 to ensure it wraps around correctly for times past midnight. Here is the function:
+
+```python
+def computeEndTime(hour, mins, dura):
+    # Calculate total minutes
+    total_mins = mins + dura
+    # Calculate end hour and minute
+    end_hour = (hour + total_mins // 60) % 24
+    end_mins = total_mins % 60
+    # Return as formatted string
+    return "{:02d}:{:02d}".format(end_hour, end_mins)
+```
+
+You can use this function like so:
+
+```python
+print(computeEndTime(12, 17, 59))  # Outputs: 13:16
+```
+
+This function first calculates the total minutes, then uses integer division (`//`) to calculate how many whole hours are in that total. It adds this to the start hour, and takes modulo 24 to get the hour in 24-hour format. It then calculates the remaining minutes with modulo 60. Finally, it returns a string formatted with `"{:02d}:{:02d}".format(end_hour, end_mins)`, which ensures that the hours and minutes are always two digits long, padding with zeros if necessary.

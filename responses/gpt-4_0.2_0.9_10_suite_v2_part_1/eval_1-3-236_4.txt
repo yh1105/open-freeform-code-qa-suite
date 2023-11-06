@@ -1,0 +1,21 @@
+The setting `"python.linting.jediEnabled": false` is not the correct one to disable Jedi. This setting is for disabling Jedi as the IntelliSense engine, not as a linter.
+
+To disable Jedi as a linter, you need to set the following in your settings.json:
+
+```json
+"python.linting.pylintEnabled": true,
+"python.linting.enabled": true
+```
+
+This will enable Pylint as your linter. 
+
+If you still get error messages from Jedi, it might be because Jedi is still being used as your IntelliSense engine. To disable it, you should use:
+
+```json
+"python.jediEnabled": false,
+"python.languageServer": "Pylance"
+```
+
+This will disable Jedi and set Pylance as your IntelliSense engine. If you prefer to use Microsoft Python Language Server, you can set `"python.languageServer": "Microsoft"` instead.
+
+Remember to reload your VS Code after modifying your settings.json for the changes to take effect.

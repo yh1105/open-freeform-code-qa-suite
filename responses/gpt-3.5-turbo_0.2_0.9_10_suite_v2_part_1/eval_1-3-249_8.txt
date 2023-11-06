@@ -1,0 +1,28 @@
+Sure, here's a possible implementation using the `random` and `string` modules in Python:
+
+```python
+import random
+import string
+
+def generateRandomString():
+    # Define the possible characters for the code
+    chars = string.ascii_letters + string.digits
+    
+    # Generate a random code that contains "NAA3U" and 3 digits
+    while True:
+        code = ''.join(random.choices(chars, k=11)) + "NAA3U" + ''.join(random.choices(string.digits, k=3))
+        if "NAA3U" in code and code.count(string.digits) == 3:
+            break
+    
+    return code
+```
+
+This function generates a random string of length 16 that contains the sub-string "NAA3U" and exactly 3 digits. It uses a `while` loop to keep generating codes until it finds one that meets the requirements. The `random.choices` function is used to randomly select characters from the `chars` and `string.digits` strings, and the `join` method is used to concatenate them into a single string.
+
+You can call this function multiple times to generate different codes each time:
+
+```python
+print(generateRandomString())  # Example output: "a1b2c3NAA3U456"
+print(generateRandomString())  # Example output: "XyZ9u8NAA3U123"
+print(generateRandomString())  # Example output: "PqR5NAA3U6789t"
+```

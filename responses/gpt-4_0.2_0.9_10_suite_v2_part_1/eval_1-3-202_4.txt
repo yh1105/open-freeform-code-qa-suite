@@ -1,0 +1,12 @@
+The error message you are seeing is due to the fact that the `requests` and `setuptools` packages are dependencies of `conda` and cannot be removed from the conda's operating environment. 
+
+This error typically occurs when you are trying to create a new environment from a `.yml` file and the file specifies different versions of `requests` and `setuptools` than the ones currently installed in your base conda environment.
+
+To solve this issue, you can try the following steps:
+
+1. Open the `python3.6-environment-windows.yml` file in a text editor.
+2. Find the lines where `requests` and `setuptools` are specified.
+3. Either remove these lines or change the version numbers to match the ones in your base conda environment. You can check the versions of these packages in your base environment by running `conda list` in your command prompt.
+4. Save the `.yml` file and try to create the environment again using `conda env create -f python3.6-environment-windows.yml`.
+
+If the problem persists, you might want to update your conda by running `conda update conda` in your command prompt. This will update conda and all its dependencies to their latest versions. After updating, try to create the environment again.

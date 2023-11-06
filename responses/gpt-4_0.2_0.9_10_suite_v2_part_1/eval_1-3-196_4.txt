@@ -1,0 +1,13 @@
+Unfortunately, `conda` does not provide a built-in command to list the sizes of installed packages. However, you can use the `du` command in Unix-based systems to find out the size of directories. Since you're using Windows, you can use the `Get-ChildItem` command in PowerShell to achieve the same result.
+
+Here's a PowerShell command that will list the sizes of all directories in your `conda` environment's `lib` directory:
+
+```powershell
+Get-ChildItem 'C:\path\to\your\conda\env\lib' -Recurse | Measure-Object -Property Length -Sum
+```
+
+Replace `'C:\path\to\your\conda\env\lib'` with the actual path to the `lib` directory in your `conda` environment.
+
+This command will give you the total size of each directory, which should give you a rough estimate of the size of each package. Note that this might not be 100% accurate, as some packages might have files in other directories as well.
+
+Remember to run PowerShell as an administrator to ensure it has the necessary permissions to access all files.

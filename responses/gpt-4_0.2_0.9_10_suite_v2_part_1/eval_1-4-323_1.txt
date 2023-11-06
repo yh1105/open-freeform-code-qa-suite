@@ -1,0 +1,54 @@
+Here is a function that should do what you want. It uses the `apply` function to iterate over the columns of the data frame, and for each column, it finds the minimum and maximum values, the row names where these values occur, and the frequency of these values. It then combines all this information into a new data frame.
+
+```r
+myMaxMin <- function(cars) {
+  # Initialize empty data frame
+  result <- data.frame(column = character(),
+                       min.value = numeric(),
+                       min.rowname = character(),
+                       min.freq.times = numeric(),
+                       max.value = numeric(),
+                       max.rowname = character(),
+                       max.freq.times = numeric(),
+                       stringsAsFactors = FALSE)
+  
+  # Iterate over columns
+  for (colname in names(cars)) {
+    # Get column data
+    coldata <- cars[[colname]]
+    
+    # Find min and max values
+    min.value <- min(coldata)
+    max.value <- max(coldata)
+    
+    # Find row names where min and max values occur
+    min.rowname <- which(coldata == min.value)
+    max.rowname <- which(coldata == max.value)
+    
+    # Find frequency of min and max values
+    min.freq.times <- length(min.rowname)
+    max.freq.times <- length(max.rowname)
+    
+    # Combine into data frame
+    result <- rbind(result, data.frame(column = colname,
+                                       min.value = min.value,
+                                       min.rowname = toString(min.rowname),
+                                       min.freq.times = min.freq.times,
+                                       max.value = max.value,
+                                       max.rowname = toString(max.rowname),
+                                       max.freq.times = max.freq.times,
+                                       stringsAsFactors = FALSE))
+  }
+  
+  return(result)
+}
+```
+
+You can use this function like this:
+
+```r
+result <- myMaxMin(cars)
+print(result)
+```
+
+This will print a data frame with the column names, minimum and maximum values, the row names where these values occur, and the frequency of these values for each column in the `cars` data frame.

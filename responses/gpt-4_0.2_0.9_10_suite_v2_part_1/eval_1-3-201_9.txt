@@ -1,0 +1,40 @@
+You can use Python's `multiprocessing` module to run these two tasks concurrently. Here's how you can modify your code:
+
+```python
+import multiprocessing
+from dash import Dash
+import dash_bootstrap_components as dbc
+import db
+import hp
+import fd
+
+app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
+database=db.dataBase()
+homepage=hp.homepage(database)
+homepage.timeUpdateCallback(app)
+homepage.gaugeRefreshCallback(app)
+
+def data_mining():
+    fd.financeData(database,1600)
+
+def run_server():
+    app.layout = homepage.layoutMaker()
+    app.run_server(debug=True)
+
+if __name__ == "__main__":
+    # Create processes
+    p1 = multiprocessing.Process(target=data_mining)
+    p2 = multiprocessing.Process(target=run_server)
+
+    # Start processes
+    p1.start()
+    p2.start()
+
+    # Join processes
+    p1.join()
+    p2.join()
+```
+
+In this code, `multiprocessing.Process` is used to create two separate processes. The `target` parameter is used to specify the function that should be executed in the process. `start()` is used to start the processes, and `join()` is used to make the main process wait for the completion of the other processes. However, since your functions are running in infinite loops, `join()` will not have any practical effect in this case.
+
+Please note that due to the nature of Python's Global Interpreter Lock (GIL), threading might not be effective for CPU-bound tasks. However, multiprocessing can effectively bypass the GIL and utilize multiple CPUs/cores, which is why it's used in this case.

@@ -1,0 +1,21 @@
+You can use the `pkg_resources` module to get the installed version of a package, and the `requests` module to get the latest version of the package from PyPI. Here is a function that does this:
+
+```python
+import pkg_resources
+import requests
+
+def checkVersion(pkgName):
+    # Get installed version
+    installed_version = pkg_resources.get_distribution(pkgName).version
+
+    # Get latest version
+    response = requests.get(f'https://pypi.python.org/pypi/{pkgName}/json')
+    latest_version = response.json()['info']['version']
+
+    # Compare and return
+    return installed_version == latest_version
+```
+
+This function first gets the installed version of the package using `pkg_resources.get_distribution(pkgName).version`. Then it sends a GET request to `https://pypi.python.org/pypi/{pkgName}/json` to get the latest version of the package. The latest version is then extracted from the JSON response using `response.json()['info']['version']`. Finally, it compares the installed version with the latest version and returns `True` if they are the same, and `False` otherwise.
+
+Please note that this function will raise an exception if the package is not installed or if there is a problem with the network request. You might want to add error handling code to handle these situations.

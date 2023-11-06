@@ -1,0 +1,22 @@
+Here is a Python function that uses regular expressions to solve the problem:
+
+```python
+import re
+
+def to_camel_case(text):
+    words = re.split('-|_', text)
+    return words[0] + ''.join(word.capitalize() for word in words[1:])
+```
+
+This function works by splitting the input string into words at each dash or underscore. It then joins the words back together, capitalizing each word except for the first one. The first word is left as it was in the original string, preserving its original capitalization.
+
+Here is how the function works on your test cases:
+
+```python
+print(to_camel_case(''))  # returns: ''
+print(to_camel_case("the_stealth_warrior"))  # returns: "theStealthWarrior"
+print(to_camel_case("The-Stealth-Warrior"))  # returns: "TheStealthWarrior"
+print(to_camel_case("A-B-C"))  # returns: "ABC"
+```
+
+This function should work on any string that contains words separated by dashes or underscores. It will not work correctly if the input string contains other types of punctuation or whitespace.

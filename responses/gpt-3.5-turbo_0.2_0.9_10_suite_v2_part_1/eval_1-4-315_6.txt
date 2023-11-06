@@ -1,0 +1,39 @@
+Here's the `concat` function in R that takes a dataframe `df` and returns a new dataframe with the column `X1` and concatenated columns `X2` and `X3`, `X4` and `X5`, `X6` and `X7`:
+
+```r
+concat <- function(df) {
+  new_df <- data.frame(X1 = df$X1) # create new dataframe with X1 column
+  # concatenate every two columns starting from X2
+  new_df$X2 <- paste(df$X2, df$X3, sep = "")
+  new_df$X3 <- paste(df$X4, df$X5, sep = "")
+  new_df$X4 <- paste(df$X6, df$X7, sep = "")
+  return(new_df)
+}
+```
+
+You can call this function with your example dataframe as follows:
+
+```r
+df <- data.frame(
+  X1 = c("p1", "p2", "p3", "p4"),
+  X2 = c("H", "H", "J", "K"),
+  X3 = c("I", "K", "K", "I"),
+  X4 = c("K", "J", "H", "H"),
+  X5 = c("J", "K", "I", "J"),
+  X6 = c("K", "I", "J", "I"),
+  X7 = c("H", "J", "K", "J")
+)
+
+new_df <- concat(df)
+print(new_df)
+```
+
+This will output the following dataframe:
+
+```
+  X1 X2 X3 X4
+1 p1 HI KJ KH
+2 p2 HK JK IJ
+3 p3 JK HI JK
+4 p4 KI HJ IJ
+```

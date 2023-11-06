@@ -1,0 +1,33 @@
+One way to solve this problem is to use multiprocessing instead of threading. You can create two separate processes for each file and run them simultaneously. Here's an example:
+
+```python
+import multiprocessing as mp
+import financeData as fd
+import homePage as hp
+import dash
+import dash_bootstrap_components as dbc
+import dataBase as db
+
+def run_data_mining():
+    database = db.dataBase()
+    dataMiningScript = fd.financeData(database, 1600)
+
+def run_webpage():
+    app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
+    database = db.dataBase()
+    homepage = hp.homepage(database)
+    homepage.timeUpdateCallback(app)
+    homepage.gaugeRefreshCallback(app)
+    app.layout = homepage.layoutMaker()
+    app.run_server(debug=True)
+
+if __name__ == "__main__":
+    p1 = mp.Process(target=run_data_mining)
+    p2 = mp.Process(target=run_webpage)
+    p1.start()
+    p2.start()
+    p1.join()
+    p2.join()
+```
+
+In this example, we define two functions `run_data_mining` and `run_webpage` that will run the two files separately. We then create two `Process` objects and assign each function to a process. Finally, we start both processes and wait for them to finish using the `join` method. This way, both files will run simultaneously without blocking each other.

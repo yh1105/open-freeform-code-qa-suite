@@ -1,0 +1,24 @@
+The error message is indicating that the `profile` URL pattern is not able to match the argument passed to it. Looking at your `index.html` file, the issue seems to be with the `post.author.username` value being passed as the argument to the `profile` URL.
+
+The issue is that the `author` field in your `NewPost` model is defined with `null=True`, which means that it is possible for a post to have no author. In your `index.html` file, you are trying to access the `username` attribute of the `author` field, but if the `author` field is `None`, this will raise an error.
+
+To fix this issue, you can modify your `index.html` file to check if the `author` field is not `None` before trying to access its `username` attribute. Here's an updated version of the relevant section of the `index.html` file:
+
+```html
+{% for post in posts %}
+    <div class="card">
+        <div class="card-body"> Title: {{post.title}} </div>
+        <div class="card-body"> Description: {{post.description}}</div>
+        {% if post.author %}
+            <p> {{post.author.username}} </p>
+            <div class="card-body">
+                <a href="{% url 'profile' post.author.username %}">
+                    @{{post.author.username}}
+                </a>
+            </div>
+        {% endif %}
+    </div>
+{% endfor %}
+```
+
+With this modification, the `username` attribute of the `author` field will only be accessed if the `author` field is not `None`, which should prevent the `NoReverseMatch` error from occurring.

@@ -1,0 +1,25 @@
+The error message `HTTP Error 410: Gone` indicates that the video you are trying to download is no longer available on YouTube. This could be due to various reasons such as the video being removed by the uploader, or the video being age-restricted or blocked in your region.
+
+You can try to download a different video to see if the issue persists. If the issue persists, you can try using a different library such as `pafy` or `youtube_dl` to download YouTube videos. 
+
+Here is an example code using `pafy` library to download a YouTube video:
+
+```python
+import pafy
+
+# ask for the link from user
+link = input("Enter the link of YouTube video you want to download: ")
+
+# create a pafy object
+video = pafy.new(link)
+
+# get the best available stream
+best = video.getbest()
+
+# start the download
+print("Downloading...")
+best.download()
+print("Download completed!!")
+``` 
+
+Make sure to install the `pafy` library using `pip install pafy`.

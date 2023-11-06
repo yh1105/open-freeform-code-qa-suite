@@ -1,0 +1,17 @@
+The error you're encountering is an HTTP 410 error, which means the resource you're trying to access is no longer available at the server's location. In the context of pytube, this usually means that YouTube has changed something on their end that breaks the library.
+
+The pytube library is not officially supported by YouTube, so it's common for it to break when YouTube updates their website. When this happens, the maintainers of pytube have to update the library to work with the new changes.
+
+Here are a few things you can try to fix the issue:
+
+1. **Update pytube to the latest version.** The maintainers of pytube may have already fixed the issue. You can update pytube with pip:
+
+    ```bash
+    pip install pytube --upgrade
+    ```
+
+2. **Try a different library.** If pytube is not working for you, there are other libraries available that can download YouTube videos, such as `youtube_dl`.
+
+3. **Check the pytube GitHub issues.** If you're still having problems, check the [pytube GitHub issues](https://github.com/pytube/pytube/issues) to see if anyone else is having the same problem. You can also report the issue there if it hasn't been reported yet.
+
+Remember that downloading videos from YouTube may violate their terms of service, so make sure you have the necessary permissions before downloading videos.

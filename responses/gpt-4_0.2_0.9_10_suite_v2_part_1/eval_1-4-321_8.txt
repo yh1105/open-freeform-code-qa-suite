@@ -1,0 +1,35 @@
+Here is a function that uses the `strsplit` and `unnest` functions to split the tuples into separate rows. This function first splits the `segment_stemming` column into a list of tuples, then unnests this list into separate rows.
+
+```r
+library(data.table)
+library(stringr)
+library(tidyr)
+
+mySplit <- function(x) {
+  # Split the segment_stemming column into a list of tuples
+  x[, segment_stemming := strsplit(segment_stemming, "\\), \\(")]
+  
+  # Remove the leading and trailing brackets from each list
+  x[, segment_stemming := lapply(segment_stemming, function(y) {
+    y <- str_remove_all(y, "\\[|\\]")
+    y <- str_remove_all(y, "\\(|\\)")
+    y
+  })]
+  
+  # Unnest the list into separate rows
+  x <- x %>% unnest(segment_stemming)
+  
+  # Add the parentheses back to each tuple
+  x[, segment_stemming := paste0("(", segment_stemming, ")")]
+  
+  return(x)
+}
+```
+
+You can use this function on your data table like this:
+
+```r
+x <- mySplit(x)
+```
+
+This will modify `x` in place to have the desired format. Note that this function assumes that the `segment_stemming` column contains strings that are formatted exactly like your example, with tuples separated by `), (` and enclosed in brackets. If the format is different, the function may not work correctly.

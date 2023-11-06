@@ -1,0 +1,38 @@
+You can use the `apply` function to iterate over each column of the data frame and extract the minimum and maximum values along with their corresponding row names. Then, you can use the `table` function to count the frequency of each minimum and maximum value and combine the results into a final data frame.
+
+Here's the implementation of the `myMaxMin` function:
+
+```r
+myMaxMin <- function(cars) {
+  # Extract minimum and maximum values and their row names for each column
+  minmax <- t(apply(cars, 2, function(x) {
+    c(min = min(x), rowname.min = paste(which(x == min(x)), collapse = ","), 
+      max = max(x), rowname.max = paste(which(x == max(x)), collapse = ","))
+  }))
+  
+  # Convert row names to column names and add a column for the variable names
+  minmax_df <- data.frame(colnames = colnames(cars), as.data.frame(minmax))
+  
+  # Count the frequency of each minimum and maximum value
+  min_freq <- as.data.frame(table(minmax_df$min))
+  max_freq <- as.data.frame(table(minmax_df$max))
+  
+  # Rename the frequency column and merge with the main data frame
+  colnames(min_freq)[2] <- "freq.times"
+  colnames(max_freq)[2] <- "freq.times"
+  min_df <- merge(minmax_df, min_freq, by.x = "min", by.y = "Var1", all.x = TRUE)
+  max_df <- merge(minmax_df, max_freq, by.x = "max", by.y = "Var1", all.x = TRUE)
+  
+  # Combine the results into a final data frame
+  result <- rbind(min_df[, c("min", "colnames", "rowname.min", "freq.times")], 
+                  max_df[, c("max", "colnames", "rowname.max", "freq.times")])
+  colnames(result) <- c("value", "column", "rowname", "freq.times")
+  return(result)
+}
+```
+
+You can test the function with the `cars` data frame:
+
+```r
+cars <- data.frame(speed = c(4, 4, 7, 7, 8, 9), dist = c(2, 10, 4, 22, 16, 10))
+myMaxMin(cars

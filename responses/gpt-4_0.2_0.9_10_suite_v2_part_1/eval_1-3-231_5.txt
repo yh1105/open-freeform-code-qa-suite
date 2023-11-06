@@ -1,0 +1,18 @@
+Sure, you can use the `size()` method provided by PyTorch to get the size of each tensor in the list. Here is a function that does this:
+
+```python
+def getSize(t):
+    sizes = [tensor.size() for tensor in t]
+    return sizes
+```
+
+This function iterates over each tensor in the list `t` and appends its size to the `sizes` list. The `size()` method returns a tuple representing the size of the tensor, so the `sizes` list will be a list of tuples.
+
+You can use this function like this:
+
+```python
+sizes = getSize(list_of_tensors)
+print(sizes)
+```
+
+This will print a list of tuples, where each tuple represents the size of a tensor in the list.

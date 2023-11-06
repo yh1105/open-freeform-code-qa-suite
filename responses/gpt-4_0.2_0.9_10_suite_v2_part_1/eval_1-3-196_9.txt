@@ -1,0 +1,25 @@
+You can use the `conda list --size` command to list all packages along with their sizes. However, this feature is only available in conda 4.8.3 and later versions.
+
+Here is an example of how to use it:
+
+```bash
+conda list --size
+```
+
+This will list all the packages in the current environment along with their sizes. The sizes are displayed in human-readable format (Bytes, KB, MB, GB).
+
+If you want to sort the packages by size, you can use the following command:
+
+```bash
+conda list --size --json | jq -r '.[] | "\(.size_in_bytes) \(.name)"' | sort -n
+```
+
+This command uses the `jq` tool to parse the JSON output from `conda list --size --json`, and then sorts the packages by size. Note that you need to have `jq` installed to use this command.
+
+If you don't have `jq` installed, you can use Python to parse the JSON output:
+
+```bash
+conda list --size --json | python -c "import sys, json; print('\n'.join(['{} {}'.format(x['size_in_bytes'], x['name']) for x in json.load(sys.stdin)]))" | sort -n
+```
+
+This command does the same thing as the previous one, but uses Python instead of `jq` to parse the JSON output.

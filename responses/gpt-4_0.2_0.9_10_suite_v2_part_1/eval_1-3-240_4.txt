@@ -1,0 +1,21 @@
+You can use the `merge` function in pandas to merge two data frames and then filter out the common rows. Here is a function that does that:
+
+```python
+import pandas as pd
+
+def getDifference(df1, df2):
+    # Merge the dataframes
+    df = pd.merge(df1, df2, how='outer', indicator=True)
+
+    # Filter out the rows that are only in df1
+    df3 = df[df['_merge'] == 'left_only']
+
+    # Drop the merge indicator column
+    df3 = df3.drop(columns=['_merge'])
+
+    return df3
+```
+
+This function works by merging `df1` and `df2` with an outer join, which includes all rows from both data frames. The `indicator=True` argument adds a column to the result that indicates whether each row comes from `df1` only, `df2` only, or both. Then, the function filters out the rows that come from `df1` only, and drops the indicator column.
+
+Please note that this function assumes that `df1` and `df2` have the same columns. If they don't, you'll need to adjust the function to handle the differences.

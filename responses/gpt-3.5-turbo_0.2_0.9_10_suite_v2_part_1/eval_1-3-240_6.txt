@@ -1,0 +1,20 @@
+You can use the `merge` function in pandas to merge the two data frames and then filter out the rows that are present in both data frames. Here's the code for the `getDifference` function:
+
+```python
+import pandas as pd
+
+def getDifference(df1, df2):
+    merged_df = pd.merge(df1, df2, how='outer', indicator=True)
+    diff_df = merged_df[merged_df['_merge'] == 'left_only'].drop('_merge', axis=1)
+    return diff_df
+```
+
+In this function, we first merge the two data frames using the `merge` function with the `outer` join type and an additional column `_merge` which indicates whether a row is present in both data frames or not. Then we filter out the rows that are only present in `df1` by selecting the rows where `_merge` is equal to `'left_only'`. Finally, we drop the `_merge` column and return the resulting data frame.
+
+You can call this function with your data frames `df1` and `df2` like this:
+
+```python
+df3 = getDifference(df1, df2)
+```
+
+This will give you a new data frame `df3` which contains all the rows/columns in `df1` that are not in `df2`.

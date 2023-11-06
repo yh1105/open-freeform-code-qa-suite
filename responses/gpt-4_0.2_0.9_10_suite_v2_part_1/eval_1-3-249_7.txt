@@ -1,0 +1,24 @@
+Here is a Python function that generates a 16 character code according to your requirements:
+
+```python
+import random
+import string
+
+def generateRandomString():
+    # Generate a list of 16 random characters
+    code = [random.choice(string.ascii_letters) for _ in range(16)]
+    
+    # Replace 3 random positions with digits
+    for i in random.sample(range(16), 3):
+        code[i] = str(random.randint(0, 9))
+    
+    # Insert "NAA3U" at a random position
+    pos = random.randint(0, 11)
+    code[pos:pos+5] = list("NAA3U")
+    
+    return "".join(code)
+```
+
+This function first generates a list of 16 random letters. Then it replaces 3 random positions with digits. Finally, it inserts "NAA3U" at a random position.
+
+Please note that the position of "NAA3U" is randomly chosen from 0 to 11 (inclusive) to ensure that the entire substring can fit into the 16 character code.

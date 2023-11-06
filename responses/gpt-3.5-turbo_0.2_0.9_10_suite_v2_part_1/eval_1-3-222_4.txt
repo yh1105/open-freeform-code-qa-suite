@@ -1,0 +1,17 @@
+Here's the Python code to compute the number of ways to form a string of length n using k characters such that at most two adjacent characters can be same:
+
+```python
+def func(n, k):
+    if n == 1:
+        return k
+    if n == 2:
+        return k * k
+    dp = [0] * (n + 1)
+    dp[1] = k
+    dp[2] = k * k
+    for i in range(3, n + 1):
+        dp[i] = (k - 1) * (dp[i - 1] + dp[i - 2])
+    return dp[n]
+```
+
+The function uses dynamic programming to compute the number of ways to form a string of length n using k characters such that at most two adjacent characters can be same. The base cases are when n is 1 and 2, where the number of ways is simply k and k * k, respectively. For n > 2, the function uses the recurrence relation dp[i] = (k - 1) * (dp[i - 1] + dp[i - 2]), where dp[i] represents the number of ways to form a string of length i. The (k - 1) factor is used to ensure that no more than two adjacent characters are the same. Finally, the function returns dp[n], which is the number of ways to form a string of length n.

@@ -1,0 +1,22 @@
+Yes, you can use the `date_range` function from pandas to generate a range of dates for the given year and then calculate the length of the range to get the total number of days in the year. Here's an example function that does this:
+
+```python
+import pandas as pd
+
+def DaysInYear(year):
+    start_date = pd.to_datetime(f"{year}-01-01")
+    end_date = pd.to_datetime(f"{year}-12-31")
+    days_in_year = len(pd.date_range(start=start_date, end=end_date))
+    return days_in_year
+```
+
+This function takes the year as an argument, creates a start date of January 1st of that year, an end date of December 31st of that year, generates a range of dates between those two dates using `pd.date_range`, and then calculates the length of that range to get the total number of days in the year. 
+
+You can call this function like this:
+
+```python
+days_in_2020 = DaysInYear(2020)
+days_in_2019 = DaysInYear(2019)
+print(days_in_2020) # Output: 366
+print(days_in_2019) # Output: 365
+```

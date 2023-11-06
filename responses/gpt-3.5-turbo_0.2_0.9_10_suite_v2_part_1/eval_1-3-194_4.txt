@@ -1,0 +1,15 @@
+To write a list of lists into an Excel file, we can use the `openpyxl` library. Here's the implementation of the `writeExcel()` function:
+
+```python
+import openpyxl
+
+def writeExcel():
+    new_list = [["first", "second"], ["third", "fourth"]]
+    wb = openpyxl.Workbook()
+    sheet = wb.active
+    for row in new_list:
+        sheet.append(row)
+    wb.save("data.xlsx")
+```
+
+In this function, we first create a new workbook using the `openpyxl.Workbook()` method. We then get the active worksheet using the `active` attribute of the workbook. We iterate over the list of lists and append each row to the worksheet using the `append()` method. Finally, we save the workbook to a file named "data.xlsx" using the `save()` method.

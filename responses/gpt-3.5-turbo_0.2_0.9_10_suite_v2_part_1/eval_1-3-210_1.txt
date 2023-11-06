@@ -1,0 +1,5 @@
+The reason why the access times are different is because the `match` statement in Python is not implemented as a lookup table or a jump table, as it is in other languages like C or Java. Instead, it is implemented as a series of `if`/`elif` statements, where each case is checked in order until a match is found.
+
+In your example, when you call `match_case` with an input of `'0'`, the first case is matched immediately and the function returns `"000"`. However, when you call it with an input of `'7'`, the function has to check each case in order until it reaches the last one, which matches any input that did not match the previous cases. This means that the function takes longer to run when the input is `'7'` than when it is `'0'`.
+
+If you need to have equal access times for each case, you can use a dictionary to map inputs to outputs, as you mentioned. This will give you O(1) lookup time for each case, regardless of the input.

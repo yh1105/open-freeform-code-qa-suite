@@ -1,0 +1,8 @@
+You can use the `conda list --show-channel-urls` command to display the size of each package in your conda environment. Here's how to do it:
+
+1. Open the Anaconda Prompt or your terminal.
+2. Type `conda list --show-channel-urls` and press Enter.
+3. Wait for the command to finish running. This may take a few seconds.
+4. Once the command has finished running, you should see a list of all the packages installed in your conda environment, along with their version numbers, build numbers, and sizes.
+
+The size of each package is listed in the "Size" column, in bytes. You can use this information to identify large packages that you no longer need and delete them to free up space.

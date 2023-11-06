@@ -1,0 +1,23 @@
+To filter the data based on the `TEST_STATUS` column and only keep the rows with `PASS TEST`, you can use the following code:
+
+```python
+pass_test_data = data_useless[data_useless['TEST_STATUS'] == 'PASS TEST']
+```
+
+This will create a new DataFrame called `pass_test_data` that only contains the rows where `TEST_STATUS` is equal to `'PASS TEST'`.
+
+If you want to group this filtered data by `TEST_TYPE`, you can use the following code:
+
+```python
+pass_test_grouped = pass_test_data.groupby('TEST_TYPE').count()
+```
+
+This will group the `pass_test_data` DataFrame by `TEST_TYPE` and count the number of occurrences of each `TEST_TYPE`. The result will be a new DataFrame called `pass_test_grouped`.
+
+If you want to see the data in a similar way to your SQL query, you can use the following code:
+
+```python
+pass_test_grouped = pass_test_data.groupby('TEST_TYPE').agg('count').reset_index()
+```
+
+This will group the `pass_test_data` DataFrame by `TEST_TYPE` and count the number of occurrences of each `TEST_TYPE`. The result will be a new DataFrame called `pass_test_grouped` with columns `TEST_TYPE` and `TEST_STATUS` (which will have the same count values). The `reset_index()` function is used to reset the index of the DataFrame to a default integer index.

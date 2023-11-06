@@ -1,0 +1,18 @@
+If the `"python.linting.jediEnabled": false` line is greyed out, it means that it is being overridden by another setting. 
+
+To fix this, you can try the following steps:
+
+1. Open your VS Code settings by pressing `Ctrl + ,` or by going to `File > Preferences > Settings`.
+2. In the search bar, type `python.linting.enabled` and make sure it is set to `true`.
+3. In the search bar, type `python.languageServer` and make sure it is set to `Pylance`.
+4. In the search bar, type `python.linting.pylintEnabled` and make sure it is set to `true`.
+5. In the search bar, type `python.linting.jediEnabled` and make sure it is set to `false`.
+6. If the above steps do not work, you can try adding the following line to your VS Code `settings.json` file:
+
+```
+"python.jediEnabled": false
+```
+
+7. Save the `settings.json` file and restart VS Code.
+
+If none of these steps work, you can try uninstalling and reinstalling the Python extension for VS Code.

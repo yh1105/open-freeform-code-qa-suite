@@ -1,0 +1,36 @@
+The error message you are getting suggests that the `join_axes` parameter is not supported in the version of Pandas you are using. This parameter was deprecated in Pandas 0.25 and removed in Pandas 1.0.
+
+To solve this problem, you can try upgrading your pandas-profiling package to the latest version. You can do this by running the following command in your terminal or Anaconda prompt:
+
+```
+conda update pandas-profiling
+```
+
+Alternatively, you can try specifying the version of pandas-profiling that is compatible with your version of Pandas. For example, if you are using Pandas 1.0, you can try installing pandas-profiling version 2.8.0, which is compatible with Pandas 1.0. You can do this by running the following command:
+
+```
+conda install pandas-profiling=2.8.0
+```
+
+Once you have upgraded pandas-profiling or installed a compatible version, you can try running your code again:
+
+```python
+import pandas_profiling
+from pandas_profiling import ProfileReport
+
+profile = ProfileReport(data)
+```
+
+or
+
+```python
+profile = pandas_profiling.ProfileReport(data)
+```
+
+If you still encounter issues, you can try updating your Pandas package to the latest version by running the following command:
+
+```
+conda update pandas
+```
+
+This should ensure that you have the latest version of Pandas with all the necessary dependencies.

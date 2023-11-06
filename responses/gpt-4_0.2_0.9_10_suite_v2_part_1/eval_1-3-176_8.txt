@@ -1,0 +1,26 @@
+The error message is indicating that the Pillow library could not be installed because it could not find the headers or library files for zlib, which is a required dependency when compiling Pillow from source.
+
+Here are a few steps you can take to resolve this issue:
+
+1. **Upgrade pip, setuptools, and wheel**: Sometimes, these packages become outdated and cause errors when trying to install other packages. You can upgrade them using the following commands:
+
+```bash
+python -m pip install --upgrade pip
+python -m pip install --upgrade setuptools wheel
+```
+
+2. **Install zlib**: If zlib is not installed on your system, you will need to install it. You can download zlib from the zlib website and follow the instructions provided to install it.
+
+3. **Install Pillow using a precompiled binary**: If you're still having trouble, you can try installing a precompiled binary version of Pillow. This can be done by specifying the version number in the pip install command. For example:
+
+```bash
+pip install pillow==6.2.0
+```
+
+This command will install Pillow version 6.2.0, which is the last version to support Python 3.8.
+
+4. **Use a different Python version**: The error message also mentions that Pillow does not yet support Python 3.8. If possible, you could try using a different Python version. Pillow supports Python 3.6 and 3.7.
+
+5. **Install Microsoft Visual C++ Build Tools**: If you're on Windows, you might need to install Microsoft Visual C++ Build Tools. You can download it from the official Microsoft website.
+
+Remember to restart your PyCharm and/or command prompt after making these changes to ensure they take effect.

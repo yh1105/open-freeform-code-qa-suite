@@ -1,0 +1,39 @@
+The error message is indicating that the `profile` URL pattern is not able to match the argument passed to it. Looking at your `index.html` file, the issue seems to be with the `post.author.username` value being passed as the argument to the `profile` URL.
+
+The error message indicates that the argument passed to the `profile` URL is `('',)`, which means that the `post.author.username` value is empty or None. This could be because the `author` field of the `NewPost` model is set to `null=True`, which means that it is optional and can be left empty.
+
+To fix this issue, you can add a check in your `index.html` file to only display the author's username if it is not None. Here's an updated version of the relevant part of your `index.html` file:
+
+```html
+{% extends "network/layout.html" %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block body %}
+    <div class="form-group">
+        <form method="post" action="{% url 'index' %}">
+            {% csrf_token %}
+            {{form | crispy}}
+            <button class="btn btn-primary"> Post </button>
+        </form>
+    </div>
+
+    {% for post in posts %}
+        <div class="card">
+            <div class="card-body"> Title: {{post.title}} </div>
+            <div class="card-body"> Description: {{post.description}}</div>
+            {% if post.author.username %}
+                <p> {{post.author.username}} </p>
+                <div class="card-body">
+                    <a href="{% url 'profile' post.author.username %}">
+                        @{{post.author.username}}
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+    {% endfor %}
+{% endblock %}
+```
+
+With this change, the author's username and the link to their profile will only be displayed if the `post.author.username` value is not None.

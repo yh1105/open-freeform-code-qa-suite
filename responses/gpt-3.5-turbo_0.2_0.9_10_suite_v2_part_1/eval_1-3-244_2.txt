@@ -1,0 +1,10 @@
+Yes, it is possible to print with RGB colored background. Here's the modified function:
+
+```python
+def colored(background_r, background_g, background_b, text):
+    return "\033[48;2;{};{};{}m{}\033[0m".format(background_r, background_g, background_b, text)
+```
+
+This function takes in the RGB values for the background color and the text to be printed. It then returns a string with the appropriate escape codes to set the background color and print the text. The `"\033[0m"` at the end resets the color to the default after the text is printed. 
+
+Note that this will only work in terminals that support RGB colors.

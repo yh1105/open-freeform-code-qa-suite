@@ -1,0 +1,40 @@
+Yes, you can use the `data.table` function `merge()` to join the two tables and then replace the corresponding values. Here's the `myReplace()` function that you can use:
+
+```r
+myReplace <- function(big, new_big) {
+  # Join the two tables based on the 'id' column
+  merged <- merge(big, new_big, by = "id", all.x = TRUE)
+  
+  # Replace the values in 'col' column with the values from 'new_big'
+  merged[!is.na(col.y), col := col.y]
+  
+  # Remove the 'col.y' column
+  merged[, col.y := NULL]
+  
+  # Return the updated table
+  return(merged)
+}
+```
+
+You can call this function with your example tables as follows:
+
+```r
+result <- myReplace(big, new_big)
+print(result)
+```
+
+This will give you the desired output:
+
+```
+    id col
+ 1:  B   1
+ 2:  C 103
+ 3:  D 102
+ 4:  E  11
+ 5:  F 104
+ 6:  G 111
+ 7:  H 104
+ 8:  I 104
+ 9:  J 104
+10:  K 103
+```

@@ -1,0 +1,19 @@
+It seems like you are trying to disable Jedi in Visual Studio Code. The setting you are trying to change is not for linting but for IntelliSense.
+
+To disable Jedi, you should use the following setting:
+
+```json
+"python.jediEnabled": false
+```
+
+If you want to use Pylint for linting, you should also make sure that you have the following setting:
+
+```json
+"python.linting.pylintEnabled": true
+```
+
+If you still see error messages from Jedi, it might be because of some other extension that is using Jedi. You can try to disable other Python related extensions to see if that helps.
+
+Also, make sure that you have the correct Python interpreter selected for your workspace. You can change the interpreter by clicking on the Python version in the bottom left corner of the status bar.
+
+If none of the above helps, you can try to reinstall the Python extension for Visual Studio Code.

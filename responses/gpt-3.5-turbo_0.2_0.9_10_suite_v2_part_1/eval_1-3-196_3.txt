@@ -1,0 +1,12 @@
+You can use the `conda list --show-channel-urls` command to display the size of each package in your conda environment. 
+
+Here's how to do it:
+
+1. Open the Anaconda Prompt or your terminal.
+2. Type `conda list --show-channel-urls` and press Enter.
+3. Wait for the list of packages to be displayed.
+4. Look for the `size` column in the output. This column shows the size of each package in bytes.
+
+You can sort the packages by size by adding the `--reverse-sort` option to the command. This will display the largest packages at the top of the list.
+
+For example, the command `conda list --show-channel-urls --reverse-sort` will display the packages sorted by size, with the largest packages at the top of the list.

@@ -1,0 +1,23 @@
+Unfortunately, Conda does not provide a built-in command to directly display the size of installed packages. However, you can use the `conda-pack` tool to get the size of a specific package.
+
+Here is a workaround to get the size of all installed packages:
+
+1. Install `conda-pack` if you haven't installed it yet. You can install it using the following command:
+
+```markdown
+conda install -c conda-forge conda-pack
+```
+
+2. Use the following command to get the size of a specific package:
+
+```markdown
+conda pack -n <your_env_name> -p <path_to_package> --output temp.tar.gz
+```
+
+Replace `<your_env_name>` with the name of your environment and `<path_to_package>` with the path to the package you want to check the size of. This will create a `temp.tar.gz` file.
+
+3. Check the size of the `temp.tar.gz` file. This will give you an approximation of the size of the package.
+
+Please note that this is a workaround and the size might not be 100% accurate. It's also a bit cumbersome if you want to check the size of many packages.
+
+For a more convenient way, you might want to consider using a disk usage statistics viewer like WinDirStat (for Windows) to visually see the size of the packages in the Conda package directory.

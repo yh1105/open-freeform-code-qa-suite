@@ -1,0 +1,24 @@
+The error message is indicating that there is an issue with the argument being passed to the `profile` URL in your `index.html` file. Specifically, it is saying that the argument being passed is an empty string, which is causing the URL pattern to not match.
+
+The issue is likely with the `post.author.username` attribute in the `a` tag. It is possible that some of the `NewPost` objects in your database do not have an author associated with them, which would result in an empty string being passed as the argument to the `profile` URL.
+
+To fix this, you can add a check to ensure that the `post.author` attribute is not `None` before trying to access its `username` attribute. Here is an updated version of the relevant section of your `index.html` file:
+
+```html
+{% for post in posts %}
+    <div class="card">
+        <div class="card-body"> Title: {{post.title}} </div>
+        <div class="card-body"> Description: {{post.description}}</div>
+        {% if post.author %}
+            <p> {{post.author.username}} </p>
+            <div class="card-body">
+                <a href="{% url 'profile' post.author.username %}">
+                    @{{post.author.username}}
+                </a>
+            </div>
+        {% endif %}
+    </div>
+{% endfor %}
+```
+
+This will only display the author's username and link to their profile if the `post.author` attribute is not `None`.

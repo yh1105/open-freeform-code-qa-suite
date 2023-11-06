@@ -1,0 +1,19 @@
+Here is a function that uses the `strsplit` function to split the `segment_stemming` column by comma and parenthesis, and then uses the `unnest` function from the `tidyverse` package to expand the list column into multiple rows.
+
+```r
+library(tidyverse)
+
+mySplit <- function(x) {
+  x %>%
+    mutate(segment_stemming = strsplit(segment_stemming, "\\), \\(")) %>%
+    unnest(segment_stemming) %>%
+    mutate(segment_stemming = gsub("\\[\\('", "", segment_stemming),
+           segment_stemming = gsub("'\\), \\('", "", segment_stemming),
+           segment_stemming = gsub("'\\)\\]", "", segment_stemming),
+           segment_stemming = paste0("(", segment_stemming, ")"))
+}
+```
+
+This function first splits the `segment_stemming` column into a list of strings, then unnests this list into multiple rows. After that, it removes the unnecessary characters from the `segment_stemming` column and adds the parenthesis back to the beginning and end of each string.
+
+Please note that this function assumes that the `segment_stemming` column contains strings that are formatted exactly like in your example. If the format of the strings in this column is different, the function might not work correctly.

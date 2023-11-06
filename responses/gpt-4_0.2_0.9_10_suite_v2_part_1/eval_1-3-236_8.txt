@@ -1,0 +1,20 @@
+The `"python.linting.jediEnabled": false` setting is for disabling Jedi as an IntelliSense engine, not as a linter. 
+
+If you're using Visual Studio Code, you can disable Jedi as a linter by following these steps:
+
+1. Open the Command Palette (Ctrl+Shift+P).
+2. Type "Preferences: Open Settings (JSON)" and select it.
+3. In the settings.json file, add the following lines:
+
+```json
+"python.linting.pylintEnabled": true,
+"python.linting.enabled": true,
+"python.jediEnabled": false,
+"python.languageServer": "Pylance",
+```
+
+This will enable Pylint as your linter, disable Jedi, and set Pylance as your language server.
+
+After you've made these changes, you should restart VS Code to make sure the changes take effect.
+
+If you're still having issues, it's possible that you have a workspace or folder setting that is overriding your user setting. You can check this by opening the settings for your workspace or folder and making sure that the same settings are applied there.

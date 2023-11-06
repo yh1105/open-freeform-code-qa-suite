@@ -1,0 +1,21 @@
+The error message `ImportError: DLL load failed while importing _psycopg: The operating system cannot run %1.` indicates that there is a problem with the psycopg2 library that you installed. This error is usually caused by a missing or incompatible library.
+
+Here are a few things you can try to solve this issue:
+
+1. **Reinstall psycopg2-binary:** The psycopg2-binary package is a stand-alone package that includes its own PostgreSQL binary libraries. You can install it using pip:
+
+    ```bash
+    conda activate wr
+    pip uninstall psycopg2
+    pip install psycopg2-binary
+    ```
+
+2. **Check your Python version:** Make sure that the Python version you are using is compatible with the psycopg2 library. You can check your Python version by running `python --version` in your command line.
+
+3. **Check your PostgreSQL version:** Make sure that the PostgreSQL version you are using is compatible with the psycopg2 library. You can check your PostgreSQL version by running `psql --version` in your command line.
+
+4. **Check your system's PATH:** Make sure that the path to the PostgreSQL binary is in your system's PATH. You can check your system's PATH by running `echo %PATH%` in your command line.
+
+5. **Reinstall Anaconda:** There might be an issue with your Anaconda installation. Try reinstalling Anaconda and then reinstalling the psycopg2 library.
+
+If none of these solutions work, you might want to consider using a different PostgreSQL library, such as `pg8000` or `sqlalchemy`.

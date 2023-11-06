@@ -258,7 +258,7 @@ def preprocess(generations: List[str], lang: str) -> List[str]:
             code_idendifier_lines = [no for no, text in enumerate(lines) if text.startswith("```")]
             longest_lines = 0
             longest_lines_idx = 0
-            for i in range(0, len(code_idendifier_lines), 2):
+            for i in range(0, len(code_idendifier_lines)-1, 2):
                 if code_idendifier_lines[i+1] - code_idendifier_lines[i] > longest_lines:
                     longest_lines = code_idendifier_lines[i+1] - code_idendifier_lines[i]
                     longest_lines_idx = i

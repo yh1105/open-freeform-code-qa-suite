@@ -1,0 +1,3 @@
+The error message `HTTP Error 410: Gone` indicates that the video you are trying to download is no longer available on YouTube. This could be due to various reasons such as the video being removed by the user or YouTube, or the video being age-restricted or blocked in your region.
+
+You can try downloading a different video to see if the issue persists. If the issue persists, you can try using a VPN to change your region and see if that helps. If none of these solutions work, it is possible that the issue is with the pytube library itself and you may need to wait for an update or switch to a different library for downloading YouTube videos.

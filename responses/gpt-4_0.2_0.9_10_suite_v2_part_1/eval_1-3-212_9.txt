@@ -1,0 +1,21 @@
+```python
+from __future__ import annotations
+from typing import TypeVar, Type
+
+T = TypeVar('T', bound='M')
+
+class M:
+    def set_width(self: T, width: int) -> T:
+        self.width = width
+        return self
+
+    def set_height(self: T, height: int) -> T:
+        self.height = height
+        return self
+
+class M3D(M):
+    def set_depth(self: 'M3D', depth: int) -> 'M3D':
+        self.depth = depth
+        return self
+```
+In this code, we use Python's `TypeVar` to create a type variable `T` that is bound to the class `M`. This means that `T` can be any subclass of `M`. We then use this type variable as the type of `self` in the `set_width` and `set_height` methods. This tells mypy that the type of `self` is the same as the type of the instance that called the method, which allows method chaining to work correctly in subclasses.

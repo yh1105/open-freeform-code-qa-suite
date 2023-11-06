@@ -1,0 +1,19 @@
+The error message you are receiving suggests that there is an issue with the `concat()` function in Pandas. This is likely due to a version incompatibility between Pandas and pandas-profiling.
+
+One solution is to downgrade Pandas to a version that is compatible with pandas-profiling. You can try running the following command in your Anaconda prompt:
+
+```
+conda install pandas=0.25.3
+```
+
+This will install Pandas version 0.25.3, which is known to be compatible with pandas-profiling.
+
+Alternatively, you can try updating pandas-profiling to the latest version by running:
+
+```
+pip install pandas-profiling[notebook]
+```
+
+This will install the latest version of pandas-profiling along with the necessary dependencies for Jupyter Notebook.
+
+Once you have made the necessary changes, try running your code again and see if the issue has been resolved.

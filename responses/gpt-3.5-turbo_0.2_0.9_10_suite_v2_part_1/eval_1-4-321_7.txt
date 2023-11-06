@@ -1,0 +1,41 @@
+You can use the `tstrsplit` function from the `data.table` package to split the `segment_stemming` column into two separate columns, one for the word and one for the part of speech. Then, you can use the `melt` function from the `reshape2` package to convert the columns into rows.
+
+Here's the code for the `mySplit` function:
+
+```r
+library(data.table)
+library(reshape2)
+
+mySplit <- function(x) {
+  # Split the segment_stemming column into word and part of speech
+  x[, c("word", "pos") := tstrsplit(segment_stemming, ",\\s*\\(", perl = TRUE)]
+  x[, c("word", "pos") := tstrsplit(word, "\\('", perl = TRUE)]
+  x[, pos := gsub("\\)", "", pos)]
+  
+  # Melt the data table to convert columns to rows
+  x <- melt(x, id.vars = "id", measure.vars = c("word", "pos"))
+  x[, variable := NULL]
+  
+  # Return the result
+  return(x)
+}
+```
+
+You can call the function like this:
+
+```r
+result <- mySplit(x)
+print(result)
+```
+
+This will output:
+
+```
+   id               value
+1:  A    'Brownie', 'Noun'
+2:  B 'Dung-caroon-gye', 'Noun'
+3:  A         'From', 'Josa'
+4:  B            'in', 'Josa'
+5:  A            'Pi', 'Noun'
+6:  B    'innovation', 'Noun'
+```

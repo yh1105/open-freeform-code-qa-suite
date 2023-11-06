@@ -1,0 +1,19 @@
+You can use the `loc` method of the DataFrame to filter the rows where `instrument_token` column matches the `matchedString` and then extract the value of `tradingsymbol` column from the resulting row.
+
+Here's the Python code for the `extractCellValue` function:
+
+```python
+def extractCellValue(df, matchedString):
+    row = df.loc[df['instrument_token'] == matchedString]
+    cellValue = row['tradingsymbol'].values[0]
+    return cellValue
+```
+
+You can call this function by passing your DataFrame and the matched string as arguments:
+
+```python
+cellValue = extractCellValue(df, '123')
+print(cellValue)
+```
+
+This will output the `tradingsymbol` value for the row where `instrument_token` is `123`.

@@ -1,0 +1,42 @@
+The error message `ModuleNotFoundError: No module named 'app'` is indicating that Python cannot find the module named 'app'. This is likely due to the way your Dockerfile is set up.
+
+Here is a revised version of your Dockerfile:
+
+```Dockerfile
+# Use an official Python runtime as a parent image
+FROM python:3.8
+
+# Set the working directory in the container to /app
+WORKDIR /app
+
+# Add the current directory contents into the container at /app
+ADD . /app
+
+# Install any needed packages specified in requirements.txt
+COPY requirements.txt /app
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Make port 8000 available to the world outside this container
+EXPOSE 8000
+
+# Run the command to start uVicorn server
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+```
+
+This Dockerfile starts with the Python 3.8 image, sets the working directory to `/app`, and then adds the current directory into the container at `/app`. It then copies the `requirements.txt` file into the container at `/app` and installs any necessary packages using `pip`. It exposes port 8000 and then starts the uVicorn server.
+
+Also, make sure your `docker-compose.yml` file is correctly set up. Here is an example:
+
+```yaml
+version: '3'
+services:
+  web:
+    build: .
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    volumes:
+      - .:/app
+    ports:
+      - 8000:8000
+```
+
+This `docker-compose.yml` file sets up a single service, `web`, builds the Dockerfile in the current directory, and runs the command to start the uVicorn server. It also maps the current directory on the host to `/app` in the container and exposes port 8000.

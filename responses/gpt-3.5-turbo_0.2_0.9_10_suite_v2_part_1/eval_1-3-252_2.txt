@@ -1,0 +1,14 @@
+You can use the `groupby` method to group the DataFrame by column A, and then use the `idxmin` method to get the index of the minimum value in column B for each group. Finally, you can use the `loc` method to select the rows with those indices.
+
+Here's the code for the `getMin` function:
+
+```python
+def getMin(df):
+    idx = df.groupby(['A'])['B'].idxmin()
+    result = df.loc[idx]
+    return result
+```
+
+This function first groups the DataFrame by column A using the `groupby` method, and then applies the `idxmin` method to column B to get the index of the minimum value for each group. The resulting `idx` variable is a Pandas Series object with the group names as the index and the index of the minimum value as the value.
+
+The function then uses the `loc` method to select the rows with those indices from the original DataFrame, and returns the resulting DataFrame as the result.

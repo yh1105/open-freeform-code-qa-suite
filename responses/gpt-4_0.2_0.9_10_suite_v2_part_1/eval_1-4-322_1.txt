@@ -1,0 +1,20 @@
+You can use the `split` function in R to achieve this. The `split` function divides the data into subsets based on the levels of a factor. Here is how you can do it:
+
+```r
+library(tidyverse)
+
+myConvert <- function(my_data) {
+  # Split the 'list_values' column based on the 'list_names' column
+  my_list <- split(my_data$list_values, my_data$list_names)
+  
+  # Return the list
+  return(my_list)
+}
+
+my_data <- tibble(list_names = c("Ford", "Chevy", "Ford", "Dodge", "Dodge", "Ford"),
+                  list_values = c("Ranger", "Equinox", "F150", "Caravan", "Ram", "Explorer"))
+
+myConvert(my_data)
+```
+
+This will return a list where the names of the list elements are the unique values of the 'list_names' column and the list elements are all the values of the 'list_values' column.

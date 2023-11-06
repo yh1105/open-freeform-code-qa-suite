@@ -1,0 +1,23 @@
+You can use the `conda list --size` command to display the size of each installed package. This command will list all the packages installed in the current environment along with their sizes.
+
+Here is an example of how to use it:
+
+```bash
+conda list --size
+```
+
+This will output a list of all installed packages, their versions, and their sizes. The sizes are displayed in human-readable format (Bytes, KB, MB, GB).
+
+Please note that this feature is available in conda 4.6.0 and later. If you're using an older version of conda, you might need to upgrade it to use this feature. You can upgrade conda using the following command:
+
+```bash
+conda update conda
+```
+
+After running the `conda list --size` command, you can identify the packages that are taking up a lot of space and that you don't use often. You can then remove these packages using the `conda remove` command. Here is an example:
+
+```bash
+conda remove package-name
+```
+
+Replace `package-name` with the name of the package you want to remove.

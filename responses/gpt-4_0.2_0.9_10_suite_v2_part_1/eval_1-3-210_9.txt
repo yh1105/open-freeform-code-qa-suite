@@ -1,0 +1,7 @@
+The `match/case` statement in Python 3.10 is not implemented as a lookup table or hash map, but rather as a linear sequence of comparisons. This is why the time taken increases with the position of the case in the sequence.
+
+When the `match` statement is executed, Python checks each `case` one by one, from top to bottom. If the `match` expression matches a `case` pattern, Python executes the code block for that `case` and then exits the `match` statement. If no `case` patterns are matched, Python executes the code block for the `case _:` (which is a catch-all case).
+
+This means that the time complexity of a `match` statement is O(n), where n is the number of `case` statements. The first `case` statement is checked immediately, but the last `case` statement isn't checked until all the previous ones have been checked and didn't match. This is why the time taken increases with the position of the `case` in the sequence.
+
+In contrast, a lookup table or hash map has a time complexity of O(1), which means the time taken is constant regardless of the number of elements. However, Python's `match/case` statement is not implemented this way, because it's designed to be more flexible and powerful than a simple lookup table. It can match complex patterns, not just simple values, and these patterns can include variables, attributes, sequences, and even nested patterns.

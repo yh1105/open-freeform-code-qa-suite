@@ -1,0 +1,42 @@
+Sure, I can help you with that. Here's a function that should do what you're asking for:
+
+```python
+import openpyxl
+
+def filterExcelRows(filePath, matchedString):
+    # Load the workbook
+    wb = openpyxl.load_workbook(filePath)
+
+    # Select the sheet
+    sheet = wb['Sheet1']
+
+    # Find all cells that contain the matched string
+    matchedCells = sheet.findall(matchedString)
+
+    # Create a list to store the row indexes
+    rowIndexes = []
+
+    # Loop through the matched cells and add their row indexes to the list
+    for cell in matchedCells:
+        rowIndexes.append(cell.row)
+
+    # Remove duplicates from the list
+    rowIndexes = list(set(rowIndexes))
+
+    # Create a dictionary to store the cell values
+    cellValues = {}
+
+    # Loop through the rows and store the cell values in the dictionary
+    for rowIndex in rowIndexes:
+        for cell in sheet[rowIndex]:
+            cellValues[cell.column_letter + str(rowIndex)] = cell.value
+
+    # Return the dictionary of cell values
+    return cellValues
+```
+
+This function first loads the Excel workbook and selects the `Sheet1` sheet. It then uses the `findall` method to find all cells that contain the `matchedString`. It loops through these cells and adds their row indexes to a list, removing duplicates.
+
+Next, it creates a dictionary to store the cell values. It loops through the row indexes and the cells in each row, storing the cell values in the dictionary with the cell's column letter and row number as the key.
+
+Finally, it returns the dictionary of cell values. You can modify this function to return only the row indexes if that's all you need.

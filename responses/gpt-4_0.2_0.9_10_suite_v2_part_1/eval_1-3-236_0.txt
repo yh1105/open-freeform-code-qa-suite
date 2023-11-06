@@ -1,0 +1,21 @@
+It seems like you're trying to disable Jedi in Visual Studio Code. The setting you're trying to change is not for linting but for IntelliSense. 
+
+If you want to disable Jedi for IntelliSense, you should use the following setting:
+
+```json
+"python.jediEnabled": false
+```
+
+If you want to set Pylint as your linter, you should use the following setting:
+
+```json
+"python.linting.pylintEnabled": true
+```
+
+And if you want to disable all other linters, you should set their enabled setting to false. For example, if you want to disable flake8, you should use the following setting:
+
+```json
+"python.linting.flake8Enabled": false
+```
+
+Remember to reload your VS Code after changing these settings.

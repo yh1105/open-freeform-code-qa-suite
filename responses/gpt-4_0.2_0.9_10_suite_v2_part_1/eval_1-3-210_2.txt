@@ -1,0 +1,7 @@
+The `match/case` statement in Python is not implemented as a hash table or lookup table, but rather it works more like a series of `if/elif` statements. This means that Python will evaluate each case in order until it finds a match. This is why the time it takes to find a match increases with the position of the case: Python has to evaluate more cases before it finds the right one.
+
+In your example, the case for '0' is evaluated first, so it's the fastest. The case for '7' is evaluated last (among the numeric cases), so it's the slowest. The case for any other input would be even slower, because Python would have to evaluate all the numeric cases and the catch-all case before returning "NA".
+
+This is different from how some other languages implement switch/case statements. For example, in C, a switch/case statement can be implemented as a jump table, which allows for constant-time access to each case. However, this is only possible because C's switch/case statement is much more limited than Python's match/case statement: it only works with integers, and it doesn't support patterns or guards.
+
+Python's match/case statement is much more powerful, but this power comes at the cost of performance. However, in most cases, the difference in performance is negligible. If you need to optimize this kind of code, you might want to consider using a dictionary or an array instead.

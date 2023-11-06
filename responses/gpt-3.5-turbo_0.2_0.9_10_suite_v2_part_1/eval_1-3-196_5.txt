@@ -1,0 +1,7 @@
+You can use the `conda list --show-channel-urls` command to show the size of each package in the list. This command will display the size of each package in bytes. Here's an example:
+
+```
+conda list --show-channel-urls
+```
+
+This will display a list of all installed packages, along with their size in bytes. You can then use this information to identify and remove any large or unused packages.

@@ -1,0 +1,7 @@
+The "f" in `print(f"...")` indicates an f-string, which is a way to format strings in Python 3.6 and above. 
+
+An f-string is a string literal that is prefixed with the letter "f" or "F". It contains expressions inside curly braces `{}` that are evaluated at runtime and replaced with their values. 
+
+In your example, the expressions inside the curly braces `{}` are `args.input_directory` and `args.output_directory`. These expressions are evaluated and their values are inserted into the string at runtime. 
+
+So, the output of the `print` statements will be strings that include the values of `args.input_directory` and `args.output_directory`.

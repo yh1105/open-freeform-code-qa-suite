@@ -1,0 +1,13 @@
+You can use regular expressions to remove the special characters from the end of each row in the "LGA" column of the pandas DataFrame. Here's a function `remove` that does this:
+
+```python
+import re
+
+def remove(df):
+    df["LGA"] = df["LGA"].apply(lambda x: re.sub(r"\s*\([^)]*\)", "", x))
+    return df
+```
+
+Here, we use the `apply` method of the pandas DataFrame to apply a lambda function to each element of the "LGA" column. The lambda function uses the `re.sub` method to remove any substring that matches the regular expression `\s*\([^)]*\)`, which matches any sequence of whitespace characters followed by a left parenthesis, followed by any sequence of characters that are not a right parenthesis, followed by a right parenthesis. This effectively removes any substring that is enclosed in parentheses, along with any whitespace characters that precede it.
+
+Finally, we return the modified DataFrame.

@@ -1,0 +1,20 @@
+The `_io.BytesIO` object is a stream of bytes in memory. To convert it to a bytes-like object, you need to read from the stream. You can do this using the `read()` method. Here's how you can modify your function:
+
+```python
+def uncompress_body(self, compression_type, body):
+    # If body is a BytesIO object, read it into a bytes object
+    if isinstance(body, io.BytesIO):
+        body = body.read()
+
+    if compression_type == 'gzip' or compression_type == 'compress':
+        return zlib.decompress(body)
+    elif compression_type == 'deflate':
+        compressor = zlib.compressobj(9, zlib.DEFLATED, -zlib.MAX_WBITS)
+        compressed = compressor.compress(body)
+        compressed += compressor.flush()
+        return base64.b64encode(compressed)
+
+    return body
+```
+
+This will read the entire stream into a bytes object, which can then be passed to `zlib.decompress()`.

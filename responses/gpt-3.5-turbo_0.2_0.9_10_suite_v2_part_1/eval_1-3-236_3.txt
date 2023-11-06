@@ -1,0 +1,9 @@
+If the `"python.linting.jediEnabled": false` line is greyed out, it means that it is being overridden by another setting. To find out which setting is overriding it, you can follow these steps:
+
+1. Open the Command Palette by pressing `Ctrl+Shift+P` (Windows, Linux) or `Cmd+Shift+P` (macOS).
+2. Type "Preferences: Open User Settings" and select it.
+3. In the search bar at the top, type "jediEnabled".
+4. Look for any settings that have "jediEnabled" set to true. These settings could be in the "User" or "Workspace" sections.
+5. Change the value of any settings that have "jediEnabled" set to true to false.
+
+Once you have made these changes, save the settings file and restart Visual Studio Code. This should disable Jedi and prevent it from interfering with Pylint.

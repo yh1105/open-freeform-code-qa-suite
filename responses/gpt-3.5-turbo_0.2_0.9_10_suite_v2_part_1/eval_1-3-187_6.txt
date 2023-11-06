@@ -1,0 +1,30 @@
+You can achieve this by iterating over the first `n` elements of `b` (where `n` is the length of `rest`) and replacing them with the corresponding elements from `rest`. Then, you can iterate over `last` and replace any element that matches an element in `b` with the corresponding element from `rest`.
+
+Here's the implementation of the `ReplaceElementsByIndex` function:
+
+```python
+def ReplaceElementsByIndex(rest, b, last):
+    # Replace the first n elements of b with the elements from rest
+    n = len(rest)
+    for i in range(n):
+        b[i] = rest[i]
+    
+    # Replace the elements in last according to the matches with b
+    for i in range(len(last)):
+        if last[i] in b:
+            index = b.index(last[i])
+            last[i] = rest[index]
+    
+    return last
+```
+
+You can call this function with your example lists like this:
+
+```python
+rest = [5, 7, 11, 4]
+b = [21, 22, 33, 31, 23, 15, 19, 13, 6]
+last = [33, 19, 40, 21, 31, 22, 6, 15, 13, 23]
+
+result = ReplaceElementsByIndex(rest, b, last)
+print(result)  # Output: [11, 19, 40, 5, 4, 7, 6, 15, 13, 23]
+```

@@ -1,0 +1,17 @@
+It seems like you've done the right steps to disable Jedi. However, if you're still seeing error messages from Jedi, it might be because of the Python Language Server or the Python extension itself.
+
+Here are a few things you can try:
+
+1. **Disable Python Language Server**: The Python Language Server might be using Jedi in the background. You can disable it by adding the following line to your `settings.json` file:
+
+    ```json
+    "python.languageServer": "None"
+    ```
+
+2. **Disable Python Extension**: If the problem persists, try disabling the Python extension altogether to see if the error messages stop. If they do, it's likely that the extension is causing the problem. You can disable it by going to the Extensions view (`Ctrl+Shift+X`), finding the Python extension, and clicking on the disable button.
+
+3. **Check for other Python-related extensions**: If you have other Python-related extensions installed, they might be causing the problem. Try disabling them one by one to see if the error messages stop.
+
+4. **Reinstall Python Extension**: If none of the above steps work, try uninstalling and reinstalling the Python extension. This will reset all its settings to their defaults.
+
+Remember to restart Visual Studio Code after making these changes to ensure they take effect.

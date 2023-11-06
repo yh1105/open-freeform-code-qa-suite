@@ -1,0 +1,24 @@
+You can achieve this by using the `split` function in R, which splits a vector into groups determined by a factor level. Here is the function you requested:
+
+```r
+library(tidyverse)
+
+myConvert <- function(my_data) {
+  my_data %>%
+    split(.$list_names) %>%
+    map(~.$list_values)
+}
+```
+
+In this function, we first split the `my_data` tibble by the `list_names` column. This creates a list of tibbles, each named by the unique values in `list_names`. Then, we use `map` to extract the `list_values` from each tibble, resulting in a named list of character vectors.
+
+You can test this function with your example data:
+
+```r
+my_data <- tibble(list_names = c("Ford", "Chevy", "Ford", "Dodge", "Dodge", "Ford"),
+                  list_values = c("Ranger", "Equinox", "F150", "Caravan", "Ram", "Explorer"))
+
+myConvert(my_data)
+```
+
+This should give you the desired output.

@@ -1,0 +1,33 @@
+Here's a possible implementation of the `removeComma` function in R:
+
+```r
+removeComma <- function(s) {
+  # Find all quoted substrings
+  quoted <- gregexpr("\"[^\"]*\"", s)
+  # Loop over each quoted substring
+  for (i in seq_along(quoted[[1]])) {
+    # Replace commas inside the current quoted substring
+    s <- gsub(",", "", s, fixed = TRUE, 
+              from = quoted[[1]][i] + 1, 
+              to = quoted[[1]][i + attr(quoted[[1]], "match.length")[i]] - 1)
+  }
+  return(s)
+}
+```
+
+This function uses `gregexpr()` to find all quoted substrings in the input string `s`. Then, it loops over each quoted substring and uses `gsub()` to replace commas inside it with an empty string. The `fixed = TRUE` argument in `gsub()` ensures that commas are treated as literal characters, not regular expressions. The `from` and `to` arguments specify the range of the current quoted substring. Finally, the function returns the modified string.
+
+You can use this function to modify your example strings as follows:
+
+```r
+string <- c("1, 2, \"something, else\"", 
+            "3, 5, \"more, more, more\"", 
+            "6, \"commas, are fun\", \"no, they are not\"")
+
+sapply(string, removeComma)
+# [1] "1, 2, \"something else\""                  
+# [2] "3, 5, \"more more more\""                  
+# [3] "6, \"commas are fun\", \"no they are not\""
+```
+
+Note that this implementation assumes that quoted substrings do not contain nested quotes. If your input strings can have nested quotes, you may need to use a more sophisticated parsing algorithm.

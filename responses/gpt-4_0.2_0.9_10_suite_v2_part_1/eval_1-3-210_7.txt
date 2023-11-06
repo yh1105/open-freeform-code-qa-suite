@@ -1,0 +1,7 @@
+The `match/case` statement in Python 3.10+ is not implemented as a hash table or lookup table, but rather as a sequence of checks. This means that the time complexity of a `match/case` statement is O(n), where n is the number of `case` clauses. The Python interpreter checks each `case` clause in order, from top to bottom, until it finds a match.
+
+In your example, the `match_case` function has 8 `case` clauses. When you call `match_case('0')`, the interpreter only needs to check the first `case` clause to find a match, so it's very fast. But when you call `match_case('7')`, the interpreter needs to check all 8 `case` clauses to find a match, so it's slower.
+
+This is different from a dictionary, which has a time complexity of O(1) for lookups, because it uses a hash table internally. In a dictionary, the keys are hashed to compute an index into an array, and the corresponding value can be retrieved directly, regardless of the size of the dictionary.
+
+So, the reason why the access times are different in your example is because of the way the `match/case` statement is implemented in Python. It's not because of any optimization or lack thereof, but simply because of the fundamental difference between sequential checks and hash table lookups.

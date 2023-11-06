@@ -1,0 +1,30 @@
+Here's the Python code for the `extractCellValue` function that you can use:
+
+```python
+def extractCellValue(df, matchedString):
+    row = df.loc[df['instrument_token'] == matchedString]
+    cellValue = row['tradingsymbol'].values[0]
+    return cellValue
+```
+
+You can call this function by passing your DataFrame and the string you want to match as arguments. For example:
+
+```python
+df = pd.DataFrame({'instrument_token': [123, 555, 34, 189],
+                   'tradingsymbol': ['xyz', 'aaa', 'rst', 'op'],
+                   'lot_size': [1000, 200, 2400, 780]})
+
+matchedString = 123
+
+result = extractCellValue(df, matchedString)
+
+print(result)
+```
+
+This will output:
+
+```
+xyz
+```
+
+Note that this assumes that there is only one row in the DataFrame that matches the `instrument_token` value you're searching for. If there are multiple rows with the same value, this function will only return the `tradingsymbol` value from the first matching row.

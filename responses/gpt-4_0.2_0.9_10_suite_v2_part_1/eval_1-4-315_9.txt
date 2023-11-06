@@ -1,0 +1,50 @@
+Here is a function `concat` that does what you want:
+
+```r
+concat <- function(df) {
+  # Create a new data frame with the first column
+  new_df <- data.frame(X1 = df$X1)
+  
+  # Loop over the columns in pairs
+  for (i in seq(2, ncol(df), by = 2)) {
+    # Concatenate the pair of columns and add it to the new data frame
+    new_df <- cbind(new_df, paste0(df[,i], df[,i+1]))
+  }
+  
+  # Rename the columns of the new data frame
+  colnames(new_df) <- c("X1", "X2", "X3", "X4")
+  
+  return(new_df)
+}
+```
+
+This function works by first creating a new data frame with the first column of the input data frame. Then it loops over the columns of the input data frame in pairs, concatenating each pair of columns and adding the result to the new data frame. Finally, it renames the columns of the new data frame to match your desired output.
+
+You can use this function like this:
+
+```r
+# Your input data frame
+df <- data.frame(X1 = c("p1", "p2", "p3", "p4"),
+                 X2 = c("H", "H", "J", "K"),
+                 X3 = c("I", "K", "K", "I"),
+                 X4 = c("K", "J", "H", "H"),
+                 X5 = c("J", "K", "I", "J"),
+                 X6 = c("K", "I", "J", "I"),
+                 X7 = c("H", "J", "K", "J"))
+
+# Use the function
+new_df <- concat(df)
+
+# Print the new data frame
+print(new_df)
+```
+
+This will print:
+
+```r
+  X1 X2 X3 X4
+1 p1 HI KJ KH
+2 p2 HK JK IJ
+3 p3 JK HI JK
+4 p4 KI HJ IJ
+```

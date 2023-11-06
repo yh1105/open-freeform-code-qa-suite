@@ -1,0 +1,7 @@
+The reason why the access times are different is because the `match` statement in Python is not implemented as a lookup table. Instead, it is implemented as a series of if-else statements. 
+
+When you use a `match` statement, Python checks each case in order until it finds a match. If it doesn't find a match, it executes the default case. This means that the time it takes to execute the `match` statement depends on the position of the matching case. 
+
+In your example, the first case (`case '0'`) is the fastest because it is the first case that Python checks. The last case (`case _:`) is the slowest because it is the last case that Python checks and it has to check all the other cases first. 
+
+If you want to have equal access times for each case, you can use a lookup table like a dictionary. This will ensure that the time it takes to access each case is constant, regardless of its position in the table.

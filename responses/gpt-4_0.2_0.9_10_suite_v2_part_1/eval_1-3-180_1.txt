@@ -1,0 +1,15 @@
+You are trying to filter your DataFrame before grouping, but you are not using the correct syntax. In pandas, you can use the `loc` function to filter rows in your DataFrame. Here is how you can do it:
+
+```python
+data_useless.loc[data_useless['TEST_STATUS'] == 'PASS TEST'].groupby('TEST_STATUS').count()
+```
+
+This code will filter your DataFrame to only include rows where `TEST_STATUS` is 'PASS TEST', then it will group by `TEST_STATUS` and count the number of occurrences in each group.
+
+If you want to see the count of `TEST_TYPE` for each `TEST_STATUS` of 'PASS TEST', you can do:
+
+```python
+data_useless.loc[data_useless['TEST_STATUS'] == 'PASS TEST'].groupby('TEST_TYPE').count()
+```
+
+This will group the filtered DataFrame by `TEST_TYPE` and count the number of occurrences in each group.

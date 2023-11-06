@@ -1,0 +1,13 @@
+This error message indicates that the Firefox browser binary location is not set or not found. You can try specifying the path to the Firefox binary location using the `executable_path` parameter when creating the `webdriver.Firefox()` instance.
+
+Here's an example:
+
+```python
+from selenium import webdriver
+
+firefox_binary_path = '/path/to/firefox/binary'
+browser = webdriver.Firefox(executable_path=firefox_binary_path)
+browser.get('http://www.seleniumhq.org')
+```
+
+Make sure to replace `/path/to/firefox/binary` with the actual path to the Firefox binary on your system.

@@ -1,0 +1,19 @@
+The error message `ImportError: DLL load failed while importing _psycopg: The operating system cannot run %1.` suggests that the psycopg2 library is not able to find the necessary DLLs to function properly.
+
+Here are a few things you can try to solve this issue:
+
+1. **Reinstall psycopg2-binary**: The psycopg2-binary package is a stand-alone package that includes its own PostgreSQL binary libraries. You can install it using pip in your conda environment:
+
+    ```bash
+    conda activate wr
+    pip uninstall psycopg2
+    pip install psycopg2-binary
+    ```
+
+2. **Check your PATH**: Make sure that the PostgreSQL binaries are in your PATH. If you installed PostgreSQL with the EnterpriseDB installer, the binaries are likely in a directory like `C:\Program Files\PostgreSQL\13\bin`. You can add this directory to your PATH in the System Properties -> Advanced -> Environment Variables dialog.
+
+3. **Check your Python version**: psycopg2 doesn't support all Python versions. Make sure you're using a version that's compatible with the version of psycopg2 you're trying to use.
+
+4. **Check your PostgreSQL version**: Similarly, psycopg2 doesn't support all PostgreSQL versions. Make sure you're using a version that's compatible with the version of psycopg2 you're trying to use.
+
+5. **Try a different Python PostgreSQL library**: If none of the above solutions work, you might want to try a different Python PostgreSQL library, like pg8000 or SQLAlchemy (which can use either psycopg2 or pg8000 as a backend).

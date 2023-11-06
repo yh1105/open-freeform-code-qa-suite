@@ -1,0 +1,21 @@
+The error message you're seeing is due to the fact that the packages `requests` and `setuptools` are dependencies of `conda` itself, and `conda` is trying to remove or modify them during the environment creation process. This is not allowed, hence the error.
+
+Here are a few things you can try to resolve this issue:
+
+1. **Update Conda:** The issue might be due to an outdated version of `conda`. You can update `conda` using the following command:
+
+    ```bash
+    conda update conda
+    ```
+
+2. **Check the environment file:** The `python3.6-environment-windows.yml` file might have some specifications that are causing the issue. Check if `requests` and `setuptools` are being explicitly removed or downgraded in this file. If they are, you might need to modify the file.
+
+3. **Create a new environment without the file:** Try creating a new environment without using the `python3.6-environment-windows.yml` file. If this works, then the issue is likely with the file itself.
+
+    ```bash
+    conda create --name myenv
+    ```
+
+4. **Reinstall Anaconda:** If none of the above solutions work, you might need to reinstall Anaconda. Uninstall it first, then download the latest version from the official Anaconda website and install it.
+
+Remember to backup your environments and important data before reinstalling Anaconda.

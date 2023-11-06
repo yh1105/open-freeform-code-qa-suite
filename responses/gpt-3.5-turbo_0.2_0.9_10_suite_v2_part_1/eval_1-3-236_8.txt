@@ -1,0 +1,12 @@
+If the `"python.linting.jediEnabled": false` line is greyed out, it means that the setting is being overridden by another setting. 
+
+To fix this issue, you can try the following steps:
+
+1. Open your VS Code settings by pressing `Ctrl + ,` (Windows/Linux) or `Cmd + ,` (Mac).
+2. Search for "python.linting.enabled" and make sure it is set to `true`.
+3. Search for "python.languageServer" and make sure it is set to "Pylance".
+4. Search for "python.linting.pylintEnabled" and make sure it is set to `true`.
+5. Search for "python.linting.jediEnabled" and make sure it is set to `false`.
+6. If the "python.linting.jediEnabled" setting is still greyed out, it means that it is being overridden by a workspace or folder setting. To fix this, open your workspace or folder settings by clicking on the "Open Workspace Settings" or "Open Folder Settings" button in the settings window, and make sure that the "python.linting.jediEnabled" setting is not set to `true` in any of the workspace or folder settings files.
+
+After making these changes, restart VS Code and try again. The error messages from Jedi should no longer appear.

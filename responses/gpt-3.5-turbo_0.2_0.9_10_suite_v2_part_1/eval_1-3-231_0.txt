@@ -1,0 +1,10 @@
+You can use a list comprehension to iterate over each tensor in the list and get its size using the `.size()` method of PyTorch tensors. Here's the implementation of the `getSize` function:
+
+```python
+import torch
+
+def getSize(t):
+    return [tensor.size() for tensor in t]
+```
+
+You can call this function with your list of PyTorch tensors as an argument and it will return a list of sizes of each tensor in the input list.

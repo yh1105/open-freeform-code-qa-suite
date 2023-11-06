@@ -1,0 +1,5 @@
+```python
+my_set = ['LUNAUSDT', 'ETHBTC', 'ETHBNB', 'BTCUSDT', 'MANATUSD', 'ALICEETH']
+my_set = [word for word in my_set if 'USDT' in word]
+my_set
+```
