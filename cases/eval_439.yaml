@@ -10,6 +10,6 @@ grading:
 ```'
     escape: " '\"\n`"
     targets:
-      - "bin/console --env=dev doctrine:migrations:execute  'Application\Migrations\Version20210909072642' --down --no-interaction -vvv"
+      - "bin/console --env=dev doctrine:migrations:execute  'Application\\Migrations\\Version20210909072642' --down --no-interaction -vvv"
 
 
