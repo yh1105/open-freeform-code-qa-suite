@@ -6,4 +6,4 @@ grading:
   keywords:
     - 'DateTimeFormatter'
     - 'ofPattern'
-    - '"uuuu-MM-dd\'T\'HH:mm:ssX"'
+    - "\"uuuu-MM-dd'T'HH:mm:ssX\""

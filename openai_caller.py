@@ -110,6 +110,18 @@ if __name__ == '__main__':
     # start the evaluation
     with open(args.suite_path, 'r') as f:
         suite = yaml.load(f, yaml.Loader)
+    # test loading all configs first
+    for no, case in tqdm(enumerate(suite['cases'])):
+        if isinstance(case, str):
+            case_fpath = case
+        else:
+            case_fpath = case['path']
+        case_fpath = os.path.join(os.path.dirname(args.suite_path), case_fpath)
+        case_stemname = case_fpath.split('/')[-1].split('.')[0]
+        with open(case_fpath, 'r') as f:
+            tmp_conf = yaml.load(f, yaml.Loader)
+    print('all cfgs can be successfully parsed')
+    # really start the calling process
     for no, case in tqdm(enumerate(suite['cases'])):
         if isinstance(case, str):
             case_fpath = case
