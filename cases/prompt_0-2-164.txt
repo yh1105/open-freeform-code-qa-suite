@@ -1,0 +1,5 @@
+I came across the `.attrs()` function in styled components in reactjs, but I do not understand what it does, or what it does differently?
+
+I tried to understand the example in their docs, but as far as I am concerned, I can do the exact same thing without the `attrs()` function.
+
+Could you please explain this to me or give a simple example?
