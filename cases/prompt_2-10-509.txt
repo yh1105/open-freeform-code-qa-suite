@@ -1,0 +1,6 @@
+How to convert Vec<T> to HashMap<T,T>?
+
+I have a vector of strings.I need to convert it to HashMap.
+Vector's 0 elements should become a key and 1 element should become a value. The same for 2, 3, and so on.
+The obvious solution, just to make a for loop and add them to HashMap one by one. However, it will end up several lines of code. I am curious whether there is a cleaner, one-liner.
+I know you can do vec.to_iter().collect(). However, this requires a vector to have tuples (vs a flat vector).

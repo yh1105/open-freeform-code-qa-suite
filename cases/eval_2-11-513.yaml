@@ -1,0 +1,101 @@
+# Corresponding to post https://stackoverflow.com/questions/71830496
+id: 2-11-513
+# for case self identificaton
+
+prompt_path: prompt_2-11-513.txt
+# relative path to the prompt text
+
+# type: code debugging
+# type: code completion
+# type: knowledge question-answering
+# question type, for later statistics
+
+lang: c++/c
+# question language or area, for later statistics
+
+# full_score: 1.0
+# [optional] the full score of this case in the final suite report
+
+# null_score: 0.0
+# [optional]the score of providing no response
+
+grading:
+  
+  # max_score: float
+  # the maximum score within the test case for clipping purpose, if not specified, no maximum clipping
+  
+  # min_score: float
+  # the minimum score within the test case for clipping purpose, if not specified, no minimum clipping
+  
+  blank_filling:
+    template: ""
+    
+    # blank_str: "[blank]"
+    # [optional] how blanks are represented in the template
+
+    # escape: " '\"\n`"
+    # [optional] list of characters to be pre-filtered for model responses for blanks, default: " '"·"
+
+    targets: 
+        # list gold answers for blanks sequentially
+        - ...
+        # - ...
+        # - content: ...
+        #   weight: 1.0
+        #   # [optional] customized blank weight 
+        #   to_lower: false
+        #   # [optional] whether to be case-sensitive (default is sensitive, set to true will apply lower() then match)
+
+  keywords:
+    - ...
+    # - content: ...
+    #   weight: 1.0
+    #   # [optional] customized keyword weight 
+    #   to_lower: false
+    #   # [optional] whether to be case-sensitive (default is sensitive, set to true will apply lower() then match)
+    #   neg: false
+    #   # [optional] if neg=true, match means subtracting the score (use for common wrong answers)
+
+  unit_test:
+
+    # lang: ...
+    # [optional] overwrite the root lang field and decide how to execute the code
+
+    tests:
+        - ...
+        # - content: str
+        #   # source code in string
+        #   path: str
+        #   # source code relative path, either content or path needs specify
+        #   # the source code is appended to model's generated code
+        #   #
+        #   prefix: str
+        #   prefix_path: str
+        #   # [optional] prefix code prepended to model's generated code before unit test execution
+        #   #
+        #   cleanup_path: str
+        #   # [optional] cleanup code path after execution, used when some files need to be cleaned up
+        #   #
+        #   weight: 1.0
+        #   # [optional] set the weight
+        #   timetout: float
+        #   # [optional] set customized timeout in seconds, default python,js,java 10s, cpp 60s, go 20s, rust 300s
+  
+  similarity: # refrain from use if other metric works
+    - metric: rougeL # select from rouge1 / rouge2 / rougeL / rougeLsum
+      references:
+        - ...
+        # - answer_str
+        # or
+        # - path: answer_path
+      # max_score: float
+      # [optional] decide how to scale ROUGE score to our score, default 0.53 for rouge1 and 0.51 for others
+      # min_score: float
+      # [optional] decide how to scale ROUGE score to our score, default: 0.30
+      # weight: 1.0
+      # [optional] default is 1.0
+  
+  customized:
+    module: str
+    func: str
+    # we will call module.func(response), expected to return (now_score: float, full_score: float, detail: any type)

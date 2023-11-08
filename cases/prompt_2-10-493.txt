@@ -1,0 +1,17 @@
+Best way to populate a struct from a similar struct?
+
+I am new to Rust, and am attempting to take a struct returned from a library (referred to as source struct) and convert it into protobuf message using `prost`. The goal is to take the source struct, map the source struct types to the protobuf message types (or rather, the appropriate types for prost-generated struct, referred to as message struct), and populate the message struct fields using fields from the source struct. The source struct fields are a subset of message struct fields. For example:
+```
+pub struct Message {
+    pub id: i32,
+    pub email: String,
+    pub name: String,
+}
+
+pub struct Source {
+    pub email: Email,
+    pub name: Name,
+}
+```
+
+So, I would like to take fields from from `Source`, map the types to corresponding types in `Message`, and populate the fields of `Message` using `Source` (fields have the same name). Currently, I am manually assigning the values by creating a `Message` struct and doing something like `message_struct.email = source_struct.email.to_string();`. Except I have multiple Message structs based on protobuf, some having 20+ fields, so I'm really hoping to find a more efficient way of doing this.

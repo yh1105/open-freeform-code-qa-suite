@@ -1,0 +1,19 @@
+How to fix diesel_cli link libpq.lib error with Postgres tools installed in Docker?
+
+I'm trying (for hours now) to install the cargo crate `diesel_cli` for postgres. However, every time I run the [recommended](https://diesel.rs/guides/getting-started/) cargo command:
+```
+cargo install diesel_cli --no-default-features --features postgres
+```
+
+I wait a few minutes just to see the same build fail with this message:
+```
+note: LINK : fatal error LNK1181: cannot open input file 'libpq.lib'
+
+error: aborting due to previous error
+error: failed to compile `diesel_cli v1.4.1`, intermediate artifacts can be found at `C:\Users\<user name here>\AppData\Local\Temp\cargo-installUU2DtT`
+
+Caused by:
+  could not compile `diesel_cli`.
+```
+
+I'm running postgres in a docker container and have the binaries on my `C:\pgsql` with the `lib` and `bin` directories both on the `PATH` so I can't figure out why it's not linking. What else could be required they didn't mention in the docs?

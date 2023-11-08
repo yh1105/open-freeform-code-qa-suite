@@ -1,0 +1,16 @@
+The issue is that you are trying to send a JSON body with the `http.post` method but you are not encoding your body to JSON. The `http.post` method does not automatically encode the body to JSON.
+
+You should use `jsonEncode` from `dart:convert` to encode your body to JSON. Here is how you can do it:
+
+```dart
+import 'dart:convert';
+
+Map<String,String> headers = {'Content-Type':'application/json','authorization':'Basic c3R1ZHlkb3RlOnN0dWR5ZG90ZTEyMw=='};
+
+var response = await post(Urls.getToken,
+        headers: headers,
+        body: jsonEncode({"grant_type":"password","username":"******","password":"*****","scope":"offline_access"}),
+      );
+```
+
+This will convert your body to a JSON string and then you can send it with the `http.post` method.

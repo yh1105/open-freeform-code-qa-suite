@@ -1,0 +1,16 @@
+In Rust, the caret (`^`) operator is not used for exponentiation. Instead, it is used for bitwise XOR operation. 
+
+To perform exponentiation in Rust, you can use the `pow` method. Here is an example:
+
+```rust
+fn main() {
+    let base = 2;
+    let exponent = 3;
+    let result = base.pow(exponent);
+    println!("{} to the power of {} is {}", base, exponent, result);
+}
+```
+
+In this example, `2` is raised to the power of `3`, and the result `8` is printed. 
+
+The `pow` method works on integers and returns the result of raising the number to the power of the given exponent. The exponent is expected to be of type `u32`.

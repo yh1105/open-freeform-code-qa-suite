@@ -1,0 +1,30 @@
+Xcode 10.2.1 Command PhaseScriptExecution failed with a nonzero exit code
+
+```
+Showing Recent Messages:-1: mkdir -p /Users/spritzindia/Library/Developer/Xcode/DerivedData/Contigo-atftiouzrdopcmcpprphpilawwzm/Build/Products/Debug-iphonesimulator/Contigo.app/Frameworks
+
+Showing Recent Messages:-1: rsync --delete -av --filter P .*.?????? --filter "- CVS/" --filter "- .svn/" --filter "- .git/" --filter "- .hg/" --filter "- Headers" --filter "- PrivateHeaders" --filter "- Modules" "/Users/pothi/Library/Developer/Xcode/DerivedData/Contigo-atftiouzrdopcmcpprphpilawwzm/Build/Products/Debug-iphonesimulator/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework" "/Users/pothi/Library/Developer/Xcode/DerivedData/Contigo-atftiouzrdopcmcpprphpilawwzm/Build/Products/Debug-iphonesimulator/Contigo.app/Frameworks"
+```
+
+
+Command `PhaseScriptExecution` failed with a `nonzero` exit code
+
+I deleted derived data.
+i have tried :  
+
+> keychain access -> right click on login -> lock & unlock again ->
+  clear Xcode project
+
+Restarted machine, no use
+
+How do I resolve "`Command PhaseScriptExecution failed with a nonzero exit code`" error when trying to archive project. 
+
+And I am using those librarys 
+
+```
+pod 'IQKeyboardManagerSwift'
+pod 'SDWebImage', '~> 4.0'
+pod 'KRPullLoader'
+pod 'Paytm-Payments'
+```
+

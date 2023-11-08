@@ -1,0 +1,14 @@
+How to sort a Vec by indices?
+
+I want to sort (reorder) a `Vec` in-place by a predefined ordering in Rust.
+For example:
+```
+let i = vec![0, 3, 2, 1];
+let mut v = vec!["a", "b", "c", "d"];
+v.sort_by_indices(&i);
+
+assert_eq!(v, &["a", "d", "c", "b"]);
+```
+
+I would like to do this in-place. In my use case, `v` takes up a lot of memory.
+This question is a follow-up to [How to get the indices that would sort a Vec?](https://stackoverflow.com/q/69764050/5299417)

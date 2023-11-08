@@ -1,0 +1,56 @@
+# Corresponding to post https://stackoverflow.com/questions/68986071
+id: 3-15-631
+# for case self identificaton
+
+prompt_path: prompt_3-15-631.txt
+# relative path to the prompt text
+
+# type: code debugging
+type: code completion
+# type: knowledge question-answering
+# question type, for later statistics
+
+lang: vba
+# question language or area, for later statistics
+
+# full_score: 1.0
+# [optional] the full score of this case in the final suite report
+
+# null_score: 0.0
+# [optional]the score of providing no response
+
+grading:
+
+  
+  blank_filling:
+    template: "Sub ReplaceSpecial()
+    Dim cel As Range
+    Dim strVal As String, [blank]
+    Dim i As Long
+    Application.ScreenUpdating = False
+    For Each cel In Selection
+        strVal = cel.Value
+        [blank]
+        For i = 1 To Len(strVal)
+            Select Case Asc(Mid(strVal, i, 1))
+                Case 32, 48 To 57, 65 To 90, 97 To 122
+                    [blank]                   
+            End Select
+        Next i
+        [blank]
+    Next cel
+    Application.ScreenUpdating = True
+End Sub"
+
+    blank_str: "[blank]"
+    # [optional] how blanks are represented in the template
+
+    escape: " '\"\n`"
+  # [optional] list of characters to be pre-filtered for model responses for blanks, default: " '"·"
+
+    targets:
+      # list gold answers for blanks sequentially
+      - content: temp As String
+      - content: temp = vbNullString
+      - content: temp = temp & Mid(strVal, i, 1)
+      - content: cel.Value = temp

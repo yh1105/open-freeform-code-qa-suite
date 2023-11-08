@@ -1,0 +1,66 @@
+Change elements in vector using multithreading in Rust
+
+I'm new in Rust and i'm trying to allocate computational work to threads.
+I have vector of strings, i would want to create to each string one thread to do his job. There's simple code:
+```
+use std::thread;
+
+fn child_job(s: &mut String) {
+    *s = s.to_uppercase();
+}
+
+fn main() {
+    // initialize
+    let mut thread_handles = vec![];
+    let mut strings = vec![
+        "hello".to_string(),
+        "world".to_string(),
+        "testing".to_string(),
+        "good enough".to_string(),
+    ];
+
+    // create threads
+    for s in &mut strings {
+        thread_handles.push(thread::spawn(|| child_job(s)));
+    }
+
+    // wait for threads
+    for handle in thread_handles {
+        handle.join().unwrap();
+    }
+
+    // print result
+    for s in strings {
+        println!("{}", s);
+    }
+}
+```
+
+I got errors while compile:
+```
+error[E0597]: `strings` does not live long enough
+  --> src/main.rs:18:14
+   |
+18 |     for s in &mut strings {
+   |              ^^^^^^^^^^^^
+   |              |
+   |              borrowed value does not live long enough
+   |              argument requires that `strings` is borrowed for `'static`
+...
+31 | }
+   | - `strings` dropped here while still borrowed
+
+error[E0505]: cannot move out of `strings` because it is borrowed
+  --> src/main.rs:28:14
+   |
+18 |     for s in &mut strings {
+   |              ------------
+   |              |
+   |              borrow of `strings` occurs here
+   |              argument requires that `strings` is borrowed for `'static`
+...
+28 |     for s in strings {
+   |              ^^^^^^^ move out of `strings` occurs here
+```
+
+I can't understand what's wrong with lifetime of pointers and how i should fix that. For me it looks OK, because every thread get only one mutable pointer of string and doesn't affect the vector itself in any way.

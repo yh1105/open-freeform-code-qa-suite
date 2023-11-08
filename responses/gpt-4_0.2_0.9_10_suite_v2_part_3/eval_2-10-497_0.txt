@@ -1,0 +1,26 @@
+In Rust, you don't typically deal with null pointers. Instead, Rust has the `Option` type which can be `Some` or `None`. This is used to represent the presence or absence of a value.
+
+To implement a stack in Rust, you can use `Option<Box<Node>>` for the `next` field in `Node` and `top` field in `Stack`. Here's how you can do it:
+
+```rust
+struct Node {
+    value: i32,
+    next: Option<Box<Node>>,
+}
+
+struct Stack {
+    top: Option<Box<Node>>,
+}
+```
+
+In this case, `None` represents a null pointer. You can check if a `Box<Node>` is null by checking if it's `None`:
+
+```rust
+if let Some(node) = &self.top {
+    // The stack is not empty
+} else {
+    // The stack is empty
+}
+```
+
+In the above code, `&self.top` is a reference to the `top` field of the `Stack`. The `if let` statement checks if `&self.top` is `Some(node)`. If it is, the code inside the first block is executed. If it's not (i.e., it's `None`), the code inside the `else` block is executed.

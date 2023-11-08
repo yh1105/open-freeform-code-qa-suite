@@ -1,0 +1,55 @@
+Flutter how can i use colorful icon
+
+I have a BrandButton Widget. Its simply holding login buttons with brands. It has icon , label and some colors. In apple i can use Icon(Icons.apple) coz it will have white simple icon and facebook is same too. But in google i want to use colorful one. So how can i make it ? How can i make custom icon ? My custom widget doesnt accept images or what. How can i fix it ? Thank you for all helps!
+
+[](https://i.stack.imgur.com/29pd5.png)
+
+```
+class BrandButton extends StatelessWidget {
+  final String label;
+  final double height;
+  final Color backgroundColor;
+  final Color textColor;
+  final Icon brandIcon;
+
+  const BrandButton(
+      {Key? key,
+      this.label = "Sign in with Apple",
+      this.height: 48,
+      this.backgroundColor: Colors.black,
+      required this.brandIcon,
+      this.textColor: Colors.white})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: height,
+      child: ElevatedButton(
+          onPressed: () {},
+          style: ButtonStyle(
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
+            backgroundColor: MaterialStateProperty.all<Color>(backgroundColor),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              brandIcon,
+              SizedBox(width: 15),
+              Text(
+                label,
+                style: TextStyle(
+                    color: textColor,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 17,
+                    height: 1.41),
+              )
+            ],
+          )),
+    );
+  }
+}
+```
+

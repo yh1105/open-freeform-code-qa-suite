@@ -1,0 +1,49 @@
+How to forcefully close GetX Snackbar?
+
+I am using `Get.snackbar()` to show the process of connection to API.
+I don't understand how programmatically close a snackbar?
+I have the following code:
+```
+@override
+  Future<List> getImportantData(String inputData) async {
+    try {
+      final token =  basicApiAuthString;
+      print("requesting API with the following request: $inputData");
+      Get.snackbar(
+          "Requesting very important data...",
+          "",
+          duration: 60.seconds, // it could be any reasonable time, but I set it lo-o-ong
+          snackPosition: SnackPosition.BOTTOM,
+          showProgressIndicator: true,
+          isDismissible: true,
+          backgroundColor: Colors.lightGreen,
+          colorText: Colors.white,
+        );
+      List importantData = await _client.requestAPI(basicAuthString: token, body: inputData);
+          .then((importantData) {
+              // Here I need to dismiss the snackbar I am still showing to user
+              print("I want to close snackbar here but I don't know how to do that!");
+              // Then I return data for future processing... 
+              return importantData;
+                });
+
+      return importantData;
+    } on DioError catch (error) {
+      // Here I handle all possible API errors... Also I want to close snackbar here as well.
+  
+    }
+ } // getImportantData() function.
+```
+
+I need to take into account, the following:
+
+1. app may be closed and open again during the request (so the snackbar may be closed, but I can know it by status callback (not shown)
+2. The snackbar may be dismissed by the user during request
+3. request may be completed in milliseconds
+4. There are possible API errors and .then() portion will never be executed.
+
+
+So, I need some external way to close the snack. `Navigator.of(context).hide...` is not the solution as I use GetX.
+—————
+PS: Here is the definition of snackbar that doesn't help me to clarify:
+[https://pub.dev/documentation/get/3.4.2/route_manager/GetNavigation/snackbar.html](https://pub.dev/documentation/get/3.4.2/route_manager/GetNavigation/snackbar.html)

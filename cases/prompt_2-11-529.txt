@@ -1,0 +1,26 @@
+How to make_from_tuple on the heap?
+
+So in C++ there is now make_from_tuple as:
+```
+T obj = std::make_from_tuple<T>( { Args... args } ); // args represents a tuple
+```
+
+but how would one do:
+```
+T* obj = std::make_new_from_tuple<T*>( { Args... args } );
+```
+
+There is make_shared and make_unique but neither of those takes a tuple (and I'm not sure how one would extract the arguments from the tuple if that is the direction to go, as you can always make_unique then release if you want the raw pointer).
+Very simple example 1:
+```
+struct A
+{
+    int i_; double d_; std::string s_;
+
+    A( int i, double d, const std::string& s ) : i_(i), d_(d), s_(s) {}
+};
+
+auto aTuple = std::make_tuple( 1, 1.5, std::string("Hello") );
+```
+
+For a more complex example, if the tuple contains a unique_ptr you want to forward, I will want that to work too.

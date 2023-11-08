@@ -1,0 +1,44 @@
+# Corresponding to post https://stackoverflow.com/questions/67699823
+id: 3-13-605
+# for case self identificaton
+
+prompt_path: prompt_3-13-605.txt
+# relative path to the prompt text
+
+type: code debugging
+# type: code completion
+# type: knowledge question-answering
+# question type, for later statistics
+
+lang: kotlin
+# question language or area, for later statistics
+
+# full_score: 1.0
+# [optional] the full score of this case in the final suite report
+
+# null_score: 0.0
+# [optional]the score of providing no response
+
+grading:
+  
+  # max_score: float
+  # the maximum score within the test case for clipping purpose, if not specified, no maximum clipping
+  
+  # min_score: float
+  # the minimum score within the test case for clipping purpose, if not specified, no minimum clipping
+  
+#  similarity:
+#    - metric: rougeLsum
+#      references:
+#        - path: answer_3-13-605_0.txt
+  max_score: 3.0
+  # the maximum score within the test case for clipping purpose, if not specified, no maximum clipping
+
+  min_score: 0.0
+  # the minimum score within the test case for clipping purpose, if not specified, no minimum clipping
+
+
+  keywords:
+    - content: kotlin_version
+    - content: '1.3.50'
+    - content: '1.6.0'

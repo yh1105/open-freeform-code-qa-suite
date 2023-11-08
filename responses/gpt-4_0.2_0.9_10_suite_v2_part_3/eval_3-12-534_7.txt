@@ -1,0 +1,55 @@
+You can use the `MultiProvider` widget to provide multiple providers to a single widget. Here is an example:
+
+```dart
+MultiProvider(
+  providers: [
+    ChangeNotifierProvider(create: (context) => Provider1()),
+    ChangeNotifierProvider(create: (context) => Provider2()),
+    ChangeNotifierProvider(create: (context) => Provider3()),
+    ChangeNotifierProvider(create: (context) => Provider4()),
+  ],
+  child: CurvedNavigationBar(
+    // Your code here
+  ),
+)
+```
+
+However, if you want to consume multiple providers in a single widget, you can nest multiple `Consumer` widgets. Here is an example:
+
+```dart
+Consumer<Provider1>(
+  builder: (context, provider1, child) {
+    return Consumer<Provider2>(
+      builder: (context, provider2, child) {
+        return Consumer<Provider3>(
+          builder: (context, provider3, child) {
+            return Consumer<Provider4>(
+              builder: (context, provider4, child) {
+                // Your widget that needs to consume Provider1, Provider2, Provider3, and Provider4
+              },
+            );
+          },
+        );
+      },
+    );
+  },
+)
+```
+
+In the above example, the innermost widget has access to `provider1`, `provider2`, `provider3`, and `provider4`.
+
+Alternatively, you can use the `context.watch<T>()` function to watch a provider if you're inside a `build` method:
+
+```dart
+@override
+Widget build(BuildContext context) {
+  final provider1 = context.watch<Provider1>();
+  final provider2 = context.watch<Provider2>();
+  final provider3 = context.watch<Provider3>();
+  final provider4 = context.watch<Provider4>();
+
+  // Your widget that needs to consume Provider1, Provider2, Provider3, and Provider4
+}
+```
+
+In this example, the widget will rebuild whenever any of the providers changes.

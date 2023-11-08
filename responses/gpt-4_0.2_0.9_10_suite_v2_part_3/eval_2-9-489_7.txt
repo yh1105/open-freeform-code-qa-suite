@@ -1,0 +1,45 @@
+The warning message you're seeing is because Elasticsearch 7.13.1 has built-in security features that are not currently enabled in your setup. This could potentially leave your Elasticsearch cluster accessible to anyone.
+
+To fix this, you need to enable the built-in security features of Elasticsearch. Here are the steps to do this:
+
+1. Open your Elasticsearch configuration file (`elasticsearch.yml`). The location of this file can vary depending on your installation. On macOS, it's typically located in `/usr/local/etc/elasticsearch` if you installed Elasticsearch with Homebrew.
+
+2. Add the following lines to the `elasticsearch.yml` file:
+
+    ```yaml
+    xpack.security.enabled: true
+    xpack.security.transport.ssl.enabled: true
+    ```
+
+3. Save the file and restart Elasticsearch.
+
+Please note that enabling security will require all users to authenticate. You will need to create users and assign roles to them. You can do this using the built-in `elasticsearch-setup-passwords` tool.
+
+Here's how you can use this tool:
+
+1. Run the following command in your terminal:
+
+    ```bash
+    ./bin/elasticsearch-setup-passwords interactive
+    ```
+
+2. You will be prompted to enter passwords for various built-in users, such as `elastic`, `apm_system`, `kibana`, `logstash_system`, `beats_system`, and `remote_monitoring_user`.
+
+After you've done this, you should be able to connect to Elasticsearch using these credentials.
+
+Please note that you will also need to update your application's Elasticsearch client configuration to include these credentials when connecting to Elasticsearch.
+
+For example, if you're using the `elasticsearch` Ruby gem, you can configure it like this:
+
+```ruby
+Elasticsearch::Client.new(
+  url: 'http://localhost:9200',
+  user: 'elastic',
+  password: 'yourpassword',
+  log: true
+)
+```
+
+Replace `'elastic'` and `'yourpassword'` with the actual username and password you set up.
+
+Remember to keep your credentials secure and avoid hardcoding them directly into your application. Consider using environment variables or a secure credential storage solution.

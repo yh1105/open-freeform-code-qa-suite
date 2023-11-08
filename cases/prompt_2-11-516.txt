@@ -1,0 +1,7 @@
+Is `new` in `new int;` considered an operator?
+
+The expression `new int;` such as in `int * x = new int;` is a [new expression](https://en.cppreference.com/w/cpp/language/new). The term "new operator" seems to be used interchangeably with "new expression", for example in this question : [Difference between 'new operator' and 'operator new'?](https://stackoverflow.com/questions/1885849/difference-between-new-operator-and-operator-new)
+Is it correct to say that the keyword [new](https://en.cppreference.com/w/cpp/keyword/new) as it is used in a new expression is an operator? Why or why not?
+If not, is there another justification for calling a new expression "new operator"?
+I am having trouble finding an authoritative definition for what constitutes an operator.
+I already understand the distinction between [operator new](https://en.cppreference.com/w/cpp/memory/new/operator_new) which allocates memory for an object and "new expression" which may eventually call an `operator new`.

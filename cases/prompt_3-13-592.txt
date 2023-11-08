@@ -1,0 +1,29 @@
+how to instantiate ViewModel In AndroidX?
+
+I want to initialize ViewModel in Activity using androidx library
+
+I have tried what documentation says but it is not working. the ".of" is not resolved.
+
+```
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
+import com.example.myapplication.databinding.ActivityMainBinding`
+
+class MainActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val binding: ActivityMainBinding = DataBindingUtil.setContentView(
+            this, R.layout.activity_main)
+        binding.setLifecycleOwner(this)
+
+        var model = ViewModelProvider.of(this).get(SheduleViewModel::class.java)
+
+    }
+}
+```
+
+
+of is not resolved, maybe there are another way to do it in androidx

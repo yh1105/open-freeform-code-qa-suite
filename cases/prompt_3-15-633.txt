@@ -1,0 +1,6 @@
+Alternative of FILTER function on non office 365
+
+Using a Macro or Formula, is there a way to achieve the result of the following formula of Office 365?
+`=FILTER(B:B,A:A = "x")`
+What it does is get all the values from `Column B` if `Column A` on the same row has a value of `x`.
+My PC has office 365 but the one I'm working with only has `Office Pro Plus 2019`. I had to use my pc when I needed the function and I'm getting tired of it, maybe it can be done on Office Pro Plus 2019 too using a formula or a macro?

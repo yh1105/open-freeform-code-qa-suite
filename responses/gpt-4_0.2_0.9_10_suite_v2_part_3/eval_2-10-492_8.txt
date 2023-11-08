@@ -1,0 +1,23 @@
+Sure, here's how you can fill in the blanks:
+
+```rust
+    let ix = anchor_lang::solana_program::system_instruction::transfer(
+        &user_account.key, // the account of the user who is sending SOL
+        &event_vault_address, // the address of the event account's vault
+        amount,
+    );
+    anchor_lang::solana_program::program::invoke(
+        &ix,
+        &[
+            user_account.clone(), // the user's account
+            ctx.accounts.system_program.to_account_info(), // the system program's account
+        ],
+    );
+```
+
+In this code:
+
+- `user_account` is the account of the user who is sending SOL.
+- `event_vault_address` is the address of the event account's vault where the SOL will be deposited.
+- `amount` is the amount of SOL to be transferred.
+- `ctx.accounts.system_program.to_account_info()` is the account of the system program, which is needed to perform the transfer.

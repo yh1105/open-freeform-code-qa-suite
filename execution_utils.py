@@ -243,7 +243,7 @@ def remove_last_block(code, lang):
     return code
 
 
-def preprocess(generations: List[str], lang: str) -> List[str]:
+def preprocess(generations: List[str], lang: str, only_longest: bool) -> List[str]:
     """
         Extract code blocks from the generations
     :param generations:
@@ -254,16 +254,25 @@ def preprocess(generations: List[str], lang: str) -> List[str]:
     ### first, if ``` exists, using the longest ``` blocks
     for gen in generations:
         if gen.count('```') >= 2:
+            # TODO: just directly concatenate all code blocks
             lines = gen.split('\n')
             code_idendifier_lines = [no for no, text in enumerate(lines) if text.startswith("```")]
-            longest_lines = 0
-            longest_lines_idx = 0
-            for i in range(0, len(code_idendifier_lines)-1, 2):
-                if code_idendifier_lines[i+1] - code_idendifier_lines[i] > longest_lines:
-                    longest_lines = code_idendifier_lines[i+1] - code_idendifier_lines[i]
-                    longest_lines_idx = i
-            gen = '\n'.join(lines[code_idendifier_lines[longest_lines_idx] + 1:
-                                  code_idendifier_lines[longest_lines_idx + 1]])
+            if only_longest:
+                longest_lines = 0
+                longest_lines_idx = 0
+                for i in range(0, len(code_idendifier_lines)-1, 2):
+                    if code_idendifier_lines[i+1] - code_idendifier_lines[i] > longest_lines:
+                        longest_lines = code_idendifier_lines[i+1] - code_idendifier_lines[i]
+                        longest_lines_idx = i
+                gen = '\n'.join(lines[code_idendifier_lines[longest_lines_idx] + 1:
+                                      code_idendifier_lines[longest_lines_idx + 1]])
+            else:
+                gens = []
+                for i in range(0, len(code_idendifier_lines)-1, 2):
+                    now_gen = '\n'.join(lines[code_idendifier_lines[i] + 1:
+                                              code_idendifier_lines[i + 1]])
+                    gens.append(now_gen)
+                gen = '\n\n'.join(gens)
         else:
             # function-signature form
             gen = remove_last_block(gen, lang)

@@ -1,0 +1,24 @@
+How can I create a calendar input in VBA Excel?
+
+
+
+In VBA, three main kinds of date time controls can be used provided certain ocxs have been registered using [administrator rights]. These are VB6 controls and are not native to VBA environment. To install the  and , we need to set a reference to  which can only be accessed by elevated registration of . Similarly for  and . Having said that, the  may or may not work on Windows 10.
+
+Depending on your Windows and Office versions (32 bit or 64 bit), it can be really painful to register these ocxs.
+
+
+
+If you include them in your project and distribute them to your friends, neighbours, clients etc the application may or may not work depending on whether they have those ocx installed.
+
+And hence it is highly advisable  to use them in your project
+
+
+
+This was suggested earlier and is incredibly basic.
+
+When I saw the Windows 10 calendar which popped up when I clicked on the date and time from the system tray, I could not help but wonder if we can replicate that in VBA.
+
+This post is about how to create a calendar  which is not dependant on any ocx or 32bit/64bit and can be freely distributed with your project.
+
+
+

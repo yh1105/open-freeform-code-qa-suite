@@ -1,0 +1,39 @@
+C++ an VS error: <experimental/filesystem> header providing std::experimental::filesystem is deprecated by Microsoft and will be REMOVED
+
+I coded in  on  (Windows 10) and got this error:
+```
+#error The <experimental/filesystem> header providing std::experimental::filesystem is deprecated by Microsoft \
+and will be REMOVED. It is superseded by the C++17 <filesystem> header providing std::filesystem. \
+You can define _SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING to acknowledge that you have received this warning.
+```
+
+With this headers:
+```
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <windows.h>
+#include <filesystem>//If I will disable it nothing happens.
+
+#include <experimental/filesystem> //If I will disable it happens another error.
+namespace fs = std::experimental::filesystem; 
+
+using namespace std;
+```
+
+I've tried: `#define _SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING` in the main cpp file. It didnt help.
+So then I paste this code from [here](https://stackoverflow.com/questions/53365538/how-to-determine-whether-to-use-filesystem-or-experimental-filesystem):
+```
+#ifdef __cpp_lib_filesystem
+    #include <filesystem>
+    using fs = std::filesystem;
+#elif __cpp_lib_experimental_filesystem
+    #include <experimental/filesystem>
+    using fs = std::experimental::filesystem;
+#else
+    #error "no filesystem support ='("
+#endif
+```
+
+Didn't helped too.
+What is the easiest way to get out that error?

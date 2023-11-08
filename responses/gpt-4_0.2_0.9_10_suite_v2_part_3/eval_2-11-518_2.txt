@@ -1,0 +1,17 @@
+The Rule of Five is not outdated, but its usage has been reduced due to the introduction of smart pointers and other features in modern C++. 
+
+You're correct that many resource-managing classes can be converted into aggregate data structures using smart pointers. This is a good practice because it reduces the chance of resource leaks and makes the code easier to understand and maintain. 
+
+However, there are still cases where you might need to define these special member functions:
+
+1. **Performance**: Sometimes, for performance reasons, you might want to manage memory directly. For example, you might want to implement a custom allocator for a class that does a lot of dynamic memory allocation.
+
+2. **Legacy Code**: If you're working with legacy code that doesn't use smart pointers, you might need to define these functions.
+
+3. **Custom Behavior**: You might need to define these functions if you want custom behavior. For example, you might want to implement a deep copy for a class that contains raw pointers.
+
+4. **Resource other than Memory**: If your class manages a resource other than memory (like a file or a network connection), you might need to define these functions to properly manage that resource.
+
+5. **Interoperability with C or other languages**: If you're writing code that needs to interoperate with C or other languages, you might need to manage resources manually.
+
+So while the need to define these functions has been reduced, there are still cases where they're necessary. Therefore, the Rule of Five is still relevant.

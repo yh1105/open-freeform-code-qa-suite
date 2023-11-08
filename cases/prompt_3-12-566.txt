@@ -1,0 +1,5 @@
+Flutter inspector stuck on "Installing Dev tools"
+
+My flutter inspector in android studio is stuck on "Installing Dev tools"
+[](https://i.stack.imgur.com/SGF3h.png)
+it worked before, Today when I opened it, it did not work

@@ -1,0 +1,6 @@
+How to listen to the changes and rebuild the widget in flutter using provider packge?
+
+The problem i am facing is,
+I am connecting my ui to backend with websocket using subscribe method(graphql client). That means there is a connection between my ui and backend. I am storing the data i got from backend  in the local storage
+From the local storage, i am getting that data,
+Whenever i receive the data from backend it should be reflected in the ui automatically. For reflecting change in ui, i am using state management provider package.What should i do to make my widget rebuild on listening to the changes i had made using provider package;

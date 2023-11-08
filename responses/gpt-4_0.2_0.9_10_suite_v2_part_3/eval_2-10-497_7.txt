@@ -1,0 +1,40 @@
+In Rust, `Box<T>` is a smart pointer that points to data on the heap. It cannot be null. If you want to have an optional `Box<T>`, you should use `Option<Box<T>>`. 
+
+In your case, you can modify your `Node` and `Stack` structs to use `Option<Box<Node>>` for `next` and `top` respectively. Then, you can check if the `Box<Node>` is `None` (which would be equivalent to a null pointer in languages that have them).
+
+Here's how you can modify your structs:
+
+```rust
+struct Node {
+    value: i32,
+    next: Option<Box<Node>>,
+}
+
+struct Stack {
+    top: Option<Box<Node>>,
+}
+```
+
+Now, you can check if `top` is `None` like this:
+
+```rust
+if let Some(top_node) = &stack.top {
+    // top is not None, do something with top_node
+} else {
+    // top is None
+}
+```
+
+Or you can use `is_none()` or `is_some()` methods:
+
+```rust
+if stack.top.is_none() {
+    // top is None
+}
+
+if stack.top.is_some() {
+    // top is not None
+}
+```
+
+Remember that in Rust, `Option<T>` is used to represent optional values and is a safer alternative to null pointers found in other languages. It forces you to handle the case when the value might be `None`, preventing null pointer dereference bugs.
