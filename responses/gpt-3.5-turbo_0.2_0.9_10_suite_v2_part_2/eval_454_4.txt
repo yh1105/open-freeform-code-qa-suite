@@ -1,0 +1,34 @@
+The err113 warning in golangci-lint is suggesting that you should not define dynamic errors using `errors.New()` directly in your code. Instead, you should use wrapped static errors.
+
+Wrapped static errors are errors that are defined once and reused throughout the codebase. They are usually defined as package-level variables and can be wrapped with additional context information as needed.
+
+Here's an example of how you can define a wrapped static error:
+
+```
+var ErrRepo = errors.New("repo error")
+
+// ...
+
+func foo() error {
+    // ...
+    return fmt.Errorf("failed to do something: %w", ErrRepo)
+}
+```
+
+In this example, `ErrRepo` is a wrapped static error that can be reused throughout the codebase. When returning an error, you can wrap it with additional context information using `fmt.Errorf()` and `%w` verb to include the wrapped error.
+
+To fix the err113 warnings in your code, you can define wrapped static errors for the dynamic errors that you are currently defining using `errors.New()`. Then, use the wrapped static errors instead of defining new errors each time.
+
+For example:
+
+```
+var ErrRepoGaveErr = errors.New("repo gave err")
+var ErrOops = errors.New("oops")
+
+// ...
+
+repoMock.EXPECT().Save(gomock.Eq(&foooBarBar)).Return(nil, ErrRepoGaveErr)
+repoMock.EXPECT().FindAll().Return(nil, ErrOops)
+```
+
+By using wrapped static errors, you can ensure that your error messages are consistent and reusable throughout your codebase.

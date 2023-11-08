@@ -1,0 +1,27 @@
+In Java, you can use the `getClass()` method to get the class of an object. This method is part of the `Object` class, so it's available for any object. It returns the runtime class of an object.
+
+Here is an example:
+
+```java
+Object obj = "Hello, World!";
+System.out.println(obj.getClass().getName()); // prints "java.lang.String"
+
+obj = 123;
+System.out.println(obj.getClass().getName()); // prints "java.lang.Integer"
+
+obj = new ArrayList<>();
+System.out.println(obj.getClass().getName()); // prints "java.util.ArrayList"
+```
+
+However, this approach doesn't work with primitive types, because they are not objects and don't have methods. But you can use the wrapper classes for primitive types, which are objects and have the `getClass()` method.
+
+For example:
+
+```java
+Object obj = Integer.valueOf(123);
+System.out.println(obj.getClass().getName()); // prints "java.lang.Integer"
+```
+
+If you want to check if an object is of a specific type, you can use the `instanceof` operator, as you mentioned. But again, this doesn't work with primitive types.
+
+If you want to get the type of a variable, not an object, there is no direct way to do it in Java. The type of a variable is determined at compile time and cannot be changed or queried at runtime. This is a fundamental difference between statically typed languages like Java and dynamically typed languages like JavaScript.

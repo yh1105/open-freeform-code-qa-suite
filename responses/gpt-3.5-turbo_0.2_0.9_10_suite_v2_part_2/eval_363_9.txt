@@ -1,0 +1,20 @@
+The error message indicates that Spring Cloud Config is trying to import configuration from a Config Server, but it cannot find the `spring.config.import` property. This property is used to specify the location of the Config Server, and it is required if you are using Spring Cloud Config.
+
+Since you mentioned that your project is not a Config Server and does not use Config Server, you can disable Spring Cloud Config by excluding the `ConfigServerAutoConfiguration` class from your application. You can do this by adding the following annotation to your test class:
+
+```java
+@SpringBootTest(
+    webEnvironment = WebEnvironment.RANDOM_PORT,
+    classes = {
+        ProductCompositeServiceApplication.class,
+        TestSecurityConfig.class },
+    properties = {
+        "spring.main.allow-bean-definition-overriding=true" })
+@AutoConfigureWebTestClient
+@EnableAutoConfiguration(exclude = ConfigServerAutoConfiguration.class)
+public class MyTest {
+    // ...
+}
+```
+
+This will exclude the `ConfigServerAutoConfiguration` class from your application, which should prevent Spring Cloud Config from trying to import configuration from a Config Server.

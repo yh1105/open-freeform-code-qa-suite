@@ -1,0 +1,34 @@
+It seems like you are facing a version conflict issue. The `@NotEmpty` and `@NotBlank` annotations are part of the Bean Validation 2.0 specification, which is implemented by Hibernate Validator 6.0.0.Final and later versions.
+
+However, as per your logs, the Hibernate Validator version being used is 5.3.5.Final-redhat-2, which is a part of Bean Validation 1.1 and does not support `@NotEmpty` and `@NotBlank` annotations.
+
+The version of Hibernate Validator being used is likely being brought in by one of your dependencies. To resolve this issue, you can try to force the use of a newer version of Hibernate Validator. You can do this by adding the following dependency to your `pom.xml`:
+
+```xml
+<dependency>
+    <groupId>org.hibernate.validator</groupId>
+    <artifactId>hibernate-validator</artifactId>
+    <version>6.0.11.Final</version>
+</dependency>
+```
+
+This will ensure that Hibernate Validator 6.0.11.Final is used, which supports `@NotEmpty` and `@NotBlank` annotations.
+
+If this doesn't work, you might need to exclude the older version of Hibernate Validator from the dependencies that are bringing it in. You can find out which dependencies are responsible by running `mvn dependency:tree` in your terminal and looking for `hibernate-validator`.
+
+Once you've identified the dependencies, you can exclude the older Hibernate Validator version like this:
+
+```xml
+<dependency>
+    <groupId>the.group.id</groupId>
+    <artifactId>the-artifact-id</artifactId>
+    <exclusions>
+        <exclusion>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator</artifactId>
+        </exclusion>
+    </exclusions>
+</dependency>
+```
+
+Replace `the.group.id` and `the-artifact-id` with the actual group and artifact IDs of the dependencies you identified.

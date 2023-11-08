@@ -1,0 +1,47 @@
+In Java, you can use the `getClass()` method to get the class of an object. This method is part of the `Object` class, so it's available for any object. However, like `instanceof`, it doesn't work with primitive types because they are not objects.
+
+Here's an example:
+
+```java
+String str = "Hello, World!";
+System.out.println(str.getClass().getName());  // prints "java.lang.String"
+
+Integer num = 42;
+System.out.println(num.getClass().getName());  // prints "java.lang.Integer"
+```
+
+For primitive types, you can use wrapper classes and then use `getClass().getName()`. But remember, this will not give you the primitive type, but the wrapper class:
+
+```java
+int i = 10;
+Integer integer = i;
+System.out.println(integer.getClass().getName());  // prints "java.lang.Integer"
+```
+
+If you want to handle both objects and primitives in a generic way, you might need to use a method that takes an `Object` and uses `instanceof` to check for the primitive wrapper types:
+
+```java
+public static String getType(Object obj) {
+    if (obj instanceof Integer) {
+        return "int";
+    } else if (obj instanceof Float) {
+        return "float";
+    } else if (obj instanceof Double) {
+        return "double";
+    } else if (obj instanceof Boolean) {
+        return "boolean";
+    } else if (obj instanceof Character) {
+        return "char";
+    } else if (obj instanceof Byte) {
+        return "byte";
+    } else if (obj instanceof Short) {
+        return "short";
+    } else if (obj instanceof Long) {
+        return "long";
+    } else {
+        return obj.getClass().getName();
+    }
+}
+```
+
+This method will return the name of the primitive type for the corresponding wrapper objects, and the class name for any other object.

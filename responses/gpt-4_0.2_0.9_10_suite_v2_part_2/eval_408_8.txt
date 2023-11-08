@@ -1,0 +1,21 @@
+The error message is telling you that you cannot create an index on a navigation property. In Entity Framework, navigation properties are used to establish relationships between entities (like the relationship between `User` and `Gender`), but they cannot be used to create indexes.
+
+Indexes in Entity Framework are used to speed up the retrieval of rows from the database. They are typically created on columns that are frequently searched or that are used in sorting operations. 
+
+In your case, if you want to create an index on the `GenderId` column of the `User` entity, you should do it like this:
+
+```c#
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    modelBuilder.Entity<User>(user =>
+    {
+        user
+        .HasOne(x => x.Gender)
+        .WithMany(x => x.Users)
+        .HasForeignKey(x => x.GenderId);
+
+        user.HasIndex(x => x.GenderId);
+    });
+}
+```
+This will create an index on the `GenderId` column, which should improve the performance of queries that filter or sort on this column.

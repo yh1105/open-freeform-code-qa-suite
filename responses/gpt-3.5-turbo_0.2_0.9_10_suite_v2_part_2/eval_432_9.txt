@@ -1,0 +1,17 @@
+By default, Laravel's `dd()` function has a depth limit of 3 levels. This means that if you have nested relationships beyond 3 levels, you won't be able to see all the data.
+
+To increase the depth limit, you can pass a second argument to the `dd()` function. For example, if you want to increase the depth limit to 5 levels, you can do:
+
+```php
+dd($data, 5);
+```
+
+This will show you the data up to 5 levels deep.
+
+Alternatively, you can use the `dump()` function instead of `dd()`. The `dump()` function will output the data without stopping the script execution, so you can see all the data without any depth limit. However, this can be overwhelming if you have a lot of data.
+
+```php
+dump($data);
+```
+
+I hope this helps!

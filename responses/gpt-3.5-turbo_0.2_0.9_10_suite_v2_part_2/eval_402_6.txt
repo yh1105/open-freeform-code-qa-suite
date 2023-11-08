@@ -1,0 +1,74 @@
+One way to achieve this is by creating a factory class that creates instances of `ServiceBusSender` based on the queue name. Here's an example:
+
+```c#
+public interface IServiceBusSenderFactory
+{
+    ServiceBusSender Create(string queueName);
+}
+
+public class ServiceBusSenderFactory : IServiceBusSenderFactory
+{
+    private readonly ServiceBusClient _serviceBusClient;
+
+    public ServiceBusSenderFactory(ServiceBusClient serviceBusClient)
+    {
+        _serviceBusClient = serviceBusClient;
+    }
+
+    public ServiceBusSender Create(string queueName)
+    {
+        return _serviceBusClient.CreateSender(queueName);
+    }
+}
+```
+
+Then, you can register the `ServiceBusSenderFactory` as a singleton and inject it wherever you need to create instances of `ServiceBusSender`:
+
+```c#
+_services.AddSingleton<IServiceBusSenderFactory, ServiceBusSenderFactory>();
+
+// Register multiple instances of ServiceBusClient with different queue names
+_services.AddSingleton(implementationFactory =>
+{
+    var serviceBusConfiguration = implementationFactory.GetRequiredService<IOptions<UserEventConsumerSetting>>().Value;
+
+    var serviceBusClient = new ServiceBusClient(serviceBusConfiguration.ServiceBusConnectionString, new ServiceBusClientOptions
+    {
+        TransportType = ServiceBusTransportType.AmqpWebSockets
+    });
+
+    return serviceBusClient;
+}, "queue1");
+
+_services.AddSingleton(implementationFactory =>
+{
+    var serviceBusConfiguration = implementationFactory.GetRequiredService<IOptions<UserEventConsumerSetting>>().Value;
+
+    var serviceBusClient = new ServiceBusClient(serviceBusConfiguration.ServiceBusConnectionString, new ServiceBusClientOptions
+    {
+        TransportType = ServiceBusTransportType.AmqpWebSockets
+    });
+
+    return serviceBusClient;
+}, "queue2");
+```
+
+Finally, you can use the `IServiceBusSenderFactory` to create instances of `ServiceBusSender`:
+
+```c#
+public class CarReservationMessagingService
+{
+    private readonly IServiceBusSenderFactory _serviceBusSenderFactory;
+
+    public CarReservationMessagingService(IServiceBusSenderFactory serviceBusSenderFactory)
+    {
+        _serviceBusSenderFactory = serviceBusSenderFactory ?? throw new ArgumentNullException(nameof(serviceBusSenderFactory));
+    }
+
+    public async Task PublishNewCarReservationMessageAsync(CarReservation carReservation)
+    {
+        var carReservationIntegrationMessage = new CarReservationIntegrationMessage
+        {
+            Id = Guid.NewGuid().ToString(),
+            CarId = carReservation.CarId,
+            CustomerId = carReservation.CustomerId,

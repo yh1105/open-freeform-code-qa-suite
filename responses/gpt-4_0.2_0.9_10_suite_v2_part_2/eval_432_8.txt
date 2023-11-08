@@ -1,0 +1,17 @@
+The `dd()` function in Laravel is a helper function that dumps the content of the variable and terminates the script. However, it has a limitation when dealing with large amounts of data or deeply nested arrays or objects. It might not display all the data due to memory limitations.
+
+To increase the limit, you can use the `ini_set()` function to increase the memory limit before calling `dd()`. Here's an example:
+
+```php
+ini_set('xdebug.var_display_max_depth', '10');
+ini_set('xdebug.var_display_max_children', '256');
+ini_set('xdebug.var_display_max_data', '1024');
+
+dd($yourVariable);
+```
+
+In this example, `xdebug.var_display_max_depth` is the maximum nested level, `xdebug.var_display_max_children` is the maximum number of array elements or object properties, and `xdebug.var_display_max_data` is the maximum string length.
+
+However, keep in mind that increasing these limits can slow down your script and consume more memory. It's not recommended to use these settings in a production environment.
+
+If you still have problems with viewing your data, you might want to consider using a different approach. For example, you can log your data to a file, or use a debugging tool like [Laravel Debugbar](https://github.com/barryvdh/laravel-debugbar) or [Laravel Telescope](https://laravel.com/docs/8.x/telescope) which are more suitable for inspecting large amounts of data.

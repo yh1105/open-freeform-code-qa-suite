@@ -1,0 +1,9 @@
+It seems like Gradle is not picking up the Java version correctly. You can try adding the following to your Gradle build file:
+
+```
+tasks.withType(JavaCompile) {
+    options.release = 17
+}
+```
+
+This sets the `--release` option for the Java compiler to 17, which should resolve the error.

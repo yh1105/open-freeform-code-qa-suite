@@ -1,0 +1,27 @@
+The Maven Wrapper is a shell script used to automatically manage the correct version of Maven for your project. It's a good practice to use it because it ensures that everyone working on the project uses the same version of Maven.
+
+The Maven Wrapper uses the JAVA_HOME environment variable to determine which Java version to use. If you want to use a different Java version, you can change the JAVA_HOME environment variable to point to the desired Java installation directory.
+
+Here's how you can do it:
+
+1. Find out where your desired Java version is installed. You can do this by running the command `which java` in your terminal. This will print the path to the Java executable. The Java installation directory is the directory containing the directory containing the Java executable. For example, if `which java` prints `/usr/bin/java`, your Java installation directory is `/usr`.
+
+2. Set the JAVA_HOME environment variable to the Java installation directory. You can do this by adding the following line to your `.bashrc` or `.bash_profile` file (or the equivalent for your shell), replacing `/path/to/java` with your Java installation directory:
+
+    ```bash
+    export JAVA_HOME=/path/to/java
+    ```
+
+    Then, run `source ~/.bashrc` or `source ~/.bash_profile` (or the equivalent for your shell) to apply the changes.
+
+3. Now, when you run the Maven Wrapper, it should use the Java version you specified.
+
+If you want to use a different Java version only for a specific project, you can set the JAVA_HOME environment variable in a shell script that you run before running the Maven Wrapper. Here's an example:
+
+```bash
+#!/bin/bash
+export JAVA_HOME=/path/to/java
+./mvnw clean install
+```
+
+This script sets the JAVA_HOME environment variable to the desired Java installation directory, then runs the Maven Wrapper. The JAVA_HOME environment variable is only changed for the duration of this script, so it won't affect other terminal sessions or scripts.

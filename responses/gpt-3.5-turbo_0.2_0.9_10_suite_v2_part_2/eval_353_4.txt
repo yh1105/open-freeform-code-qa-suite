@@ -1,0 +1,9 @@
+The error message suggests that the `--add-opens` option is not recognized by the version of Java that you are using. This option was introduced in Java 9, so it is possible that you are using an older version of Java that does not support it.
+
+You can try upgrading to a newer version of Java that supports the `--add-opens` option. Alternatively, you can try running Besu with an older version of the `--add-opens` option that is supported by your version of Java. For example, you can try using the following command instead:
+
+```shell
+bin\besu --add-opens java.base/sun.nio.ch=ALL-UNNAMED --help
+```
+
+This command uses an older version of the `--add-opens` option that should be supported by Java 8. If this command works, you can use it to run Besu instead of the original command.

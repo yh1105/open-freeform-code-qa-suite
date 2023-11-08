@@ -1,0 +1,26 @@
+The `ILogger<T>` interface is a generic type that needs a class to be specified. You should change your `MyClass` constructor to take `ILogger<MyClass>` instead of `ILogger`. Here is how you should do it:
+
+```c#
+private readonly ILogger<MyClass> _logger;
+
+public MyClass(ILogger<MyClass> logger)
+{
+    _logger = logger;
+}
+```
+
+Then, you should add your `MyClass` to the service collection:
+
+```c#
+var services = new ServiceCollection()
+    .AddLogging(logging => logging.AddConsole())
+    .AddSingleton<MyClass>()
+    .BuildServiceProvider();
+```
+
+Now, you can get an instance of `MyClass` from the service provider and the logger will be injected automatically:
+
+```c#
+var myClass = services.GetService<MyClass>();
+myClass.MyFunc();
+```

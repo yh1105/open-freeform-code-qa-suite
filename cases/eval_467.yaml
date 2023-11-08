@@ -1,0 +1,10 @@
+id: 467
+prompt_path: prompt_467.txt
+type: code completion
+lang: go
+grading:
+  blank_filling:
+    template: 'TBD'
+    escape: " '\"\n`"
+    targets:
+      - 'TBD'

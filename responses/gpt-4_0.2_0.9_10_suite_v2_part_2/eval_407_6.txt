@@ -1,0 +1,33 @@
+In a console application, you don't have the `WebApplication` class available. You can use `ConfigurationBuilder` to read the `appsettings.json` file. Here's an example:
+
+```csharp
+using Microsoft.Extensions.Configuration;
+using System.IO;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        var builder = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+
+        IConfigurationRoot configuration = builder.Build();
+
+        // Now you can use configuration.GetSection or configuration.GetValue to read your settings
+        var mySetting = configuration.GetSection("MySetting").Value;
+    }
+}
+```
+
+In this code, we're creating a new `ConfigurationBuilder`, setting the base path to the current directory (where the `appsettings.json` file is), and adding the `appsettings.json` file to the configuration sources. 
+
+Then, we build the configuration and use it to read settings. 
+
+Make sure that your `appsettings.json` file is being copied to the output directory. You can set this in the file properties in Visual Studio (right-click on the file > Properties > Copy to Output Directory > Copy if newer). 
+
+Also, don't forget to install the `Microsoft.Extensions.Configuration.Json` NuGet package to your project. You can do this via the NuGet package manager in Visual Studio or by running the following command in your Package Manager Console:
+
+```
+Install-Package Microsoft.Extensions.Configuration.Json
+```

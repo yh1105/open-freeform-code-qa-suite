@@ -1,0 +1,37 @@
+In a .NET 6 console application, you don't have the `WebApplication` class available. You can use the `ConfigurationBuilder` class to read the `appsettings.json` file.
+
+Here is an example:
+
+```csharp
+using Microsoft.Extensions.Configuration;
+using System.IO;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        var builder = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+
+        IConfigurationRoot configuration = builder.Build();
+
+        // Now you can read settings from the configuration object
+        var settingValue = configuration["MySetting"];
+    }
+}
+```
+
+In this example, `appsettings.json` should be in the same directory as your executable. If it's not, you should adjust the `SetBasePath` method accordingly.
+
+Also, make sure that the `appsettings.json` file is being copied to the output directory. You can set this in the file properties in Visual Studio, or by editing the .csproj file and adding:
+
+```xml
+<ItemGroup>
+  <None Update="appsettings.json">
+    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+  </None>
+</ItemGroup>
+```
+
+This will ensure that the `appsettings.json` file is copied to the output directory every time you build your application.

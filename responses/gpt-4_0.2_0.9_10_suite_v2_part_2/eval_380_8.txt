@@ -1,0 +1,28 @@
+In Java, you can use the `getClass()` method to get the class of an object. This method is part of the `Object` class, so it's available for any object. However, it doesn't work with primitive types, because they are not objects.
+
+Here's an example:
+
+```java
+String str = "Hello, World!";
+System.out.println(str.getClass().getName());  // prints "java.lang.String"
+
+Integer num = 123;
+System.out.println(num.getClass().getName());  // prints "java.lang.Integer"
+```
+
+If you want to handle both objects and primitive types, you can use the `getClass().getName()` method for objects and the `instanceof` operator for primitive types. But remember, `instanceof` does not work with primitive types, so you need to use their wrapper classes.
+
+```java
+Object obj = "Hello, World!";
+if (obj instanceof String) {
+    System.out.println("This is a String");
+} else if (obj instanceof Integer) {
+    System.out.println("This is an Integer");
+} else {
+    System.out.println("This is an object of type: " + obj.getClass().getName());
+}
+```
+
+In this example, the `instanceof` operator is used to check if the object is a `String` or an `Integer`. If it's not, the `getClass().getName()` method is used to get the class of the object.
+
+Remember, in Java, everything is an object, except for the primitive types (int, char, etc.). These types have corresponding wrapper classes (Integer, Character, etc.), which you can use if you need to treat a primitive type as an object.

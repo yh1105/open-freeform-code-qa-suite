@@ -1,0 +1,21 @@
+The error message indicates that Doctrine cannot find the migration class you are trying to execute. This could be due to the incorrect namespace or the wrong migration version number.
+
+Based on your configuration and the error message, it seems like you are using the correct namespace (`Application\Migrations`) and the correct migration version number (`Version20210909072642`).
+
+The command to execute a specific migration version should look like this:
+
+```bash
+bin/console doctrine:migrations:execute 'Application\Migrations\Version20210909072642' --down
+```
+
+However, you mentioned that you have already tried this command and it didn't work. Here are a few things you could check:
+
+1. Make sure that the migration class `Version20210909072642` actually exists in the directory `app/DoctrineMigrations`. The file name should be `Version20210909072642.php`.
+
+2. Check if the namespace in the migration file `Version20210909072642.php` is declared as `Application\Migrations`.
+
+3. Clear the cache using the command `bin/console cache:clear`.
+
+4. If you are using Symfony Flex, the migrations directory might be `%kernel.project_dir%/src/Migrations`. In this case, you would need to adjust your `doctrine_migrations` configuration accordingly.
+
+If none of these suggestions work, there might be an issue with your Doctrine configuration or your environment. In this case, you might want to check the Doctrine documentation or ask for help in the Doctrine community.

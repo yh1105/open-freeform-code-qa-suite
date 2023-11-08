@@ -1,0 +1,34 @@
+In Java, you can use the `getClass()` method to get the class of an object. This method is part of the `Object` class, so it's available for any object you create. However, it's important to note that `getClass()` also does not support primitive types, as they are not objects in Java.
+
+Here's an example:
+
+```java
+String str = "Hello";
+System.out.println(str.getClass().getName()); // prints "java.lang.String"
+
+Integer i = 10;
+System.out.println(i.getClass().getName()); // prints "java.lang.Integer"
+
+Float f = 12.3f;
+System.out.println(f.getClass().getName()); // prints "java.lang.Float"
+```
+
+If you want to handle both objects and primitive types, you can use the `instanceof` operator for objects and the `==` operator for primitive types:
+
+```java
+Object obj = "Hello";
+if (obj instanceof String) {
+    System.out.println("It's a String");
+} else if (obj instanceof Integer) {
+    System.out.println("It's an Integer");
+} else if (obj instanceof Float) {
+    System.out.println("It's a Float");
+}
+
+int primitiveInt = 10;
+if (primitiveInt == (int)primitiveInt) {
+    System.out.println("It's an int");
+}
+```
+
+This approach is a bit more verbose, but it allows you to handle both objects and primitive types.

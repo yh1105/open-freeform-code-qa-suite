@@ -1,0 +1,7 @@
+id: 363
+prompt_path: prompt_363.txt
+type: non-code debugging
+lang: java
+grading:
+  keywords:
+    - 'spring.cloud.config.enabled=false'

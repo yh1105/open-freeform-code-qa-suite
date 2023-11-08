@@ -1,0 +1,35 @@
+The `getDoctrine()` method is not officially deprecated, but it is recommended to use dependency injection instead of calling this method directly.
+
+To use dependency injection, you can inject the `Doctrine\Common\Persistence\ManagerRegistry` service into your controller and use it to get the entity manager:
+
+```php
+use Doctrine\Common\Persistence\ManagerRegistry;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
+class MyController extends AbstractController
+{
+    public function myAction(ManagerRegistry $doctrine)
+    {
+        $entityManager = $doctrine->getManager();
+        // ...
+    }
+}
+```
+
+Alternatively, you can use the `getDoctrine()` method with a type hint to get the entity manager:
+
+```php
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Doctrine\ORM\EntityManagerInterface;
+
+class MyController extends AbstractController
+{
+    public function myAction()
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        // ...
+    }
+}
+```
+
+This will also work, but it is not recommended because it makes your code less testable and harder to maintain.

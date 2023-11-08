@@ -1,0 +1,33 @@
+The err113 error from golangci-lint is suggesting that you should not define dynamic errors using `errors.New()` in your code. Instead, you should use wrapped static errors.
+
+Here's an example of how you can fix the error:
+
+```go
+package main
+
+import (
+    "errors"
+    "fmt"
+)
+
+var (
+    ErrRepo = errors.New("repo error")
+    ErrOops = errors.New("oops error")
+)
+
+func main() {
+    err := doSomething()
+    if err != nil {
+        fmt.Println(err)
+    }
+}
+
+func doSomething() error {
+    // Instead of using errors.New(), use the wrapped static errors.
+    return fmt.Errorf("failed to do something: %w", ErrRepo)
+}
+```
+
+In the above example, we define two static errors `ErrRepo` and `ErrOops`. Then, in the `doSomething()` function, we use `fmt.Errorf()` to wrap the static error with a dynamic error message.
+
+By using wrapped static errors, you can provide more context to the error message while still maintaining a consistent error type. This makes it easier to handle errors in your code and provides better error messages for debugging.

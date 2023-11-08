@@ -1,0 +1,24 @@
+The issue you're experiencing is likely due to the fact that Spring Boot's REST controllers use Jackson to serialize and deserialize objects to and from JSON by default. Jackson does not support XML out of the box.
+
+To enable XML support, you need to add the Jackson XML module to your project's dependencies. If you're using Gradle, add the following to your `build.gradle` file:
+
+```groovy
+dependencies {
+    // ...
+    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml'
+    // ...
+}
+```
+
+After adding this dependency, Spring Boot should be able to automatically configure Jackson to support XML when it sees this on the classpath.
+
+Also, ensure that your `Pet` model is annotated with `@XmlRootElement` and other necessary JAXB annotations. This is required for the XML serialization to work correctly. 
+
+```java
+@XmlRootElement
+public class Pet {
+    // ...
+}
+```
+
+Remember to restart your application after making these changes.

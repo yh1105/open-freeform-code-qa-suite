@@ -1,0 +1,15 @@
+The issue you're facing might be due to a number of reasons. Here are a few things you could check:
+
+1. **Domain Configuration**: Ensure that your domain is correctly configured in your `.env` file. The `APP_URL` should match the domain you're using. If you're using `www` in your domain, make sure it's included in the `APP_URL`.
+
+2. **Session Domain**: In your `config/session.php` file, check the `domain` configuration. If it's set to `null`, Laravel will use the domain from the `APP_URL` in your `.env` file. If it's set to something else, make sure it matches your domain.
+
+3. **Secure Cookies**: If your `config/session.php` file has `secure` set to `true`, it means that Laravel will only send the cookie over HTTPS. If your server is not configured to use HTTPS, this could be causing the issue. You can set this to `env('SESSION_SECURE_COOKIE', false)` in your `config/session.php` file to allow cookies over HTTP.
+
+4. **Cookie SameSite Attribute**: The `same_site` attribute in `config/session.php` file determines whether the browser should send the cookie along with cross-site requests. If it's set to `strict`, the browser will only send the cookie if the request is same-site. You can set this to `lax` or `none` to allow the cookie to be sent with cross-site requests.
+
+5. **Server Timezone**: If your server's timezone is different from your application's timezone, it might be causing the session to expire prematurely. Make sure your server's timezone matches the `timezone` in your `config/app.php` file.
+
+6. **File Permissions**: Check the permissions of the `storage/framework/sessions` directory. Laravel needs to be able to read and write to this directory to manage sessions. The directory should be writable by the web server.
+
+Remember to clear the configuration cache using `php artisan config:clear` after making changes to the configuration files.

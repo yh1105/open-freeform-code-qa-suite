@@ -1,0 +1,8 @@
+id: 432
+prompt_path: prompt_432.txt
+type: knowledge question-answering
+lang: php
+grading:
+  keywords:
+    - 'override'
+    - 'dumper/dump'

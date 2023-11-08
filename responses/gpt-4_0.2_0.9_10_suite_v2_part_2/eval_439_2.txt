@@ -1,0 +1,13 @@
+The error message indicates that Doctrine cannot find the migration class you're trying to execute. The problem is likely due to the way you're specifying the migration version in your command.
+
+You should use the version number only, without any namespace or prefix, as the argument to the `doctrine:migrations:execute` command.
+
+Given that your migration is `Application\Migrations\Version20210909072642`, you should execute the following command:
+
+```bash
+bin/console --env=dev doctrine:migrations:execute 20210909072642 --down --no-interaction -vvv
+```
+
+This command tells Doctrine to execute the `down` method of the migration with the version number `20210909072642` in the `dev` environment, without any interaction and with verbose output.
+
+If you're still encountering the error, make sure that the migration class `Version20210909072642` actually exists in the directory specified in your Doctrine configuration (`app/DoctrineMigrations`). The file should be named `Version20210909072642.php` and the class inside it should be named `Version20210909072642`.

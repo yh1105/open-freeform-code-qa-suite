@@ -1,0 +1,36 @@
+The error message suggests that the `Keys` table is missing in your database. You can try the following steps to solve this problem:
+
+1. Make sure that the `Keys` table exists in your database. You can use a database management tool like SQLiteStudio to check the database schema.
+
+2. If the `Keys` table is missing, you can create it by running the following command in the Package Manager Console:
+
+   ```
+   Add-Migration AddKeysTable
+   ```
+
+   This will generate a migration file that creates the `Keys` table. You can then apply the migration by running the following command:
+
+   ```
+   Update-Database
+   ```
+
+   This will create the `Keys` table in your database.
+
+3. If the `Keys` table already exists in your database, you can try deleting the migrations history and reapplying the migrations. To do this, run the following commands in the Package Manager Console:
+
+   ```
+   Remove-Migration
+   Update-Database
+   ```
+
+   This will delete the migrations history and reapply all the migrations, which should recreate the `Keys` table if it is missing.
+
+4. If none of the above steps work, you can try deleting the database and recreating it from scratch. To do this, run the following commands in the Package Manager Console:
+
+   ```
+   Drop-Database
+   Add-Migration Initial
+   Update-Database
+   ```
+
+   This will delete the database and recreate it from scratch, including all the necessary tables. Note that this will delete all the data in your database, so make sure to back up any important data before doing this.

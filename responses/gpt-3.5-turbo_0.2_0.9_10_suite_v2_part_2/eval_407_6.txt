@@ -1,0 +1,27 @@
+In a .NET 6 Console Application, you can use the `Host` class to create a host for your application and configure it to read the `appsettings.json` file. Here's an example:
+
+```c#
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        var host = new HostBuilder()
+            .ConfigureAppConfiguration((hostContext, config) =>
+            {
+                config.AddJsonFile("appsettings.json", optional: true);
+            })
+            .Build();
+
+        var mySetting = host.Services.GetService(typeof(IConfiguration))?.GetSection("MySetting").Value;
+        Console.WriteLine($"MySetting value is: {mySetting}");
+    }
+}
+```
+
+In this example, we create a `HostBuilder` and configure it to read the `appsettings.json` file using the `ConfigureAppConfiguration` method. Then, we build the host and use the `GetService` method to get an instance of the `IConfiguration` interface, which allows us to access the values in the `appsettings.json` file.
+
+Note that you need to add the `Microsoft.Extensions.Configuration.Json` NuGet package to your project to use the `AddJsonFile` method.

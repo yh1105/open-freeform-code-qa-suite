@@ -1,0 +1,30 @@
+The `getDoctrine()` method is not officially deprecated in Symfony 5. However, it is true that the Symfony team has been encouraging developers to use constructor injection instead of relying on the container to fetch dependencies.
+
+If you want to follow this best practice, you can inject the `Doctrine\Common\Persistence\ManagerRegistry` service into your controller's constructor and use it to get the `EntityManager` or `ObjectManager` instance.
+
+Here's an example:
+
+```php
+use Doctrine\Common\Persistence\ManagerRegistry;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
+class MyController extends AbstractController
+{
+    private $managerRegistry;
+
+    public function __construct(ManagerRegistry $managerRegistry)
+    {
+        $this->managerRegistry = $managerRegistry;
+    }
+
+    public function myAction()
+    {
+        $entityManager = $this->managerRegistry->getManager();
+        // use the $entityManager instance to work with your entities
+    }
+}
+```
+
+Note that you need to import the `ManagerRegistry` class and inject it into the constructor. The `getManager()` method returns the `EntityManager` or `ObjectManager` instance, depending on which one you are using.
+
+This approach is more explicit and easier to test than relying on the container to fetch the `EntityManager` instance.

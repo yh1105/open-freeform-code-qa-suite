@@ -1,0 +1,8 @@
+It seems like IntelliJ IDEA is still using the old version of Java (1.8) to compile your application. You need to configure IntelliJ IDEA to use Java 11 instead.
+
+1. Go to `File > Project Structure > Project` and make sure that the `Project SDK` is set to Java 11.
+2. Go to `File > Project Structure > Modules` and make sure that the `Language level` is set to `11 - Local variable syntax for lambda parameters`.
+3. Go to `File > Settings > Build, Execution, Deployment > Build Tools > Gradle` and make sure that the `Gradle JVM` is set to Java 11.
+4. If you are using Maven, go to `File > Settings > Build, Execution, Deployment > Build Tools > Maven` and make sure that the `Maven home directory` is set to the correct path for Java 11.
+
+After making these changes, try rebuilding your application and see if it compiles successfully with Java 11.

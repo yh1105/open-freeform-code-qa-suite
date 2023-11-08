@@ -1,0 +1,25 @@
+id: 353
+prompt_path: prompt_353.txt
+type: code debugging
+lang: java
+grading:
+  keywords:
+    - content:
+        and:
+          - '11'
+          - content:
+              or:
+                - content:
+                    content: 'jvm'
+                    to_lower: true
+                - content:
+                    content: 'jdk'
+                    to_lower: true
+                - content:
+                    content: 'jre'
+                    to_lower: true
+                - content:
+                    content: 'java'
+                    to_lower: true
+
+      weight: 1

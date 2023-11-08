@@ -1,0 +1,11 @@
+By default, Laravel's `dd()` function limits the output to 1024 characters. However, you can increase this limit by modifying the `outputBuffering` configuration option in your `config/app.php` file.
+
+To increase the limit, simply add the following line to your `config/app.php` file:
+
+```php
+'outputBuffering' => 8192,
+```
+
+This will increase the output limit to 8192 characters. You can adjust this value to suit your needs.
+
+Alternatively, you can use the `dump()` function instead of `dd()`. The `dump()` function will output the entire contents of the variable, without any limitations. However, it will not stop the execution of your code like `dd()` does.

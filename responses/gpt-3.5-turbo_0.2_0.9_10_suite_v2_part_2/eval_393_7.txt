@@ -1,0 +1,9 @@
+Having separate pipelines for specific requests is not necessarily a bad practice. In fact, it can be a good way to keep your code organized and maintainable. 
+
+However, it's important to consider the trade-offs. Having separate pipelines can lead to code duplication and increased complexity. It may also make it harder to add new requests in the future.
+
+If you find that you have a lot of specific requests that require unique behavior, you may want to consider using a more flexible approach. One option is to use a base request and response class, and then use inheritance to create specific request and response classes that inherit from the base class. You can then use a single pipeline with a generic implementation that works with the base classes, and override the behavior in the specific request and response classes as needed.
+
+Another option is to use a more dynamic approach, such as using a dictionary to store the specific behavior for each request type. This can be more flexible, but may also be more complex to implement and maintain.
+
+Ultimately, the best approach will depend on the specific requirements of your application and the trade-offs you are willing to make.

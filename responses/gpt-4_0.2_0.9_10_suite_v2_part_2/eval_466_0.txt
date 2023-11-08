@@ -1,0 +1,39 @@
+The `ext-zip` is a PHP extension, not a Composer package. This means you can't install it using Composer. You need to install it on your system using the appropriate command for your operating system.
+
+Here's how you can install it on different operating systems:
+
+**Ubuntu/Debian**
+
+```bash
+sudo apt-get install php-zip
+```
+
+**CentOS/RedHat**
+
+```bash
+sudo yum install php-pecl-zip
+```
+
+**macOS (using Homebrew)**
+
+```bash
+brew install php@7.3
+brew link --overwrite --force php@7.3
+```
+
+After installing the extension, you may need to restart your web server for the changes to take effect.
+
+If you're using PHPStorm, you may also need to configure it to use the correct PHP interpreter. You can do this in the settings under `Languages & Frameworks > PHP`.
+
+If you're using a `composer.json` file, you can specify the requirement for the `ext-zip` extension like this:
+
+```json
+{
+    "require": {
+        "php": "^7.1",
+        "ext-zip": "*"
+    }
+}
+```
+
+This won't install the extension, but it will prevent Composer from installing your project unless the `ext-zip` extension is present.

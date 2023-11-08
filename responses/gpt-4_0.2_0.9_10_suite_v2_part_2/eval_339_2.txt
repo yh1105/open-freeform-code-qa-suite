@@ -1,0 +1,30 @@
+The error message indicates that Jackson is trying to serialize the `MultipartFile` object to JSON, but it can't because `MultipartFile` is not a simple POJO and contains complex objects like `InputStream` which Jackson doesn't know how to serialize.
+
+To solve this issue, you need to convert the `MultipartFile` to `HttpEntity<ByteArrayResource>`. Here's how you can do it:
+
+```java
+HttpHeaders headers = new HttpHeaders();
+headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+
+// Convert MultipartFile to ByteArrayResource
+ByteArrayResource resource = new ByteArrayResource(souqBean.getCircularAttachment().getBytes()) {
+    @Override
+    public String getFilename() {
+        return souqBean.getCircularAttachment().getOriginalFilename();
+    }
+};
+
+MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
+body.add("circularAttachment", resource);
+body.add("circularEntryId", souqBean.getCircularEntryId());
+body.add("circularTitle", souqBean.getCircularTitle());
+
+HttpEntity<MultiValueMap<String, Object>> entity = new HttpEntity<>(body, headers);
+
+ResponseEntity<Boolean> response = restTemplate.postForEntity("http://localhost:8081/circular-save", entity, Boolean.class);
+status = response.getBody();
+```
+
+In this code, we're creating a `ByteArrayResource` from the `MultipartFile`'s bytes. `ByteArrayResource` is a `Resource` implementation for a given byte array, and it's serializable by Jackson. We're also overriding the `getFilename()` method to provide the original file name.
+
+Please note that you need to handle `IOException` which may be thrown by `getBytes()` method.

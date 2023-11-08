@@ -1,0 +1,23 @@
+The issue might be related to the URL you are trying to access. For Springdoc (OpenAPI 3.0), the Swagger UI is not available at `/swagger-ui.html` as it was with Springfox (Swagger 2.0). Instead, it is available at `/swagger-ui/index.html` or `/swagger-ui/`.
+
+So, you should be able to access the Swagger UI at `http://localhost:8080/swagger-ui/` or `http://localhost:8080/swagger-ui/index.html`.
+
+If you still can't access the Swagger UI, please check the following:
+
+1. Make sure you have the correct Springdoc version. The latest version at the time of writing is `1.6.11`.
+
+2. Check if you have any configuration that might be disabling the Swagger UI. For example, in your `application.properties` or `application.yml`, make sure you don't have `springdoc.swagger-ui.enabled=false`.
+
+3. If you have a custom context path, servlet path or server port, you need to include them in the URL. For example, if you have `server.servlet.context-path=/api`, then the Swagger UI should be available at `http://localhost:8080/api/swagger-ui/`.
+
+4. Make sure your application is running and there are no errors in the logs related to Springdoc or Swagger UI.
+
+5. If you have Spring Security, make sure it's not blocking access to the Swagger UI. You might need to permit all access to `/swagger-ui/**` and `/v3/api-docs/**`.
+
+6. If you are using Spring Boot 2.3.0 or later, you might need to add the following property in your `application.properties` or `application.yml` to enable the Swagger UI:
+
+```properties
+springdoc.swagger-ui.enabled=true
+```
+
+7. If you are using Spring WebFlux, you need to add the `springdoc-openapi-webflux-ui` dependency instead of `springdoc-openapi-ui`.

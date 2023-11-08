@@ -1,0 +1,7 @@
+No, it's not a bad practice to have separate pipelines for different requests if they require different logic. The whole point of using a pipeline is to handle different types of requests in a more organized and maintainable way. 
+
+In your case, if `RequestOne` and `RequestTwo` have different processing requirements, it makes sense to have two separate pipelines. This way, you can encapsulate the logic for each request type in its own pipeline, making your code easier to understand and maintain.
+
+However, if there are common behaviors that apply to both requests, you might want to consider creating a generic pipeline that handles these common behaviors, and then have the specific pipelines handle only the behaviors that are unique to each request type.
+
+Remember, the key is to keep your code DRY (Don't Repeat Yourself) and as simple as possible. If having separate pipelines helps achieve this, then it's a good practice.

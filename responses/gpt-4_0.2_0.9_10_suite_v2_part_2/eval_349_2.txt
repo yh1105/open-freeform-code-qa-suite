@@ -1,0 +1,17 @@
+The error message suggests that there is a problem with the command you are trying to run, specifically that there is a malformed argument with an embedded quote. 
+
+This is likely due to the way the command is being interpreted by the command line. 
+
+Here's a revised version of your command that might work:
+
+```bash
+cd C:\projects\open && set "JAVA_HOME=C:\\Program Files\\Java\\jdk-11.0.5" && "C:\\Program Files\\NetBeans-11.1\\netbeans\\java\\maven\\bin\\mvn.cmd" -DskipTests=true -Dmaven.ext.class.path="C:\\Program Files\\NetBeans-11.1\\netbeans\\java\\maven-nblib\\netbeans-eventspy.jar" -Dfile.encoding=UTF-8 clean install
+```
+
+In this version, I've replaced the semicolon (`;`) with double ampersand (`&&`). The `&&` operator runs the second command only if the first command is successful. This ensures that the `JAVA_HOME` environment variable is set before the `mvn.cmd` command is run.
+
+If you still encounter issues, you might want to check the following:
+
+1. Ensure that the paths in the command are correct and that the files exist at those locations.
+2. Check that you have the necessary permissions to run the command and access the files and directories in the command.
+3. Make sure that the JDK and NetBeans are correctly installed and configured.

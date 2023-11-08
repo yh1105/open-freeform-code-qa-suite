@@ -1,0 +1,19 @@
+The error message you're seeing suggests that there's a problem with the way the command is formatted. Specifically, it's complaining about an "embedded quote" in the argument to `cmd`.
+
+The issue is likely related to the way the command is being passed to `cmd`. In your command, you're using both double quotes (`"`) and escaped double quotes (`\"`). This can sometimes confuse the command interpreter.
+
+Here's a simplified version of your command that might work:
+
+```cmd
+cd C:\projects\open
+set JAVA_HOME=C:\\Program Files\\Java\\jdk-11.0.5
+"C:\\Program Files\\NetBeans-11.1\\netbeans\\java\\maven\\bin\\mvn.cmd" -DskipTests=true -Dmaven.ext.class.path=C:\\Program Files\\NetBeans-11.1\\netbeans\\java\\maven-nblib\\netbeans-eventspy.jar -Dfile.encoding=UTF-8 clean install
+```
+
+This version of the command sets the `JAVA_HOME` environment variable and then runs the `mvn.cmd` command, all without using the `cmd /c` construct.
+
+If you still encounter issues, it might be worth checking the following:
+
+1. Make sure that the paths you're using are correct and that the files exist at those locations.
+2. Check that you have the necessary permissions to execute the `mvn.cmd` file and to write to the `C:\projects\open` directory.
+3. Ensure that your version of `cmd` supports the `/c` option (it should on most modern versions of Windows).

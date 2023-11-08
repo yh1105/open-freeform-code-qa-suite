@@ -1,0 +1,17 @@
+Here's the implementation of the `getASCIIAsString` function in Go:
+
+```go
+func getASCIIAsString(asciiCode uint64) string {
+    return string(asciiCode)
+}
+```
+
+This function takes an `uint64` ASCII code as input and returns the corresponding ASCII string. The `string` function in Go converts a sequence of bytes (in this case, a single byte corresponding to the ASCII code) into a string.
+
+Here's an example usage of the function:
+
+```go
+fmt.Println(getASCIIAsString(65)) // Output: "A"
+```
+
+This will print the ASCII string corresponding to the ASCII code 65, which is the uppercase letter "A".

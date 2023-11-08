@@ -1,0 +1,17 @@
+The issue is that you're trying to inject `ILogger` directly, but the logging services are added as `ILogger<TCategoryName>`. You should modify your class to accept `ILogger<MyClass>` instead of `ILogger`. Here's how you can do it:
+
+```c#
+private readonly ILogger<MyClass> _logger;
+
+public MyClass(ILogger<MyClass> logger)
+{
+    _logger = logger;
+}
+
+public void MyFunc()
+{
+    _logger.Log(LogLevel.Error, "My Message");
+}
+```
+
+This way, the dependency injection container will be able to resolve the logger instance correctly.

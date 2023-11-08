@@ -1,0 +1,11 @@
+Based on the error message, it seems like Doctrine is having trouble finding the migration class. The migration class name should be the fully qualified name, including the namespace. 
+
+Since your migration is listed as `Application\Migrations\Version20210909072642`, you should use this full name when executing the migration. 
+
+Try the following command:
+
+```bash
+bin/console --env=dev doctrine:migrations:execute 'Application\Migrations\Version20210909072642' --down --no-interaction -vvv
+```
+
+This command tells Doctrine to execute the `Version20210909072642` migration in the `Application\Migrations` namespace in the `down` direction (i.e., rollback the migration), without any interaction and with verbose output.

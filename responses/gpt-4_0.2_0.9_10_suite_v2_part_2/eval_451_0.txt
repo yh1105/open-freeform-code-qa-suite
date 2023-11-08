@@ -1,0 +1,47 @@
+To create the JSON object and print it to the terminal in Go, you can use the `encoding/json` package. Here's an example of how you can do it:
+
+```go
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"log"
+)
+
+type Client struct {
+	Hostname string `json:"Hostname"`
+	IP       string `json:"IP"`
+	MacAddr  string `json:"MacAddr"`
+}
+
+type Clients struct {
+	Clients []Client `json:"Clients"`
+}
+
+func main() {
+	clients := Clients{
+		Clients: []Client{
+			{
+				Hostname: "example.com",
+				IP:       "127.0.0.1",
+				MacAddr:  "mactonight",
+			},
+			{
+				Hostname: "foo.biz",
+				IP:       "0.0.0.0",
+				MacAddr:  "12:34:56:78",
+			},
+		},
+	}
+
+	jsonData, err := json.MarshalIndent(clients, "", "  ")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Println(string(jsonData))
+}
+```
+
+In this code, we first define the `Client` and `Clients` types that match the structure of your JSON. Then we create a `Clients` instance and populate it with the data you provided. We use `json.MarshalIndent` to convert our `Clients` instance into a JSON string with a pretty-printed format. If there's an error during this process, we log it and stop the program. Finally, we print the JSON string to the terminal.

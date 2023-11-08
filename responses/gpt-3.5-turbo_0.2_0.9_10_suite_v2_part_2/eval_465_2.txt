@@ -1,0 +1,34 @@
+The error message indicates that the Lambda function is unable to find the executable file `main` in the `/var/task` directory. This is because the executable file was built on a Windows platform and is not compatible with the Linux environment that Lambda runs on.
+
+To resolve this issue, you need to build the executable file on a Linux environment or use a cross-compiler to build the executable file that is compatible with the Linux environment.
+
+Here are the steps to build a compatible executable file using a cross-compiler:
+
+1. Install the Go cross-compiler for Linux on your Windows machine. You can download it from the official Go website: https://golang.org/dl/
+
+2. Set the environment variables for the cross-compiler. Open a command prompt and run the following commands:
+
+```
+set GOOS=linux
+set GOARCH=amd64
+```
+
+3. Build the executable file using the cross-compiler. Run the following command:
+
+```
+go build -o main main.go
+```
+
+This will create an executable file named `main` that is compatible with the Linux environment.
+
+4. Zip the executable file and any dependencies. Run the following command:
+
+```
+zip main.zip main
+```
+
+This will create a zip file named `main.zip` that contains the executable file `main`.
+
+5. Upload the zip file to your Lambda function and test it.
+
+After following these steps, your Lambda function should be able to find and execute the `main` executable file without any issues.

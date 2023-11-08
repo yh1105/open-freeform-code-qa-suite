@@ -1,0 +1,46 @@
+In Java, you can use the `getClass()` method to get the class of an object. This method is part of the `Object` class, so it's available for every object you create. However, as you mentioned, it doesn't work with primitive types because they are not objects.
+
+Here's an example:
+
+```java
+Integer a = 12;
+System.out.println(a.getClass().getName()); // java.lang.Integer
+
+String s = "Hello";
+System.out.println(s.getClass().getName()); // java.lang.String
+
+Float f = 12.3f;
+System.out.println(f.getClass().getName()); // java.lang.Float
+```
+
+This will print the fully qualified name of the class of the object.
+
+If you want to handle both objects and primitives, you could create a method that takes an `Object` as a parameter and then checks the type of the object using `instanceof` and `getClass()`. Here's an example:
+
+```java
+public static void printType(Object obj) {
+    if (obj instanceof Integer) {
+        System.out.println("Integer");
+    } else if (obj instanceof Float) {
+        System.out.println("Float");
+    } else if (obj instanceof String) {
+        System.out.println("String");
+    } else if (obj instanceof Double) {
+        System.out.println("Double");
+    } else if (obj instanceof Boolean) {
+        System.out.println("Boolean");
+    } else {
+        System.out.println(obj.getClass().getName());
+    }
+}
+```
+
+You can use this method like this:
+
+```java
+printType(12); // Integer
+printType(12.3f); // Float
+printType("Hello"); // String
+```
+
+This method will print the simple name of the class for the known types and the fully qualified name for the other types.

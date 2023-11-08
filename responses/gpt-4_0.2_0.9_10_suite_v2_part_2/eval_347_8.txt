@@ -1,0 +1,13 @@
+The issue is likely due to Gradle using a different version of Java than the one you specified for your project. You need to ensure that Gradle uses the same Java version.
+
+You can specify the Java version for Gradle in the `gradle.properties` file in your project root directory. If the file doesn't exist, create it. Then add the following line:
+
+```properties
+org.gradle.java.home=/path/to/your/jdk17
+```
+
+Replace `/path/to/your/jdk17` with the actual path to your JDK 17 installation.
+
+If you're unsure where your JDK 17 is installed, in IntelliJ you can go to `File -> Project Structure -> SDKs` and see the path there.
+
+After you've done this, try to rebuild your project. If the problem persists, you might need to invalidate caches and restart IntelliJ (`File -> Invalidate Caches / Restart... -> Invalidate and Restart`).

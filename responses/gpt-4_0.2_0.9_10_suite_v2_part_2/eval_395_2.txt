@@ -1,0 +1,7 @@
+You can't directly register a generic interface without specifying the type. You need to register each type you want to use with the interface. For example, if you have a `User` class and you want to use `IDatabaseService<User>`, you would register it like this:
+
+```c#
+services.AddScoped<IDatabaseService<User>, DatabaseService<User>>();
+```
+
+In this example, `DatabaseService<User>` is the concrete implementation of `IDatabaseService<User>`. You would need to do this for each type you want to use with `IDatabaseService<T>`.

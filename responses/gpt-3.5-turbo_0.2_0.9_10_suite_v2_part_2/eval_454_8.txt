@@ -1,0 +1,25 @@
+The err113 lint rule is suggesting that you should not define dynamic errors using `errors.New()` and instead use wrapped static errors. This is because dynamic errors can make it difficult to identify the root cause of an error and can make error handling more complex.
+
+To fix this, you can use a static error message that describes the error in a more meaningful way. You can use the `fmt.Errorf()` function to create a wrapped static error message that includes the original error message.
+
+For example, instead of:
+```
+errors.New("repo gave err")
+```
+you can use:
+```
+fmt.Errorf("failed to save foobarbar: %w", err)
+```
+This creates a wrapped static error message that includes the original error message and can help identify the root cause of the error.
+
+Similarly, instead of:
+```
+errors.New("oops")
+```
+you can use:
+```
+fmt.Errorf("failed to find all foobars: %w", err)
+```
+This creates a wrapped static error message that includes the original error message and can help identify the root cause of the error.
+
+By using wrapped static errors, you can make error handling more consistent and easier to understand.

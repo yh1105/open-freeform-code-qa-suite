@@ -1,0 +1,15 @@
+id: 393
+prompt_path: prompt_393.txt
+type: knowledge question-answering
+lang: c#
+grading:
+  keywords:
+    - content:
+        or:
+          - content:
+              content: 'not bad'
+              to_lower: true
+          - content:
+              content: 'no'
+              to_lower: true
+      weight: 1

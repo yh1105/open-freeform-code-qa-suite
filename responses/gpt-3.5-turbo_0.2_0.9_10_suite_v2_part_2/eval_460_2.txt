@@ -1,0 +1,22 @@
+It seems like the issue is related to the inability of the Go module system to download the dependencies. Here are a few things you can try to debug the issue:
+
+1. Check if the private repo is accessible from computer B: Make sure that you can access the private repo from computer B. You can try cloning the repo manually and see if it works.
+
+2. Check if the Go module cache is corrupted: Try clearing the Go module cache on computer B and then try building the program again. You can clear the cache by running the following command:
+```bash
+$ go clean -modcache
+```
+
+3. Check if the Go version is the same on both computers: Make sure that the Go version is the same on both computers. You can check the Go version by running the following command:
+```bash
+$ go version
+```
+
+4. Check if the dependencies are vendored: If the dependencies are vendored, then the Go module system will not download them. Make sure that the dependencies are not vendored by checking if there is a vendor directory in the project.
+
+5. Check if the dependencies are specified correctly: Make sure that the dependencies are specified correctly in the go.mod file. You can try running the following command to check if the dependencies are correct:
+```bash
+$ go mod verify
+```
+
+If none of the above solutions work, you can try running the build with the -v flag to get more verbose output. This might help you identify the issue.

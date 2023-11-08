@@ -1,0 +1,59 @@
+To use the promhttp library with the gin framework, you can create a new gin router and register the promhttp.Handler() as a middleware. Here's an example:
+
+```go
+package main
+
+import (
+    "log"
+
+    "github.com/gin-gonic/gin"
+    "github.com/prometheus/client_golang/prometheus"
+    "github.com/prometheus/client_golang/prometheus/promhttp"
+)
+
+var cpuTemp = prometheus.NewGauge(prometheus.GaugeOpts{
+    Name: "cpu_temperature_celsius",
+    Help: "Current temperature of the CPU.",
+})
+
+func init() {
+    // Metrics have to be registered to be exposed:
+    prometheus.MustRegister(cpuTemp)
+}
+
+func main() {
+    cpuTemp.Set(65.3)
+
+    // Create a new gin router
+    r := gin.Default()
+
+    // Register the prometheus middleware
+    r.Use(prometheusMiddleware())
+
+    // Define your routes
+    r.GET("/", func(c *gin.Context) {
+        c.JSON(200, gin.H{
+            "message": "Hello World!",
+        })
+    })
+
+    // Start the server
+    if err := r.Run(":8080"); err != nil {
+        log.Fatal(err)
+    }
+}
+
+// prometheusMiddleware returns a gin.HandlerFunc that exposes prometheus metrics
+func prometheusMiddleware() gin.HandlerFunc {
+    return func(c *gin.Context) {
+        if c.Request.URL.Path == "/metrics" {
+            promhttp.Handler().ServeHTTP(c.Writer, c.Request)
+            c.Abort()
+            return
+        }
+        c.Next()
+    }
+}
+```
+
+In this example, we create a new gin router and register the prometheus middleware using the `r.Use(prometheusMiddleware())` line. The `prometheusMiddleware()` function returns a `gin.HandlerFunc` that checks if the request path is `/metrics` and, if so, serves the prometheus metrics using the `promhttp.Handler()`.

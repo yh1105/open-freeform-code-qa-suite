@@ -1,0 +1,41 @@
+This issue is likely due to the fact that your Spring Boot application is not configured to produce XML responses. By default, Spring Boot applications are configured to produce JSON responses.
+
+To enable XML responses, you need to add the `spring-boot-starter-data-rest` and `jackson-dataformat-xml` dependencies to your `build.gradle`:
+
+```gradle
+dependencies {
+    // ...
+    implementation 'org.springframework.boot:spring-boot-starter-data-rest'
+    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml'
+    // ...
+}
+```
+
+Then, you need to ensure that your `Pet` model is annotated with `@XmlRootElement` and `@XmlElement`:
+
+```java
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
+public class Pet {
+
+    private Long id;
+    private String name;
+    // ...
+
+    @XmlElement
+    public Long getId() {
+        return id;
+    }
+
+    @XmlElement
+    public String getName() {
+        return name;
+    }
+
+    // ...
+}
+```
+
+After making these changes, your application should be able to produce XML responses.

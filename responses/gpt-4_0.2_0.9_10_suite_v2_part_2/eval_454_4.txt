@@ -1,0 +1,22 @@
+The `err113` linter rule is complaining because you're creating dynamic errors using `errors.New()`. Dynamic errors are those that are created at runtime and they can't be compared to any static (predefined) error.
+
+To fix this issue, you should define your errors as package-level variables and use them instead. Here's how you can do it:
+
+```go
+var (
+    ErrRepo = errors.New("repo gave err")
+    ErrOops = errors.New("oops")
+)
+```
+
+Then, you can use these errors in your tests:
+
+```go
+foo_test.go:55:61: 
+    repoMock.EXPECT().Save(gomock.Eq(&foooBarBar)).Return(nil, ErrRepo),
+
+foo_test.go:22:42: 
+    repoMock.EXPECT().FindAll().Return(nil, ErrOops)
+```
+
+This way, you're using static errors that can be compared with `errors.Is()`, which is a better practice for error handling in Go.

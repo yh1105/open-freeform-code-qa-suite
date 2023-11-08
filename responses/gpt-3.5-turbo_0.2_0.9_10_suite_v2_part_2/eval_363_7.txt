@@ -1,0 +1,18 @@
+The error message indicates that the `ConfigServerConfigDataMissingEnvironmentPostProcessor` is trying to import configuration data from a Config Server, but it cannot find the `spring.config.import` property. This is because the `spring-cloud-starter-config` dependency is included in your project, which enables the Config Client functionality.
+
+To fix this issue, you can either remove the `spring-cloud-starter-config` dependency if you are not using it, or add the `spring.config.import` property to your test properties.
+
+Try adding the following property to your `@SpringBootTest` annotation:
+
+```java
+@SpringBootTest(
+    webEnvironment = WebEnvironment.RANDOM_PORT,
+    classes = {
+        ProductCompositeServiceApplication.class,
+        TestSecurityConfig.class },
+    properties = {
+        "spring.main.allow-bean-definition-overriding=true",
+        "spring.config.import=" })
+```
+
+This should set the `spring.config.import` property to an empty string, which should prevent the `ConfigServerConfigDataMissingEnvironmentPostProcessor` from trying to import configuration data from a Config Server.

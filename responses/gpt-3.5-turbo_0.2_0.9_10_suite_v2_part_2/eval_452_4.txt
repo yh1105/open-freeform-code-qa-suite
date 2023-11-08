@@ -1,0 +1,27 @@
+Yes, Go modules (formerly known as vgo) supports a similar approach to what you described. You can use the `go mod download` command to download all the dependencies of your project and cache them in your local module cache. This command will not build or install anything, it will only download the dependencies.
+
+You can then copy your `go.mod` and `go.sum` files to your Docker image and run `go build` or `go install` as a separate step. This will use the cached dependencies from your local module cache instead of downloading them again, which can significantly speed up your build process.
+
+Here's an example Dockerfile that demonstrates this approach:
+
+```
+# First stage: download dependencies and cache them
+FROM golang:1.11 AS builder
+WORKDIR /app
+COPY go.mod go.sum ./
+RUN go mod download
+
+# Second stage: build the binary
+FROM builder AS runner
+COPY . .
+RUN go build -o myapp
+
+# Final stage: create a minimal image with only the binary
+FROM scratch
+COPY --from=runner /app/myapp /myapp
+ENTRYPOINT ["/myapp"]
+```
+
+In this example, the first stage downloads the dependencies and caches them in the local module cache. The second stage copies the code and builds the binary using the cached dependencies. Finally, the third stage creates a minimal image with only the binary, without any unnecessary dependencies.
+
+Note that this approach requires Go 1.11 or later with module support. If you're using an older version of Go, you can use the `dep` tool to achieve a similar result.

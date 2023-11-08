@@ -1,0 +1,11 @@
+The error you're seeing is likely because Gradle itself doesn't yet fully support Java 17. As of the time of writing, the latest stable version of Gradle (7.2) only supports up to Java 16.
+
+However, you can use the early-access version of Gradle (7.3-rc-2) which has added support for Java 17. You can change the Gradle version in the `gradle-wrapper.properties` file in your project:
+
+```properties
+distributionUrl=https\://services.gradle.org/distributions/gradle-7.3-rc-2-bin.zip
+```
+
+After changing the Gradle version, refresh your Gradle project in IntelliJ IDEA.
+
+Please note that using early-access or release-candidate software in production has its own risks, as it might not be as stable or as thoroughly tested as a full release.

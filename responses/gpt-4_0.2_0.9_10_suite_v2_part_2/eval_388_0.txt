@@ -1,0 +1,22 @@
+The error message indicates that the SQLite database does not have a table named `Keys`. This could be due to several reasons:
+
+1. The database was not created correctly.
+2. The database was created, but the `Keys` table was not.
+3. The database was created and the `Keys` table was created, but the table name is case-sensitive and does not match the name in the query.
+
+Here are some steps you can take to solve this problem:
+
+1. **Check the Database Schema**: Ensure that the `Keys` table exists in your SQLite database. You can use a SQLite browser or similar tool to inspect the database schema.
+
+2. **Update the Database**: If the `Keys` table does not exist, you may need to update your database to include it. In Entity Framework Core, you can do this using migrations. Run the `Add-Migration` command to create a new migration, and then run the `Update-Database` command to apply the migration to the database.
+
+    ```bash
+    Add-Migration AddKeysTable
+    Update-Database
+    ```
+
+3. **Check the Table Name**: If the `Keys` table exists but the query is still failing, check the case of the table name. SQLite is case-sensitive, so ensure that the table name in the query matches the table name in the database exactly.
+
+4. **Check the Connection String**: Make sure that your connection string in the `appsettings.json` file is correct and pointing to the right database.
+
+If you're using IdentityServer4's `AddDeveloperSigningCredential` extension method, it will try to create a `Keys` table in your database to store the signing key. If you don't want this behavior, you can use the `AddSigningCredential` method instead and provide your own signing credential.

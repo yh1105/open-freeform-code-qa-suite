@@ -1,0 +1,26 @@
+```go
+type A struct {
+}
+
+type B struct {
+}
+
+type AB interface {
+    *A | *B
+    some() bool
+}
+
+func (a *A) some() bool {
+    return true
+}
+
+func (b *B) some() bool {
+    return false
+}
+
+func some[T AB](x T) bool {
+    return x.some()
+}
+```
+
+The issue is that the `AB` interface only specifies that it can be either `*A` or `*B`, but it doesn't specify any methods that are common to both `A` and `B`. To fix this, you can add a `some()` method to the `AB` interface that both `A` and `B` implement.

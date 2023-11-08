@@ -1,0 +1,9 @@
+id: 460
+prompt_path: prompt_460.txt
+type: non-code debugging
+lang: go
+grading:
+  keywords:
+    - 'git config'
+    - 'url'
+    - 'ssh'

@@ -1,0 +1,11 @@
+The error message suggests that the migration class "20210909072642" was not found. This is because the command is not correctly referencing the namespace of the migration class.
+
+Based on your configuration, your migrations are under the `Application\Migrations` namespace and are located in the `app/DoctrineMigrations` directory.
+
+So, you should use the full namespace of the migration class in the command. Here is the correct command:
+
+```bash
+bin/console --env=dev doctrine:migrations:execute 'Application\Migrations\Version20210909072642' --down --no-interaction -vvv
+```
+
+This command will execute the `down` method of the `Version20210909072642` migration class, which will effectively rollback the changes made by this migration. The `--no-interaction` option will run the command without asking any interactive question and the `-vvv` option will increase the verbosity of messages: i.e., debug.

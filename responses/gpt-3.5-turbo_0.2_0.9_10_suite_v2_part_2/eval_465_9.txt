@@ -1,0 +1,13 @@
+The error message indicates that the Lambda function is unable to find the executable file `main` in the `/var/task` directory. This is likely because the file was not properly packaged in the ZIP file that was uploaded to AWS Lambda.
+
+To properly package the Go executable file, you need to ensure that it is compiled for the Linux operating system, which is the operating system used by AWS Lambda. You can do this by cross-compiling your Go code on a Linux machine or by using a tool like `GOOS=linux go build` on a Windows machine.
+
+Here are the steps to cross-compile your Go code on a Windows machine:
+
+1. Install the Go compiler for Linux on your Windows machine. You can download it from the official Go website: https://golang.org/dl/
+2. Open a command prompt and navigate to your Go project directory.
+3. Set the `GOOS` and `GOARCH` environment variables to `linux` and `amd64`, respectively: `set GOOS=linux` and `set GOARCH=amd64`
+4. Build your Go code: `go build -o main main.go`
+5. Zip the `main` executable file: `zip main.zip main`
+
+Now you can upload the `main.zip` file to AWS Lambda and test your function again.

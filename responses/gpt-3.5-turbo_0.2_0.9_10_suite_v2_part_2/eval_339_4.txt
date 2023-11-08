@@ -1,0 +1,16 @@
+The error message indicates that the JSON serializer used by RestTemplate is unable to serialize the `MultipartFile` object. One way to solve this is to configure RestTemplate to use a different serializer that supports `MultipartFile` serialization.
+
+One such serializer is the `MappingJackson2HttpMessageConverter` with the `ObjectMapper` configured to use the `Jackson2ObjectMapperBuilder` with the `DefaultSerializerProvider` set to `JsonSerializerProvider`. Here's an example of how to configure RestTemplate to use this serializer:
+
+```java
+RestTemplate restTemplate = new RestTemplate();
+MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
+ObjectMapper objectMapper = Jackson2ObjectMapperBuilder.json()
+        .serializerByType(MultipartFile.class, new ByteArraySerializer())
+        .serializerProvider(new JsonSerializerProvider())
+        .build();
+converter.setObjectMapper(objectMapper);
+restTemplate.getMessageConverters().add(converter);
+```
+
+In this example, we're configuring the `ObjectMapper` to use the `ByteArraySerializer` for `MultipartFile` objects, and the `JsonSerializerProvider` as the default serializer provider. You can customize this configuration to suit your needs.

@@ -1,0 +1,19 @@
+You need to add a `go_package` option to your `.proto` file. This option specifies the Go package name and import path for the generated code. 
+
+For example, you can add the following line to your `.proto` file:
+
+```go
+option go_package = "github.com/yourusername/yourpackagename";
+```
+
+Replace `yourusername` and `yourpackagename` with your own values. 
+
+Then, run the `protoc` command again with the `--go_out` flag and the `M` argument:
+
+```bash
+protoc --go_out=plugins=grpc,M<yourpackagename>=github.com/yourusername/yourpackagename:. simple.proto
+```
+
+Replace `<yourpackagename>` with the same value you used in the `go_package` option. 
+
+This should generate the Go code for your `.proto` file in the correct package and import path.

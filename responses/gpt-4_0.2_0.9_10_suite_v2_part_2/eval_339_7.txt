@@ -1,0 +1,35 @@
+The error message indicates that Jackson is trying to serialize the `MultipartFile` to JSON, but it can't because `MultipartFile` is not serializable to JSON. 
+
+When you are sending a file over HTTP, it should be sent as binary data, not JSON. 
+
+In your case, you are trying to send a `MultipartFile` as a part of the request body. You should convert the `MultipartFile` to `HttpEntity<FileSystemResource>` before sending it.
+
+Here is an example of how you can do it:
+
+```java
+HttpHeaders headers = new HttpHeaders();
+headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+
+// Convert MultipartFile to File
+File convFile = new File(souqBean.getCircularAttachment().getOriginalFilename());
+FileOutputStream fos = new FileOutputStream(convFile);
+fos.write(souqBean.getCircularAttachment().getBytes());
+fos.close();
+
+// Use FileSystemResource to wrap the File
+FileSystemResource resource = new FileSystemResource(convFile);
+
+MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
+body.add("circularAttachment", resource);
+body.add("circularEntryId", souqBean.getCircularEntryId());
+body.add("circularTitle", souqBean.getCircularTitle());
+
+HttpEntity<MultiValueMap<String, Object>> entity = new HttpEntity<>(body, headers);
+
+ResponseEntity<Boolean> response = restTemplate.postForEntity("http://localhost:8081/circular-save", entity, Boolean.class);
+status = response.getBody();
+```
+
+This code first converts the `MultipartFile` to a `File`, then wraps it in a `FileSystemResource` before adding it to the request body. This way, the file is sent as binary data, not JSON. 
+
+Please note that this code writes the `MultipartFile` to a `File` on the server's filesystem. If you don't want to do this, you will need to find another way to convert the `MultipartFile` to a `Resource` that can be used with `RestTemplate`.

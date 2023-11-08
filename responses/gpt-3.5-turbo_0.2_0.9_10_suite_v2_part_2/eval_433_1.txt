@@ -1,0 +1,20 @@
+The error message "419 Page Expired" is related to the Laravel's CSRF (Cross-Site Request Forgery) protection. When you log out from one tab, the CSRF token is invalidated and the other tab's token becomes invalid as well. That's why you are seeing the error message when you try to log out from the other tab.
+
+To avoid this error message, you can add a check in your logout function to see if the CSRF token is still valid. If it is not valid, you can simply redirect the user to the login page without showing any error message.
+
+Here's an example of how you can implement this check in your logout function:
+
+```php
+public function logout(Request $request)
+{
+    if ($request->session()->regenerateToken()) {
+        return redirect('/login')->with('status', 'You have been logged out.');
+    }
+
+    return redirect('/login');
+}
+```
+
+In this example, we regenerate the CSRF token and then check if it was successful. If it was successful, we redirect the user to the login page with a success message. If it was not successful, we simply redirect the user to the login page without any message.
+
+By doing this, you can avoid the "419 Page Expired" error message and provide a better user experience for your users.

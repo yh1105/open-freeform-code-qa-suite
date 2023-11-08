@@ -1,0 +1,13 @@
+The error message is indicating that the Spring Cloud Config client is active in your application, but it can't find the `spring.config.import` property that should point to the Config Server.
+
+Since you mentioned that your project is not a ConfigServer and doesn't use ConfigServer, you should not have the Spring Cloud Config client dependency in your build file.
+
+In your `build.gradle`, you have the following line:
+
+```groovy
+implementation('org.springframework.cloud:spring-cloud-starter-config')
+```
+
+This line is adding the Spring Cloud Config client to your project. If you don't use the Config Server, you should remove this line.
+
+After removing this line, try to rebuild your project. If you still encounter issues, make sure there are no other references to the Config Server in your project. For example, check if there are any `spring.cloud.config` properties in your `application.properties` or `application.yml` files. If you find any, you should remove or comment them out.

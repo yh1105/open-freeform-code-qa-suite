@@ -1,0 +1,28 @@
+```go
+type A struct {
+}
+
+type B struct {
+}
+
+type AB interface {
+    *A | *B
+    some() bool
+}
+
+func (a *A) some() bool {
+    return true
+}
+
+func (b *B) some() bool {
+    return false
+}
+
+func some[T AB](x T) bool {
+    return x.some()
+}
+```
+
+In the `AB` interface, you need to add the `some() bool` method signature. This is because the `some` function is using the `T` type parameter, which is constrained to the `AB` interface. Therefore, the `T` type parameter must have the `some()` method defined.
+
+Also note that the `|` operator is used to define a type union constraint, which means that the `AB` interface can be implemented by types that are either pointers to `A` or pointers to `B`.

@@ -1,0 +1,8 @@
+id: 435
+prompt_path: prompt_435.txt
+type: knowledge question-answering
+lang: php
+grading:
+  keywords:
+    - 'dependency injection'
+    - 'ManagerRegistry'
