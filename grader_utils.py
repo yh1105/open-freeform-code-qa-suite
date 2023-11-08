@@ -113,6 +113,8 @@ def blank_filling_match(template: str, blank_str: str, escape: str, targets: Lis
                 anses = [target]
             else:
                 anses = target['content']
+                if isinstance(anses, str):
+                    anses = [anses]
 
             matched = False
             now_status = 'unmatched'
@@ -147,7 +149,7 @@ def blank_filling_match(template: str, blank_str: str, escape: str, targets: Lis
         func_name = post_handler['func']
 
         custom_module = importlib.import_module(module_name)
-        new_ans, new_tot, post_handler_detail = custom_module.__call__(func_name)(now_ans, now_tot, grading_details)
+        new_ans, new_tot, post_handler_detail = getattr(custom_module, func_name)(now_ans, now_tot, grading_details)
         now_ans = new_ans
         now_tot = new_tot
 

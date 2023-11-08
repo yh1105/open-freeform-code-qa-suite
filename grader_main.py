@@ -79,7 +79,7 @@ def grade_response(config: dict, case_dir: str, response: str, full_score: float
             func_name = post_handler['func']
 
             custom_module = importlib.import_module(module_name)
-            new_ans, new_tot, new_detail = custom_module.__call__(func_name)(now_ans, now_tot, status['keywords'])
+            new_ans, new_tot, new_detail = getattr(custom_module, func_name)(now_ans, now_tot, status['keywords'])
             status['post_handler_detail'] = new_detail
             now_ans = new_ans
             now_tot = new_tot
@@ -201,7 +201,7 @@ def grade_response(config: dict, case_dir: str, response: str, full_score: float
         func_name = customized_config['func']
 
         custom_module = importlib.import_module(module_name)
-        now_ans, now_tot, now_detail = custom_module.__call__(func_name)(response)
+        now_ans, now_tot, now_detail = getattr(custom_module, func_name)(response)
 
         status['custom_score'] = now_ans
         status['custom_totscore'] = now_tot
@@ -335,7 +335,7 @@ Total cases with response: {tot_cases_with_response}
         print('Keyboard interrupted')
         exit(1)
     if args.result_summary_path is None:
-        stem_filename = f'results/{os.path.basename(args.suite_path).rsplit(".", 1)[0]}_{os.path.basename(args.responses_dir)}'
+        stem_filename = f'results/{os.path.basename(args.suite_path).rsplit(".", 1)[0]}_{os.path.basename(args.responses_dir.strip("/"))}'
         print(f'Output to {stem_filename}.(txt/yaml)')
         args.result_summary_path = stem_filename + '.txt'
         args.result_detail_path = stem_filename + '.yaml'
