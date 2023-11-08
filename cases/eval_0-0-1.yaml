@@ -8,6 +8,7 @@ prompt_path: prompt_0-0-1.txt
 # type: code debugging
 # type: code completion
 # type: knowledge question-answering
+type: non-code debugging
 # question type, for later statistics
 
 lang: javascript
