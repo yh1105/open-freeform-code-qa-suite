@@ -1,0 +1,15 @@
+For my users, waiting nearly a month till December 10 for a fix release from Microsoft is not an option. Nor is uninstalling the offending Microsoft update across several government locked down workstations.
+
+I need to apply a workaround, but am not exactly thrilled with what Microsoft suggested - creating and substituting a query for each table.
+
+The solution is to replace the Table name with a simple (SELECT * FROM Table) query directly in the UPDATE command. This does not require creating and saving a ton of additional queries, tables, or functions.
+
+EXAMPLE:
+
+Before:
+
+UPDATE Table1 SET Field1 = "x" WHERE (Field2=1);
+After:
+
+UPDATE (SELECT * FROM Table1) SET Field1 = "x" WHERE (Field2=1);
+That should be much easier to implement across several databases and applications (and later rollback).

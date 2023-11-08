@@ -1,0 +1,18 @@
+How do "omp single" and "omp task" provide parallelism?
+
+I am confused about `omp single` and `omp task` directives. I have read several examples which use both of them. The following example shows how to use the task construct to process elements of a linked list.
+```
+1  #pragma omp parallel
+2  {
+3      #pragma omp single
+4      {
+5          for(node* p = head; p; p = p->next)
+6          {
+7              #pragma omp task
+8              process(p); 
+9          }
+10     }
+11 }
+```
+
+I am failing to understand the parallelism in this example. With `omp single`, only one thread will execute the structured block related to the single construct, is it right? In this example, Lines 4-10 is the structured block related to the single construct and it can be executed only once, then why we can use `omp task` inside this structured block? How can it be worked in a parallel manner?

@@ -1,0 +1,9 @@
+How to create a Flutter background service that works also when app closed
+
+I am developing a Flutter app for academic purposes in university. Now, I need to run a sort of "always on" background service in order to use Bluetooth and most importantly to get periodic updates from external REST APIs.
+
+I've already checked those two libraries from pub.dev ([this](https://pub.dev/packages/foreground_service) and [this](https://pub.dev/packages/background_fetch)) without finding the perfect solution that works out-of-the-box (as expected...). I also saw something native with Kotlin ([here](https://www.youtube.com/watch?v=NXuAzXY_KOo)). What I would to know is what is the best option in order to achieve my goals (in terms of best practices, completeness and with simplicity in mind).
+
+Have a look at the following image for a more schematic view: 
+
+[](https://i.stack.imgur.com/mzMbc.png)

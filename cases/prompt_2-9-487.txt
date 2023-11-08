@@ -1,0 +1,12 @@
+Herkou Redis - certificate verify failed (self signed certificate in certificate chain)
+
+I have been using heroku redis for a while now on one of my side projects. I currently use it for 3 things
+
+1. It serves as a place for me to store firebase certificates
+2. It is used for caching data on the site
+3. It is used for rails sidekiq jobs
+
+
+Recently, my heroku usage went up and I had to change it to use heroku redis premium plan. Ever since then I have been getting `error: SSL_connect returned=1 errno=0 state=error: certificate verify failed (self signed certificate in certificate chain)` somehow. Everything stayed the same yet the error started popping out of nowhere.
+Does heroku-redis premium plan work fundamentally different than a basic heroku-redis plan?
+I am using ruby on rails, deployed on heroku with heroku redis if that helps.

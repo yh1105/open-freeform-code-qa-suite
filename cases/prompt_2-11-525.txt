@@ -1,0 +1,25 @@
+What is wrong with my application of SFINAE when trying to implement a type trait?
+
+I needed a type trait that decays enums to their underlying type, and works the same as `decay_t` for all other types. I've written the following code, and apparently this is not how SFINAE works. But it is how I thought it should work, so what exactly is the problem with this code and what's the gap in my understanding of C++?
+```
+namespace detail {
+    template <typename T, std::enable_if_t<!std::is_enum_v<T>>* = nullptr>
+    struct BaseType {
+        using Type = std::decay_t<T>;
+    };
+
+    template <typename T, std::enable_if_t<std::is_enum_v<T>>* = nullptr>
+    struct BaseType {
+        using Type = std::underlying_type_t<T>;
+    };
+}
+
+template <class T>
+using base_type_t = typename detail::BaseType<T>::Type;
+```
+
+The error in MSVC is completely unintelligible:
+> 'detail::BaseType': template parameter '__formal' is incompatible with
+the declaration
+In GCC it's a bit better - says that declarations of the second template parameter are incompatible between the two `BaseType` templates. But according to my understanding of SFINAE, only one should be visible at all for any given T and the other one should be malformed thanks to `enable_if`.
+[Godbolt link](https://godbolt.org/z/49v3xd7Mr)

@@ -1,0 +1,7 @@
+Command CompileSwift failed with a nonzero exit code in Xcode 10
+
+After updating to the latest version of Xcode at the moment (version 10.0) the project is unable to build because it found some errors regarding some "Command CompileSwift failed with a nonzero exit code" error.
+
+They appear in most of the Pods (I use CocoaPods) I use inside my project.
+I have tried updating the pod version and the pods to the latest version available, but the problem is still there.
+I have searched a lot through the web and there is very little information regarding this issue.

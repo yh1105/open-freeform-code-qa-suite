@@ -1,0 +1,4 @@
+Expected a value of type 'SkDeletable', but got one of type 'Null'
+
+I have updated my flutter project from 1.26.3 to 2.1.0. Since then I am facing some issue. I am getting error as "Expected a value of type 'SkDeletable', but got one of type 'Null'".
+Does anybody knows what is related with?

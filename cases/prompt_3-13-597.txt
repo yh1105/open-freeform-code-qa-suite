@@ -1,0 +1,16 @@
+Kotlin MutableList initial capacity
+
+I'm creating a list of values, in a context where it so happens that, though the values are being added one at a time, the eventual number is known in advance. This is in a function that will be called many times, so the faster it runs, the better.
+
+In Java, I would use the ArrayList constructor that specifies an initial capacity, because in theory this makes it slightly faster because it avoids resizing.
+
+In Kotlin, one normally uses mutableListOf(), but this does not allow an initial capacity; in theory this should result in slightly slower code.
+
+Is the recommended/idiomatic Kotlin solution in this case:
+
+
+1. Go ahead and use the ArrayList constructor; ArrayList is a perfectly valid MutableList.
+2. Ignore the issue; the initial capacity never actually makes a measurable difference to speed.
+3. Something else?
+
+

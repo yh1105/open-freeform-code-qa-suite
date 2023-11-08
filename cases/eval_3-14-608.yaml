@@ -1,0 +1,66 @@
+# Corresponding to post https://stackoverflow.com/questions/57519164
+id: 3-14-608
+# for case self identificaton
+
+prompt_path: prompt_3-14-608.txt
+  # relative path to the prompt text
+
+# type: code debugging
+type: code completion
+# type: knowledge question-answering
+# question type, for later statistics
+
+lang: swift
+# question language or area, for later statistics
+
+# full_score: 1.0
+# [optional] the full score of this case in the final suite report
+
+# null_score: 0.0
+# [optional]the score of providing no response
+
+grading:
+  
+  max_score: 2.0
+  # the maximum score within the test case for clipping purpose, if not specified, no maximum clipping
+  
+  min_score: 0.0
+  # the minimum score within the test case for clipping purpose, if not specified, no minimum clipping
+  
+  blank_filling:
+    template: "var body: some View {
+    Button(action: {
+    }) {
+        Group {
+            Spacer().frame(width: 0, height: 36.0, alignment: .topLeading)
+            HStack {
+                Image('home')
+                    .resizable()
+                    .frame(width: 24, height: 24)
+                    .foregroundColor(.navigationTextGrey)
+                    [blank]
+                Text('HOME')
+                    .bold()
+                    .font(.system(size: 17.0))
+                    .foregroundColor(Color.navigationTextGrey)
+                    .padding(.leading, 4.0)
+                [blank]
+            }
+            Rectangle()
+                .fill(Color.navigationTextGrey)
+                .frame(width: UIScreen.main.bounds.width - 60, height: 1)
+                .padding(.top, 6.0)
+        }
+    }
+}"
+
+    blank_str: "[blank]"
+      # [optional] how blanks are represented in the template
+
+    escape: " '\"\n`"
+    # [optional] list of characters to be pre-filtered for model responses for blanks, default: " '"·"
+
+    targets:
+      # list gold answers for blanks sequentially
+      - content: .padding(.leading, 30.0)
+      - content: Spacer()

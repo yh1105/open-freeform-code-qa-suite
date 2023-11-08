@@ -1,0 +1,9 @@
+Installing ruby-2.1.2: Cannot load such file -- openssl (LoadError)
+
+Getting few errors while installing ruby-2.1.2 using rvm. I am new to ruby and hence need assistance. Please let me know 
+
+Installation log and other relevant information here: [log](https://paste.ubuntu.com/p/RTXNP2D25K/)
+
+From the log provided in problem description, I have ruby 2.1.2 installed in the system. However, getting error when tried listing gems with `gem list` due to installation errors.After changing to 2.1.2 i.e., `rvm use 2.1.2` and executing `ruby -r openssl -e 'puts OpensSSL::OPENSSL_VERSION'` gives this error: 
+
+> /Users/praveenk.k/.rvm/rubies/ruby-2.1.2/lib/ruby/site_ruby/2.1.0/rubygems/core_ext/kernel_require.rb:54:in require': cannot load such file -- openssl (LoadError) from /Users/praveenk.k/.rvm/rubies/ruby-2.1.2/lib/ruby/site_ruby/2.1.0/rubygems/core_ext/kernel_require.rb:54:in require'

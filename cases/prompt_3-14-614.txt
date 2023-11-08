@@ -1,0 +1,15 @@
+Xcode 11 beta swift ui preview not showing
+
+Just playing with Swift UI basic app and the preview canvas is not showing even though I'm in canvas mode. App runs, and I have this little snippet what am I missing?
+
+```
+swift
+#if DEBUG
+struct ContentView_Previews : PreviewProvider {
+    static var previews: some View {
+       ContentView()
+    }
+}
+#endif
+```
+

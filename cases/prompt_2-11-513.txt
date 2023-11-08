@@ -1,0 +1,41 @@
+How to properly solve memset() function MISRA errors in C?
+
+I have written a simple function to initialise the structure values using `memset()`. These are the code I have written in C language.
+
+```
+typedef struct{
+ bool flag;
+ bool check;
+ int val_1;
+ int val_2;
+} MY_STRUCT;
+```
+
+
+```
+static MY_STRUCT mystruct;
+
+void Test()
+{
+  memset(&mystruct, 0, sizeof(MY_STRUCT)); 
+}
+```
+
+When i run MISRA , i am getting this kind of error
+```
+The return value of non-void function 'memset' shall be used
+```
+
+I have tried to fix this warning using below method
+```
+(void)memset(&mystruct, 0, sizeof(MY_STRUCT));
+```
+
+But unfortunately, i am getting 2 new warnings
+```
+Cast between types that are not both pointers or not pointers
+
+object of pointer type 'void*' cast to unrelated type 'void'
+```
+
+Anybody suggest how to fix this warning while using `memset()` function ? Also please explain to avoid such warnings in future.

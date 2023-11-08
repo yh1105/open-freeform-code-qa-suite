@@ -1,0 +1,10 @@
+Module was compiled with an incompatible version of Kotlin. The binary version of its metadata is 1.5.1, expected version is 1.1.15
+
+My client wants email and cardholder name, but the Stripe payment UI doesn't provide that option in `com.stripe.android.view.CardMultilineWidget`. I wanted to give it a try with the latest stripe version,
+
+1. I was using Stripe version (14.1.1). So I updated it to the latest one (16.8.0)
+2. The build showed me the error that it doesn't take minSdkVersion 19. It requires 21 in manifest merger. So I updated minSdkVersion to 21.
+3. I got caches/transforms-2/files-2.1/4541b0189187e0017d23bbb0afebd16a/jetified-kotlin-stdlib-common-1.5.0.jar!/META-INF/kotlin-stdlib-common.kotlin_module: Module was compiled with an incompatible version of Kotlin. The binary version of its metadata is 1.5.1, expected version is 1.1.15.
+
+
+I tried changing the Gradle version, but I am still getting the same error. How can I solve the incompatible error and add the email and cardholder name in Stripe?

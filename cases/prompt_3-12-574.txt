@@ -1,0 +1,13 @@
+How get the name of the days of the week in Dart
+
+Somebody knows how can I extract from DateTime the name of the day of the week?
+
+ej: 
+
+```
+DateTime date = DateTime.now();
+String dateFormat = DateFormat('dd-MM-yyyy hh:mm').format(date);
+```
+
+
+Result -> Friday

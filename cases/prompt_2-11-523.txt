@@ -1,0 +1,31 @@
+Order of evaluation in v != std::exchange(v, predecessor(v))
+
+I keep finding more idioms that lend themselves to `std::exchange`.
+Today I found myself [writing this](https://stackoverflow.com/a/74600853/85371) in an answer:
+```
+do {
+    path.push_front(v);
+} while (v != std::exchange(v, pmap[v]));
+```
+
+I like it a lot more than, say
+```
+do {
+    path.push_front(v);
+    if (v == pmap[v])
+        break;
+    v= pmap[v];
+} while (true);
+```
+
+Hopefully for obvious reasons.
+However, I'm not big on standardese and I can't help but worry that `lhs != rhs` doesn't guarantee that the right-hand side expression isn't fully evaluated before the left-hand-side. That would make it a tautologous comparison - which would by definition return `true`.
+The code, however, does run correctly, apparently evaluating `lhs` first.
+Does anyone know
+- - 
+
+---
+
+
+PS. I realize that this is a special case of `f(a,b)` where `f` is `operator!=`. I've tried to answer my own query using the information found here but have failed to reach a conclusion to date:
+- [https://en.cppreference.com/w/cpp/language/eval_order](https://en.cppreference.com/w/cpp/language/eval_order)- [https://en.wikipedia.org/wiki/Sequence_point](https://en.wikipedia.org/wiki/Sequence_point)- [Order of evaluation in C++ function parameters](https://stackoverflow.com/questions/2934904/order-of-evaluation-in-c-function-parameters)- [What are the evaluation order guarantees introduced by C++17?](https://stackoverflow.com/questions/38501587/what-are-the-evaluation-order-guarantees-introduced-by-c17)

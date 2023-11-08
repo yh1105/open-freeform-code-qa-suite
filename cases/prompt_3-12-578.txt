@@ -1,0 +1,22 @@
+Invalid Constant Value using variable as parameter
+
+```
+var textSize = 10.0;
+// or
+double textSize = 10.0;
+```
+
+
+into `Text` Widget of Flutter 
+
+```
+child: const Text('Calculate Client Fees',
+                   style: TextStyle(fontSize: textSize),)
+```
+
+
+Here it is giving error 
+
+> Invalid Constant Value
+
+Do we have to compulsory use `const` value? Why can not we use `var` or `double`?

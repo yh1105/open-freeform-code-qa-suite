@@ -1,0 +1,11 @@
+Flutter - Remove String after certain character?
+
+What is the best way to remove all characters after specific character in the String object in Flutter?
+
+Suppose that I have the following string:
+
+> one.two
+
+and I need to remove the ".two" from it. How can I do it?
+
+Thanks in advance.

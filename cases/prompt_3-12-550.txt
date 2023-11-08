@@ -1,0 +1,8 @@
+Android Studio Emulator Tool Windows Not Show
+
+I was creating a flutter project, but I want to run my AVD in the android studio window itself, I already select the option in "Settings-> Tools-> Emulator" and check the option that says "Launch in a tool windows" but it still executes me regardless of the emulator.
+[](https://i.stack.imgur.com/qDBpq.png)
+I've already done several unsuccessful searches, does anyone have any ideas?
+[](https://i.stack.imgur.com/AJu6d.png)
+---Updated-----
+Create a project in normal java and there if that window appears I think it is a problem in flutter or something similar.

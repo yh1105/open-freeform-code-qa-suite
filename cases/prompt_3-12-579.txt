@@ -1,0 +1,45 @@
+Show alert dialog on app main screen load automatically in flutter
+
+I want to show alert dialog based on a condition. Not based on user interaction such as button press event.
+
+If a flag is set in app state data alert dialog is shown otherwise its not.
+
+Below is the sample alert dialog which I want to show
+
+```
+void _showDialog() {
+    // flutter defined function
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // return object of type Dialog
+        return AlertDialog(
+          title: new Text("Alert Dialog title"),
+          content: new Text("Alert Dialog body"),
+          actions: <Widget>[
+            // usually buttons at the bottom of the dialog
+            new FlatButton(
+              child: new Text("Close"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+```
+
+
+I tried to call that method inside main screen widget's build method but it gives me error -
+
+```
+The context used to push or pop routes from the Navigator must be that of a widget that is a descendant of a Navigator widget.
+E/flutter ( 3667): #0      Navigator.of.<anonymous closure> (package:flutter/src/widgets/navigator.dart:1179:9)
+E/flutter ( 3667): #1      Navigator.of (package:flutter/src/widgets/navigator.dart:1186:6)
+E/flutter ( 3667): #2      showDialog (package:flutter/src/material/dialog.dart:642:20)
+```
+
+
+Problem is I don't know from where I should call that _showDialog method?

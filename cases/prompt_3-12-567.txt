@@ -1,0 +1,27 @@
+how to make row alignment in flutter
+
+How to make alignment in row if I give space in between spaces occupies between widgets, but I need to get two text at the left and another one in the right. How to do it?
+```
+Row(
+    // mainAxisAlignment:
+    // MainAxisAlignment.spaceBetween,
+    children: [
+      Container(
+        child: Icon(Icons.comment),
+        margin: EdgeInsets.only(left: 5.0),
+      ),
+      Container(
+        child: Text(snapshot.data![index].comments.toString(),
+            style: TextStyle(
+                fontSize: 14.0, fontWeight: FontWeight.bold)),
+        margin: EdgeInsets.only(left: 5.0),
+      ),
+      Align(
+        alignment: Alignment.topRight,
+        child: Text(snapshot.data![index].date.toString()),
+      )
+    ]),
+```
+
+check the image in the description
+[](https://i.stack.imgur.com/WIla9.jpg)

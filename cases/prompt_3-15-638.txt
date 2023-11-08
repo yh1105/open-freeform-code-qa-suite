@@ -1,0 +1,94 @@
+SolidWorks API SelectByID2 method
+
+There is a more efficient method using the  and  methods to obtain the points that can be used with SelectByID2 method. The issue of the method below is that creation of each point is not time efficient nor tidy in the feature tree. Will update this thread once I have time.
+Thank you for understanding.
+
+---
+
+
+I recently started some programming in VBA in SolidWorks and I am looking to write a macro. The goal for now is to create a reference plane from selected face and point(deriving it from edge). As a reminder, method to create the reference plane is InsertRefPlane, which requires the selection to be done by SelectByID2 method.
+So far I've managed to save the handle for the face and point objects, but I haven't managed to successfully use the SelectByID2 method. Objects that were selected become deselected.
+`value = instance.SelectByID2(Name, Type, X, Y, Z, Append, Mark, Callout, SelectOption)`
+I have tried select just a face, but I couldn't manage to do it. Also, I have renamed the face property using the SetEntityName method, and supplied it as well, but it did not manage to select it.
+Could you please share the ideas how to do create a reference plane? It doesn't have to be necessary a face and an edge/mid-point.
+Thank you in advance.
+
+For further clarification, I have added two objects (face and edge) to selection and I would like to use those to properly select objects with SelectByID2 to use for InsertRefPlane. I have added the code below.
+Ideas that I have are:
+- I have handles to the face and the edge, but can I use those for proper selection with SelectByID2?- Can I create a reference points on the selected face and edge to identify the face somehow?- SelectByRay seems feasible, but it would require some calculations with face normals so, I would try some other "simpler" methods if available. : I have non-planar face so I can't request Normal property of the face.- : It seems that it all comes down to identifying an object name and type is the way to solve the problem. This is probably a solution, but I'm open for another one, easier if possible. We can create a reference points when using one of appropriate Selection methods, because their names are known, we can use those for SelectbyID2 method.  Will post the solution once I am done.- Regarding the GetFaces/GetFirstFace/GetNextFace methods, [InsertRefPlane](https://help.solidworks.com/2017/english/api/sldworksapi/solidworks.interop.sldworks%7Esolidworks.interop.sldworks.ifeaturemanager%7Einsertrefplane.html) requires objects to be selected by SelectByID2
+```
+Dim swApp As SldWorks.SldWorks
+Dim swModel As SldWorks.ModelDoc2
+Dim swPart As SldWorks.PartDoc
+Dim swSelMgr As SldWorks.SelectionMgr
+Dim swModelDocExt As SldWorks.ModelDocExtension
+Dim swFeatMgr As SldWorks.FeatureManager
+
+Dim selBool As Boolean
+Dim longstatus As Long, longwarnings As Long
+
+Sub main()
+
+Set swApp = Application.SldWorks
+Set swModel = swApp.ActiveDoc
+Set swModelDocExt = swModel.Extension
+Set swPart = swModel
+Set swSelMgr = swModel.SelectionManager
+Set swFeatMgr = swModel.FeatureManager
+
+' Check which file is opened
+Dim filePath As String: filePath = swModel.GetPathName()
+Debug.Print "File path is:" & filePath
+
+'   User has to select the face and the edge of the body to create plane and
+'   sketch to convert face entities
+' Gets selection from SelectionManager
+Dim numSelectedObjs As Long
+Dim selectionMark As Long: selectionMark = -1
+
+numSelectedObjs = swSelMgr.GetSelectedObjectCount2(selectionMark)
+Debug.Print "Number of selected objects:" & numSelectedObjs
+
+Dim faceObj As SldWorks.Face2
+Dim edgeObj As SldWorks.Edge
+Dim midpointObj As Object
+
+If (numSelectedObjs > 0) Then
+    ' Get and validate selection
+    Dim selObj As Object
+    Dim selObjIndex As Long
+    Dim selObjType As Long
+    For selObjIndex = 1 To numSelectedObjs ' This method uses 1 as first index
+        selObjType = swSelMgr.GetSelectedObjectType3(selObjIndex, selectionMark)
+        ' Check selected object type and assign it to appropriate variable
+        If (selObjType = SwConst.swSelFACES) Then
+            Set faceObj = swSelMgr.GetSelectedObject6(selObjIndex, selectionMark)
+            Dim faceFeat As Object
+            Set faceFeat = faceObj.GetFeature()
+        ElseIf (selObjType = SwConst.swSelEDGES) Then
+            Set edgeObj = swSelMgr.GetSelectedObject6(selObjIndex, selectionMark)
+            swModel.SelectMidpoint ' With this line, we add point to selection, increasing the count to 3
+            Dim deselVal As Long
+            deselVal = swSelMgr.DeSelect2(selObjIndex, selectionMark) ' Deselect the edge
+            Set midpointObj = swSelMgr.GetSelectedObject6(selObjIndex, selectionMark) ' Set the object to the point
+        Else
+            MsgBox "Wrong objects selected, select only face and edge"
+            Exit For
+        End If
+    Next
+End If
+
+' Create reference plane using face and a point
+' InsertRefPlane method requires selection using SelectByID2 Method
+
+Dim objName, objType As String: objName = "": objType = SwConst.swSelectType_e.swSelFACES
+Dim X, Y, Z As Double: X = 0: Y = 0: Z = 0
+Dim selAppend As Boolean: selAppend = True
+Dim objMark As Long: objMark = 0
+Dim objCallout As Callout
+Dim selOption As swSelectOption_e: selOption = 0
+
+selBool = swModel.Extension.SelectByID2(objName, objType, X, Y, Z, selAppend, objMark, objCallout, selOption)
+Debug.Print selBool
+```
+
