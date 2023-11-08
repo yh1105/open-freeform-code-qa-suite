@@ -1,0 +1,24 @@
+This error occurs when the `getApplicationDocumentsDirectory()` method returns null. This can happen if the path_provider package is not properly initialized or if there is an issue with the platform channels.
+
+To fix this error, you can try the following steps:
+
+1. Make sure that you have added the path_provider package to your pubspec.yaml file and ran `flutter pub get` to install it.
+
+2. Import the path_provider package in your Dart file:
+```dart
+import 'package:path_provider/path_provider.dart';
+```
+
+3. Wrap your `main()` method in a `WidgetsFlutterBinding.ensureInitialized()` call to ensure that the Flutter engine is properly initialized before calling the `getApplicationDocumentsDirectory()` method:
+```dart
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final appDocsDir = await getApplicationDocumentsDirectory();
+  Hive.init(appDocsDir.path);
+  runApp(MyApp());
+}
+```
+
+4. If the above steps do not work, try running `flutter clean` to clear the build cache and then rebuild your app.
+
+If you are still facing the same issue, you can try using the `getApplicationSupportDirectory()` method instead of `getApplicationDocumentsDirectory()`. This method returns the path to the directory where your app can store files that are not visible to the user.

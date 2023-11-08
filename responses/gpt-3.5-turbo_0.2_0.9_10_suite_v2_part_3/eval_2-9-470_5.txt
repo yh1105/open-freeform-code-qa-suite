@@ -1,0 +1,19 @@
+The error message indicates that the `libffi.so.6` library is missing. To fix this issue, you can try the following steps:
+
+1. Install the `libffi6` package:
+```
+sudo apt-get install libffi6
+```
+
+2. If the above step doesn't work, you can try creating a symbolic link to the `libffi.so.7` library:
+```
+sudo ln -s /usr/lib/x86_64-linux-gnu/libffi.so.7 /usr/lib/x86_64-linux-gnu/libffi.so.6
+```
+
+3. If the above steps don't work, you can try reinstalling the `ffi` gem:
+```
+gem uninstall ffi
+gem install ffi
+```
+
+After trying these steps, you should be able to run Rails commands without any issues.

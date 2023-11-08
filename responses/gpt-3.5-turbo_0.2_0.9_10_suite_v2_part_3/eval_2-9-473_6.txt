@@ -1,0 +1,11 @@
+The error message suggests that there is an issue with the encryption of a message in your Rails application. To fix this, you can try resetting your Rails application's secret key base on Heroku by running the following command:
+```
+heroku config:set SECRET_KEY_BASE=`rails secret`
+```
+This will generate a new secret key base and set it as an environment variable on your Heroku app.
+
+Regarding the error when pushing to Heroku, it seems like there is an issue with the pre-receive hook. You can try disabling the pre-receive hook by running the following command:
+```
+git config --global core.hooksPath /dev/null
+```
+This will temporarily disable the pre-receive hook and allow you to push your code to Heroku. However, it's important to note that the pre-receive hook is there for a reason and disabling it may cause issues in the future. It's recommended to investigate the cause of the pre-receive hook error and fix it properly.

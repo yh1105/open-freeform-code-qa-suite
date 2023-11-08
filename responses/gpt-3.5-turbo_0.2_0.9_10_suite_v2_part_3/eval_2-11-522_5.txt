@@ -1,0 +1,3 @@
+No. 
+
+C++ does not provide a direct way to query the properties of individual CPU cores or threads. The behavior of threads is determined by the operating system's scheduler, which decides which thread runs on which core at any given time. While some operating systems may provide APIs to control thread affinity (i.e., which cores a thread can run on), this is not part of the C++ standard library and is therefore platform-dependent.

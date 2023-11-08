@@ -1,0 +1,7 @@
+Yes, the above comment is correct. 
+
+A constructor is a special method in a class that is automatically called when an object of that class is created using the `new` keyword. It is not called explicitly like a regular function. 
+
+The purpose of a constructor is to initialize the object's properties and set its initial state. It can also perform any other necessary setup tasks. 
+
+So, when you create a new object using the constructor, the constructor is invoked automatically to create and initialize the object.

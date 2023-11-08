@@ -1,0 +1,47 @@
+To disable the behavior of the Bottom Navigation Bar moving up with the keyboard, you can wrap your `Scaffold` widget with a `GestureDetector` and then add a `onTap` event to it. In the `onTap` event, you can call `FocusScope.of(context).unfocus()` to unfocus the search text field and hide the keyboard. Here's an example:
+
+```dart
+class _AppHomeViewState extends State<AppHomeView>
+    with TickerProviderStateMixin {
+
+  TabController tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    tabController = TabController(length: 4, vsync: this, initialIndex: 0);
+    tabController.addListener(handleTabSelection);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final scaffold = Scaffold(
+      body: GestureDetector(
+        onTap: () {
+          FocusScope.of(context).unfocus();
+        },
+        child: SafeArea(child: _buildBody(context)),
+      ),
+      bottomNavigationBar: Container(
+        height: 48,
+        decoration: BoxDecoration(
+          color: StyledColors.BACKGROUND_COLOR,
+          boxShadow: [
+            BoxShadow(
+              color: StyledColors.FORGROUND_COLOR.withOpacity(0.16),
+              blurRadius: 12,
+              offset: Offset(0, 0),
+            ),
+          ],
+        ),
+        child: SafeArea(
+          child: _buildTabBar(context),
+        ),
+      ),
+    );
+  }
+  ...
+}
+```
+
+This will ensure that the Bottom Navigation Bar stays behind the keyboard when the search text field is focused.

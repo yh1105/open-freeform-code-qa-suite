@@ -1,0 +1,35 @@
+In Rust, the caret operator (`^`) is not used for exponentiation. Instead, you can use the `pow` method that is available on the `num::Integer` trait. Here's an example:
+
+```rust
+use num::Integer;
+
+fn main() {
+    let base = 2;
+    let exponent = 10;
+    let result = base.pow(exponent);
+    println!("{} raised to the power of {} is {}", base, exponent, result);
+}
+```
+
+This will output:
+
+```
+2 raised to the power of 10 is 1024
+```
+
+Note that the `pow` method returns a `BigInt` type, which can represent arbitrarily large integers. If you want to raise a floating-point number to a power, you can use the `powf` method that is available on the `f64` type. Here's an example:
+
+```rust
+fn main() {
+    let base = 2.0;
+    let exponent = 0.5;
+    let result = base.powf(exponent);
+    println!("{} raised to the power of {} is {}", base, exponent, result);
+}
+```
+
+This will output:
+
+```
+2 raised to the power of 0.5 is 1.4142135623730951
+```

@@ -1,0 +1,17 @@
+You can use the `sort_by` method of the `Vec` to sort by multiple fields. Here's an example of how to sort `my_vector` by `row` and then by `column`:
+
+```rust
+my_vector.sort_by(|a, b| {
+    if a.row == b.row {
+        a.column.cmp(&b.column)
+    } else {
+        a.row.cmp(&b.row)
+    }
+});
+```
+
+This code uses a closure to define the sorting logic. The `sort_by` method will call this closure repeatedly to compare pairs of elements in the vector and determine their order.
+
+The closure first checks if the `row` fields of the two elements are equal. If they are, it compares the `column` fields to determine the order. If the `row` fields are not equal, it compares them directly to determine the order.
+
+After the `sort_by` method completes, `my_vector` will be sorted by `row` and then by `column`.

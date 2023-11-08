@@ -1,0 +1,27 @@
+The issue is that you are not correctly overriding the `operator==` function from the base class `IClient`. The function signature in the base class is `bool operator==(const IClient& anotherClient)`, but in your derived class `SeviceClient`, you have defined the function as `bool operator==(const SeviceClient& anotherClient)`. 
+
+To correctly override the function, you need to use the same function signature as in the base class. You can modify your `SeviceClient` class as follows:
+
+```c++
+class SeviceClient : public IClient<int8_t> {
+  const std::vector<int8_t> ID;
+
+ public:
+  SeviceClient(const std::vector<int8_t>& ID) : ID(std::move(ID)) {}
+  SeviceClient(const std::vector<int8_t>&& ID) : ID(std::move(ID)) {}
+
+  const std::vector<int8_t>& getID() override {
+      return ID;
+  }
+  bool isEqual(const std::vector<int8_t>& anotherID) override {
+      return true;
+  }
+  bool operator==(const IClient<int8_t>& anotherClient) override {
+      // Cast the passed object to SeviceClient and compare the IDs
+      const auto& other = dynamic_cast<const SeviceClient&>(anotherClient);
+      return ID == other.ID;
+  }
+};
+```
+
+Here, we have changed the function signature to match the base class, and then we have cast the passed object to `SeviceClient` and compared the IDs.
