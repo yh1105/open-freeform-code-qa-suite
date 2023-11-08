@@ -1,8 +1,0 @@
-id: 349
-prompt_path: prompt_349.txt
-type: code debugging
-lang: java
-grading:
-  keywords:
-    - content: 'Djdk.lang.Process.allowAmbiguousCommands=true'
-      weight: 1

@@ -1,0 +1,32 @@
+framework preset
+other things include next.js
+
+It's hard to provide a specific solution without seeing your code, but here are some general steps you can take to debug and potentially solve the issue:
+
+1. **Check your build logs on Vercel**: When you deploy your Next.js app to Vercel, it should provide you with build logs. Check these logs for any errors or warnings that might indicate what's going wrong.
+
+2. **Ensure your dynamic routes are correctly configured**: In Next.js, dynamic routes are defined using file names. For example, a file named `[id].js` in the `pages` directory would match routes like `/1`, `/abc`, etc. Make sure your dynamic routes are correctly set up.
+
+3. **Check your `package.json` scripts**: Vercel uses the `build` and `start` scripts in your `package.json` file to build and run your application. Make sure these scripts are correctly defined. Typically, for a Next.js app, they should look something like this:
+
+    ```json
+    "scripts": {
+      "dev": "next dev",
+      "build": "next build",
+      "start": "next start"
+    }
+    ```
+
+4. **Create a `next.config.js` file**: Although you mentioned you don't have a `next.config.js` file, it might be worth creating one if you don't already have it. This file is used to customize various aspects of Next.js. Here's a basic example:
+
+    ```js
+    module.exports = {
+      target: "serverless",
+    };
+    ```
+
+    The `target: "serverless"` configuration is particularly important when deploying to Vercel, as it enables serverless functions.
+
+5. **Upgrade Next.js**: Although this is less likely to be the issue, it's worth noting that Next.js 10.0.3 is not the latest version. It might be worth upgrading to the latest version to see if that resolves your issue.
+
+Remember, these are just general suggestions. The exact solution will depend on the specifics of your application and the exact error you're encountering.

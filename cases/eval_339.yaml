@@ -1,8 +1,0 @@
-id: 339
-prompt_path: prompt_339.txt
-type: code debugging
-lang: java
-grading:
-  keywords:
-    - content: 'getBytes()'
-      weight: 1

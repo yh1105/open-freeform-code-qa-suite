@@ -1,0 +1,35 @@
+The `.attrs()` function in styled-components is a chainable method that attaches some props to a styled component. It allows you to define static props or dynamically calculate them based on the props passed to the component. 
+
+Here's a simple example:
+
+```jsx
+const Button = styled.button.attrs(props => ({
+  type: 'button', // static value
+  size: props.small ? '2em' : '3em', // dynamic value based on props
+}))`
+  font-size: ${props => props.size};
+`;
+
+// Usage
+<Button small>Small Button</Button>
+<Button>Normal Button</Button>
+```
+
+In this example, the `Button` component will always have a `type` prop of `'button'`, and a `size` prop that depends on whether the `small` prop is passed to it. The `size` prop is then used in the component's styles.
+
+Without `.attrs()`, you would have to pass these props manually every time you use the component, or calculate dynamic styles within the styled component's template string. `.attrs()` provides a more elegant and readable way to handle this.
+
+It's important to note that `.attrs()` will be deprecated in `styled-components v5` in favor of using props directly in the template string or using a function form of styled-components. Here's how you would rewrite the above example in `v5`:
+
+```jsx
+const Button = styled.button`
+  type: button;
+  font-size: ${props => props.small ? '2em' : '3em'};
+`;
+
+// Usage
+<Button small>Small Button</Button>
+<Button>Normal Button</Button>
+```
+
+In this version, the `type` prop is hardcoded into the template string, and the `size` prop is calculated directly in the `font-size` rule.

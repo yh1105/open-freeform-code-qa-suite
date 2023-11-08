@@ -1,9 +1,0 @@
-id: 433
-prompt_path: prompt_433.txt
-type: code completion
-lang: php
-grading:
-  keywords:
-    - 'redirect'
-    - 'route'
-    - 'login'

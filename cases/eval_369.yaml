@@ -1,9 +1,0 @@
-id: 369
-prompt_path: prompt_369.txt
-type: non-code debugging
-lang: java
-grading:
-  similarity:
-    - metric: rougeLsum
-      references:
-        - path: answer_369_0.txt

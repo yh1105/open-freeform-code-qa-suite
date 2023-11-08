@@ -1,7 +1,0 @@
-id: 454
-prompt_path: prompt_454.txt
-type: code debugging
-lang: go
-grading:
-  keywords:
-    - 'package-level variable'
