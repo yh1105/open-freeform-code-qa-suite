@@ -1,0 +1,9 @@
+It sounds like you might be referring to Emmet, a plugin for text editors that allows you to write HTML and CSS code using shortcuts. 
+
+To use Emmet, you can type out the shortcut for the HTML or CSS code you want to generate, and then press the "Tab" key. For example, if you type "div.classname" and then press "Tab", it should generate the following code:
+
+```html
+<div class="classname"></div>
+```
+
+If this isn't working for you, make sure that you have Emmet installed and enabled in your text editor. The specific steps for doing this will depend on which text editor you are using.

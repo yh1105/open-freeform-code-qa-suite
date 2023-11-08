@@ -1,0 +1,32 @@
+The error message you're seeing is because ESLint is trying to find the `tsconfig.json` file in the same directory as the `.eslintrc.js` file. If your `tsconfig.json` file is not in the same directory, you need to provide the correct relative path to it in your `.eslintrc.js` file.
+
+In your `.eslintrc.js` file, you have:
+
+```javascript
+parserOptions: {
+  project: "tsconfig.json",
+  sourceType: "module",
+},
+```
+
+Here, `project: "tsconfig.json"` is telling ESLint to look for the `tsconfig.json` file in the same directory. If your `tsconfig.json` file is not in the same directory, you need to provide the correct path.
+
+For example, if your `tsconfig.json` file is in the root directory and your `.eslintrc.js` file is in a `config` directory, you would need to change it to:
+
+```javascript
+parserOptions: {
+  project: "../tsconfig.json",
+  sourceType: "module",
+},
+```
+
+If your `tsconfig.json` file is in a `config` directory and your `.eslintrc.js` file is in the root directory, you would need to change it to:
+
+```javascript
+parserOptions: {
+  project: "./config/tsconfig.json",
+  sourceType: "module",
+},
+```
+
+Adjust the path according to your project structure. This should resolve the parsing error you're seeing.

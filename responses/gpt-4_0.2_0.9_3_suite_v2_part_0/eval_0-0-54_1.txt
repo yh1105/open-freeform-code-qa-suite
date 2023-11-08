@@ -1,0 +1,78 @@
+You can create a button and add an `onClick` event to it. In the `onClick` event, you can access the state value which is updated every time the input field changes. Here's how you can do it:
+
+```javascript
+import React, { useState } from 'react';
+
+export default function InputField({name, label}) {
+  const [state, setState] = useState('')
+
+  const handleClick = () => {
+    console.log(state); // This will log the input field value on button click
+  }
+
+  return (
+    <div>
+     <label>{label}</label>
+      <input 
+        type="text" 
+        value={state} 
+        name={name}
+        onChange={(e) => setState(e.target.value)} 
+      />
+
+      <button onClick={handleClick}>Click me</button>
+
+      {state}
+    </div>
+  );
+}
+```
+
+In the above code, I have added a button with an `onClick` event. The `handleClick` function is called when the button is clicked. Inside the `handleClick` function, I am logging the state value which is the current value of the input field.
+
+If you want to get the values of multiple input fields (like first name and last name), you can use an object as the state:
+
+```javascript
+import React, { useState } from 'react';
+
+export default function InputField() {
+  const [state, setState] = useState({ firstName: '', lastName: '' })
+
+  const handleChange = (e) => {
+    setState({
+      ...state,
+      [e.target.name]: e.target.value
+    });
+  }
+
+  const handleClick = () => {
+    console.log(state); // This will log the input field values on button click
+  }
+
+  return (
+    <div>
+     <label>First Name</label>
+      <input 
+        type="text" 
+        value={state.firstName} 
+        name="firstName"
+        onChange={handleChange} 
+      />
+
+      <label>Last Name</label>
+      <input 
+        type="text" 
+        value={state.lastName} 
+        name="lastName"
+        onChange={handleChange} 
+      />
+
+      <button onClick={handleClick}>Click me</button>
+
+      {state.firstName} {state.lastName}
+    </div>
+  );
+}
+```
+
+In the above code, I have two input fields for first name and last name. The `handleChange` function updates the respective field

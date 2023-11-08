@@ -1,0 +1,21 @@
+When deploying a NextJS app to Vercel, there are a few things you need to keep in mind:
+
+1. Make sure you have a `next.config.js` file in the root of your project. This file is used to configure your NextJS app and is required for deployment to Vercel.
+
+2. Make sure you have specified the correct `target` in your `next.config.js` file. If you are not using an API, you should set the `target` to `serverless`.
+
+Here is an example `next.config.js` file:
+
+```
+module.exports = {
+  target: 'serverless'
+}
+```
+
+3. Make sure you are using the correct URL when accessing your app on Vercel. The URL should be in the format `https://your-app-name.vercel.app`.
+
+4. If you are using dynamic routes, make sure you are using the correct file naming convention. For example, if you have a dynamic route called `post`, the file should be named `[post].js`.
+
+5. If you are using custom server-side code, make sure you have configured it correctly in your `next.config.js` file.
+
+If you have checked all of these things and are still experiencing issues, you may want to check the Vercel logs for more information about the error.

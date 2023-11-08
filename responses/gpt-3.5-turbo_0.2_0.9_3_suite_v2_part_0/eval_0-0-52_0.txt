@@ -1,0 +1,9 @@
+You can remove a package that was added using `ng add` command by using the `npm uninstall` command. 
+
+For example, if you added the `@angular/material` package using `ng add @angular/material`, you can remove it using the following command:
+
+```
+npm uninstall @angular/material
+```
+
+This will remove the package from your project and also remove any dependencies that were installed along with it.

@@ -1,0 +1,23 @@
+The error message indicates that the build process requires Python to be installed on your system. Here are the steps to fix the issue:
+
+1. Download and install Python 2.7.x from the official website: https://www.python.org/downloads/
+
+2. Add Python to your system PATH environment variable. To do this, follow these steps:
+
+   a. Open the Control Panel and go to System and Security > System > Advanced system settings > Environment Variables.
+
+   b. Under System Variables, find the PATH variable and click Edit.
+
+   c. Add the path to your Python installation directory (e.g. C:\Python27) to the list of paths. Make sure to separate it from the other paths with a semicolon.
+
+3. Restart your command prompt or IDE to ensure that the PATH changes take effect.
+
+4. Try running the build process again.
+
+If the issue persists, you may need to update your node-gyp version. You can do this by running the following command:
+
+```
+npm install -g node-gyp
+```
+
+This will install the latest version of node-gyp globally on your system.

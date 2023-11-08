@@ -1,0 +1,14 @@
+The `truncate` class in TailwindCSS only works if the element has a fixed width or a max-width set. You can add the `max-w-xs` class to the `span` element to limit its width to the equivalent of 20rem (320px) or adjust the value to your preference.
+
+Here's the updated code:
+
+```html
+<div className="ml-1 inline-block">
+   <span>Label: </span>
+   <span className="font-semibold truncate max-w-xs">
+     long texttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt
+   </span>
+</div>
+``` 
+
+This should make the text truncate with an ellipsis if it overflows beyond one line.

@@ -1,0 +1,13 @@
+It sounds like you might be trying to use a CSS preprocessor like Sass or Less. These preprocessors allow you to use shorthand syntax to write CSS, which can save you a lot of time and effort.
+
+To use the shorthand syntax, you need to first install the preprocessor and then compile your code into regular CSS. Here are some steps to get started:
+
+1. Install a CSS preprocessor like Sass or Less. You can do this using a package manager like npm or by downloading the preprocessor directly from their website.
+
+2. Create a new file with a .scss or .less extension. This will be your preprocessed CSS file.
+
+3. Write your CSS using the shorthand syntax. For example, you can use `.classname { background: red; }` instead of writing out the full `div` tag.
+
+4. Compile your preprocessed CSS into regular CSS using a compiler. This can be done using a command line tool or a plugin for your code editor.
+
+Once you've compiled your preprocessed CSS, you can use it in your HTML just like regular CSS.

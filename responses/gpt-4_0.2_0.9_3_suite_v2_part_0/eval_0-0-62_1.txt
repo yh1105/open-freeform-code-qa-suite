@@ -1,0 +1,15 @@
+The error you're seeing is due to the `:key` attribute in your `v-for` loop. Vue.js requires a unique key for each item in a `v-for` loop, and it should be a primitive value (string or number), not an object or array. 
+
+In your case, `comment` is likely an object, which is causing the error. If your `comment` object has a unique identifier like an `id`, you can use that as the key:
+
+```html
+<div v-for="comment in comments" :key="comment.id">
+```
+
+If there's no unique identifier, you can use the index of the loop:
+
+```html
+<div v-for="(comment, index) in comments" :key="index">
+```
+
+This will ensure that each item in the loop has a unique key.

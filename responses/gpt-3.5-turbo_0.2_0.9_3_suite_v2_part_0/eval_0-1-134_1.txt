@@ -1,0 +1,7 @@
+It sounds like you are trying to use Emmet, a plugin that allows you to write shorthand code and then expand it into full HTML/CSS. 
+
+To use Emmet, you need to first install it in your code editor. Most popular code editors like Visual Studio Code, Sublime Text, and Atom have Emmet built-in or available as a plugin.
+
+Once you have Emmet installed, you can use shorthand syntax to write HTML and CSS code. For example, to create a div with a class of "classname", you can type `div.classname` and then press the "Tab" key. This will expand the shorthand code into the full HTML code `<div class="classname"></div>`.
+
+Make sure that you are typing the shorthand code correctly and that Emmet is enabled in your code editor. If you are still having trouble, check the documentation for your code editor or the Emmet website for more information.

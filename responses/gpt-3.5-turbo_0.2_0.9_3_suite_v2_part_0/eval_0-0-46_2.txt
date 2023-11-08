@@ -1,0 +1,12 @@
+The error message you are seeing indicates that ESLint is trying to read the `tsconfig.json` file but is unable to find it. This is because the `tsconfig.json` file is not in the root directory of your project, but rather in the `src` directory.
+
+To fix this issue, you need to update the `parserOptions.project` property in your `.eslintrc.js` file to point to the correct location of the `tsconfig.json` file. In your case, you should change it to:
+
+```javascript
+parserOptions: {
+  project: "./src/tsconfig.json",
+  sourceType: "module",
+},
+```
+
+This should resolve the error and allow ESLint to correctly parse your TypeScript files.

@@ -1,0 +1,30 @@
+Sure, you can use the `group-hover` variant in Tailwind CSS to apply styles to a child element when hovering over a parent. However, Tailwind CSS doesn't support pseudo-elements like `:after` or `:before` out of the box. 
+
+You can use a `span` element to simulate the `:after` pseudo-element and animate it on hover. Here's how you can do it:
+
+```html
+<a href="#" class="group inline-block">
+    Link
+    <span class="block w-0 h-0.5 bg-sky-600 transition-all duration-300 group-hover:w-full"></span>
+</a>
+```
+
+In this code, the `span` element is initially hidden with a width of 0 (`w-0`). When you hover over the `a` element (which is now a group), the width of the `span` element is set to full (`group-hover:w-full`), creating an animation effect. The `transition-all` and `duration-300` classes are used to animate the width change.
+
+Please note that you need to enable the `group-hover` variant for the `width` utilities in your Tailwind CSS configuration file (`tailwind.config.js`) if it's not enabled by default:
+
+```javascript
+module.exports = {
+  theme: {
+    extend: {},
+  },
+  variants: {
+    extend: {
+      width: ['group-hover'],
+    },
+  },
+  plugins: [],
+}
+```
+
+Also, remember to rebuild your CSS after changing the configuration file.

@@ -1,0 +1,48 @@
+The issue you're facing seems to be related to the positioning of the HTML elements. You can use CSS to adjust the position of the "Stop Game" button. 
+
+Here are a few suggestions:
+
+1. **Flexbox**: You can use CSS Flexbox to align your buttons. Wrap your buttons in a container and apply `display: flex;` and `justify-content: space-between;` to it. This will align your buttons on the same line with maximum space between them.
+
+```html
+<div class="button-container">
+    <button id="StartBtn" class="btnStyle" onclick="gameStarted=true;">Begin Game</button>
+    <button id="StopBtn" class="btnStyle" onclick="self.close()">Stop Game</button>
+</div>
+```
+
+```css
+.button-container {
+    display: flex;
+    justify-content: space-between;
+}
+```
+
+2. **CSS Grid**: Similar to Flexbox, you can use CSS Grid to create a layout that will keep your buttons aligned.
+
+```html
+<div class="button-container">
+    <button id="StartBtn" class="btnStyle" onclick="gameStarted=true;">Begin Game</button>
+    <button id="StopBtn" class="btnStyle" onclick="self.close()">Stop Game</button>
+</div>
+```
+
+```css
+.button-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+```
+
+3. **Positioning**: You can use CSS positioning to manually position your buttons. This is less flexible and responsive than the previous methods, but it can work if you know exactly where you want your buttons to be.
+
+```css
+#StopBtn {
+    position: absolute;
+    top: 10px; /* adjust as needed */
+    right: 10px; /* adjust as needed */
+}
+```
+
+Remember to remove the `<br>` tags between your buttons if you decide to use Flexbox or Grid, as they can interfere with the layout.
