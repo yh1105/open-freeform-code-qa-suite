@@ -1,0 +1,7 @@
+No, it's not a bad practice. In fact, it's quite common to have different pipeline behaviors for different types of requests/responses in a system. 
+
+The idea behind using generics in `PipelineBehavior<TRequest, TResponse>` is to provide a way to handle a wide variety of different types of requests and responses. However, if you have specific logic that only applies to certain types of requests or responses, it's perfectly fine to create separate pipeline behaviors for those specific types.
+
+This is actually one of the strengths of using a pipeline behavior pattern. It allows you to easily customize the handling of different types of requests/responses in a clean and modular way. Each pipeline behavior can encapsulate its own specific logic, making the code easier to understand and maintain.
+
+Just make sure that your specific logic is indeed specific to the types `RequestOne` and `ResponseOne` (or `RequestTwo` and `ResponseTwo`). If there is any common logic, try to keep it in a base class or a shared pipeline behavior to avoid code duplication.

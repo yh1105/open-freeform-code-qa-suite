@@ -1,0 +1,25 @@
+The `err113` linter rule is complaining because you're creating new error instances in your code with `errors.New()`. This is considered a bad practice because it makes it harder to check for specific errors in your code. Instead, you should define your errors as package-level variables and use those in your code.
+
+Here's how you can fix your code:
+
+First, define your errors as package-level variables:
+
+```go
+var (
+    ErrRepoGave = errors.New("repo gave err")
+    ErrOops     = errors.New("oops")
+)
+```
+
+Then, use these variables in your code:
+
+```go
+foo_test.go:55:61: err113: do not define dynamic errors, use wrapped static errors instead: "errors.New(\"repo gave err\")" (goerr113)
+        repoMock.EXPECT().Save(gomock.Eq(&foooBarBar)).Return(nil, ErrRepoGave),
+                                                                  ^
+
+foo_test.go:22:42: err113: do not define dynamic errors, use wrapped static errors instead: "errors.New(\"oops\")" (goerr113)
+    repoMock.EXPECT().FindAll().Return(nil, ErrOops)
+```
+
+This way, you're using static errors instead of dynamic ones, which is what the `err113` linter rule suggests.

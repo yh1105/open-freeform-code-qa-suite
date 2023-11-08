@@ -1,0 +1,22 @@
+The error message indicates that the Lambda function is unable to find the executable file `main` in the expected location `/var/task/main`. This is likely because the file was not properly included in the Lambda deployment package.
+
+When building a Go executable for use in AWS Lambda, it is important to build it for the Linux platform, which is the operating system used by Lambda. Since you are building the executable on a Windows platform, it will be built for the Windows platform by default.
+
+To build the executable for the Linux platform, you can use the `GOOS` and `GOARCH` environment variables to specify the target platform. You can set these variables to `linux` and `amd64` respectively, which will build the executable for the Linux platform on a 64-bit architecture.
+
+Here's an updated set of steps to deploy your Go AWS Lambda handler:
+
+1. Write your code in Go language with VSCode in Windows platform.
+2. Build the project with the following command to build the executable for the Linux platform:
+
+   ```
+   set GOOS=linux
+   set GOARCH=amd64
+   go build main.go
+   ```
+
+3. Convert `main` to `main.zip`.
+4. Upload `main.zip` with handler name `main` to AWS Lambda function using AWS console account.
+5. Create a test event to test the Lambda function.
+
+After following these steps, your Lambda function should be able to find the `main` executable and execute it successfully.

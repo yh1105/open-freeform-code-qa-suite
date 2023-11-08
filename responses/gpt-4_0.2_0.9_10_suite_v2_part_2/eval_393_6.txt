@@ -1,0 +1,9 @@
+No, it's not a bad practice. In fact, it's quite common to have different pipeline behaviors for different requests and responses. 
+
+The `PipelineBehavior<TRequest, TResponse>` in MediatR is a way to add behavior to your request/response pipeline. This is a powerful feature that allows you to add cross-cutting concerns to your application, such as logging, validation, caching, etc.
+
+However, not all requests will need the same behavior. For example, you might want to add a caching behavior to some requests, but not to others. In this case, you would create two different pipeline behaviors: one for the requests that need caching, and another for the ones that don't.
+
+In your case, if `RequestOne` and `RequestTwo` need different behaviors, it's perfectly fine to create two different pipeline behaviors for them. This will make your code more modular and easier to maintain, as each pipeline behavior will have a single responsibility.
+
+Just remember to register your pipeline behaviors in your dependency injection container, so that MediatR can find them.

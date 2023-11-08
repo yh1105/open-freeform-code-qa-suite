@@ -1,0 +1,7 @@
+Based on the error message, it seems like Doctrine is not able to find the migration class. You can try running the following command to rollback the migration:
+
+```
+bin/console --env=dev doctrine:migrations:execute Application\Migrations\Version20210909072642 --down --no-interaction -vvv
+```
+
+This command specifies the full namespace of the migration class, which should help Doctrine locate it correctly.

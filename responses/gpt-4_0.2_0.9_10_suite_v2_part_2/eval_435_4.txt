@@ -1,0 +1,20 @@
+The `AbstractController::getDoctrine()` method is deprecated since Symfony 4.2, and it will be removed in Symfony 5.0.
+
+The new alternative is to inject the `Doctrine` service into your controller methods. You can do this by type-hinting the `Doctrine` service in your controller method and Symfony will automatically inject it for you.
+
+Here is an example:
+
+```php
+use Doctrine\ORM\EntityManagerInterface;
+//...
+
+public function myMethod(EntityManagerInterface $entityManager)
+{
+    // You can now use the $entityManager object
+    //...
+}
+```
+
+In this example, `EntityManagerInterface` is the Doctrine's entity manager. Symfony will automatically provide it when the method is called.
+
+This change is part of a broader strategy in Symfony to promote dependency injection and make services explicit.

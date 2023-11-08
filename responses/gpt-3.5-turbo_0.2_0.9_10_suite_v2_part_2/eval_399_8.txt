@@ -1,0 +1,5 @@
+You need to register the ILogger service in the service collection. You can do this by adding the following line to your service registration:
+```c#
+services.AddLogging();
+```
+This will register the ILoggerFactory and ILogger services in the service collection, which will allow you to inject them into your classes.

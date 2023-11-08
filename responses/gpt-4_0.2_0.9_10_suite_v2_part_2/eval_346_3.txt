@@ -1,0 +1,11 @@
+The error you're encountering is due to a compatibility issue between IntelliJ IDEA and the version of Maven used in your project. 
+
+As of now, IntelliJ IDEA supports up to Maven 3.8.1. If you're using a newer version (like 3.8.5 in your case), you might encounter this error.
+
+To resolve this issue, you can downgrade the Maven version in your project to 3.8.1 or earlier. You can do this by modifying the `maven-wrapper.properties` file in your project:
+
+```properties
+distributionUrl=https://repo.maven.apache.org/maven2/org/apache/maven/apache-maven/3.8.1/apache-maven-3.8.1-bin.zip
+```
+
+Alternatively, you can wait for JetBrains to release an update for IntelliJ IDEA that supports the newer Maven versions.

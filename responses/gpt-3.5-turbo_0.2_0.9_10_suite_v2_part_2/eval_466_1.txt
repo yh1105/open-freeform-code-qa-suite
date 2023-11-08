@@ -1,0 +1,10 @@
+The `ext-zip` package is not a regular package that can be installed via Composer. It is an extension that needs to be installed on your server or local machine.
+
+To install the `ext-zip` extension, you need to follow the steps below:
+
+1. Open your php.ini file.
+2. Search for the line that starts with `;extension=zip` and remove the semicolon at the beginning of the line to uncomment it.
+3. Save the php.ini file.
+4. Restart your web server or PHP-FPM service.
+
+After completing these steps, the `ext-zip` extension should be installed and enabled on your server or local machine. You can verify this by running the `php -m` command in your terminal and checking if `zip` is listed as one of the installed modules.

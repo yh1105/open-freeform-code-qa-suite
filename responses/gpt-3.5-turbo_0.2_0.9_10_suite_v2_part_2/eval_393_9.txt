@@ -1,0 +1,7 @@
+Having two separate pipelines for two specific requests is not necessarily a bad practice. In fact, it can be a good practice to keep the logic for each request separate and organized. 
+
+However, if you find yourself creating many separate pipelines for different requests, it may be a sign that your design could be improved. One way to improve your design is to use a more generic approach that can handle multiple types of requests and responses. 
+
+You could consider using a base class or interface for your requests and responses, and then use a single pipeline that can handle any request and response that implements or inherits from that base class or interface. This can make your code more flexible and easier to maintain in the long run. 
+
+Ultimately, the decision to use separate pipelines or a more generic approach will depend on the specific requirements of your application and the trade-offs you are willing to make between flexibility and complexity.

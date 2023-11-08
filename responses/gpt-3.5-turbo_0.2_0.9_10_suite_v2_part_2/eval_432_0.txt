@@ -1,0 +1,19 @@
+By default, Laravel's `dd()` function limits the output to 1024 characters. However, you can increase this limit by modifying the `xdebug.var_display_max_data` and `xdebug.var_display_max_children` configuration values in your `php.ini` file.
+
+To increase the `xdebug.var_display_max_data` value, open your `php.ini` file and add the following line:
+
+```
+xdebug.var_display_max_data = 4096
+```
+
+This will increase the limit to 4096 characters. You can adjust the value to suit your needs.
+
+To increase the `xdebug.var_display_max_children` value, add the following line to your `php.ini` file:
+
+```
+xdebug.var_display_max_children = 256
+```
+
+This will increase the limit to 256 children. Again, you can adjust the value to suit your needs.
+
+After modifying your `php.ini` file, you will need to restart your web server for the changes to take effect.

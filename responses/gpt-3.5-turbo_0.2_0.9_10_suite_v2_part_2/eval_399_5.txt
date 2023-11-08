@@ -1,0 +1,8 @@
+You need to register the `ILogger` service in the `ServiceCollection`. You can do this by adding the following line to your `ServiceCollection` configuration:
+```c#
+var services = new ServiceCollection()
+    .AddLogging(logging => logging.AddConsole())
+    .AddTransient<MyClass>() // Add this line
+    .BuildServiceProvider();
+```
+This will register `MyClass` with the `ServiceCollection` and allow it to resolve the `ILogger` dependency.

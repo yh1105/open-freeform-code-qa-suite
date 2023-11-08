@@ -1,0 +1,19 @@
+The error message suggests that Go is unable to find the specific version of the module `github.ibm.com/kms/key-protect-client` that you're trying to use. This could be due to a few reasons:
+
+1. **Network Issues:** There might be network issues preventing Go from accessing the module. You can try to manually clone the repository to see if this is the case.
+
+2. **Authentication Issues:** Even though you have access to the repository, Go might not be using the correct credentials. You can try setting the `GOPRIVATE` environment variable to tell Go to use your credentials when accessing the repository. For example:
+
+    ```bash
+    export GOPRIVATE=github.ibm.com
+    ```
+
+3. **Version Issues:** The specific version of the module you're trying to use might not exist. You can check the repository to see if this is the case.
+
+To debug this issue, you can use the `-x` flag with the `go get` command to see exactly what commands Go is running. For example:
+
+```bash
+go get -x github.ibm.com/kms/key-protect-client@v0.1.5
+```
+
+This should give you more information about what's going wrong. If you're still unable to resolve the issue, you can try deleting your `go.sum` file and re-running `go build`. Go will then re-calculate the required module versions.

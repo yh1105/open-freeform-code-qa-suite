@@ -1,0 +1,37 @@
+The error message you're seeing is indicating that Go is unable to find the specific version of the `key-protect-client` module in your private repository. This could be due to a number of reasons, including network issues, incorrect configuration, or authentication problems.
+
+Here are some steps you can take to debug this issue:
+
+1. **Check your network connection**: Make sure you have a stable internet connection and you can access the private repository from your browser.
+
+2. **Check the version of the module**: Ensure that the version `v0.1.5` of the `key-protect-client` module actually exists in your private repository.
+
+3. **Check your Go version**: Make sure you're using Go 1.11 or later, which supports the use of modules.
+
+4. **Check your GOPRIVATE environment variable**: If you're using Go 1.13 or later, you can use the `GOPRIVATE` environment variable to specify a comma-separated list of patterns (glob patterns or literal strings) that match import paths whose modules or packages should not be fetched from proxy servers. If your private repository is on GitHub, you can set `GOPRIVATE=github.ibm.com`.
+
+    ```bash
+    export GOPRIVATE=github.ibm.com
+    ```
+
+5. **Check your Git configuration**: If you're using Git to fetch modules, make sure your Git configuration is correct. You might need to set up Git to use SSH instead of HTTPS for GitHub, or you might need to enter your GitHub username and password.
+
+6. **Check your GitHub token**: If you're using a GitHub token for authentication, make sure it's set up correctly. You can set it in your environment variables like this:
+
+    ```bash
+    export GITHUB_TOKEN=your_token
+    ```
+
+7. **Verbose mode**: You can also use the `-v` flag with `go get` or `go build` to get more verbose output, which might help you debug the issue.
+
+    ```bash
+    go get -v
+    ```
+
+8. **Clear the Go module cache**: Sometimes, the Go module cache might get corrupted or out-of-date. You can clear it with the following command:
+
+    ```bash
+    go clean -modcache
+    ```
+
+Remember to replace `github.ibm.com` and `your_token` with your actual GitHub domain and token.

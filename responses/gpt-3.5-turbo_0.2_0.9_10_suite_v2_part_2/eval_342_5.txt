@@ -1,0 +1,1 @@
+It's possible that the XML format is not properly configured in your Spring Boot project. You may need to add a dependency for Jackson XML in your build.gradle file and configure it in your application.properties file. Alternatively, you can try using a different XML parser such as JAXB.

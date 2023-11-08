@@ -1,0 +1,50 @@
+The `AbstractController::getDoctrine()` method is deprecated since Symfony 4.2. The alternative is to inject the `Doctrine` service into your controller method or use dependency injection for the entire controller.
+
+Here is an example of how you can do it:
+
+```php
+// src/Controller/YourController.php
+namespace App\Controller;
+
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
+class YourController extends AbstractController
+{
+    public function yourMethod(EntityManagerInterface $entityManager)
+    {
+        $repository = $entityManager->getRepository(YourEntity::class);
+        // ...
+    }
+}
+```
+
+In this example, `EntityManagerInterface` is automatically injected into your method by Symfony's service container.
+
+If you want to inject `EntityManagerInterface` into the entire controller, you can do it like this:
+
+```php
+// src/Controller/YourController.php
+namespace App\Controller;
+
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
+class YourController extends AbstractController
+{
+    private $entityManager;
+
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
+    public function yourMethod()
+    {
+        $repository = $this->entityManager->getRepository(YourEntity::class);
+        // ...
+    }
+}
+```
+
+In this case, `EntityManagerInterface` is injected into the constructor and can be used in all methods of the controller.

@@ -1,0 +1,21 @@
+Here is a simple function in Go that converts a uint64 ASCII code into a string:
+
+```go
+package main
+
+import (
+	"fmt"
+)
+
+func getASCIIAsString(asciiCode uint64) {
+	asciiString := string(asciiCode)
+	fmt.Println(asciiString)
+}
+
+func main() {
+	// Test the function
+	getASCIIAsString(65) // Output: A
+}
+```
+
+In this function, we use the `string` function to convert the ASCII code into a string. The `fmt.Println` function is then used to print the resulting string.

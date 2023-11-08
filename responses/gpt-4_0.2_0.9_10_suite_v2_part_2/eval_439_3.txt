@@ -1,0 +1,11 @@
+The error message indicates that the migration class "20210909072642" was not found. This could be due to the incorrect namespace or the wrong migration version number.
+
+Based on your configuration and the migration class listed, you should be able to execute the migration with the following command:
+
+```bash
+bin/console --env=dev doctrine:migrations:execute 'Application\Migrations\Version20210909072642' --down --no-interaction -vvv
+```
+
+This command includes the correct namespace (`Application\Migrations`) and the version number (`Version20210909072642`) as listed in your migrations list.
+
+If you still encounter the error, make sure that the migration file `Version20210909072642.php` exists in the directory `app/DoctrineMigrations`. If it doesn't exist, you might need to create a new migration or use a different version number.

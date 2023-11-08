@@ -1,0 +1,5 @@
+You should use `@Configuration` when you need to define beans explicitly in code, typically when you are dealing with third-party beans that you don't have control over. It's also used when you need to create beans with specific initialization behavior or with complex dependencies.
+
+On the other hand, `@Service`, `@Controller`, and `@Component` are used for automatic detection and configuration of beans. They are used when you want Spring to automatically manage your beans and you don't need to define specific initialization behavior or complex dependencies. 
+
+`@Service`, `@Controller`, and `@Component` are stereotypes that provide hints about the role of a class in your application. `@Service` is used for service layer, `@Controller` is used for Spring MVC controller, and `@Component` is a generic stereotype for any Spring-managed component.

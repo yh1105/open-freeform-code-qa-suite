@@ -1,0 +1,19 @@
+The error message suggests that there is an issue with the path to the `mvn.cmd` file. It seems that the path contains quotes that are causing the issue. 
+
+To fix this issue, you can try the following steps:
+
+1. Open the command prompt as an administrator.
+2. Navigate to the directory where the `mvn.cmd` file is located. In this case, it is `"C:\Program Files\NetBeans-11.1\netbeans\java\maven\bin\"`.
+3. Run the following command to set the `JAVA_HOME` environment variable:
+
+   ```
+   set JAVA_HOME=C:\Program Files\Java\jdk-11.0.5
+   ```
+
+4. Now, try running the `mvn.cmd` command again:
+
+   ```
+   mvn.cmd -DskipTests=true -Dmaven.ext.class.path="C:\Program Files\NetBeans-11.1\netbeans\java\maven-nblib\netbeans-eventspy.jar" -Dfile.encoding=UTF-8 clean install
+   ```
+
+If the above steps do not work, you can try reinstalling NetBeans and Maven to ensure that they are installed correctly.

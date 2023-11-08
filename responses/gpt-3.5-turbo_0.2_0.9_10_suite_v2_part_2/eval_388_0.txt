@@ -1,0 +1,49 @@
+The error message indicates that the `Keys` table is missing in your database. This could be caused by a migration issue during the upgrade process.
+
+To solve this problem, you can try the following steps:
+
+1. Open the Package Manager Console in Visual Studio by going to Tools > NuGet Package Manager > Package Manager Console.
+
+2. Run the following command to generate a new migration:
+
+   ```
+   Add-Migration AddKeysTable
+   ```
+
+3. Run the following command to apply the migration to the database:
+
+   ```
+   Update-Database
+   ```
+
+   This will create the `Keys` table in your database.
+
+If the above steps do not solve the problem, you can try deleting the existing migration files and generating a new migration from scratch. To do this, follow these steps:
+
+1. Delete all migration files in the Migrations folder of your project.
+
+2. Run the following command to add a new initial migration:
+
+   ```
+   Add-Migration InitialCreate
+   ```
+
+3. Run the following command to apply the migration to the database:
+
+   ```
+   Update-Database
+   ```
+
+4. Run the following command to add a new migration for the `Keys` table:
+
+   ```
+   Add-Migration AddKeysTable
+   ```
+
+5. Run the following command to apply the migration to the database:
+
+   ```
+   Update-Database
+   ```
+
+This should solve the problem. If you still encounter issues, you may need to check your database connection string and ensure that it is pointing to the correct database.

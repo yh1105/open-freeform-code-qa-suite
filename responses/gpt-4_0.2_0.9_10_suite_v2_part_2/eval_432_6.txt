@@ -1,0 +1,23 @@
+The `dd()` function in Laravel is a helper function to dump and die, which is useful for debugging. However, it doesn't have a built-in feature to increase its limitation.
+
+If you're dealing with a large amount of data, you might run into memory limit issues. This is not a limitation of `dd()` itself, but rather PHP's memory limit. You can increase PHP's memory limit in your `php.ini` file:
+
+```ini
+memory_limit = 512M
+```
+
+But, if you're dealing with deeply nested structures or large objects, even increasing the memory limit might not help. In such cases, you might want to consider alternative approaches:
+
+1. **Use `dump()` instead of `dd()`:** The `dump()` function works similarly to `dd()`, but it doesn't stop the execution of the script. This allows you to dump multiple variables or objects one after another.
+
+2. **Log the data:** Instead of dumping the data to the browser, you can log it. Laravel provides a simple way to write information to the log:
+
+    ```php
+    \Log::info(print_r($yourVariable, true));
+    ```
+
+3. **Use Xdebug:** Xdebug is a PHP extension which provides debugging and profiling capabilities. It allows you to step through your code and watch variables to see their values at different steps.
+
+4. **Use a Laravel Debugging Package:** There are several Laravel debugging packages available that provide more advanced features than `dd()`. For example, Laravel Debugbar and Laravel Telescope.
+
+Remember, it's important not to dump or log sensitive information, especially in a production environment.

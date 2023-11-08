@@ -1,0 +1,36 @@
+The `getDoctrine()` method is deprecated since Symfony 5.2 and will be removed in Symfony 6.0. The reason for deprecation is to encourage better separation of concerns between the controller and the persistence layer.
+
+The recommended alternative is to use dependency injection to inject the `Doctrine\Persistence\ManagerRegistry` service into your controller. Then, you can use the `getManager()` method to get the entity manager for a specific entity.
+
+Here's an example of how to inject the `ManagerRegistry` service into your controller:
+
+```php
+use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
+class MyController extends AbstractController
+{
+    private $managerRegistry;
+
+    public function __construct(ManagerRegistry $managerRegistry)
+    {
+        $this->managerRegistry = $managerRegistry;
+    }
+
+    public function myAction()
+    {
+        $entityManager = $this->managerRegistry->getManager();
+        // use the entity manager to query the database
+    }
+}
+```
+
+In this example, the `ManagerRegistry` service is injected into the controller's constructor. Then, the `getManager()` method is used to get the entity manager for the default entity manager.
+
+You can also use the `getManagerForClass()` method to get the entity manager for a specific entity class:
+
+```php
+$entityManager = $this->managerRegistry->getManagerForClass(MyEntity::class);
+```
+
+I hope this helps!

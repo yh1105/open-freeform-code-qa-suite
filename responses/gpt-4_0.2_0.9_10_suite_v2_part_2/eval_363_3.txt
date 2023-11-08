@@ -1,0 +1,57 @@
+The error message you're seeing is due to the Spring Cloud Config Client trying to connect to a Config Server, but it can't find the `spring.config.import` property to know where to connect.
+
+Since you mentioned that your project is not a ConfigServer and doesn't use ConfigServer, you should remove the `spring-cloud-starter-config` dependency from your `build.gradle` file. This dependency is what's causing Spring Boot to look for the `spring.config.import` property.
+
+Here's the corrected `build.gradle`:
+
+```groovy
+plugins {
+    id 'org.springframework.boot' version '2.4.2'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+}
+
+group = 'com.example.microservices.composite.product'
+version = '1.0.0-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+    mavenCentral()
+    maven {
+        url 'https://repo.spring.io/milestone'
+    }
+}
+
+ext {
+   // resilience4jVersion = "1.7.0"
+   resilience4jVersion = "1.6.1"
+
+}
+
+dependencies {
+    // Local projects dependencies
+    implementation project(':api')
+    implementation project(':util')
+
+    // Implementations dependencies
+    // Standard (actuator - for monitoring and Health)
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    // WebFlux (asynchronous Web)
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+
+    // SpringFox dependencies
+    implementation "io.springfox:springfox-boot-starter:3+"
+    implementation('io.springfox:springfox-spring-webflux:3+')
+
+    // Implementation: Spring cloud
+    implementation('org.springframework.cloud:spring-cloud-starter-stream-rabbit')
+    implementation('org.springframework.cloud:spring-cloud-starter-stream-kafka')
+
+    // Security
+    implementation('org.springframework.boot:spring-boot-starter-security')
+    implementation('org.springframework.security:spring-security-oauth2-resource-server')
+    implementation('org.springframework.security:spring-security-oauth2-jose')
+
+    // CircuitBreaker with Resilience4J
+    implementation("io.github.resilience4j:resilience4j-spring-boot2:${resilience4jVersion}")
+    implementation("io.github.resilience4j:resilience4j-reactor:${resilience

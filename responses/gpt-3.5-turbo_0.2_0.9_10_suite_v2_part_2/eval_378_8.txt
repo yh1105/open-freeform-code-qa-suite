@@ -1,0 +1,37 @@
+The issue with your code is that you are using `LocalDate` instead of `LocalDateTime`. `LocalDate` only represents a date without time, while `LocalDateTime` represents a date and time.
+
+Here is an updated version of your code that generates a random `LocalDateTime` and formats it to the desired format:
+
+```java
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Random;
+
+public class Main {
+    public static void main(String[] args) {
+        System.out.println(generateRandomDateAndTimeInString());
+    }
+
+    public static String generateRandomDateAndTimeInString() {
+        LocalDateTime dateTime = LocalDateTime.now().minusDays(new Random().nextInt(365 * 70)).withNano(0);
+        System.out.println("date and time :: " + dateTime.toString());
+        return formatDate(dateTime);
+    }
+
+    public static String formatDate(LocalDateTime dateTime) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'");
+        return dateTime.format(formatter);
+    }
+}
+```
+
+This code generates a random `LocalDateTime` by subtracting a random number of days from the current date and time. The `withNano(0)` method call sets the nanoseconds to zero to avoid printing fractional seconds in the output.
+
+The `formatDate` method formats the `LocalDateTime` using the `DateTimeFormatter` class, which provides a convenient way to format dates and times in Java 8 and later.
+
+The output should look something like this:
+
+```
+date and time :: 1955-06-14T13:37:00
+1955-06-14T13:37:00Z
+```

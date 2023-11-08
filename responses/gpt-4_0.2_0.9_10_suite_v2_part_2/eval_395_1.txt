@@ -1,0 +1,23 @@
+You can't directly register a generic interface without specifying the type. However, you can register all implementations of a generic interface using reflection. Here's an example:
+
+```c#
+var types = AppDomain.CurrentDomain.GetAssemblies()
+    .SelectMany(s => s.GetTypes())
+    .Where(p => p.IsClass && !p.IsAbstract && p.IsPublic);
+
+foreach (var type in types)
+{
+    var interfaces = type.GetInterfaces();
+    foreach (var @interface in interfaces)
+    {
+        if (@interface.IsGenericType && @interface.GetGenericTypeDefinition() == typeof(IDatabaseService<>))
+        {
+            services.AddScoped(@interface, type);
+        }
+    }
+}
+```
+
+This code will scan all public, non-abstract classes in your application, and if they implement `IDatabaseService<T>`, it will register them with the DI container. 
+
+Remember to replace `AddScoped` with `AddSingleton`, `AddTransient` or `AddScoped` depending on your needs.

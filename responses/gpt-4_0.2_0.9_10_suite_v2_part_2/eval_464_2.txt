@@ -1,0 +1,27 @@
+```go
+type A struct {
+}
+
+type B struct {
+}
+
+type Some interface {
+    some() bool
+}
+
+type AB interface {
+    Some | *A | *B
+}
+
+func (a *A) some() bool {
+    return true
+}
+
+func (b *B) some() bool {
+    return false
+}
+
+func some[T AB](x T) bool {
+    return x.some()
+}
+```

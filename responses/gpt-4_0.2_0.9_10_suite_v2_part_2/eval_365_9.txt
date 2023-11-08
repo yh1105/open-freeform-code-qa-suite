@@ -1,0 +1,26 @@
+The Java version used by Maven can be controlled by setting the `JAVA_HOME` environment variable. If you're using the Maven Wrapper (`mvnw` or `mvnw.cmd`), it will use the Java version specified by `JAVA_HOME`.
+
+Here's how you can set `JAVA_HOME`:
+
+**On Windows:**
+
+1. Search for "Environment Variables" in the Start Menu.
+2. Click on "Edit the system environment variables".
+3. Click on "Environment Variables...".
+4. Under "System variables", click on "New...".
+5. For "Variable name", enter `JAVA_HOME`.
+6. For "Variable value", enter the path to your JDK installation (e.g., `C:\Program Files\Java\jdk1.8.0_231`).
+7. Click "OK" on all dialogs to apply the changes.
+
+**On Unix-based systems (like Linux or Mac):**
+
+1. Open a terminal.
+2. Add the following line to your `.bashrc`, `.bash_profile`, or `.zshrc` file (replace `/path/to/jdk` with the actual path to your JDK installation):
+
+```bash
+export JAVA_HOME=/path/to/jdk
+```
+
+3. Apply the changes by running `source ~/.bashrc`, `source ~/.bash_profile`, or `source ~/.zshrc`.
+
+After setting `JAVA_HOME`, the Maven Wrapper should use the correct Java version. If it's still not working, make sure the `JAVA_HOME` variable is correctly set by running `echo $JAVA_HOME` (Unix) or `echo %JAVA_HOME%` (Windows) in a terminal/command prompt.

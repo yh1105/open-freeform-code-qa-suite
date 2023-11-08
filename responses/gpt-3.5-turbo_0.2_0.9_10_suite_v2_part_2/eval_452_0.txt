@@ -1,0 +1,13 @@
+Yes, you can use the `-mod=vendor` flag with `go build` or `go test` to use the vendor directory as the source of dependencies. This will cause Go to use the dependencies in the vendor directory instead of downloading them from the internet.
+
+To use this feature, you need to first create a vendor directory by running `go mod vendor`. This will copy all of your dependencies into the vendor directory.
+
+Then, when you build or test your code, you can use the `-mod=vendor` flag to tell Go to use the vendor directory:
+
+```
+go build -mod=vendor
+```
+
+This will use the dependencies in the vendor directory instead of downloading them from the internet. If you make changes to your dependencies, you can update the vendor directory by running `go mod vendor` again.
+
+Using the vendor directory can help speed up builds and reduce the amount of network traffic required to build your code. It also makes it easier to ensure that everyone is using the same versions of dependencies, since the dependencies are included in your code repository.

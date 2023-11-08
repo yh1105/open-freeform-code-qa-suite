@@ -1,0 +1,73 @@
+You can create a factory class that creates instances of `ServiceBusSender` based on the queue name. Here's an example:
+
+```c#
+public class ServiceBusSenderFactory
+{
+    private readonly ServiceBusClient _serviceBusClient;
+
+    public ServiceBusSenderFactory(ServiceBusClient serviceBusClient)
+    {
+        _serviceBusClient = serviceBusClient;
+    }
+
+    public ServiceBusSender CreateSender(string queueName)
+    {
+        return _serviceBusClient.CreateSender(queueName);
+    }
+}
+```
+
+Then, you can register the factory and the `ServiceBusSender` instances in the DI container like this:
+
+```c#
+// Register the ServiceBusClient instances
+_services.AddSingleton<ServiceBusClient>(implementationFactory =>
+{
+    var serviceBusConfiguration = implementationFactory.GetRequiredService<IOptions<UserEventConsumerSetting>>().Value;
+
+    return new ServiceBusClient(serviceBusConfiguration.ServiceBusConnectionString, new ServiceBusClientOptions
+    {
+        TransportType = ServiceBusTransportType.AmqpWebSockets
+    });
+});
+
+// Register the ServiceBusSenderFactory
+_services.AddSingleton<ServiceBusSenderFactory>();
+
+// Register the ServiceBusSender instances
+_services.AddSingleton<ServiceBusSender>(implementationFactory =>
+{
+    var serviceBusSenderFactory = implementationFactory.GetRequiredService<ServiceBusSenderFactory>();
+
+    // Replace "queueName1" and "queueName2" with your actual queue names
+    var sender1 = serviceBusSenderFactory.CreateSender("queueName1");
+    var sender2 = serviceBusSenderFactory.CreateSender("queueName2");
+
+    // Return a tuple of the two senders
+    return (sender1, sender2);
+});
+```
+
+Finally, you can inject the tuple of `ServiceBusSender` instances into your service and use them like this:
+
+```c#
+private readonly (ServiceBusSender, ServiceBusSender) _serviceBusSenders;
+
+public CarReservationMessagingService((ServiceBusSender, ServiceBusSender) serviceBusSenders)
+{
+    _serviceBusSenders = serviceBusSenders;
+}
+
+public async Task PublishNewCarReservationMessageAsync(CarReservation carReservation)
+{
+    var carReservationIntegrationMessage = new CarReservationIntegrationMessage
+    {
+        Id = Guid.NewGuid().ToString(),
+        CarId = carReservation.CarId,
+        CustomerId = carReservation.CustomerId,
+        RentFrom = carReservation.RentFrom,
+        RentTo = carReservation.RentTo
+    };
+
+    var serializedMessage = JsonSerializer.Serialize(carReservationIntegrationMessage);
+   

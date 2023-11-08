@@ -1,0 +1,21 @@
+The `err113` linter is complaining because you're creating new error instances in your code with `errors.New()`. This is considered a bad practice because it makes it harder to check for specific errors in your code. Instead, you should define a variable for your error and wrap it if necessary.
+
+Here's how you can fix your code:
+
+```go
+var (
+    ErrRepoGave = errors.New("repo gave err")
+    ErrOops = errors.New("oops")
+)
+
+// ...
+
+foo_test.go:55:61: err113: do not define dynamic errors, use wrapped static errors instead: "errors.New(\"repo gave err\")" (goerr113)
+        repoMock.EXPECT().Save(gomock.Eq(&foooBarBar)).Return(nil, fmt.Errorf("%w", ErrRepoGave)),
+                                                                  ^
+
+foo_test.go:22:42: err113: do not define dynamic errors, use wrapped static errors instead: "errors.New(\"oops\")" (goerr113)
+    repoMock.EXPECT().FindAll().Return(nil, fmt.Errorf("%w", ErrOops))
+```
+
+In this example, `ErrRepoGave` and `ErrOops` are error variables that you can reuse in your code. If you need to add more context to your errors, you can use `fmt.Errorf()` to wrap your base error with a new message. The `%w` verb is used to wrap an error.

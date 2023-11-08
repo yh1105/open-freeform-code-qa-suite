@@ -1,0 +1,69 @@
+You can use the factory pattern to create multiple instances of `ServiceBusClient` with different queue names. Here's an example of how you can do it:
+
+First, create a factory interface:
+
+```csharp
+public interface IServiceBusClientFactory
+{
+    ServiceBusSender CreateSender(string queueName);
+    ServiceBusReceiver CreateReceiver(string queueName);
+}
+```
+
+Then, implement this interface:
+
+```csharp
+public class ServiceBusClientFactory : IServiceBusClientFactory
+{
+    private readonly ServiceBusClient _serviceBusClient;
+
+    public ServiceBusClientFactory(string connectionString)
+    {
+        _serviceBusClient = new ServiceBusClient(connectionString, new ServiceBusClientOptions
+        {
+            TransportType = ServiceBusTransportType.AmqpWebSockets
+        });
+    }
+
+    public ServiceBusSender CreateSender(string queueName)
+    {
+        return _serviceBusClient.CreateSender(queueName);
+    }
+
+    public ServiceBusReceiver CreateReceiver(string queueName)
+    {
+        return _serviceBusClient.CreateReceiver(queueName, new ServiceBusReceiverOptions
+        {
+            ReceiveMode = ServiceBusReceiveMode.PeekLock
+        });
+    }
+}
+```
+
+Register the factory in your DI container:
+
+```csharp
+_services.TryAddSingleton<IServiceBusClientFactory>(implementationFactory =>
+{
+    var serviceBusConfiguration = implementationFactory.GetRequiredService<IOptions<UserEventConsumerSetting>>().Value;
+    return new ServiceBusClientFactory(serviceBusConfiguration.ServiceBusConnectionString);
+});
+```
+
+Now, you can inject `IServiceBusClientFactory` into your services and create senders or receivers for different queues:
+
+```csharp
+public class CarReservationMessagingService
+{
+    private readonly ServiceBusSender _serviceBusSender;
+
+    public CarReservationMessagingService(IServiceBusClientFactory serviceBusClientFactory)
+    {
+        _serviceBusSender = serviceBusClientFactory.CreateSender("queueName");
+    }
+
+    // ...
+}
+```
+
+This way, you can create multiple senders or receivers with the same connection string but different queue names.

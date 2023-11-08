@@ -1,0 +1,19 @@
+The `ext-zip` is a reference to the ZIP PHP extension. This is not a package that you can install via composer, but rather it's an extension that needs to be installed into PHP itself.
+
+If you're using a Unix-like operating system, you can install the ZIP extension with the following command:
+
+```bash
+sudo apt-get install php-zip
+```
+
+If you're using Windows, you'll need to enable the extension in your `php.ini` file. You can do this by removing the semicolon from the start of the line that reads `;extension=php_zip.dll`.
+
+After you've installed or enabled the ZIP extension, you should update your `composer.json` file to include the requirement for the ZIP extension. This can be done by adding the following line to the `require` section of your `composer.json`:
+
+```json
+"ext-zip": "*"
+```
+
+Then run `composer update` to update your project dependencies.
+
+Remember to restart your web server after making these changes to ensure that they take effect.

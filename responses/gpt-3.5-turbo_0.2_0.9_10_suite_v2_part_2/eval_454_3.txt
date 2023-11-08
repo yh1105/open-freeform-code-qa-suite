@@ -1,0 +1,21 @@
+The err113 lint rule is suggesting that you should not define dynamic errors and instead use wrapped static errors. This means that you should not create new errors with a fixed string message every time you encounter an error. Instead, you should create a static error variable with a descriptive message and use it throughout your codebase.
+
+To fix this, you can create a static error variable with a descriptive message and use it throughout your codebase. For example:
+
+```
+var ErrRepo = errors.New("repository error")
+```
+
+Then, you can use this error variable whenever you encounter an error in your repository code:
+
+```
+repoMock.EXPECT().Save(gomock.Eq(&foooBarBar)).Return(nil, ErrRepo)
+```
+
+Similarly, you can use this error variable whenever you encounter an error in your test code:
+
+```
+repoMock.EXPECT().FindAll().Return(nil, ErrRepo)
+```
+
+By using a static error variable, you can ensure that your error messages are consistent and descriptive throughout your codebase.

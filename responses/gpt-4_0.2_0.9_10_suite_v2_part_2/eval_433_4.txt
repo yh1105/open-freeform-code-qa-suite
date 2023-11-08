@@ -1,0 +1,27 @@
+The "419 Page Expired" error is due to Laravel's built-in CSRF protection. When you log out in one tab, the session is invalidated. Therefore, when you try to log out in the other tab, the CSRF token associated with that session is no longer valid, hence the "419 Page Expired" error.
+
+To handle this situation, you can customize the logout process to check if the user is already logged out before attempting to log out again. Here's an example of how you can do this:
+
+```php
+public function logout(Request $request)
+{
+    if (Auth::check()) {
+        Auth::logout();
+    }
+
+    return redirect('/login');
+}
+```
+
+In this code, `Auth::check()` is used to determine if the user is logged in. If the user is logged in, `Auth::logout()` is called to log out the user. If the user is already logged out (e.g., they logged out in another tab), `Auth::check()` will return `false` and `Auth::logout()` will not be called. Instead, the user will be redirected to the login page.
+
+This code should be placed in your `LoginController` or `AuthController`, depending on your Laravel version and setup.
+
+Remember to import the `Auth` facade and `Request` class at the top of your controller:
+
+```php
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+```
+
+This way, even if the user is already logged out, they will simply be redirected to the login page without seeing the "419 Page Expired" error.

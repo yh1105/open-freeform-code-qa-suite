@@ -1,0 +1,16 @@
+It seems like IntelliJ is still using the old version of Java (1.8) to compile your code. You need to configure IntelliJ to use the new JDK 11.
+
+Here are the steps to add JDK 11 to IntelliJ:
+
+1. Go to `File > Project Structure > SDKs`.
+2. Click on the `+` button and select `JDK`.
+3. Navigate to the directory where you installed JDK 11 (`C:\Program Files\Java\jdk-11.0.1`) and select it.
+4. Click `OK` to save the new SDK.
+
+Now you need to configure your project to use the new SDK:
+
+1. Go to `File > Project Structure > Project`.
+2. In the `Project SDK` dropdown, select the new JDK 11 SDK you just added.
+3. Click `OK` to save the changes.
+
+Now IntelliJ should be using JDK 11 to compile your code.

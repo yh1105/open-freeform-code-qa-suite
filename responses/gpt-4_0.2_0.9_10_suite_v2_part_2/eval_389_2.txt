@@ -1,0 +1,18 @@
+The `[Keyless]` attribute is part of the `Microsoft.EntityFrameworkCore` namespace, not the `System.ComponentModel.DataAnnotations` namespace. 
+
+You should add a reference to the `Microsoft.EntityFrameworkCore` in your class file to use the `[Keyless]` attribute.
+
+Here is how you can do it:
+
+```csharp
+using Microsoft.EntityFrameworkCore;
+
+[Keyless]
+public class MyKeylessClass
+{
+    public string SomeProperty { get; set; }
+    // other properties...
+}
+```
+
+Also, ensure that you have installed the appropriate version of Entity Framework Core. The `[Keyless]` attribute was introduced in EF Core 5.0. If you're using an older version, you won't have access to this attribute. You can check your EF Core version in your project's `.csproj` file. If you're using an older version, consider upgrading to the latest stable version.

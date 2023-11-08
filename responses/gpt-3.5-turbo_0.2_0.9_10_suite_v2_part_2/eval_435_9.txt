@@ -1,0 +1,20 @@
+The `getDoctrine()` method is not officially deprecated, but it is marked as "internal" and should not be used in your code. Instead, you should use dependency injection to get the Doctrine object.
+
+Here's an example of how to do this in a controller:
+
+```php
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
+class MyController extends AbstractController
+{
+    public function myAction(EntityManagerInterface $entityManager)
+    {
+        // use $entityManager to interact with the database
+    }
+}
+```
+
+In this example, we're using dependency injection to get the `EntityManagerInterface` object, which is an instance of Doctrine's `EntityManager` class. You can then use this object to interact with the database.
+
+Note that you'll need to make sure that the `EntityManagerInterface` is available in your service container. If you're using the default Symfony configuration, this should already be set up for you.

@@ -1,0 +1,1 @@
+It's possible that the XML format is not properly configured in your project. Check if you have the necessary dependencies and configurations for XML serialization and deserialization. Also, make sure that the `produces` attribute in your `@RequestMapping` annotation includes `MediaType.APPLICATION_XML_VALUE` to indicate that your API can produce XML responses.

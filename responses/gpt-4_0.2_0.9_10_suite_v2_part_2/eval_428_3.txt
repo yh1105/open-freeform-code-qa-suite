@@ -1,0 +1,27 @@
+## CSRF Token Mismatch Issue
+
+The CSRF token mismatch issue could be due to the following reasons:
+
+1. **Domain Configuration**: Ensure that your domain is correctly configured to use HTTPS. Laravel uses secure cookies for session by default. If your application is running under HTTP, the cookie containing the session will not be set in the client's browser.
+
+2. **Session Configuration**: Check your session configuration in `config/session.php`. Ensure that the `domain` and `path` are correctly set. The `domain` should match your application's domain and the `path` should be `/`.
+
+3. **Middleware**: Ensure that the `VerifyCsrfToken` middleware is included in the `web` middleware group in your `app/Http/Kernel.php` file.
+
+4. **Cookie Configuration**: Check your cookie configuration in `config/session.php`. Ensure that the `secure` option is set to `true` if your application is running under HTTPS, or `false` if it's running under HTTP.
+
+5. **Cache Configuration**: Clear your application cache using `php artisan cache:clear` and `php artisan config:clear` commands.
+
+## Email Sending Issue
+
+The error message `stream_socket_client(): SSL operation failed with code 1. OpenSSL Error messages: error:1408F10B:SSL routines:ssl3_get_record:wrong version number` indicates that there is a mismatch between the SSL/TLS version that your application is trying to use and the version that your SMTP server supports.
+
+Here are some steps you can take to resolve this issue:
+
+1. **Change Encryption Method**: Try changing the `MAIL_ENCRYPTION` in your `.env` file from `ssl` to `tls`. Some servers do not support SSL, but do support TLS.
+
+2. **Change Port Number**: Try changing the `MAIL_PORT` in your `.env` file to `465` if you're using `ssl`, or `587` if you're using `tls`.
+
+3. **Contact Your Email Provider**: If the above steps do not resolve the issue, you may need to contact your email provider (in this case, propnex.sg) and ask them for the correct SMTP settings. They should be able to provide you with the correct host, port, and encryption method to use.
+
+Remember to run `php artisan config:clear` after making changes to your `.env` file to ensure that Laravel picks up the new settings.

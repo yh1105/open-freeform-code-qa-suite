@@ -1,0 +1,33 @@
+The `err113` linter is complaining because you're creating new errors inline with `errors.New()`. This is considered bad practice because it makes it harder to check for specific errors.
+
+The recommended way to handle this is to define your errors as package-level variables, and then wrap them with `%w` when needed. Here's how you can do it:
+
+```go
+var (
+    ErrRepoGave = errors.New("repo gave err")
+    ErrOops = errors.New("oops")
+)
+```
+
+Then, in your tests, you can use these errors directly:
+
+```go
+repoMock.EXPECT().Save(gomock.Eq(&foooBarBar)).Return(nil, ErrRepoGave)
+repoMock.EXPECT().FindAll().Return(nil, ErrOops)
+```
+
+If you need to add more context to an error, you can use `fmt.Errorf()` to wrap the original error:
+
+```go
+return fmt.Errorf("while saving fooBarBar: %w", ErrRepoGave)
+```
+
+This way, you can check for errors using `errors.Is()`:
+
+```go
+if errors.Is(err, ErrRepoGave) {
+    // handle specific error
+}
+```
+
+This approach makes your error handling more robust and your code easier to understand.

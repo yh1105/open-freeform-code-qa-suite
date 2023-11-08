@@ -1,0 +1,39 @@
+This issue might be related to the Go modules proxy settings. Go uses a modules proxy to download dependencies, and by default, it uses `https://proxy.golang.org`. However, this proxy does not support private repositories.
+
+To solve this issue, you can try the following steps:
+
+1. **Set GOPRIVATE environment variable**
+
+    The `GOPRIVATE` environment variable controls which modules the go command considers to be private (not available publicly) and should therefore not use the proxy or checksum database. The variable is a comma-separated list of glob patterns (in the syntax of Go's `path.Match`) of module path prefixes.
+
+    If your module is in a private repository, you should set this variable to match your module path. For example:
+
+    ```bash
+    export GOPRIVATE=github.ibm.com/kms/*
+    ```
+
+    This tells Go to not use the proxy for any modules whose paths start with `github.ibm.com/kms/`.
+
+2. **Check your Git configuration**
+
+    Make sure that you have correctly configured Git to use your credentials when accessing your private repository. You can do this by setting the `http.extraheader` configuration option:
+
+    ```bash
+    git config --global http.https://github.ibm.com/kms/.extraheader "Authorization: Basic $(echo -n 'username:token' | base64)"
+    ```
+
+    Replace `username:token` with your GitHub username and personal access token.
+
+3. **Check your network settings**
+
+    If you are behind a corporate firewall or using a VPN, make sure that your network settings allow you to access your private repository.
+
+4. **Clear your Go modules cache**
+
+    If you have previously attempted to download the module and failed, it might be cached as a failed download. You can clear your Go modules cache with the following command:
+
+    ```bash
+    go clean -modcache
+    ```
+
+After following these steps, try to build your program again. If you still encounter issues, you might want to check the Go modules documentation or the Go community for further assistance.

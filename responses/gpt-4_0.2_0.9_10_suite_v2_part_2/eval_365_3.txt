@@ -1,0 +1,18 @@
+The Maven Wrapper is a shell script called `mvnw` (or `mvnw.cmd` on Windows) that automatically downloads and installs the correct version of Maven (if necessary) and runs your build. It's a way to ensure that everyone working on a project is using the same version of Maven.
+
+However, the Maven Wrapper doesn't control the version of Java that's used. That's determined by the `JAVA_HOME` environment variable and the `java` command on your system path.
+
+If you want to control the version of Java that's used, you can do so by setting the `JAVA_HOME` environment variable before running the Maven Wrapper. For example:
+
+```bash
+export JAVA_HOME=/path/to/your/jdk
+./mvnw clean install
+```
+
+This will ensure that the specified version of Java is used when running your Maven build.
+
+If you want to automate this process, you could modify the `mvnw` script to set `JAVA_HOME` before running Maven. However, this would require everyone working on the project to have the same JDK installed in the same location, which might not be practical.
+
+Another option is to use a tool like [jEnv](http://www.jenv.be/) or [SDKMAN!](https://sdkman.io/) to manage and switch between different versions of Java and other development tools.
+
+If you're using a continuous integration server, it may also have options for controlling the version of Java that's used. For example, in Jenkins, you can configure different JDK installations and choose which one to use in each job.

@@ -29,6 +29,7 @@ parser.add_argument('--qa_system_prompt', help='Prefix prompt as the system role
                     default='You are a professional assistant for programmers. '
                             'By default, questions and answers are in Markdown format. '
                             'You are chatting with programmers, so please answer as briefly as possible.')
+parser.add_argument('--skip', action='store_true', help='whether to skip if already generated', default=False)
 
 
 def single_turn(prompt, system_prompt, model_name, temp, top_p, n, max_tokens, timeout, patience, batch=2):
@@ -129,6 +130,10 @@ if __name__ == '__main__':
             case_fpath = case['path']
         case_fpath = os.path.join(os.path.dirname(args.suite_path), case_fpath)
         case_stemname = case_fpath.split('/')[-1].split('.')[0]
+
+        if args.skip and all([os.path.exists(os.path.join(exp_folder, f'{case_stemname}_{j}.txt')) for j in range(args.n)]):
+            continue
+
         with open(case_fpath, 'r') as f:
             tmp_conf = yaml.load(f, yaml.Loader)
             case_promptpath = tmp_conf['prompt_path']

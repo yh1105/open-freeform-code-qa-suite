@@ -1,0 +1,9 @@
+If you want to use the same version of Java that is used by the Maven task, you can specify the path to the Java executable in the `MAVEN_OPTS` environment variable. Here's an example:
+
+```
+MAVEN_OPTS="-Dmaven.compiler.source=1.8 -Dmaven.compiler.target=1.8 -Djava.home=/path/to/java" ./mvnw clean install
+```
+
+In this example, we're setting the `MAVEN_OPTS` environment variable to specify the Java version to use (`/path/to/java` should be replaced with the path to your Java installation). The `maven.compiler.source` and `maven.compiler.target` options are also set to ensure that the correct Java version is used for compilation.
+
+You can also set the `JAVA_HOME` environment variable to point to your Java installation directory, but this will affect all Java-related tasks on your system, not just Maven.

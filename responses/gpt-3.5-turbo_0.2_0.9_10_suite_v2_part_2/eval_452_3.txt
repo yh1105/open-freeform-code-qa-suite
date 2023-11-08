@@ -1,0 +1,38 @@
+Yes, you can use the `go mod download` command to download all the dependencies specified in your `go.mod` file. This command will download the dependencies to your local cache, which can then be used in subsequent builds.
+
+To take advantage of Docker's layer caching, you can create a separate Docker image that only downloads the dependencies and then use that image as a base for your build image. This way, if your dependencies haven't changed, Docker will use the cached layer and skip the download step, making your builds faster.
+
+Here's an example Dockerfile:
+
+```
+# First stage: download dependencies
+FROM golang:1.11-alpine AS dependencies
+
+WORKDIR /app
+
+COPY go.mod go.sum ./
+
+RUN go mod download
+
+# Second stage: build the binary
+FROM golang:1.11-alpine AS build
+
+WORKDIR /app
+
+COPY --from=dependencies /go/pkg/mod /go/pkg/mod
+
+COPY . .
+
+RUN go build -o myapp
+
+# Final stage: create a minimal image with only the binary
+FROM alpine:latest
+
+COPY --from=build /app/myapp /usr/local/bin/myapp
+
+CMD ["myapp"]
+```
+
+In this example, we first create a Docker image that only downloads the dependencies (`dependencies` stage). We then use that image as a base for our build image (`build` stage), copying over the downloaded dependencies from the previous stage. Finally, we create a minimal image with only the binary (`final` stage).
+
+Note that we're copying over the entire `/go/pkg/mod` directory from the `dependencies` stage to the `build` stage. This is because the `go mod download` command downloads the dependencies to the `/go/pkg/mod` directory by default. By copying over this directory, we ensure that subsequent builds will use the cached dependencies.

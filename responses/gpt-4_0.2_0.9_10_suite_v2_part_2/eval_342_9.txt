@@ -1,0 +1,18 @@
+The issue you're experiencing is likely due to the fact that Spring Boot, by default, uses Jackson for JSON serialization/deserialization, but does not include a library for XML serialization/deserialization.
+
+To enable XML responses, you need to add the Jackson dataformat XML library to your project. If you're using Maven, add the following to your `pom.xml`:
+
+```xml
+<dependency>
+    <groupId>com.fasterxml.jackson.dataformat</groupId>
+    <artifactId>jackson-dataformat-xml</artifactId>
+</dependency>
+```
+
+If you're using Gradle, add the following to your `build.gradle`:
+
+```groovy
+implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml'
+```
+
+After adding this dependency, Spring should be able to automatically configure Jackson to handle XML responses.

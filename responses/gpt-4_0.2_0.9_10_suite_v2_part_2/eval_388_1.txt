@@ -1,0 +1,35 @@
+The error message indicates that the SQLite database does not have a table named "Keys". This table is used by IdentityServer4 for key material storage.
+
+When you upgrade to ASP.NET Core 6.0, you also need to migrate the database schema. You can do this by creating a migration and updating the database.
+
+Here are the steps to do this:
+
+1. First, install the necessary Entity Framework tools if you haven't already. You can do this by running the following command in your Package Manager Console:
+
+```shell
+dotnet tool install --global dotnet-ef
+```
+
+2. Next, navigate to the project directory where your `DbContext` is located.
+
+3. Create a new migration. Replace `AppDbContext` with the name of your `DbContext` and `AddKeysTable` with the name you want to give to the migration:
+
+```shell
+dotnet ef migrations add AddKeysTable --context AppDbContext
+```
+
+4. Finally, update the database with the new migration:
+
+```shell
+dotnet ef database update --context AppDbContext
+```
+
+This will create the necessary `Keys` table in your SQLite database.
+
+If you're still encountering issues, ensure that your `AppDbContext` is correctly configured and that the `Keys` table is included in your `DbContext`. If it's not, you'll need to add it:
+
+```csharp
+public DbSet<Key> Keys { get; set; }
+```
+
+Remember to replace `Key` with the actual model representing your `Keys` table.

@@ -1,0 +1,36 @@
+To use the Prometheus Go client with the Gin framework, you need to create a Gin handler function that serves the Prometheus metrics. Here is how you can modify your code:
+
+```go
+package main
+
+import (
+    "github.com/gin-gonic/gin"
+    "github.com/prometheus/client_golang/prometheus"
+    "github.com/prometheus/client_golang/prometheus/promhttp"
+)
+
+var cpuTemp = prometheus.NewGauge(prometheus.GaugeOpts{
+    Name: "cpu_temperature_celsius",
+    Help: "Current temperature of the CPU.",
+})
+
+func init() {
+    // Metrics have to be registered to be exposed:
+    prometheus.MustRegister(cpuTemp)
+}
+
+func main() {
+    cpuTemp.Set(65.3)
+
+    // Create a new gin router
+    router := gin.Default()
+
+    // The prometheus middleware
+    router.GET("/metrics", gin.WrapH(promhttp.Handler()))
+
+    // Start the server
+    router.Run(":8080")
+}
+```
+
+In this code, `gin.WrapH(promhttp.Handler())` wraps the Prometheus HTTP handler into a Gin handler function. This function is then registered with the Gin router to serve the `/metrics` endpoint. When you navigate to `http://localhost:8080/metrics`, you should see the Prometheus metrics.

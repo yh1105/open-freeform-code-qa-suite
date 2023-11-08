@@ -1,0 +1,17 @@
+By default, Laravel's `dd()` function limits the output to 1024 characters. However, you can increase this limit by passing a second argument to the `dd()` function.
+
+For example, if you want to increase the limit to 4096 characters, you can use the following code:
+
+```php
+dd($data, 4096);
+```
+
+This will output the `$data` variable with a limit of 4096 characters.
+
+Alternatively, you can use the `dump()` function instead of `dd()`. The `dump()` function does not have a character limit and will output the entire variable.
+
+```php
+dump($data);
+```
+
+Keep in mind that dumping large amounts of data can slow down your application and consume a lot of memory. It's recommended to use these functions for debugging purposes only and remove them from your code once you're done.

@@ -1,0 +1,30 @@
+It seems that there might be a version conflict between the Hibernate Validator version used by Spring Boot and the one resolved by Maven. Spring Boot 2.0.4.RELEASE uses Hibernate Validator 6.0.10.Final by default, while your Maven dependencies are resolving version 5.3.5.Final-redhat-2.
+
+To solve this issue, you can try excluding the Hibernate Validator dependency from your pom.xml and let Spring Boot manage it:
+
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-validation</artifactId>
+    <exclusions>
+        <exclusion>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator</artifactId>
+        </exclusion>
+    </exclusions>
+</dependency>
+```
+
+This will exclude the Hibernate Validator dependency from the Spring Boot starter and let Spring Boot use its own version.
+
+Alternatively, you can try upgrading the Hibernate Validator version in your Maven dependencies to match the one used by Spring Boot:
+
+```xml
+<dependency>
+    <groupId>org.hibernate.validator</groupId>
+    <artifactId>hibernate-validator</artifactId>
+    <version>6.0.10.Final</version>
+</dependency>
+```
+
+After making these changes, try rebuilding your project and see if the issue is resolved.

@@ -1,0 +1,23 @@
+## CSRF Token Mismatch
+
+The CSRF token mismatch issue could be due to several reasons. Here are a few things you could check:
+
+1. **Domain Configuration**: Ensure that your domain is correctly configured. If you're using a www version (www.example.com) and a non-www version (example.com), Laravel might treat them as two different sessions. Make sure to redirect all traffic to either the www or non-www version.
+
+2. **Cookie Configuration**: Check your `config/session.php` file and ensure that the `domain` attribute is correctly set. If your application is on a subdomain, you should set the domain attribute to your root domain and prefix it with a dot. For example, '.example.com'.
+
+3. **Middleware**: Ensure that the `VerifyCsrfToken` middleware is included in your middleware group in `app/Http/Kernel.php`.
+
+4. **HTTPS**: If your application is running over HTTPS, make sure that the `secure` attribute in your `config/session.php` file is set to `true`.
+
+## SMTP Connection Error
+
+The error message you're seeing is related to the SSL version or encryption method used by the SMTP server. Here are a few things you could try:
+
+1. **Change Encryption Method**: Try changing the `MAIL_ENCRYPTION` in your `.env` file from `ssl` to `tls`. Some servers use TLS instead of SSL.
+
+2. **Change Port**: Try changing the `MAIL_PORT` in your `.env` file to `465` if you're using SSL or `587` if you're using TLS.
+
+3. **Check with Hosting Provider**: If the above solutions don't work, it's possible that there's a server configuration issue. You might need to check with your hosting provider or the email service provider to find out the correct SMTP settings.
+
+Remember to clear your config cache by running `php artisan config:cache` after making changes to your `.env` file.
