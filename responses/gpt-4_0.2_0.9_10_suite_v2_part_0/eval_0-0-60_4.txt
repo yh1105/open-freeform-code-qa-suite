@@ -1,0 +1,38 @@
+The error message you're seeing suggests that the `popper.js` module, which is a dependency for Bootstrap, is not found in your project. Here are a few steps to resolve this issue:
+
+1. Install `popper.js` via npm. Open your terminal and navigate to your project directory, then run the following command:
+
+```bash
+npm install popper.js --save
+```
+
+2. After installing `popper.js`, you need to import it into your project. Add the following line at the top of your JavaScript file:
+
+```javascript
+import Popper from 'popper.js';
+```
+
+3. If you're using Bootstrap, make sure to import `popper.js` before Bootstrap:
+
+```javascript
+import Popper from 'popper.js';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
+```
+
+The `bootstrap.bundle.min.js` file includes `popper.js`, so you don't need to import it separately if you're using this file.
+
+4. If you're using Webpack, you may need to add an alias for `popper.js` in your Webpack configuration file:
+
+```javascript
+resolve: {
+  alias: {
+    'popper.js': path.resolve(__dirname, 'node_modules/popper.js'),
+  },
+},
+```
+
+Remember to replace `__dirname` with the path to your `node_modules` directory.
+
+5. Finally, restart your development server to see if the error is resolved.
+
+If you're still encountering the error after following these steps, it may be due to a different issue, such as a problem with your project configuration or a conflict with another package.

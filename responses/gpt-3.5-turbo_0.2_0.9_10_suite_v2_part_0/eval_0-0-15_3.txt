@@ -1,0 +1,25 @@
+To mock a class with Jest, you can use the `jest.mock` function and return a constructor function that creates an object with the desired methods. Here's an example of how you can mock the `API` class:
+
+```javascript
+import API from 'utils/API';
+
+jest.mock('utils/API', () => {
+  return jest.fn().mockImplementation(() => {
+    return {
+      someMethod: jest.fn()
+    };
+  });
+});
+
+describe('API', () => {
+  it('should call someMethod', () => {
+    const api = new API();
+    api.someMethod();
+    expect(api.someMethod).toHaveBeenCalled();
+  });
+});
+```
+
+In this example, we're using `jest.fn()` to create a mock function that will be used as the constructor for the `API` class. We're then using `mockImplementation()` to return an object with the `someMethod` function. 
+
+Note that we're also using `jest.fn()` to create a mock function for `someMethod`. This allows us to test that `someMethod` is called correctly in our tests.

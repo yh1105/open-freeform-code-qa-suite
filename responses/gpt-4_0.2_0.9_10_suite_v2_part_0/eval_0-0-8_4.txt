@@ -1,0 +1,55 @@
+Sure, you can use a recursive function to traverse the nested object tree. Here is an example of how you can implement the `findObject` function:
+
+```javascript
+function findObject(id, obj) {
+    if (obj.id === id) {
+        return obj;
+    }
+    for (let i = 0; i < obj.child.length; i++) {
+        let found = findObject(id, obj.child[i]);
+        if (found) return found;
+    }
+}
+```
+
+In this function, we first check if the current object's `id` is the one we are looking for. If it is, we return the object. If it's not, we recursively call `findObject` for each child of the current object. If we find the object in one of the children, we return it.
+
+You can use this function like this:
+
+```javascript
+let objTree = {
+    "id": "A",
+    "name": "Item A",
+    "child": [
+        {
+            "id": "B",
+            "name": "Item B",
+            "child": [
+                {
+                    "id": "C",
+                    "name": "Item C",
+                    "child": []
+                }
+            ]
+        },
+        {
+            "id": "D",
+            "name": "Item D",
+            "child": []
+        }
+    ]
+};
+
+let foundObj = findObject("C", objTree);
+console.log(foundObj);
+```
+
+This will print:
+
+```javascript
+{
+  "id": "C",
+  "name": "Item C",
+  "child": []
+}
+```

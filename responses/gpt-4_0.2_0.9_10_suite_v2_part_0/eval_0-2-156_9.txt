@@ -1,0 +1,23 @@
+It seems like you want to align the "Stop Game" button with the "Begin Game" button. Here are a few suggestions:
+
+1. **Flexbox**: You can use CSS Flexbox to align items in a container. You can make the parent div a flex container and then align the items along the cross axis using `align-items: flex-start;`. This will align the buttons to the top of the container.
+
+2. **Grid Layout**: CSS Grid Layout is another powerful tool for aligning items. You can create a grid container and place the items in the desired grid cells.
+
+3. **Positioning**: You can use CSS positioning to move the "Stop Game" button. You can set the position of the button to absolute and then use top, right, bottom, and left properties to move the button.
+
+4. **Margin and Padding**: You can also use CSS margin and padding properties to move the "Stop Game" button. You can adjust the margin-top property of the button to move it upwards.
+
+Here is an example using Flexbox:
+
+```css
+#DanceScoreboard {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+```
+
+This will make the `DanceScoreboard` a flex container and align all child elements (including your buttons) to the start of the container (top).
+
+Remember, the exact solution will depend on your existing CSS and the layout you want to achieve. You may need to adjust other properties as well to get the desired result.

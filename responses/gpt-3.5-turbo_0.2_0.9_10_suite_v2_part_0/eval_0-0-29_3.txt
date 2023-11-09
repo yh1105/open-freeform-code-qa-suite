@@ -1,0 +1,14 @@
+To make sure the second query runs only after the first one is fulfilled, you can use the `useEffect` hook and add `user.id` as a dependency. Here's the updated code for the second query:
+
+```javascript
+const { data: userBio, isFulfilled: userBioFulfilled } = useGetUserBioQuery(user.id);
+
+useEffect(() => {
+  if (userFulfilled) {
+    // Run the second query only if the first one is fulfilled
+    userBioFulfilled || refetch(); // refetch() is a function provided by useGetUserBioQuery
+  }
+}, [user.id, userFulfilled, userBioFulfilled]);
+```
+
+This code uses the `useEffect` hook to run the second query only when `user.id` and `userFulfilled` change. It also checks if the second query is already fulfilled using `userBioFulfilled`, and if not, it calls `refetch()` to fetch the data.

@@ -1,0 +1,23 @@
+The error message you're seeing is due to a conflict between the Windows and WSL versions of Node.js and npm. The `whereis` command shows that there are two versions of both `node` and `npm` installed: one in `/usr/bin` (the WSL version) and one in `/mnt/c/Program Files/nodejs` (the Windows version).
+
+The problem is that the Windows version of `npm` is being called instead of the WSL version. The Windows version of `npm` is a shell script that starts with a shebang line (`#!/bin/sh`), but it has Windows-style line endings (CRLF, or `^M` at the end of the line). The WSL environment doesn't recognize this as a valid shebang line, hence the error message.
+
+To fix this, you need to make sure that the WSL version of `npm` is called instead of the Windows version. You can do this by adding the following line to your `.bashrc` or `.bash_profile` file:
+
+```bash
+export PATH=/usr/bin:$PATH
+```
+
+This line prepends `/usr/bin` to your `PATH`, ensuring that the WSL versions of `node` and `npm` are found first. After adding this line, you need to source your `.bashrc` or `.bash_profile` file to apply the changes:
+
+```bash
+source ~/.bashrc
+```
+
+or
+
+```bash
+source ~/.bash_profile
+```
+
+Now, when you run `npm -v`, you should see the version of the WSL `npm`, not the Windows one.

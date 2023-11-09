@@ -1,0 +1,32 @@
+Based on your HTML structure, it seems like your "Stop Game" button is inside the `#GameRunning` div, which might be positioned behind the game frame. Here are a few suggestions to fix this issue:
+
+1. **CSS Positioning**: You can use CSS positioning to move the "Stop Game" button to the desired location. If you want to align it with the "Begin Game" button, you can use absolute positioning. Here's an example:
+
+```css
+#GameRunning {
+    position: absolute;
+    top: 0; /* adjust as needed */
+    left: 0; /* adjust as needed */
+}
+```
+
+2. **HTML Structure**: You could also adjust your HTML structure to place the "Stop Game" button in a more appropriate location. For example, you could place it next to the "Begin Game" button inside the `#GameStopped` div. Here's an example:
+
+```html
+<div id="GameStopped">
+    <button id="StartBtn" class="btnStyle" onclick="gameStarted=true;">Begin Game</button>
+    <button id="StopBtn" class="btnStyle" onclick="self.close()">Stop Game</button>
+    <div class="Status">Click Begin Game to start</div>
+</div>
+```
+
+3. **Flexbox or Grid**: If you want more control over the layout, you could use CSS Flexbox or Grid. These allow you to create complex layouts with less code. Here's a Flexbox example:
+
+```css
+#GameStopped {
+    display: flex;
+    justify-content: space-between; /* or 'space-around', 'space-evenly', etc. */
+}
+```
+
+Remember to adjust the CSS and HTML according to your specific needs.

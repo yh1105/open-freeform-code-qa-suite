@@ -1,0 +1,12 @@
+Sure, you can achieve this by using the `group-hover` utility in Tailwind CSS. Here is how you can modify your code:
+
+```html
+<a href="#" class="group text-sky-600 transition duration-300">
+    Link
+    <span class="block max-w-0 h-0.5 bg-sky-600 group-hover:max-w-full transition-all duration-500"></span>
+</a>
+```
+
+In this code, the `group-hover:max-w-full` utility applies the `max-w-full` utility when the parent element (in this case, the `<a>` tag) is hovered over. The `transition-all` utility is used to animate all of the changes.
+
+This will animate the width of the `<span>` element from `0` to `100%` of the parent's width when you hover over the link.

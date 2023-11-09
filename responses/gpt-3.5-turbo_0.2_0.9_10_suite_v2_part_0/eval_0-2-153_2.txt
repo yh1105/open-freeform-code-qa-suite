@@ -1,0 +1,7 @@
+To have the border drawn only to the top, you can use the `border-t` class instead of `border`. Here's an example:
+
+```html
+<div class="border-t border-blue-900 border-t-1">foo</div>
+```
+
+This will add a border only to the top of the element with a width of 1 pixel and a blue color. The `border-t` class is used to specify that the border should be applied only to the top of the element.

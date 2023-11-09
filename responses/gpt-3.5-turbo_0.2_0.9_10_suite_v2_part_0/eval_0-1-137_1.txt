@@ -1,0 +1,20 @@
+The issue is with the format of the `$theme-colors` variable. The values in the map should be in quotes. Here's the corrected SCSS code:
+
+```scss
+@import "../../node_modules/bootstrap/scss/variables";
+
+$theme-colors: (
+  "primary": "#0d6efd",
+  "secondary": "#6c757d",
+  "success": "#198754",
+  "info": "#0dcaf0",
+  "warning": "#ffc107",
+  "danger": "#dc3545",
+  "light": "#f8f9fa",
+  "dark": "#212529"
+);
+
+@import "../../node_modules/bootstrap/scss/bootstrap";
+```
+
+Make sure to replace the color values with your desired colors. This should compile without any errors.

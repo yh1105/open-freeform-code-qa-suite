@@ -1,0 +1,12 @@
+You can try wrapping the `Switch` component and the `span` inside a `div` or any other container. This is because the `Form.Item` component expects a single child component. Here is the revised version of your code:
+
+```html
+<Form.Item name="switch" valuePropName="checked">
+  <div>
+    <Switch checkedChildren="Yes" unCheckedChildren="No" />
+    <span>Chargable</span>
+  </div>
+</Form.Item>
+```
+
+This should work as expected and the `onCreate` function should now be able to access the value from the switch.

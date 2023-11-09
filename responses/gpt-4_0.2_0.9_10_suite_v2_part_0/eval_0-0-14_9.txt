@@ -1,0 +1,14 @@
+The `Switch` component from Ant Design should be used inside the `Form.Item` component with a `name` prop to make it work with the form. The `valuePropName` prop should be set to `"checked"` to bind the checked state of the switch to the form field. 
+
+Here is the revised version of your code:
+
+```jsx
+<Form.Item name="chargable" valuePropName="checked" noStyle>
+  <Switch checkedChildren="Yes" unCheckedChildren="No" />
+  <span>Chargable</span>
+</Form.Item>
+```
+
+In this code, `"chargable"` is the name of the form field that will hold the value of the switch. The `Switch` component's checked state is bound to this form field. When the switch is toggled, the form field's value will be updated accordingly. 
+
+Please replace `"chargable"` with the actual name of the form field you want to bind to the switch.

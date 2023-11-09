@@ -1,0 +1,28 @@
+Yes, you can modify the internal CSS of Firefox to adjust the spacing between menu items. Here's how you can do it:
+
+1. Open your Firefox profile folder. You can do this by typing `about:support` in the address bar and then clicking on `Open Folder` next to `Profile Folder`.
+
+2. In the profile folder, create a new folder named `chrome` if it doesn't exist.
+
+3. Inside the `chrome` folder, create a new file named `userChrome.css`. If the file already exists, you can just edit it.
+
+4. Open `userChrome.css` with a text editor and paste the following CSS code:
+
+```css
+/* Reduce Spacing in Menus for Proton UI in Firefox */
+:root {
+  --arrowpanel-menuitem-padding: 4px 8px !important;
+}
+```
+
+5. Save the file and close it.
+
+6. Now, you need to enable the usage of this file in Firefox. Type `about:config` in the address bar and press Enter.
+
+7. Click on `Accept the Risk and Continue`.
+
+8. In the search bar, type `toolkit.legacyUserProfileCustomizations.stylesheets` and set its value to `true` by clicking on the toggle button.
+
+9. Restart Firefox.
+
+This CSS code reduces the padding around each menu item, effectively reducing the spacing between them. You can adjust the padding values (4px 8px in this case) to your liking. The first value is for top and bottom padding, and the second value is for left and right padding.

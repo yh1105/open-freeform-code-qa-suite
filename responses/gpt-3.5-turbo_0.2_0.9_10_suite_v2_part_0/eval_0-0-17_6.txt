@@ -1,0 +1,19 @@
+Sure! Here's how you can add an event listener for the "enter" key in Tiptap:
+
+```javascript
+mounted() {
+  let editor = new Editor({
+    extensions: [StarterKit],
+    content: this.value,
+    onKeyDown: (event, editor) => {
+      if (event.key === 'Enter') {
+        console.log('good');
+        // Add your code to submit the chat and clear the editor here
+      }
+    }
+  });
+  this.editor = editor;
+}
+```
+
+This code adds an `onKeyDown` event listener to the editor instance, which is triggered whenever a key is pressed down. The function checks if the key that was pressed is the "Enter" key, and if so, it executes `console.log("good")`. You can add your own code to submit the chat and clear the editor inside the `if` statement.

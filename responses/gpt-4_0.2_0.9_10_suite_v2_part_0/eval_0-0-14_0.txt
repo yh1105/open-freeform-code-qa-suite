@@ -1,0 +1,12 @@
+The issue you're facing might be due to the incorrect usage of the `Switch` component inside the `Form.Item`. The `Switch` component should be wrapped with the `Form.Item` and the `name` prop should be passed to the `Form.Item` to correctly bind the value.
+
+Here's the corrected version of your code:
+
+```jsx
+<Form.Item name="switch" valuePropName="checked">
+  <Switch checkedChildren="Yes" unCheckedChildren="No" />
+  <span>Chargable</span>
+</Form.Item>
+```
+
+In this code, the `Switch` component is correctly wrapped with the `Form.Item` and the `name` prop is passed to the `Form.Item`. This will ensure that the value of the `Switch` is correctly bound to the form data.

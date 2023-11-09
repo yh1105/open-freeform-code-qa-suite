@@ -1,0 +1,41 @@
+Yes, you can accomplish this by using the `useRef` hook in React. You can create a reference to the form in the `CustomForm` component and then pass this reference to the parent component (`App` in this case). Then, you can use this reference to submit the form when the 'In Root' button is clicked.
+
+Here is how you can do it:
+
+```javascript
+import React, { useRef, forwardRef } from "react";
+import ReactDOM from "react-dom";
+
+const CustomForm = forwardRef((props, ref) => (
+  <form id='my-form' onSubmit={(e) => { e.preventDefault(); alert('Form submitted!'); }} ref={ref}>
+    <button type='submit'>Inside Custom</button>
+  </form>
+));
+
+function App() {
+  const formRef = useRef();
+
+  const submitForm = () => {
+    if (formRef.current) {
+      formRef.current.dispatchEvent(new Event('submit', { cancelable: true }));
+    }
+  };
+
+  return (
+    <div>
+      <CustomForm ref={formRef} />
+      <button onClick={submitForm}>In Root</button>
+    </div>
+  );
+}
+
+const rootElement = document.getElementById("root");
+ReactDOM.render(<App />, rootElement);
+```
+
+In this code:
+
+- `forwardRef` is used to pass the ref from the parent component to the `CustomForm` component.
+- `useRef` is used to create a reference to the form.
+- `submitForm` function is created to submit the form when the 'In Root' button is clicked. It dispatches a 'submit' event to the form.
+- The 'In Root' button's `onClick` event is set to the `submitForm` function.

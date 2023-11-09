@@ -1,0 +1,18 @@
+The error you're getting is because you're trying to import the `variables` file from Bootstrap before you declare your `$theme-colors` map. The `variables` file from Bootstrap already contains a declaration for `$theme-colors`, so when you try to declare it again, it causes a conflict.
+
+Instead, you should declare your `$theme-colors` map before importing the main `bootstrap` file. You don't need to import the `variables` file separately, as it is already included when you import the main `bootstrap` file.
+
+Here's how you should structure your SCSS file:
+
+```scss
+$theme-colors: (
+  "primary": #your-color-here,
+  // Add other colors if needed
+);
+
+@import "../../node_modules/bootstrap/scss/bootstrap";
+```
+
+Replace `#your-color-here` with the color you want to use for your primary theme color. If you want to override other colors, you can add them to the `$theme-colors` map as well.
+
+Also, make sure you have the correct path to the `bootstrap` file in your `@import` statement. The path should be relative to the SCSS file you're working in.

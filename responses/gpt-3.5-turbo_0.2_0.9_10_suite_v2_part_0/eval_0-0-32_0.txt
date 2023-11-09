@@ -1,0 +1,51 @@
+To identify if a div is visible on the viewport, you can use the Intersection Observer API. Here's an example of how you can use it in your React code:
+
+```javascript
+import React, { useRef, useEffect, useState } from "react";
+
+const MyComponent = ({ data }) => {
+  const parentRef = useRef(null);
+  const [visibleIds, setVisibleIds] = useState([]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const ids = entries
+          .filter((entry) => entry.isIntersecting)
+          .map((entry) => entry.target.id);
+        setVisibleIds(ids);
+      },
+      { rootMargin: "0px", threshold: 1 }
+    );
+
+    const children = parentRef.current.children;
+    for (let i = 0; i < children.length; i++) {
+      observer.observe(children[i]);
+    }
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [data]);
+
+  return (
+    <div id="parent" ref={parentRef}>
+      {data.map((item) => (
+        <div key={item.id} id={item.id}>
+          {item.title}
+        </div>
+      ))}
+    </div>
+  );
+};
+```
+
+In this example, we use the `useRef` hook to get a reference to the parent div. We also use the `useState` hook to keep track of the visible ids.
+
+In the `useEffect` hook, we create a new `IntersectionObserver` instance and observe all the children of the parent div. We set the `rootMargin` to `0px` and the `threshold` to `1` so that the intersection is detected when the entire child element is visible.
+
+When the intersection changes, we filter the entries to get only the ones that are intersecting and map them to their respective ids. We then set the visible ids using the `setVisibleIds` function.
+
+Finally, we render the parent div with the `data` and map over each item to render a child div with the `id` and `title`. We also pass the `parentRef` to the parent div so that we can get a reference to it in the `useEffect` hook.
+
+With this code, you can get the list of divs inside of `#parent` which are visible on viewport on scroll.

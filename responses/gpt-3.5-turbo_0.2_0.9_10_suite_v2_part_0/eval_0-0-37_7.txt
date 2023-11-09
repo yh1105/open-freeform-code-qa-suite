@@ -1,0 +1,13 @@
+Sure! Here's the revised route pattern that should fulfill your requirements:
+
+```
+/route/:param1/config/:OptionalParam2?/:OptionalParam3?
+```
+
+This pattern will match all three examples you provided:
+
+- `/route/aa/config`
+- `/route/aa/config/bb`
+- `/route/aa/config/bb/cc`
+
+The `:param1` parameter is required, while `:OptionalParam2` and `:OptionalParam3` are both optional. You can access the values of these parameters in your Nestjs controller using the `@Param()` decorator.

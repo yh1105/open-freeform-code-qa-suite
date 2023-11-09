@@ -1,0 +1,33 @@
+The error message you are seeing is related to ESLint, which is a popular tool for linting and analyzing JavaScript code. It seems that ESLint is trying to read your `tsconfig.json` file but is unable to find it.
+
+To fix this issue, you need to make sure that your `tsconfig.json` file is located in the root directory of your project. If it is already there, then you can try specifying the full path to the file in your `.eslintrc.js` file.
+
+To do this, replace the following line in your `.eslintrc.js` file:
+
+```javascript
+parserOptions: {
+  project: "tsconfig.json",
+  sourceType: "module",
+},
+```
+
+with:
+
+```javascript
+parserOptions: {
+  project: "./tsconfig.json",
+  sourceType: "module",
+},
+```
+
+This should tell ESLint to look for the `tsconfig.json` file in the root directory of your project.
+
+If this does not work, you can also try running the following command in your terminal to clear the ESLint cache:
+
+```
+npx eslint --clear-cache
+```
+
+This should clear any cached information that ESLint has about your project and force it to re-read your configuration files.
+
+I hope this helps! Let me know if you have any further questions.

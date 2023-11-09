@@ -1,0 +1,30 @@
+The error message `Error: Invalid login: 535-5.7.8 Username and Password not accepted` indicates that the username or password you're using to authenticate with Gmail's SMTP server is incorrect.
+
+Here are some steps to troubleshoot this issue:
+
+1. **Check your username and password**: Make sure that the username and password in your code are correct. The username should be your full email address, and the password should be your Gmail password.
+
+2. **Enable Less Secure Apps**: Google may block sign-in attempts from some apps or devices that do not use modern security standards. To resolve this issue, you need to enable "Less secure apps" in your Gmail account. Here is how you can do it:
+
+   - Go to your Google Account.
+   - On the left navigation panel, click Security.
+   - On the bottom of the page, in the Less secure app access panel, click Turn on access.
+   - If you don't see this setting, your administrator might have turned off less secure app account access.
+
+3. **Use App Password**: If you have 2-Step Verification enabled for your account, you need to use an App Password instead of your regular password. Here is how you can generate an App Password:
+
+   - Go to your Google Account.
+   - On the left navigation panel, click Security.
+   - Under "Signing in to Google," click App Passwords. You might need to sign in again.
+   - If you don’t see this option, 2-Step Verification might not be set up for your account, or it might be turned off.
+   - At the bottom, click Select app and choose the app you’re using.
+   - Click Select device and choose the device you’re using.
+   - Click Generate.
+   - Follow the instructions to enter the App Password. The App Password is the 16-character code in the yellow bar on your device.
+   - Click Done.
+
+Remember to replace the 'pass' field in your code with this new App Password.
+
+4. **Unlock Captcha**: Sometimes, Google may block a sign-in attempt if it considers it suspicious. You can resolve this by visiting [https://accounts.google.com/DisplayUnlockCaptcha](https://accounts.google.com/DisplayUnlockCaptcha) and following the instructions on the page.
+
+Please note that it's not recommended to hardcode your credentials in your code for security reasons. Consider using environment variables or some sort of secure configuration that can be

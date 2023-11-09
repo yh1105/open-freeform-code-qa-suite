@@ -1,0 +1,61 @@
+Sure, you can use a recursive function to traverse the tree and find the object by its `id`. Here is a simple implementation:
+
+```javascript
+function findObject(obj, id) {
+    if (obj.id === id) {
+        return obj;
+    } else if (obj.child) {
+        let result = null;
+        for (let i = 0; result == null && i < obj.child.length; i++) {
+            result = findObject(obj.child[i], id);
+        }
+        return result;
+    }
+    return null;
+}
+```
+
+This function starts by checking if the current object's `id` matches the `id` we're looking for. If it does, it returns the object.
+
+If the `id` doesn't match, it checks if the object has a `child` property. If it does, it recursively calls `findObject` on each child object until it finds a match or runs out of children.
+
+If the `id` doesn't match and the object has no `child` property, it returns `null`.
+
+You can use this function like this:
+
+```javascript
+let tree = {
+    "id": "A",
+    "name": "Item A",
+    "child": [
+        {
+            "id": "B",
+            "name": "Item B",
+            "child": [
+                {
+                    "id": "C",
+                    "name": "Item C",
+                    "child": []
+                }
+            ]
+        },
+        {
+            "id": "D",
+            "name": "Item D",
+            "child": []
+        }
+    ]
+};
+
+console.log(findObject(tree, "C"));
+```
+
+This will output:
+
+```javascript
+{
+  "id": "C",
+  "name": "Item C",
+  "child": []
+}
+```

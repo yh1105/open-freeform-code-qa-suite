@@ -1,0 +1,24 @@
+The issue you're experiencing might be due to a variety of reasons. Here are a few things you can check:
+
+1. **Network Connection**: Ensure that your device or emulator has a proper network connection. Sometimes, the loading state persists because the request to the server is not going through due to network issues.
+
+2. **Server URL**: Make sure that the server URL you're using is correct and the server is up and running. You can test the server URL by pasting it into a web browser or using a tool like Postman.
+
+3. **Query**: Check if your GraphQL query is correct. You can test your query directly on the GraphQL server if it has a playground. The URL you provided seems to have a GraphQL playground. You can access it [here](https://48p1r2roz4.sse.codesandbox.io/graphql).
+
+4. **Apollo Client Version**: There might be compatibility issues with the version of Apollo Client you're using. Try downgrading or upgrading the version.
+
+5. **Error Handling**: It's possible that an error is occurring but not being displayed. Try logging the error to the console in a more explicit way:
+
+```javascript
+if (error) {
+    console.error('Error:', error);
+    return <Text>Error :(</Text>;
+}
+```
+
+6. **React Native Debugger**: If you're using React Native Debugger, try disabling it. Sometimes, it can cause issues with network requests.
+
+7. **CORS Policy**: If your server is on a different domain, there might be issues related to CORS policy. Check the server settings and ensure that the necessary headers are set to allow requests from your client's domain.
+
+If none of the above solutions work, it would be helpful if you could provide more information about the issue, such as any error messages you're seeing in the console or network logs.

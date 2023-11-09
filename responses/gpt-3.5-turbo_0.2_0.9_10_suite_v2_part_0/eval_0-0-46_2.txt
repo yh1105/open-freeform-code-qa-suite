@@ -1,0 +1,32 @@
+The error message you are seeing is related to ESLint, which is a popular tool for linting and analyzing JavaScript code. It seems that ESLint is trying to read your `tsconfig.json` file but is unable to find it.
+
+To fix this issue, you need to make sure that your `tsconfig.json` file is in the root directory of your project. If it is not, you need to update the `parserOptions.project` property in your `.eslintrc.js` file to point to the correct location of your `tsconfig.json` file.
+
+Assuming that your `tsconfig.json` file is in the root directory of your project, you can update your `.eslintrc.js` file as follows:
+
+```javascript
+module.exports = {
+  env: {
+    browser: true,
+    es6: true,
+    node: true,
+  },
+  extends: [
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:import/typescript",
+  ],
+  parser: "@typescript-eslint/parser",
+  parserOptions: {
+    project: "./tsconfig.json", // update this line
+    sourceType: "module",
+  },
+  plugins: [
+    "@typescript-eslint",
+    "import",
+  ],
+  // ...
+};
+```
+
+After making this change, save the file and restart VSCode. The error message should disappear, and you should no longer see red lines in your `.ts` files.

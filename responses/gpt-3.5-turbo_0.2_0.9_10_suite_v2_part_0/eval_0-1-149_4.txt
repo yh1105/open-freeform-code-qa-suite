@@ -1,0 +1,14 @@
+To create an animation after hovering over the link using Tailwind CSS, you can use the `group-hover` variant to target the `span` element and change its `max-width` property to create the animation effect. Here's the revised code:
+
+```html
+<a href="#" class="group text-sky-600 transition duration-300 relative">
+    Link
+    <span class="absolute bottom-0 left-0 w-full h-0.5 bg-sky-600 group-hover:max-w-full transition-all duration-500"></span>
+</a>
+```
+
+In this code, we added the `relative` class to the `a` element to make the `span` element positioned absolutely relative to it. We also added the `bottom-0` and `left-0` classes to position the `span` element at the bottom of the link.
+
+Then, we added the `group-hover:max-w-full` class to the `span` element to change its `max-width` property to `100%` when the link is hovered over. We also added the `transition-all` class to make the animation smooth.
+
+Note that we also removed the `block` class from the `span` element and replaced it with `absolute` to make it positioned absolutely relative to the `a` element.

@@ -1,0 +1,52 @@
+To move the stop button to the top and align it with the begin button, you can use CSS Flexbox or CSS Grid. Here, I'll show you how to do it with Flexbox.
+
+First, you need to wrap your buttons in a container. Then, apply `display: flex;` to the container. This will align your buttons in a row by default.
+
+Here's how you can modify your HTML:
+
+```html
+<div id="BackgroundScene">
+  <div id="DanceScoreboard">
+    <div id="buttonContainer">
+      <div id="GameStopped"><button id="StartBtn" class="btnStyle" onclick="gameStarted=true;">Begin Game</button></div>
+      <div id="GameRunning"><button id="StopBtn" class="btnStyle" onclick="self.close()">Stop Game</button></div>
+    </div>
+    <div class="Status">Click Begin Game to start</div>
+    <div id="dancePoints" class="Points">Points Earned:
+      <div class="OutputText" id="CorrectCount">0</div>
+    </div>
+  </div>
+  <div class="stage"></div>
+  <!-- ENDS .STAGE -->
+  <div id="controls">
+    <img id="left" src="./arrows/staticLeft.png">
+    <img id="up" src="./arrows/staticUp.png">
+    <img id="down" src="./arrows/staticDown.png">
+    <img id="right" src="./arrows/staticRight.png">
+  </div>
+  <!-- ENDS #CONTROLS -->
+</div>
+```
+
+Then, add the following CSS to your stylesheet:
+
+```css
+#buttonContainer {
+  display: flex;
+  justify-content: space-between;
+}
+```
+
+This will align your buttons in a row (`display: flex;`) and space them evenly across the container (`justify-content: space-between;`).
+
+If you want the buttons to be stacked vertically, you can add `flex-direction: column;` to the `#buttonContainer` styles.
+
+```css
+#buttonContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+```
+
+Remember to remove the `<br>` tags that were used for spacing before. With flexbox, you can control the spacing with CSS, which is a more flexible and maintainable approach.

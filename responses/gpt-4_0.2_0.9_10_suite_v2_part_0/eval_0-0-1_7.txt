@@ -1,0 +1,25 @@
+It's hard to provide a concrete solution without seeing your code, but here are some general steps you can follow to debug and potentially solve your issue:
+
+1. **Check your `package.json` scripts**: Ensure that your `package.json` file has the correct scripts for building and starting your application. Vercel uses these scripts to build and serve your application. A typical Next.js `package.json` might have scripts like this:
+
+    ```json
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start"
+    }
+    ```
+
+2. **Check your dynamic routes**: If you're using dynamic routes, make sure you're using them correctly. The file and folder structure in the `pages` directory should correctly reflect your routes. For example, a file located at `pages/posts/[id].js` would match the route `/posts/1`, `/posts/2`, etc.
+
+3. **Check your API routes**: If you're using Next.js API routes, ensure they're correctly defined in the `pages/api` directory. Also, make sure you're not trying to access these routes directly from the browser, as they're server-side only.
+
+4. **Check your `next.config.js` file**: Even though you mentioned you don't have a `next.config.js` file, it's worth noting that if you do create one in the future, it should be correctly configured. Misconfigurations in this file can cause deployment issues.
+
+5. **Check the build logs**: Vercel provides detailed build logs. Check these logs for any error messages or warnings that could indicate what's going wrong.
+
+6. **Local testing**: Test the build process locally by running `yarn run build` and then `yarn run start`. This will give you a more accurate representation of what's happening on Vercel.
+
+7. **Upgrade Next.js**: You're using an older version of Next.js. Consider upgrading to the latest version, as the issue you're experiencing might have been fixed in a newer version.
+
+If none of these steps help, please provide more details about your application, such as the structure of your `pages` directory, the contents of your `package.json` file, and any error messages you're seeing in the build logs.

@@ -1,0 +1,66 @@
+To get the input field value on button click in React using hooks, you can create a button and attach an `onClick` event to it. In the `onClick` event, you can create a function that will log the state (which holds the input field value). Here's how you can do it:
+
+```javascript
+import React, { useState } from 'react';
+
+export default function InputField({name,label}) {
+  const [state, setState] = useState('')
+
+  const handleClick = () => {
+    console.log(state); // This will log the input field value
+  }
+
+  return (
+    <div>
+     <label>{label}</label>
+      <input type="text" 
+      value={state} 
+      name={name}
+      onChange={(e) => setState(e.target.value)} />
+
+      <button onClick={handleClick}>Click me</button>
+
+      {state}
+    </div>
+  );
+}
+```
+
+In this code, `handleClick` is a function that logs the current state when the button is clicked. The button's `onClick` event calls this function.
+
+If you want to get the first name and last name value on button click, you can create two states, one for the first name and another for the last name. Then, in the `handleClick` function, you can log both states. Here's how you can do it:
+
+```javascript
+import React, { useState } from 'react';
+
+export default function InputField() {
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
+
+  const handleClick = () => {
+    console.log(firstName, lastName); // This will log the first name and last name
+  }
+
+  return (
+    <div>
+     <label>First Name</label>
+      <input type="text" 
+      value={firstName} 
+      name="firstName"
+      onChange={(e) => setFirstName(e.target.value)} />
+
+     <label>Last Name</label>
+      <input type="text" 
+      value={lastName} 
+      name="lastName"
+      onChange={(e) => setLastName(e.target.value)} />
+
+      <button onClick={handleClick}>Click me</button>
+
+      {firstName} {lastName}
+    </div>
+  );
+}
+```
+
+In this code, `setFirstName` and `setLastName` are used to update the first name and last name states respectively. The `handleClick`

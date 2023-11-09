@@ -1,0 +1,24 @@
+In Nest.js, when you use the `@Prop()` decorator from the `@nestjs/mongoose` package to define a schema, you can pass an options object to it. One of the options is `index`, which you can set to `true` to create an index for that property.
+
+However, merely defining the index in the schema is not enough. You also need to ensure that Mongoose actually creates the index in MongoDB. This is done by calling the `Model.syncIndexes()` function.
+
+Here's how you can do it:
+
+```javascript
+import { Injectable, OnModuleInit } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+
+@Injectable()
+export class MyService implements OnModuleInit {
+  constructor(@InjectModel(Schema.name) private readonly model: Model<Schema>) {}
+
+  async onModuleInit(): Promise<void> {
+    await this.model.syncIndexes();
+  }
+}
+```
+
+In this example, `MyService` implements the `OnModuleInit` interface, which means it has an `onModuleInit()` method that will be called when the Nest.js module containing this service is initialized. In this method, we call `Model.syncIndexes()`, which will ensure that all indexes defined in the schema are actually created in MongoDB.
+
+Remember to replace `Schema` with your actual schema name.

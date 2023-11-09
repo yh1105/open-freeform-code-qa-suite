@@ -1,0 +1,10 @@
+Sure, you need to wrap the `Switch` component with the `Form.Item` component and give it a `name` prop. This way, the form will be able to track the value of the switch. Here is the revised code:
+
+```jsx
+<Form.Item name="switch" valuePropName="checked" noStyle>
+  <Switch checkedChildren="Yes" unCheckedChildren="No" />
+  <span>Chargable</span>
+</Form.Item>
+```
+
+This way, the `Switch` component is now a part of the form and its value will be included when the form values are collected.

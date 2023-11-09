@@ -1,0 +1,34 @@
+The `.attrs()` function in styled components allows you to set default props for a component. This means that you can define default values for props that are not explicitly passed to the component.
+
+Here's a simple example:
+
+```
+import styled from 'styled-components';
+
+const Button = styled.button.attrs({
+  type: 'button',
+  disabled: false
+})`
+  background-color: ${props => props.disabled ? 'gray' : 'blue'};
+  color: white;
+  padding: 10px;
+`;
+
+<Button>Click me!</Button>
+```
+
+In this example, we're creating a `Button` component using styled components. We're also using the `.attrs()` function to set default props for the component. We're setting the `type` prop to `'button'` and the `disabled` prop to `false`.
+
+In the styled component definition, we're using the `props` object to conditionally set the background color based on the value of the `disabled` prop. If `disabled` is `true`, the background color will be gray, otherwise it will be blue.
+
+When we render the `Button` component without passing any props, it will use the default props we defined in `.attrs()`. However, if we pass props to the component, they will override the default props.
+
+For example, if we render the `Button` component like this:
+
+```
+<Button disabled={true}>Click me!</Button>
+```
+
+The `disabled` prop will be `true`, so the background color will be gray.
+
+Overall, the `.attrs()` function can be useful for setting default props and reducing the amount of code you need to write for your components.

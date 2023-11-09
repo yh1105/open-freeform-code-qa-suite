@@ -1,0 +1,31 @@
+In order to create an index in Mongoose, you need to use the `@Index()` decorator from the `@nestjs/mongoose` package. Here is how you can do it:
+
+```javascript
+import { Prop, Schema, SchemaFactory, Index } from '@nestjs/mongoose';
+import { Document } from 'mongoose';
+
+@Schema()
+@Index({ type: 1 }) // This is where you define your index
+export class MySchema extends Document {
+
+  @Prop()
+  _id: string;
+
+  @Prop({required: true})
+  type: string;
+
+  @Prop()
+  creationDate: string;
+
+  @Prop()
+  name: string;
+}
+
+export const MySchemaModel = SchemaFactory.createForClass(MySchema);
+```
+
+In the above code, `@Index({ type: 1 })` creates an ascending index on the `type` field. If you want to create a descending index, you can use `-1` instead of `1`.
+
+Remember, indexes are not created until the model is compiled and a connection is made to MongoDB. Also, Mongoose will not overwrite existing indexes, so you need to drop the index manually or allow Mongoose to drop it by setting `autoIndex` to `true` in your connection options.
+
+Please note that creating indexes can take a while depending on your data size, and it can potentially lock up MongoDB. So, it's usually a good idea to create indexes manually or in the background.

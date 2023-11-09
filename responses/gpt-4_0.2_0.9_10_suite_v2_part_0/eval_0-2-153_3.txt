@@ -1,0 +1,7 @@
+To draw a border only on the top edge, you should use the `border-t` class, which applies the border to the top edge only. You also need to remove the `border` class which applies the border to all edges. Here's how you can do it:
+
+```html
+<div class="border-t border-blue-900">foo</div>
+```
+
+This will apply a border to the top edge only and the border color will be blue-900.

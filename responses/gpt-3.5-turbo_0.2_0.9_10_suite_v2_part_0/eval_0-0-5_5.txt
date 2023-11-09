@@ -1,0 +1,21 @@
+The error message indicates that Python is not installed or not found in your system. You need to install Python and add it to your system's PATH environment variable.
+
+Here are the steps to install Python and add it to your system's PATH:
+
+1. Download the latest version of Python from the official website: https://www.python.org/downloads/
+
+2. Run the installer and select "Add Python to PATH" option during the installation process.
+
+3. Once the installation is complete, open a new command prompt and type `python` to verify that Python is installed and added to your system's PATH.
+
+4. If Python is installed and added to your system's PATH, try running the build command again.
+
+If you still encounter the same error, you may need to set the PYTHON environment variable to the path of your Python executable. You can do this by running the following command in your command prompt:
+
+```
+set PYTHON=C:\Python27\python.exe
+```
+
+Replace `C:\Python27\python.exe` with the path to your Python executable.
+
+After setting the PYTHON environment variable, try running the build command again.

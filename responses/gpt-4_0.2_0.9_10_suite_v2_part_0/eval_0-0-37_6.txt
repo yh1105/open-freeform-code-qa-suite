@@ -1,0 +1,17 @@
+Sure, you can define your route in NestJS like this:
+
+```typescript
+@Controller('route')
+export class YourController {
+  @Get(':param1/config/:OptionalParam2?/:OptionalParam3?')
+  async yourMethod(
+    @Param('param1') param1: string,
+    @Param('OptionalParam2') OptionalParam2?: string,
+    @Param('OptionalParam3') OptionalParam3?: string,
+  ) {
+    // Your code here
+  }
+}
+```
+
+In this code, `:OptionalParam2?` and `:OptionalParam3?` are optional parameters. The `?` at the end of the parameter name makes it optional.

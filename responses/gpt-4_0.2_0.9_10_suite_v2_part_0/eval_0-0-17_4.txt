@@ -1,0 +1,22 @@
+Sure, you can use the `keydown` event and check if the key pressed is "Enter". Here is the revised version of your code:
+
+```javascript
+mounted() {
+  let editor = new Editor({
+    extensions: [
+      StarterKit,
+      Keymap({
+        "Enter": ({ state, dispatch }) => {
+          console.log("good");
+          // prevent the default "Enter" behavior
+          return true;
+        }
+      })
+    ],
+    content: this.value
+  });
+  this.editor = editor;
+}
+```
+
+In this code, we're using the `Keymap` extension to listen for the "Enter" key press. When the "Enter" key is pressed, it will execute `console.log("good")` and prevent the default "Enter" behavior.

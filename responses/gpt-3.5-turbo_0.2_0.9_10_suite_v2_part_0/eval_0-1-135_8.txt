@@ -1,0 +1,19 @@
+Try adding `align-items: flex-start;` to the `.container` class. This will align the nested flexbox elements to the top of the container, which should allow the `height: auto;` property to work properly in Safari. Here's the updated CSS:
+
+```css
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.container section:first-child {
+  display: flex;
+  margin-bottom: 25px;
+}
+
+.container img {
+  width: 125px;
+  height: auto;
+}
+```

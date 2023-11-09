@@ -1,0 +1,31 @@
+Yes, you can add a `displayName` property to the component function to shut down the ESLint error. Here's an example:
+
+```jsx
+const columns_payment_summary_table = [ 
+  {
+    title: FooConstants.LABEL_QUANTITY_SELECTED,
+    dataIndex: 'group',
+    key: 'group',
+    render: function CustomRender(text) {
+      return <span>{getCountForCountry(text)}</span>;
+    },
+    displayName: 'CustomRender',
+  },
+];
+```
+
+Alternatively, you can use an arrow function and set the `displayName` property on the function itself:
+
+```jsx
+const columns_payment_summary_table = [ 
+  {
+    title: FooConstants.LABEL_QUANTITY_SELECTED,
+    dataIndex: 'group',
+    key: 'group',
+    render: (text) => <span>{getCountForCountry(text)}</span>,
+    displayName: 'CustomRender',
+  },
+];
+```
+
+Either way, setting the `displayName` property should resolve the ESLint error.

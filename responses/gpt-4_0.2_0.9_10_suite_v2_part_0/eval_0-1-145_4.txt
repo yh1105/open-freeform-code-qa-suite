@@ -1,0 +1,36 @@
+The `truncate` class in TailwindCSS only works for a single line of text. If the text overflows more than one line, the `truncate` class won't work as expected.
+
+If you want to truncate the text to a specific number of lines, you can use the `line-clamp-{n}` utility provided by TailwindCSS. However, this utility is not included by default in TailwindCSS, you need to enable it in your `tailwind.config.js` file.
+
+Here's how you can do it:
+
+1. Enable the `lineClamp` plugin in your `tailwind.config.js`:
+
+```javascript
+module.exports = {
+  theme: {
+    // ...
+  },
+  variants: {
+    // ...
+  },
+  plugins: [
+    require('@tailwindcss/line-clamp'),
+  ],
+}
+```
+
+2. Then you can use the `line-clamp-{n}` utility in your HTML:
+
+```html
+<div className="ml-1 inline-block">
+   <span>Label: </span>
+   <span className="font-semibold line-clamp-1">
+     long texttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt
+   </span>
+</div>
+```
+
+In this example, the `line-clamp-1` utility will truncate the text to 1 line.
+
+Please note that the `line-clamp-{n}` utility is not fully supported in all browsers. It is not supported in IE and has partial support in Edge. For full browser support, you can check [Can I use](https://caniuse.com/?search=line-clamp).

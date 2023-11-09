@@ -1,0 +1,42 @@
+For the first way, you can pass an `options` prop to the `Tab.Screen` component for the "Settings" screen. Here's an example:
+
+```javascript
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Tab.Navigator>
+        <Tab.Screen name="Home" component={ProfileStackScreen} />
+        <Tab.Screen
+          name="Settings"
+          component={SettingsStackScreen}
+          options={{ tabBarVisible: false }}
+        />
+      </Tab.Navigator>
+    </NavigationContainer>
+  );
+}
+```
+
+For the second way, you can use the `useEffect` hook to set the `tabBarVisible` option to `false` when the "Settings" screen is focused. Here's an example:
+
+```javascript
+import { useEffect } from 'react';
+
+function SettingsStackScreen({ navigation }) {
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      navigation.setOptions({ tabBarVisible: false });
+    });
+
+    return unsubscribe;
+  }, [navigation]);
+
+  return (
+    <SettingsStack.Navigator>
+      <SettingsStack.Screen name="Settings" component={SettingsScreen} />
+    </SettingsStack.Navigator>
+  );
+}
+``` 
+
+Note that in the second way, we're using the `useEffect` hook to add a listener to the `focus` event of the navigation object. When the "Settings" screen is focused, we're setting the `tabBarVisible` option to `false` using the `setOptions` method of the navigation object. We're also returning a function from the `useEffect` hook to remove the listener when the component unmounts.

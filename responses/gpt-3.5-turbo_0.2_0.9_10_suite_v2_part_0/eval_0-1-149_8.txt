@@ -1,0 +1,14 @@
+Yes, you can achieve this animation effect using Tailwind CSS. Here's an example code snippet that you can use:
+
+```html
+<a href="#" class="group text-sky-600 relative">
+    Link
+    <span class="absolute bottom-0 left-0 w-full h-0.5 bg-sky-600 transition-all duration-500 group-hover:h-full"></span>
+</a>
+```
+
+In this code, we have added the `relative` class to the link container and `absolute` class to the span element. The `bottom-0` and `left-0` classes position the span element at the bottom of the link container. The `w-full` class makes the span element take up the full width of the link container.
+
+We have also added the `transition-all` and `duration-500` classes to the span element to make the transition smooth and last for 500ms. The `group-hover:h-full` class makes the span element expand to full height when the link container is hovered over.
+
+I hope this helps! Let me know if you have any further questions.

@@ -1,0 +1,11 @@
+Sure, here is a function that does what you asked for:
+
+```javascript
+function keys_and_prices(raw_obj) {
+    let keys = Object.keys(raw_obj);
+    let prices = keys.map(key => raw_obj[key].price);
+    return [keys, prices];
+}
+```
+
+This function first gets all the keys from the input object using `Object.keys()`. Then it maps over these keys and for each key, it retrieves the corresponding price from the input object. Finally, it returns an array containing the keys array and the prices array.

@@ -1,0 +1,11 @@
+You can use the Tailwind CSS utility classes to apply a border only to the top of an element. 
+
+The `border-t` class applies a border to the top edge of an element. The `border-blue-900` class applies a blue color to the border. 
+
+Here's how you can modify your code:
+
+```html
+<div class="border-t border-blue-900">foo</div>
+```
+
+In this code, `border-t` applies a border to the top edge of the div, and `border-blue-900` sets the color of the border to blue.

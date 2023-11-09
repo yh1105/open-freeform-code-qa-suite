@@ -1,0 +1,22 @@
+Sure, you can use the `keydown` event to listen for the "enter" key. Here is your revised code:
+
+```javascript
+mounted() {
+  let editor = new Editor({
+    extensions: [
+      StarterKit,
+      Keymap({
+        "Enter": ({ state, dispatch }) => {
+          console.log("good");
+          // prevent the default "Enter" behavior
+          return true;
+        }
+      })
+    ],
+    content: this.value
+  });
+  this.editor = editor;
+}
+```
+
+Please note that you need to import `Keymap` from `prosemirror-commands` to use it.

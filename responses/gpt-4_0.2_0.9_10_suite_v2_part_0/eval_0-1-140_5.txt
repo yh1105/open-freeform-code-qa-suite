@@ -1,0 +1,20 @@
+Font Awesome 5 has some changes in the way it is used compared to Font Awesome 4. 
+
+Firstly, the font-family is no longer "FontAwesome", it's now "Font Awesome 5 Free" for the free version, or "Font Awesome 5 Pro" for the pro version. 
+
+Secondly, Font Awesome 5 uses different Unicode for the icons. The Unicode for the angle-down icon (which was "\f107" in Font Awesome 4) is now "\f107" for the solid style, "\f359" for the regular style, and "\f358" for the light style in Font Awesome 5.
+
+Thirdly, you need to add "font-weight" property. The value should be "900" for solid, "400" for regular, and "300" for light.
+
+Here is how you can modify your CSS to work with Font Awesome 5:
+
+```css
+#mainNav .navbar-collapse .navbar-sidenav .nav-link-collapse:after {
+  float: right;
+  content: "\f107";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900; /* Use 400 for regular style and 300 for light style */
+}
+```
+
+Please replace the content value and font-weight based on the style of the icon you want to use.

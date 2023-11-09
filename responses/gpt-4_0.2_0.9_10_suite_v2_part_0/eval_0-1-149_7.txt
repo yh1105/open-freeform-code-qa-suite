@@ -1,0 +1,25 @@
+Sure, I can help with that. You can use the `group-hover` utility to apply styles on hover. Here's how you can modify your code to animate the width of the span on hover:
+
+```html
+<a href="#" class="group text-sky-600 transition duration-300">
+    Link
+    <span class="block w-0 group-hover:w-full transition-all duration-500 h-0.5 bg-sky-600"></span>
+</a>
+```
+
+In this code, the `w-0` class sets the initial width of the span to 0. The `group-hover:w-full` class applies the `w-full` class when the parent with the `group` class is hovered over, setting the width to 100%. The `transition-all` class applies the transition effect to all properties, and the `duration-500` class sets the duration of the transition to 500ms.
+
+Please note that the `group-hover` variant is not enabled for all utilities by default in Tailwind CSS. If it doesn't work, you may need to enable it in your Tailwind CSS configuration file (`tailwind.config.js`) like so:
+
+```javascript
+module.exports = {
+  variants: {
+    extend: {
+      width: ['group-hover'],
+    },
+  },
+  // ...
+}
+```
+
+This will enable the `group-hover` variant for the `width` utility.

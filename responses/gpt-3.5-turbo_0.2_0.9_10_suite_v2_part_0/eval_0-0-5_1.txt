@@ -1,0 +1,17 @@
+The error log indicates that node-gyp is unable to find Python executable "python" or "python2" in the PATH. 
+
+To fix this issue, you need to install Python and add it to the PATH environment variable. 
+
+Here are the steps to install Python and add it to the PATH:
+
+1. Download the latest version of Python from the official website: https://www.python.org/downloads/
+2. Run the installer and select "Add Python to PATH" option during the installation process.
+3. After installation, open the Command Prompt and type `python` to verify that Python is installed and added to the PATH.
+4. If Python is not added to the PATH, you can add it manually by following these steps:
+   - Open the Control Panel and go to System and Security > System > Advanced system settings.
+   - Click on the "Environment Variables" button.
+   - Under "System Variables", scroll down and find the "Path" variable, then click on "Edit".
+   - Click on "New" and add the path to the Python executable (e.g. C:\Python27) and click "OK".
+   - Restart your Command Prompt and try running the build again.
+
+Once you have installed Python and added it to the PATH, try running the build again and it should work.

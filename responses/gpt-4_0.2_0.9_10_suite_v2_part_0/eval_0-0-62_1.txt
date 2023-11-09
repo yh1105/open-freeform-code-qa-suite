@@ -1,0 +1,17 @@
+The error message you're seeing is related to the `v-for` directive in your Vue.js template. Vue.js requires a unique `key` attribute for each item in a list when using `v-for` for better performance and predictability. 
+
+The `key` attribute should be a unique primitive value (string or number). In your case, you're using the entire `comment` object as the key, which is a non-primitive value. That's why Vue.js is giving you a warning.
+
+Assuming each comment has a unique id, you can use that as the key:
+
+```html
+<div v-for="comment in comments" :key="comment.id">
+```
+
+If there's no unique id, you can use the index of the comment in the array:
+
+```html
+<div v-for="(comment, index) in comments" :key="index">
+```
+
+Remember that using the index as a key only works well if your list does not have a dynamic order. If items will be added, removed, or reordered, it's better to use a unique id.

@@ -1,0 +1,27 @@
+Yes, you can detect if the user's system is in dark mode using CSS media queries. The `prefers-color-scheme` media feature is used to detect if the user has requested the system use a light or dark color theme.
+
+Here's an example:
+
+```css
+/* Light mode */
+@media (prefers-color-scheme: light) {
+  body {
+    background-color: white;
+    color: black;
+  }
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: black;
+    color: white;
+  }
+}
+```
+
+In this example, the background color of the body will be white and the text color will be black in light mode. In dark mode, the background color will be black and the text color will be white.
+
+This feature is supported in Safari 12.1, Firefox 67, and Chrome 76 and later versions. For older browsers, you might want to provide a fallback style.
+
+Please note that this only works if the user has chosen a preferred color scheme for their system. If they haven't, the browser will not apply either of these color schemes.

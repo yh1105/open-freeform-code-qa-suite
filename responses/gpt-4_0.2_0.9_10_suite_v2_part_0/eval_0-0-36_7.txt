@@ -1,0 +1,13 @@
+In your case, you can use the `router.reload()` function to trigger a client-side reload. Here is how you can do it:
+
+```javascript
+import { useRouter } from "next/router";
+
+export default function Component(){
+    const router = useRouter();
+
+    router.reload();
+}
+```
+
+This will reload the current page and `getInitialProps` will be called on the client-side.

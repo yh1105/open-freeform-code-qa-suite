@@ -1,0 +1,27 @@
+The error log indicates that Python is not found in your system. Node-gyp, which is a cross-platform command-line tool written in Node.js for compiling native addon modules for Node.js, requires Python to work. 
+
+Here are the steps to fix this issue:
+
+1. Install Python 2.7.x from the [official website](https://www.python.org/downloads/). Node-gyp requires Python 2.7 and does not support Python 3.x.
+
+2. After installing Python, you need to add it to your system PATH. To do this, follow these steps:
+
+   - Open the Start Menu and search for "Environment Variables".
+   - Click on "Edit the system environment variables".
+   - Click on the "Environment Variables" button at the bottom.
+   - In the "System variables" section, find the "Path" variable, select it, and click on "Edit".
+   - In the "Variable value" field, add the path to your Python installation directory. If you installed Python to the default location, this will be `C:\Python27\`. Make sure to separate this value from existing ones with a semicolon (`;`).
+
+3. After adding Python to your PATH, you should be able to use it from the command line. You can test this by opening a new command prompt window (old ones won't have the updated PATH) and typing `python --version`. If Python is correctly installed and on your PATH, this should return "Python 2.7.x".
+
+4. Now, try to build your Node.js project again. The node-gyp dependency should now be able to find and use Python.
+
+If you still encounter issues, you might need to configure npm to know the path of Python by running the following command in your terminal:
+
+```bash
+npm config set python /path/to/executable/python2.7
+```
+
+Replace `/path/to/executable/python2.7` with the actual path to your Python 2.7 executable.
+
+Remember to restart your terminal or command prompt after setting the environment variables.

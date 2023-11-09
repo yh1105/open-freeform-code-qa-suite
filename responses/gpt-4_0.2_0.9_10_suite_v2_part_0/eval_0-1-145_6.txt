@@ -1,0 +1,27 @@
+The `truncate` class in Tailwind CSS only works for a single line of text. If the text overflows more than one line, the `truncate` class won't work. 
+
+If you want to truncate text that overflows more than one line, you'll have to use some custom CSS. Here's an example:
+
+```css
+.truncate-2-lines {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;  
+  overflow: hidden;
+}
+```
+
+You can use this class in your HTML like this:
+
+```html
+<div className="ml-1 inline-block">
+   <span>Label: </span>
+   <span className="font-semibold truncate-2-lines">
+     long texttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt
+   </span>
+</div>
+```
+
+This will truncate the text after two lines. You can adjust the number of lines by changing the `-webkit-line-clamp` property.
+
+Please note that this solution uses `-webkit-` prefixed CSS properties, which means it will only work in webkit-based browsers like Chrome and Safari. It won't work in Internet Explorer.

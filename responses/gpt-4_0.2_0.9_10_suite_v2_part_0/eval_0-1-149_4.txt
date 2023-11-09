@@ -1,0 +1,30 @@
+To create an animation after hovering over the link using Tailwind CSS, you can use the `group-hover` variant. The `group-hover` variant is used to style an element when its parent is being hovered over.
+
+Here is an example of how you can use it:
+
+```html
+<a href="#" class="group">
+    <span class="text-sky-600 transition-all duration-300">Link</span>
+    <span class="block w-0 h-0.5 bg-sky-600 transition-all duration-500 group-hover:w-full"></span>
+</a>
+```
+
+In the above code, the width of the second span (which is the underline) is initially set to 0. When you hover over the parent element (which is the link), the width of the underline will transition to full width (`w-full`). The transition duration is set to 500ms (`duration-500`).
+
+Please note that you need to enable the `group-hover` variant in your Tailwind CSS configuration file (`tailwind.config.js`) for this to work. Here is how you can do it:
+
+```javascript
+module.exports = {
+  theme: {
+    extend: {},
+  },
+  variants: {
+    extend: {
+      width: ['group-hover'],
+    },
+  },
+  plugins: [],
+}
+```
+
+In the above configuration, `width: ['group-hover']` is added to the `variants` section. This means that the `group-hover` variant is enabled for the `width` utility.

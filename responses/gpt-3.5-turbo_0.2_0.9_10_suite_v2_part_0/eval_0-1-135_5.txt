@@ -1,0 +1,21 @@
+Try adding `align-items: flex-start;` to the `.container` class. This will ensure that the nested flexbox items are aligned to the top of the container and not stretched to fill the height of the container. Here's the updated CSS:
+
+```css
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.container section:first-child {
+  display: flex;
+  margin-bottom: 25px;
+}
+
+.container img {
+  width: 125px;
+  height: auto;
+}
+```
+
+This should fix the issue with the images being stretched in Safari.

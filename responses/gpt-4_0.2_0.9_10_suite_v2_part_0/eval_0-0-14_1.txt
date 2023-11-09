@@ -1,0 +1,12 @@
+You should wrap the `<Switch />` and `<span>` inside a `<div>` or any other container. This is because the `Form.Item` component in Ant Design can only have one child. Here is the revised version of your code:
+
+```jsx
+<Form.Item name="switch" valuePropName="checked">
+  <div>
+    <Switch checkedChildren="Yes" unCheckedChildren="No" />
+    <span>Chargable</span>
+  </div>
+</Form.Item>
+```
+
+This should solve your issue. Now, the value of the switch will be included in the form values when the form is submitted.

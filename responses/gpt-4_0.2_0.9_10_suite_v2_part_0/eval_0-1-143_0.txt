@@ -1,0 +1,36 @@
+Yes, you can modify the internal CSS of Firefox to reduce the spacing between menu items. Here's how you can do it:
+
+1. Open your Firefox profile folder. You can do this by typing `about:support` in the address bar and then clicking on `Open Folder` in the `Profile Folder` row.
+
+2. In your profile folder, create a new folder named `chrome` if it doesn't exist.
+
+3. Inside the `chrome` folder, create a new file named `userChrome.css`. If it already exists, open it.
+
+4. Paste the following CSS into the `userChrome.css` file:
+
+```css
+/* Reduce Menu and URL Bar padding */
+:root {
+  --proton-dense-toolbar-vertical-padding: 2px !important;
+  --proton-toolbar-vertical-padding: 2px !important;
+  --proton-tab-block-margin: 0px !important;
+  --proton-tab-block-padding: 0px !important;
+}
+
+/* Reduce padding on bookmarks toolbar items */
+#PersonalToolbar .bookmark-item {
+  padding-block: 2px !important;
+}
+```
+
+5. Save the `userChrome.css` file and close it.
+
+6. Now, you need to enable the usage of this file in Firefox. Type `about:config` in the address bar and press Enter.
+
+7. Click on `Accept the Risk and Continue`.
+
+8. In the search bar, type `toolkit.legacyUserProfileCustomizations.stylesheets` and set its value to `true` by clicking on the toggle button.
+
+9. Restart Firefox to see the changes.
+
+This CSS reduces the padding of the toolbar and the bookmarks toolbar items. You can adjust the padding values according to your preference.

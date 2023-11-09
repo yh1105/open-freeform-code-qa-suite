@@ -1,0 +1,52 @@
+Yes, you can accomplish this by using the `ref` attribute in React. You can create a reference to the form in the `CustomForm` component and then pass this reference to the `App` component. Then, you can use this reference to submit the form when the 'In Root' button is clicked.
+
+Here is how you can do it:
+
+```javascript
+import React, { Component, createRef } from "react";
+import ReactDOM from "react-dom";
+
+class CustomForm extends Component {
+  formRef = createRef();
+
+  componentDidMount() {
+    this.props.passRefUpward(this.formRef);
+  }
+
+  render() {
+    return (
+      <form ref={this.formRef} id='my-form' onSubmit={(e) => {e.preventDefault(); alert('Form submitted!')}}>
+        <button type='submit'>Inside Custom</button>
+      </form>
+    );
+  }
+}
+
+class App extends Component {
+  formRef = createRef();
+
+  handleRef = (ref) => {
+    this.formRef = ref;
+  }
+
+  handleSubmit = () => {
+    if (this.formRef.current) {
+      this.formRef.current.dispatchEvent(new Event('submit', { cancelable: true }));
+    }
+  }
+
+  render() {
+    return (
+      <div>
+        <CustomForm passRefUpward={this.handleRef} />
+        <button onClick={this.handleSubmit}>In Root</button>
+      </div>
+    );
+  }
+}
+
+const rootElement = document.getElementById("root");
+ReactDOM.render(<App />, rootElement);
+```
+
+In this code, the `CustomForm` component creates a reference to the form using `createRef()`. Then, it passes this reference to the `App` component using a function passed as a prop (`passRefUpward`). The `App` component saves this reference and uses it to submit the form when the 'In Root' button is clicked.

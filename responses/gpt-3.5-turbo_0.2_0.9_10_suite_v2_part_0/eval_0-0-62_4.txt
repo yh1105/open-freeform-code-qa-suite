@@ -1,0 +1,15 @@
+The error message is telling you that you should use a string or a number as the value for the `key` attribute in your `v-for` loop. In your code, you are using the entire `comment` object as the key, which is not recommended.
+
+To fix the error, you should use a unique identifier for each comment as the key. For example, if your `comment` object has an `id` property, you can use that as the key:
+
+```html
+<div v-for="comment in comments" :key="comment.id">
+```
+
+If your `comment` object doesn't have a unique identifier, you can use the index of the comment in the array as the key:
+
+```html
+<div v-for="(comment, index) in comments" :key="index">
+```
+
+Using the index as the key is not recommended if the order of the comments can change, as it can cause performance issues and unexpected behavior.

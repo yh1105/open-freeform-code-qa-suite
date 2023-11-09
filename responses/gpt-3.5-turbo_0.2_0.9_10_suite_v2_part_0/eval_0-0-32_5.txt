@@ -1,0 +1,46 @@
+To identify if a div is visible on the viewport, you can use the Intersection Observer API. This API allows you to observe changes in the intersection of a target element with an ancestor element or with a top-level document's viewport.
+
+Here is an example of how to use it in your case:
+
+```javascript
+import React, { useRef, useEffect, useState } from 'react';
+
+const MyComponent = ({ data }) => {
+  const parentRef = useRef(null);
+  const [visibleDivs, setVisibleDivs] = useState([]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(entries => {
+      const visibleIds = entries
+        .filter(entry => entry.isIntersecting)
+        .map(entry => entry.target.id);
+      setVisibleDivs(visibleIds);
+    }, { threshold: 0.5 });
+
+    const divs = parentRef.current.querySelectorAll('div');
+    divs.forEach(div => observer.observe(div));
+
+    return () => observer.disconnect();
+  }, [data]);
+
+  return (
+    <div id="parent" ref={parentRef}>
+      {data.map(item => (
+        <div key={item.id} id={item.id}>
+          {item.title}
+        </div>
+      ))}
+    </div>
+  );
+};
+```
+
+In this example, we use the `useRef` hook to get a reference to the parent div. We also use the `useState` hook to keep track of the visible divs.
+
+In the `useEffect` hook, we create a new `IntersectionObserver` instance and pass a callback function that will be called whenever the intersection of the target element with the viewport changes. We set the `threshold` option to `0.5` to trigger the callback when the target element is at least 50% visible.
+
+We then use `querySelectorAll` to get all the child divs of the parent div and call `observe` on each of them to start observing their intersection with the viewport.
+
+Finally, we return a cleanup function that calls `disconnect` on the observer to stop observing the divs when the component unmounts.
+
+The visible divs are stored in the `visibleDivs` state variable and can be used in your component as needed.

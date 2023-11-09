@@ -1,0 +1,17 @@
+Sure, in NestJS, you can define optional parameters by using a question mark (`?`) at the end of the parameter in the route definition. However, optional parameters in the middle of the route are not supported directly. 
+
+To achieve your requirement, you can define multiple routes that map to the same controller method. Here is how you can do it:
+
+```typescript
+@Controller('route')
+export class YourController {
+  @Get(':param1/config')
+  @Get(':param1/config/:param2')
+  @Get(':param1/config/:param2/:param3')
+  handleRequest(@Param('param1') param1, @Param('param2') param2?, @Param('param3') param3?) {
+    // Your logic here
+  }
+}
+```
+
+In this example, `param1` is required, but `param2` and `param3` are optional. The `handleRequest` method will handle all three routes.

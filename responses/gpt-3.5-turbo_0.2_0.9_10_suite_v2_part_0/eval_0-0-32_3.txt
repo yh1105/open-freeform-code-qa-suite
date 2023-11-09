@@ -1,0 +1,58 @@
+To identify if a div is visible on the viewport on scroll, you can use the `Intersection Observer API`. This API allows you to observe changes in the intersection of a target element with an ancestor element or with a top-level document's viewport.
+
+Here's an example of how you can use it to get the list of divs inside `#parent` which are visible on viewport on scroll:
+
+```javascript
+const parent = document.querySelector('#parent');
+const divs = parent.querySelectorAll('div');
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      console.log(`Div with id ${entry.target.id} is visible on viewport`);
+    }
+  });
+});
+
+divs.forEach(div => {
+  observer.observe(div);
+});
+```
+
+In this example, we first select the `#parent` element and all the divs inside it. Then, we create a new `IntersectionObserver` and loop through all the divs, observing each one. When a div intersects with the viewport, the `isIntersecting` property of the `entry` object is set to `true`, and we log a message to the console indicating that the div is visible on the viewport.
+
+You can also use the `react-intersection-observer` module from npm to use the Intersection Observer API in a React component. Here's an example of how you can use it:
+
+```javascript
+import React, { useRef } from 'react';
+import { useInView } from 'react-intersection-observer';
+
+const MyComponent = ({ data }) => {
+  const parentRef = useRef(null);
+  const [visibleDivs, setVisibleDivs] = useState([]);
+
+  const handleIntersection = (entries) => {
+    const visibleIds = entries.filter(entry => entry.isIntersecting).map(entry => entry.target.id);
+    setVisibleDivs(visibleIds);
+  };
+
+  const { ref } = useInView({
+    threshold: 0,
+    root: parentRef.current,
+    rootMargin: '0px',
+    onChange: handleIntersection,
+  });
+
+  return (
+    <div id="parent" ref={parentRef}>
+      {data.map(item => (
+        <div key={item.id} id={item.id} ref={ref}>
+          {item.title}
+        </div>
+      ))}
+    </div>
+  );
+};
+```
+
+In this example, we use the `useInView` hook from `react-intersection-observer

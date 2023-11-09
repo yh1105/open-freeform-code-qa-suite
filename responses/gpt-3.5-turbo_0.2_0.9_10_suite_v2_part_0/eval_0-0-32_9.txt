@@ -1,0 +1,49 @@
+To identify if a div is visible on the viewport, you can use the Intersection Observer API. Here's an example of how you can use it in your code:
+
+```javascript
+import React, { useRef, useEffect, useState } from "react";
+
+const MyComponent = ({ data }) => {
+  const parentRef = useRef(null);
+  const [visibleDivs, setVisibleDivs] = useState([]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visibleIds = entries
+          .filter((entry) => entry.isIntersecting)
+          .map((entry) => entry.target.id);
+        setVisibleDivs(visibleIds);
+      },
+      { rootMargin: "0px", threshold: 1 }
+    );
+
+    const divs = parentRef.current.querySelectorAll("div");
+    divs.forEach((div) => observer.observe(div));
+
+    return () => {
+      divs.forEach((div) => observer.unobserve(div));
+    };
+  }, [data]);
+
+  return (
+    <div id="parent" ref={parentRef}>
+      {data.map((item) => (
+        <div key={item.id} id={item.id}>
+          {item.title}
+        </div>
+      ))}
+    </div>
+  );
+};
+```
+
+In this code, we're using the `useRef` hook to get a reference to the parent div, and the `useState` hook to keep track of the visible divs. We're also using the `useEffect` hook to create an instance of the `IntersectionObserver` and observe the child divs.
+
+The `IntersectionObserver` takes a callback function that is called whenever an observed element intersects with the viewport. In this callback, we're filtering the entries to get only the ones that are intersecting, and then mapping them to get their ids. We're then setting the visible divs state to this array of ids.
+
+Finally, we're returning the parent div with the child divs mapped from the data array. We're also passing the `parentRef` to the parent div so that we can get a reference to it in the `useEffect` hook.
+
+Note that we're using the `key` prop in the child divs to avoid a warning from React. Also, we're using the `data` array as a dependency in the `useEffect` hook so that the observer is recreated whenever the data changes.
+
+There are also some npm modules that you

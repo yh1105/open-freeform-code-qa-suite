@@ -1,0 +1,46 @@
+It seems like ESLint is not able to find the `tsconfig.json` file. You can try the following steps to resolve the issue:
+
+1. Make sure that the `tsconfig.json` file is present in the root directory of your project.
+
+2. In your `.eslintrc.js` file, update the `parserOptions` property to include the `tsconfigRootDir` property. This property tells ESLint where to find the `tsconfig.json` file. Here's an example:
+
+   ```javascript
+   parserOptions: {
+     project: "./tsconfig.json",
+     tsconfigRootDir: __dirname,
+     sourceType: "module",
+   },
+   ```
+
+3. If the above step doesn't work, try specifying the path to the `tsconfig.json` file explicitly in the `parserOptions` property. Here's an example:
+
+   ```javascript
+   parserOptions: {
+     project: "./tsconfig.json",
+     tsconfigRootDir: __dirname,
+     sourceType: "module",
+     extraFileExtensions: [".ts"],
+     ecmaFeatures: {
+       jsx: true,
+     },
+     createDefaultProgram: true,
+     configFile: "./tsconfig.json",
+   },
+   ```
+
+4. If none of the above steps work, try installing the `eslint-import-resolver-typescript` package and adding it to your `.eslintrc.js` file. Here's an example:
+
+   ```javascript
+   module.exports = {
+     // ...
+     settings: {
+       "import/resolver": {
+         typescript: {},
+       },
+     },
+   };
+   ```
+
+   After installing the package, you may need to restart your editor for the changes to take effect.
+
+I hope this helps! Let me know if you have any further questions.
