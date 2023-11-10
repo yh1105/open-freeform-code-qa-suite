@@ -1,0 +1,17 @@
+There could be several reasons why the SwiftUI preview is not showing in Xcode 11. Here are a few things you can try to resolve this issue:
+
+1. **Check your macOS and Xcode version**: Ensure that you are running macOS Catalina and Xcode 11 or later. SwiftUI requires these versions to function properly.
+
+2. **Check your device and iOS version**: Make sure you have selected an iOS 13 (or later) device for the SwiftUI preview. You can change the device by clicking on the device name in the toolbar at the top of the Xcode window.
+
+3. **Try restarting Xcode**: Sometimes, Xcode might have a glitch that can be resolved by simply restarting the program.
+
+4. **Try cleaning the build folder**: Go to `Product > Clean Build Folder` or press `Shift + Command + K`.
+
+5. **Check your code**: Make sure there are no errors in your SwiftUI code that could be preventing the preview from displaying.
+
+6. **Try manually refreshing the preview**: You can do this by clicking on the "Try Again" button in the canvas, or by pressing `Option + Command + P`.
+
+7. **Check if SwiftUI preview is enabled**: Go to `Editor > Canvas` or press `Option + Command + Return` to toggle the canvas.
+
+If none of these steps work, there might be a problem with your Xcode installation. You might want to consider reinstalling Xcode or updating it to the latest version.

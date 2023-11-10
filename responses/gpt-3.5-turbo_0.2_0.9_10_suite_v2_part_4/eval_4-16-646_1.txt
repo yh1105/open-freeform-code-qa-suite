@@ -1,0 +1,13 @@
+The error message "bad CPU type in executable" usually means that the binary is not compatible with the CPU architecture of your Mac. This can happen if you are trying to run a 32-bit binary on a 64-bit Mac or vice versa.
+
+In the case of pdftk, it is a 32-bit binary and it is not compatible with the latest version of MacOS Catalina, which only supports 64-bit applications.
+
+One solution is to use an alternative tool to pdftk that is compatible with MacOS Catalina. Here are some options:
+
+1. Use the built-in Preview app in MacOS to merge PDF files. Open the first PDF file in Preview, then drag and drop the other PDF files into the sidebar. Rearrange the pages as needed, then save the merged PDF.
+
+2. Use the open-source tool PDFsam Basic (PDF Split and Merge). This tool is available for free and supports merging PDF files on MacOS Catalina.
+
+3. Use Adobe Acrobat Pro DC. This is a paid tool, but it is a professional-grade PDF editor that supports merging PDF files and many other advanced features.
+
+I hope this helps!

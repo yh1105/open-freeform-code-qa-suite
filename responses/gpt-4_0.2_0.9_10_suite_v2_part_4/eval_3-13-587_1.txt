@@ -1,0 +1,15 @@
+The error message you're seeing is related to the Groovy VM plugin trying to create a Java 9 VM plugin and failing because it can't find `java.lang.Module`. However, this error message is a debug message and not the cause of your task failure.
+
+The actual issue is likely related to the compatibility of the versions of Kotlin, Gradle, and JaCoCo you're using. 
+
+As of now, JaCoCo version `0.8.6` does not fully support Kotlin `1.5.10` with Gradle `7.0.2`. 
+
+You can try the following solutions:
+
+1. **Downgrade your Kotlin version**: You can try downgrading your Kotlin version to `1.4.32` which is known to work with JaCoCo `0.8.6` and Gradle `7.0.2`.
+
+2. **Use a snapshot version of JaCoCo**: You can try using a snapshot version of JaCoCo that has better support for Kotlin `1.5.10`. For example, you can try using JaCoCo `0.8.7-SNAPSHOT`. However, keep in mind that snapshot versions are not stable and may have other issues.
+
+3. **Wait for a stable release of JaCoCo that supports Kotlin `1.5.10`**: You can monitor the JaCoCo GitHub repository for updates and use a stable release when it becomes available.
+
+Remember to clean and rebuild your project after making these changes.

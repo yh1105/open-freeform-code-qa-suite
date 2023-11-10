@@ -1,0 +1,35 @@
+AWS CLI uses a pager program to handle its output. By default, it uses the `less` program. If you want to disable this behavior, you can do so by setting the `AWS_PAGER` environment variable to an empty string. 
+
+You can do this in your current shell session with the following command:
+
+```bash
+export AWS_PAGER=""
+```
+
+After running this command, AWS CLI will stop using a pager for its output.
+
+If you want to make this change permanent, you can add the above line to your shell's profile script (like `~/.bashrc` or `~/.bash_profile` for Bash).
+
+Alternatively, you can pipe the output to `cat` to bypass the pager:
+
+```bash
+for x in 1 2 3; do 
+  aws sqs purge-queue --queue-url https://sqs.<aws-region>.amazonaws.com/<id>/<env>-$x-<queueName>.fifo | cat; 
+done
+```
+
+Or redirect the output to a file:
+
+```bash
+for x in 1 2 3; do 
+  aws sqs purge-queue --queue-url https://sqs.<aws-region>.amazonaws.com/<id>/<env>-$x-<queueName>.fifo > output.txt; 
+done
+```
+
+This will write the output of each command to the file `output.txt`. If you want to append the output to the file instead of overwriting it each time, you can use `>>` instead of `>`:
+
+```bash
+for x in 1 2 3; do 
+  aws sqs purge-queue --queue-url https://sqs.<aws-region>.amazonaws.com/<id>/<env>-$x-<queueName>.fifo >> output.txt; 
+done
+```

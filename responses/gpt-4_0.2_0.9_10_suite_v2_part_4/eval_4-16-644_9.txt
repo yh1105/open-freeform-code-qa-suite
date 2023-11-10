@@ -1,0 +1,7 @@
+This error is happening because the `startup.sh` script does not have execute permissions. You can add execute permissions to the script by running the following command:
+
+```bash
+chmod +x ./startup.sh
+```
+
+This command uses `chmod` to add (`+`) execute (`x`) permissions to `startup.sh`. After running this command, you should be able to execute your script.

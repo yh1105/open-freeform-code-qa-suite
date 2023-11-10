@@ -1,0 +1,20 @@
+Starting with macOS Catalina 10.15, the default shell is zsh and not bash. Therefore, `.bash_profile` or `.profile` will not be sourced if you're using zsh.
+
+If you want to set environment variables for your shell sessions, you should add them to the `.zshrc` file in your home directory. If the file doesn't exist, you can create it.
+
+Here's how you can do it:
+
+1. Open Terminal.
+2. Type `nano ~/.zshrc` to open this file in a text editor.
+3. Add your export statement to the file:
+
+    ```
+    export JBOSS_HOME=/Users/{USERNAME}/Desktop/jboss7
+    ```
+
+4. Press `Control+O` to save the changes, then `Control+X` to exit the editor.
+5. Type `source ~/.zshrc` to manually source the `.zshrc` file or simply close and reopen your Terminal.
+
+Now, when you type `echo $JBOSS_HOME` in a new Terminal window, it should display the path you specified.
+
+If you want to continue using bash instead of zsh, you can change your default shell back to bash by using the `chsh -s /bin/bash` command in the Terminal. But please note that bash is deprecated in macOS Catalina and newer versions.

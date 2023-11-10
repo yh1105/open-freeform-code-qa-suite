@@ -1,0 +1,21 @@
+The `~/.bashrc` file is not sourced when a Docker container is run because Docker does not start a login shell by default. The `CMD` and `ENTRYPOINT` instructions run commands without a shell, which means that shell profiles such as `~/.bashrc` or `~/.bash_profile` are not sourced.
+
+To solve this issue, you can source the `~/.bashrc` file in your `launch.sh` script:
+
+```bash
+#!/bin/bash
+
+source ~/.bashrc
+
+cd /workspace/demo
+npm install
+node index.js
+```
+
+Alternatively, you can use `bash -c` in the `CMD` instruction to start a shell and then run your script:
+
+```Dockerfile
+CMD ["/bin/bash", "-c", "/workspace/launch.sh"]
+```
+
+This will start a shell and then run your script, which should source the `~/.bashrc` file if it's a login shell. However, this approach might not work if `~/.bashrc` is not sourced in non-interactive shells. In this case, you should stick to sourcing `~/.bashrc` in your script.

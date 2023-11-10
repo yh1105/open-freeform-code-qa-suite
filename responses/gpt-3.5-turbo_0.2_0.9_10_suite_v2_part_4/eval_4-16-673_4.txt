@@ -1,0 +1,25 @@
+To install the latest version of CMake on Linux using `apt-get`, you can follow these steps:
+
+1. Add the Kitware APT repository to your system:
+
+```
+sudo apt-get install apt-transport-https ca-certificates gnupg software-properties-common wget
+wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | sudo apt-key add -
+sudo apt-add-repository 'deb https://apt.kitware.com/ubuntu/ focal main'
+```
+
+Note: Replace `focal` with your Ubuntu version codename.
+
+2. Update the package list:
+
+```
+sudo apt-get update
+```
+
+3. Install CMake:
+
+```
+sudo apt-get install cmake
+```
+
+This should install the latest version of CMake available in the Kitware APT repository.

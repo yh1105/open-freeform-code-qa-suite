@@ -1,0 +1,30 @@
+You can't directly initialize a `@State` variable in the `init()` method. Instead, you can use a `@StateObject` to hold your state and initialize it in the `init()` method. Here's how you can do it:
+
+```swift
+class TextHolder: ObservableObject {
+    @Published var text: String
+    init(_ text: String) {
+        self.text = text
+    }
+}
+
+struct StateFromOutside: View {
+    let list = [
+        "a": "Letter A",
+        "b": "Letter B",
+        // ...
+    ]
+
+    @StateObject var fullText: TextHolder
+
+    init(letter: String) {
+        _fullText = StateObject(wrappedValue: TextHolder(list[letter] ?? ""))
+    }
+
+    var body: some View {
+        TextField("Placeholder", text: $fullText.text)
+    }
+}
+```
+
+In this code, `TextHolder` is a class that conforms to `ObservableObject` and holds your text. You initialize a `@StateObject` with an instance of `TextHolder` in the `init()` method. Then, you bind the `TextField` to `fullText.text`.

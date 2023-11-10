@@ -1,0 +1,17 @@
+The error message you're seeing is related to the Java version you're using. Jacoco 0.8.6 is not compatible with Java 9 and above. 
+
+You have two options to resolve this issue:
+
+1. Downgrade your Java version to 8. This is not recommended as it might affect other parts of your project that require a newer Java version.
+
+2. Upgrade your Jacoco version to 0.8.7 or above. This version has support for Java 9 and above. 
+
+Here's how you can upgrade your Jacoco version:
+
+```groovy
+jacoco {
+    toolVersion = "0.8.7"
+}
+```
+
+After making this change, try running your tests again. If you're still facing issues, please provide more details about your setup.

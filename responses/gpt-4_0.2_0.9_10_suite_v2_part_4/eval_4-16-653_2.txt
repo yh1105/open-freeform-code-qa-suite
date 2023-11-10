@@ -1,0 +1,12 @@
+You can use the `date` command in Linux to convert the date format. Here is a simple script that reads each line from the file, extracts the date, and then converts it to the desired format:
+
+```bash
+while IFS= read -r line
+do
+    # Extract the date from the line and convert it to the desired format
+    formatted_date=$(date -d "${line:0:10}" +"%d %b %Y")
+    echo $formatted_date
+done < filename.txt
+```
+
+This script assumes that `filename.txt` is the file containing your dates. The `date -d "${line:0:10}" +"%d %b %Y"` command extracts the date from the line (ignoring the time and timezone), and then formats it as "DD MMM YYYY". The `%b` format specifier in the `date` command outputs the abbreviated month name, as per your requirement.

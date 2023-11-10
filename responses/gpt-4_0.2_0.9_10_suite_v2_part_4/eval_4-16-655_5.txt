@@ -1,0 +1,14 @@
+Nested parameter expansion is not supported in GitLab CI/CD's `variables` section. This is a limitation of the GitLab CI/CD variables system, not the `bash` runner.
+
+The `variables` section in GitLab CI/CD only supports simple variable substitution. It doesn't support complex shell expressions like nested parameter expansion.
+
+You can instead use a script to achieve the same result:
+
+```yaml
+job1:
+  script:
+    - GIT_BRANCH="${CI_MERGE_REQUEST_SOURCE_BRANCH_NAME:-${CI_COMMIT_BRANCH:-$CI_DEFAULT_BRANCH}}"
+    - echo $GIT_BRANCH
+```
+
+In this case, the `GIT_BRANCH` variable is set within the context of the script, and the nested parameter expansion is handled by the shell executing the script, not by the GitLab CI/CD variables system.

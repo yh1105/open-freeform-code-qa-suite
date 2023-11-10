@@ -1,0 +1,20 @@
+You can try using the `--no-cache` flag when running the `docker build` command. This will force Docker to rebuild all the layers, including the ones that were previously cached, and show you the full build output.
+
+For example:
+```
+docker build --no-cache -t myimage .
+```
+
+Alternatively, you can try using the `docker buildx` command instead of `docker build`. `docker buildx` is a newer experimental feature that provides better build output and more options for customizing the build process.
+
+To use `docker buildx`, you first need to enable it by running the following command:
+```
+docker buildx create --use
+```
+
+Then, you can run the build command with the `--progress=plain` flag to get a more detailed build output:
+```
+docker buildx build --progress=plain -t myimage .
+```
+
+I hope this helps!

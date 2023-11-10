@@ -1,0 +1,18 @@
+This error occurs because pdftk is a 32-bit application and macOS Catalina only supports 64-bit applications. One solution is to install a 64-bit version of pdftk. Here are the steps to install pdftk using Homebrew:
+
+1. Install Homebrew by running this command in the terminal:
+```
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+```
+
+2. Install pdftk by running this command in the terminal:
+```
+brew install pdftk-java
+```
+
+3. Once the installation is complete, you can use pdftk by running this command in the terminal:
+```
+pdftk input.pdf output output.pdf
+```
+
+This should solve the "pdftk: Bad CPU type in executable" error on your Mac.

@@ -1,0 +1,13 @@
+You can use the `-split` operator in PowerShell to split the string at the `-354` sequence and then take the first part. However, this will remove the `-354` from the output, so you will need to add it back manually. Here's how you can do it:
+
+```powershell
+$FileArray = @("Name1-354-03.pdf", "Name23-354-H11.pdf", "Name354-354-02.pdf", "Name3545-354.pdf")
+ForEach ($n in $FileArray){
+     $split = $n -split "-354", 2
+     Write-Host ($split[0] + "-354")
+}
+```
+
+This script splits each string in `$FileArray` at the first occurrence of `-354` and takes the first part (before `-354`). It then adds `-354` back to the end of the string and prints it.
+
+Please note that this will only work correctly if `-354` does not occur more than once in the part of the string that you want to keep. If `-354` can occur multiple times and you want to keep all occurrences except the last one, you would need a different approach.

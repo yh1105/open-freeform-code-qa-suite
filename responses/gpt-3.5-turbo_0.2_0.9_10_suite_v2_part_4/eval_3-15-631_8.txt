@@ -1,0 +1,26 @@
+To remove the spaces from the output, you can modify the code by adding an additional line of code to remove the spaces. Here's the modified code:
+
+```
+Sub ReplaceSpecial()
+    Dim cel As Range
+    Dim strVal As String
+    Dim i As Long
+    Application.ScreenUpdating = False
+    For Each cel In Selection
+        strVal = cel.Value
+        For i = 1 To Len(strVal)
+            Select Case Asc(Mid(strVal, i, 1))
+                Case 32, 48 To 57, 65 To 90, 97 To 122
+                    ' Leave ordinary characters alone
+                Case Else
+                    Mid(strVal, i, 1) = " "
+            End Select
+        Next i
+        strVal = Replace(strVal, " ", "") ' Remove spaces
+        cel.Value = strVal
+    Next cel
+    Application.ScreenUpdating = True
+End Sub
+```
+
+The line `strVal = Replace(strVal, " ", "")` replaces all spaces in the string with an empty string, effectively removing them from the output.

@@ -1,0 +1,47 @@
+Starting from Android 11, there are some changes in the way file storage works. One of the changes is that apps can no longer access files in the external storage directory directly using hardcoded paths like `Environment.getExternalStorageDirectory()`. Instead, you need to use the `MediaStore` API to access files in the external storage directory.
+
+To fix the issue, you can try the following:
+
+1. Add the following permission to your app's manifest file:
+```
+<uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+```
+
+2. Use the `MediaStore` API to create the file. Here's an example:
+```
+private fun getTempFile(): File {
+    val timeStamp = SimpleDateFormat("yyyyMMdd_HHMMss", Locale.getDefault()).format(Date())
+    val resolver = context.contentResolver
+    val contentValues = ContentValues().apply {
+        put(MediaStore.MediaColumns.DISPLAY_NAME, "image${Calendar.getInstance().timeInMillis}$timeStamp.jpg")
+        put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg")
+        put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_PICTURES + "/sample-take-image")
+    }
+    val uri = resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)
+    return File(uri?.let { RealPathUtil.getRealPath(context, it) })
+}
+```
+
+Note: In the above example, `RealPathUtil.getRealPath()` is a helper method to get the real path from the `Uri` returned by the `MediaStore` API. You can implement this method yourself or use a library like `commons-io` to do this.
+
+3. Modify the `saveImageToFile()` method to use the new `getTempFile()` method:
+```
+private fun saveImageToFile(bitmap: Bitmap? = null): String? {
+    return try {
+        val file = getTempFile()
+        Timber.e("Path: + : ${file.absolutePath}")
+        val fOut = FileOutputStream(file)
+        bitmap?.apply {
+            this.compress(Bitmap.CompressFormat.JPEG, 100, fOut)
+        }
+        fOut.flush()
+        fOut.close()
+        file?.absolutePath.getDefault()
+    } catch (e: Exception) {
+        e.printStackTrace()
+        ""
+    }
+}
+```
+
+With these changes, your app should be able to create the file in the external storage directory on Android 11 and above.

@@ -1,0 +1,9 @@
+The issue might be that `ContentView_Previews` is using `@State` instead of `@Binding` for `selected`. Try changing `@State` to `@Binding` in `ContentView_Previews` and pass in a `Bool` value to `selected` when previewing the view. For example:
+
+```
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView(isSelected: .constant(true))
+    }
+}
+```

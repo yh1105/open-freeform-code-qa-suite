@@ -1,0 +1,15 @@
+Your code seems correct. However, the problem might be that you're trying to preview the changes in `ContentView_Previews`. The `@State` property wrapper is designed to work within the same view, not across different views. 
+
+In a real-life scenario, you would have a parent view that holds the `@State` and passes the `@Binding` to the `ContentView`. Here's an example:
+
+```swift
+struct ParentView: View {
+    @State private var isSelected: Bool = false
+
+    var body: some View {
+        ContentView(isSelected: $isSelected)
+    }
+}
+```
+
+In this case, `ParentView` is the owner of the state and `ContentView` can modify it through the binding. This should work as expected.

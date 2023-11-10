@@ -1,0 +1,44 @@
+Your code seems to be on the right track, but there are a few issues. 
+
+First, you're trying to assign a value to `query` and `currentSheet` without declaring them as variables. You should declare them at the beginning of your subroutine like this:
+
+```vba
+Dim query As String
+Dim currentSheet As String
+```
+
+Second, you're trying to use `query.Name` but `query` is a string, not an object, so it doesn't have a `Name` property. You should just use `query` instead.
+
+Here's the corrected code:
+
+```vba
+Sub LoadToWorksheetOnly()
+
+    Dim query As String
+    Dim currentSheet As String
+
+    query = Sheets("Sheet6").Range("A1").Value 'here is where my query from power query is. I put the text from power query advanced editor in another sheet cell.
+    currentSheet = ActiveSheet.Name
+    With ActiveSheet.ListObjects.Add(SourceType:=0, Source:= _
+        "OLEDB;Provider=Microsoft.Mashup.OleDb.1;Data Source=$Workbook$;Location=" & query _
+        , Destination:=Sheets("target").Range("$A$1")).QueryTable
+        .CommandType = xlCmdDefault
+        .CommandText = Array("SELECT * FROM [" & query & "]")
+        .RowNumbers = False
+        .FillAdjacentFormulas = False
+        .PreserveFormatting = True
+        .RefreshOnFileOpen = False
+        .BackgroundQuery = True
+        .RefreshStyle = xlInsertDeleteCells
+        .SavePassword = False
+        .SaveData = True
+        .AdjustColumnWidth = True
+        .RefreshPeriod = 0
+        .PreserveColumnInfo = False
+        .Refresh BackgroundQuery:=False
+    End With
+     
+End Sub
+```
+
+This code should work if the query text in `Sheet6` cell `A1` is a valid Power Query query. However, note that automating Power Query with VBA is not officially supported by Microsoft, so this approach might not work in all cases.

@@ -1,0 +1,22 @@
+The error you're encountering might be due to a few reasons:
+
+1. **Compatibility Issue**: SeleniumBasic (VBA) might not be fully compatible with Excel 2019. You can check the official documentation or community for any known issues.
+
+2. **Browser Driver**: Ensure that the browser driver (like IEDriverServer for Internet Explorer, chromedriver for Chrome, etc.) is up-to-date and compatible with the browser version you're using.
+
+3. **Reference Problem**: Make sure that the Selenium Type Library is correctly referenced in your VBA project. You can check this by going to `Tools > References` in the VBA editor.
+
+4. **Internet Explorer Issue**: Since you're using Internet Explorer in your code (`driver.Start "ie"`), it's worth noting that IE is being phased out by Microsoft. You might want to switch to Edge or another browser.
+
+Here's an example of how you can use Chrome instead of IE:
+
+```vba
+Dim driver As New WebDriver
+
+driver.Start "chrome", "https://www.google.com"
+driver.Window.Maximize
+```
+
+Remember to have the `chromedriver.exe` in your system path or in the same directory as your workbook.
+
+If none of the above solutions work, you might want to consider using a different automation tool that is more compatible with Excel 2019, like Excel VBA's built-in `Microsoft HTML Object Library` for web scraping, or a more powerful tool like UiPath.

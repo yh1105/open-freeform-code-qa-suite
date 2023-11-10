@@ -1,0 +1,15 @@
+You can use the `jq` command-line tool to minify JSON in a shell script. Here's an example:
+
+```
+cat file.json | jq -c .
+```
+
+This will read the contents of `file.json`, pass it to `jq`, and use the `-c` option to output the result in compact form. The `.` argument tells `jq` to use the default filter, which just outputs the input as-is.
+
+You can also use `jq` to minify JSON inline, like this:
+
+```
+echo '{"foo": "lorem", "bar": "ipsum"}' | jq -c .
+```
+
+This will output `{"foo":"lorem","bar":"ipsum"}`.

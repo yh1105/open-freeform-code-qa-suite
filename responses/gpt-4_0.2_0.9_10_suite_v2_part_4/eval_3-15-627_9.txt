@@ -1,0 +1,26 @@
+Here's a simple way to create a calendar input in VBA Excel using a form and Microsoft's MonthView control:
+
+1. First, you need to add a UserForm to your VBA project. To do this, in the VBA editor, click on "Insert" -> "UserForm".
+
+2. Next, you need to add the MonthView control to your UserForm. If it's not visible in the toolbox, you can add it by right-clicking on the toolbox and selecting "Additional Controls". Scroll down until you find "Microsoft MonthView Control" and check it.
+
+3. Now, you can add the MonthView control to your UserForm by clicking on it in the toolbox and then clicking on your UserForm.
+
+4. You can add a button to your UserForm that will insert the selected date into a cell when clicked. To do this, add a button to your UserForm and double click on it to open the code editor. Enter the following code:
+
+```vba
+Private Sub CommandButton1_Click()
+    Range("A1").Value = MonthView1.Value
+    Unload Me
+End Sub
+```
+
+5. Finally, you can display the UserForm with the following code:
+
+```vba
+Sub ShowForm()
+    UserForm1.Show
+End Sub
+```
+
+Please note that the MonthView control is not available in 64-bit versions of Office. If you're using a 64-bit version, you'll need to use a different method, such as creating a custom calendar form.

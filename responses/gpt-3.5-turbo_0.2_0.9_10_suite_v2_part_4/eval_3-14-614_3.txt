@@ -1,0 +1,18 @@
+There could be a few reasons why the preview canvas is not showing in Xcode 11 beta when using Swift UI. Here are a few things you can try:
+
+1. Make sure you are using Xcode 11 beta or later and have the latest version installed.
+
+2. Check that you are in the canvas mode by clicking on the "Canvas" button in the top-right corner of the Xcode window.
+
+3. Verify that you have imported the SwiftUI framework at the top of your file:
+
+```
+swift
+import SwiftUI
+```
+
+4. Ensure that you have set the preview provider correctly. The code you provided looks correct, but make sure that the `ContentView` struct matches the name of your main view.
+
+5. Try cleaning the build folder by going to "Product" > "Clean Build Folder" in the Xcode menu.
+
+If none of these solutions work, try restarting Xcode or your computer. If the issue persists, you may want to file a bug report with Apple.

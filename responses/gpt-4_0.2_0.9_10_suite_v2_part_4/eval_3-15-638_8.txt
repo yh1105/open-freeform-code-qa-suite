@@ -1,0 +1,36 @@
+The `SelectByID2` method is a bit tricky to use because it requires the name of the entity to select. For faces and edges, these names are not readily available or easily identifiable. 
+
+However, you can use the `GetSelectByIDString` method to get the name of a selected entity. This method returns the name that can be used with `SelectByID2` to reselect the same entity.
+
+Here is a simple example of how to use it:
+
+```vba
+Dim swApp As SldWorks.SldWorks
+Dim swModel As SldWorks.ModelDoc2
+Dim swSelMgr As SldWorks.SelectionMgr
+
+Sub main()
+
+Set swApp = Application.SldWorks
+Set swModel = swApp.ActiveDoc
+Set swSelMgr = swModel.SelectionManager
+
+' Get the name of the first selected entity
+Dim selName As String
+selName = swSelMgr.GetSelectByIDString(1)
+Debug.Print "Selected entity name: " & selName
+
+' Deselect all entities
+swModel.ClearSelection2 True
+
+' Reselect the entity using SelectByID2
+Dim selBool As Boolean
+selBool = swModel.Extension.SelectByID2(selName, "FACE", 0, 0, 0, False, 0, Nothing, 0)
+Debug.Print "Reselection successful: " & selBool
+
+End Sub
+```
+
+In this example, the user is expected to manually select a face before running the macro. The macro then gets the name of the selected face, deselects all entities, and reselects the face using `SelectByID2`.
+
+You can modify this example to suit your needs. For instance, you can store the names of the selected face and edge in variables, then use these names to reselect the entities when needed.

@@ -1,0 +1,8 @@
+This issue might be due to the SwiftUI Preview not being associated with a target. Here are some steps to fix this:
+
+1. Select the SwiftUI file in the Project Navigator.
+2. In the File Inspector (the first tab in the right panel), under the "Target Membership" section, make sure your app's target is checked.
+3. Clean the build folder (Product > Clean Build Folder).
+4. Quit and restart Xcode.
+
+If the issue persists, try creating a new SwiftUI file and check if the preview works there. If it does, you can move your code to the new file.

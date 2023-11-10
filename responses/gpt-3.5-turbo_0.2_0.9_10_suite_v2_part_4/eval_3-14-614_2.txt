@@ -1,0 +1,11 @@
+There are a few things you can try to get the preview canvas to show up in Xcode 11 beta:
+
+1. Make sure you are running Xcode 11 beta on macOS Catalina beta. The preview canvas requires the latest version of macOS to work.
+
+2. Check that you have the latest version of Xcode 11 beta installed. You can check for updates in the App Store.
+
+3. Try cleaning your build folder by going to Product > Clean Build Folder. Then try running the preview again.
+
+4. If none of the above solutions work, try resetting the Xcode preferences by going to Xcode > Preferences > Locations and clicking the "Reset" button next to "Derived Data".
+
+If none of these solutions work, it may be a bug in Xcode 11 beta. You can report the issue to Apple using the Feedback Assistant app.

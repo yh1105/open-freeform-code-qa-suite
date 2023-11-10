@@ -1,0 +1,21 @@
+The issue you're facing is due to the way GitLab CI/CD parses the `.gitlab-ci.yml` file. The parsing is done in YAML and not in bash, so the nested parameter expansion you're trying to use doesn't work as expected.
+
+GitLab CI/CD variables are not processed by the shell when they are defined, but only at the point they are used. Therefore, the shell doesn't interpret the nested braces correctly and you get the unexpected output.
+
+A workaround for this would be to handle the logic in the script section of your job:
+
+```yaml
+job1:
+  script:
+    - |
+      if [[ -n "$CI_MERGE_REQUEST_SOURCE_BRANCH_NAME" ]]; then
+        GIT_BRANCH=$CI_MERGE_REQUEST_SOURCE_BRANCH_NAME
+      elif [[ -n "$CI_COMMIT_BRANCH" ]]; then
+        GIT_BRANCH=$CI_COMMIT_BRANCH
+      else
+        GIT_BRANCH=$CI_DEFAULT_BRANCH
+      fi
+      echo $GIT_BRANCH
+```
+
+This way, the shell handles the logic of choosing the correct variable to assign to `GIT_BRANCH`, and you should get the expected output.

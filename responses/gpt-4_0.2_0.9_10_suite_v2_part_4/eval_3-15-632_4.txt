@@ -1,0 +1,18 @@
+Assuming that the data you want to split is separated by spaces, you can use the `Split` function in VBA to split the string into an array, and then assign each element of the array to a cell in the row. Here's how you can modify your code:
+
+```vba
+idx = InStr(textline, "Cabinet No.")
+If idx > 0 Then
+    Line Input #1, textline
+    Line Input #1, textline
+    Dim splitData() As String
+    splitData = Split(textline, " ") ' split the string into an array
+    ActiveSheet.Cells(nextrow, "G").Value = splitData(0) ' assign first element to column G
+    ActiveSheet.Cells(nextrow, "H").Value = splitData(1) ' assign second element to column H
+    ActiveSheet.Cells(nextrow, "I").Value = splitData(2) ' assign third element to column I
+    ActiveSheet.Cells(nextrow, "J").Value = splitData(3) ' assign fourth element to column J
+    ActiveSheet.Cells(nextrow, "K").Value = splitData(4) ' assign fifth element to column K
+    nextrow = nextrow + 1 'now move to next row
+End If
+```
+This code assumes that `textline` contains at least 5 space-separated elements. If it may contain fewer, you should add error checking to avoid a "Subscript out of range" error.

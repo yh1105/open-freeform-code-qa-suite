@@ -1,0 +1,25 @@
+The error message indicates that the version of Kotlin used to compile the module is not compatible with the version expected by your project. To solve this issue, you can try the following steps:
+
+1. Update the Kotlin version in your project to match the version used by the module. In this case, you need to update your Kotlin version to 1.5.1.
+
+2. Clean and rebuild your project to ensure that the updated Kotlin version is used.
+
+3. If the issue persists, try deleting the caches/transforms-2 directory and rebuilding your project. This will force Gradle to re-download and re-compile the dependencies.
+
+Regarding adding the email and cardholder name in Stripe, you can use the `CardInputWidget` instead of `CardMultilineWidget`. The `CardInputWidget` provides an option to enter the cardholder name and email. You can add the `CardInputWidget` to your layout file and use it to collect the required information. Here's an example:
+
+```
+<com.stripe.android.view.CardInputWidget
+    android:id="@+id/card_input_widget"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:shouldShowPostalCode="false"
+    app:shouldShowCardholderName="true"
+    app:shouldShowError="true"
+    app:shouldShowExpiry="true"
+    app:shouldShowScanCard="true"
+    app:shouldShowPostalCode="false"
+    app:shouldShowPostalCode="false" />
+```
+
+You can then use the `CardInputWidget` to create a `Card` object and pass it to the `Stripe` API to process the payment.

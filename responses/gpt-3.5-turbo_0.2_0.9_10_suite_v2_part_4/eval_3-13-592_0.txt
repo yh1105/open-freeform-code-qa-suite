@@ -1,0 +1,7 @@
+In AndroidX, you can use `ViewModelProvider` to instantiate a ViewModel in an Activity. Here's an example:
+
+```
+val viewModel = ViewModelProvider(this).get(MyViewModel::class.java)
+```
+
+Make sure to import `androidx.lifecycle.ViewModelProvider`.

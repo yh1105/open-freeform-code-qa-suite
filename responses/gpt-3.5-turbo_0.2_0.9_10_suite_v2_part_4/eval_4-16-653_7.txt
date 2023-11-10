@@ -1,0 +1,7 @@
+You can use the `date` command in the shell to convert the date format. Here's an example command that should work for your case:
+
+```
+date -d "2021-05-10T18:25:00.000+0100" "+%d %b %Y"
+```
+
+This will output `10 May 2021`. You can use a loop to read the dates from your file and apply this command to each date.

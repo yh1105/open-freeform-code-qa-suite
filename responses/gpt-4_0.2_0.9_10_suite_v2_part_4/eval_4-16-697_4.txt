@@ -1,0 +1,15 @@
+The `~/.bashrc` file is not sourced when you run a non-interactive shell, which is the case when you run a Docker container. 
+
+To solve this issue, you can source the `~/.bashrc` file in your `launch.sh` script. Modify your `launch.sh` script as follows:
+
+```bash
+#!/bin/bash
+
+source $HOME/.bashrc
+
+cd /workspace/demo
+npm install
+node index.js
+```
+
+This will ensure that the `nvm` and `node` commands are available in the shell that runs your script.

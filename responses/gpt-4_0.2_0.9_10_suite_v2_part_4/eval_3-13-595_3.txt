@@ -1,0 +1,26 @@
+The error `java.io.IOException: No such file or directory` usually occurs when the directory or file you're trying to access does not exist. In your case, you're trying to create a file in the external storage directory. However, starting from Android 10 (API level 29), direct access to shared/external storage is deprecated. And in Android 11 (API level 30), the system ignores the `requestLegacyExternalStorage` flag, which means apps cannot access the 'External Storage' in the traditional way.
+
+To solve this issue, you have a few options:
+
+1. **Use app-specific external storage**: This is the easiest way. You can use `Context.getExternalFilesDir()` to get a `File` representing an app-specific directory on external storage where you can place files. These files will be removed when the user uninstalls your app.
+
+```java
+private fun getTempFolder(): File {
+    val directoryFolder = File(context.getExternalFilesDir(null), "sample-take-image")
+    directoryFolder.mkdirs()
+    return directoryFolder
+}
+```
+
+2. **Use the MediaStore API**: If you want your files to be shared between apps or persist after your app is uninstalled, you can use the MediaStore API. This is more complex but gives you more control.
+
+3. **Request the `MANAGE_EXTERNAL_STORAGE` permission**: This is a new permission introduced in Android 11 that allows an app to read and write all files on external storage. However, this permission is intended for apps that need broad file access, such as file managers, and Google's policy is that it will only approve apps that truly need this access.
+
+Remember to update your `AndroidManifest.xml` file with the necessary permissions:
+
+```xml
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+```
+
+And request these permissions at runtime if you're targeting Android 6.0 (API level 23) or higher.

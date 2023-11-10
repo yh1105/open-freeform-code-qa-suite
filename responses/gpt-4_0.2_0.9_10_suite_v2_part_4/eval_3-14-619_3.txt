@@ -1,0 +1,29 @@
+The issue is that you're using `@Binding` in `ContentView` but you're not providing a source of truth for the `isSelected` variable. 
+
+In SwiftUI, `@Binding` is used to create a two-way connection between a variable and a source of truth. In your case, you're not providing a source of truth for `isSelected` variable.
+
+You should use `@State` in the parent view to provide a source of truth for the `isSelected` variable. Here is the corrected code:
+
+```swift
+import SwiftUI
+
+struct ContentView: View {
+    @State private var isSelected: Bool = false
+
+    var body: some View {
+        Button(action: {
+            self.isSelected.toggle()
+        }) {
+            Text(isSelected ? "Selected" : "Not Selected")
+        }
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
+}
+```
+
+In this corrected code, `@State` is used to provide a source of truth for the `isSelected` variable. When the button is clicked, `isSelected` is toggled and the view is updated.

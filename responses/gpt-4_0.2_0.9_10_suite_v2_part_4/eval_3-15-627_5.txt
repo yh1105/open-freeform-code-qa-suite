@@ -1,0 +1,15 @@
+To create a calendar input in VBA Excel, you can use the `Application.InputBox` method with `Type:=8` to return a date. Here's a simple example:
+
+```vba
+Sub GetDate()
+    Dim dateInput As Date
+    dateInput = Application.InputBox(Prompt:="Please enter a date.", Title:="Date Input", Type:=1)
+    If dateInput <> 0 Then
+        MsgBox "You entered: " & dateInput
+    End If
+End Sub
+```
+
+This will show an input box where the user can type a date. The date is then stored in the `dateInput` variable. If the user clicks Cancel or enters an invalid date, `Application.InputBox` returns `False`, and the dateInput variable is set to `0`.
+
+Please note that this method does not provide a calendar picker, it just allows the user to input a date in a text box. If you want a calendar picker, you may need to use an ActiveX control or a third-party solution, but this can be more complex and may not work in all environments.

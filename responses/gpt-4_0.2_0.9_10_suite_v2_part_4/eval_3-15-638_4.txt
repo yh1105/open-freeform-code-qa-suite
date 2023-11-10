@@ -1,0 +1,19 @@
+The `SelectByID2` method requires the name of the entity you want to select. However, faces and edges in SolidWorks do not have names by default. You can assign names to them using the `IEntity::SetName` method, but this is not recommended because it can lead to confusion and errors.
+
+Instead, you can use the `Select4` method, which allows you to select entities directly without needing to know their names. Here's how you can modify your code to use `Select4`:
+
+```vba
+' Select the face
+selBool = faceObj.Select4(True, Nothing)
+
+' Select the midpoint
+selBool = midpointObj.Select4(True, Nothing)
+
+' Now you can create the reference plane
+Dim refPlane As SldWorks.RefPlane
+Set refPlane = swFeatMgr.InsertRefPlane(3, 0, 0, 0, 0, 0)
+```
+
+In the `Select4` method, the first argument is a boolean that specifies whether to add to the current selection (True) or replace it (False). The second argument is a `SelectData` object that you can use to provide additional selection options. In this case, we're not using any additional options, so we pass `Nothing`.
+
+After selecting the face and the midpoint, you can call `InsertRefPlane` to create the reference plane. The arguments to `InsertRefPlane` specify the type of the reference plane and its parameters. In this case, we're creating a plane that passes through the selected face and point, so we use `3` as the type and `0` for all the parameters.

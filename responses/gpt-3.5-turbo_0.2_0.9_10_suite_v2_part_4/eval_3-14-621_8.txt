@@ -1,0 +1,24 @@
+The error message is indicating that you are trying to access a `@State` variable outside of the `body` property of a `View`, which is not allowed in SwiftUI. 
+
+To initialize the value of a `@State` variable based on external data, you can use a separate `init` method that takes the external data as a parameter and sets the value of the `@State` variable accordingly. Here's an example:
+
+```
+struct StateFromOutside: View {
+    let list = [
+        "a": "Letter A",
+        "b": "Letter B",
+        // ...
+    ]
+    @State var fullText: String
+
+    init(letter: String) {
+        self._fullText = State(initialValue: list[letter]!)
+    }
+
+    var body: some View {
+        TextField($fullText)
+    }
+}
+```
+
+In this example, we're using the `_fullText` property wrapper to directly set the initial value of the `@State` variable in the `init` method. This should allow you to initialize the value of the `@State` variable based on external data without encountering the error you were seeing.

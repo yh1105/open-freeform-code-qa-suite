@@ -1,0 +1,8 @@
+There are a few things you can try to get the preview canvas to show up in Xcode 11 beta:
+
+1. Make sure you have the latest version of Xcode 11 beta installed.
+2. Check that you are in the correct canvas mode. You can switch between code and canvas mode by clicking the appropriate button in the top-right corner of the editor.
+3. Try cleaning your project and rebuilding it. Sometimes Xcode can get stuck and needs a fresh start.
+4. If none of the above solutions work, try resetting Xcode preferences by running the following command in Terminal: `defaults delete com.apple.dt.Xcode`. This will reset Xcode to its default settings and may fix the issue.
+
+If none of these solutions work, you may want to file a bug report with Apple.

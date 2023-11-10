@@ -1,0 +1,35 @@
+Yes, you can achieve the same result using an array formula with `INDEX` and `SMALL` functions. Here's how you can do it:
+
+```excel
+=IFERROR(INDEX($B$1:$B$100, SMALL(IF($A$1:$A$100="x", ROW($A$1:$A$100)-MIN(ROW($A$1:$A$100))+1, ""), ROW(A1))), "")
+```
+
+This is an array formula, so you need to press `Ctrl+Shift+Enter` after typing it, instead of just `Enter`.
+
+This formula will return the values from `Column B` where `Column A` has a value of `x`. If there are no more values, it will return an empty string.
+
+Please replace `$B$1:$B$100` and `$A$1:$A$100` with your actual range.
+
+If you want to use a VBA macro, you can use the following code:
+
+```vba
+Sub FilterData()
+    Dim rng As Range
+    Dim outputCol As Range
+    Dim cell As Range
+    Dim i As Integer
+
+    Set rng = Worksheets("Sheet1").Range("A1:A100")
+    Set outputCol = Worksheets("Sheet1").Range("C1")
+    i = 0
+
+    For Each cell In rng
+        If cell.Value = "x" Then
+            outputCol.Offset(i, 0).Value = cell.Offset(0, 1).Value
+            i = i + 1
+        End If
+    Next cell
+End Sub
+```
+
+This macro will copy the values from `Column B` to `Column C` where `Column A` has a value of `x`. Please replace `"Sheet1"`, `"A1:A100"`, and `"C1"` with your actual sheet name and range.

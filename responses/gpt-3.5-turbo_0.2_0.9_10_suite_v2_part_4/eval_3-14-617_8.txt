@@ -1,0 +1,17 @@
+This error usually occurs when there is an issue with the build settings or the script used in the build phase. Here are some steps you can try to resolve the issue:
+
+1. Clean the project: Go to Product > Clean Build Folder and try building the project again.
+
+2. Check build settings: Make sure that the build settings are correct for the project. Check if there are any missing or incorrect settings.
+
+3. Check script: Check the script used in the build phase. Make sure that it is correct and there are no errors in it.
+
+4. Update pods: Try updating the pods used in the project to the latest version. Run `pod update` in the terminal to update the pods.
+
+5. Remove derived data: Delete the derived data folder for the project. Go to Xcode > Preferences > Locations > Derived Data and delete the folder for the project.
+
+6. Check for conflicts: Check if there are any conflicts between the pods used in the project. Try removing one of the pods and see if the error goes away.
+
+7. Reinstall Xcode: If none of the above steps work, try reinstalling Xcode and try building the project again.
+
+Hopefully, one of these steps will help you resolve the issue.

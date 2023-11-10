@@ -1,0 +1,16 @@
+You can use the `date` command in Unix to convert the date format. Here is a simple script that reads each line from the file, converts the date, and then prints it:
+
+```bash
+while IFS= read -r line
+do
+    # Extract the date part from the line
+    date_str=$(echo $line | cut -d'T' -f1)
+
+    # Convert to the desired format
+    new_date=$(date -d$date_str +"%d %b %Y")
+
+    echo $new_date
+done < filename.txt
+```
+
+This script assumes that `filename.txt` is the file containing your dates. It reads each line from the file, extracts the date part before the 'T', converts it to the "DD MMM YYYY" format, and then prints it.

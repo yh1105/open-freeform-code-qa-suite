@@ -1,0 +1,20 @@
+The `SelectByID2` method is a bit tricky to use because it requires the name of the entity to select. For faces and edges, these names are not readily available or easily identifiable. However, you can use the `GetSelectByIDString` method to get the name of the selected entity, which can then be used with `SelectByID2`.
+
+Here's how you can modify your code to use `GetSelectByIDString`:
+
+```vba
+' After selecting the face and edge, get their names
+Dim faceName As String
+Dim edgeName As String
+
+faceName = swSelMgr.GetSelectByIDString
+edgeName = swSelMgr.GetSelectByIDString
+
+' Now you can use these names with SelectByID2
+selBool = swModel.Extension.SelectByID2(faceName, "FACE", 0, 0, 0, False, 0, Nothing, 0)
+selBool = swModel.Extension.SelectByID2(edgeName, "EDGE", 0, 0, 0, True, 0, Nothing, 0)
+```
+
+This code first deselects everything, then selects the face and edge by their names. The `SelectByID2` method is called with `Append` set to `False` for the face and `True` for the edge, so the face is selected first and then the edge is added to the selection.
+
+After this, you should be able to use `InsertRefPlane` with the selected face and edge.

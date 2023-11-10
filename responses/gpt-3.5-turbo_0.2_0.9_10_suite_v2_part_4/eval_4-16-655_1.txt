@@ -1,0 +1,14 @@
+This issue is caused by the way GitLab CI/CD processes variable expansion. GitLab CI/CD uses its own syntax for variable expansion, which can conflict with nested parameter expansion in some cases. 
+
+To work around this issue, you can use a `before_script` block to set the `GIT_BRANCH` variable using `bash` parameter expansion instead of GitLab CI/CD's syntax:
+
+```
+before_script:
+  - export GIT_BRANCH="${CI_MERGE_REQUEST_SOURCE_BRANCH_NAME:-${CI_COMMIT_BRANCH:-$CI_DEFAULT_BRANCH}}"
+
+job1:
+  script:
+    - echo $GIT_BRANCH
+```
+
+This should correctly set the `GIT_BRANCH` variable to the expected value.

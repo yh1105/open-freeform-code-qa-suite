@@ -1,0 +1,32 @@
+The `@State` property wrapper is designed to be used and modified within the view's body or methods called from it. You can't modify it directly in the `init` method. 
+
+However, you can use a workaround by using a `@StateObject` or `@ObservedObject` with an `ObservableObject`. Here's an example:
+
+```swift
+class StateFromOutsideModel: ObservableObject {
+    @Published var fullText: String
+    
+    init(letter: String) {
+        self.fullText = letter
+    }
+}
+
+struct StateFromOutside: View {
+    @StateObject var model: StateFromOutsideModel
+
+    init(letter: String) {
+        let list = [
+            "a": "Letter A",
+            "b": "Letter B",
+            // ...
+        ]
+        _model = StateObject(wrappedValue: StateFromOutsideModel(letter: list[letter]!))
+    }
+
+    var body: some View {
+        TextField("Placeholder", text: $model.fullText)
+    }
+}
+```
+
+In this example, `StateFromOutsideModel` is an `ObservableObject` that holds the `fullText` state. This state is then initialized in the `init` method of `StateFromOutside` view.

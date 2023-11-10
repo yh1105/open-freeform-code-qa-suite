@@ -1,0 +1,51 @@
+To remove the spaces from your output, you can simply replace the space character with an empty string. You can do this by modifying the line where you replace the special characters with a space to replace them with an empty string instead. 
+
+Here's the modified code:
+
+```vba
+Sub ReplaceSpecial()
+    Dim cel As Range
+    Dim strVal As String
+    Dim i As Long
+    Application.ScreenUpdating = False
+    For Each cel In Selection
+        strVal = cel.Value
+        For i = 1 To Len(strVal)
+            Select Case Asc(Mid(strVal, i, 1))
+                Case 32, 48 To 57, 65 To 90, 97 To 122
+                    ' Leave ordinary characters alone
+                Case Else
+                    Mid(strVal, i, 1) = "" ' replace with empty string instead of space
+            End Select
+        Next i
+        cel.Value = strVal
+    Next cel
+    Application.ScreenUpdating = True
+End Sub
+```
+
+Please note that the `Mid` function in VBA is not able to replace a character with an empty string. So, you need to use a different approach to remove the special characters. Here is a modified version of your code that should work:
+
+```vba
+Sub ReplaceSpecial()
+    Dim cel As Range
+    Dim strVal As String
+    Dim i As Long
+    Dim tempStr As String
+    Application.ScreenUpdating = False
+    For Each cel In Selection
+        strVal = cel.Value
+        tempStr = ""
+        For i = 1 To Len(strVal)
+            Select Case Asc(Mid(strVal, i, 1))
+                Case 48 To 57, 65 To 90, 97 To 122
+                    tempStr = tempStr & Mid(strVal, i, 1)
+            End Select
+        Next i
+        cel.Value = tempStr
+    Next cel
+    Application.ScreenUpdating = True
+End Sub
+```
+
+In this version of the code, a temporary string (`tempStr`) is used to build the new string without the special characters. The `Mid` function is used to append each character that is not a special character to `tempStr`. Finally, the cell's value is replaced with `tempStr`.

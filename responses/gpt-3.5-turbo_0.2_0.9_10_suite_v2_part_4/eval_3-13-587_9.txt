@@ -1,0 +1,17 @@
+This issue seems to be related to the compatibility of Jacoco with the latest version of Gradle and Kotlin. 
+
+To fix this issue, you can try updating the Jacoco version to the latest version which is compatible with Gradle 7.0.2 and Kotlin 1.5.10. You can update the Jacoco version in your build.gradle file as follows:
+
+```
+jacoco {
+    toolVersion = "0.8.7"
+}
+```
+
+If this doesn't work, you can try downgrading the Gradle version to a lower version that is compatible with Jacoco. You can do this by changing the distributionUrl in your gradle-wrapper.properties file to a lower version of Gradle, for example:
+
+```
+distributionUrl=https\://services.gradle.org/distributions/gradle-6.8.3-all.zip
+```
+
+I hope this helps!

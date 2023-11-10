@@ -44,7 +44,7 @@ grading:
           file?.absolutePath.getDefault()
         } catch (e: Exception) {
             e.printStackTrace()
-            ""
+            \"\"
         }
     }"
 

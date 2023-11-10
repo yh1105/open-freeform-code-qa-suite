@@ -1,0 +1,1 @@
+You can use the ArrayList constructor with an initial capacity in Kotlin as well. So, the recommended solution in your case would be to use the ArrayList constructor with the desired initial capacity. This will help avoid resizing and improve performance.

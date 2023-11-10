@@ -1,0 +1,31 @@
+Unfortunately, Excel VBA doesn't have a built-in function to retrieve the local path of a OneDrive or SharePoint file. However, you can use a workaround to get the local path of the synced SharePoint file.
+
+Here's a simple VBA function that can convert a SharePoint or OneDrive URL to a local file path:
+
+```vba
+Function ConvertToLocalPath(SPUrl As String) As String
+    Dim strLocalPath As String
+    strLocalPath = Replace(SPUrl, "https://", "")
+    strLocalPath = Replace(strLocalPath, "/", "\")
+    strLocalPath = Environ("UserProfile") & "\OneDrive - YourCompanyName\" & strLocalPath
+    ConvertToLocalPath = strLocalPath
+End Function
+```
+
+You can use this function in your VBA code like this:
+
+```vba
+Sub Test()
+    Dim SPUrl As String
+    Dim LocalPath As String
+    SPUrl = "https://YourCompanyName.sharepoint.com/Shared Documents/YourFileName.xlsx"
+    LocalPath = ConvertToLocalPath(SPUrl)
+    Debug.Print LocalPath
+End Sub
+```
+
+Please replace "YourCompanyName" and "YourFileName.xlsx" with your actual company name and file name.
+
+Please note that this function assumes that the OneDrive folder is located in the user's profile folder and the name of the OneDrive folder is "OneDrive - YourCompanyName". If this is not the case, you need to adjust the function accordingly.
+
+Also, this function doesn't check if the file actually exists at the local path. You might want to add some error checking code to handle this situation.

@@ -1,0 +1,26 @@
+Creating a calendar input in VBA Excel can be done using a UserForm and a ComboBox. Here's a simple example:
+
+1. First, create a new UserForm in VBA (Insert > UserForm).
+2. Add a ComboBox to the UserForm (Toolbox > ComboBox).
+3. Double click on the UserForm and add the following code to the UserForm_Initialize() event:
+
+```vba
+Private Sub UserForm_Initialize()
+    Dim i As Integer
+    For i = 1 To 31
+        ComboBox1.AddItem i
+    Next i
+End Sub
+```
+
+This will populate the ComboBox with numbers 1 to 31, representing the days of a month.
+
+4. To use this UserForm, you can call it from a Sub procedure like this:
+
+```vba
+Sub ShowForm()
+    UserForm1.Show
+End Sub
+```
+
+This is a very basic example and doesn't take into account different month lengths or years. For a more robust solution, you might want to consider using a third-party date picker control, or using Excel's built-in date picker if it's available in your version of Excel.

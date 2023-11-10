@@ -1,0 +1,19 @@
+GitLab CI/CD uses a simple variable substitution method, which doesn't support nested variable expansion like Bash does. This is why your nested parameter expansion isn't working as expected.
+
+In your case, you can use a script to achieve the same result:
+
+```yaml
+job1:
+  script:
+    - |
+      if [[ -n "$CI_MERGE_REQUEST_SOURCE_BRANCH_NAME" ]]; then
+        GIT_BRANCH=$CI_MERGE_REQUEST_SOURCE_BRANCH_NAME
+      elif [[ -n "$CI_COMMIT_BRANCH" ]]; then
+        GIT_BRANCH=$CI_COMMIT_BRANCH
+      else
+        GIT_BRANCH=$CI_DEFAULT_BRANCH
+      fi
+      echo $GIT_BRANCH
+```
+
+This script will check the variables in order and assign the first non-empty one to `GIT_BRANCH`.

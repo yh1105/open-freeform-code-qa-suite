@@ -1,0 +1,20 @@
+You can use the `MSForms.DataObject` to interact with the clipboard. This object is part of the Microsoft Forms 2.0 Object Library, so you need to add a reference to it in your VBA environment (VBE > Tools > References > Microsoft Forms 2.0 Object Library).
+
+Here is a simple function to copy text to the clipboard:
+
+```vba
+Public Sub CopyToClipboard(s As String)
+    Dim DataObj As MSForms.DataObject
+    Set DataObj = New MSForms.DataObject
+    DataObj.SetText s
+    DataObj.PutInClipboard
+End Sub
+```
+
+You can use this function to copy the value of `NodeKey` to the clipboard:
+
+```vba
+Call CopyToClipboard(Me.NodeKey.Value)
+```
+
+This will put the value of `NodeKey` in the clipboard, and you can paste it anywhere you want.

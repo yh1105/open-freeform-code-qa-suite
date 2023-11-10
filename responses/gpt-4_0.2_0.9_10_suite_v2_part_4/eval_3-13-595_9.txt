@@ -1,0 +1,37 @@
+The issue you're facing is likely due to changes in the way Android 11 (API level 30) handles file storage. Android 11 introduces the concept of scoped storage which changes the way that apps store and access files on a device's storage.
+
+In your case, you're trying to access the external storage directory which is not allowed in Android 11. You should use the app-specific directory instead.
+
+Here is an example of how you can get the app-specific directory:
+
+```java
+private fun getAppSpecificAlbumStorageDir(context: Context, albumName: String): File {
+    val file = File(context.getExternalFilesDir(Environment.DIRECTORY_PICTURES), albumName)
+    if (!file.mkdirs()) {
+        Log.e(LOG_TAG, "Directory not created")
+    }
+    return file
+}
+```
+
+In this example, `context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)` returns the path to the app-specific directory on the external storage where you can place pictures.
+
+Also, make sure you have the necessary permissions in your manifest file:
+
+```xml
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+```
+
+And you request these permissions at runtime:
+
+```java
+if (ContextCompat.checkSelfPermission(thisActivity, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+    != PackageManager.PERMISSION_GRANTED) {
+    ActivityCompat.requestPermissions(thisActivity,
+        arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+        MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE)
+}
+```
+
+Remember that starting from Android 6.0 (API level 23), users grant permissions to apps while the app is running, not when they install the app. This approach streamlines the app install process, since the user does not need to grant permissions when they install or update the app. It also gives the user more control over the app's functionality; for example, a user could choose to give a camera app access to the camera but not to the device location.

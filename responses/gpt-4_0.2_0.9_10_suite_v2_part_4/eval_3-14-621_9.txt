@@ -1,0 +1,31 @@
+You can't directly initialize a `@State` variable in the `init()` method. Instead, you can use a workaround by using a `@StateObject` or `@ObservedObject` with an `ObservableObject`. Here's an example:
+
+```swift
+class TextModel: ObservableObject {
+    @Published var fullText: String
+
+    init(letter: String) {
+        self.fullText = letter
+    }
+}
+
+struct StateFromOutside: View {
+    let list = [
+        "a": "Letter A",
+        "b": "Letter B",
+        // ...
+    ]
+
+    @StateObject var textModel: TextModel
+
+    init(letter: String) {
+        _textModel = StateObject(wrappedValue: TextModel(letter: list[letter] ?? ""))
+    }
+
+    var body: some View {
+        TextField("Placeholder", text: $textModel.fullText)
+    }
+}
+```
+
+In this example, `TextModel` is an `ObservableObject` that wraps the `fullText` state. You initialize `TextModel` with the desired letter in the `init()` method of `StateFromOutside`.

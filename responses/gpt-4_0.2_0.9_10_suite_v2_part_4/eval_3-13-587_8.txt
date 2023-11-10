@@ -1,0 +1,13 @@
+The error message you're seeing suggests that the Java version being used is not compatible with the Gradle and Kotlin versions you've updated to. 
+
+Gradle 7.0.2 requires Java 8 or newer, and Kotlin 1.5.10 also requires Java 8 or newer. However, the error message suggests that it's looking for `java.lang.Module`, which is a class that was introduced in Java 9. 
+
+This could be due to a couple of reasons:
+
+1. Your project is still using an older version of Java. You can check the Java version being used by your project by running `./gradlew -version` in your project directory.
+
+2. Your `JAVA_HOME` environment variable is pointing to an older version of Java. You can check this by running `echo $JAVA_HOME` in your terminal.
+
+If either of these is the case, you'll need to update your project to use a newer version of Java. You can do this by either updating the `sourceCompatibility` and `targetCompatibility` properties in your `build.gradle` file, or by updating your `JAVA_HOME` environment variable to point to a newer version of Java.
+
+If you're still having issues after checking these, it could be a compatibility issue between Jacoco and the newer versions of Gradle and Kotlin. You could try downgrading to an older version of Jacoco, or waiting for a new version to be released that fixes the issue.

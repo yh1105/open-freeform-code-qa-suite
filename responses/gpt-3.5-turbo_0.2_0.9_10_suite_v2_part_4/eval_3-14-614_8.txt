@@ -1,0 +1,10 @@
+There are a few things you can try to get the preview canvas to show up in Xcode 11 beta:
+
+1. Make sure you have the latest version of Xcode 11 beta installed.
+2. Try cleaning the build folder by going to Product > Clean Build Folder.
+3. Restart Xcode and try again.
+4. Make sure you are in the Preview canvas by clicking on the "Resume" button in the top left corner of the canvas.
+5. Check if there are any errors in the console or in the code that may be preventing the preview from showing up.
+6. Try creating a new project and see if the preview canvas works in the new project.
+
+If none of these solutions work, you may want to file a bug report with Apple.

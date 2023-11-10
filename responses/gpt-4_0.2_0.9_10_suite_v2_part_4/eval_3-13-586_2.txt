@@ -1,0 +1,28 @@
+The error message you're seeing is due to a change in Android 12 (API level 31) that requires you to specify whether a `PendingIntent` is mutable or immutable when you create it. 
+
+The `MediaSessionCompat` class in the AndroidX Media library creates a `PendingIntent` internally, and it seems like the version you're using (1.4.0) doesn't yet handle this requirement correctly.
+
+You can try the following solutions:
+
+1. **Update the AndroidX Media library to the latest version.** At the time of writing, the latest version is 1.4.3. You can update the version in your `build.gradle` file like this:
+
+```groovy
+dependencies {
+    implementation 'androidx.media:media:1.4.3'
+}
+```
+
+2. **Downgrade your target SDK version to 30** until the AndroidX Media library is updated to handle this requirement correctly. You can do this in your `build.gradle` file like this:
+
+```groovy
+android {
+    compileSdkVersion 30
+    defaultConfig {
+        targetSdkVersion 30
+    }
+}
+```
+
+Remember to sync your project with Gradle files after making these changes.
+
+If updating the library or downgrading the target SDK version doesn't work, you might need to wait for an update to the AndroidX Media library that fixes this issue. You can also consider filing a bug report with the AndroidX team.

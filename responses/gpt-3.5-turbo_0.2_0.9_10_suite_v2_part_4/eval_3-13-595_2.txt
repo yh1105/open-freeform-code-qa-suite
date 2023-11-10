@@ -1,0 +1,42 @@
+Starting from Android 11, you need to request the `MANAGE_EXTERNAL_STORAGE` permission to access files outside your app's sandboxed storage. Without this permission, you cannot access the external storage directory.
+
+To request this permission, you need to add the following line to your app's manifest file:
+
+```
+<uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+```
+
+Additionally, you need to request this permission at runtime by using the `ActivityResultContracts.RequestPermission()` API. Here's an example of how to do this:
+
+```
+private val requestPermissionLauncher =
+    registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
+        if (isGranted) {
+            // Permission is granted, you can access external storage directory
+            saveImageToFile(bitmap)
+        } else {
+            // Permission is denied, handle the error
+            Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+private fun requestManageExternalStoragePermission() {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+        if (Environment.isExternalStorageManager()) {
+            // Permission is already granted, you can access external storage directory
+            saveImageToFile(bitmap)
+        } else {
+            // Permission is not granted, request it
+            val intent = Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION)
+            val uri = Uri.fromParts("package", packageName, null)
+            intent.data = uri
+            requestPermissionLauncher.launch(intent)
+        }
+    } else {
+        // For devices running Android 10 or lower, you don't need to request this permission
+        saveImageToFile(bitmap)
+    }
+}
+```
+
+You can call the `requestManageExternalStoragePermission()` function before calling the `saveImageToFile()` function to request the `MANAGE_EXTERNAL_STORAGE` permission at runtime.

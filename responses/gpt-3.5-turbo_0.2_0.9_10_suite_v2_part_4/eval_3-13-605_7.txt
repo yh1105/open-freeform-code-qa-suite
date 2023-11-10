@@ -1,0 +1,49 @@
+The error message indicates that the version of Kotlin used to compile the module is not compatible with the version expected by your project. To solve this issue, you can try the following steps:
+
+1. Update the Kotlin version in your project to match the version used to compile the module. You can do this by adding the following line to your app-level build.gradle file:
+
+   ```
+   kotlin_version = "1.5.1"
+   ```
+
+2. Clean and rebuild your project to ensure that the new Kotlin version is used.
+
+Regarding adding email and cardholder name in Stripe, you can use the `CardInputWidget` instead of `CardMultilineWidget`. The `CardInputWidget` provides an option to enter the cardholder name and email. Here's an example of how to use it:
+
+1. Add the following dependency to your app-level build.gradle file:
+
+   ```
+   implementation 'com.stripe:stripe-android:16.8.0'
+   ```
+
+2. Add the following code to your layout file:
+
+   ```
+   <com.stripe.android.view.CardInputWidget
+       android:id="@+id/card_input_widget"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       app:shouldShowPostalCode="false"
+       app:shouldShowCardholderName="true"
+       app:shouldShowError="true"
+       app:shouldShowExpiry="true"
+       app:shouldShowScanCard="true"
+       app:shouldShowCardSavingCheckBox="false" />
+   ```
+
+3. In your activity or fragment, initialize the `CardInputWidget` and retrieve the card details:
+
+   ```
+   val cardInputWidget = findViewById<CardInputWidget>(R.id.card_input_widget)
+   val card = cardInputWidget.card
+   val email = "example@example.com" // replace with actual email
+   val cardholderName = "John Doe" // replace with actual cardholder name
+   val params = PaymentMethodCreateParams.create(
+       card.toPaymentMethodParamsCard(),
+       PaymentMethodCreateParams.BillingDetails.Builder()
+           .setEmail(email)
+           .setName(cardholderName)
+           .build()
+   )
+   // use the params to create a payment method or perform a payment
+   ```

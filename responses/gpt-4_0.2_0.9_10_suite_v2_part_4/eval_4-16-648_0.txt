@@ -1,0 +1,17 @@
+The error message you're seeing indicates that the `/data` directory is on a read-only file system, which means you can't make changes to it, including creating new directories.
+
+On macOS Catalina and later, the system files are stored on a separate, read-only volume. This is part of a feature called "System Integrity Protection" (SIP) that's designed to help prevent malicious software from modifying protected files and folders.
+
+If you're trying to create a directory for MongoDB (which is what `/data/db` is commonly used for), you might want to consider creating it in a different location. For example, you could create it in your home directory:
+
+```bash
+mkdir -p ~/data/db
+```
+
+Then, when you start MongoDB, you can specify this directory with the `--dbpath` option:
+
+```bash
+mongod --dbpath ~/data/db
+```
+
+This way, you don't need to modify any system-protected directories.

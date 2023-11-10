@@ -1,0 +1,11 @@
+You can use the `Split-Path` and `Split-Path -Parent` cmdlets to split the PATH environment variable into individual directories and then check if the specified folder is in the list. Here's an example function:
+
+```
+function FolderIsInPATH($Path_to_directory) {
+    $path_dirs = $env:Path -split ';'
+    $dir = Split-Path $Path_to_directory -Parent
+    return $path_dirs -contains $dir
+}
+```
+
+This function splits the PATH environment variable into individual directories using the `-split` operator and stores them in the `$path_dirs` array. It then uses the `Split-Path` cmdlet to get the parent directory of the specified folder and stores it in the `$dir` variable. Finally, it checks if the `$path_dirs` array contains the `$dir` directory using the `-contains` operator and returns true or false accordingly.

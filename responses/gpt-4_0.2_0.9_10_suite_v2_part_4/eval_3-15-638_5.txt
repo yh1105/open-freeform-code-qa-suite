@@ -1,0 +1,29 @@
+The SelectByID2 method is a bit tricky to use. The 'Name' parameter is not the name of the face or edge as you see it in the feature tree, but rather the internal name that SolidWorks uses. For faces and edges, this is usually a number. The 'Type' parameter should be a string that represents the type of the entity you are trying to select, such as "FACE" or "EDGE". The 'X', 'Y', and 'Z' parameters are the coordinates of the point you want to select on the entity.
+
+Here is a simplified example of how you can use SelectByID2 to select a face and a point:
+
+```vba
+Dim swApp As SldWorks.SldWorks
+Dim swModel As SldWorks.ModelDoc2
+Dim swSelMgr As SldWorks.SelectionMgr
+Dim swModelDocExt As SldWorks.ModelDocExtension
+
+Sub main()
+
+Set swApp = Application.SldWorks
+Set swModel = swApp.ActiveDoc
+Set swModelDocExt = swModel.Extension
+Set swSelMgr = swModel.SelectionManager
+
+' Select a face
+swModelDocExt.SelectByID2 "Face1", "FACE", 0, 0, 0, False, 0, Nothing, 0
+
+' Select a point
+swModelDocExt.SelectByID2 "Point1", "DATUMPOINT", 0, 0, 0, True, 0, Nothing, 0
+
+End Sub
+```
+
+In this example, "Face1" and "Point1" are the internal names of the face and point. You can find these names by hovering over the face or point in the feature tree. The 'X', 'Y', and 'Z' parameters are all set to 0, which means the point at the origin of the face or point will be selected. The 'Append' parameter is set to False for the face and True for the point, which means the face will be deselected when the point is selected.
+
+If you want to select a face and a point on an edge, you can use the GetClosestPointOn method of the IEdge interface to get the coordinates of the point, and then use these coordinates in the SelectByID2 method.

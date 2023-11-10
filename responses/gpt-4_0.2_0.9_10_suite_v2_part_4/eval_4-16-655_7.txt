@@ -1,0 +1,14 @@
+Nested parameter expansion is not supported in GitLab CI/CD. GitLab CI/CD uses a simple key-value store for variables and does not support complex shell expressions.
+
+In your case, the variable `GIT_BRANCH` is not being expanded as you expect. Instead, it's being treated as a string literal. The `}` you see is the last character of the string literal.
+
+You can achieve the desired behavior by moving the logic into the script section of your job:
+
+```yaml
+job1:
+  script:
+    - GIT_BRANCH="${CI_MERGE_REQUEST_SOURCE_BRANCH_NAME:-${CI_COMMIT_BRANCH:-$CI_DEFAULT_BRANCH}}"
+    - echo $GIT_BRANCH
+```
+
+This way, the variable assignment and expansion is done within the context of the bash shell, which does support nested parameter expansion.

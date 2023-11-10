@@ -1,0 +1,1 @@
+You can create a calendar input in VBA Excel by using the built-in Date Picker control. To add it to your userform, go to the Developer tab, click on Insert, and then select the Date Picker control. You can then customize its properties to fit your needs. If you don't see the Developer tab, you can enable it in the Excel Options menu under Customize Ribbon.

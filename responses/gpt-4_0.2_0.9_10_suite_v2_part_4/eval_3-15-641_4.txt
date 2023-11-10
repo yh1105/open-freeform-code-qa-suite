@@ -1,0 +1,17 @@
+You can use the `Environ` function in VBA to get the local path of the OneDrive folder. This function returns the value of the specified system environment variable. The OneDrive local path is stored in the "OneDrive" environment variable.
+
+Here is a simple example:
+
+```vba
+Sub GetOneDrivePath()
+    Dim OneDrivePath As String
+    OneDrivePath = Environ("OneDrive")
+    MsgBox OneDrivePath
+End Sub
+```
+
+This will show a message box with the local path of the OneDrive folder.
+
+However, this will only return the root path of the OneDrive folder. If you need to find a specific subfolder within the OneDrive folder, you will need to use additional code to search for it.
+
+Also, please note that the "OneDrive" environment variable might not be set on all systems, especially if OneDrive is not installed or if it has been installed in a non-standard way. Therefore, you should always check if the returned path is valid before using it.

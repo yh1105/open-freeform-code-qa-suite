@@ -1,0 +1,7 @@
+You can use `grep` with a regular expression to match the `lang` attribute value regardless of its position in the HTML tag. Here's an example command that should work for both cases:
+
+```
+curl -Ls yahoo.com | grep -oE 'lang="[^"]+"' | head -1 | cut -d'"' -f 2
+```
+
+This command uses the `-o` option with `grep` to output only the matched text (i.e., the `lang` attribute and its value), and the `-E` option to enable extended regular expressions. The regular expression `lang="[^"]+"` matches the `lang` attribute and its value, regardless of its position in the HTML tag. Finally, the `cut` command extracts the value of the `lang` attribute from the matched text.

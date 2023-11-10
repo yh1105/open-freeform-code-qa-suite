@@ -1,0 +1,53 @@
+The `apt-get` package manager installs the version of the software that is available in the repository defined for your version of the operating system. If you need a newer version of a software than is available in your repository, you can download and install it from source. Here is how you can do it for cmake:
+
+1. First, remove the existing version of cmake:
+
+    ```bash
+    sudo apt-get remove cmake
+    ```
+
+2. Then, download the latest version of cmake from the official website. At the time of writing, the latest version is 3.21.2. Replace `3.21.2` with the latest version if it has changed.
+
+    ```bash
+    wget https://github.com/Kitware/CMake/releases/download/v3.21.2/cmake-3.21.2.tar.gz
+    ```
+
+3. Extract the downloaded file:
+
+    ```bash
+    tar -xzvf cmake-3.21.2.tar.gz
+    ```
+
+4. Navigate to the extracted directory:
+
+    ```bash
+    cd cmake-3.21.2
+    ```
+
+5. Now, run the bootstrap script:
+
+    ```bash
+    ./bootstrap
+    ```
+
+6. Make the installation:
+
+    ```bash
+    make -j$(nproc)
+    ```
+
+7. Finally, install cmake:
+
+    ```bash
+    sudo make install
+    ```
+
+8. Verify the installed version of cmake:
+
+    ```bash
+    cmake --version
+    ```
+
+This should display the version you have installed.
+
+Please note that building from source requires you to have build-essential installed. If you don't have it installed, you can install it using `sudo apt-get install build-essential`.

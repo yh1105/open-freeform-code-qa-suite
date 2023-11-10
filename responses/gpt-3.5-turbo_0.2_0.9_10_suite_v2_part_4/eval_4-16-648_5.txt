@@ -1,0 +1,31 @@
+This error message indicates that the file system is mounted as read-only, which means that you cannot create new directories or files on it. 
+
+To fix this issue, you can try the following steps:
+
+1. Check the file system's read/write status by running the following command:
+
+   ```
+   mount | grep ' / '
+   ```
+
+   This will show you the mount options for the root file system. Look for the "read-only" option in the output.
+
+2. If the file system is indeed mounted as read-only, you can remount it as read/write by running the following command:
+
+   ```
+   sudo mount -uw /
+   ```
+
+   This will remount the root file system as read/write.
+
+3. Now you should be able to create the `/data/db` directory using the `sudo mkdir -p /data/db` command.
+
+4. Once you have created the directory, you can remount the file system as read-only again by running the following command:
+
+   ```
+   sudo mount -ur /
+   ```
+
+   This will remount the root file system as read-only again.
+
+Hopefully, this will solve your issue.

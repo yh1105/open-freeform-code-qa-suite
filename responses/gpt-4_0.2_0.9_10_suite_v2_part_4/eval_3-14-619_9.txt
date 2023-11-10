@@ -1,0 +1,13 @@
+The code you posted is correct, but the problem might be that you're not using `ContentView` properly. The `@Binding` property wrapper is used to create a two-way binding to a mutable state. If you're using `ContentView` in another view, you need to pass a `@State` variable to it. Here's an example:
+
+```swift
+struct ParentView: View {
+    @State private var isSelected: Bool = false
+
+    var body: some View {
+        ContentView(isSelected: $isSelected)
+    }
+}
+```
+
+In this example, `ParentView` has a `@State` variable `isSelected` that it passes to `ContentView`. When `isSelected` changes in `ContentView`, the view will update because `@State` will notify SwiftUI about the change.

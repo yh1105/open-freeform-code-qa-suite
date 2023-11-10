@@ -1,0 +1,25 @@
+You can achieve this by simply replacing the space character with an empty string. In your code, you are replacing all special characters with a space character. Instead, you can replace them with an empty string. Here is how you can do it:
+
+```vba
+Sub ReplaceSpecial()
+    Dim cel As Range
+    Dim strVal As String
+    Dim i As Long
+    Application.ScreenUpdating = False
+    For Each cel In Selection
+        strVal = cel.Value
+        For i = 1 To Len(strVal)
+            Select Case Asc(Mid(strVal, i, 1))
+                Case 32, 48 To 57, 65 To 90, 97 To 122
+                    ' Leave ordinary characters alone
+                Case Else
+                    Mid(strVal, i, 1) = ""
+            End Select
+        Next i
+        cel.Value = strVal
+    Next cel
+    Application.ScreenUpdating = True
+End Sub
+```
+
+Please note that this code will remove all special characters and spaces from the selected cells. If you want to keep the spaces between words, you should not include 32 (ASCII value for space) in the Case statement.

@@ -1,0 +1,561 @@
+answer_paths:
+  cases/eval_3-13-586.yaml:
+  - eval_3-13-586_0.txt
+  - eval_3-13-586_1.txt
+  - eval_3-13-586_2.txt
+  - eval_3-13-586_3.txt
+  - eval_3-13-586_4.txt
+  - eval_3-13-586_5.txt
+  - eval_3-13-586_6.txt
+  - eval_3-13-586_7.txt
+  - eval_3-13-586_8.txt
+  - eval_3-13-586_9.txt
+  cases/eval_3-13-587.yaml:
+  - eval_3-13-587_0.txt
+  - eval_3-13-587_1.txt
+  - eval_3-13-587_2.txt
+  - eval_3-13-587_3.txt
+  - eval_3-13-587_4.txt
+  - eval_3-13-587_5.txt
+  - eval_3-13-587_6.txt
+  - eval_3-13-587_7.txt
+  - eval_3-13-587_8.txt
+  - eval_3-13-587_9.txt
+  cases/eval_3-13-591.yaml:
+  - eval_3-13-591_0.txt
+  - eval_3-13-591_1.txt
+  - eval_3-13-591_2.txt
+  - eval_3-13-591_3.txt
+  - eval_3-13-591_4.txt
+  - eval_3-13-591_5.txt
+  - eval_3-13-591_6.txt
+  - eval_3-13-591_7.txt
+  - eval_3-13-591_8.txt
+  - eval_3-13-591_9.txt
+  cases/eval_3-13-592.yaml:
+  - eval_3-13-592_0.txt
+  - eval_3-13-592_1.txt
+  - eval_3-13-592_2.txt
+  - eval_3-13-592_3.txt
+  - eval_3-13-592_4.txt
+  - eval_3-13-592_5.txt
+  - eval_3-13-592_6.txt
+  - eval_3-13-592_7.txt
+  - eval_3-13-592_8.txt
+  - eval_3-13-592_9.txt
+  cases/eval_3-13-593.yaml:
+  - eval_3-13-593_0.txt
+  - eval_3-13-593_1.txt
+  - eval_3-13-593_2.txt
+  - eval_3-13-593_3.txt
+  - eval_3-13-593_4.txt
+  - eval_3-13-593_5.txt
+  - eval_3-13-593_6.txt
+  - eval_3-13-593_7.txt
+  - eval_3-13-593_8.txt
+  - eval_3-13-593_9.txt
+  cases/eval_3-13-595.yaml:
+  - eval_3-13-595_0.txt
+  - eval_3-13-595_1.txt
+  - eval_3-13-595_2.txt
+  - eval_3-13-595_3.txt
+  - eval_3-13-595_4.txt
+  - eval_3-13-595_5.txt
+  - eval_3-13-595_6.txt
+  - eval_3-13-595_7.txt
+  - eval_3-13-595_8.txt
+  - eval_3-13-595_9.txt
+  cases/eval_3-13-596.yaml:
+  - eval_3-13-596_0.txt
+  - eval_3-13-596_1.txt
+  - eval_3-13-596_2.txt
+  - eval_3-13-596_3.txt
+  - eval_3-13-596_4.txt
+  - eval_3-13-596_5.txt
+  - eval_3-13-596_6.txt
+  - eval_3-13-596_7.txt
+  - eval_3-13-596_8.txt
+  - eval_3-13-596_9.txt
+  cases/eval_3-13-597.yaml:
+  - eval_3-13-597_0.txt
+  - eval_3-13-597_1.txt
+  - eval_3-13-597_2.txt
+  - eval_3-13-597_3.txt
+  - eval_3-13-597_4.txt
+  - eval_3-13-597_5.txt
+  - eval_3-13-597_6.txt
+  - eval_3-13-597_7.txt
+  - eval_3-13-597_8.txt
+  - eval_3-13-597_9.txt
+  cases/eval_3-13-600.yaml:
+  - eval_3-13-600_0.txt
+  - eval_3-13-600_1.txt
+  - eval_3-13-600_2.txt
+  - eval_3-13-600_3.txt
+  - eval_3-13-600_4.txt
+  - eval_3-13-600_5.txt
+  - eval_3-13-600_6.txt
+  - eval_3-13-600_7.txt
+  - eval_3-13-600_8.txt
+  - eval_3-13-600_9.txt
+  cases/eval_3-13-605.yaml:
+  - eval_3-13-605_0.txt
+  - eval_3-13-605_1.txt
+  - eval_3-13-605_2.txt
+  - eval_3-13-605_3.txt
+  - eval_3-13-605_4.txt
+  - eval_3-13-605_5.txt
+  - eval_3-13-605_6.txt
+  - eval_3-13-605_7.txt
+  - eval_3-13-605_8.txt
+  - eval_3-13-605_9.txt
+  cases/eval_3-14-606.yaml:
+  - eval_3-14-606_0.txt
+  - eval_3-14-606_1.txt
+  - eval_3-14-606_2.txt
+  - eval_3-14-606_3.txt
+  - eval_3-14-606_4.txt
+  - eval_3-14-606_5.txt
+  - eval_3-14-606_6.txt
+  - eval_3-14-606_7.txt
+  - eval_3-14-606_8.txt
+  - eval_3-14-606_9.txt
+  cases/eval_3-14-608.yaml:
+  - eval_3-14-608_0.txt
+  - eval_3-14-608_1.txt
+  - eval_3-14-608_2.txt
+  - eval_3-14-608_3.txt
+  - eval_3-14-608_4.txt
+  - eval_3-14-608_5.txt
+  - eval_3-14-608_6.txt
+  - eval_3-14-608_7.txt
+  - eval_3-14-608_8.txt
+  - eval_3-14-608_9.txt
+  cases/eval_3-14-613.yaml:
+  - eval_3-14-613_0.txt
+  - eval_3-14-613_1.txt
+  - eval_3-14-613_2.txt
+  - eval_3-14-613_3.txt
+  - eval_3-14-613_4.txt
+  - eval_3-14-613_5.txt
+  - eval_3-14-613_6.txt
+  - eval_3-14-613_7.txt
+  - eval_3-14-613_8.txt
+  - eval_3-14-613_9.txt
+  cases/eval_3-14-614.yaml:
+  - eval_3-14-614_0.txt
+  - eval_3-14-614_1.txt
+  - eval_3-14-614_2.txt
+  - eval_3-14-614_3.txt
+  - eval_3-14-614_4.txt
+  - eval_3-14-614_5.txt
+  - eval_3-14-614_6.txt
+  - eval_3-14-614_7.txt
+  - eval_3-14-614_8.txt
+  - eval_3-14-614_9.txt
+  cases/eval_3-14-615.yaml:
+  - eval_3-14-615_0.txt
+  - eval_3-14-615_1.txt
+  - eval_3-14-615_2.txt
+  - eval_3-14-615_3.txt
+  - eval_3-14-615_4.txt
+  - eval_3-14-615_5.txt
+  - eval_3-14-615_6.txt
+  - eval_3-14-615_7.txt
+  - eval_3-14-615_8.txt
+  - eval_3-14-615_9.txt
+  cases/eval_3-14-617.yaml:
+  - eval_3-14-617_0.txt
+  - eval_3-14-617_1.txt
+  - eval_3-14-617_2.txt
+  - eval_3-14-617_3.txt
+  - eval_3-14-617_4.txt
+  - eval_3-14-617_5.txt
+  - eval_3-14-617_6.txt
+  - eval_3-14-617_7.txt
+  - eval_3-14-617_8.txt
+  - eval_3-14-617_9.txt
+  cases/eval_3-14-619.yaml:
+  - eval_3-14-619_0.txt
+  - eval_3-14-619_1.txt
+  - eval_3-14-619_2.txt
+  - eval_3-14-619_3.txt
+  - eval_3-14-619_4.txt
+  - eval_3-14-619_5.txt
+  - eval_3-14-619_6.txt
+  - eval_3-14-619_7.txt
+  - eval_3-14-619_8.txt
+  - eval_3-14-619_9.txt
+  cases/eval_3-14-621.yaml:
+  - eval_3-14-621_0.txt
+  - eval_3-14-621_1.txt
+  - eval_3-14-621_2.txt
+  - eval_3-14-621_3.txt
+  - eval_3-14-621_4.txt
+  - eval_3-14-621_5.txt
+  - eval_3-14-621_6.txt
+  - eval_3-14-621_7.txt
+  - eval_3-14-621_8.txt
+  - eval_3-14-621_9.txt
+  cases/eval_3-14-622.yaml:
+  - eval_3-14-622_0.txt
+  - eval_3-14-622_1.txt
+  - eval_3-14-622_2.txt
+  - eval_3-14-622_3.txt
+  - eval_3-14-622_4.txt
+  - eval_3-14-622_5.txt
+  - eval_3-14-622_6.txt
+  - eval_3-14-622_7.txt
+  - eval_3-14-622_8.txt
+  - eval_3-14-622_9.txt
+  cases/eval_3-14-623.yaml:
+  - eval_3-14-623_0.txt
+  - eval_3-14-623_1.txt
+  - eval_3-14-623_2.txt
+  - eval_3-14-623_3.txt
+  - eval_3-14-623_4.txt
+  - eval_3-14-623_5.txt
+  - eval_3-14-623_6.txt
+  - eval_3-14-623_7.txt
+  - eval_3-14-623_8.txt
+  - eval_3-14-623_9.txt
+  cases/eval_3-15-626.yaml:
+  - eval_3-15-626_0.txt
+  - eval_3-15-626_1.txt
+  - eval_3-15-626_2.txt
+  - eval_3-15-626_3.txt
+  - eval_3-15-626_4.txt
+  - eval_3-15-626_5.txt
+  - eval_3-15-626_6.txt
+  - eval_3-15-626_7.txt
+  - eval_3-15-626_8.txt
+  - eval_3-15-626_9.txt
+  cases/eval_3-15-627.yaml:
+  - eval_3-15-627_0.txt
+  - eval_3-15-627_1.txt
+  - eval_3-15-627_2.txt
+  - eval_3-15-627_3.txt
+  - eval_3-15-627_4.txt
+  - eval_3-15-627_5.txt
+  - eval_3-15-627_6.txt
+  - eval_3-15-627_7.txt
+  - eval_3-15-627_8.txt
+  - eval_3-15-627_9.txt
+  cases/eval_3-15-629.yaml:
+  - eval_3-15-629_0.txt
+  - eval_3-15-629_1.txt
+  - eval_3-15-629_2.txt
+  - eval_3-15-629_3.txt
+  - eval_3-15-629_4.txt
+  - eval_3-15-629_5.txt
+  - eval_3-15-629_6.txt
+  - eval_3-15-629_7.txt
+  - eval_3-15-629_8.txt
+  - eval_3-15-629_9.txt
+  cases/eval_3-15-631.yaml:
+  - eval_3-15-631_0.txt
+  - eval_3-15-631_1.txt
+  - eval_3-15-631_2.txt
+  - eval_3-15-631_3.txt
+  - eval_3-15-631_4.txt
+  - eval_3-15-631_5.txt
+  - eval_3-15-631_6.txt
+  - eval_3-15-631_7.txt
+  - eval_3-15-631_8.txt
+  - eval_3-15-631_9.txt
+  cases/eval_3-15-632.yaml:
+  - eval_3-15-632_0.txt
+  - eval_3-15-632_1.txt
+  - eval_3-15-632_2.txt
+  - eval_3-15-632_3.txt
+  - eval_3-15-632_4.txt
+  - eval_3-15-632_5.txt
+  - eval_3-15-632_6.txt
+  - eval_3-15-632_7.txt
+  - eval_3-15-632_8.txt
+  - eval_3-15-632_9.txt
+  cases/eval_3-15-633.yaml:
+  - eval_3-15-633_0.txt
+  - eval_3-15-633_1.txt
+  - eval_3-15-633_2.txt
+  - eval_3-15-633_3.txt
+  - eval_3-15-633_4.txt
+  - eval_3-15-633_5.txt
+  - eval_3-15-633_6.txt
+  - eval_3-15-633_7.txt
+  - eval_3-15-633_8.txt
+  - eval_3-15-633_9.txt
+  cases/eval_3-15-637.yaml:
+  - eval_3-15-637_0.txt
+  - eval_3-15-637_1.txt
+  - eval_3-15-637_2.txt
+  - eval_3-15-637_3.txt
+  - eval_3-15-637_4.txt
+  - eval_3-15-637_5.txt
+  - eval_3-15-637_6.txt
+  - eval_3-15-637_7.txt
+  - eval_3-15-637_8.txt
+  - eval_3-15-637_9.txt
+  cases/eval_3-15-638.yaml:
+  - eval_3-15-638_0.txt
+  - eval_3-15-638_1.txt
+  - eval_3-15-638_2.txt
+  - eval_3-15-638_3.txt
+  - eval_3-15-638_4.txt
+  - eval_3-15-638_5.txt
+  - eval_3-15-638_6.txt
+  - eval_3-15-638_7.txt
+  - eval_3-15-638_8.txt
+  - eval_3-15-638_9.txt
+  cases/eval_3-15-641.yaml:
+  - eval_3-15-641_0.txt
+  - eval_3-15-641_1.txt
+  - eval_3-15-641_2.txt
+  - eval_3-15-641_3.txt
+  - eval_3-15-641_4.txt
+  - eval_3-15-641_5.txt
+  - eval_3-15-641_6.txt
+  - eval_3-15-641_7.txt
+  - eval_3-15-641_8.txt
+  - eval_3-15-641_9.txt
+  cases/eval_4-16-644.yaml:
+  - eval_4-16-644_0.txt
+  - eval_4-16-644_1.txt
+  - eval_4-16-644_2.txt
+  - eval_4-16-644_3.txt
+  - eval_4-16-644_4.txt
+  - eval_4-16-644_5.txt
+  - eval_4-16-644_6.txt
+  - eval_4-16-644_7.txt
+  - eval_4-16-644_8.txt
+  - eval_4-16-644_9.txt
+  cases/eval_4-16-646.yaml:
+  - eval_4-16-646_0.txt
+  - eval_4-16-646_1.txt
+  - eval_4-16-646_2.txt
+  - eval_4-16-646_3.txt
+  - eval_4-16-646_4.txt
+  - eval_4-16-646_5.txt
+  - eval_4-16-646_6.txt
+  - eval_4-16-646_7.txt
+  - eval_4-16-646_8.txt
+  - eval_4-16-646_9.txt
+  cases/eval_4-16-648.yaml:
+  - eval_4-16-648_0.txt
+  - eval_4-16-648_1.txt
+  - eval_4-16-648_2.txt
+  - eval_4-16-648_3.txt
+  - eval_4-16-648_4.txt
+  - eval_4-16-648_5.txt
+  - eval_4-16-648_6.txt
+  - eval_4-16-648_7.txt
+  - eval_4-16-648_8.txt
+  - eval_4-16-648_9.txt
+  cases/eval_4-16-652.yaml:
+  - eval_4-16-652_0.txt
+  - eval_4-16-652_1.txt
+  - eval_4-16-652_2.txt
+  - eval_4-16-652_3.txt
+  - eval_4-16-652_4.txt
+  - eval_4-16-652_5.txt
+  - eval_4-16-652_6.txt
+  - eval_4-16-652_7.txt
+  - eval_4-16-652_8.txt
+  - eval_4-16-652_9.txt
+  cases/eval_4-16-653.yaml:
+  - eval_4-16-653_0.txt
+  - eval_4-16-653_1.txt
+  - eval_4-16-653_2.txt
+  - eval_4-16-653_3.txt
+  - eval_4-16-653_4.txt
+  - eval_4-16-653_5.txt
+  - eval_4-16-653_6.txt
+  - eval_4-16-653_7.txt
+  - eval_4-16-653_8.txt
+  - eval_4-16-653_9.txt
+  cases/eval_4-16-654.yaml:
+  - eval_4-16-654_0.txt
+  - eval_4-16-654_1.txt
+  - eval_4-16-654_2.txt
+  - eval_4-16-654_3.txt
+  - eval_4-16-654_4.txt
+  - eval_4-16-654_5.txt
+  - eval_4-16-654_6.txt
+  - eval_4-16-654_7.txt
+  - eval_4-16-654_8.txt
+  - eval_4-16-654_9.txt
+  cases/eval_4-16-655.yaml:
+  - eval_4-16-655_0.txt
+  - eval_4-16-655_1.txt
+  - eval_4-16-655_2.txt
+  - eval_4-16-655_3.txt
+  - eval_4-16-655_4.txt
+  - eval_4-16-655_5.txt
+  - eval_4-16-655_6.txt
+  - eval_4-16-655_7.txt
+  - eval_4-16-655_8.txt
+  - eval_4-16-655_9.txt
+  cases/eval_4-16-656.yaml:
+  - eval_4-16-656_0.txt
+  - eval_4-16-656_1.txt
+  - eval_4-16-656_2.txt
+  - eval_4-16-656_3.txt
+  - eval_4-16-656_4.txt
+  - eval_4-16-656_5.txt
+  - eval_4-16-656_6.txt
+  - eval_4-16-656_7.txt
+  - eval_4-16-656_8.txt
+  - eval_4-16-656_9.txt
+  cases/eval_4-16-662.yaml:
+  - eval_4-16-662_0.txt
+  - eval_4-16-662_1.txt
+  - eval_4-16-662_2.txt
+  - eval_4-16-662_3.txt
+  - eval_4-16-662_4.txt
+  - eval_4-16-662_5.txt
+  - eval_4-16-662_6.txt
+  - eval_4-16-662_7.txt
+  - eval_4-16-662_8.txt
+  - eval_4-16-662_9.txt
+  cases/eval_4-16-670.yaml:
+  - eval_4-16-670_0.txt
+  - eval_4-16-670_1.txt
+  - eval_4-16-670_2.txt
+  - eval_4-16-670_3.txt
+  - eval_4-16-670_4.txt
+  - eval_4-16-670_5.txt
+  - eval_4-16-670_6.txt
+  - eval_4-16-670_7.txt
+  - eval_4-16-670_8.txt
+  - eval_4-16-670_9.txt
+  cases/eval_4-16-673.yaml:
+  - eval_4-16-673_0.txt
+  - eval_4-16-673_1.txt
+  - eval_4-16-673_2.txt
+  - eval_4-16-673_3.txt
+  - eval_4-16-673_4.txt
+  - eval_4-16-673_5.txt
+  - eval_4-16-673_6.txt
+  - eval_4-16-673_7.txt
+  - eval_4-16-673_8.txt
+  - eval_4-16-673_9.txt
+  cases/eval_4-16-677.yaml:
+  - eval_4-16-677_0.txt
+  - eval_4-16-677_1.txt
+  - eval_4-16-677_2.txt
+  - eval_4-16-677_3.txt
+  - eval_4-16-677_4.txt
+  - eval_4-16-677_5.txt
+  - eval_4-16-677_6.txt
+  - eval_4-16-677_7.txt
+  - eval_4-16-677_8.txt
+  - eval_4-16-677_9.txt
+  cases/eval_4-16-690.yaml:
+  - eval_4-16-690_0.txt
+  - eval_4-16-690_1.txt
+  - eval_4-16-690_2.txt
+  - eval_4-16-690_3.txt
+  - eval_4-16-690_4.txt
+  - eval_4-16-690_5.txt
+  - eval_4-16-690_6.txt
+  - eval_4-16-690_7.txt
+  - eval_4-16-690_8.txt
+  - eval_4-16-690_9.txt
+  cases/eval_4-16-694.yaml:
+  - eval_4-16-694_0.txt
+  - eval_4-16-694_1.txt
+  - eval_4-16-694_2.txt
+  - eval_4-16-694_3.txt
+  - eval_4-16-694_4.txt
+  - eval_4-16-694_5.txt
+  - eval_4-16-694_6.txt
+  - eval_4-16-694_7.txt
+  - eval_4-16-694_8.txt
+  - eval_4-16-694_9.txt
+  cases/eval_4-16-695.yaml:
+  - eval_4-16-695_0.txt
+  - eval_4-16-695_1.txt
+  - eval_4-16-695_2.txt
+  - eval_4-16-695_3.txt
+  - eval_4-16-695_4.txt
+  - eval_4-16-695_5.txt
+  - eval_4-16-695_6.txt
+  - eval_4-16-695_7.txt
+  - eval_4-16-695_8.txt
+  - eval_4-16-695_9.txt
+  cases/eval_4-16-696.yaml:
+  - eval_4-16-696_0.txt
+  - eval_4-16-696_1.txt
+  - eval_4-16-696_2.txt
+  - eval_4-16-696_3.txt
+  - eval_4-16-696_4.txt
+  - eval_4-16-696_5.txt
+  - eval_4-16-696_6.txt
+  - eval_4-16-696_7.txt
+  - eval_4-16-696_8.txt
+  - eval_4-16-696_9.txt
+  cases/eval_4-16-697.yaml:
+  - eval_4-16-697_0.txt
+  - eval_4-16-697_1.txt
+  - eval_4-16-697_2.txt
+  - eval_4-16-697_3.txt
+  - eval_4-16-697_4.txt
+  - eval_4-16-697_5.txt
+  - eval_4-16-697_6.txt
+  - eval_4-16-697_7.txt
+  - eval_4-16-697_8.txt
+  - eval_4-16-697_9.txt
+  cases/eval_4-16-698.yaml:
+  - eval_4-16-698_0.txt
+  - eval_4-16-698_1.txt
+  - eval_4-16-698_2.txt
+  - eval_4-16-698_3.txt
+  - eval_4-16-698_4.txt
+  - eval_4-16-698_5.txt
+  - eval_4-16-698_6.txt
+  - eval_4-16-698_7.txt
+  - eval_4-16-698_8.txt
+  - eval_4-16-698_9.txt
+  cases/eval_4-16-699.yaml:
+  - eval_4-16-699_0.txt
+  - eval_4-16-699_1.txt
+  - eval_4-16-699_2.txt
+  - eval_4-16-699_3.txt
+  - eval_4-16-699_4.txt
+  - eval_4-16-699_5.txt
+  - eval_4-16-699_6.txt
+  - eval_4-16-699_7.txt
+  - eval_4-16-699_8.txt
+  - eval_4-16-699_9.txt
+  cases/eval_4-16-700.yaml:
+  - eval_4-16-700_0.txt
+  - eval_4-16-700_1.txt
+  - eval_4-16-700_2.txt
+  - eval_4-16-700_3.txt
+  - eval_4-16-700_4.txt
+  - eval_4-16-700_5.txt
+  - eval_4-16-700_6.txt
+  - eval_4-16-700_7.txt
+  - eval_4-16-700_8.txt
+  - eval_4-16-700_9.txt
+  cases/eval_4-16-701.yaml:
+  - eval_4-16-701_0.txt
+  - eval_4-16-701_1.txt
+  - eval_4-16-701_2.txt
+  - eval_4-16-701_3.txt
+  - eval_4-16-701_4.txt
+  - eval_4-16-701_5.txt
+  - eval_4-16-701_6.txt
+  - eval_4-16-701_7.txt
+  - eval_4-16-701_8.txt
+  - eval_4-16-701_9.txt
+max_tokens: null
+model_name: gpt-3.5-turbo
+qa_system_prompt: You are a professional assistant for programmers. By default, questions
+  and answers are in Markdown format. You are chatting with programmers, so please
+  answer as briefly as possible.
+sample_n: 10
+system_prompt: You are a professional assistant for programmers. By default, questions
+  and answers are in Markdown format.
+temp: 0.2
+top_p: 0.9

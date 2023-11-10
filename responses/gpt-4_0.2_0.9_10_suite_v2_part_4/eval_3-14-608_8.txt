@@ -1,0 +1,37 @@
+The issue you're facing is due to the fact that by default, SwiftUI's `Button` view centers its content. To align the content to the left, you can use the `HStack` view with a `Spacer` view.
+
+Here is the modified code:
+
+```swift
+struct HomeSection: View {
+    var body: some View {
+        Button(action: {
+
+        }) {
+            HStack {
+                Group {
+                    Image("home")
+                        .resizable()
+                        .frame(width: 24, height: 24)
+                        .foregroundColor(.navigationTextGrey)
+
+                    Text("HOME")
+                        .bold()
+                        .font(.system(size: 17.0))
+                        .foregroundColor(Color.navigationTextGrey)
+                        .padding(.leading, 4.0)
+                    
+                    Rectangle()
+                        .fill(Color.navigationTextGrey)
+                        .frame(width: UIScreen.main.bounds.width - 60, height: 1)
+                        .padding(.top, 6.0)
+                }
+                Spacer() // This will push your content to the left
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading) // This will make the button take the full width
+    }
+}
+```
+
+This code uses an `HStack` with a `Spacer` to push the content to the left. The `.frame(maxWidth: .infinity, alignment: .leading)` modifier is used to make the button take the full width and align its content to the leading edge (left for LTR languages).

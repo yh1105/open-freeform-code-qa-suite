@@ -1,0 +1,26 @@
+The `SelectByID2` method is used to select entities in the model. The `Name` parameter is the name of the entity to select. For faces, edges, and vertices, this is usually an empty string (""). The `Type` parameter is the type of the entity to select. For faces, this is `swSelFACES`. The `X`, `Y`, and `Z` parameters are the coordinates of the point on the entity to select. For faces, this is usually the centroid of the face. The `Append` parameter is a boolean that determines whether the selection should be added to the current selection list (True) or replace the current selection list (False). The `Mark` parameter is an integer that can be used to differentiate between multiple selections. The `Callout` and `SelectOption` parameters are usually not used.
+
+To select a face, you can use the `GetSafeEntity` method of the `Face2` object to get an `Entity` object, and then use the `Select4` method of the `Entity` object to select the face. Here is an example:
+
+```vba
+Dim faceEntity As SldWorks.Entity
+Set faceEntity = faceObj.GetSafeEntity
+faceEntity.Select4 True, Nothing
+```
+
+To select a point, you can use the `CreatePoint` method of the `ModelDoc2` object to create a `SketchPoint` object, and then use the `Select4` method of the `SketchPoint` object to select the point. Here is an example:
+
+```vba
+Dim sketchPoint As SldWorks.SketchPoint
+Set sketchPoint = swModel.CreatePoint(X, Y, Z)
+sketchPoint.Select4 True, Nothing
+```
+
+After selecting the face and the point, you can use the `InsertRefPlane` method of the `FeatureManager` object to create a reference plane. Here is an example:
+
+```vba
+Dim refPlane As SldWorks.RefPlane
+Set refPlane = swFeatMgr.InsertRefPlane(3, 0, 0, 0, 0, 0)
+```
+
+The `InsertRefPlane` method requires the entities to be pre-selected, so you need to select the face and the point before calling this method. The parameters of the `InsertRefPlane` method are used to specify the orientation and position of the reference plane, but these are usually not needed when

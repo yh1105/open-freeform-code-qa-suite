@@ -1,0 +1,9 @@
+This error message suggests that the preview code is not associated with any target in the current scheme. You can try the following steps to fix this issue:
+
+1. Make sure that the preview code is included in the target that you are building. You can check this by selecting the file in the Project navigator and checking the Target Membership section in the File inspector.
+
+2. Make sure that the correct target is selected in the scheme. You can check this by selecting Product > Scheme > Edit Scheme... and making sure that the correct target is selected in the Run section.
+
+3. Clean the build folder by selecting Product > Clean Build Folder and try building and running the project again.
+
+If none of these steps work, you can try creating a new project and copying the code over to see if the issue persists.

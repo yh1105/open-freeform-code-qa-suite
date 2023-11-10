@@ -1,0 +1,15 @@
+Your code seems fine, but the issue might be that you're trying to test the `@Binding` in the `PreviewProvider`. The `PreviewProvider` doesn't support live updates, so you won't see changes there when you toggle `isSelected`.
+
+To see the changes, you need to use your `ContentView` in a parent view that has a `@State` property and passes its binding to `ContentView`. Here's an example:
+
+```swift
+struct ParentView: View {
+    @State private var isSelected: Bool = false
+
+    var body: some View {
+        ContentView(isSelected: $isSelected)
+    }
+}
+```
+
+In this example, `ParentView` has a `@State` property `isSelected` and it passes the binding to `ContentView`. When you run your app and click the button in `ContentView`, you should see the text change.

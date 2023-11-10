@@ -1,0 +1,7 @@
+The `myprogram-0.0.1-plain.jar` is generated due to the `jar` task in Gradle. You can disable it by adding the following line to your `build.gradle` file:
+
+```groovy
+jar.enabled = false
+```
+
+This will prevent the `jar` task from running, and only the `bootJar` task will run, generating only the `myprogram-0.0.1.jar` file.

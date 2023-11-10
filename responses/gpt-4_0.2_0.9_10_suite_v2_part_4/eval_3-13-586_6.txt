@@ -1,0 +1,11 @@
+The error you're encountering is due to changes in Android 12 (API level 31) regarding PendingIntent mutability. As per the Android 12 behavior changes, you must specify mutability explicitly when you create an instance of PendingIntent.
+
+The error message suggests that you should use `FLAG_IMMUTABLE` unless you need the PendingIntent to be mutable for specific functionality like inline replies or bubbles.
+
+However, the MediaSessionCompat class in the AndroidX Media library version 1.4.0 you're using seems to be handling this requirement already.
+
+This issue might be due to some other part of your code where you're creating a PendingIntent without specifying its mutability. You should check all places in your code where you're creating a PendingIntent and make sure to specify its mutability.
+
+If you're sure that the error is due to MediaSessionCompat, you might want to try updating to a newer version of the AndroidX Media library if available, or consider filing a bug report with the AndroidX team.
+
+In the meantime, you could try a workaround by lowering your targetSdkVersion to 30 until the issue is resolved. This should allow your app to run without encountering this error, but it's not a long-term solution as you'll eventually need to update your targetSdkVersion to meet Google Play's target API level requirements.

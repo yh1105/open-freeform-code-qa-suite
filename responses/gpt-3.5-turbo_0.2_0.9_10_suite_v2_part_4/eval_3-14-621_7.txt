@@ -1,0 +1,29 @@
+The error message is telling you that you cannot access a `@State` variable outside of the `body` property of a `View`. In your case, you are trying to access `fullText` in the `init` method, which is not allowed.
+
+One solution to this problem is to use a computed property instead of the `init` method to set the initial value of `fullText`. Here's an example:
+
+```
+struct StateFromOutside: View {
+    let list = [
+        "a": "Letter A",
+        "b": "Letter B",
+        // ...
+    ]
+    @State var fullText: String
+
+    var letter: String
+
+    var body: some View {
+        TextField($fullText)
+    }
+
+    init(letter: String) {
+        self.letter = letter
+        self._fullText = State(initialValue: list[letter]!)
+    }
+}
+```
+
+In this example, we create a computed property `fullText` that uses the `list` dictionary to set its initial value based on the `letter` parameter passed to the `init` method. We also store the `letter` parameter in a separate property so that we can use it in the computed property.
+
+Note that we use the `_fullText` property wrapper to access the underlying `State` variable, since we cannot access the `fullText` property directly in the `init` method.

@@ -1,0 +1,45 @@
+The `apt-get` package manager installs the version of the software that is in its repositories, which may not always be the latest version. To install the latest version of cmake, you can download it from the official website and compile it from source.
+
+Here are the steps to do that:
+
+1. First, you need to uninstall the existing version of cmake:
+
+```bash
+sudo apt-get remove cmake
+```
+
+2. Then, download the latest version of cmake from the official website. You can do this by using `wget` in the terminal. Replace `3.x.y` with the version number you want to install:
+
+```bash
+wget https://github.com/Kitware/CMake/releases/download/v3.x.y/cmake-3.x.y.tar.gz
+```
+
+3. Extract the downloaded file:
+
+```bash
+tar -xzvf cmake-3.x.y.tar.gz
+```
+
+4. Navigate to the extracted directory:
+
+```bash
+cd cmake-3.x.y
+```
+
+5. Now, compile and install cmake:
+
+```bash
+./bootstrap
+make -j$(nproc)
+sudo make install
+```
+
+6. Verify the installed version of cmake:
+
+```bash
+cmake --version
+```
+
+This should display the version number of cmake that you just installed.
+
+Note: The `-j$(nproc)` option in the `make` command is used to speed up the compilation process by using multiple cores of your CPU. If you encounter any problems, you can just use `make` without any options.

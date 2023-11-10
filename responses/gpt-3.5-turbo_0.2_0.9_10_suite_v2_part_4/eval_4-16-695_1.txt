@@ -1,0 +1,11 @@
+You can try using the `--no-cache` flag with the `docker build` command to force a rebuild of all layers, including the ones that were previously cached. This should show you the full build output, including the results of the `ls -la` commands in steps 7 and 15.
+
+Alternatively, you can try using the `docker history` command to inspect the layers of the image and see the commands that were executed in each layer. This can give you a better understanding of what happened during the build process and help you troubleshoot any issues.
+
+For example, you can run `docker history <image-name>` to see the history of the image, and then use the `--no-trunc` flag to show the full command for each layer:
+
+```
+docker history --no-trunc <image-name>
+```
+
+This should give you a detailed view of the build process and help you identify any issues that may have occurred.
