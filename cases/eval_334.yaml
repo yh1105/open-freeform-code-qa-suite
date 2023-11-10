@@ -4,6 +4,7 @@ type: code completion
 lang: java
 grading:
   unit_test:
+    lang: python
     tests:
-      - content: "TBD"
-        prefix: "TBD"
+      - content: "This is content"
+        prefix: "This is prefix"
