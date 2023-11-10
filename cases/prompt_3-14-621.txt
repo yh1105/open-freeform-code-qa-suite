@@ -1,0 +1,26 @@
+SwiftUI @State var initialization issue
+
+I would like to initialise the value of a `@State` var in SwiftUI through the `init()` method of a `Struct`, so it can take the proper text from a prepared dictionary for manipulation purposes in a TextField.
+The source code looks like this:
+```
+swift
+struct StateFromOutside: View {
+    let list = [
+        "a": "Letter A",
+        "b": "Letter B",
+        // ...
+    ]
+    @State var fullText: String = ""
+
+    init(letter: String) {
+        self.fullText = list[letter]!
+    }
+
+    var body: some View {
+        TextField($fullText)
+    }
+}
+```
+
+Unfortunately the execution fails with the error `Thread 1: Fatal error: Accessing State<String> outside View.body`
+How can I resolve the situation? Thank you very much in advance!

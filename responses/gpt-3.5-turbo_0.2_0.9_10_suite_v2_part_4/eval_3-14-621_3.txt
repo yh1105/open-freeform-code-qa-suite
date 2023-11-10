@@ -1,0 +1,35 @@
+You cannot access `@State` variables outside of the `body` property of a `View`. Instead, you can use a `@Binding` variable to achieve the same result. Here's an example of how you can modify your code to use a `@Binding` variable:
+
+```
+struct StateFromOutside: View {
+    let list = [
+        "a": "Letter A",
+        "b": "Letter B",
+        // ...
+    ]
+    @Binding var fullText: String
+
+    init(letter: String, fullText: Binding<String>) {
+        self._fullText = fullText
+        self.fullText = list[letter]!
+    }
+
+    var body: some View {
+        TextField("", text: $fullText)
+    }
+}
+```
+
+Then, you can use this view like this:
+
+```
+struct ContentView: View {
+    @State var text = ""
+
+    var body: some View {
+        StateFromOutside(letter: "a", fullText: $text)
+    }
+}
+```
+
+This will initialize `text` with the value of `"Letter A"` from the `list` dictionary.

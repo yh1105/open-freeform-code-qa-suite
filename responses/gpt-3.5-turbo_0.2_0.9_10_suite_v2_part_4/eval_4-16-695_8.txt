@@ -1,0 +1,5 @@
+You can try using the `--no-cache` flag when running the `docker build` command. This will force Docker to rebuild all the layers, including the ones that were previously cached. This should give you the full build output, including the results of steps 7 and 15.
+
+Alternatively, you can try using the `docker build --progress=plain --log-level=debug` command to see more detailed output. The `--log-level=debug` flag will increase the verbosity of the output, which may help you see what's going on behind the scenes.
+
+If neither of these options work, you can try running the `docker build` command with the `-t` flag to tag the image with a name, and then use the `docker history` command to see the full build history of the image. This will show you all the layers that were built, along with the commands that were run in each layer.

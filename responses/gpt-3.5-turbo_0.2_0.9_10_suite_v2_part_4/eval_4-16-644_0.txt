@@ -1,0 +1,1 @@
+This error message usually means that you do not have the necessary permissions to execute the `startup.sh` script. You can try giving the script executable permissions by running the command `chmod +x startup.sh` and then try running the script again with `./startup.sh nginx:start`.

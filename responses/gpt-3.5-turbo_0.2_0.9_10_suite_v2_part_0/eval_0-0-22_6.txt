@@ -1,0 +1,33 @@
+For the first way, you can pass the `options` prop to the `Tab.Screen` component for the "Settings" screen and set `tabBarVisible` to `false`. Here's the updated code:
+
+```javascript
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Tab.Navigator>
+        <Tab.Screen name="Home" component={ProfileStackScreen} />
+        <Tab.Screen name="Settings" component={SettingsStackScreen} options={{ tabBarVisible: false }} />
+      </Tab.Navigator>
+    </NavigationContainer>
+  );
+}
+```
+
+For the second way, you can use the `useLayoutEffect` hook to set the `tabBarVisible` option to `false` in the `SettingsStackScreen` component. Here's the updated code:
+
+```javascript
+import { useLayoutEffect } from 'react';
+
+function SettingsStackScreen({ navigation }) {
+    useLayoutEffect(() => {
+        navigation.setOptions({ tabBarVisible: false });
+    }, [navigation]);
+    return (
+        <SettingsStack.Navigator>
+            <SettingsStack.Screen name="Settings" component={SettingsScreen} />
+        </SettingsStack.Navigator>
+    )
+}
+``` 
+
+Note that for the second way, you need to import the `useLayoutEffect` hook from the `react` package.

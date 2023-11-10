@@ -1,0 +1,11 @@
+Sure! The code you provided is almost correct. The only issue is that you cannot have two index signatures on the same object type. To fix this, you can use the `&` operator to create an intersection type between two separate objects, one with the fruit keys and another with the color keys:
+
+```typescript
+type FruitsAndColors = {
+  [key in fruit]: number;
+} & {
+  [key in color]: boolean;
+}
+```
+
+This will create a type with all the fruit keys mapped to numbers and all the color keys mapped to booleans.

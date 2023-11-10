@@ -8,4 +8,6 @@ results/
 tmp.csv
 responses/freeform_qa*
 responses/old*
+responses/*mogao*
 batched_responses/
+.*

@@ -1,0 +1,5 @@
+The issue seems to be with IntelliJ IDEA 2017. It does not fully support Java 11. You need to upgrade your IntelliJ IDEA to 2018.2 or later versions, which have full support for Java 11.
+
+After upgrading IntelliJ IDEA, you should be able to add the JDK 11 in your project structure without any issues.
+
+Regarding the JDK and JRE folders, starting from Java 9, Oracle provides JDK distributions only. The JRE is essentially deprecated, as there's no real need for it anymore. You can run your applications with the JDK just fine.

@@ -1,0 +1,22 @@
+The Docker build output you're seeing is the new BuildKit output, which is designed to be more concise and easier to read. However, it does not show the full output of each command by default.
+
+If you want to see the full output of each command, you need to disable BuildKit. You can do this by setting the `DOCKER_BUILDKIT` environment variable to `0` before running your `docker build` command:
+
+```bash
+export DOCKER_BUILDKIT=0
+docker build .
+```
+
+This will revert to the old build output, which shows the full output of each command.
+
+If you want to permanently disable BuildKit, you can add the following line to your Docker configuration file (`~/.docker/daemon.json`):
+
+```json
+{
+  "features": {"buildkit": false}
+}
+```
+
+Then restart Docker for the changes to take effect.
+
+Please note that BuildKit is the new and improved builder for Docker, and it's recommended to use it if possible. It has several improvements over the old builder, such as better caching, parallel builds, and more. If you're having issues with it, it might be worth trying to solve those issues instead of reverting to the old builder.

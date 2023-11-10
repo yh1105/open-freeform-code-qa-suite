@@ -1,0 +1,18 @@
+You can use the following PowerShell command to check if a specified folder is in your PATH:
+
+```
+$env:Path -split ';' | Select-String -SimpleMatch $Path_to_directory
+```
+
+This will return the path to the directory if it is in your PATH, or nothing if it is not. You can then use this in your function to return true or false. Here's an example:
+
+```
+function FolderIsInPATH($Path_to_directory) {
+    $result = $env:Path -split ';' | Select-String -SimpleMatch $Path_to_directory
+    if ($result) {
+        return $true
+    } else {
+        return $false
+    }
+}
+```

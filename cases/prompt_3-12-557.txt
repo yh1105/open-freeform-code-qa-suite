@@ -1,0 +1,123 @@
+How to use shared preferences to keep user logged in flutter?
+
+I want to keep the user logged in after the user successfully logsin in flutter.
+I am using a REST API to retrieve the user name and password of the user. But I want to save those details so that the user can stay logged in. My current situation is i can successfully log the user in but when i restart the app i have to login again so i need to save the details of the user in a shared preference so that the user can stay logged for the entire session until logout.But i am unable to do that so please help me with it. 
+Thanks in advance
+
+This is the code i have for my login page. 
+I have removed the UI contents which should be inside the listview as those are not that relevant. 
+
+Login.dart
+
+```
+import 'dart:convert';
+
+import 'package:flutter/material.dart';
+import 'package:restaurant_app/globalVar.dart';
+import 'package:restaurant_app/homescreen.dart';
+import 'package:restaurant_app/models/auth.dart';
+import 'package:restaurant_app/signup.dart';
+import 'package:http/http.dart' as http;
+import 'package:restaurant_app/utils/authutils.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+class SignIn extends StatefulWidget {
+
+    SignIn({ Key key, this.post }): super(key: key);
+
+@override
+_SignInState createState() => _SignInState();
+    }
+
+class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin 
+    {
+    TabController controller;
+    TextEditingController _email = new TextEditingController();
+    TextEditingController _password = new TextEditingController();
+    bool loading;
+
+    final GlobalKey < ScaffoldState > _scaffoldKey = new GlobalKey<ScaffoldState>
+        ();
+
+    @override
+    void initState() {
+        // TODO: implement initState
+        super.initState();
+        _fetchSessionAndNavigate();
+        controller = new TabController(length: 2, vsync: this);
+        loading = false;
+    }
+
+    @override
+    void dispose() {
+        // TODO: implement dispose
+        super.dispose();
+        controller.dispose();
+        setState(() {
+            loading = false;
+        });
+        _email.dispose();
+        _password.dispose();
+    }
+
+    final GlobalKey < FormState > _formKey = GlobalKey<FormState>();
+    bool _autoValidate = false;
+
+    _login(username, password) async {
+        setState(() {
+            loading = true;
+        });
+
+        var body = json.encode({
+            "username": username,
+            "password": password,
+        });
+
+        Map < String, String > headers = {
+            'Content-type': 'application/json',
+                'Accept': 'application/json',
+      };
+
+        await http
+            .post("${GlobalVar.Ip}/wp-json/jwt-auth/v1/token",
+                body: body, headers: headers)
+            .then((response) {
+                var body = json.decode(response.body);
+                //var response1;
+
+                if (response.statusCode == 200) {
+                    // TODO: you need to store body['token'] to use in some authentication
+                    loading = false;
+                    Navigator.pushReplacement(context,
+                        MaterialPageRoute(builder: (BuildContext ctx) => HomePage()));
+    } else {
+        // TODO: alert message
+        final snackBar = SnackBar(
+            content: Text(body['message'].toString().trim()),
+        );
+        _scaffoldKey.currentState.showSnackBar(snackBar);
+    }
+    setState(() {
+        loading = false;
+    });
+});
+      }
+
+@override
+Widget build(BuildContext context) {
+    return Scaffold(
+        key: _scaffoldKey,
+        resizeToAvoidBottomPadding: false,
+        body: Container(
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage('images/art.png'),
+                    fit: BoxFit.fill,
+                    colorFilter: ColorFilter.mode(
+                        Colors.white12.withOpacity(0.2), BlendMode.dstATop),
+                ),
+            ),
+            child: ListView();
+}
+```
+

@@ -1,0 +1,17 @@
+You can use the `jq` command-line tool to minify JSON in a shell script. `jq` is a lightweight and flexible command-line JSON processor that can be used to manipulate and transform JSON data.
+
+To minify JSON using `jq`, you can use the following command:
+
+```
+jq -c . input.json
+```
+
+This command reads the JSON data from the `input.json` file and outputs the minified JSON to the console.
+
+If you want to pass the minified JSON to another command, you can use command substitution to capture the output of the `jq` command and pass it as an argument to the next command. For example, to pass the minified JSON to `httpie`, you can use the following command:
+
+```
+http POST http://example.com/api/data "$(jq -c . input.json)"
+```
+
+This command sends a POST request to `http://example.com/api/data` with the minified JSON data from `input.json` as the request body.

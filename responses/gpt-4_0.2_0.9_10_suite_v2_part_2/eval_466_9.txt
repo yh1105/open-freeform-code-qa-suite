@@ -1,0 +1,30 @@
+The `ext-zip` is a PHP extension, not a Composer package. It's used to handle ZIP archives in PHP. The error message you're seeing is because Composer is trying to find a package named `ext-zip`, but it doesn't exist.
+
+If you're using a Unix-like operating system (like Ubuntu), you can install the `ext-zip` extension with the following command:
+
+```bash
+sudo apt-get install php-zip
+```
+
+If you're using Windows, you can enable the extension by editing your `php.ini` file. Uncomment (or add) the line:
+
+```ini
+extension=php_zip.dll
+```
+
+Then, restart your web server.
+
+After installing or enabling the `ext-zip` extension, you can tell Composer that it's installed by adding it to the `require` section of your `composer.json` file:
+
+```json
+{
+    "require": {
+        "php": "^7.1.3",
+        "ext-zip": "*"
+    }
+}
+```
+
+Then, run `composer update` to update your project's dependencies.
+
+If you're still having trouble, you might need to specify the version of `ext-zip` that your project requires. You can find out which version you have installed by running `php -m` and looking for `zip` in the list of modules.

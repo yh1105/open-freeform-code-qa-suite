@@ -1,0 +1,7 @@
+No, C++ standard library does not provide a direct way to distinguish between high- and low-performance cores/threads or to enforce on which cores they'll run.
+
+The C++ standard library's threading model is designed to be platform-independent, and as such, it does not provide any direct control over the specifics of thread scheduling or core assignment. These are typically handled by the operating system's scheduler, and the level of control you have over these details can vary widely depending on the specific operating system you are using.
+
+If you need this level of control, you would typically need to use platform-specific APIs. For example, on a Unix-like system, you might use the `pthread_setaffinity_np` function to specify a CPU set that a thread is allowed to run on. On Windows, you might use the `SetThreadAffinityMask` function. But these are not portable solutions and they are not part of the C++ standard library.
+
+Remember that manually controlling thread scheduling and core assignment can often lead to worse performance, not better, unless you have a very specific use case and a deep understanding of the system's hardware and the OS's scheduling algorithms. In most cases, it's best to let the OS handle these details.

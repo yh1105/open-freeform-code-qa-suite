@@ -1,0 +1,28 @@
+The error message you're seeing suggests that the directory you're trying to create (`/data/db`) is on a read-only file system. On macOS, starting from Catalina, the system files are stored on a separate read-only volume.
+
+Here are a few solutions:
+
+1. **Create the directory under your home directory or any other writable directory.** For example, you can create the directory under your home directory:
+
+    ```bash
+    mkdir -p ~/data/db
+    ```
+
+    Then, you can use this directory (`~/data/db`) for your needs.
+
+2. **Use `/usr/local` directory.** This directory is usually writable, and it's a common place to store additional software and data:
+
+    ```bash
+    sudo mkdir -p /usr/local/data/db
+    ```
+
+3. **Disable the read-only setting for your system volume.** This is not recommended because it can potentially harm your system. However, if you really need to do this, you can follow these steps:
+
+    - Restart your Mac and hold down `Command + R` during the reboot until the Apple logo appears on your screen.
+    - Click `Utilities` -> `Terminal`.
+    - In the Terminal window, type `csrutil disable` and press `Enter`.
+    - Restart your Mac again.
+
+    After these steps, your system volume should be writable. You can enable the protection again by following the same steps, but typing `csrutil enable` in the Terminal instead.
+
+Remember, it's generally a good idea to avoid making changes to your system volume. Try to use directories that are intended for additional software and data, like `/usr/local` or your home directory.

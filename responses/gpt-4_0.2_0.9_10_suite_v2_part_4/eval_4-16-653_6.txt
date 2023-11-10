@@ -1,0 +1,12 @@
+You can use the `date` command in Unix to convert the date format. Here is a simple script that reads each line from the file and converts the date:
+
+```bash
+while IFS= read -r line
+do
+    date -d "${line:0:10}" +"%d %b %Y"
+done < filename.txt
+```
+
+This script reads the file line by line. For each line, it extracts the date part (ignoring the time and timezone), converts it to the desired format, and prints it. 
+
+Please replace `filename.txt` with your actual file name.

@@ -1,0 +1,33 @@
+The issue is that you're trying to inject `ILogger` directly, but the logging system is designed to work with `ILogger<TCategoryName>`. 
+
+You should change your `MyClass` constructor to take `ILogger<MyClass>` instead of `ILogger`. Here's how you can do it:
+
+```c#
+private readonly ILogger _logger;
+
+public MyClass(ILogger<MyClass> logger)
+{
+    _logger = logger;
+}
+
+public void MyFunc()
+{
+    _logger.Log(LogLevel.Error, "My Message");
+}
+```
+
+Then, when you're configuring your services, make sure to add `MyClass` to the service collection:
+
+```c#
+var services = new ServiceCollection()
+    .AddLogging(logging => logging.AddConsole())
+    .AddSingleton<MyClass>()
+    .BuildServiceProvider();
+```
+
+Now, when you create an instance of `MyClass` through the service provider, it will correctly inject the logger:
+
+```c#
+var myClass = services.GetService<MyClass>();
+myClass.MyFunc();
+```

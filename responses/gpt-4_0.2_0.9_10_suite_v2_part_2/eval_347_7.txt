@@ -1,0 +1,15 @@
+The error you're encountering is because Gradle is not using the correct Java version. You need to make sure that Gradle uses the same Java version as your project.
+
+You can do this by specifying the Java version in the `gradle.properties` file. If the file does not exist, create it in the root directory of your project.
+
+Add the following lines to your `gradle.properties` file:
+
+```properties
+org.gradle.java.home=/path/to/your/jdk17
+```
+
+Replace `/path/to/your/jdk17` with the actual path to your JDK 17 installation.
+
+You can find the path to your JDK 17 installation in IntelliJ IDEA by going to `File -> Project Structure -> SDKs`.
+
+After you've done this, try to rebuild your project. If the problem persists, you might need to restart IntelliJ IDEA.

@@ -1,0 +1,11 @@
+This error occurs because pdftk is a 32-bit application and MacOS Catalina only supports 64-bit applications. Here are a few solutions you can try:
+
+1. Use an alternative tool: Since pdftk is no longer supported on MacOS Catalina, you can use an alternative tool such as PDFsam or QPDF.
+
+2. Use a virtual machine: You can install a virtual machine on your Mac and run an older version of MacOS that supports 32-bit applications. This will allow you to use pdftk without any issues.
+
+3. Use Docker: You can use Docker to run pdftk in a container. This will allow you to use pdftk without any issues on MacOS Catalina.
+
+4. Compile pdftk from source: You can download the pdftk source code and compile it on your Mac. This will create a 64-bit version of pdftk that can be used on MacOS Catalina. However, this solution requires some technical knowledge and may not be suitable for everyone.
+
+I hope one of these solutions works for you!

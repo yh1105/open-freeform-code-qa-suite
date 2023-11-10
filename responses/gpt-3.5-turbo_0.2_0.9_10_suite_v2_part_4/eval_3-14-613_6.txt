@@ -1,0 +1,9 @@
+This error message suggests that the preview target is not included in the current scheme. You can try the following steps to fix the issue:
+
+1. Open the project settings by selecting the project file in the Project navigator and clicking on the project name in the editor area.
+2. Select the "Info" tab and scroll down to the "Configurations" section.
+3. Make sure that the preview target is selected for the current build configuration.
+4. If the preview target is not listed, click on the "+" button to add it.
+5. Clean the project and rebuild it.
+
+If this does not work, you can also try deleting the derived data folder for the project and restarting Xcode. To do this, go to Xcode -> Preferences -> Locations and click on the arrow next to the "Derived Data" folder to open it in Finder. Delete the folder for your project and restart Xcode.

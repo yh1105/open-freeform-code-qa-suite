@@ -1,0 +1,35 @@
+The `.attrs()` method in styled-components is a chainable method that attaches some props to a styled component. It allows you to define static props, or dynamic ones with a function.
+
+Here's a simple example:
+
+```jsx
+const Input = styled.input.attrs(props => ({
+  type: 'text',
+  size: props.small ? 5 : 10,
+}))`
+  color: palevioletred;
+  font-size: 1em;
+  border: 2px solid palevioletred;
+  border-radius: 3px;
+  margin: 0.5em;
+  padding: 0.25em 0.5em;
+  ::placeholder {
+    color: palevioletred;
+  }
+`;
+
+// Use it like this
+<Input placeholder="A small text input" small />
+<Input placeholder="A bigger text input" />
+```
+
+In the above example, `attrs()` is used to define the `type` and `size` attributes of the `input` element. The `size` attribute is dynamically calculated based on the `small` prop.
+
+Without `attrs()`, you would have to pass these props every time you use the `Input` component:
+
+```jsx
+<Input type="text" size={5} placeholder="A small text input" small />
+<Input type="text" size={10} placeholder="A bigger text input" />
+```
+
+So, `attrs()` provides a way to define default props or props that are derived from other props, which can make your code cleaner and easier to maintain.

@@ -1,0 +1,28 @@
+In C++, string interpolation is not as straightforward as in C# or JavaScript. However, you can achieve something similar using `std::ostringstream` or `sprintf` (though `sprintf` is more prone to errors and less recommended). Here is an example using `std::ostringstream`:
+
+```cpp
+#include <sstream>
+#include <string>
+
+int main() {
+    int myVariable = 5;
+    std::ostringstream oss;
+    oss << "My variable has value " << myVariable;
+    std::string result = oss.str();
+    // result now contains "My variable has value 5"
+}
+```
+
+In C++20, a new feature called "format library" was introduced, which allows a more Python-like string formatting:
+
+```cpp
+#include <format> // for C++20
+
+int main() {
+    int myVariable = 5;
+    std::string result = std::format("My variable has value {}", myVariable);
+    // result now contains "My variable has value 5"
+}
+```
+
+Please note that the `std::format` function is part of C++20, and may not be available in all compilers yet.

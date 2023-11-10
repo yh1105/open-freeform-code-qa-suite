@@ -1,0 +1,35 @@
+Here's an example Go code that creates the JSON object you described and prints it to the terminal:
+
+```go
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+)
+
+func main() {
+	type Client struct {
+		Hostname string `json:"Hostname"`
+		IP       string `json:"IP"`
+		MacAddr  string `json:"MacAddr"`
+	}
+
+	clients := []Client{
+		{Hostname: "example.com", IP: "127.0.0.1", MacAddr: "mactonight"},
+		{Hostname: "foo.biz", IP: "0.0.0.0", MacAddr: "12:34:56:78"},
+	}
+
+	data := map[string][]Client{"Clients": clients}
+
+	jsonData, err := json.MarshalIndent(data, "", "  ")
+	if err != nil {
+		fmt.Println("Error marshaling JSON:", err)
+		return
+	}
+
+	fmt.Println(string(jsonData))
+}
+```
+
+This code defines a `Client` struct with the fields `Hostname`, `IP`, and `MacAddr`. It then creates a slice of `Client` objects and assigns it to a map with the key `"Clients"`. The `json.MarshalIndent` function is used to convert the map to a JSON string with indentation for readability. Finally, the JSON string is printed to the terminal using `fmt.Println`.

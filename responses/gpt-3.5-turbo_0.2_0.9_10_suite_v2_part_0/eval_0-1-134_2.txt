@@ -1,0 +1,33 @@
+It sounds like you might be trying to use a CSS preprocessor like Sass or Less. These preprocessors allow you to write CSS in a more efficient way by using variables, nesting, and other features. 
+
+In Sass, for example, you can write:
+
+```
+.container {
+  width: 100%;
+  .box {
+    background-color: #ccc;
+    padding: 10px;
+  }
+}
+```
+
+This will compile to:
+
+```
+.container {
+  width: 100%;
+}
+.container .box {
+  background-color: #ccc;
+  padding: 10px;
+}
+```
+
+If you're using a preprocessor, make sure you have it set up correctly and that you're using the correct syntax. If you're not using a preprocessor, you can still use the `.classname` syntax in your HTML, but you'll need to define the class in your CSS like this:
+
+```
+.classname {
+  /* styles here */
+}
+```

@@ -1,0 +1,56 @@
+Yes, you can accomplish this by using the `ref` feature in React. You can create a reference to the form in the `CustomForm` component, and then pass that reference to the `App` component. Then, you can use that reference to submit the form when the 'In Root' button is clicked.
+
+Here is how you can do it:
+
+```javascript
+import React, { Component, createRef } from "react";
+import ReactDOM from "react-dom";
+
+class CustomForm extends Component {
+  formRef = createRef();
+
+  componentDidMount() {
+    this.props.setFormRef(this.formRef);
+  }
+
+  render() {
+    return (
+      <form ref={this.formRef} id='my-form' onSubmit={(e) => {e.preventDefault(); alert('Form submitted!')}}>
+        <button type='submit'>Inside Custom</button>
+      </form>
+    );
+  }
+}
+
+class App extends Component {
+  formRef = null;
+
+  setFormRef = (ref) => {
+    this.formRef = ref;
+  }
+
+  handleSubmit = () => {
+    if (this.formRef.current) {
+      this.formRef.current.dispatchEvent(new Event('submit', { cancelable: true }));
+    }
+  }
+
+  render() {
+    return (
+      <div>
+        <CustomForm setFormRef={this.setFormRef} />
+        <button onClick={this.handleSubmit}>In Root</button>
+      </div>
+    );
+  }
+}
+
+const rootElement = document.getElementById("root");
+ReactDOM.render(<App />, rootElement);
+```
+
+In this code:
+
+- In the `CustomForm` component, we create a `ref` to the form using `createRef()`, and then pass that `ref` to the `App` component using a prop function `setFormRef`.
+- In the `App` component, we store the `ref` to the form in a variable `formRef`, and then use that `ref` to submit the form when the 'In Root' button is clicked. We do this by dispatching a 'submit' event on the form.
+- We also prevent the default form submission in the `CustomForm` component to prevent the page from refreshing when the form is submitted.

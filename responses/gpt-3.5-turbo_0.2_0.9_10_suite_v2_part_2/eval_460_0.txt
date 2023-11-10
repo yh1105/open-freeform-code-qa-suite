@@ -1,0 +1,13 @@
+It seems like the module `github.ibm.com/kms/key-protect-client` is not being downloaded to the module cache on computer B. Here are some steps you can take to debug this issue:
+
+1. Check if the module is present in the module cache on computer B. You can find the module cache location by running `go env GOMODCACHE`. If the module is not present, try running `go get github.ibm.com/kms/key-protect-client` to download it.
+
+2. Check if the module is accessible from computer B. Try running `git clone https://github.ibm.com/kms/key-protect-client.git` on computer B to see if you can access the repository.
+
+3. Check if the module version `v0.1.5` exists. You can check this by going to the module's repository on GitHub and checking the tags. If the version does not exist, you may need to update the dependency in your `go.mod` file to a valid version.
+
+4. Check if there are any network or firewall issues on computer B that may be preventing the module from being downloaded. Try running `go env` to check if there are any environment variables that may be affecting network connectivity.
+
+5. If none of the above steps work, try running `go clean -modcache` to clear the module cache and then try running `go build` again. This will force the module to be downloaded again.
+
+Hopefully, one of these steps will help you debug the issue and get the module to download successfully on computer B.

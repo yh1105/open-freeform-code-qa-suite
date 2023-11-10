@@ -1,0 +1,5 @@
+You should use the following command to rollback the migration:
+```
+bin/console --env=dev doctrine:migrations:execute 'Application\Migrations\Version20210909072642' --down --no-interaction -vvv
+```
+Make sure to use the full namespace of the migration class, which in this case is `Application\Migrations\Version20210909072642`.

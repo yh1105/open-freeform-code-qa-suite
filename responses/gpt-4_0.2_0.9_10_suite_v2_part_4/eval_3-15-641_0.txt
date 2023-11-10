@@ -1,0 +1,27 @@
+It seems like you're trying to get the local path of a file that is synced with OneDrive/SharePoint. Unfortunately, Excel VBA doesn't provide a direct way to get this information. However, you can use a workaround by using the `Environ` function to get the local OneDrive path and then append your relative path to it.
+
+Here is a simple example:
+
+```vba
+Sub GetOneDrivePath()
+
+    Dim OneDrivePath As String
+    Dim FilePath As String
+
+    ' Get OneDrive path
+    OneDrivePath = Environ("OneDrive")
+
+    ' Append your file relative path
+    FilePath = OneDrivePath & "\path\to\your\file"
+
+    ' Print the file path
+    Debug.Print FilePath
+
+End Sub
+```
+
+Please replace `"path\to\your\file"` with your actual relative file path.
+
+This method assumes that the OneDrive path is the same for all users and that they all have the same folder structure in their OneDrive. If this is not the case, you may need to create a more complex function to find the correct path.
+
+Please note that this method will only work if the file is synced locally. If the file is not synced, the file will not exist in the local OneDrive folder.

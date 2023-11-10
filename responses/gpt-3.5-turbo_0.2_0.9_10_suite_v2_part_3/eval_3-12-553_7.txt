@@ -1,0 +1,12 @@
+The error message indicates that your app is not using AndroidX, which is a new package structure for Android that replaces the old support library. Flutter requires AndroidX starting from version 1.12.0. If you are using an older version of Flutter, you need to upgrade it to the latest version.
+
+To migrate your app to AndroidX, you can follow the steps provided in the error message. Basically, you need to add the following two lines to your `gradle.properties` file:
+
+```
+android.useAndroidX=true
+android.enableJetifier=true
+```
+
+After adding these lines, you need to run `flutter clean` to clean the build directory, and then run `flutter build appbundle` again. This should generate the Android App Bundle (AAB) file successfully.
+
+If you still encounter the same error, you can try running `flutter build apk` instead of `flutter build appbundle`. This will generate an APK file that you can install on Android devices.

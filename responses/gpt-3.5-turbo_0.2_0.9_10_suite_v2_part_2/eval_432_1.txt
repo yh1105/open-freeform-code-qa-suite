@@ -1,0 +1,13 @@
+By default, Laravel's `dd()` function limits the number of nested levels to 3. However, you can increase this limit by modifying the `xdebug` configuration.
+
+Here are the steps to increase the `dd()` limit:
+
+1. Locate your `php.ini` file. You can find the location of this file by running `php --ini` in your terminal.
+
+2. Open the `php.ini` file in a text editor.
+
+3. Search for `xdebug.var_display_max_depth` and set it to a higher value. For example, you can set it to `5` or `10`.
+
+4. Save the file and restart your web server.
+
+After increasing the `xdebug` limit, you should be able to view more nested levels when using `dd()` in Laravel.

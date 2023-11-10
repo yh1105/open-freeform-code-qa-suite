@@ -1,0 +1,9 @@
+Your `sed` command is not correctly removing the question mark and everything after it. Try using `sed 's/\?.*//'` instead. This should remove the question mark and everything after it. 
+
+Also, the `mv` command is not necessary since you are not changing the directory or filename, only modifying the filename. You can use the `rename` command instead. Here's the updated command:
+
+```
+find . -type f -name '*\?*' -exec rename 's/\?.*//' {} \;
+``` 
+
+This should remove the question mark and everything after it from all filenames that match the pattern `*\?*`.

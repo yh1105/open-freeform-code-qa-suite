@@ -1,0 +1,21 @@
+When deploying a NextJS app to Vercel, you need to make sure that your app is properly configured for serverless deployment. Here are some steps you can follow to troubleshoot the issue:
+
+1. Create a `next.config.js` file in the root of your project if you don't have one already. This file is necessary for configuring your NextJS app for serverless deployment. 
+
+2. In your `next.config.js` file, add the following code:
+
+```js
+module.exports = {
+  target: 'serverless'
+}
+```
+
+This tells NextJS to build your app for serverless deployment.
+
+3. Make sure that your dynamic routes are properly defined. For example, if you have a dynamic route `/posts/[id].js`, make sure that you have a file named `[id].js` in the `pages/posts` directory.
+
+4. Check your Vercel deployment logs for any errors. You can access the logs by clicking on the "Logs" button in the Vercel dashboard.
+
+5. If you're still having issues, try running `yarn run build` locally and then deploying the `out` directory to Vercel instead of deploying the entire project directory.
+
+I hope this helps! Let me know if you have any further questions.

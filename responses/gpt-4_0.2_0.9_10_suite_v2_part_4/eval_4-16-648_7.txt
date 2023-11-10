@@ -1,0 +1,32 @@
+The error message you're seeing indicates that the directory you're trying to write to is a read-only file system. This means you don't have permission to write to this directory.
+
+On macOS Catalina and later versions, the system has implemented a new feature that separates data into two volumes: one is a read-only system volume, and the other is a data volume. The root directory `/` is on the read-only system volume, which is why you're unable to create a directory at `/data/db`.
+
+Instead, you should create directories in your home directory or under `/Users/Shared/` if you want it to be accessible to all users. 
+
+For example, you could create the directory in your home directory:
+
+```bash
+mkdir ~/data/db
+```
+
+Or in the shared directory:
+
+```bash
+
+sudo mkdir -p /Users/Shared/data/db
+```
+
+If you're trying to set up MongoDB, you can specify the db path when you start it:
+
+```bash
+mongod --dbpath ~/data/db
+```
+
+Or:
+
+```bash
+mongod --dbpath /Users/Shared/data/db
+```
+
+Remember to replace `~/data/db` and `/Users/Shared/data/db` with your actual paths.

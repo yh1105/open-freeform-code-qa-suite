@@ -1,0 +1,20 @@
+The error message indicates that the Kotlin version used to compile one of your dependencies is not compatible with the Kotlin version in your project. 
+
+Here are the steps to solve this issue:
+
+1. **Update your Kotlin version:** The error message suggests that your project is using an older version of Kotlin (1.1.15), while one of your dependencies (probably Stripe) is using a newer version (1.5.1). You should update your Kotlin version to match the one used by your dependencies. In your project-level `build.gradle` file, update the Kotlin version like this:
+
+```groovy
+buildscript {
+    ext.kotlin_version = '1.5.1'
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+```
+
+2. **Sync your project:** After updating the Kotlin version, you should sync your project with Gradle files. You can do this by clicking on the "Sync Project with Gradle Files" button in the toolbar, or by using the `File -> Sync Project with Gradle Files` menu option.
+
+3. **Clean and rebuild your project:** Sometimes, old build artifacts can cause issues. You can clean your project by using the `Build -> Clean Project` menu option, and then rebuild it using the `Build -> Rebuild Project` menu option.
+
+As for collecting the email and cardholder name, the `CardMultilineWidget` does not support these fields. You will need to create separate input fields in your UI for the email and cardholder name. Once the user fills in these fields, you can collect the data and use it as needed.

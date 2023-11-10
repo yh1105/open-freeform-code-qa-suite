@@ -1,0 +1,21 @@
+Programmatically Lighten or Darken a hex color in dart
+
+I am trying to convert this hash color code #159424   to more darken and lighten programmatically. How to do this please help?
+
+
+
+```
+toDarkColor(String hashColor){
+  // how to convert that hash string to make green color darker?
+}
+```
+
+
+
+
+```
+toLightColor(String hashColor){
+  // how to convert that hash string to make green color lighter? 
+}
+```
+

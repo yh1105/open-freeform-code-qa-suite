@@ -1,0 +1,52 @@
+You can achieve this by simply not replacing the special characters with a space, but with an empty string. Here's how you can modify your code:
+
+```vba
+Sub ReplaceSpecial()
+    Dim cel As Range
+    Dim strVal As String
+    Dim i As Long
+    Application.ScreenUpdating = False
+    For Each cel In Selection
+        strVal = cel.Value
+        For i = 1 To Len(strVal)
+            Select Case Asc(Mid(strVal, i, 1))
+                Case 48 To 57, 65 To 90, 97 To 122
+                    ' Leave ordinary characters alone
+                Case Else
+                    Mid(strVal, i, 1) = ""
+            End Select
+        Next i
+        cel.Value = strVal
+    Next cel
+    Application.ScreenUpdating = True
+End Sub
+```
+
+However, this code will not work because VBA does not allow you to replace a character in a string with an empty string using the `Mid` function. Strings in VBA are immutable, which means once a string is created, it cannot be changed.
+
+Instead, you can use the `Replace` function in VBA to replace each special character with an empty string. Here's how you can modify your code:
+
+```vba
+Sub ReplaceSpecial()
+    Dim cel As Range
+    Dim strVal As String
+    Dim i As Long
+    Application.ScreenUpdating = False
+    For Each cel In Selection
+        strVal = cel.Value
+        For i = 1 To Len(strVal)
+            Select Case Asc(Mid(strVal, i, 1))
+                Case 48 To 57, 65 To 90, 97 To 122
+                    ' Leave ordinary characters alone
+                Case Else
+                    strVal = Replace(strVal, Mid(strVal, i, 1), "")
+                    i = i - 1 ' Adjust counter as length of string has decreased
+            End Select
+        Next i
+        cel.Value = strVal
+    Next cel
+    Application.ScreenUpdating = True
+End Sub
+```
+
+This code will replace each special character with an empty string, effectively removing it from the string.

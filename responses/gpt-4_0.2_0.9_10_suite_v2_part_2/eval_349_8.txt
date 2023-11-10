@@ -1,0 +1,19 @@
+The error message is indicating that there's a problem with the command you're trying to run. It seems to be complaining about the embedded quotes in the command.
+
+The issue is likely due to the way the command is being interpreted. The command interpreter is getting confused by the quotes around the command and its arguments.
+
+Here's a possible solution:
+
+1. Open NetBeans IDE.
+2. Go to `Tools > Options > Java > Maven > Execution`.
+3. Uncheck the option `Use Embedded Maven`.
+4. Browse and set your external Maven path in `Maven Home`.
+5. Click `OK` to save the changes.
+
+This will tell NetBeans to use the external Maven installation instead of the embedded one. The external Maven installation might handle the command line arguments correctly.
+
+If you don't have an external Maven installed, you can download it from the [official Apache Maven website](https://maven.apache.org/download.cgi).
+
+After downloading and extracting the Maven archive, you can set the `Maven Home` in NetBeans to the directory where you extracted the Maven files.
+
+If the problem persists, you might want to check the command itself. Make sure that all the paths in the command are correct and that all the necessary files are in their respective directories.

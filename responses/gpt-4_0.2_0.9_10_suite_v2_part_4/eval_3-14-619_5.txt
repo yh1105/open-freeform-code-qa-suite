@@ -1,0 +1,34 @@
+The code you posted is correct, but it seems like you're missing the part where `isSelected` is being changed from outside `ContentView`. 
+
+`@Binding` is a two-way connection to a `@State` property owned by a parent view. It allows you to read and write the value, but the parent view is still the source of truth. 
+
+In your case, `ContentView` is trying to modify `isSelected`, but there's no parent view that owns a `@State` variable that is bound to `isSelected`.
+
+Here's an example of how you could use it:
+
+```swift
+struct ParentView: View {
+    @State private var isSelected: Bool = false
+
+    var body: some View {
+        VStack {
+            ContentView(isSelected: $isSelected)
+            Text("Is selected: \(isSelected.description)")
+        }
+    }
+}
+
+struct ContentView: View {
+    @Binding var isSelected: Bool
+
+    var body: some View {
+        Button(action: {
+            self.isSelected.toggle()
+        }) {
+            Text(isSelected ? "Selected" : "Not Selected")
+        }
+    }
+}
+```
+
+In this example, `ParentView` owns `isSelected` and `ContentView` can modify it through the `@Binding`. When `ContentView` modifies `isSelected`, the `ParentView` is updated because it's observing `isSelected`.

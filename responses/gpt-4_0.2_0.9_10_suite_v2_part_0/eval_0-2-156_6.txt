@@ -1,0 +1,32 @@
+From your HTML code, it seems like the "Begin Game" and "Stop Game" buttons are in different divs (`GameStopped` and `GameRunning` respectively). This could be causing the alignment issue.
+
+Here are a few suggestions to fix this:
+
+1. **Place both buttons in the same div**: This will ensure that they are in the same container and can be styled together. You can then use CSS to position them as needed.
+
+```html
+<div id="GameControls">
+  <button id="StartBtn" class="btnStyle" onclick="gameStarted=true;">Begin Game</button>
+  <button id="StopBtn" class="btnStyle" onclick="self.close()">Stop Game</button>
+</div>
+```
+
+2. **Use CSS Flexbox or Grid**: These are powerful layout models that allow you to control the alignment, direction, order, and size of boxes. For example, with Flexbox:
+
+```css
+#GameControls {
+  display: flex;
+  justify-content: space-between; /* or 'space-around' or 'center' etc. */
+}
+```
+
+3. **Use CSS Positioning**: If you need more control, you can use CSS positioning properties (`relative`, `absolute`, `fixed`, `sticky`) along with `top`, `right`, `bottom`, `left` properties to position your elements. For example:
+
+```css
+#StopBtn {
+  position: absolute;
+  top: 0;
+}
+```
+
+Remember to adjust these suggestions according to your specific layout and design needs.

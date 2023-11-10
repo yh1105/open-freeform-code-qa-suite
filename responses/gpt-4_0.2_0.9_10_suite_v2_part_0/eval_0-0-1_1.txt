@@ -1,0 +1,13 @@
+If you're getting a 404 error on Vercel, it might be due to a misconfiguration in your project settings or a problem with your code. Here are a few things you could check:
+
+1. **Vercel Project Settings**: Make sure you have set up your Vercel project correctly. The Build Command should be `yarn run build` or `npm run build` and the Output Directory should be `out` or `.next` depending on your Next.js configuration.
+
+2. **Dynamic Routes**: If you're using dynamic routes, make sure you're using the `getStaticPaths` function correctly. This function should return an array of possible values for each dynamic part of your routes. If you're using `getServerSideProps` instead, keep in mind that it won't work on Vercel because Vercel is a static hosting provider.
+
+3. **next.config.js**: Even though you mentioned you don't have a next.config.js file, it might be worth creating one if you need to customize your Next.js configuration. For example, you might need to set the `target` to `serverless` if you're deploying on Vercel.
+
+4. **Dependencies**: Make sure all your dependencies are listed in your `package.json` file and that you're not importing any modules that aren't listed as dependencies.
+
+5. **Check the Logs**: Vercel provides detailed logs of your deployments. Check these logs for any error messages that might help you identify the problem.
+
+If none of these suggestions help, you might want to consider creating a minimal reproduction of your problem and asking for help on the Vercel support or on the Next.js GitHub repository.

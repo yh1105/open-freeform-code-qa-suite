@@ -1,0 +1,13 @@
+The issue you're experiencing could be due to a variety of reasons. Here are a few things you could check:
+
+1. **Network Connection**: Ensure that your device/emulator has a proper internet connection. The Apollo Client fetches data over the network, so a lack of internet connection could cause the loading state to hang indefinitely.
+
+2. **Server Availability**: The server at 'https://48p1r2roz4.sse.codesandbox.io' should be up and running. You can check this by visiting the URL in a web browser. If the server is down, the Apollo Client won't be able to fetch any data.
+
+3. **Query Syntax**: Make sure that your GraphQL query is correct. If the query is incorrect, the server might not send back any data. You can test your query in a GraphQL playground to ensure it's correct.
+
+4. **Apollo Client Setup**: Check your Apollo Client setup. Make sure that the `ApolloProvider` is properly wrapping your component tree.
+
+5. **Error Handling**: You might not be seeing any errors because they're not being logged. Try logging the error object to see if there are any error messages. You can do this by adding `console.log(error)` in your `TestScreen` component.
+
+If none of the above solutions work, you might want to try creating a new Apollo Client instance with a different URI to see if the issue is specific to the current server.

@@ -1,0 +1,30 @@
+To enable Dev Tools in IntelliJ with a Maven project, follow these steps:
+
+1. Add the Spring Boot DevTools dependency to your `pom.xml`:
+
+```xml
+<dependencies>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-devtools</artifactId>
+        <optional>true</optional>
+    </dependency>
+</dependencies>
+```
+
+2. Enable automatic build on save:
+
+   - Go to `File -> Settings -> Build, Execution, Deployment -> Compiler`
+   - Check the `Build project automatically` option
+
+3. Enable automatic deployment after build:
+
+   - Press `Ctrl+Shift+A` (or `Cmd+Shift+A` on MacOS)
+   - Type `Registry...`
+   - In the registry, enable `compiler.automake.allow.when.app.running`
+
+4. Restart your IntelliJ IDEA.
+
+Now, whenever you make changes to your code and save the file, IntelliJ IDEA will automatically compile and redeploy your application, and Spring Boot DevTools will automatically restart the server.
+
+Remember, DevTools is only for development, not for production use. It should be excluded from the final built artifact.

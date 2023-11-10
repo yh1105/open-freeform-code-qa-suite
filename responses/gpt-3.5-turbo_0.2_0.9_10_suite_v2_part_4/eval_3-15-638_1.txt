@@ -1,0 +1,1 @@
+To use the SelectByID2 method, you need to provide the name and type of the object you want to select. You can create reference points on the selected face and edge to identify the face somehow. Once you have the names of the objects, you can use them with SelectByID2 method. Alternatively, you can use SelectByRay method, but it requires some calculations with face normals.

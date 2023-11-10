@@ -1,0 +1,44 @@
+Starting from Android 11, there are some changes in the way file storage works. One of the changes is that you can no longer access the external storage directory directly using `Environment.getExternalStorageDirectory()`. Instead, you should use the `MediaStore` API to access the external storage directory.
+
+To fix the issue, you can try the following steps:
+
+1. Add the following permission to your AndroidManifest.xml file:
+
+```
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+```
+
+2. Use the `MediaStore` API to create a file in the external storage directory. Here's an example:
+
+```
+private fun getTempFile(): File {
+    val timeStamp = SimpleDateFormat("yyyyMMdd_HHMMss", Locale.getDefault()).format(Date())
+    val resolver = context.contentResolver
+    val contentValues = ContentValues().apply {
+        put(MediaStore.MediaColumns.DISPLAY_NAME, "image".plus(Calendar.getInstance().timeInMillis).plus(timeStamp).plus(".jpg"))
+        put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg")
+        put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_PICTURES + "/sample-take-image")
+    }
+    val uri = resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)
+    return File(uri?.let { FileUtil.getPath(context, it) })
+}
+
+private fun saveImageToFile(bitmap: Bitmap? = null): String? {
+    return try {
+        val file = getTempFile()
+        Timber.e("Path: + : ${file.absolutePath}")
+        val fOut = FileOutputStream(file)
+        bitmap?.apply {
+            this.compress(Bitmap.CompressFormat.JPEG, 100, fOut)
+        }
+        fOut.flush()
+        fOut.close()
+        file?.absolutePath.getDefault()
+    } catch (e: Exception) {
+        e.printStackTrace()
+        ""
+    }
+}
+```
+
+Note that you need to add the `FileUtil` class to your project to get the file path from the `MediaStore` URI. You can find the `FileUtil` class implementation in this [gist](https://gist.github.com/ianhanniballake/afb2ad316b7a5fa1b50b).

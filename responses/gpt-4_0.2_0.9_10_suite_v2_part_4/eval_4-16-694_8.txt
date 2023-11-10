@@ -1,0 +1,15 @@
+The issue you're facing is due to the inconsistent position of the `lang` attribute in the HTML tag. To resolve this, you can use a more flexible approach using `grep` with a regular expression (regex) to match the `lang` attribute and its value, regardless of its position in the tag.
+
+Here is a modified version of your command:
+
+```bash
+curl -Ls stick-it.app | grep -oP '(?<=lang=")[^"]*' | head -1
+```
+
+This command does the following:
+
+- `curl -Ls stick-it.app` fetches the HTML content of the page.
+- `grep -oP '(?<=lang=")[^"]*'` uses Perl-compatible regex (`-P`) to match and output (`-o`) only the part of the line that comes after `lang="` and before the next `"`. This effectively extracts the value of the `lang` attribute.
+- `head -1` ensures that only the first match is returned, in case there are multiple `lang` attributes in the page.
+
+This command should return the language code from the page, regardless of where the `lang` attribute is located within the tag.

@@ -1,0 +1,32 @@
+You can use `jq` command-line JSON processor to minify JSON in a shell script. `jq` is a lightweight and flexible command-line JSON processor. If it's not installed, you can install it using package managers like `apt` for Ubuntu, `brew` for MacOS, etc.
+
+Here is how you can use `jq` to minify JSON:
+
+```bash
+echo '{
+    "foo": "lorem",
+    "bar": "ipsum"
+}' | jq -c .
+```
+
+This will output:
+
+```bash
+{"foo":"lorem","bar":"ipsum"}
+```
+
+In the above command, `jq -c .` minifies the JSON. `-c` or `--compact-output` option ensures that each JSON object is output on a single line.
+
+If you have a JSON file, you can use `jq` in the following way:
+
+```bash
+jq -c . file.json
+```
+
+This will output the minified JSON to the console. If you want to overwrite the original file with the minified JSON, you can use the following command:
+
+```bash
+jq -c . file.json > tmp.json && mv tmp.json file.json
+```
+
+This command will create a temporary file `tmp.json` with the minified JSON and then replace the original file with it.

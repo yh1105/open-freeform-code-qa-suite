@@ -1,0 +1,25 @@
+To enable Dev Tools in your project, follow these steps:
+
+1. Add the Spring Boot DevTools dependency to your `pom.xml`:
+
+```xml
+<dependencies>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-devtools</artifactId>
+        <optional>true</optional>
+    </dependency>
+</dependencies>
+```
+
+2. Enable automatic build on save:
+
+   - Go to `File` -> `Settings` -> `Build, Execution, Deployment` -> `Compiler`.
+   - Check the `Build project automatically` option.
+
+3. Enable automatic restart:
+
+   - Press `Ctrl+Shift+A` (or `Cmd+Shift+A` on macOS) and search for `Registry`.
+   - In the `Registry`, enable `compiler.automake.allow.when.app.running`.
+
+Now, whenever you make changes to your code and save the file, the application will automatically restart, and you will be able to observe the changes without having to manually restart the Tomcat server.

@@ -1,0 +1,15 @@
+This error can be caused by a variety of issues, but here are a few things you can try to resolve it:
+
+1. **Clean the project:** You can do this by going to `Product > Clean Build Folder` or by pressing `Shift + Command + K`. After cleaning, try building the project again.
+
+2. **Delete derived data:** Derived data includes all the logs, indexes, and build products. Sometimes, these files can cause issues. You can delete derived data by going to `Window > Organizer > Projects`, select your project, and click `Delete` next to derived data.
+
+3. **Update CocoaPods:** If you're using CocoaPods, make sure you're using the latest version. You can update CocoaPods by running `sudo gem install cocoapods` in the terminal.
+
+4. **Reinstall Pods:** Sometimes, reinstalling the pods can solve the issue. You can do this by running `pod deintegrate` and then `pod install` in the terminal.
+
+5. **Check your Swift version:** Make sure that all your pods and your project are using the same Swift version. You can check this by going to `Build Settings > Swift Compiler - Language > Swift Language Version`.
+
+6. **Disable incremental builds:** This can be done by going to `File > Project/Workspace Settings` and setting `Build System` to `Legacy Build System`.
+
+If none of these solutions work, the issue might be with the specific pods you're using. In that case, you might need to check if there are any known issues with those pods and Xcode 10.

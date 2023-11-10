@@ -1,0 +1,16 @@
+You can optimize your task by using `awk` command which is much faster for this kind of task. Here is an example:
+
+```bash
+awk -F'=' '
+  /^name/ { if (name) print name"="value; name=$2; next }
+  /^value/ { value=$2 }
+  END { print name"="value }
+' input.txt > output.txt
+```
+
+This script works as follows:
+
+- `-F'='` sets the field separator to `=`.
+- `/^name/` matches lines starting with `name`. If `name` variable is set, it prints the `name=value` pair, then sets `name` to the second field of the current line and skips to the next line.
+- `/^value/` matches lines starting with `value` and sets `value` to the second field of the current line.
+- `END` is a special pattern that matches the end of the input. It prints the last `name=value` pair.

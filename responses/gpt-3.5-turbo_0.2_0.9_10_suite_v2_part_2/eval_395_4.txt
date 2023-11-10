@@ -1,0 +1,7 @@
+You can use an open generic type to register a generic interface with a container. Here's an example of how to register your `IDatabaseService<T>` interface with a container:
+
+```c#
+services.AddScoped(typeof(IDatabaseService<>), typeof(DatabaseService<>));
+```
+
+This registers `IDatabaseService<T>` as an open generic type, and `DatabaseService<T>` as the implementation. Now you can inject `IDatabaseService<T>` into your controllers without having to specify the generic type parameter.

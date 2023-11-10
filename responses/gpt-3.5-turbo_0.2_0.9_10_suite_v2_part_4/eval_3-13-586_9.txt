@@ -1,0 +1,29 @@
+The error message indicates that when creating a PendingIntent, you need to specify either FLAG_IMMUTABLE or FLAG_MUTABLE. This is a new requirement for Android SDK 31 and above.
+
+To fix the error, you can modify the code that creates the PendingIntent to include the FLAG_IMMUTABLE flag. Here's an example:
+
+```
+val mediaButtonIntent = Intent(Intent.ACTION_MEDIA_BUTTON)
+mediaButtonIntent.setComponent(mbrComponent)
+val pendingIntent = PendingIntent.getBroadcast(
+    context,
+    0,
+    mediaButtonIntent,
+    PendingIntent.FLAG_IMMUTABLE // add this flag
+)
+```
+
+Alternatively, you can use the new PENDING_INTENT_FLAG_MUTABLE constant provided by the MediaSessionCompat class:
+
+```
+val mediaButtonIntent = Intent(Intent.ACTION_MEDIA_BUTTON)
+mediaButtonIntent.setComponent(mbrComponent)
+val pendingIntent = PendingIntent.getBroadcast(
+    context,
+    0,
+    mediaButtonIntent,
+    MediaSessionCompat.PENDING_INTENT_FLAG_MUTABLE // use this constant
+)
+```
+
+By using either FLAG_IMMUTABLE or PENDING_INTENT_FLAG_MUTABLE, you're telling the system that the PendingIntent should not be modified by other apps or components. This is a security measure to prevent malicious apps from tampering with your app's PendingIntent.

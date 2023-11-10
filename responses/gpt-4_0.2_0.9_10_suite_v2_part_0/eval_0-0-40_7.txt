@@ -1,0 +1,31 @@
+The problem you're experiencing is due to a conflict between the Node.js and npm versions installed in your WSL2 Ubuntu and the ones installed in your Windows system. The `whereis` command shows that there are two versions of Node.js and npm installed: one in `/usr/bin/` (WSL2 Ubuntu) and another in `/mnt/c/Program Files/nodejs/` (Windows).
+
+When you run `node -v`, it's using the Node.js installed in your WSL2 Ubuntu, but when you run `npm -v`, it's trying to use the npm installed in your Windows system, which doesn't work because of the different file system and environment.
+
+To solve this issue, you can remove the Windows path from the WSL2 Ubuntu `$PATH` variable. Here's how to do it:
+
+1. Open your `.bashrc` file with a text editor. You can use `nano`:
+
+```bash
+nano ~/.bashrc
+```
+
+2. Add the following line at the end of the file:
+
+```bash
+export PATH=$(echo "$PATH" | sed -e 's/:\/mnt.*//g') # strip out problematic Windows %PATH% imported var
+```
+
+3. Save the file and exit the text editor. If you're using `nano`, you can do this by pressing `Ctrl + X`, then `Y`, then `Enter`.
+
+4. Reload your `.bashrc` file to apply the changes:
+
+```bash
+source ~/.bashrc
+```
+
+Now, when you run `npm -v`, it should use the npm installed in your WSL2 Ubuntu. If you still encounter the problem, you might need to reinstall npm in your WSL2 Ubuntu:
+
+```bash
+sudo apt-get install -y npm
+```

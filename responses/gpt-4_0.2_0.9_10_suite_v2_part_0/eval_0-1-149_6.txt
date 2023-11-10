@@ -1,0 +1,28 @@
+Sure, you can achieve this by using the `group-hover` feature of Tailwind CSS. Here is an example of how you can do it:
+
+```html
+<a href="#" class="group">
+    <span class="text-sky-600 transition-all duration-300 group-hover:text-sky-900">Link</span>
+    <span class="block h-0.5 bg-sky-600 transition-all duration-500 group-hover:w-full"></span>
+</a>
+```
+
+In this example, the link text color will change from `sky-600` to `sky-900` when you hover over it. The underline (which is the second span) will expand to full width when you hover over the link. 
+
+Please note that you need to enable the `group-hover` variant for the `width` utility in your Tailwind CSS configuration file (`tailwind.config.js`) if it's not already enabled:
+
+```javascript
+module.exports = {
+  theme: {
+    extend: {},
+  },
+  variants: {
+    extend: {
+      width: ['group-hover'],
+    },
+  },
+  plugins: [],
+}
+```
+
+Remember to rebuild your CSS after changing the configuration file.

@@ -1,0 +1,15 @@
+The issue is that the command substitution `$(echo {} | sed 's/\?.*//g')` is evaluated before the `find` command is executed. This means that the `{}` placeholder hasn't been replaced with the actual file name yet, so the `sed` command doesn't change anything.
+
+You can solve this by using a shell script or a shell function to perform the rename operation. Here's how you can do it with a bash shell script:
+
+```bash
+find . -type f -name '*\?*' -exec bash -c '
+  for file; do
+    mv -- "$file" "${file%%\?*}"
+  done
+' bash {} +
+```
+
+This script uses the `${file%%\?*}` parameter expansion to remove the `?` and everything after it from the file name. The `mv -- "$file" "${file%%\?*}"` command is then used to rename the file.
+
+The `-exec bash -c '...' bash {} +` part of the command is used to execute the bash script for each file found. The `{}` placeholder is replaced with the actual file name, and the `+` symbol tells `find` to replace `{}` with as many file names as possible (similar to `xargs`). The `bash` argument after the script is the `$0` argument for the `bash -c` command (it's the name of the command, but it's not used in this script).

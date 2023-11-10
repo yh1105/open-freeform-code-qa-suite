@@ -1,0 +1,24 @@
+The Docker build output on macOS is different from Linux due to the way Docker is implemented on macOS. Docker on macOS runs in a virtual machine, and the Docker CLI communicates with the Docker Engine through a REST API, not directly as it does on Linux. This can cause some differences in the output.
+
+If you want to see the full output of a command in a Dockerfile, you can use the `RUN` instruction with a shell command and redirect the output to a file, then use the `cat` command to display the contents of the file.
+
+Here's an example:
+
+```Dockerfile
+# ...
+RUN ls -la > output.txt
+RUN cat output.txt
+# ...
+```
+
+This will print the output of `ls -la` to the console during the build.
+
+However, keep in mind that the output of `RUN` commands will only be displayed when the layer is being built. If the layer is cached from a previous build and there are no changes that invalidate the cache, Docker will use the cached layer and the `RUN` command won't be executed, so its output won't be displayed.
+
+If you want to force Docker to run the commands and display the output even when the layers are cached, you can use the `--no-cache` option:
+
+```bash
+docker build --no-cache -t your-image .
+```
+
+This will build the image without using the cache, so all `RUN` commands will be executed and their output will be displayed.

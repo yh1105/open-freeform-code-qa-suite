@@ -1,0 +1,43 @@
+Flutter :- This AdWidget is already in the Widget tree. How to disable this exception. And what does it mean?
+
+So I insert admob ads inside the List. And I added the functionality of infinity scroll inside the list view. So when the user scrolls to end of the list, new items are added into the list. With this items I also add admob ads inside it.
+So when the users scroll to the end the new items and ads are added into the List. At that time the below exceptions are caught. So how to solve this exception.
+```
+======== Exception caught by widgets library =======================================================
+The following assertion was thrown building AdWidget-[#53ef3](dirty, state: _AdWidgetState#850ac):
+This AdWidget is already in the Widget tree
+
+
+If you placed this AdWidget in a list, make sure you create a new instance in the builder function with a unique ad object.
+Make sure you are not using the same ad object in more than one AdWidget.
+
+The relevant error-causing widget was: 
+  AdWidget-[#53ef3] file:///D:/flutter%20project/memer/lib/pages/TimeLinePage.dart:198:42
+When the exception was thrown, this was the stack: 
+#0      _AdWidgetState.build (package:google_mobile_ads/src/ad_containers.dart:371:7)
+#1      StatefulElement.build (package:flutter/src/widgets/framework.dart:4612:27)
+#2      ComponentElement.performRebuild (package:flutter/src/widgets/framework.dart:4495:15)
+#3      StatefulElement.performRebuild (package:flutter/src/widgets/framework.dart:4667:11)
+#4      Element.rebuild (package:flutter/src/widgets/framework.dart:4189:5)
+```
+
+code:-
+```
+return ListView.builder(itemBuilder: (context, index){
+        //print(posts);
+        if(posts[index] is Post){
+          return posts[index];
+        }
+        else{
+          final Container adContainer = Container(
+                                  alignment: Alignment.center,
+                                  child: AdWidget(key: UniqueKey(), ad: posts[index] as BannerAd),//AdmobService.createBannerAd()..load()
+                                  height: 50,
+                              );
+                      return adContainer;
+        }
+      },itemCount: posts.length,
+          controller: scrollController,physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()));
+    }
+```
+

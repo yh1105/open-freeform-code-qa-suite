@@ -1,0 +1,24 @@
+TailwindCSS is a utility-first CSS framework and does not provide a way to select direct children of an element. However, you can use the `@layer` directive to define your own custom CSS rules.
+
+Here's an example of how you can define a custom rule to select direct children of `div` with class `section`:
+
+```css
+@layer components {
+  div.section > div {
+    /* your styles here */
+  }
+}
+```
+
+You can add this code to your `tailwind.config.js` file under the `theme` property. This will create a new layer called `components` and allow you to define custom CSS rules.
+
+Once you have defined this rule, you can use it in your HTML like this:
+
+```html
+<div class="section">
+  <div>Direct child 1</div>
+  <div>Direct child 2</div>
+</div>
+```
+
+The styles you defined for `div.section > div` will be applied to the direct children of `div` with class `section`.

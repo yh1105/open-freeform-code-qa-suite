@@ -113,6 +113,8 @@ def blank_filling_match(template: str, blank_str: str, escape: str, targets: Lis
                 anses = [target]
             else:
                 anses = target['content']
+                if isinstance(anses, str):
+                    anses = [anses]
 
             matched = False
             now_status = 'unmatched'
@@ -147,14 +149,14 @@ def blank_filling_match(template: str, blank_str: str, escape: str, targets: Lis
         func_name = post_handler['func']
 
         custom_module = importlib.import_module(module_name)
-        new_ans, new_tot, post_handler_detail = custom_module.__call__(func_name)(now_ans, now_tot, grading_details)
+        new_ans, new_tot, post_handler_detail = getattr(custom_module, func_name)(now_ans, now_tot, grading_details)
         now_ans = new_ans
         now_tot = new_tot
 
     return now_score, tot_score, grading_details, post_handler_detail
 
 
-def unit_test_execution(lang: str, response: str, unit_tests: List[Union[str, Dict]], case_dir: str) \
+def unit_test_execution(lang: str, response: str, unit_tests: List[Union[str, Dict]], case_dir: str, only_longest: bool = False) \
         -> Tuple[float, float, List[Dict[str, str]]]:
 
     grading_details = []
@@ -185,11 +187,11 @@ def unit_test_execution(lang: str, response: str, unit_tests: List[Union[str, Di
                 with open(os.path.join(case_dir, unit_test['cleanup_path']), 'r') as f:
                     clean_up_code = f.read()
             weight = unit_test.get('weight', 1.0)
-        combined_response = prefix + response
+        combined_response = prefix + '\n' + response
 
         tot_score += weight
 
-        preprocessed_code = preprocess([combined_response], lang)
+        preprocessed_code = preprocess([combined_response], lang, only_longest)
         exec_passks, exec_details, code = get_exec_results(prefix_from_file, preprocessed_code, reference, lang, timeout)
 
         # cleanup

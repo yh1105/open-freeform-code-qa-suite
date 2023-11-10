@@ -1,0 +1,34 @@
+The issue you're experiencing is due to a conflict between the Node.js and npm versions installed in your WSL2 Ubuntu and those installed in your Windows system. The `whereis` command shows that the system is trying to run npm from the Windows directory (`/mnt/c/Program Files/nodejs/npm`), which is not compatible with the Linux environment.
+
+To resolve this issue, you need to remove the Windows PATH from the WSL environment. Here are the steps:
+
+1. Open your bash profile file. If you're using bash, it's usually `~/.bashrc`. If you're using zsh, it's `~/.zshrc`. You can open it with a text editor like vim or nano:
+
+   ```bash
+   nano ~/.bashrc
+   ```
+
+2. Add the following line at the end of the file:
+
+   ```bash
+   export PATH="$HOME/.local/bin:$HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin"
+   ```
+
+   This line sets the PATH to only include directories within the WSL environment, excluding the Windows directories.
+
+3. Save the file and exit the editor. If you're using nano, you can do this by pressing `Ctrl+X`, then `Y` to confirm, and then `Enter`.
+
+4. Reload your bash profile:
+
+   ```bash
+   source ~/.bashrc
+   ```
+
+5. Now, check the versions of Node.js and npm again:
+
+   ```bash
+   node -v
+   npm -v
+   ```
+
+You should now see the correct versions that you installed in your WSL2 Ubuntu environment.

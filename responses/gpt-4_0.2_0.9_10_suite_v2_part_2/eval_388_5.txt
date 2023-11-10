@@ -1,0 +1,35 @@
+The error message indicates that the SQLite database does not have a table named "Keys". This could be due to the database not being updated after upgrading to ASP.NET Core 6.0.
+
+To solve this problem, you need to update your database to include the new tables or changes. In Entity Framework Core, you can do this by running migrations. Here are the steps:
+
+1. Open your terminal or command prompt.
+2. Navigate to the directory of your project.
+3. Run the following commands:
+
+```bash
+dotnet ef migrations add InitialCreate
+dotnet ef database update
+```
+
+The first command `dotnet ef migrations add InitialCreate` will create a new migration script for updating the database schema. "InitialCreate" is the name of the migration. You can replace it with whatever name you prefer.
+
+The second command `dotnet ef database update` will apply the migration to the database. This will create the new tables or make changes to existing ones according to the migration script.
+
+If you have already run these commands and the error still persists, it could be that the "Keys" table is not defined in your DbContext. In this case, you need to define it in your DbContext.
+
+Here is an example:
+
+```csharp
+public class AppDbContext : IdentityDbContext
+{
+    // ...
+
+    public DbSet<Key> Keys { get; set; }
+
+    // ...
+}
+```
+
+In the above code, replace `Key` with the actual class representing the "Keys" table.
+
+Remember to run the migration commands again after making changes to the DbContext.

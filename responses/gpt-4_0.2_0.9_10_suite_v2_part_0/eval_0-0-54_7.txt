@@ -1,0 +1,74 @@
+You can create a button and a function that will be triggered when the button is clicked. In this function, you can access the state value which holds the value of the input field. Here is how you can do it:
+
+```javascript
+import React, { useState } from 'react';
+
+export default function InputField({name,label}) {
+  const [state, setState] = useState('')
+
+  const handleClick = () => {
+    console.log(state); // This will log the value of the input field
+  }
+
+  return (
+    <div>
+     <label>{label}</label>
+      <input type="text" 
+      value={state} 
+      name={name}
+      onChange={(e) => setState(e.target.value)} />
+
+      <button onClick={handleClick}>Click me</button>
+
+      {state}
+    </div>
+  );
+}
+```
+
+In this code, `handleClick` is a function that gets triggered when the button is clicked. Inside this function, we are logging the value of the input field which is stored in the `state` variable.
+
+If you have multiple fields (like first name and last name), you can use an object as the state:
+
+```javascript
+import React, { useState } from 'react';
+
+export default function InputField({name,label}) {
+  const [state, setState] = useState({
+    firstName: '',
+    lastName: ''
+  })
+
+  const handleChange = (e) => {
+    setState({
+      ...state,
+      [e.target.name]: e.target.value
+    });
+  }
+
+  const handleClick = () => {
+    console.log(state); // This will log the value of the input fields
+  }
+
+  return (
+    <div>
+     <label>{label}</label>
+      <input type="text" 
+      value={state.firstName} 
+      name="firstName"
+      onChange={handleChange} />
+
+      <input type="text" 
+      value={state.lastName} 
+      name="lastName"
+      onChange={handleChange} />
+
+      <button onClick={handleClick}>Click me</button>
+
+      {state.firstName} {state.lastName}
+    </div>
+  );
+}
+```
+
+In this code, `state` is an object that holds the values of the first name and last name fields. The `handleChange` function updates the state when the value of any of the input fields changes. The `handleClick` function logs the state which includes the values of both input fields.

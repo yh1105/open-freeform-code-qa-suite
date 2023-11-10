@@ -1,0 +1,24 @@
+In Rust, `Box<T>` cannot be null. It's a non-nullable pointer. If you want to have a nullable pointer, you should use `Option<Box<T>>` instead. `Option` is an enum that can have two values: `Some(T)` or `None`. `None` is used to represent the absence of a value, similar to null in other languages.
+
+Here is how you can modify your code:
+
+```rust
+struct Node {
+    value: i32,
+    next: Option<Box<Node>>,
+}
+
+struct Stack {
+    top: Option<Box<Node>>,
+}
+```
+
+You can check if the `Box<Node>` is null by checking if the `Option<Box<Node>>` is `None`. Here is an example:
+
+```rust
+fn is_empty(&self) -> bool {
+    self.top.is_none()
+}
+```
+
+In this function, `is_none()` returns `true` if the `Option` is `None`, and `false` otherwise.

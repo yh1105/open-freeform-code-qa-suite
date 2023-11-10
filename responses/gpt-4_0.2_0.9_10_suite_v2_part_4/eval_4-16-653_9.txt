@@ -1,0 +1,19 @@
+You can use the `date` command in Unix to convert the date format. Here is a simple script that reads each line from the file, converts the date, and prints it:
+
+```bash
+while IFS= read -r line
+do
+    date -d "${line:0:10}" '+%d %b %Y'
+done < filename.txt
+```
+
+This script reads the file `filename.txt` line by line. For each line, it extracts the first 10 characters (which is the date in `YYYY-MM-DD` format), converts it to `DD MMM YYYY` format using the `date` command, and prints it.
+
+Note: The `%b` format in the `date` command prints the abbreviated month name, which is in uppercase. If you want the month name in lowercase, you can use `tr` command to convert it:
+
+```bash
+while IFS= read -r line
+do
+    date -d "${line:0:10}" '+%d %b %Y' | tr '[:upper:]' '[:lower:]'
+done < filename.txt
+```

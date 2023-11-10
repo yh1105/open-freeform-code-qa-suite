@@ -1,0 +1,11 @@
+You can disable the animation in ViewPager2 by setting the `offscreenPageLimit` to 0. This will prevent ViewPager2 from pre-loading adjacent pages and thus disable the animation when switching between pages. Here's an example:
+
+```kotlin
+viewPager2.offscreenPageLimit = 0
+```
+
+Additionally, you can also set the `isUserInputEnabled` property to false to disable user input for ViewPager2. This will prevent the user from swiping between pages altogether.
+
+```kotlin
+viewPager2.isUserInputEnabled = false
+```

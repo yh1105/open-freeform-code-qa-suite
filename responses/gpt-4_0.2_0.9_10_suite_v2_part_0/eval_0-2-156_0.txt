@@ -1,0 +1,36 @@
+It seems like you want the "Stop Game" button to be aligned with the "Begin Game" button. Here are a few ways to achieve this:
+
+1. **Use CSS Flexbox:** You can use CSS Flexbox to align the buttons. Wrap the buttons in a container and apply `display: flex;` to it. This will align the buttons side by side. You can control the spacing between the buttons using `justify-content: space-between;` or `justify-content: space-around;`.
+
+2. **Use CSS Grid:** Similar to Flexbox, you can use CSS Grid to align the buttons. Wrap the buttons in a container and apply `display: grid;` to it. You can control the grid columns using `grid-template-columns: 1fr 1fr;` to create two equal columns.
+
+3. **Use Floats:** You can float the buttons to the left or right. This will align the buttons side by side. However, floats can be tricky to work with and can cause layout issues, so it's generally recommended to use Flexbox or Grid instead.
+
+4. **Use Inline-Block:** You can set the buttons to `display: inline-block;`. This will align the buttons side by side. You can control the spacing between the buttons using `margin`.
+
+Here's an example using Flexbox:
+
+```html
+<div style="display: flex; justify-content: space-between;">
+  <button id="StartBtn" class="btnStyle" onclick="gameStarted=true;">Begin Game</button>
+  <button id="StopBtn" class="btnStyle" onclick="self.close()">Stop Game</button>
+</div>
+```
+
+And corresponding CSS:
+
+```css
+.btnStyle {
+  /* Add your button styles here */
+}
+
+#StartBtn {
+  /* Add your start button styles here */
+}
+
+#StopBtn {
+  /* Add your stop button styles here */
+}
+```
+
+Remember to remove the `<br>` tags and any other elements between the buttons, as they will interfere with the alignment.

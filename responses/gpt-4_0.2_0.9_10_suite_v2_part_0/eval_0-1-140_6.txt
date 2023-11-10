@@ -1,0 +1,16 @@
+Font Awesome 5 has a few changes in the way it's used compared to Font Awesome 4. The `font-family` is no longer just "FontAwesome", it's now divided into different styles like "Font Awesome 5 Free", "Font Awesome 5 Brands", and "Font Awesome 5 Pro". Also, the `font-weight` needs to be specified.
+
+Here's how you can modify your CSS to work with Font Awesome 5:
+
+```css
+#mainNav .navbar-collapse .navbar-sidenav .nav-link-collapse:after {
+  float: right;
+  content: "\f107";
+  font-family: "Font Awesome 5 Free"; /* or "Font Awesome 5 Pro" if you're using the Pro version */
+  font-weight: 900; /* For solid style */
+}
+```
+
+The `font-weight` can be `400` for regular style, `300` for light style, `900` for solid style, and `400` for brands style. Make sure you're using the correct unicode for the icon you want to display. You can find these unicodes on the Font Awesome website.
+
+Also, ensure that you have properly included the Font Awesome 5 CSS file in your project.

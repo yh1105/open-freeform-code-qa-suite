@@ -1,0 +1,27 @@
+The error you're encountering is due to the missing `libffi` library, which is a dependency for the `travis` gem. 
+
+You can install `libffi` using Homebrew, a package manager for macOS. If you haven't installed Homebrew yet, you can install it by running the following command in your terminal:
+
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+After installing Homebrew, you can install `libffi` by running:
+
+```bash
+brew install libffi
+```
+
+Once `libffi` is installed, you need to set the `PKG_CONFIG_PATH` environment variable to the path where `libffi.pc` is located. This allows the `gem install` command to find the `libffi` library. You can do this by running:
+
+```bash
+export PKG_CONFIG_PATH="/usr/local/opt/libffi/lib/pkgconfig"
+```
+
+Now, you should be able to install the `travis` gem without any issues:
+
+```bash
+gem install travis
+```
+
+Remember, the `export` command only sets the environment variable for the current session. If you open a new terminal window or restart your computer, you'll need to run the `export` command again. If you want to set the environment variable permanently, you can add the `export` command to your shell profile file (like `~/.bash_profile` or `~/.zshrc` depending on your shell).

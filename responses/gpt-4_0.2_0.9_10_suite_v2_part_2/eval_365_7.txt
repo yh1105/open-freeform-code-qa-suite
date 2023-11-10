@@ -1,0 +1,28 @@
+It sounds like you need to specify the Java version for your Maven Wrapper. The Maven Wrapper is a shell script used to automatically download and install a specific version of Maven. It's also used to run Maven builds with a specific version of Java.
+
+You can specify the Java version in the `maven-wrapper.properties` file, which is located in the `.mvn/wrapper` directory of your project. Here's how you can do it:
+
+1. Open the `maven-wrapper.properties` file.
+2. Find the line that starts with `distributionUrl`.
+3. Modify the URL to include the version of Java you want to use. The URL should look something like this:
+
+```markdown
+distributionUrl=https\://repo.maven.apache.org/maven2/org/apache/maven/apache-maven/3.6.1/apache-maven-3.6.1-bin.zip
+```
+
+If you want to use Java 11, for example, you can change it to:
+
+```markdown
+distributionUrl=https\://repo.maven.apache.org/maven2/org/apache/maven/apache-maven/3.6.1/apache-maven-3.6.1-bin.zip&JavaVersion=11
+```
+
+Please note that the `JavaVersion` parameter might not work with all versions of the Maven Wrapper. If it doesn't work, you might need to manually set the `JAVA_HOME` environment variable to point to the JDK you want to use before running the Maven Wrapper.
+
+If you're running the Maven Wrapper from a script, you can set the `JAVA_HOME` environment variable in the script. Here's an example of how you can do it in a bash script:
+
+```bash
+export JAVA_HOME=/path/to/your/jdk
+./mvnw clean install
+```
+
+In this script, replace `/path/to/your/jdk` with the actual path to the JDK you want to use.

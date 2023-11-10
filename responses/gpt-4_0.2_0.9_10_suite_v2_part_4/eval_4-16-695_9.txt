@@ -1,0 +1,19 @@
+The Docker build output on macOS is different from Linux due to the way Docker works on macOS. Docker runs natively on Linux, but on macOS, it runs in a virtual machine. This difference can cause some changes in the behavior of Docker, including the build output.
+
+The `--progress=plain` option is used to disable the build output's interactive mode, which is not what you want. It will not show more detailed output.
+
+If you want to see the full output of a command in a Dockerfile, you can use the `RUN` instruction with the `-x` option in a shell command. This option will print each command that will be executed before it is actually executed. Here is an example:
+
+```dockerfile
+RUN set -x ; ls -la
+```
+
+This will print the `ls -la` command before it is executed, and then print its output.
+
+If you want to see the full output of the Docker build process, including all the steps Docker is taking during the build, you can use the `--debug` option with the `docker` command:
+
+```bash
+docker --debug build .
+```
+
+This will print a lot of debug information, so it might be a bit overwhelming, but it will definitely show you everything Docker is doing during the build.

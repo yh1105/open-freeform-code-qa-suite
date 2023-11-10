@@ -1,0 +1,23 @@
+Sure, you can use the `keydown` event and check if the key pressed is "Enter". Here is the revised code:
+
+```javascript
+mounted() {
+  let editor = new Editor({
+    extensions: [
+      StarterKit,
+      Keymap({
+        "Enter": ({ state, dispatch }) => {
+          console.log("good");
+          // Prevent the default "Enter" behavior
+          return true;
+        }
+      })
+    ],
+    content: this.value
+  });
+
+  this.editor = editor;
+}
+```
+
+Please note that you need to import `Keymap` from `prosemirror-commands` to use it.

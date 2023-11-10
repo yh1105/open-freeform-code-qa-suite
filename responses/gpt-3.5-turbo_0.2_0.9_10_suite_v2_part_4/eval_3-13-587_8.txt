@@ -1,0 +1,14 @@
+This issue is caused by a compatibility problem between Jacoco and Kotlin 1.5.10. To fix it, you can try upgrading Jacoco to version 0.8.7 or higher, which has resolved this issue. 
+
+You can update your `build.gradle` file with the following changes:
+```
+kotlin_version = "1.5.10"
+...
+jacoco {
+    toolVersion = "0.8.7"
+}
+...
+distributionUrl=https\://services.gradle.org/distributions/gradle-7.0.2-all.zip
+```
+
+After making these changes, run the test coverage report task again and it should work without any issues.

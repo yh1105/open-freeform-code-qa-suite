@@ -1,0 +1,9 @@
+In C++, please complete the two following functions:
+
+1. Have a function named ```my_2d_array(int N, int M)``` which takes two arguments M and N and returns a matrix or 2d-array of dimension (M*N) with elements indicating the position of that element. E.g. calling my_2d_array(4,3) would return:
+[[00, 01, 02],
+[10, 11, 12],
+[20, 21, 22],
+[30, 31, 32]]
+
+2. The main function should execute my_2d_array and be able to potentially perform calculations with the result or modify it. In the main function, print the return value (which is the M*N matrix) of my_2d_array, and elements are separate with ' '. After each line is output, a '\n' character is output.

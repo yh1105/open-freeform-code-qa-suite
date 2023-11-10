@@ -1,0 +1,17 @@
+The error message is telling you that Vue.js prefers using primitive values (like strings or numbers) as keys in a `v-for` loop. This is because Vue uses the key to track each node's identity, and it's more efficient to compare primitive values than objects.
+
+In your case, you're using `comment` as the key, which is an object. This is what's causing the error.
+
+To fix this, you should use a unique primitive value from each `comment` as the key. If each comment has a unique id, you could use that:
+
+```html
+<div v-for="comment in comments" :key="comment.id">
+```
+
+If there's no unique id, you could use the index of the loop:
+
+```html
+<div v-for="(comment, index) in comments" :key="index">
+```
+
+Just remember that using the index as a key is a last resort, as it can lead to issues if the order of items changes. It's always better to use a unique id if one is available.

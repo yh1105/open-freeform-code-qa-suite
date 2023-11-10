@@ -1,0 +1,30 @@
+The `SelectByID2` method requires the name of the entity to be selected. For faces and edges, these are usually not set by default. So, you need to set the name of the entity using `IEntity::SetName` method before you can select it using `SelectByID2`.
+
+Here's a simple example of how you can set the name of a face and then select it:
+
+```vba
+Dim swFace As Face2
+Set swFace = swSelMgr.GetSelectedObject6(1, -1)
+swFace.SetName "MyFace"
+swModel.ClearSelection2 True
+swModel.Extension.SelectByID2 "MyFace", "FACE", 0, 0, 0, False, 0, Nothing, 0
+```
+
+In your case, you can set the names for the face and the edge, then use `SelectByID2` to select them before calling `InsertRefPlane`.
+
+```vba
+' Set names for the face and the edge
+faceObj.SetName "MyFace"
+edgeObj.SetName "MyEdge"
+
+' Clear any existing selection
+swModel.ClearSelection2 True
+
+' Select the face and the edge
+swModel.Extension.SelectByID2 "MyFace", "FACE", 0, 0, 0, False, 0, Nothing, 0
+swModel.Extension.SelectByID2 "MyEdge", "EDGE", 0, 0, 0, True, 0, Nothing, 0
+
+' Now you can call InsertRefPlane
+```
+
+Please note that the `SetName` method is not available in early versions of SolidWorks. If you're using an older version, you might need to find a different approach.

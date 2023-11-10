@@ -1,0 +1,9 @@
+It's possible that the XML response is not properly configured in your Spring Boot project. You can check if the Jackson XML dependency is included in your project and if the `produces` attribute is set to include XML in your `@RestController` annotation. For example:
+```java
+@RestController
+@RequestMapping(value = "/pet", produces = { "application/json", "application/xml" })
+public class PetApiController implements PetApi {
+    // ...
+}
+``` 
+Also, make sure that the `accept` header in your curl command is set to `application/xml`.

@@ -1,0 +1,1 @@
+It's possible that the XML response is not properly configured in your Spring Boot project. You may need to add the necessary dependencies and configuration to support XML serialization and deserialization. Check your project's dependencies and configuration to ensure that XML support is properly set up.

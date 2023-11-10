@@ -1,0 +1,11 @@
+You can try using the `--no-cache` flag when running the `docker build` command. This will force Docker to rebuild all the layers, including the ones that were previously cached. This should give you the full build output, including the results of the `ls -la` commands in steps 7 and 15.
+
+Alternatively, you can try running the `docker build` command with the `-t` flag and a new tag name. This will create a new image with a different tag, even if the Dockerfile and build context are the same. This should also force Docker to rebuild all the layers and give you the full build output.
+
+Finally, you can try running the `docker build` command with the `--progress=plain` flag and redirecting the output to a file. This will give you a plain text output of the build, which you can then inspect at your leisure. For example:
+
+```
+docker build --progress=plain -t myimage . > build.log
+```
+
+This will create a new image with the tag `myimage`, using the Dockerfile in the current directory (`.`), and redirect the build output to a file called `build.log`. You can then open this file in a text editor or viewer to inspect the full build output.

@@ -1,0 +1,32 @@
+The error message indicates that your app isn't using AndroidX, which is the open-source project used by the Android team to develop, test, package, version and release libraries within Jetpack.
+
+AndroidX is a major improvement to the original Android Support Library, which is no longer maintained. It provides parity across Android releases, and means that you only need to manage a single version of the support library.
+
+To migrate your app to AndroidX, you can follow these steps:
+
+1. Backup your project.
+2. Update your `android/gradle.properties` file and add the following lines:
+
+    ```markdown
+    android.useAndroidX=true
+    android.enableJetifier=true
+    ```
+
+3. Update your `compileSdkVersion` to 28 in your `android/app/build.gradle` file.
+
+    ```markdown
+    android {
+        compileSdkVersion 28
+
+        ...
+    }
+    ```
+
+4. Update your dependencies in your `pubspec.yaml` file to the AndroidX equivalents. You can find the AndroidX equivalents of common libraries [here](https://developer.android.com/jetpack/androidx/migrate).
+
+5. Run `flutter clean` to clean your project.
+6. Finally, run `flutter pub get` to fetch the packages.
+
+After you've migrated your app to AndroidX, you should be able to generate the Android project and its APK without any issues.
+
+If you still encounter the error, it might be due to a problem with your Gradle configuration. You can try to delete the `android/.gradle` directory and rebuild your project.

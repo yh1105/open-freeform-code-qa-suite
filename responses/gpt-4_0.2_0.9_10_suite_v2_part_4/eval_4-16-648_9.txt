@@ -1,0 +1,21 @@
+The error message you're seeing indicates that the `/data` directory is on a read-only file system, so you can't create new directories or files in it.
+
+On macOS Catalina and later, the system files are stored on a separate, read-only volume. This is a security feature designed to protect the system files from being modified or deleted. The root directory `/` is also read-only.
+
+Instead of trying to create a directory at the root level, you should create it in your home directory or another location where you have write permissions. For example, you could create the directory in `/Users/yourusername/data/db`:
+
+```bash
+mkdir -p ~/data/db
+```
+
+If you specifically need the directory to be at `/data/db` for some reason (for example, if you're setting up MongoDB), you could create a symbolic link from `/data/db` to the actual directory in your home directory:
+
+```bash
+# Create the directory in your home directory
+mkdir -p ~/data/db
+
+# Create a symbolic link
+sudo ln -s ~/data/db /data/db
+```
+
+Please note that you may need to adjust the MongoDB configuration or command line options to use the new directory path.

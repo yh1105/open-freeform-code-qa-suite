@@ -1,0 +1,22 @@
+Convert nullable variable with int.parse using dart
+
+Do I need to convert a string? to an int if the value in the string is not null. (My routeArgs variable may be is null) I was doing according to this code before the null safety:
+```
+final routeArgs = ModalRoute.of(context)!.settings.arguments as Map<String, String>;
+if(routeArgs["id"] != null){
+   id = int.parse(routeArgs["id"]);
+ }
+```
+
+But now it displays the error stating: "The argument type 'String?' can't be assigned to the parameter type 'String'."  I tried to correct as the code below:
+```
+final routeArgs = ModalRoute.of(context)!.settings.arguments as Map<String, String>;
+   
+    int id;
+    String? idtest = routeArgs["id"]; 
+    if (idtest != null){
+      id = int.parse(idtest);
+    }
+```
+
+This code stopped giving error, but I think this is not the correct way to solve it, I would need to do this for several variable values. Would it be correct for me to make a function just for conversion? Could anyone give me an idea of a solution?

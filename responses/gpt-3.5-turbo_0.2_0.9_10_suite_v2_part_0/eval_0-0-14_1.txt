@@ -1,0 +1,40 @@
+To get the value of the ant design switch, you need to add `onChange` event to the `Switch` component and update the value of the `switch` field in the form. Here's the revised code:
+
+```html
+<Form form={form} layout="vertical">
+  <Form.Item
+    label="Description"
+    name="description"
+    rules={[{ required: true, message: 'Enter a description' }]}
+  >
+    <Input placeholder="Enter Description" />
+  </Form.Item>
+
+  <Form.Item name="switch" noStyle valuePropName="checked">
+    <Switch
+      checkedChildren="Yes"
+      unCheckedChildren="No"
+      onChange={(checked) => form.setFieldsValue({ switch: checked })}
+    />
+    <span>Chargable</span>
+  </Form.Item>
+
+  <Button
+    onClick={() => {
+      form
+        .validateFields()
+        .then((values) => {
+          form.resetFields()
+          onCreate(values)
+        })
+        .catch((info) => {
+          console.log('Validate Failed:', info)
+        })
+    }}
+  >
+    Save
+  </Button>
+</Form>
+```
+
+With this change, the value of the `switch` field in the form will be updated whenever the user toggles the switch, and the updated value will be passed to the `onCreate` function when the user clicks the "Save" button.

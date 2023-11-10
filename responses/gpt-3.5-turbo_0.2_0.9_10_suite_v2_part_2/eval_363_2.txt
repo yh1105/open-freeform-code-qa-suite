@@ -1,0 +1,23 @@
+The error message suggests that the `ConfigServerConfigDataMissingEnvironmentPostProcessor` is trying to import configuration from a Config Server, but it cannot find the `spring.config.import` property. This could be caused by a number of things, including:
+
+1. The `spring-cloud-config-client` dependency is still present in your project, even though you have commented out the config client code. This could be causing the `ConfigServerConfigDataMissingEnvironmentPostProcessor` to run and look for configuration from a Config Server.
+
+2. The `spring-cloud-starter-config` dependency is still present in your project, even though you are not using a Config Server. This could be causing the `ConfigServerConfigDataMissingEnvironmentPostProcessor` to run and look for configuration from a Config Server.
+
+To fix this issue, you can try the following:
+
+1. Remove the `spring-cloud-config-client` dependency from your project, if it is still present.
+
+2. Remove the `spring-cloud-starter-config` dependency from your project, if you are not using a Config Server.
+
+3. Add the `spring.config.import` property to your `application.properties` file, with a value of `optional:configserver:`. This will tell Spring to import configuration from a Config Server if it is available, but not to fail if it is not.
+
+```
+spring.config.import=optional:configserver:
+```
+
+4. If you are still having issues, try adding the `spring.cloud.config.enabled=false` property to your `application.properties` file. This will disable the Config Server configuration completely.
+
+```
+spring.cloud.config.enabled=false
+```

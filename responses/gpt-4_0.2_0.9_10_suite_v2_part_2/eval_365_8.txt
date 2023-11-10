@@ -1,0 +1,34 @@
+If you want to use a specific version of Java with Maven, you can specify it in the `pom.xml` file. Here's how you can do it:
+
+```xml
+<project>
+  [...]
+  <build>
+    [...]
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.8.0</version>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+        </configuration>
+      </plugin>
+    </plugins>
+    [...]
+  </build>
+  [...]
+</project>
+```
+
+In this example, Maven will use Java 1.8. You can replace `1.8` with the version of Java you want to use.
+
+If you want to use a specific version of Java with the Maven Wrapper, you can specify it in the `mvnw` or `mvnw.cmd` script file. Here's how you can do it:
+
+1. Open the `mvnw` or `mvnw.cmd` file in a text editor.
+2. Find the line that starts with `JAVA_HOME=` and replace it with `JAVA_HOME=/path/to/your/jdk`. Replace `/path/to/your/jdk` with the path to the JDK you want to use.
+
+For example, if you want to use the JDK installed in `/usr/lib/jvm/java-11-openjdk-amd64`, you would change the line to `JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64`.
+
+Please note that the `mvnw` or `mvnw.cmd` file is usually located in the root directory of your Maven project. If you can't find it, you might need to generate it using the Maven Wrapper Plugin.

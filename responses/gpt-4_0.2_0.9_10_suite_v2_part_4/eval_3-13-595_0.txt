@@ -1,0 +1,28 @@
+The issue you're facing is likely due to changes in how Android 11 handles file storage. Android 11 introduced scoped storage which restricts broad access to shared storage for all apps running Android 11 and higher, regardless of target SDK version. 
+
+The `Environment.getExternalStorageDirectory()` method you're using is deprecated in API 29 and higher. 
+
+Instead, you should use the app-specific directory to store your files. You can get the app-specific directory using `Context.getExternalFilesDir()`. This method returns a `File` representing an external storage directory where you should save your app-specific files. These files will be deleted when the user uninstalls your app.
+
+Here's how you can modify your `getTempFolder()` method:
+
+```java
+private fun getTempFolder(): File {
+    val directoryFolder = File(context.getExternalFilesDir(null), "sample-take-image")
+    directoryFolder.mkdirs()
+    return directoryFolder
+}
+```
+
+In the above code, replace `context` with your `Context` object.
+
+Also, ensure you have the necessary permissions in your manifest file:
+
+```xml
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+```
+
+And you're requesting these permissions at runtime. 
+
+Remember that if you want to share these files with other apps, or persist these files even after your app is uninstalled, you should use the MediaStore API or the Storage Access Framework respectively.

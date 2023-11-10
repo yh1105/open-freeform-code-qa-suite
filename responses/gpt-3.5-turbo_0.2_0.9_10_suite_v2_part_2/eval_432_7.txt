@@ -1,0 +1,11 @@
+By default, Laravel's `dd()` function limits the output to 1024 characters. However, you can increase this limit by modifying the `outputBuffering` configuration option in your `config/app.php` file.
+
+To increase the limit, you can set the `outputBuffering` option to a higher value, like so:
+
+```php
+'outputBuffering' => 8192,
+```
+
+This will increase the output limit to 8192 characters, which should be enough to view your nested relationships.
+
+Alternatively, you can use the `dump()` function instead of `dd()`. The `dump()` function will output the entire variable without any limits. However, it won't stop the execution of your code like `dd()` does. So, you'll need to manually remove the `dump()` function after you've finished debugging.

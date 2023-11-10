@@ -1,0 +1,5 @@
+It seems like the issue is with the URI you are using in your `ApolloClient`. The URI `https://48p1r2roz4.sse.codesandbox.io` is a demo server provided by Apollo Client, and it may not be working properly at the moment.
+
+You should replace the URI with the endpoint of your GraphQL server. For example, if you are using a local server, you can use `http://localhost:4000/graphql` as the URI. If you are using a remote server, you should use the URL provided by your hosting service.
+
+Once you have updated the URI, try running your app again and see if it works.

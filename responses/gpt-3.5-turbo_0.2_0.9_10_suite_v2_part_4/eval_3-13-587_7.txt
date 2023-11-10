@@ -1,0 +1,15 @@
+This error occurs because Jacoco 0.8.6 is not compatible with Java 9 or higher, which is used by Gradle 7.0.2. To fix this issue, you can either downgrade Gradle to a version that uses Java 8 or lower, or upgrade Jacoco to a version that is compatible with Java 9 or higher.
+
+To upgrade Jacoco, you can use version 0.8.7 or higher, which is compatible with Java 9 or higher. You can update your build.gradle file with the following code:
+
+```
+kotlin_version = "1.5.10"
+...
+jacoco {
+    toolVersion = "0.8.7"
+}
+...
+distributionUrl=https\://services.gradle.org/distributions/gradle-7.0.2-all.zip
+```
+
+After updating the Jacoco version, run the test coverage report task again and it should work without any issues.

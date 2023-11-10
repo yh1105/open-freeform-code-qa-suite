@@ -1,0 +1,9 @@
+You can try using the `-q` or `--quiet` flag with the `docker build` command. This will suppress the build output and only show the final image ID. Then, you can use the `docker history` command to see the full build output.
+
+For example:
+```
+docker build -q -t myimage .
+docker history myimage
+```
+
+This will show you the full build output, including the results of the `ls -la` commands.

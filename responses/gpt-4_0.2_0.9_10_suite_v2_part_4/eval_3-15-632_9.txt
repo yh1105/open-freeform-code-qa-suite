@@ -1,0 +1,17 @@
+If the data you want to split into 5 separate columns is space-separated, you can use the `Split` function in VBA. Here's how you can modify your code:
+
+```vba
+idx = InStr(textline, "Cabinet No.")
+If idx > 0 Then
+    Line Input #1, textline
+    Line Input #1, textline
+    Dim splitData As Variant
+    splitData = Split(textline, " ") ' split the line into an array
+    For i = 0 To 4 ' assuming you have 5 columns to fill
+        ActiveSheet.Cells(nextrow, "G" + i).Value = splitData(i)
+    Next i
+    nextrow = nextrow + 1 'now move to next row
+End If
+```
+
+This code will split the line into an array of strings, then loop through the first 5 elements of the array and put them into 5 consecutive columns starting from "G". Adjust the code as needed if your data is separated differently or if you need to fill more or fewer columns.

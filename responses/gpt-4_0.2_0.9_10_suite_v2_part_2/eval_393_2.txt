@@ -1,0 +1,9 @@
+No, it's not a bad practice. In fact, it's quite common to have different pipeline behaviors for different requests/responses. The whole point of using generics is to provide flexibility and reusability. 
+
+In your case, `PipelineBehavior<RequestOne, ResponseOne>` and `PipelineBehavior<RequestTwo, ResponseTwo>` are two different types, and they can have completely different implementations. 
+
+This is actually a good practice because it adheres to the Single Responsibility Principle (SRP) - each pipeline behavior is responsible for handling a specific type of request/response. 
+
+However, if you find that there is a lot of duplicated code between different pipeline behaviors, you might want to consider creating a base class or using some kind of strategy pattern to share the common logic. 
+
+Remember, the goal is to keep your code DRY (Don't Repeat Yourself), maintainable, and easy to understand.

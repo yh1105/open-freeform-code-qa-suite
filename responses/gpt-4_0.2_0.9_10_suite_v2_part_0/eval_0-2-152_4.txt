@@ -1,0 +1,21 @@
+You can use the `.toast('show')` method to show the toast. Here is how you can modify your JavaScript code:
+
+```javascript
+$('.toast').toast('show');
+```
+
+This line of code selects the element with the class `toast` and calls the `toast` method with the argument `'show'`, which will display the toast.
+
+Please ensure that you have included the necessary Bootstrap JavaScript file in your HTML file. If you haven't, you can include it with the following line of code:
+
+```html
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+```
+
+Also, make sure that you have jQuery included before the Bootstrap JavaScript file, as Bootstrap's JavaScript components depend on jQuery. You can include it with the following line of code:
+
+```html
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+```
+
+These scripts should be placed at the end of your `body` tag.

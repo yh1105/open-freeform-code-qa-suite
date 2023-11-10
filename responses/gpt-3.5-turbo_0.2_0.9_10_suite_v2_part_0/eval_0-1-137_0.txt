@@ -1,0 +1,28 @@
+The issue seems to be with the format of the `$theme-colors` variable. In Bootstrap 5, the `$theme-colors` variable should be defined as a map of color names to color values in the following format:
+
+```scss
+$theme-colors: (
+  "primary":    $primary,
+  "secondary":  $secondary,
+  "success":    $success,
+  "info":       $info,
+  "warning":    $warning,
+  "danger":     $danger,
+  "light":      $light,
+  "dark":       $dark
+);
+```
+
+Where `$primary`, `$secondary`, `$success`, `$info`, `$warning`, `$danger`, `$light`, and `$dark` are the default color values defined in the `_variables.scss` file.
+
+So, in your case, you should define the `$theme-colors` variable like this:
+
+```scss
+$theme-colors: (
+  "primary": #0d6efd
+);
+
+@import "../../node_modules/bootstrap/scss/bootstrap";
+```
+
+This should fix the invalid CSS value error.

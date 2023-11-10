@@ -1,0 +1,15 @@
+Sure, you can use the `*` wildcard to catch all the routes. Here is how you can define the route in your controller:
+
+```typescript
+@Controller('route')
+export class YourController {
+  @Get(':param1/config/*')
+  async getSomething(@Param() params: string[]): Promise<any> {
+    // Your code here
+  }
+}
+```
+
+In this case, `params` will be an array containing all the parameters. The first element will be `param1`, the second will be `OptionalParam2` if it exists, and the third will be `OptionalParam3` if it exists.
+
+Please note that this is not the most elegant solution, as it will also match routes like `/route/aa/config/bb/cc/dd`, but it will work for your case.

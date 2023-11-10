@@ -1,0 +1,17 @@
+The issue is that you are not correctly overriding the `operator==` method from the base class `IClient`. The signature of the `operator==` method in the base class is:
+```c++
+virtual bool operator==(const IClient& anotherClient) = 0;
+```
+So, in the derived class `SeviceClient`, you need to override this method with the same signature. However, you have overridden it with the signature:
+```c++
+bool operator==(const SeviceClient& anotherClient) override {
+    return true;
+}
+```
+This is not the same signature as the base class method, hence the error message. To fix this, change the signature of the `operator==` method in `SeviceClient` to match the base class method:
+```c++
+bool operator==(const IClient<int8_t>& anotherClient) override {
+    return true;
+}
+```
+This should resolve the error.

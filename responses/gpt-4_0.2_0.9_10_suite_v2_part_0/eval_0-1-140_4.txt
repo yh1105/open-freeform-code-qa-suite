@@ -1,0 +1,16 @@
+In Font Awesome 5, the way to use icons in CSS has changed a bit. The `font-family` is now separated into different styles: `Font Awesome 5 Free`, `Font Awesome 5 Brands`, and `Font Awesome 5 Pro`. The `content` value has also changed for some icons.
+
+Here's how you can modify your code to work with Font Awesome 5:
+
+```css
+#mainNav .navbar-collapse .navbar-sidenav .nav-link-collapse:after {
+  float: right;
+  content: "\f105";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+}
+```
+
+In this code, `font-weight: 900;` is used for solid icons. If you want to use regular icons, you can set `font-weight: 400;`. For brands, you would use `font-family: "Font Awesome 5 Brands";`.
+
+Please note that the `content` value (`"\f105"`) is for the `angle-right` icon in Font Awesome 5, which is similar to the `angle-down` icon (`"\f107"`) in Font Awesome 4. You may need to adjust this value depending on the exact icon you want to use. You can find the correct `content` values in the Font Awesome 5 cheatsheet.

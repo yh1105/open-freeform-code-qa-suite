@@ -1,0 +1,39 @@
+You can use the `alignmentGuide` modifier to align the contents of the `HStack` to the leading edge. Here's the modified code:
+
+```
+struct HomeSection: View {
+    var body: some View {
+        Button(action: {
+            
+        }) {
+            Group {
+                Spacer().frame(width: 0, height: 36.0, alignment: .topLeading)
+                HStack(alignment: .top) {
+                    Image("home")
+                        .resizable()
+                        .frame(width: 24, height: 24)
+                        .foregroundColor(.navigationTextGrey)
+                        .alignmentGuide(.leading) { d in
+                            d[.leading]
+                        }
+                    
+                    Text("HOME")
+                        .bold()
+                        .font(.system(size: 17.0))
+                        .foregroundColor(Color.navigationTextGrey)
+                        .padding(.leading, 4.0)
+                        .alignmentGuide(.leading) { d in
+                            d[.leading]
+                        }
+                }
+                Rectangle()
+                    .fill(Color.navigationTextGrey)
+                    .frame(width: UIScreen.main.bounds.width - 60, height: 1)
+                    .padding(.top, 6.0)
+            }
+        }
+    }
+}
+```
+
+The `alignmentGuide` modifier takes a closure that returns a guide value for the specified alignment. In this case, we're using the `.leading` alignment and returning the leading edge of the view. This will align the contents of the `HStack` to the leading edge of the button.

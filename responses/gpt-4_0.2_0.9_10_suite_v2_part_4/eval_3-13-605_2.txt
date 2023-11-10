@@ -1,0 +1,58 @@
+The error message indicates that your project is using an older version of Kotlin, while the Stripe library you're trying to use was compiled with a newer version of Kotlin. Here are the steps to resolve this issue:
+
+1. **Update Kotlin Version**
+
+   Update your Kotlin version in your project-level `build.gradle` file. The version should be at least 1.5.1 or higher as the Stripe library requires it. Here is an example:
+
+   ```gradle
+   buildscript {
+       ext.kotlin_version = '1.5.1'
+       repositories {
+           google()
+           jcenter()
+       }
+       dependencies {
+           classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+           // NOTE: Do not place your application dependencies here; they belong
+           // in the individual module build.gradle files
+       }
+   }
+   ```
+
+2. **Clean and Rebuild Project**
+
+   After updating the Kotlin version, clean and rebuild your project. You can do this by clicking on `Build` > `Clean Project` and then `Build` > `Rebuild Project` from the Android Studio menu.
+
+3. **Add Email and Cardholder Name**
+
+   Unfortunately, the `CardMultilineWidget` does not support collecting the cardholder's name and email. You will need to create your own EditText fields for the cardholder's name and email. Here is an example:
+
+   ```xml
+   <EditText
+       android:id="@+id/cardholderName"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:hint="Cardholder Name"
+       android:inputType="text" />
+
+   <EditText
+       android:id="@+id/email"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:hint="Email"
+       android:inputType="textEmailAddress" />
+
+   <com.stripe.android.view.CardMultilineWidget
+       android:id="@+id/cardInputWidget"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content" />
+   ```
+
+   Then in your activity or fragment, you can get the text from these fields like this:
+
+   ```kotlin
+   val cardholderName = findViewById<EditText>(R.id.cardholderName).text.toString()
+   val email = findViewById<EditText>(R.id.email).text.toString()
+   ```
+
+   You can then use these values along with

@@ -1,0 +1,5 @@
+You should use `@Configuration` when you want to define beans explicitly in code, typically via `@Bean` methods. This is often used when the bean cannot be automatically discovered by component scanning or when you want to create a bean with specific settings that cannot be achieved with `@Service/@Controller/@Component`.
+
+`@Service/@Controller/@Component` are used for defining beans that can be automatically discovered by component scanning. They are typically used for defining service, controller, and general component beans respectively. 
+
+So, if you want to define a bean that should be created with specific settings or if the bean cannot be automatically discovered, use `@Configuration`. Otherwise, use `@Service/@Controller/@Component`.

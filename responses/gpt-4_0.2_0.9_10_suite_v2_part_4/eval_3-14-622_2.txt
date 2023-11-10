@@ -1,0 +1,37 @@
+To conform to `ShapeStyle` protocol, you need to implement a `func _apply(to shape: inout _ShapeStyle_ShapeType)` method in your struct. Here is how you can do it:
+
+```swift
+struct MyContentView: View {
+    var body: some View {
+        Circle()
+            .fill(RedShapeStyle())
+    }
+}
+
+struct RedShapeStyle: ShapeStyle {
+    func _apply(to shape: inout _ShapeStyle_ShapeType) {
+        shape.fill = Color.red._apply(to: &shape)
+    }
+}
+```
+
+However, `_ShapeStyle_ShapeType` and `_apply(to:)` are underscored because they are private APIs, which means they are not intended for public use and may change in future versions of SwiftUI. 
+
+A better and safer way to achieve this is to use `some ShapeStyle` in your `RedView`:
+
+```swift
+struct MyContentView: View {
+    var body: some View {
+        Circle()
+            .fill(RedView().color)
+    }
+}
+
+struct RedView {
+    var color: some ShapeStyle {
+        Color.red
+    }
+}
+```
+
+This way, you are not using any private APIs and your `RedView` can provide a `ShapeStyle` that can be used to fill a shape.

@@ -1,0 +1,25 @@
+This error message indicates that the file system you're trying to write to is read-only, which means you don't have the necessary permissions to create new directories or files.
+
+On macOS Catalina and later versions, the system has implemented a new feature that makes certain parts of the system read-only. This is to increase security and make the system more robust.
+
+The root directory `/` is one of these read-only areas, so you can't create a `/data/db` directory directly under the root.
+
+Here are a couple of alternatives:
+
+1. **Create the directory under your home directory**. This is the most straightforward solution. You can create a `data/db` directory under your home directory like this:
+
+```bash
+mkdir -p ~/data/db
+```
+
+2. **Create a symbolic link to a directory in a writable location**. If you need the directory to appear as `/data/db` for some reason (for example, a program expects to find its data there), you can create the directory somewhere else and then create a symbolic link to it from the root. Here's how:
+
+```bash
+# Create the directory under /Users/Shared
+sudo mkdir -p /Users/Shared/data/db
+
+# Create a symbolic link
+sudo ln -s /Users/Shared/data/db /data/db
+```
+
+Remember to replace `/Users/Shared/data/db` with the actual path where you want to create the directory.

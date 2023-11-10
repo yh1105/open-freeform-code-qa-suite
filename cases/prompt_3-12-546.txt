@@ -1,0 +1,121 @@
+How can I make multiple image picker which upload and set image inside container in flutter?
+
+[](https://i.stack.imgur.com/DqNvb.jpg)
+I want to make this type of image picker when I clicked on the plus sign it will open image picker when I picked images it will fit into this container.
+Here is some code I've tried.
+In this code, I've use flat button it will pick and image and show it under the flat button. but I want output like I mentioned in images. 5 different images uploader.
+```
+import 'dart:io';
+
+import 'package:flutter/gestures.dart';
+import 'package:flutter/material.dart';
+
+import 'package:image_picker/image_picker.dart';
+
+class BusinessProfilePage extends StatefulWidget {
+
+
+  @override
+  _BusinessProfilePageState createState() => _BusinessProfilePageState();
+}
+
+class _BusinessProfilePageState extends State<BusinessProfilePage> {
+  Future<File> profilepicture;
+  bool aggreeandaccept = false;
+  bool accepttudo = false;
+
+  pickprofilepicture(ImageSource source) {
+    setState(() {
+      profilepicture = ImagePicker.pickImage(source: source);
+    });
+  }
+
+  Widget _buildbusinessprofilepicture() {
+    return new FormField(
+      builder: (FormFieldState state) {
+        return FlatButton.icon(
+          icon: Icon(Icons.image),
+          label: Text('Business Profile Picture'),
+          //color: Colors.white,
+          textColor: Colors.black54,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(50),
+          ),
+          onPressed: () {
+            pickprofilepicture(ImageSource.gallery);
+          },
+        );
+      },
+    );
+  }
+
+  Widget _buildprofileimage() {
+    return FutureBuilder<File>(
+      future: profilepicture,
+      builder: (BuildContext context, AsyncSnapshot<File> snapshot) {
+        if (snapshot.connectionState == ConnectionState.done &&
+            snapshot.data != null) {
+          return Image.file(
+            snapshot.data,
+            width: 100,
+            height: 100,
+          );
+        } else if (snapshot.error != null) {
+          return const Text(
+            'Error Picking Image',
+            textAlign: TextAlign.center,
+          );
+        } else {
+          return const Text(
+            'No Image Selected',
+            textAlign: TextAlign.center,
+          );
+        }
+      },
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return new Scaffold(
+      appBar: new AppBar(
+        title: new Text("BusinessProfile"),
+      ),
+      body: Container(
+        height: double.infinity,
+        width: double.infinity,
+        child: Stack(
+          children: <Widget>[
+            SingleChildScrollView(
+              child: SafeArea(
+                top: false,
+                bottom: false,
+                child: Form(
+                  child: Scrollbar(
+                    child: SingleChildScrollView(
+                      dragStartBehavior: DragStartBehavior.down,
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: new Container(
+                        margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                        child: new Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            _buildbusinessprofilepicture(),
+                            _buildprofileimage(),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+```
+

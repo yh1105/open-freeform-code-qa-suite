@@ -1,0 +1,33 @@
+Your second approach using a `HashSet` is already quite efficient and idiomatic in Rust. It has a time complexity of O(n) which is the best you can achieve for this problem.
+
+However, if you want to simplify it further, you can use the `dedup_by` function from the `slice` module in Rust's standard library. This function removes consecutive duplicate elements from a slice in-place based on a predicate function.
+
+Here's how you can use it:
+
+```rust
+use std::collections::HashSet;
+
+#[derive(Debug)]
+struct Person {
+    name: String,
+    age: u32,
+}
+
+fn main() {
+    let mut arr = vec![
+        Person { name: "aaa".to_string(), age: 10 },
+        Person { name: "bbb".to_string(), age: 20 },
+        Person { name: "bbb".to_string(), age: 20 },
+        Person { name: "ccc".to_string(), age: 30 },
+    ];
+
+    arr.sort_by(|a, b| a.name.cmp(&b.name));
+    arr.dedup_by(|a, b| a.name == b.name);
+
+    dbg!(arr);
+}
+```
+
+This code first sorts the array by the `name` field, then removes consecutive duplicates based on the `name` field. Note that this modifies the original array in-place and also changes the order of elements.
+
+Please note that `dedup_by` only removes consecutive duplicates, so you need to sort the array first if the duplicates are not consecutive. If you don't want to change the order of elements, you should stick with your second approach using a `HashSet`.

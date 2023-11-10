@@ -1,0 +1,11 @@
+The issue you're experiencing is likely due to the fact that Spring Boot does not support XML responses by default. It primarily supports JSON responses out of the box.
+
+To enable XML responses, you need to add the following dependency to your `build.gradle` file:
+
+```gradle
+implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml'
+```
+
+This dependency includes the Jackson XML data format module, which allows your application to serialize and deserialize XML.
+
+After adding this dependency, Spring Boot should be able to handle XML responses. If you still encounter issues, you may need to configure your `HttpMessageConverter` to use the `MappingJackson2XmlHttpMessageConverter`.

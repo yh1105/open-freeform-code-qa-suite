@@ -1,0 +1,20 @@
+Starting from Android 11, there are some changes in the way file storage works. One of the major changes is that apps can no longer access files in the external storage directory directly, instead, they need to use the MediaStore API or the Storage Access Framework to access files.
+
+To fix the issue, you can either use the MediaStore API or request the `MANAGE_EXTERNAL_STORAGE` permission from the user. Here's how you can request the permission:
+
+1. Add the following permission to your AndroidManifest.xml file:
+```
+<uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+```
+
+2. Request the permission from the user at runtime:
+```
+if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && !Environment.isExternalStorageManager()) {
+    val intent = Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION)
+    val uri = Uri.fromParts("package", packageName, null)
+    intent.data = uri
+    startActivity(intent)
+}
+```
+
+Note that requesting the `MANAGE_EXTERNAL_STORAGE` permission will show a system dialog to the user, and they can choose to grant or deny the permission. If the user denies the permission, your app won't be able to access files in the external storage directory.

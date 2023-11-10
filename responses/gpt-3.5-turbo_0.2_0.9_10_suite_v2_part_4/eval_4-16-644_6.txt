@@ -1,0 +1,1 @@
+The error message suggests that you do not have the necessary permissions to execute the `startup.sh` script. You can try giving execute permission to the script by running the command `chmod +x startup.sh` and then try running the script again.

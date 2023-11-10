@@ -1,0 +1,30 @@
+It's possible that the issue is related to the dynamic routes in your NextJS app. When deploying to Vercel, you need to make sure that your dynamic routes are properly configured.
+
+Here are some steps you can take to troubleshoot the issue:
+
+1. Check your Vercel deployment logs for any errors or warnings. This can give you a clue as to what might be causing the issue.
+
+2. Make sure that your dynamic routes are properly defined in your NextJS app. You can do this by creating a `pages` directory and adding a file with square brackets in the filename (e.g. `[id].js` for a dynamic route with an `id` parameter).
+
+3. If you're using dynamic routes with API routes, make sure that your API routes are properly configured. You can do this by creating a `pages/api` directory and adding a file with the same name as your dynamic route (e.g. `pages/api/[id].js` for a dynamic route with an `id` parameter).
+
+4. If you're using dynamic routes with static content, make sure that your static content is properly generated. You can do this by using the `getStaticPaths` and `getStaticProps` functions in your dynamic route file.
+
+5. If you're still having issues, you can try adding a `next.config.js` file to your project and configuring your dynamic routes there. Here's an example configuration:
+
+```
+module.exports = {
+  async rewrites() {
+    return [
+      {
+        source: '/blog/:slug',
+        destination: '/blog/post/:slug',
+      },
+    ]
+  },
+}
+```
+
+This configuration maps the dynamic route `/blog/:slug` to the static route `/blog/post/:slug`.
+
+I hope this helps! Let me know if you have any further questions.

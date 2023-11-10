@@ -1,0 +1,12 @@
+The problem is that you're trying to inject `ILogger` directly, but the logging services are set up to use a generic `ILogger<TCategoryName>`.
+
+You should change your `MyClass` constructor to take a `ILogger<MyClass>` instead:
+
+```c#
+public MyClass(ILogger<MyClass> logger)
+{
+    _logger = logger;
+}
+```
+
+This way, the DI container can resolve the logger correctly.

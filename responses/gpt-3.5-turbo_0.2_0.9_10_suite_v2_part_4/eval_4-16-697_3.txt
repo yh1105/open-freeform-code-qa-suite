@@ -1,0 +1,12 @@
+When you run the container with `docker run IMAGE_NAME`, the `.bashrc` file is not sourced because the default shell used by Docker is `/bin/sh`, not `/bin/bash`. To source `.bashrc`, you can modify your `launch.sh` script to source it explicitly before running your commands:
+
+```
+#!/bin/bash
+
+source /root/.bashrc
+cd /workspace/demo
+npm install
+node index.js
+``` 
+
+This will ensure that the `nvm` script is loaded and available for use in your container.

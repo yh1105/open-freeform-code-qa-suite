@@ -1,0 +1,51 @@
+The `GestureDetector` widget behaves as you've described. It only detects gestures on its child widget. If you want to detect gestures on the whole screen, you need to make sure the `GestureDetector` covers the whole screen.
+
+One way to achieve this is to wrap your `GestureDetector` with an `Expanded` or `Flexible` widget, which will force the `GestureDetector` to take up all available space. However, this will only work if the parent of the `Expanded` or `Flexible` widget is a `Flex` widget (like `Column` or `Row`).
+
+In your case, you can use a `Stack` widget to overlay your `QQBody` widget on top of the `GestureDetector` widget. This will ensure that the `GestureDetector` covers the whole screen.
+
+Here's how you can modify your code:
+
+```dart
+class QQHome extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primaryColor: Colors.blueGrey,
+      ),
+      home: Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text('QuoteQuota'),
+        ),
+        body: Stack(
+          children: <Widget>[
+            GestureDetector(
+              onTap: () => print('Tapped'),
+              child: Container(
+                color: Colors.transparent,
+              ),
+            ),
+            QQBody(),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class QQBody extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Text(
+        'Hello, World!'
+      ),
+    );
+  }
+}
+```
+
+In this code, the `GestureDetector` is placed in a `Stack` widget along with the `QQBody` widget. The `GestureDetector` is given a transparent `Container` as a child, which makes it cover the whole screen. The `QQBody` widget is then placed on top of the `GestureDetector`, allowing the `GestureDetector` to detect taps anywhere on the screen.

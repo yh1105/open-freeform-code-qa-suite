@@ -1,0 +1,47 @@
+The issue you're facing is due to the fact that by default, the `Scaffold` widget in Flutter adjusts its layout to accommodate the onscreen keyboard. This is why your bottom navigation bar is moving up when the keyboard appears.
+
+To prevent this behavior, you can set the `resizeToAvoidBottomInset` property of the `Scaffold` widget to `false`. This will tell the `Scaffold` not to resize when the keyboard appears.
+
+Here's how you can modify your code:
+
+```dart
+class _AppHomeViewState extends State<AppHomeView>
+    with TickerProviderStateMixin {
+
+  TabController tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    tabController = TabController(length: 4, vsync: this, initialIndex: 0);
+    tabController.addListener(handleTabSelection);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final scaffold = Scaffold(
+      resizeToAvoidBottomInset: false, // Add this line
+      body: SafeArea(child: _buildBody(context)),
+      bottomNavigationBar: Container(
+        height: 48,
+        decoration: BoxDecoration(
+          color: StyledColors.BACKGROUND_COLOR,
+          boxShadow: [
+            BoxShadow(
+              color: StyledColors.FORGROUND_COLOR.withOpacity(0.16),
+              blurRadius: 12,
+              offset: Offset(0, 0),
+            ),
+          ],
+        ),
+        child: SafeArea(
+          child: _buildTabBar(context),
+        ),
+      ),
+    );
+  }
+  ...
+}
+```
+
+Please note that this will prevent the entire scaffold from resizing when the keyboard appears. If you have other widgets in your scaffold that you want to move when the keyboard appears, you may need to handle them separately.

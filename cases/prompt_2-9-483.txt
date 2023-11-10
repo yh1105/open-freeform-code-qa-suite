@@ -1,0 +1,12 @@
+How to require custom JS files in Rails 6
+
+I'm currently trying Rails 6.0.0.rc1 which seems to have moved the default `javascript` folder from `app/assets/javascript` to `app/javascript`. The `application.js` file is now located in `app/javascript/packs`. Now, I want to add a couple of js files, but for some reason they don't get imported and I can't find any documentation on how this can be done in Rails 6. I tried a couple of things:
+
+
+1. Create a new folder custom_js under app/javascript/packs, putting all my js files there and then add a require "custom_js" to application.js.
+2. Copy all my js files under app/javascript/channels (which should be included by default, since application.js has require("channels")).
+3. Adding require_tree . to application.js, which was the previous approach.
+
+
+
+How can I load my own js files inside a Rails 6 application?

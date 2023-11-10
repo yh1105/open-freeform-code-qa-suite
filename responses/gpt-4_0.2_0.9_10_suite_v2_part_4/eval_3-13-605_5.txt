@@ -1,0 +1,41 @@
+The error message you're seeing is indicating that your project is using a version of Kotlin that is incompatible with the one used to compile the Stripe SDK. The Stripe SDK is compiled with Kotlin 1.5.1, but your project is expecting Kotlin 1.1.15.
+
+To fix this, you need to update your Kotlin version to match the one used by Stripe. You can do this by changing the Kotlin version in your project's build.gradle file. Here's how:
+
+1. Open your project's build.gradle file.
+2. Find the line that sets the Kotlin version. It should look something like this:
+
+```gradle
+ext.kotlin_version = '1.1.15'
+```
+
+3. Change the version to '1.5.1':
+
+```gradle
+ext.kotlin_version = '1.5.1'
+```
+
+4. Sync your project with Gradle files.
+
+As for adding email and cardholder name in Stripe, the `CardMultilineWidget` does not support these fields. You will need to create your own UI to collect these details. You can create two EditText fields for email and cardholder name and then pass these values when creating a `PaymentMethodCreateParams.Card` object.
+
+Here's a simple example:
+
+```kotlin
+val card = cardMultilineWidget.card
+val email = emailEditText.text.toString()
+val cardholderName = cardholderNameEditText.text.toString()
+
+if (card != null) {
+    val paymentMethodParams = PaymentMethodCreateParams.create(
+        PaymentMethodCreateParams.Card.create(card.number, card.expMonth, card.expYear, card.cvc),
+        PaymentMethod.BillingDetails.Builder()
+            .setEmail(email)
+            .setName(cardholderName)
+            .build()
+    )
+    // Use paymentMethodParams for Stripe API call
+}
+```
+
+Remember to validate the email and cardholder name before passing them to the Stripe API.

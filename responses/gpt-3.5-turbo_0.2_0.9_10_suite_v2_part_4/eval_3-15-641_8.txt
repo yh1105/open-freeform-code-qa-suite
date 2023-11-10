@@ -1,0 +1,1 @@
+You can use the OneDrive API to create folders and files on SharePoint using VBA. You can also use the SharePoint REST API to achieve the same. As for retrieving the local path of the file, you can use the `ActiveWorkbook.Path` property to get the local path of the file.

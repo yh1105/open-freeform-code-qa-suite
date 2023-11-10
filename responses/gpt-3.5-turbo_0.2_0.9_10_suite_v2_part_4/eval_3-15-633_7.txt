@@ -1,0 +1,3 @@
+Yes, you can achieve the same result using the `INDEX` and `MATCH` functions in Excel. Here's the formula you can use:
+`=INDEX(B:B, MATCH("x", A:A, 0))`
+This will return the value in `Column B` where the corresponding cell in `Column A` has a value of "x". If there are multiple matches, it will return the first one. If you need to return all matches, you can use an array formula with `INDEX` and `MATCH`.

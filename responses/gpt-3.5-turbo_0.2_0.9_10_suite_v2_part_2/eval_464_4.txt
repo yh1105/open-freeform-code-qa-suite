@@ -1,0 +1,26 @@
+```go
+type A struct {
+}
+
+type B struct {
+}
+
+type AB interface {
+    *A | *B
+    some() bool
+}
+
+func (a *A) some() bool {
+    return true
+}
+
+func (b *B) some() bool {
+    return false
+}
+
+func some[T AB](x T) bool {
+    return x.some()
+}
+```
+
+The key is to define the `some()` method in the `AB` interface, which is a union of `*A` and `*B`. This allows the `some()` method to be called on any type that implements either `*A` or `*B`.

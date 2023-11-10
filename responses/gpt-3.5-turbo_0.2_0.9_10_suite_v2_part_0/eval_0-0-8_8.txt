@@ -1,0 +1,57 @@
+Sure! Here's one way to implement the `findObject` function in JavaScript:
+
+```javascript
+function findObject(id, obj) {
+  if (obj.id === id) {
+    return obj;
+  }
+  for (let i = 0; i < obj.child.length; i++) {
+    const foundObj = findObject(id, obj.child[i]);
+    if (foundObj) {
+      return foundObj;
+    }
+  }
+}
+```
+
+This function takes two arguments: `id` is the ID of the object you want to find, and `obj` is the current object being searched. If the current object's ID matches the ID you're looking for, it returns that object. Otherwise, it recursively searches through each child object until it finds the object with the matching ID. If the object is not found, the function returns `undefined`.
+
+To use this function with the example object you provided, you would call it like this:
+
+```javascript
+const obj = {
+    "id": "A",
+    "name": "Item A",
+    "child": [
+        {
+            "id": "B",
+            "name": "Item B",
+            "child": [
+                {
+                    "id": "C",
+                    "name": "Item C",
+                    "child": []
+                }
+            ]
+        },
+        {
+            "id": "D",
+            "name": "Item D",
+            "child": []
+        }
+    ]
+};
+
+const foundObj = findObject("C", obj);
+console.log(foundObj);
+```
+
+This would output the following object:
+
+```javascript
+{
+  "id": "C",
+  "name": "Item C",
+  "child": []
+}
+```

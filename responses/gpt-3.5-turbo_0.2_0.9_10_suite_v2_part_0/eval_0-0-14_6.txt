@@ -1,0 +1,36 @@
+To get the value of the switch in the `onCreate` function, you need to add the `name` attribute to the `Switch` component and set it to `switch`. Here's the revised code:
+
+```html
+<Form form={form} layout="vertical">
+  <Form.Item
+    label="Description"
+    name="description"
+    rules={[{ required: true, message: 'Enter a description' }]}
+  >
+    <Input placeholder="Enter Description" />
+  </Form.Item>
+
+  <Form.Item name="switch" noStyle valuePropName="checked">
+    <Switch name="switch" checkedChildren="Yes" unCheckedChildren="No" />
+    <span>Chargable</span>
+  </Form.Item>
+
+  <Button
+    onClick={() => {
+      form
+        .validateFields()
+        .then((values) => {
+          form.resetFields()
+          onCreate(values)
+        })
+        .catch((info) => {
+          console.log('Validate Failed:', info)
+        })
+    }}
+  >
+    Save
+  </Button>
+</Form>
+```
+
+With this change, the value of the switch will be included in the `values` object passed to the `onCreate` function with the key `switch`.

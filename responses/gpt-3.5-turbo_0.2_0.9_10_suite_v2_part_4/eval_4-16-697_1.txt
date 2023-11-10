@@ -1,0 +1,7 @@
+When you run the container with `docker run IMAGE_NAME`, it does not execute the `~/.bashrc` file because it is not an interactive shell. To source the `~/.bashrc` file, you can add the following line to your `launch.sh` script before running any commands:
+
+```
+source /root/.bashrc
+```
+
+This will ensure that the `nvm` script is loaded and available for use in your script.

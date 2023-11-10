@@ -1,0 +1,36 @@
+The error message indicates that the SQLite database doesn't have a table named `Keys`. This table is required by IdentityServer4 for storing cryptographic keys.
+
+If you are using Entity Framework Core, you can solve this problem by adding a migration and updating the database. Here are the steps:
+
+1. Add a new migration. Open the terminal in the project directory and run the following command:
+
+```bash
+dotnet ef migrations add CreateKeysTable
+```
+
+This command creates a new migration that includes the operations necessary to create the `Keys` table.
+
+2. Update the database. Run the following command:
+
+```bash
+dotnet ef database update
+```
+
+This command applies the new migration to the database. It creates the `Keys` table if it doesn't exist.
+
+If you are not using Entity Framework Core, you need to manually create the `Keys` table in your SQLite database. The SQL command might look like this:
+
+```sql
+CREATE TABLE "Keys" (
+    "Id" INTEGER PRIMARY KEY,
+    "Algorithm" TEXT NOT NULL,
+    "Created" TEXT NOT NULL,
+    "Data" BLOB NOT NULL,
+    "DataProtected" INTEGER NOT NULL,
+    "IsX509Certificate" INTEGER NOT NULL,
+    "Use" TEXT NOT NULL,
+    "Version" INTEGER NOT NULL
+);
+```
+
+Please adjust the SQL command according to your actual needs.

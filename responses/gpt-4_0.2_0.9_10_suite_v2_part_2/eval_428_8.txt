@@ -1,0 +1,27 @@
+## CSRF Token Mismatch
+
+The CSRF token mismatch error could be due to a number of reasons. Here are a few things you could check:
+
+1. **Domain Configuration**: Ensure that your domain is correctly configured to point to the public directory of your Laravel application. Misconfiguration could lead to issues with session management.
+
+2. **Session Configuration**: Check your session configuration in `config/session.php`. Ensure that the `domain` and `path` options are correctly set. If your application is served from a subdirectory, the `path` should be set to that subdirectory. If your application is served from a subdomain, the `domain` should be set to that subdomain.
+
+3. **Cookie Configuration**: Check your cookie configuration in `config/session.php`. Ensure that the `secure` option is set to `true` if your application is served over HTTPS, and `false` if it is served over HTTP.
+
+4. **Middleware**: Ensure that the `VerifyCsrfToken` middleware is included in the `web` middleware group in your `app/Http/Kernel.php` file.
+
+5. **Cache**: Clear your application cache using the `php artisan cache:clear` and `php artisan config:clear` commands.
+
+## SMTP Connection Error
+
+The error message `stream_socket_client(): SSL operation failed with code 1. OpenSSL Error messages: error:1408F10B:SSL routines:ssl3_get_record:wrong version number` suggests that there's a mismatch between the SSL/TLS version that your application is trying to use and the version that the SMTP server supports.
+
+Here are a few things you could try:
+
+1. **Change Encryption Method**: Try changing the `MAIL_ENCRYPTION` value in your `.env` file from `ssl` to `tls`.
+
+2. **Change Port Number**: The port number `587` is typically used for `tls` encryption. If you're using `ssl` encryption, try changing the `MAIL_PORT` value in your `.env` file to `465`.
+
+3. **Disable Encryption**: If the SMTP server doesn't support SSL/TLS encryption, you might need to disable encryption by setting the `MAIL_ENCRYPTION` value in your `.env` file to `null`.
+
+Remember to run `php artisan config:clear` after making changes to your `.env` file to clear the configuration cache.

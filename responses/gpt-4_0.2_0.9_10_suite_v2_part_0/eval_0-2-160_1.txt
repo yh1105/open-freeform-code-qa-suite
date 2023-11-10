@@ -1,0 +1,9 @@
+Source maps are files that associate the compiled JavaScript that runs in the browser back to the original TypeScript source code. They are a critical tool for debugging because they allow you to view and debug the original TypeScript code in the browser's developer tools, even though the browser is actually running the compiled JavaScript code.
+
+When `"sourceMap": true` is set in `tsconfig.json`, the TypeScript compiler will generate corresponding `.js.map` source map files for each compiled `.js` file. These `.js.map` files are what allow the browser's developer tools to map the running JavaScript back to the original TypeScript.
+
+If you set `"sourceMap": false`, the TypeScript compiler will not generate these `.js.map` source map files. This means that if you try to debug the code in the browser's developer tools, you will only see the compiled JavaScript code, not the original TypeScript. This can make debugging more difficult, especially if the JavaScript is minified.
+
+However, setting `"sourceMap": false` can also make the build process faster and the resulting JavaScript bundle smaller, because the compiler doesn't have to generate the source map files. This can be beneficial in a production environment, where debugging in the browser is less likely to be needed.
+
+So, in summary, setting `"sourceMap": false` won't change anything about how your Angular app runs, but it will affect your ability to debug the TypeScript code in the browser's developer tools.

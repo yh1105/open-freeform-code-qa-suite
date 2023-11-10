@@ -1,0 +1,15 @@
+The error message is indicating that there's a problem with the command you're trying to run. It seems like the command is not properly formatted. 
+
+The issue might be related to the way the command is being passed to the `cmd` program. The command is being passed as a single string, which includes both the command and its arguments. This can cause problems if the command or any of its arguments include special characters, such as spaces or quotes.
+
+Here's how you can try to solve this:
+
+1. **Check the paths**: Make sure that all the paths in the command are correct. This includes the path to `cmd`, the path to `mvn.cmd`, and the paths in the `-Dmaven.ext.class.path` argument. If any of these paths are incorrect, it could cause the command to fail.
+
+2. **Check the quotes**: The error message suggests that there's a problem with a "malformed argument" that has an "embedded quote". This could be caused by a quote character that's not properly escaped. Make sure that all quote characters in the command are properly escaped.
+
+3. **Try running the command directly**: Try running the `mvn.cmd` command directly from the command line, without going through `cmd`. This can help you determine whether the problem is with the command itself, or with the way it's being passed to `cmd`.
+
+4. **Update NetBeans and Java**: If none of the above solutions work, it might be a good idea to update both NetBeans and Java to the latest versions. There might be a bug in the version of NetBeans or Java you're using that's causing this problem.
+
+If you're still having trouble after trying these solutions, please provide more information about your setup, including the exact version of NetBeans and Java you're using, and the full error message you're seeing. This will help us provide more specific advice.

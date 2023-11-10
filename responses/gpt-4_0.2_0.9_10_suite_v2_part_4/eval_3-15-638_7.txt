@@ -1,0 +1,28 @@
+The `SelectByID2` method is used to select entities in the model. The `Name` parameter is the name of the entity to select. For faces and edges, this is typically an empty string. The `Type` parameter is the type of the entity to select, for example `swSelFACES` or `swSelEDGES`. The `X`, `Y`, and `Z` parameters are the coordinates of the point to select. These are typically the coordinates of the center of the face or edge.
+
+Here's how you can modify your code to select the face and the midpoint of the edge:
+
+```vba
+' Select the face
+selBool = swModel.Extension.SelectByID2("", "FACE", 0, 0, 0, False, 0, Nothing, 0)
+Debug.Print selBool
+
+' Get the coordinates of the midpoint of the edge
+Dim midpoint As MathPoint
+Set midpoint = edgeObj.GetCurve().GetMidPoint()
+Dim midpointCoords As Variant
+midpointCoords = midpoint.ArrayData
+
+' Select the midpoint of the edge
+selBool = swModel.Extension.SelectByID2("", "VERTEX", midpointCoords(0), midpointCoords(1), midpointCoords(2), True, 0, Nothing, 0)
+Debug.Print selBool
+```
+
+After this, you can use the `InsertRefPlane` method to create the reference plane:
+
+```vba
+Dim refPlane As Feature
+Set refPlane = swFeatMgr.InsertRefPlane(4, 0, 0, 0, 0, 0)
+```
+
+This will create a reference plane using the selected face and point.

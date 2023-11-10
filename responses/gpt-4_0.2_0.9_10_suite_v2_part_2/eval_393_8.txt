@@ -1,0 +1,9 @@
+No, it's not a bad practice. 
+
+In fact, it's a common practice to have different pipeline behaviors for different types of requests in MediatR or similar libraries. This allows you to encapsulate the logic specific to each type of request and response, making your code more maintainable and easier to understand.
+
+The key is to ensure that each pipeline behavior is responsible for a single aspect of the processing. This follows the Single Responsibility Principle (SRP) and helps to keep your code clean and modular.
+
+For example, you might have one pipeline behavior that handles validation, another that handles logging, and so on. Each of these can be applied to different types of requests as needed.
+
+So, in your case, having a `PipelineBehavior<RequestOne, ResponseOne>` and a `PipelineBehavior<RequestTwo, ResponseTwo>` is perfectly fine if they each encapsulate different logic that is specific to the processing of `RequestOne` and `RequestTwo` respectively.

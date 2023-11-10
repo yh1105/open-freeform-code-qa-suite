@@ -1,0 +1,6 @@
+How do I properly use std::string on UTF-8 in C++?
+
+My platform is a Mac. I'm a C++ beginner and working on a personal project which processes Chinese and English. UTF-8 is the preferred encoding for this project.
+I read some posts on Stack Overflow, and many of them suggest using `std::string` when dealing with UTF-8 and avoid `wchar_t` as there's no `char8_t` right now for UTF-8.
+However, none of them talk about how to properly deal with functions like `str[i]`, `std::string::size()`, `std::string::find_first_of()` or `std::regex` as these function usually returns unexpected results when facing UTF-8.
+Should I go ahead with `std::string` or switch to `std::wstring`? If I should stay with `std::string`, what's the best practice for one to handle the above problems?

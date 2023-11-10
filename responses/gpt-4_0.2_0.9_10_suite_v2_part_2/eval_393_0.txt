@@ -1,0 +1,5 @@
+No, it's not a bad practice to have separate pipelines for different requests if they require different logic. The purpose of the pipeline is to handle cross-cutting concerns that apply to many or all requests. However, if you have logic that only applies to a specific request, it's perfectly fine to create a separate pipeline for that request.
+
+In fact, it's a good practice to separate concerns and not mix logic that doesn't belong together. This way, you keep your code clean, maintainable, and easy to understand. It also allows you to reuse the pipelines for other similar requests in the future.
+
+Remember, the key is to keep your code DRY (Don't Repeat Yourself) and follow the Single Responsibility Principle. If a specific pipeline is doing too many things or handling too many types of requests, it might be a good idea to split it into multiple pipelines.

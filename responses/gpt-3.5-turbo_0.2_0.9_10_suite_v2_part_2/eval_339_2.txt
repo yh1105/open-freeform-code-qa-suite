@@ -1,0 +1,26 @@
+The error message suggests that there is no serializer found for the `java.io.ByteArrayInputStream` class. This is because the `CommonsMultipartFile` class contains a `DiskFileItem` object that has an `inputStream` field of type `ByteArrayInputStream`. 
+
+To solve this issue, you can configure the `RestTemplate` to use a `ByteArrayHttpMessageConverter` to handle the `ByteArrayInputStream` objects. 
+
+Here's an updated version of your code that includes the `ByteArrayHttpMessageConverter` configuration:
+
+```java
+HttpHeaders headers = new HttpHeaders();
+headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+
+MultiValueMap<String, Object> body= new LinkedMultiValueMap<>();
+body.add("circularAttachment", souqBean.getCircularAttachment()); //MultipartFile
+body.add("circularEntryId", souqBean.getCircularEntryId());
+body.add("circularTitle", souqBean.getCircularTitle());
+
+// Configure the RestTemplate to use a ByteArrayHttpMessageConverter
+RestTemplate restTemplate = new RestTemplate();
+restTemplate.getMessageConverters().add(new ByteArrayHttpMessageConverter());
+
+HttpEntity<MultiValueMap<String, Object>> entity = new HttpEntity<>(body, headers);
+
+ResponseEntity<Boolean> response = restTemplate.postForEntity("http://localhost:8081/circular-save", entity, Boolean.class);
+status = response.getBody();
+```
+
+By adding the `ByteArrayHttpMessageConverter` to the `RestTemplate`'s message converters, it will be used to handle the `ByteArrayInputStream` objects, and the error should be resolved.

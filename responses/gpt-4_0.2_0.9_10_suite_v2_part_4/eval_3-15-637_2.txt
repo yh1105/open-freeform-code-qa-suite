@@ -1,0 +1,13 @@
+The error you're experiencing might be due to a few reasons. Here are some suggestions to troubleshoot:
+
+1. **Check SeleniumBasic version**: Ensure that you have the latest version of SeleniumBasic installed. You can download it from the [official GitHub repository](https://github.com/florentbr/SeleniumBasic/releases).
+
+2. **Check WebDriver**: Ensure that the WebDriver for the browser you're using (in this case, Internet Explorer) is up-to-date and correctly installed. The WebDriver should be in the same directory as the SeleniumBasic installation or in a directory listed in your system's PATH.
+
+3. **Check Internet Explorer settings**: Since you're using Internet Explorer, make sure that the "Enable Protected Mode" setting is the same for all zones in the Internet Options Security tab. Selenium WebDriver requires this to automate IE.
+
+4. **Check Excel references**: In Excel, go to `Developer > Visual Basic > Tools > References` and make sure that Selenium Type Library is checked.
+
+5. **Check your code**: In your code, you've declared `IE As Object` but you're not using it. If you're not using Internet Explorer, you can remove this line. If you're using it, you need to create an instance of Internet Explorer.
+
+If none of these suggestions work, please provide the exact error message you're getting for more specific help.

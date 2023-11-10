@@ -1,0 +1,20 @@
+The error message "The selected directory is not a valid home for JDK" usually means that IntelliJ IDEA does not recognize the specified directory as a JDK home. This could be due to a number of reasons, including a corrupted JDK installation or a bug in IntelliJ IDEA.
+
+Here are some steps you can try:
+
+1. **Reinstall JDK 11**: Uninstall JDK 11 and reinstall it. Make sure you download the JDK from the official Oracle website or OpenJDK website.
+
+2. **Check your IntelliJ IDEA version**: IntelliJ IDEA 2017 might not fully support Java 11. Consider upgrading your IntelliJ IDEA to the latest version.
+
+3. **Manually add JDK 11 to IntelliJ IDEA**:
+
+    - Go to `File > Project Structure > SDKs`.
+    - Click on the `+` button and select `JDK`.
+    - Navigate to the location where JDK 11 is installed. The path should be something like `C:\Program Files\Java\jdk-11.0.1`.
+    - Click `OK`.
+
+4. **Check your project settings**: Make sure that the Project SDK and Language Level are set to 11. You can check this in `File > Project Structure > Project`.
+
+5. **Check your module settings**: Make sure that the Module SDK is set to 11. You can check this in `File > Project Structure > Modules`.
+
+Regarding your observation about the separate JDK and JRE folders for 1.7 and 1.8 but only JDK folder for 11.0.1, this is expected. Starting from Java 9, the JRE is no longer provided as a separate distribution. It is now part of the JDK.

@@ -1,0 +1,51 @@
+You can create the JSON object by defining a struct that matches the structure of the JSON object, then use the `encoding/json` package's `MarshalIndent` function to convert the struct to a JSON object. Here's how you can do it:
+
+```go
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"log"
+)
+
+type Client struct {
+	Hostname string `json:"Hostname"`
+	IP       string `json:"IP"`
+	MacAddr  string `json:"MacAddr"`
+}
+
+type Clients struct {
+	Clients []Client `json:"Clients"`
+}
+
+func main() {
+	clients := Clients{
+		Clients: []Client{
+			{
+				Hostname: "example.com",
+				IP:       "127.0.0.1",
+				MacAddr:  "mactonight",
+			},
+			{
+				Hostname: "foo.biz",
+				IP:       "0.0.0.0",
+				MacAddr:  "12:34:56:78",
+			},
+		},
+	}
+
+	jsonData, err := json.MarshalIndent(clients, "", "  ")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Println(string(jsonData))
+}
+```
+
+In this code, `Client` is a struct that represents each client object in the JSON. `Clients` is a struct that represents the entire JSON object. The `json` struct tags are used to map the struct fields to the corresponding JSON fields.
+
+The `json.MarshalIndent` function is used to convert the `Clients` struct to a JSON object. The second and third parameters to `json.MarshalIndent` are the prefix and indent string to use for each level of indentation. In this case, we're using an empty prefix and a two-space indent.
+
+Finally, we print the JSON object to the terminal using `fmt.Println`.

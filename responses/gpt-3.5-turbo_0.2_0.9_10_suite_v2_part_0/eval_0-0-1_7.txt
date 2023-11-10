@@ -1,0 +1,13 @@
+If you are receiving a 404 error when deploying your NextJS app to Vercel, it is likely that your app is not being built correctly during the deployment process. Here are some steps you can take to troubleshoot the issue:
+
+1. Check your Vercel deployment logs: When you deploy your app to Vercel, it will generate deployment logs that you can access from the Vercel dashboard. These logs can provide valuable information about what went wrong during the deployment process. Look for any error messages or warnings that might indicate what the problem is.
+
+2. Check your `next.config.js` file: If you don't have a `next.config.js` file, you should create one. This file is used to configure various aspects of your NextJS app, including how it is built and deployed. Make sure that your `next.config.js` file is configured correctly for your app.
+
+3. Check your dynamic routes: If you are using dynamic routes in your app, make sure that they are configured correctly. Dynamic routes can be tricky to set up, so it's important to double-check that everything is working as expected.
+
+4. Check your `package.json` file: Make sure that your `package.json` file is configured correctly for your app. This file contains important information about your app, including its dependencies and scripts.
+
+5. Check your build command: Make sure that your build command is correct in your `package.json` file. The build command is what Vercel uses to build your app during the deployment process. By default, the build command for NextJS is `next build`.
+
+If none of these steps help you resolve the issue, you may want to reach out to Vercel support for further assistance.

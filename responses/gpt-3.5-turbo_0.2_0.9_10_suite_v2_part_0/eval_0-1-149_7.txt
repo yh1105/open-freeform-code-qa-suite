@@ -1,0 +1,14 @@
+You can achieve this effect by using the `group-hover` variant in Tailwind CSS. Here's the revised code:
+
+```html
+<a href="#" class="group text-sky-600 transition duration-300 relative">
+    Link
+    <span class="block w-full h-0.5 bg-sky-600 absolute bottom-0 left-0 group-hover:w-0 group-hover:duration-500"></span>
+</a>
+```
+
+In this code, we added the `relative` class to the link container to make the absolute positioning of the span element relative to it. We also added the `group` class to the link container to enable the `group-hover` variant.
+
+The span element has a width of 100% and is positioned absolutely at the bottom left of the link container. When the link is hovered over, we use the `group-hover` variant to set the width of the span element to 0 and add a duration of 500ms to create the animation effect.
+
+I hope this helps!

@@ -1,0 +1,23 @@
+The issue might be related to the network configuration of your React Native app. By default, iOS and Android do not allow unsecured HTTP requests. You can try to add the following code to your `AndroidManifest.xml` and `Info.plist` files respectively:
+
+`AndroidManifest.xml`:
+
+```xml
+<application
+  ...
+  android:usesCleartextTraffic="true"
+  ...
+>
+```
+
+`Info.plist`:
+
+```xml
+<key>NSAppTransportSecurity</key>
+<dict>
+  <key>NSAllowsArbitraryLoads</key>
+  <true/>
+</dict>
+```
+
+If the above solution does not work, you can try to use a secure HTTPS endpoint instead of an HTTP endpoint.

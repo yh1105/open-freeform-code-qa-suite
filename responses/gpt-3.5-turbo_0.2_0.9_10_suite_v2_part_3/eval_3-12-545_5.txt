@@ -1,0 +1,16 @@
+The error message suggests that you cannot set the body fields of a request with content-type "application/json". This is because the body of the request should be a JSON-encoded string, not a Map.
+
+To fix this, you can encode the body as a JSON string using the `jsonEncode` function from the `dart:convert` library. Here's an updated version of your code:
+
+```dart
+import 'dart:convert';
+
+Map<String,String> headers = {'Content-Type':'application/json','authorization':'Basic c3R1ZHlkb3RlOnN0dWR5ZG90ZTEyMw=='};
+
+var response = await post(Urls.getToken,
+        headers: headers,
+        body: jsonEncode({"grant_type":"password","username":"******","password":"*****","scope":"offline_access"}),
+      );
+```
+
+By using `jsonEncode`, the body of the request is now a JSON-encoded string, which can be sent with the "application/json" content-type header.

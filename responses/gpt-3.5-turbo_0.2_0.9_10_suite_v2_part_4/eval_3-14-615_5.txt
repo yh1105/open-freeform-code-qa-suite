@@ -1,0 +1,63 @@
+Yes, you can get the current scroll position of a SwiftUI ScrollView using the `ScrollViewProxy` and its `contentOffset` property. Here's an example:
+
+```swift
+struct ContentView: View {
+    @State private var scrollOffset: CGPoint = .zero
+    var body: some View {
+        ScrollView {
+            // your content here
+        }
+        .onPreferenceChange(ScrollViewOffsetPreferenceKey.self) { value in
+            self.scrollOffset = value
+        }
+    }
+}
+
+struct ScrollViewOffsetPreferenceKey: PreferenceKey {
+    static var defaultValue: CGPoint = .zero
+    static func reduce(value: inout CGPoint, nextValue: () -> CGPoint) {
+        value = nextValue()
+    }
+}
+
+struct ScrollViewReaderExample: View {
+    @State private var scrollToIndex: Int? = nil
+    var body: some View {
+        VStack {
+            Button("Scroll to bottom") {
+                self.scrollToIndex = 99
+            }
+            ScrollViewReader { proxy in
+                ScrollView {
+                    VStack(spacing: 20) {
+                        ForEach(0..<100) { index in
+                            Text("Item \(index)")
+                                .id(index)
+                        }
+                    }
+                    .background(GeometryReader {
+                        Color.clear.preference(key: ScrollViewOffsetPreferenceKey.self, value: $0.frame(in: .named("scroll")).origin)
+                    })
+                    .onAppear {
+                        if let scrollToIndex = self.scrollToIndex {
+                            withAnimation {
+                                proxy.scrollTo(scrollToIndex, anchor: .bottom)
+                            }
+                            self.scrollToIndex = nil
+                        }
+                    }
+                }
+                .coordinateSpace(name: "scroll")
+            }
+        }
+    }
+}
+```
+
+In this example, we're using a `ScrollViewOffsetPreferenceKey` to track the scroll offset of the ScrollView. We're also using a `ScrollViewReader` to be able to scroll programmatically to a specific index.
+
+The `ScrollView` has a `background` modifier with a `GeometryReader` that updates the `ScrollViewOffsetPreferenceKey` with the current scroll offset.
+
+Then, in the `ScrollViewReader`, we're using the `coordinateSpace` modifier to give a name to the coordinate space of the ScrollView. This is necessary to use the `scrollTo` method.
+
+Finally, in the `ScrollView`, we're using the `onAppear` modifier to check if we need to scroll to a specific index. If we do, we're using the `scrollTo` method with the `proxy

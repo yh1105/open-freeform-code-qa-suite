@@ -1,0 +1,36 @@
+In Java, you can use the `getClass()` method to get the class of an object. However, this method is not applicable to primitive types as they are not objects. Here's an example:
+
+```java
+Object a = "str";
+System.out.println(a.getClass().getName());  // java.lang.String
+
+a = 123;
+System.out.println(a.getClass().getName());  // java.lang.Integer
+
+a = new HashMap();
+System.out.println(a.getClass().getName());  // java.util.HashMap
+```
+
+For primitive types, you can use wrapper classes and then use `getClass()` method:
+
+```java
+Integer i = 10;
+System.out.println(i.getClass().getName());  // java.lang.Integer
+
+Double d = 10.5;
+System.out.println(d.getClass().getName());  // java.lang.Double
+```
+
+If you want to check if a variable is of a certain type, you can use `instanceof` operator:
+
+```java
+String s = "Hello";
+System.out.println(s instanceof String);  // true
+
+Integer i = 10;
+System.out.println(i instanceof Integer);  // true
+```
+
+But remember, `instanceof` operator cannot be used with primitive types as they are not objects. 
+
+In Java 8, there is no direct equivalent of JavaScript's `typeof` operator. The `getClass()` method and `instanceof` operator are the closest you can get.

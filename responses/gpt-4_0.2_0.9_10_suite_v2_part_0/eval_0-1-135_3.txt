@@ -1,0 +1,17 @@
+The issue you're experiencing is a known bug in Safari's implementation of Flexbox. When an image is a child of a flex container, Safari does not correctly maintain the aspect ratio of the image when `height: auto` is used.
+
+To work around this issue, you can use the `object-fit` property on the image. This property defines how an element responds to the height and width of its content box. It's similar to `background-size` for background images.
+
+Here's how you can modify your CSS:
+
+```css
+.container img {
+  width: 125px;
+  height: auto;
+  object-fit: cover; /* Add this line */
+}
+```
+
+The `object-fit: cover;` rule will cause the image to be resized to cover the entire width of the container while maintaining its aspect ratio. The image will be clipped if its aspect ratio does not match the aspect ratio of its box.
+
+However, please note that `object-fit` is not supported in IE. If you need to support IE, you might need to use a different workaround, such as wrapping the image in another element and applying the size constraints to that element instead.

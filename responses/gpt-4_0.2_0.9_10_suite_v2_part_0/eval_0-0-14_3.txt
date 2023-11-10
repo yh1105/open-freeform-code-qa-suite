@@ -1,0 +1,10 @@
+Sure, I can help with that. The issue might be related to the `valuePropName` prop. It's used to specify which prop on the child component will get the Form value. For the Switch component, the prop should be `checked`. Here is the revised version of your code:
+
+```jsx
+<Form.Item name="switch" valuePropName="checked">
+  <Switch checkedChildren="Yes" unCheckedChildren="No" />
+  <span>Chargable</span>
+</Form.Item>
+```
+
+In this revised version, I removed the `noStyle` prop from the `Form.Item` because it might be causing the issue. The `noStyle` prop should be used when you don't want to create a new field container, which is not the case here.

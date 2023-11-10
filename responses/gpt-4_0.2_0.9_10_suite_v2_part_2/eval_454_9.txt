@@ -1,0 +1,25 @@
+The `err113` linter rule is complaining because you're creating new error instances in your code with `errors.New()`. This is considered a bad practice because it makes it harder to check for specific errors in other parts of your code. Instead, you should define your errors as package-level variables and then wrap them with `fmt.Errorf()` when you need to provide more context.
+
+Here's how you can fix your code:
+
+```go
+// Define your errors as package-level variables
+var (
+    ErrRepoGave = errors.New("repo gave err")
+    ErrOops     = errors.New("oops")
+)
+
+// Then in your tests
+repoMock.EXPECT().Save(gomock.Eq(&foooBarBar)).Return(nil, fmt.Errorf("%w", ErrRepoGave))
+repoMock.EXPECT().FindAll().Return(nil, fmt.Errorf("%w", ErrOops))
+```
+
+This way, you can check for these errors elsewhere in your code like this:
+
+```go
+if errors.Is(err, ErrRepoGave) {
+    // handle the error
+}
+```
+
+This is more reliable than checking the error message, which can change and is prone to typos.

@@ -1,0 +1,18 @@
+The error you're experiencing might be due to a few reasons:
+
+1. **Incompatibility with Excel 2019**: SeleniumBasic might not be fully compatible with Excel 2019. You could try downgrading your Excel version to see if that resolves the issue.
+
+2. **Incorrect SeleniumBasic version**: Ensure you have the correct version of SeleniumBasic installed. You can download the latest version from the [official SeleniumBasic GitHub page](https://github.com/florentbr/SeleniumBasic/releases).
+
+3. **Browser driver issues**: You might be using an outdated or incompatible browser driver. Make sure you have the correct driver for the browser you're using and that it's up-to-date. You can download the latest browser drivers from the [Selenium website](https://www.selenium.dev/downloads/).
+
+4. **Reference issues**: Ensure that the Selenium Type Library is correctly referenced in your VBA environment. You can do this by going to `Tools > References` in the VBA editor and checking that Selenium Type Library is checked.
+
+5. **Code issues**: There might be an issue with your code. Try the following code instead:
+    ```vba
+    Dim bot As New WebDriver
+    bot.Start "chrome", "http://www.google.com"
+    bot.Get "/"
+    ```
+
+If none of the above solutions work, you might want to consider using an alternative to Selenium, such as [Puppeteer](https://pptr.dev/) or [Cypress](https://www.cypress.io/).

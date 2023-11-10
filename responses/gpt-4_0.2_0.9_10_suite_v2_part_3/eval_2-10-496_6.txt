@@ -1,0 +1,14 @@
+You can use the `sort_by` method provided by Rust's `Vec` type. This method sorts the vector in-place using a comparator function. In your case, you can provide a comparator that first compares the `row` fields of the structs, and if they are equal, then compares the `column` fields.
+
+Here is how you can do it:
+
+```rust
+my_vector.sort_by(|a, b| {
+    a.row.cmp(&b.row)
+        .then_with(|| a.column.cmp(&b.column))
+});
+```
+
+In this code, `cmp` is a method provided by all types that implement the `Ord` trait (which includes `u8`). It compares two values and returns an `Ordering` (`Less`, `Equal`, or `Greater`). The `then_with` method is used to chain comparisons: if the first comparison results in `Equal`, then the second comparison is performed.
+
+After this line of code is executed, `my_vector` will be sorted first by `row`, and then by `column` within each group of equal `row` values.

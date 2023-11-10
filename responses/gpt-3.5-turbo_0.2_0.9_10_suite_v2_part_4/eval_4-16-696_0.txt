@@ -1,0 +1,8 @@
+Your `sed` command is not correctly removing the `?` and everything after it. Instead of `s/\?.*//g`, try using `s/\?.*$//g`. This will remove the `?` and everything after it until the end of the filename. 
+
+Your updated command would be:
+```
+find . -type f -name '*\?*' -exec sh -c 'mv "$1" "$(echo "$1" | sed "s/\?.*$//g")"' _ {} \;
+``` 
+
+This should correctly remove the `?` and everything after it from the filenames.

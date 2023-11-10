@@ -1,0 +1,28 @@
+The Java version used by Maven can be controlled by setting the `JAVA_HOME` environment variable. This variable should point to the directory where the JDK is installed.
+
+If you're using the Maven Wrapper, you can specify the Java version in the `maven-wrapper.properties` file. This file is located in the `.mvn/wrapper` directory of your project. Here's an example of how to set it:
+
+```properties
+distributionUrl=https://repo.maven.apache.org/maven2/org/apache/maven/apache-maven/3.6.3/apache-maven-3.6.3-bin.zip
+wrapperUrl=https://repo.maven.apache.org/maven2/io/takari/maven-wrapper/0.5.6/maven-wrapper.jar
+wrapperVersion=0.5.6
+javaHome=/path/to/your/jdk
+```
+
+Replace `/path/to/your/jdk` with the actual path to your JDK. This will ensure that the Maven Wrapper uses the specified JDK.
+
+If you're using a build system like Jenkins, you can also set the `JAVA_HOME` environment variable in the build configuration.
+
+If you're running Maven from the command line, you can set the `JAVA_HOME` environment variable in your shell. The way to do this depends on your operating system and shell. Here's how to do it in a Unix-like system using the bash shell:
+
+```bash
+export JAVA_HOME=/path/to/your/jdk
+```
+
+And here's how to do it in Windows:
+
+```cmd
+set JAVA_HOME=C:\path\to\your\jdk
+```
+
+Again, replace `/path/to/your/jdk` or `C:\path\to\your\jdk` with the actual path to your JDK.

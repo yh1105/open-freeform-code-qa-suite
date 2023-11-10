@@ -1,0 +1,29 @@
+To enable Dev Tools in your Maven project and observe changes without having to restart the Tomcat server, follow these steps:
+
+1. Add the Spring Boot DevTools dependency to your `pom.xml`:
+
+```xml
+<dependencies>
+    ...
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-devtools</artifactId>
+        <optional>true</optional>
+    </dependency>
+    ...
+</dependencies>
+```
+
+2. Enable automatic build on changes:
+
+   - Go to `File` -> `Settings` -> `Build, Execution, Deployment` -> `Compiler`.
+   - Check the `Build project automatically` option.
+
+3. Enable automatic deployment after build:
+
+   - Press `Ctrl+Shift+A` and search for `Registry`.
+   - In the `Registry`, enable `compiler.automake.allow.when.app.running`.
+
+4. Restart your IntelliJ IDEA for the changes to take effect.
+
+Now, whenever you make changes to your code, the application will automatically redeploy without having to restart the Tomcat server.

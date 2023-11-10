@@ -1,0 +1,20 @@
+The error you're experiencing might be due to several reasons. Here are a few things you can try:
+
+1. **Check SeleniumBasic and Browser Driver Version:** Make sure you have the latest version of SeleniumBasic installed. Also, ensure that the browser driver (e.g., ChromeDriver for Google Chrome) is compatible with the version of the browser you're using.
+
+2. **Check References:** In VBA, go to `Tools > References` and make sure that Selenium Type Library is checked. If it's not, scroll through the list to find it and check it.
+
+3. **Try Using Early Binding:** Instead of using `Dim driver As New WebDriver`, try using early binding. Declare your WebDriver like this:
+```vba
+Dim driver As Selenium.WebDriver
+Set driver = New Selenium.WebDriver
+```
+4. **Check Internet Explorer Settings:** Since you're using Internet Explorer in your script, make sure that the version of IE installed on your machine is compatible with the SeleniumBasic you're using. Also, check if the Protected Mode settings are the same for all zones. To do this, go to `Internet Options > Security tab` and check the Enable Protected Mode checkbox for Internet, Local intranet, Trusted sites, and Restricted sites.
+
+5. **Try a Different Browser:** If none of the above solutions work, try using a different browser. If you're using Chrome, your code would look like this:
+```vba
+driver.Start "chrome", "https://www.google.com/"
+```
+Remember to have the corresponding browser driver (e.g., ChromeDriver for Google Chrome) in the SeleniumBasic folder.
+
+If none of these suggestions work, please provide the exact error message you're getting for more specific help.

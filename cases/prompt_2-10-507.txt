@@ -1,0 +1,23 @@
+How to wait for a list of async function calls in Rust?
+
+I have a list of `async` functions that I want to execute concurrently and then wait for all them to finish. The working code I have right now is:
+```
+async fn start_consumers(&self) {
+    for consumer in &self.consumers {
+        consumer.consume().await;
+    }
+}
+```
+
+This is not quite accurate as the functions are executed serially. I am looking for something like [join!](https://docs.rs/async-std/0.99.12/async_std/future/macro.join.html), but which works on a dynamic vector. With that I should be able to write something like:
+```
+async fn start_consumers(&self) {
+    let mut v = Vec::new();
+    for consumer in &self.consumers {
+        consumer.consume();
+    }
+    join!(v);
+}
+```
+
+Right now `join!` supports only tuples. I am looking for an alternative for that. Something similar to [Promise.all()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all) in JavaScript.

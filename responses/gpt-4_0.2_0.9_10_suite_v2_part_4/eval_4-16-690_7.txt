@@ -1,0 +1,25 @@
+The issue you're experiencing might be due to the fact that macOS Catalina 10.15 has switched the default shell from Bash to Zsh. 
+
+If you're using the default shell (Zsh), the `~/.bash_profile` and `~/.profile` files won't be sourced. Instead, Zsh uses the `~/.zshrc` file for this purpose.
+
+To set the environment variable for Zsh, you can add the export line to the `~/.zshrc` file:
+
+```bash
+echo 'export JBOSS_HOME=/Users/{USERNAME}/Desktop/jboss7' >> ~/.zshrc
+```
+
+Then, source the `~/.zshrc` file to apply the changes:
+
+```bash
+source ~/.zshrc
+```
+
+Now, if you execute `echo $JBOSS_HOME`, you should see the path you set.
+
+If you want to continue using Bash instead of Zsh, you can change your default shell back to Bash by running the following command in your terminal:
+
+```bash
+chsh -s /bin/bash
+```
+
+Afterward, the `~/.bash_profile` and `~/.profile` files should be sourced as expected when you open a new terminal session.

@@ -1,0 +1,17 @@
+This issue might be related to the configuration of your Git client on computer B. Go uses the Git client to fetch dependencies from private repositories, so if your Git client is not configured correctly, Go will not be able to fetch the dependencies.
+
+Here are some steps you can take to debug this issue:
+
+1. **Check your Git configuration**: Make sure that your Git client on computer B is configured correctly to access private repositories. You can do this by trying to clone the private repository directly using Git. If this fails, you will need to fix your Git configuration.
+
+2. **Check your Go version**: Make sure that you are using a version of Go that supports the version of the module you are trying to fetch. You can check your Go version by running `go version`.
+
+3. **Check your Go environment**: Run `go env` to check your Go environment. Look for the `GOPRIVATE` or `GONOPROXY` environment variables. If the domain of your private repository is not listed in these variables, Go might try to fetch the module from a public proxy instead of directly from the repository. You can add the domain of your private repository to these variables by running `go env -w GOPRIVATE=github.ibm.com/kms`.
+
+4. **Check your network connection**: If you are behind a firewall or a proxy, it might interfere with Go's ability to fetch dependencies. Check your network settings and make sure that Go can access the internet.
+
+5. **Clear your Go module cache**: Sometimes, the module cache can get corrupted, causing issues like this. You can clear your module cache by running `go clean -modcache`.
+
+6. **Verbose logging**: You can get more information about what Go is doing by running `go build -v`. This will print out more detailed information about the build process, which might help you identify the issue.
+
+If none of these steps help, you might want to consider asking for help on the Go community forums or on Stack Overflow.

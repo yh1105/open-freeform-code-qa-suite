@@ -1,0 +1,15 @@
+Sure, I can help you with that. The `Switch` component from Ant Design should be used inside the `Form.Item` component. The `name` prop in `Form.Item` is used to set the key for the collected form data. The `valuePropName` prop is used to specify which prop on the child component will get the form field value.
+
+Here is the revised version of your code:
+
+```jsx
+<Form.Item
+  name="switch"
+  label="Chargable"
+  valuePropName="checked"
+>
+  <Switch checkedChildren="Yes" unCheckedChildren="No" />
+</Form.Item>
+```
+
+In this revised code, I've added the `label` prop to the `Form.Item` to display the "Chargable" text. The `Switch` component is used as the child of the `Form.Item`. The `name` prop is set to "switch", which will be the key in the form data for the value of the switch. The `valuePropName` is set to "checked", which means the "checked" prop of the `Switch` component will get the form field value.

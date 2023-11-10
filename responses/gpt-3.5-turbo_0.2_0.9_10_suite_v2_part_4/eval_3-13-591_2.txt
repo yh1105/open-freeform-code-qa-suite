@@ -1,0 +1,31 @@
+The reason why you are seeing the logs in that order is because the `onItemSelected` function is called asynchronously when the user selects an item from the spinner. This means that the function `setupListWithAdapter` continues to execute after setting up the spinner and registering the listener, and then the `onItemSelected` function is called later when the user selects an item.
+
+To fix this, you can change the return type of the function to `Unit` (which means it doesn't return anything), and instead pass a callback function as a parameter to the function. The callback function can then be called inside the `onItemSelected` function with the selected item as a parameter.
+
+Here's an example of how you can modify your function:
+
+```
+fun Spinner.setupListWithAdapter(list: MutableList<String>, onItemSelected: (String) -> Unit) {
+    val adapter = ArrayAdapter(context, android.R.layout.simple_spinner_item, list)
+    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+    this.adapter = adapter
+    this.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+            val itemSelected = list[p2]
+            onItemSelected(itemSelected)
+        }
+        override fun onNothingSelected(p0: AdapterView<*>?) {
+        }
+    }
+}
+```
+
+You can then call the function like this:
+
+```
+spinner.setupListWithAdapter(list) { itemSelected ->
+    Log.e("categoryLog", "Selected item: $itemSelected")
+}
+```
+
+This will log the selected item as soon as the user selects it, and you don't need to worry about the order of execution.

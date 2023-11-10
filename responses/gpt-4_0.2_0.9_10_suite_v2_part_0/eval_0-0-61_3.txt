@@ -1,0 +1,46 @@
+You should use the `CssBaseline` component from Material-UI. It's a modern alternative to CSS Reset. It provides an elegant way to set up a consistent base styles across browsers. 
+
+In your case, you can use it to set the background color of the root element dynamically. Here's an example of how you can do it:
+
+```jsx
+import React from 'react';
+import { createMuiTheme, ThemeProvider, CssBaseline } from '@material-ui/core';
+
+const lightTheme = createMuiTheme({
+  palette: {
+    type: 'light',
+    background: {
+      default: '#fff' // light background
+    }
+  }
+});
+
+const darkTheme = createMuiTheme({
+  palette: {
+    type: 'dark',
+    background: {
+      default: '#000' // dark background
+    }
+  }
+});
+
+function App() {
+  const [theme, setTheme] = React.useState(lightTheme);
+
+  const toggleTheme = () => {
+    setTheme(theme.palette.type === 'light' ? darkTheme : lightTheme);
+  };
+
+  return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      {/* Your other components */}
+      <button onClick={toggleTheme}>Toggle theme</button>
+    </ThemeProvider>
+  );
+}
+
+export default App;
+```
+
+In this example, `CssBaseline` will apply the background color specified in the theme to the root element. The `toggleTheme` function allows you to switch between the light and dark themes.

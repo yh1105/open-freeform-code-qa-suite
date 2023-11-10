@@ -1,0 +1,17 @@
+You can specify the path to the Java executable that you want to use by setting the `JAVA_HOME` environment variable. Here's how you can do it:
+
+1. Find the path to the Java executable that you want to use. You can do this by running `java -version` in your terminal or command prompt. The output should include the path to the Java executable.
+
+2. Set the `JAVA_HOME` environment variable to the path of the Java executable. For example, if the path to the Java executable is `/usr/lib/jvm/java-11-openjdk-amd64/bin/java`, you can set the `JAVA_HOME` environment variable by running the following command in your terminal or command prompt:
+
+   ```
+   export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
+   ```
+
+   Note that the exact command to set the `JAVA_HOME` environment variable may vary depending on your operating system.
+
+3. Run Maven using the Maven wrapper. Maven should now use the Java executable that you specified in the `JAVA_HOME` environment variable.
+
+   ```
+   ./mvnw clean install
+   ```

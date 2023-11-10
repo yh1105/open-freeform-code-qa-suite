@@ -1,0 +1,7 @@
+Using `@Autowired` on the constructor is a recommended practice in Spring because it makes the code more readable and less error-prone. 
+
+When you use `@Autowired` on the constructor, Spring will automatically inject the required dependencies at the time of object creation. This ensures that the object is always in a valid state, and you don't have to worry about null pointer exceptions or missing dependencies.
+
+Additionally, using `@Autowired` on the constructor makes it clear which dependencies are required for the object to function properly. This can be especially helpful when working with complex object graphs or when collaborating with other developers on a project.
+
+While it is true that Spring can automatically inject dependencies without `@Autowired`, using the annotation makes the code more explicit and easier to understand.

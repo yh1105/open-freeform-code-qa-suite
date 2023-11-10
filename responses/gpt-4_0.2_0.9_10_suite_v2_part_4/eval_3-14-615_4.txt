@@ -1,0 +1,44 @@
+As of now, SwiftUI does not provide a native way to get the current scroll position of a `ScrollView`. The `ScrollViewReader` and `ScrollViewProxy` only provide the `scrollTo` method, which allows you to programmatically set the scroll position, but not get it.
+
+However, you can use `UIKit`'s `UIScrollView` in combination with `UIViewRepresentable` to get the current scroll position. Here's an example:
+
+```swift
+struct ContentView: View {
+    var body: some View {
+        ScrollViewWrapper {
+            VStack {
+                ForEach(0..<100) { i in
+                    Text("Item \(i)")
+                }
+            }
+        }
+    }
+}
+
+struct ScrollViewWrapper<Content: View>: UIViewRepresentable {
+    var content: () -> Content
+
+    func makeUIView(context: Context) -> UIScrollView {
+        let scrollView = UIScrollView()
+        let hostView = UIHostingController(rootView: self.content())
+        hostView.view.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.addSubview(hostView.view)
+        NSLayoutConstraint.activate([
+            hostView.view.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            hostView.view.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            hostView.view.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            hostView.view.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            hostView.view.widthAnchor.constraint(equalTo: scrollView.widthAnchor)
+        ])
+        return scrollView
+    }
+
+    func updateUIView(_ uiView: UIScrollView, context: Context) {
+        // Here you can get the current scroll position
+        let offset = uiView.contentOffset
+        print(offset)
+    }
+}
+```
+
+This example creates a `ScrollViewWrapper` that wraps a SwiftUI `View` and uses a `UIScrollView` to display it. The `updateUIView` method is called whenever the `UIScrollView` is updated, and you can get the current scroll position from the `contentOffset` property of the `UIScrollView`.

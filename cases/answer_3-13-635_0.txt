@@ -1,0 +1,55 @@
+You might profit from a (late bound) XML spreadsheet analysis of Excel.Range.Value(11)` returning a "flat" 1-dim array out of a column range input.
+
+Benefit: rng.Value(xlRangeValueXMLSpreadsheet), aka Value(11) approach should be faster than a character loop.
+
+Further hints
+
+This array with all product information can easily joined together using any further delimiters.
+
+Note that the xml analysis uses namespace declarations which are part of the returned Range.Value(11) xml string.
+
+Having declared a receiving results array (Dim MyResultsArray) a possible example call could be MyResultsArray = GetProducts(Sheet1.Range("A1:A50000").
+
+Function GetProducts(rng As Range)
+'[0]Get Value(11)
+    Dim s As String
+    s = rng.Value(xlRangeValueXMLSpreadsheet)    ' or: rng.Value(11)
+    s = Replace(s, "&#10;", "$")                 ' temporary replacement
+    '[1]Set xml document to memory
+    Dim xDoc As Object: Set xDoc = CreateObject("MSXML2.DOMDocument.6.0")
+    '[2]Add namespaces
+    xDoc.SetProperty "SelectionNamespaces", _
+    "xmlns:ss='urn:schemas-microsoft-com:office:spreadsheet' " & _
+    "xmlns:html='http://www.w3.org/TR/REC-html40'"
+    If xDoc.LoadXML(s) Then                      ' load wellformed string content
+        Dim dat As Object, data As Object
+        Set data = xDoc.SelectNodes("//ss:Data") ' XPath using namespace prefixes
+        Dim tmp(): ReDim tmp(1 To data.Length)
+        For Each dat In data
+            Dim r As Long:       r = r + 1
+            Dim elems As Object: Set elems = dat.SelectNodes("*")
+            Dim html():          ReDim html(0 To elems.Length - 1)
+            Dim i As Long
+            For i = 0 To elems.Length - 1
+                Select Case elems(i).nodename
+                Case "Font"
+                    html(i) = elems(i).Text
+                Case "B"
+                    html(i) = "<strong>" & elems(i).Text & "</strong>"
+                Case "I"
+                    html(i) = "<em>" & elems(i).Text & "</em>"
+                Case Else
+                    html(i) = "<" & elems(i).nodename & ">" & _
+                    elems(i).Text & _
+                    "</" & elems(i).nodename & ">"
+                End Select
+            Next i
+            ' join next row elements to one string
+            tmp(r) = Replace(Join(html, ""), "$", "<br /><br />")
+        Next dat
+        '[4]return "flat" array
+        GetProducts = tmp
+        '        Stop
+    End If
+
+End Function

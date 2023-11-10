@@ -1,0 +1,29 @@
+Starting from macOS Catalina 10.15, the default shell is `zsh` instead of `bash`. Therefore, `~/.bash_profile` and `~/.profile` are not sourced by default when you open a new terminal window.
+
+If you want to set environment variables that are available in all `zsh` sessions, you should add them to `~/.zshrc` file instead.
+
+Here is how you can do it:
+
+1. Open `~/.zshrc` with a text editor. If the file does not exist, create it.
+
+```bash
+nano ~/.zshrc
+```
+
+2. Add your environment variable at the end of the file.
+
+```bash
+export JBOSS_HOME=/Users/{USERNAME}/Desktop/jboss7
+```
+
+3. Save and close the file. If you are using `nano`, you can do this by pressing `Ctrl+X`, then `Y` to confirm that you want to save the changes, and then `Enter` to confirm the file name.
+
+4. Source the `~/.zshrc` file to apply the changes immediately. Otherwise, the changes will take effect the next time you start a new `zsh` session.
+
+```bash
+source ~/.zshrc
+```
+
+5. Now, if you run `echo $JBOSS_HOME`, it should print `/Users/{USERNAME}/Desktop/jboss7`.
+
+Remember to replace `{USERNAME}` with your actual username.

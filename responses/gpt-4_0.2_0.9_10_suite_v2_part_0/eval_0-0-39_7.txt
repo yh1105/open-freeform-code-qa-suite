@@ -1,0 +1,45 @@
+Yes, you can accomplish this by using React's `ref` API to create a reference to the form, and then trigger the form's submit event when the 'In Root' button is clicked. Here's how you can do it:
+
+```javascript
+import React, { Component } from "react";
+import ReactDOM from "react-dom";
+
+class CustomForm extends Component {
+  formRef = React.createRef(); // Create a reference to the form
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+    alert('Form submitted!');
+  }
+
+  render() {
+    return (
+      <form id='my-form' onSubmit={this.handleSubmit} ref={this.formRef}>
+        <button type='submit'>Inside Custom</button>
+      </form>
+    );
+  }
+}
+
+class App extends Component {
+  customFormRef = React.createRef(); // Create a reference to the CustomForm component
+
+  handleRootButtonClick = () => {
+    this.customFormRef.current.formRef.current.submit(); // Trigger the form's submit event
+  }
+
+  render() {
+    return (
+      <div>
+        <CustomForm ref={this.customFormRef} />
+        <button onClick={this.handleRootButtonClick}>In Root</button>
+      </div>
+    );
+  }
+}
+
+const rootElement = document.getElementById("root");
+ReactDOM.render(<App />, rootElement);
+```
+
+In this code, we're creating a reference to the `CustomForm` component in the `App` component, and a reference to the form in the `CustomForm` component. When the 'In Root' button is clicked, we're using these references to access the form and trigger its submit event.

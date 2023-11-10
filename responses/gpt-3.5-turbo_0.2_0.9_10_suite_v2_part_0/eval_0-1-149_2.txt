@@ -1,0 +1,14 @@
+You can use the `group-hover` variant in Tailwind to achieve this effect. Here's an example code snippet:
+
+```html
+<a href="#" class="group text-sky-600 relative">
+    Link
+    <span class="absolute bottom-0 left-0 w-full h-0.5 bg-sky-600 transition duration-500 group-hover:h-full"></span>
+</a>
+```
+
+In this code, we've added the `relative` class to the anchor tag to make the child `span` element positioned absolutely relative to it. We've also removed the `max-w-0` and `h-0.5` classes from the `span` element and added the `absolute`, `bottom-0`, `left-0`, `w-full`, and `h-full` classes to it. This will make the `span` element cover the entire width of the anchor tag and have a height of 0 by default.
+
+Finally, we've added the `transition` and `duration` classes to the `span` element to make the animation smooth and added the `group-hover:h-full` class to it. This will make the `span` element expand to its full height when the anchor tag is hovered over.
+
+I hope this helps! Let me know if you have any further questions.

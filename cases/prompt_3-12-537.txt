@@ -1,0 +1,168 @@
+Flutter problems: "Could not resolve all artifacts for configuration ':classpath' "
+
+I am trying to run a flutter app I am writing on my device but when I try to run, I never get past the "assembleDebug" stage and get this message in the terminal:
+
+```
+Launching lib\main.dart on SM N950U in debug mode...
+Running Gradle task 'assembleDebug'...
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+A problem occurred configuring root project 'android'.
+> Could not resolve all artifacts for configuration ':classpath'.
+   > Could not find com.android.tools.build:gradle:5.6.2.
+     Searched in the following locations:
+       - https://dl.google.com/dl/android/maven2/com/android/tools/build/gradle/5.6.2/gradle-5.6.2.pom
+       - https://dl.google.com/dl/android/maven2/com/android/tools/build/gradle/5.6.2/gradle-5.6.2.jar
+       - https://jcenter.bintray.com/com/android/tools/build/gradle/5.6.2/gradle-5.6.2.pom
+       - https://jcenter.bintray.com/com/android/tools/build/gradle/5.6.2/gradle-5.6.2.jar
+     Required by:
+         project :
+
+* Try:
+Run with --stacktrace option to get the stack trace. Run with --info or --debug option to get more log output. Run with --scan to get full insights.
+
+* Get more help at https://help.gradle.org
+
+BUILD FAILED in 14s
+Finished with error: Gradle task assembleDebug failed with exit code 1
+```
+
+
+I have recently updated to gradle 6.0.1 (I assume I did that correctly but I am very new to all this) and there are no issues with flutter doctor.
+
+Here is my project level build.gradle:
+
+```
+buildscript {
+    ext.kotlin_version = '1.3.50'
+    repositories {
+        google()
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:5.6.2'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'com.google.gms:google-services:4.3.3'
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+    }
+}
+
+rootProject.buildDir = '../build'
+subprojects {
+    project.buildDir = "${rootProject.buildDir}/${project.name}"
+}
+subprojects {
+    project.evaluationDependsOn(':app')
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+```
+
+
+Here is the app level build.gradle:
+
+```
+def localProperties = new Properties()
+def localPropertiesFile = rootProject.file('local.properties')
+if (localPropertiesFile.exists()) {
+    localPropertiesFile.withReader('UTF-8') { reader ->
+        localProperties.load(reader)
+    }
+}
+
+def flutterRoot = localProperties.getProperty('flutter.sdk')
+if (flutterRoot == null) {
+    throw new GradleException("Flutter SDK not found. Define location with flutter.sdk in the local.properties file.")
+}
+
+def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
+if (flutterVersionCode == null) {
+    flutterVersionCode = '1'
+}
+
+def flutterVersionName = localProperties.getProperty('flutter.versionName')
+if (flutterVersionName == null) {
+    flutterVersionName = '1.0'
+}
+
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
+
+android {
+    compileSdkVersion 28
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+
+    lintOptions {
+        disable 'InvalidPackage'
+    }
+
+    defaultConfig {
+        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
+        applicationId "com.example.skypeclone1"
+        minSdkVersion 16
+        targetSdkVersion 28
+        versionCode flutterVersionCode.toInteger()
+        versionName flutterVersionName
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+    }
+
+    buildTypes {
+        release {
+            // TODO: Add your own signing config for the release build.
+            // Signing with the debug keys for now, so `flutter run --release` works.
+            signingConfig signingConfigs.debug
+        }
+    }
+}
+
+flutter {
+    source '../..'
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+}
+apply plugin: 'com.google.gms.google-services'
+```
+
+
+Here are my Gradle wrapper properties in case they are also important.
+
+```
+#Fri Jun 23 08:50:38 CEST 2017
+distributionBase=GRADLE_USER_HOME
+distributionPath=wrapper/dists
+zipStoreBase=GRADLE_USER_HOME
+zipStorePath=wrapper/dists
+distributionUrl=https\://services.gradle.org/distributions/gradle-5.6.2-all.zip
+```
+
+
+gradle.properties
+
+```
+org.gradle.jvmargs=-Xmx1536M
+android.useAndroidX=true
+android.enableJetifier=true
+android.enableR8=true
+```
+

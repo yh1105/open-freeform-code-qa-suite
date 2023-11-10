@@ -1,0 +1,13 @@
+Sure, the revised route pattern to fulfill the requirement would be:
+
+```
+/route/:param1/config/:OptionalParam2?/:OptionalParam3?
+```
+
+This pattern will match the following URLs:
+
+- `/route/aa/config`
+- `/route/aa/config/bb`
+- `/route/aa/config/bb/cc`
+
+Note that the second optional parameter is named `OptionalParam3` instead of `OptionalParam2` in the original pattern, so I adjusted it to match the requirement.

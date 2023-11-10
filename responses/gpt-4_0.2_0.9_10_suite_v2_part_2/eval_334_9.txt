@@ -1,0 +1,5 @@
+```java
+public static void removeFalseSubjects(List<Subject> subjects){
+    subjects.removeIf(subject -> !subject.isStatus());
+}
+```

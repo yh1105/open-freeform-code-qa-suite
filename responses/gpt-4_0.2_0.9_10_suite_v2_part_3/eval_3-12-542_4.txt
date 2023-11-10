@@ -1,0 +1,53 @@
+You can wrap your `Scaffold` widget with `GestureDetector` and set `resizeToAvoidBottomInset` to `false` in your `Scaffold` widget. This will prevent the bottom navigation bar from moving up when the keyboard is shown.
+
+Here is how you can modify your code:
+
+```dart
+class _AppHomeViewState extends State<AppHomeView>
+    with TickerProviderStateMixin {
+
+  TabController tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    tabController = TabController(length: 4, vsync: this, initialIndex: 0);
+    tabController.addListener(handleTabSelection);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        FocusScopeNode currentFocus = FocusScope.of(context);
+        if (!currentFocus.hasPrimaryFocus) {
+          currentFocus.unfocus();
+        }
+      },
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        body: SafeArea(child: _buildBody(context)),
+        bottomNavigationBar: Container(
+          height: 48,
+          decoration: BoxDecoration(
+            color: StyledColors.BACKGROUND_COLOR,
+            boxShadow: [
+              BoxShadow(
+                color: StyledColors.FORGROUND_COLOR.withOpacity(0.16),
+                blurRadius: 12,
+                offset: Offset(0, 0),
+              ),
+            ],
+          ),
+          child: SafeArea(
+            child: _buildTabBar(context),
+          ),
+        ),
+      ),
+    );
+  }
+  ...
+}
+```
+
+In this code, `GestureDetector` is used to detect tap events outside of the text field and unfocus the text field when tapped outside. The `resizeToAvoidBottomInset: false` property in `Scaffold` is used to prevent the bottom navigation bar from moving up when the keyboard is shown.

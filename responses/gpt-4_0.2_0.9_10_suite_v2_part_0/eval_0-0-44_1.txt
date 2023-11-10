@@ -1,0 +1,22 @@
+In Mongoose, you can create an index on a field in the schema definition. However, Mongoose will not automatically build indexes defined in your schema. You need to call `Model.init()` to ensure indexes are created.
+
+In Nest.js, you can use the `onModuleInit` lifecycle hook to call `init()` on your models. Here is an example:
+
+```javascript
+import { Injectable, OnModuleInit } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+
+@Injectable()
+export class MyService implements OnModuleInit {
+  constructor(@InjectModel('Schema') private readonly myModel: Model<Schema>) {}
+
+  async onModuleInit() {
+    await this.myModel.init();
+  }
+}
+```
+
+In this example, `MyService` implements the `OnModuleInit` interface, which means it has an `onModuleInit` method that will be called when the Nest.js module containing `MyService` is initialized. In the `onModuleInit` method, we call `init()` on the Mongoose model, which will ensure that indexes are built.
+
+Also, make sure that the MongoDB server is running when you call `init()`, because Mongoose will attempt to build the indexes at that time. If the server is not running, the index build will fail.

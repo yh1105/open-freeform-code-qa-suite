@@ -1,0 +1,8 @@
+Be sure to give it the execution permission.
+
+cd ~/the/script/folder
+
+chmod +x ./startup.sh
+This will give exec permission to user, group and other, so beware of possible security issues. To restrict permission to a single access class, you can use:
+
+chmod u+x ./startup.sh

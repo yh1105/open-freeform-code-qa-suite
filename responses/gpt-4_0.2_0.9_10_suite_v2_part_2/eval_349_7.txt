@@ -1,0 +1,13 @@
+The error message indicates that there is a problem with the command you're trying to run. It seems like the command is not properly formatted, which is causing the `cmd` program to fail.
+
+The issue is likely related to the way the command is quoted. In Windows, you need to escape the quotes by doubling them. Here is the corrected command:
+
+```shell
+cd C:\projects\open; "JAVA_HOME=C:\\Program Files\\Java\\jdk-11.0.5" cmd /c "\"\"\"C:\\Program Files\\NetBeans-11.1\\netbeans\\java\\maven\\bin\\mvn.cmd\"\" -DskipTests=true -Dmaven.ext.class.path=\"\"C:\\Program Files\\NetBeans-11.1\\netbeans\\java\\maven-nblib\\netbeans-eventspy.jar\"\" -Dfile.encoding=UTF-8 clean install\""
+```
+
+If the problem persists, you might want to check the following:
+
+- Make sure that the `cmd` program is available in your system's PATH.
+- Verify that the paths in the command are correct and that the files exist at those locations.
+- Check that you have the necessary permissions to execute the `cmd` program and to read and write in the specified directories.

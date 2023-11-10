@@ -1,0 +1,28 @@
+In AndroidX, you should use `ViewModelProvider` in this way:
+
+```kotlin
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
+import com.example.myapplication.databinding.ActivityMainBinding
+
+class MainActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val binding: ActivityMainBinding = DataBindingUtil.setContentView(
+            this, R.layout.activity_main)
+        binding.lifecycleOwner = this
+
+        val model = ViewModelProvider(this).get(SheduleViewModel::class.java)
+
+    }
+}
+```
+
+You should use `ViewModelProvider(this)` instead of `ViewModelProvider.of(this)`. 
+
+Also, you should use `binding.lifecycleOwner = this` instead of `binding.setLifecycleOwner(this)`. 
+
+And, it's better to use `val` instead of `var` for the `model` if you don't plan to reassign it.

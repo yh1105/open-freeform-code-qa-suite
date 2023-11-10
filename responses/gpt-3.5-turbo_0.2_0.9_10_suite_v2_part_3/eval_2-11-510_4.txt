@@ -1,0 +1,21 @@
+The `<experimental/filesystem>` header was introduced in C++17 as an experimental feature. In C++17, the `std::experimental::filesystem` namespace was used to access the filesystem library. However, in C++17, the `<filesystem>` header was added to the standard library, and the `std::filesystem` namespace was introduced to replace the experimental one.
+
+To fix the error, you need to change the namespace from `std::experimental::filesystem` to `std::filesystem`. Here's the updated code:
+
+```c++
+#include <filesystem>
+
+int main(int argc, char** argv)
+{
+    std::string imageDirectory = "./image";;
+    std::vector<std::string> imagePath;
+    for (const auto& entry: std::filesystem::directory_iterator(imageDirectory))
+    {
+        imagePath.push_back(entry.path());
+        std::cout << entry.path() << std::endl;
+    }
+    return 0;
+}
+```
+
+Make sure to compile your code with the `-std=c++17` flag to enable C++17 features.

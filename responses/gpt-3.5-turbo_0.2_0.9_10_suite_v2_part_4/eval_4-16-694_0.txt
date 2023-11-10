@@ -1,0 +1,14 @@
+You can use `grep` with a regular expression to match the `lang` attribute and its value, like this:
+
+```
+curl -Ls stick-it.app | grep -oP 'lang="\K[^"]+'
+```
+
+This will output `he-IL` for the example you provided. Here's how it works:
+
+- `-o` tells `grep` to only output the matching part of the line
+- `-P` enables Perl-compatible regular expressions, which allows us to use `\K` to "keep" the part of the match we want (i.e. the value of the `lang` attribute)
+- `lang="\K` matches the `lang` attribute and its opening quote, but "forgets" it so it's not included in the output
+- `[^"]+` matches one or more characters that are not a quote, which is the value of the `lang` attribute
+
+This should work for both examples you provided, as long as the `lang` attribute is always enclosed in double quotes.

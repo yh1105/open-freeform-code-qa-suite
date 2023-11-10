@@ -1,0 +1,58 @@
+# Corresponding to post https://stackoverflow.com/questions/67468448
+id: 3-13-595
+# for case self identificaton
+
+prompt_path: prompt_3-13-595.txt
+# relative path to the prompt text
+
+# type: code debugging
+type: code completion
+# type: knowledge question-answering
+# question type, for later statistics
+
+lang: kotlin
+
+
+grading:
+  blank_filling:
+    template: "private fun getTempFolder(): File {
+        val directoryFolder =
+        [blank]
+        directoryFolder.mkdirs()
+        return directoryFolder
+        }
+        private fun getTempFile(): File {
+          val timeStamp = SimpleDateFormat('yyyyMMdd_HHMMss', Locale.getDefault()).format(Date())
+          return File(
+          getTempFolder().absolutePath,
+          'image'.plus(Calendar.getInstance().timeInMillis).plus(timeStamp).plus('.jpg')
+          )
+    }
+      private fun saveImageToFile(bitmap':'
+        Bitmap? = null)':' String? {
+          return try {
+          val file = getTempFile()
+          Timber.e('Path:
+            +: ${file.absolutePath}')
+          file.createNewFile()
+          val fOut = FileOutputStream(file)
+          bitmap?.apply {
+          this.compress(Bitmap.CompressFormat.JPEG, 100, fOut)
+        }
+          fOut.flush()
+          fOut.close()
+          file?.absolutePath.getDefault()
+        } catch (e: Exception) {
+            e.printStackTrace()
+            \"\"
+        }
+    }"
+
+    blank_str: "[blank]"
+    # [optional] how blanks are represented in the template
+
+    escape: " '\"\n`"
+    # [optional] list of characters to be pre-filtered for model responses for blanks, default: " '"·"
+
+    targets:
+      - content: File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), "sample-take-image")

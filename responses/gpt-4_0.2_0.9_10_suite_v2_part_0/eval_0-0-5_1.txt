@@ -1,0 +1,17 @@
+The error logs indicate that Python is not found in your PATH. `node-gyp` requires Python 2.7 to be installed and available in your PATH. Here are the steps to fix this issue:
+
+1. Download and install Python 2.7 from the [official Python website](https://www.python.org/downloads/release/python-2718/). Make sure to check the box that says "Add Python 2.7 to PATH" during the installation process.
+
+2. After installation, open a new command prompt and type `python --version`. This should return Python 2.7.x.
+
+3. If Python is still not recognized, you may need to manually add it to your PATH. Here's how to do it:
+
+   - Right-click on 'Computer' and click on 'Properties'.
+   - Click on 'Advanced system settings'.
+   - In the System Properties window, click on the 'Environment Variables' button.
+   - In the Environment Variables window, highlight the 'Path' variable in the 'Systems Variable' section and click on 'Edit'.
+   - Scroll to the end of the 'Variable value' field, add a semicolon (;), and then the path to the python.exe file. It should look something like this: `;C:\Python27\`.
+
+4. Once Python is properly installed and available in your PATH, try to rebuild your Node.js project.
+
+If you're still encountering issues, you might want to consider using a version manager like `nvm` for Windows, which can help manage multiple active Node.js versions.

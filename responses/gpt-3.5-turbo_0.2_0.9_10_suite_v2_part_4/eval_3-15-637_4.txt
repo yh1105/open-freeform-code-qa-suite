@@ -1,0 +1,11 @@
+The error you are encountering might be due to the incompatibility of the Selenium WebDriver with Excel 2019. Here are some suggestions to try and resolve the issue:
+
+1. Make sure that you have the latest version of the Selenium WebDriver installed. You can download it from the official Selenium website.
+
+2. Try using a different browser, such as Firefox or Chrome, to see if the issue persists.
+
+3. Check if the reference to the Selenium WebDriver is correctly set in the VBA editor. To do this, go to Tools > References and make sure that the Selenium Type Library is checked.
+
+4. Try running the code in compatibility mode for Excel 2013. To do this, right-click on the Excel icon and select Properties > Compatibility. Check the box for "Run this program in compatibility mode for" and select Excel 2013 from the drop-down menu.
+
+5. If none of the above solutions work, you can try using a different automation tool, such as AutoIt or WinAutomation, to automate your tasks. These tools are compatible with Excel 2019 and can be used to automate web browsers as well.

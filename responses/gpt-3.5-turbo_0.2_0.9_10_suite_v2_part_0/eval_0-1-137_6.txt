@@ -1,0 +1,20 @@
+The issue is with the format of the `$theme-colors` variable. In your code, you are defining `$theme-colors` as an object with only one key-value pair. However, the `map-loop` function in Bootstrap's `_functions.scss` file expects `$theme-colors` to be an object with eight key-value pairs, where each key is a string representing the color name and each value is a valid CSS color value.
+
+To fix the error, you need to define `$theme-colors` with all eight key-value pairs. Here's an example:
+
+```scss
+$theme-colors: (
+  "primary": #0d6efd,
+  "secondary": #6c757d,
+  "success": #198754,
+  "info": #0dcaf0,
+  "warning": #ffc107,
+  "danger": #dc3545,
+  "light": #f8f9fa,
+  "dark": #212529
+);
+
+@import "../../node_modules/bootstrap/scss/bootstrap";
+```
+
+Make sure to replace the color values with your desired colors. After making this change, you should be able to compile your SCSS file without any errors.

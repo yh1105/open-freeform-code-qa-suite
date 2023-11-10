@@ -1,0 +1,15 @@
+You can use the `jq` command-line tool to minify JSON in a shell script. Here's an example:
+
+```
+cat file.json | jq -c .
+```
+
+This will read the contents of `file.json`, pass it through `jq`, and output the minified JSON to the console. The `-c` flag tells `jq` to output the JSON in compact form.
+
+If you want to pass the minified JSON to another command, you can use command substitution like this:
+
+```
+http POST http://example.com/api <<< $(cat file.json | jq -c .)
+```
+
+This will send a POST request to `http://example.com/api` with the minified JSON from `file.json`. The `<<<` operator is used to pass the JSON as input to `http`.

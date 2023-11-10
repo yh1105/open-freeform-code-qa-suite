@@ -1,0 +1,5 @@
+You can try using the full namespace of the migration class in the `doctrine:migrations:execute` command. In your case, it would be:
+```
+bin/console --env=dev doctrine:migrations:execute 'Application\Migrations\Version20210909072642' --down --no-interaction -vvv
+```
+Make sure to enclose the namespace in quotes to avoid any issues with special characters.

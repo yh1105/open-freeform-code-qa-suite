@@ -1,0 +1,15 @@
+In MacOS, you can use the following command to restart your current terminal session without closing the window:
+
+```
+source ~/.bash_profile
+```
+
+This will reload your `.bash_profile` file and apply any changes you made to it. 
+
+Alternatively, you can use the following command to start a new instance of the terminal emulator:
+
+```
+open -a Terminal
+```
+
+This will open a new terminal window with a fresh session.

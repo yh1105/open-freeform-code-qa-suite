@@ -1,0 +1,48 @@
+The `GestureDetector` widget in Flutter provides the ability to detect simple gestures on a widget. However, it only works on the area occupied by its child. If the child does not provide a specific size, the `GestureDetector` will not work as expected.
+
+In your case, the `GestureDetector` is only wrapping the `QQBody` widget, which only contains a `Text` widget. Therefore, the tap is only detected when you tap on the `Text` widget.
+
+To make the `GestureDetector` work for the whole screen, you need to make sure it covers the whole screen. You can do this by wrapping your `GestureDetector` with an `Expanded` or `Container` widget and give it a size.
+
+Here is an example:
+
+```dart
+class QQHome extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primaryColor: Colors.blueGrey,
+      ),
+      home: Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text('QuoteQuota'),
+        ),
+        body: Container(
+          width: double.infinity,
+          height: double.infinity,
+          child: GestureDetector(
+            onTap: () => print('Tapped'),
+            child: QQBody(),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class QQBody extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Text(
+        'Hello, World!'
+      ),
+    );
+  }
+}
+```
+
+In this code, the `Container` widget with `width: double.infinity` and `height: double.infinity` will take up the whole screen, and the `GestureDetector` will detect taps anywhere on the screen.

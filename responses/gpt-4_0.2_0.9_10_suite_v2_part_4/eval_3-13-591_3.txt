@@ -1,0 +1,32 @@
+The issue you're facing is due to the asynchronous nature of the `onItemSelectedListener`. The `onItemSelected` method is called when an item is selected from the spinner, which is likely to happen after your function has already returned `itemSelected`.
+
+When you call `setupListWithAdapter`, it sets up the adapter and the listener, then immediately returns `itemSelected`, which at this point is still an empty string. Only when you select an item from the spinner, `onItemSelected` is called and `itemSelected` is updated. But by this time, the `setupListWithAdapter` function has already returned.
+
+To fix this, you could use a higher-order function or a callback function to handle the selected item. Here's an example:
+
+```kotlin
+fun Spinner.setupListWithAdapter(list: MutableList<String>, onItemSelected: (String) -> Unit) {
+    val adapter = ArrayAdapter(context, android.R.layout.simple_spinner_item, list)
+    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+    this.adapter = adapter
+    this.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+            val itemSelected = list[p2]
+            Log.e("categoryLog","1 : " + itemSelected)
+            onItemSelected(itemSelected)
+        }
+        override fun onNothingSelected(p0: AdapterView<*>?) {
+        }
+    }
+}
+```
+
+Now, when you call `setupListWithAdapter`, you can provide a lambda function to handle the selected item:
+
+```kotlin
+mySpinner.setupListWithAdapter(myList) { selectedItem ->
+    // Do something with selectedItem
+}
+```
+
+In this lambda function, you can do whatever you need to do with the selected item.

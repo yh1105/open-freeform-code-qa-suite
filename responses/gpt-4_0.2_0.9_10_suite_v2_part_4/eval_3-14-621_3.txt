@@ -1,0 +1,23 @@
+You can't directly initialize a `@State` variable in the `init()` method. However, you can use a workaround by using a private `@State` variable and a public non-`@State` variable. Here's how you can do it:
+
+```swift
+struct StateFromOutside: View {
+    let list = [
+        "a": "Letter A",
+        "b": "Letter B",
+        // ...
+    ]
+    @State private var _fullText: String
+    var fullText: Binding<String> { Binding(get: { self._fullText }, set: { self._fullText = $0 }) }
+
+    init(letter: String) {
+        _fullText = State(initialValue: list[letter]!)
+    }
+
+    var body: some View {
+        TextField("Placeholder", text: fullText)
+    }
+}
+```
+
+In this code, `_fullText` is a private `@State` variable that you initialize in the `init()` method. `fullText` is a computed property that creates a `Binding<String>` to `_fullText`. You can use `fullText` in your `TextField`.

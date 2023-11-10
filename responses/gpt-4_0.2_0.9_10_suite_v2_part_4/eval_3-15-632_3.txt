@@ -1,0 +1,17 @@
+You can use the `Split` function in VBA to split a string into an array based on a delimiter (like a space or a comma). Here's how you can modify your code to split the data into 5 separate columns:
+
+```vba
+idx = InStr(textline, "Cabinet No.")
+If idx > 0 Then
+    Line Input #1, textline
+    Line Input #1, textline
+    Dim splitData() As String
+    splitData = Split(textline, " ") ' Assuming space is the delimiter
+    For i = 0 To UBound(splitData)
+        ActiveSheet.Cells(nextrow, "G" + i).Value = splitData(i)
+    Next i
+    nextrow = nextrow + 1 'now move to next row
+End If
+```
+
+This code will split the `textline` into an array `splitData` and then loop through this array to put each element into a separate column. Adjust the delimiter in the `Split` function as per your requirement.

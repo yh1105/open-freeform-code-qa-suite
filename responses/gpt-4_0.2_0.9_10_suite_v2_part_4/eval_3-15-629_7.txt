@@ -1,0 +1,13 @@
+You can use the `MSForms.DataObject` to interact with the clipboard. This object is part of the Microsoft Forms 2.0 Object Library. Here's a simple example:
+
+```vba
+Dim MyData As DataObject
+Set MyData = New DataObject
+
+MyData.SetText Me.NodeKey.Value
+MyData.PutInClipboard
+```
+
+This will put the value of `Me.NodeKey.Value` into the clipboard.
+
+If you get an error about `DataObject` being undefined, you may need to set a reference to the Microsoft Forms 2.0 Object Library. You can do this by going to Tools -> References in the VBA editor, and then checking the box next to "Microsoft Forms 2.0 Object Library".

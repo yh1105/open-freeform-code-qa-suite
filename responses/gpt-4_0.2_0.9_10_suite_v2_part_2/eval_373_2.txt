@@ -1,0 +1,21 @@
+The error message you're seeing is because Hibernate Validator 5.3.x does not support `@NotEmpty` and `@NotBlank` for `String` types. These constraints are supported starting from Hibernate Validator 6.0.x.
+
+The problem is that you're using Spring Boot 2.0.4.RELEASE which, by default, uses Hibernate Validator 5.3.x. 
+
+To solve this issue, you have two options:
+
+1. Upgrade your Spring Boot version to 2.3.x or later, which uses Hibernate Validator 6.1.x by default. This version supports `@NotEmpty` and `@NotBlank` for `String` types.
+
+2. If you can't upgrade Spring Boot, you can override the Hibernate Validator version in your `pom.xml` to use 6.0.x or later. However, this might cause other issues if there are incompatibilities between Spring Boot 2.0.4.RELEASE and Hibernate Validator 6.0.x.
+
+Here's how you can override the Hibernate Validator version:
+
+```xml
+<properties>
+    <hibernate-validator.version>6.0.11.Final</hibernate-validator.version>
+</properties>
+```
+
+Add this in your `pom.xml` file, just below the `java.version` property. This will tell Maven to use Hibernate Validator 6.0.11.Final instead of the version that comes with Spring Boot 2.0.4.RELEASE.
+
+Remember to clean and rebuild your project after making these changes.

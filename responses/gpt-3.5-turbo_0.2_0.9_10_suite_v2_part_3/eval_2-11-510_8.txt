@@ -1,0 +1,17 @@
+The `<experimental/filesystem>` header was introduced in C++17 as an experimental feature. In C++17, the `<experimental/filesystem>` header was included in the `<filesystem>` header. Therefore, to use the `<filesystem>` header, you should include `<filesystem>` instead of `<experimental/filesystem>`.
+
+To fix the error, replace the following line:
+```c++
+#include <experimental/filesystem>
+```
+with:
+```c++
+#include <filesystem>
+```
+
+Then, you should also change the namespace from `std::experimental::filesystem` to `std::filesystem`:
+```c++
+for (const auto& entry: std::filesystem::directory_iterator(imageDirectory))
+```
+
+Note that you need to compile your code with the `-std=c++17` flag to enable C++17 features.

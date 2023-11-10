@@ -1,0 +1,27 @@
+Sure, you can define optional parameters in NestJS by using a question mark (`?`) at the end of the parameter in the route. However, optional parameters in the middle of a route are not supported in Express (which NestJS uses under the hood). 
+
+So, you can't have a route like `/route/:param1/config/:OptionalParam2?/:OptionalParam3?` where `OptionalParam2` and `OptionalParam3` are optional and in the middle of the route.
+
+Instead, you can define separate routes for each case:
+
+```javascript
+@Controller('route')
+export class YourController {
+  @Get(':param1/config')
+  getConfig(@Param('param1') param1: string) {
+    // handle route/aa/config
+  }
+
+  @Get(':param1/config/:param2')
+  getConfigWithParam2(@Param('param1') param1: string, @Param('param2') param2: string) {
+    // handle route/aa/config/bb
+  }
+
+  @Get(':param1/config/:param2/:param3')
+  getConfigWithParam2AndParam3(@Param('param1') param1: string, @Param('param2') param2: string, @Param('param3') param3: string) {
+    // handle route/aa/config/bb/cc
+  }
+}
+```
+
+In this way, you can handle all three cases.

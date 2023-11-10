@@ -1,0 +1,13 @@
+This error occurs because Jacoco 0.8.6 is not compatible with Java 9 and above. Gradle 7.0.2 uses Java 16 by default, which is causing the issue.
+
+To fix this, you can either downgrade your Gradle version to a version that uses Java 8 or lower, or you can upgrade your Jacoco version to a version that is compatible with Java 9 and above.
+
+To upgrade Jacoco, you can use version 0.8.7 or higher. You can update your build.gradle file with the following code:
+
+```
+jacoco {
+    toolVersion = "0.8.7"
+}
+```
+
+This should resolve the issue and allow you to generate the test coverage report successfully.

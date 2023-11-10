@@ -1,0 +1,10 @@
+You can use the `Split-Path` cmdlet in PowerShell to split the PATH environment variable into an array of directories, and then use the `Contains` method to check if the specified directory is in the array. Here is a function that does this:
+
+```powershell
+function FolderIsInPATH($Path_to_directory) {
+    $pathArray = $env:Path -split ';'
+    return $pathArray.Contains($Path_to_directory)
+}
+```
+
+This function will return `True` if the specified directory is in the PATH, and `False` otherwise.

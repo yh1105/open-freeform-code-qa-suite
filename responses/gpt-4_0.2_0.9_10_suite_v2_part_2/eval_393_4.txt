@@ -1,0 +1,7 @@
+No, it's not a bad practice. In fact, it's a common practice in many scenarios where different types of requests require different types of processing or handling. 
+
+The `PipelineBehavior<TRequest, TResponse>` in MediatR is designed to allow you to add pre-processing and post-processing logic to your requests. If `RequestOne` and `RequestTwo` have different processing requirements, it makes sense to have two separate pipeline behaviors.
+
+However, it's important to ensure that your design remains maintainable. If you find yourself creating a large number of very specific pipeline behaviors, it might be a sign that your design could be improved. For example, you might be able to refactor your code to use more generic pipeline behaviors, or you might be able to encapsulate some of the specific logic into services that are called by your pipeline behaviors.
+
+In conclusion, having two separate pipelines for two very specific requests is not a bad practice. It's a common way to handle different types of requests in a clean and maintainable way. Just make sure to keep an eye on the overall design to ensure it doesn't become too complex or difficult to maintain.

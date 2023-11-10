@@ -1,0 +1,30 @@
+Sure, here is a generator function that can parse the HTML string and yield objects with the required format:
+
+```javascript
+function* iterLeafNodes(strHTML, format = []) {
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(strHTML, 'text/html');
+  const stack = [...doc.body.childNodes];
+
+  while (stack.length) {
+    const node = stack.shift();
+
+    if (node.nodeType === Node.TEXT_NODE) {
+      if (node.textContent.trim() !== '') {
+        yield {
+          text: node.textContent,
+          format: format.slice()
+        };
+      }
+    } else if (node.nodeType === Node.ELEMENT_NODE) {
+      format.push(node.tagName.toLowerCase());
+      stack.unshift(...Array.from(node.childNodes));
+      continue;
+    }
+
+    format.pop();
+  }
+}
+```
+
+This function uses a depth-first search to traverse the DOM tree. It uses a stack to keep track of the nodes to be processed. When it encounters a text node, it yields an object with the text and the current format. When it encounters an element node, it adds the tag name to the format and adds the child nodes to the stack. After processing a node, it removes the tag name from the format.

@@ -1,0 +1,17 @@
+The code you posted is correct in terms of using `@Binding` and `@State`. However, the issue might be related to the way you are using the `ContentView` in your app. 
+
+The `@Binding` property in `ContentView` is bound to the `@State` property in `ContentView_Previews`, but it doesn't affect the actual usage of `ContentView` in your app. 
+
+You need to define a `@State` property in the parent view that uses `ContentView` and pass it as a `@Binding` to `ContentView`. Here is an example:
+
+```swift
+struct ParentView: View {
+    @State private var isSelected: Bool = false
+
+    var body: some View {
+        ContentView(isSelected: $isSelected)
+    }
+}
+```
+
+In this example, `ParentView` is the parent view that uses `ContentView`. It has a `@State` property `isSelected` which is passed to `ContentView` as a `@Binding`. Now, when the button in `ContentView` is clicked, it will update the `isSelected` state in `ParentView`, causing `ParentView` and `ContentView` to refresh.

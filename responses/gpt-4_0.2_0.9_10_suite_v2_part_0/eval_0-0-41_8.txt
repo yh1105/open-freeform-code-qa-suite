@@ -1,0 +1,20 @@
+The `navigator.geolocation` object is available in most modern browsers, so the `else` block in your code will rarely be executed. The user denying access to their location doesn't make `navigator.geolocation` undefined, it just causes an error when you try to access the location.
+
+The `getCurrentPosition` method takes two arguments: a success callback and an error callback. The error callback will be executed if the user denies access to their location, or if some other error occurs. Here's how you can modify your code:
+
+```javascript
+if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+        position => {
+            console.log("Location accessed");
+        },
+        error => {
+            console.log("User not allowed");
+        }
+    );
+} else {
+    console.log("Geolocation is not supported by this browser.");
+}
+```
+
+In this code, "Location accessed" will be logged if the location is successfully accessed, "User not allowed" will be logged if the user denies access to their location, and "Geolocation is not supported by this browser." will be logged if the `navigator.geolocation` object is not available.

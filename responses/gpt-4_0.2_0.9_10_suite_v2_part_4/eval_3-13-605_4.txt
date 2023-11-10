@@ -1,0 +1,41 @@
+The error message you're seeing is due to a mismatch between the Kotlin version used in your project and the Kotlin version used to compile the Stripe SDK. Here's how you can resolve this:
+
+1. **Update your Kotlin version**: The Stripe SDK version you're using has been compiled with Kotlin 1.5.1. You need to update your project's Kotlin version to match this. You can do this by updating the Kotlin version in your project's build.gradle file:
+
+```gradle
+buildscript {
+    ext.kotlin_version = '1.5.1'
+    ...
+    dependencies {
+        ...
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+```
+
+2. **Add Email and Cardholder Name**: The `CardMultilineWidget` does not support collecting email and cardholder name. You will need to create separate input fields for these in your layout and handle them separately in your code. Here's an example:
+
+```xml
+<EditText
+    android:id="@+id/email"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:inputType="textEmailAddress"
+    android:hint="Email"/>
+
+<EditText
+    android:id="@+id/cardholder_name"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:inputType="textPersonName"
+    android:hint="Cardholder Name"/>
+```
+
+Then in your code, you can retrieve these values like so:
+
+```kotlin
+val email = findViewById<EditText>(R.id.email).text.toString()
+val cardholderName = findViewById<EditText>(R.id.cardholder_name).text.toString()
+```
+
+Remember to validate these fields before proceeding with the payment process.

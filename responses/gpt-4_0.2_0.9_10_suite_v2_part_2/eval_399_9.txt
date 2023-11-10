@@ -1,0 +1,28 @@
+The issue is that you're trying to inject `ILogger` directly. In .NET Core, you should inject `ILogger<T>` where `T` is the class into which the logger is being injected. 
+
+Modify your `MyClass` constructor to look like this:
+
+```c#
+public MyClass(ILogger<MyClass> logger)
+{
+    _logger = logger;
+}
+```
+
+And then, you can use it in your methods as you're currently doing. 
+
+Remember to add the necessary services in your `Main` method:
+
+```c#
+var services = new ServiceCollection()
+    .AddLogging(logging => logging.AddConsole())
+    .AddTransient<MyClass>()
+    .BuildServiceProvider();
+```
+
+Now you can get an instance of `MyClass` with a logger:
+
+```c#
+var myClass = services.GetService<MyClass>();
+myClass.MyFunc();
+```

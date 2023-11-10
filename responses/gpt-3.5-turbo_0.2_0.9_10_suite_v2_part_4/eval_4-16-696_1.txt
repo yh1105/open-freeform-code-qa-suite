@@ -1,0 +1,5 @@
+Your `sed` command is not correctly removing the question mark and everything after it. Instead of `s/\?.*//g`, try using `s/\?.*$//g`. This should remove the question mark and everything after it. Your updated command would be:
+```
+find . -type f -name '*\?*' -exec sh -c 'mv "$1" "$(echo "$1" | sed "s/\?.*$//g")"' _ {} \;
+```
+This should rename all files with a question mark in their name by removing the question mark and everything after it.

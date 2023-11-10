@@ -1,0 +1,47 @@
+Sure! Here's a recursive function that should do the job:
+
+```javascript
+function findObject(id, obj) {
+  if (obj.id === id) {
+    return obj;
+  }
+  for (let i = 0; i < obj.child.length; i++) {
+    const found = findObject(id, obj.child[i]);
+    if (found) {
+      return found;
+    }
+  }
+}
+```
+
+You can call this function with the `id` you want to find and the root object of the nested tree:
+
+```javascript
+const nestedObj = {
+  "id": "A",
+  "name": "Item A",
+  "child": [
+    {
+      "id": "B",
+      "name": "Item B",
+      "child": [
+        {
+          "id": "C",
+          "name": "Item C",
+          "child": []
+        }
+      ]
+    },
+    {
+      "id": "D",
+      "name": "Item D",
+      "child": []
+    }
+  ]
+};
+
+const foundObj = findObject("C", nestedObj);
+console.log(foundObj); // { "id": "C", "name": "Item C", "child": [] }
+```
+
+This function recursively searches through the nested object tree until it finds an object with the matching `id`. If it finds the object, it returns it. If it doesn't find the object in the current level of the tree, it continues searching through the child objects.

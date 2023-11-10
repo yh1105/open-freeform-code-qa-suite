@@ -1,0 +1,28 @@
+The issue you're facing is likely due to changes in how Android 11 handles storage. Android 10 introduced scoped storage, and Android 11 made further updates to it. Scoped storage restricts app access to external storage, limiting it to app-specific directories and media files.
+
+In your case, you're trying to create a file in the external storage directory, which is not allowed in Android 11. Instead, you should use the app-specific directory.
+
+Here is how you can get the app-specific directory:
+
+```java
+private fun getAppSpecificAlbumStorageDir(context: Context, albumName: String): File {
+    val file = File(context.getExternalFilesDir(Environment.DIRECTORY_PICTURES), albumName)
+    if (!file.mkdirs()) {
+        Log.e(LOG_TAG, "Directory not created")
+    }
+    return file
+}
+```
+
+In this code, `context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)` returns the path to the app-specific directory in the external storage where you can save picture files.
+
+Also, make sure you have the necessary permissions in your manifest file:
+
+```xml
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+```
+
+And you request these permissions at runtime.
+
+Please note that starting from Android 11, the system ignores the `WRITE_EXTERNAL_STORAGE` permission if the app doesn't request legacy storage in the manifest file. However, apps targeting Android 11 (API level 30) or higher can't use the legacy storage, and they should use scoped storage to give users better access control over their files.

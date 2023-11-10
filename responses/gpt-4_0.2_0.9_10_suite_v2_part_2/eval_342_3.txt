@@ -1,0 +1,9 @@
+The issue is likely due to the fact that Spring Boot does not support XML responses by default. You need to add the Jackson dataformat XML dependency to your `build.gradle` file to enable XML support:
+
+```groovy
+implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml'
+```
+
+After adding this dependency, Spring Boot should be able to return XML responses. 
+
+Remember to restart your Spring Boot application after adding the new dependency.

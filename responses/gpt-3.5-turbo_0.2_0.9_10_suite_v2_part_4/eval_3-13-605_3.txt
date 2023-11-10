@@ -1,0 +1,32 @@
+The error message indicates that the Kotlin version used to compile the module is incompatible with the expected version. To solve this issue, you can try the following steps:
+
+1. Update the Kotlin version in your project to match the version used by the module. In this case, you need to update the Kotlin version to 1.5.1.
+
+2. Clean and rebuild your project to ensure that the updated Kotlin version is used.
+
+3. To add the email and cardholder name in Stripe, you can use the `CardInputWidget` instead of `CardMultilineWidget`. The `CardInputWidget` provides an option to enter the email and cardholder name.
+
+4. Alternatively, you can use the `Stripe.createToken()` method to create a token with the required information. You can pass the email and cardholder name as parameters to this method.
+
+Here's an example of how to use the `Stripe.createToken()` method:
+
+```
+Card card = new Card("4242424242424242", 12, 2022, "123");
+card.setName("John Doe");
+card.setEmail("john.doe@example.com");
+
+Stripe stripe = new Stripe(context, "pk_test_...");
+stripe.createToken(card, new TokenCallback() {
+    @Override
+    public void onSuccess(Token token) {
+        // Handle token
+    }
+
+    @Override
+    public void onError(Exception e) {
+        // Handle error
+    }
+});
+```
+
+Note that you need to replace the publishable key with your own key.

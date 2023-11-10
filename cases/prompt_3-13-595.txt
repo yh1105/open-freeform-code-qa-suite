@@ -1,0 +1,48 @@
+Error: java.io.IOException: No such file or directory in android 11
+
+I am trying to create a file on the file system, but I still get this exception:
+```
+java
+private fun getTempFolder(): File {
+        val directoryFolder =
+            File(Environment.getExternalStorageDirectory(), "sample-take-image")
+        directoryFolder.mkdirs()
+        return directoryFolder
+    }
+    private fun getTempFile(): File {
+        val timeStamp = SimpleDateFormat("yyyyMMdd_HHMMss", Locale.getDefault()).format(Date())
+        return File(
+            getTempFolder().absolutePath,
+            "image".plus(Calendar.getInstance().timeInMillis).plus(timeStamp).plus(".jpg")
+        )
+    }
+    private fun saveImageToFile(bitmap: Bitmap? = null): String? {
+        return try {
+            val file = getTempFile()
+            Timber.e("Path: + : ${file.absolutePath}")
+            file.createNewFile()
+            val fOut = FileOutputStream(file)
+            bitmap?.apply {
+                this.compress(Bitmap.CompressFormat.JPEG, 100, fOut)
+            }
+            fOut.flush()
+            fOut.close()
+            file?.absolutePath.getDefault()
+        } catch (e: Exception) {
+            e.printStackTrace()
+            ""
+        }
+    }
+```
+
+Even though I got the link after taking the photo camare:
+
+So can someone tell me why I can't create the file in this case. I am currently on 
+with
+**compileSdkVersion 30
+```
+buildToolsVersion "30.0.2"
+
+minSdkVersion 26**
+```
+

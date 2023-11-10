@@ -1,0 +1,33 @@
+Remove special characters from range in VBA
+
+I have created a VBA code to remove all special characters available in a column. As an example I have a Alphanumeric character with some special characters in every cells of a column:
+Suppose in a cell I have a value: abc@123!-245
+After executing my code I got output abc 123 245
+Here my code is working fine to remove all the special characters. My code is given below:
+```
+vba
+Sub ReplaceSpecial()
+    Dim cel As Range
+    Dim strVal As String
+    Dim i As Long
+    Application.ScreenUpdating = False
+    For Each cel In Selection
+        strVal = cel.Value
+        For i = 1 To Len(strVal)
+            Select Case Asc(Mid(strVal, i, 1))
+                Case 32, 48 To 57, 65 To 90, 97 To 122
+                    ' Leave ordinary characters alone
+                Case Else
+                    Mid(strVal, i, 1) = " "
+            End Select
+        Next i
+        cel.Value = strVal
+    Next cel
+    Application.ScreenUpdating = True
+End Sub
+```
+
+Now if I want to remove the space for my output so that output should look like abc123245, how to do that in VBA?
+Input: abc@123!-245
+Current Output: abc 123 245
+Required Output: abc123245

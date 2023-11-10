@@ -1,0 +1,30 @@
+In your code, you are already getting the input field value using React hooks. If you want to get the value on button click, you can add a button and a function that will be triggered on button click. Here is how you can do it:
+
+```javascript
+import React, { useState } from 'react';
+import { render } from 'react-dom';
+
+export default function InputField({name,label}) {
+  const [state, setState] = useState('')
+
+  const handleClick = () => {
+    alert(state); // or do whatever you want with the value
+  }
+
+  return (
+    <div>
+     <label>{label}</label>
+      <input type="text" 
+      value={state} 
+      name={name}
+      onChange={(e) => setState(e.target.value)} />
+
+      <button onClick={handleClick}>Click me</button>
+
+      {state}
+    </div>
+  );
+}
+```
+
+In this code, I added a `handleClick` function that will be triggered when the button is clicked. This function will alert the current value of the input field. You can replace the alert with whatever you want to do with the value.

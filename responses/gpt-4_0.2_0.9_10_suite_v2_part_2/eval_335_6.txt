@@ -1,0 +1,9 @@
+You should use `@Configuration` when you want to define beans explicitly in code rather than using auto-detection or XML configuration. This is typically used when the bean creation process involves complex logic or dependencies that cannot be expressed with auto-detection or XML.
+
+On the other hand, `@Service`, `@Controller`, and `@Component` are used for auto-detection of beans. They are used to annotate classes at the stereotype level, allowing for automatic detection and wiring of classes.
+
+- `@Service`: Annotates classes at the service layer.
+- `@Controller`: Annotates classes at the presentation layer, mainly used in Spring MVC.
+- `@Component`: A generic annotation, can be used across application. 
+
+Remember, `@Configuration` classes can also use `@ComponentScan` to specify base packages for component scanning, thus combining explicit bean definition with auto-detection.

@@ -1,0 +1,38 @@
+The error message is indicating that you cannot create an index on the `Gender` property of the `User` entity because it is already being used as a navigation property. 
+
+To solve this problem, you can create a separate property for the `Gender` entity in the `User` class and use that property for the index instead of the navigation property. Here's an example:
+
+```c#
+public class User
+{
+    [Key, Required]
+    public int Id { get; set; }
+    public int GenderId { get; set; }
+    public virtual Gender Gender { get; set; }
+    public string GenderName { get; set; } // new property for Gender name
+
+    // rest of the class
+}
+
+public class Gender
+{
+    [Key, Required]
+    public int Id { get; set; }
+    public virtual ICollection<User> Users { get; set; }
+}
+
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    modelBuilder.Entity<User>(user =>
+    {
+        user
+        .HasOne(x => x.Gender)
+        .WithMany(x => x.Users)
+        .HasForeignKey(x => x.GenderId);
+
+        user.HasIndex(x => x.GenderName); // use GenderName property for index
+    }
+}
+```
+
+By adding the `GenderName` property to the `User` class and using it for the index instead of the navigation property, you can avoid the error message and still have an index on the `Gender` property.
