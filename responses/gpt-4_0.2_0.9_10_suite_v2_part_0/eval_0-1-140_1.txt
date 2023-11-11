@@ -1,0 +1,25 @@
+In Font Awesome 5, the way to use icons in CSS has changed slightly. The `font-family` is now specific to the style of the icon. Here's how you can update your code:
+
+```css
+#mainNav .navbar-collapse .navbar-sidenav .nav-link-collapse:after {
+  float: right;
+  content: "\f107";
+  font-family: "Font Awesome 5 Free"; /* Change this to your specific Font Awesome style */
+  font-weight: 900; /* Add this line. It's necessary for Font Awesome 5 */
+}
+```
+
+The `font-family` can be one of the following, depending on the style of the icon you want to use:
+
+- "Font Awesome 5 Free" for solid, regular, or brands style.
+- "Font Awesome 5 Pro" for light, regular, solid, or duotone style (Pro license required).
+
+The `font-weight` should be one of the following, again depending on the style:
+
+- 300 for Light
+- 400 for Regular
+- 900 for Solid
+
+If you're using a brand icon, you should use "Font Awesome 5 Brands" as the `font-family` and you don't need to specify a `font-weight`.
+
+Please note that the unicode for the icon (`\f107` in your case) may have changed in Font Awesome 5. You can look up the correct unicode in the [Font Awesome 5 Icons List](https://fontawesome.com/v5.15/icons?d=gallery&p=2&m=free).

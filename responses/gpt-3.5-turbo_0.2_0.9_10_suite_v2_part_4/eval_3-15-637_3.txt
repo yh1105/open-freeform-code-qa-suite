@@ -1,0 +1,11 @@
+The error you are experiencing may be due to compatibility issues between the Selenium VBA library and Excel 2019. Here are some steps you can try to resolve the issue:
+
+1. Make sure that the Selenium VBA library is properly installed and referenced in your Excel 2019 workbook. You can check this by going to the VBA editor and selecting Tools > References. Look for the Selenium Type Library and make sure it is checked.
+
+2. Try using a different browser driver. For example, instead of using the Internet Explorer driver, try using the Chrome driver or Firefox driver. You can download these drivers from the Selenium website.
+
+3. Check if there are any updates available for the Selenium VBA library. You can check for updates on the Selenium website or on the GitHub repository.
+
+4. Try running the code on a different machine with Excel 2019 installed. This will help determine if the issue is specific to your machine or if it is a general compatibility issue.
+
+5. If none of the above steps work, you may need to consider using a different automation tool that is compatible with Excel 2019.

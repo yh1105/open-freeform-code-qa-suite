@@ -1,0 +1,9 @@
+It looks like you're missing a comma after the value of the "primary" color in your `$theme-colors` map. Try adding a comma after the color value like this:
+
+```scss
+$theme-colors: (
+  "primary": #0d6efd,
+);
+```
+
+Also, make sure that you're importing the correct Bootstrap variables file. In your example, you're importing `../../node_modules/bootstrap/scss/variables`, which is the correct path for Bootstrap 5.1.0. However, if you're using an older version of Bootstrap, the path may be different.

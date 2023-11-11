@@ -1,0 +1,7 @@
+You can try using the following command to restart your current terminal session without closing the window on MacOS:
+
+```
+source ~/.bash_profile
+```
+
+This command will reload your updated `.bash_profile` file and apply any changes you made to it. It should also preserve your current terminal session without closing the window.

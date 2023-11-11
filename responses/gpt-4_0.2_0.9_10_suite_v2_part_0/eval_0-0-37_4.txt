@@ -1,0 +1,22 @@
+Sure, you can define your routes in NestJS like this:
+
+```typescript
+@Controller('route')
+export class YourController {
+  @Get(':param1/config')
+  getWithOneParam(@Param('param1') param1: string) {
+    // your code here
+  }
+
+  @Get(':param1/config/:OptionalParam2')
+  getWithTwoParams(@Param('param1') param1: string, @Param('OptionalParam2') OptionalParam2: string) {
+    // your code here
+  }
+
+  @Get(':param1/config/:OptionalParam2/:OptionalParam3')
+  getWithThreeParams(@Param('param1') param1: string, @Param('OptionalParam2') OptionalParam2: string, @Param('OptionalParam3') OptionalParam3: string) {
+    // your code here
+  }
+}
+```
+In this way, you have three separate handlers for each of the possible routes. Each handler will only be called if the route matches exactly, so you won't have to worry about optional parameters being undefined.

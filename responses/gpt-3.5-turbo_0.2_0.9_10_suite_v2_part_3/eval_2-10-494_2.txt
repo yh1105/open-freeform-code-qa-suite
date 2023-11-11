@@ -1,0 +1,12 @@
+This error is caused by the `console` crate using the `format_args!` macro, which is a macro that is used to format strings. Rust-analyzer is not able to resolve this macro, which is causing the error.
+
+To fix this error, you can try updating your Rust toolchain to the latest version. If that doesn't work, you can try adding the following to your `Cargo.toml` file:
+
+```toml
+[profile.dev.package."console"]
+default-features = false
+```
+
+This will disable the default features of the `console` crate, which includes the `formatting` feature that is causing the error. By disabling this feature, you should be able to resolve the error.
+
+If neither of these solutions work, you can try disabling the `rust-analyzer` extension in your editor and using the built-in Rust language server instead.

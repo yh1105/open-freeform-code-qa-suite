@@ -1,0 +1,25 @@
+The problem you're facing is due to the conflict between the Node.js installed in your Windows system and the Node.js installed in your WSL2 Ubuntu 20.04. When you run `npm -v`, it's trying to execute the npm installed in your Windows system, which is not compatible with the WSL2 environment.
+
+To solve this problem, you need to remove the Windows PATH from the WSL2 environment. You can do this by editing the `.bashrc` file in your home directory.
+
+Here are the steps:
+
+1. Open the `.bashrc` file in a text editor. You can use `nano`:
+
+    ```bash
+    nano ~/.bashrc
+    ```
+
+2. Add the following line at the end of the file:
+
+    ```bash
+    export PATH="$HOME/.local/bin:$HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin"
+    ```
+
+    This line sets the PATH environment variable to only include directories in your WSL2 environment, excluding the Windows PATH.
+
+3. Save the file and exit the text editor. If you're using `nano`, you can do this by pressing `Ctrl + X`, then `Y` to confirm, and then `Enter`.
+
+4. Close the terminal and open a new one to apply the changes.
+
+Now, when you run `npm -v`, it should execute the npm installed in your WSL2 environment.

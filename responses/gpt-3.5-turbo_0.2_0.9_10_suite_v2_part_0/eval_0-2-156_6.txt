@@ -1,0 +1,15 @@
+To move the Stop button to the top and align it with the Begin button, you can add the following CSS code to your `style.css` file:
+
+```css
+#GameStopped {
+  position: relative;
+}
+
+#StopBtn {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+```
+
+This will make the `#GameStopped` div a relative positioned element and the `#StopBtn` button an absolute positioned element. Then, the `top` and `left` properties are used to position the button at the top left corner of the `#GameStopped` div. You can adjust the `top` and `left` values to fine-tune the position of the button.

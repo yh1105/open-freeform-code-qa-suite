@@ -1,0 +1,29 @@
+This error is due to the missing `libffi` library in your macOS. You can install it using Homebrew. If you don't have Homebrew installed, you can install it first.
+
+Here are the steps:
+
+1. Install Homebrew:
+
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+2. Install `libffi`:
+
+```bash
+brew install libffi
+```
+
+3. After installing `libffi`, you need to set the `PKG_CONFIG_PATH` environment variable to the path where `libffi.pc` is located. This is usually `/usr/local/Cellar/libffi/<version>/lib/pkgconfig/`. Replace `<version>` with the version of `libffi` you installed.
+
+```bash
+export PKG_CONFIG_PATH=/usr/local/Cellar/libffi/<version>/lib/pkgconfig/
+```
+
+4. Now, you should be able to install `travis`:
+
+```bash
+gem install travis
+```
+
+Remember to replace `<version>` with your actual `libffi` version. You can check the version by running `brew info libffi`.

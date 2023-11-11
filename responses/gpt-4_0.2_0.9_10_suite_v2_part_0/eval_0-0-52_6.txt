@@ -1,0 +1,16 @@
+Angular CLI doesn't provide a specific command to remove a package. The `ng add` command is used to add a package and optionally run an installation script. 
+
+To remove a package that was added with `ng add`, you can do the following:
+
+1. Remove the package from your `package.json` file.
+2. Run `npm install` to update your `node_modules` folder.
+
+Here is an example of how to remove a package:
+
+```bash
+npm uninstall <package-name>
+```
+
+This command will remove the package from `node_modules` and `package.json` file.
+
+Remember to replace `<package-name>` with the name of the package you want to remove.

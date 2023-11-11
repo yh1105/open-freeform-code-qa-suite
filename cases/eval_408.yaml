@@ -1,0 +1,8 @@
+id: 408
+prompt_path: prompt_408.txt
+type: code debugging
+lang: c#
+grading:
+  keywords:
+    - '[HttpGet]'
+    - 'IEnumerable<Employee>'

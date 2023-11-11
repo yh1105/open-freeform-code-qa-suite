@@ -1,0 +1,44 @@
+Yes, you can achieve this by using `refs` in React. Here's how you can modify your code to accomplish this:
+
+```javascript
+import React, { Component } from "react";
+import ReactDOM from "react-dom";
+
+class CustomForm extends Component {
+  handleSubmit = () => {
+    alert('Form submitted!');
+  }
+
+  render() {
+    return (
+      <form id='my-form' onSubmit={this.handleSubmit}>
+        <button type='submit'>Inside Custom</button>
+      </form>
+    );
+  }
+}
+
+class App extends Component {
+  customFormRef = React.createRef();
+
+  handleSubmit = () => {
+    this.customFormRef.current.handleSubmit();
+  }
+
+  render() {
+    return (
+      <div>
+        <CustomForm ref={this.customFormRef} />
+        <button onClick={this.handleSubmit}>In Root</button>
+      </div>
+    );
+  }
+}
+
+const rootElement = document.getElementById("root");
+ReactDOM.render(<App />, rootElement);
+```
+
+In this modified code, we create a `ref` in the `App` component using `React.createRef()`. We then pass this `ref` to the `CustomForm` component using the `ref` prop. In the `handleSubmit` method of the `App` component, we call the `handleSubmit` method of the `CustomForm` component using the `ref`. Finally, we attach the `handleSubmit` method of the `App` component to the `onClick` event of the 'In Root' button.
+
+With these changes, clicking the 'In Root' button will trigger the `handleSubmit` method of the `App` component, which in turn will trigger the `handleSubmit` method of the `CustomForm` component, submitting the form.

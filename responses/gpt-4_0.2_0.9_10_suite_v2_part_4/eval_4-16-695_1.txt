@@ -1,0 +1,33 @@
+The Docker build output is different on macOS compared to Linux due to the way Docker is implemented on these platforms. Docker on macOS runs in a virtual machine, and the Docker CLI communicates with the Docker engine inside this VM. This can lead to differences in the output of Docker commands.
+
+The `--progress=plain` option is used to disable the build output being shown as a progress bar, but it doesn't change the level of detail in the output.
+
+If you want to see the full output of a command that is run during the Docker build, you can try the following:
+
+1. **Run the command with a shell that logs the output.** For example, if you have a RUN command in your Dockerfile like this:
+
+```markdown
+RUN ls -la
+```
+
+You can change it to:
+
+```markdown
+RUN sh -c "ls -la | tee /tmp/output.txt"
+```
+
+This will run the `ls -la` command and log the output to a file. You can then use a `docker cp` command to copy the log file from the Docker container to your host machine.
+
+2. **Use docker logs command.** If you want to see the logs of a running container, you can use the `docker logs` command. This command shows the output of the main process running in the container, which is usually the command specified in the CMD instruction in the Dockerfile.
+
+```markdown
+docker logs <container-id>
+```
+
+3. **Use docker attach command.** If you want to see the output of a running container in real time, you can use the `docker attach` command. This command attaches your terminal to the running container.
+
+```markdown
+docker attach <container-id>
+```
+
+Remember to replace `<container-id>` with the ID of your Docker container. You can get the ID of your Docker container by running the `docker ps` command.

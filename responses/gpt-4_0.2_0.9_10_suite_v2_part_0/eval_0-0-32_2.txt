@@ -1,0 +1,39 @@
+You can use the `react-intersection-observer` npm package to achieve this. This package provides a set of React components and hooks to connect your project with the Intersection Observer API.
+
+First, install the package using npm:
+
+```bash
+npm install react-intersection-observer
+```
+
+Then, you can use the `useInView` hook from `react-intersection-observer` to track the visibility of each div. Here is an example of how you can use it:
+
+```javascript
+import React from 'react';
+import { useInView } from 'react-intersection-observer';
+
+const MyComponent = ({ data }) => {
+  return (
+    <div id="parent">
+      {data.map(item => {
+        const { ref, inView } = useInView({
+          triggerOnce: false, // Change to true if you want to track only the first visibility change
+        });
+
+        return (
+          <div id={item.id} ref={ref}>
+            {inView ? 'In viewport' : 'Not in viewport'}
+            {data.title}
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+export default MyComponent;
+```
+
+In this example, `useInView` returns an object containing `ref` and `inView`. You attach `ref` to the div you want to observe, and `inView` will be a boolean indicating whether the div is in the viewport or not.
+
+Please note that the Intersection Observer API is not supported in all browsers (notably, it's not supported in Internet Explorer). If you need to support these browsers, you may need to use a polyfill.

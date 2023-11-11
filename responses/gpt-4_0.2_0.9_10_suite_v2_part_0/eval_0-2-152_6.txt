@@ -1,0 +1,21 @@
+You need to call the `toast` method with the `show` argument on your toast element to make it visible. Here's how you can modify your JavaScript code:
+
+```javascript
+$('.toast').toast('show');
+```
+
+This line of code uses jQuery to select the element with the class `toast` and then calls the `toast` method with the `show` argument to make the toast visible.
+
+Also, make sure that you have included the necessary Bootstrap and jQuery libraries in your HTML file. Here's an example of how to include them:
+
+```html
+<!-- CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+<!-- JS, Popper.js, and jQuery -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+```
+
+Remember to place your JavaScript code after these script tags, or put your JavaScript code inside a `$(document).ready(function(){...});` to make sure the DOM is fully loaded before your script runs.

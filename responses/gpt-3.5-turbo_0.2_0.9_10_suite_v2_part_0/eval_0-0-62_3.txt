@@ -1,0 +1,9 @@
+The error is caused by using a non-primitive value as the key in the `v-for` loop. In this case, the `comment` object is being used as the key, which is not recommended. 
+
+To fix the issue, you can use a unique identifier from the `comment` object as the key. For example, if `comment.id` is a unique identifier, you can use it as the key like this:
+
+```html
+<div v-for="comment in comments" :key="comment.id">
+```
+
+This will ensure that each comment is uniquely identified and prevent the warning message from appearing.

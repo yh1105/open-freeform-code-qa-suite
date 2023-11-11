@@ -1,0 +1,14 @@
+Sure, you can use the following pattern to create a route with optional parameters in NestJS:
+
+```typescript
+@Get('route/:param1/config/:OptionalParam2?/:OptionalParam3?')
+async function getRoute(
+  @Param('param1') param1: string,
+  @Param('OptionalParam2') OptionalParam2?: string,
+  @Param('OptionalParam3') OptionalParam3?: string,
+) {
+  // your code here
+}
+```
+
+In this pattern, `:OptionalParam2?` and `:OptionalParam3?` are optional parameters. The `?` at the end of the parameter name indicates that the parameter is optional. If the parameter is not provided in the URL, its value will be `undefined` in your route handler function.

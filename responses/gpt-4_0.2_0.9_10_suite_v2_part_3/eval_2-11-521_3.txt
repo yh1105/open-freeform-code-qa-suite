@@ -1,0 +1,21 @@
+The comment is partially correct. 
+
+A constructor is indeed not a regular function, but it is a special type of method in a class. It is used to initialize the state of an object, and it is indeed invoked automatically when a new object is created. 
+
+However, the part that says "A constructor cannot be called" is not entirely accurate. In most object-oriented programming languages, you can't directly call a constructor like a regular function after an object has been created. But, you do "call" the constructor indirectly when you create a new instance of a class. 
+
+For example, in JavaScript, you might do something like this:
+
+```javascript
+class MyClass {
+  constructor() {
+    console.log('Constructor was called!');
+  }
+}
+
+let myObject = new MyClass();  // This will log 'Constructor was called!'
+```
+
+In this example, the constructor is "called" when `new MyClass()` is executed. 
+
+So, while it's true that a constructor isn't a function in the traditional sense and you can't call it in the same way as a regular function, it's not accurate to say that it "cannot be called". It's more accurate to say that it's called automatically when a new object is created.

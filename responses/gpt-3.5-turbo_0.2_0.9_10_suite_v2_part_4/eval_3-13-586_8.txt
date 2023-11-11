@@ -1,0 +1,23 @@
+The error message indicates that you need to specify either `FLAG_IMMUTABLE` or `FLAG_MUTABLE` when creating a `PendingIntent`. You can fix the error by updating the `PendingIntent` creation in your `MediaService` class to include one of these flags.
+
+To use `FLAG_IMMUTABLE`, replace the line:
+```
+mbrIntent = PendingIntent.getBroadcast(context,
+    0/* requestCode, ignored */, mediaButtonIntent,
+    PENDING_INTENT_FLAG_MUTABLE);
+```
+with:
+```
+mbrIntent = PendingIntent.getBroadcast(context,
+    0/* requestCode, ignored */, mediaButtonIntent,
+    PendingIntent.FLAG_IMMUTABLE);
+```
+
+Alternatively, if you need a mutable `PendingIntent`, you can use `FLAG_MUTABLE` instead:
+```
+mbrIntent = PendingIntent.getBroadcast(context,
+    0/* requestCode, ignored */, mediaButtonIntent,
+    PendingIntent.FLAG_MUTABLE);
+```
+
+Note that `FLAG_MUTABLE` should only be used if your app requires the `PendingIntent` to be mutable, for example if it needs to be used with inline replies or bubbles. If you don't need mutability, it's recommended to use `FLAG_IMMUTABLE`.

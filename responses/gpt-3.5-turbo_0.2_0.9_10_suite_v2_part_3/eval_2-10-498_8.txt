@@ -1,0 +1,27 @@
+In Rust, the caret operator (`^`) is not used for exponentiation. Instead, you can use the `pow` method from the `num` crate. Here's an example:
+
+```rust
+use num::pow;
+
+fn main() {
+    let x = 2;
+    let y = 3;
+    let result = pow(x, y);
+    println!("{}", result); // prints 8
+}
+```
+
+In this example, we import the `pow` function from the `num` crate and use it to raise `x` to the power of `y`. The result is then printed to the console.
+
+Alternatively, you can use the built-in `pow` method of the `i32` type:
+
+```rust
+fn main() {
+    let x = 2;
+    let y = 3;
+    let result = i32::pow(x, y);
+    println!("{}", result); // prints 8
+}
+```
+
+In this example, we call the `pow` method of the `i32` type and pass in `x` and `y` as arguments. The result is then printed to the console.

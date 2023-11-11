@@ -1,0 +1,13 @@
+You can use the `date` command in Unix to convert the date format. Here's how you can do it:
+
+```bash
+while IFS= read -r line
+do
+    d=$(date -d "${line}" +"%d %b %Y")
+    echo $d
+done < filename.txt
+```
+
+This script reads each line from the file `filename.txt`, converts the date to the desired format (`%d %b %Y`), and then prints it. 
+
+Note: This script assumes that the date in the file is in a format that the `date` command can understand. If the date format in the file is not recognized by the `date` command, you may need to preprocess the date string before passing it to `date`.

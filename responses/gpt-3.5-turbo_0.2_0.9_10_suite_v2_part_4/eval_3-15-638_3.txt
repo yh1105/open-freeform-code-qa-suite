@@ -1,0 +1,1 @@
+It seems that you need to properly identify the object name and type to use the SelectByID2 method. One possible solution is to create reference points on the selected face and edge to identify the face somehow. Another option is to use one of the appropriate Selection methods to create reference points, since their names are known, and then use those for the SelectByID2 method.

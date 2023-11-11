@@ -1,0 +1,13 @@
+The code you provided seems correct and should work as expected. However, there are a few things you might want to check if you're having issues:
+
+1. **Network Connection**: Ensure that your device/emulator has a proper internet connection. The Apollo Client fetches data over the network, so a lack of connectivity could cause the loading state to persist.
+
+2. **Server Availability**: The server at `https://48p1r2roz4.sse.codesandbox.io` should be up and running. If the server is down, the client won't be able to fetch data.
+
+3. **Correct GraphQL Query**: Make sure the GraphQL query `EXCHANGE_RATES` is correct and the server supports it. If the query is incorrect or not supported by the server, it could lead to an error or persistent loading state.
+
+4. **Apollo Client Version**: There might be compatibility issues with the version of Apollo Client you're using. Try downgrading or upgrading the version to see if that resolves the issue.
+
+5. **Debugging**: Use tools like [Apollo Client Devtools](https://www.apollographql.com/docs/react/development-testing/developer-tooling/) for Chrome to inspect your Apollo Client cache, queries, and mutations to help debug the issue.
+
+If none of the above solutions work, you might want to consider posting this issue in the Apollo Client GitHub repository or on Stack Overflow for more specific help.

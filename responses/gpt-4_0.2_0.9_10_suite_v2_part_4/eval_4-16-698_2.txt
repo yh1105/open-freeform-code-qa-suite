@@ -1,0 +1,23 @@
+You can use the `source` command to reload your `.bash_profile` without closing and reopening your terminal. The `source` command reads and executes commands from the file specified as its argument in the current shell environment.
+
+Here is how you can do it:
+
+```bash
+source ~/.bash_profile
+```
+
+This command will read and execute the `.bash_profile` file in your home directory. Any changes you made to the file will be applied to your current shell session.
+
+If you're using a different shell like zsh, you might need to source the `.zshrc` file instead:
+
+```bash
+source ~/.zshrc
+```
+
+This is equivalent to:
+
+```bash
+. ~/.bash_profile
+```
+
+The `.` is a shorthand for `source`.

@@ -1,0 +1,3 @@
+The GNU coreutils date command supports the input format you have, e.g.:
+
+date -f filename.txt +'%d %b %Y'

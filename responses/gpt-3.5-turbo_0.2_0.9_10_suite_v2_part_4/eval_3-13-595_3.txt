@@ -1,0 +1,36 @@
+Starting from Android 11, there are some changes in the way you can access files on the file system. You need to use the `MediaStore` API to save and retrieve files. 
+
+To save a file using `MediaStore`, you can use the following code:
+
+```
+private fun saveImageToFile(bitmap: Bitmap? = null): String? {
+    return try {
+        val resolver = applicationContext.contentResolver
+        val contentValues = ContentValues().apply {
+            put(MediaStore.MediaColumns.DISPLAY_NAME, "image.jpg")
+            put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg")
+            put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_PICTURES + "/sample-take-image")
+        }
+        val imageUri = resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)
+        imageUri?.let {
+            val outputStream = resolver.openOutputStream(it)
+            bitmap?.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
+            outputStream?.close()
+            it.toString()
+        }
+    } catch (e: Exception) {
+        e.printStackTrace()
+        ""
+    }
+}
+```
+
+This code creates a new file in the `Pictures/sample-take-image` directory and saves the image to that file using the `MediaStore` API. 
+
+Note that you also need to add the following permission to your AndroidManifest.xml file:
+
+```
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+```
+
+However, starting from Android 10, you also need to request the `MANAGE_EXTERNAL_STORAGE` permission to access files outside of your app's sandbox.

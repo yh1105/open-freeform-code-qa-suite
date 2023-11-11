@@ -1,0 +1,15 @@
+This issue is caused by the way GitLab CI/CD parses variables. When GitLab CI/CD parses the `${CI_MERGE_REQUEST_SOURCE_BRANCH_NAME:-${CI_COMMIT_BRANCH:-$CI_DEFAULT_BRANCH}}` expression, it interprets the inner `${CI_COMMIT_BRANCH:-$CI_DEFAULT_BRANCH}` expression as a variable named `CI_COMMIT_BRANCH:-}`. This is because GitLab CI/CD does not support nested parameter expansion.
+
+To work around this issue, you can use a shell script to perform the nested parameter expansion. For example:
+
+```
+variables:
+  GIT_BRANCH: ""
+
+job1:
+  script:
+    - GIT_BRANCH="${CI_MERGE_REQUEST_SOURCE_BRANCH_NAME:-$(bash -c 'echo ${CI_COMMIT_BRANCH:-$CI_DEFAULT_BRANCH}')}"
+    - echo $GIT_BRANCH
+```
+
+This will use a shell script to perform the nested parameter expansion, and assign the result to the `GIT_BRANCH` variable. The `echo` command will then output the correct value of `GIT_BRANCH`.

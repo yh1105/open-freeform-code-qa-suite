@@ -1,0 +1,39 @@
+The `truncate` class in Tailwind CSS only works for single line text. If you want to truncate text that spans multiple lines, you will need to use some custom CSS. 
+
+Here's an example of how you can achieve this:
+
+```html
+<div className="ml-1 inline-block">
+   <span>Label: </span>
+   <span className="font-semibold line-clamp-1">
+     long texttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt
+   </span>
+</div>
+```
+
+In your Tailwind CSS configuration file, you need to enable the `lineClamp` plugin:
+
+```javascript
+module.exports = {
+  theme: {
+    extend: {
+      typography: (theme) => ({
+        DEFAULT: {
+          css: {
+            // ...
+          },
+        },
+      }),
+    },
+  },
+  variants: {},
+  plugins: [
+    require('@tailwindcss/typography'),
+    require('@tailwindcss/line-clamp'),
+  ],
+}
+```
+
+This will enable the `line-clamp-{n}` utility, where `{n}` is the number of lines after which the text should be truncated. In the above example, `line-clamp-1` will truncate the text after one line.
+
+Please note that the `line-clamp` utility is not fully supported in all browsers. It is not supported in IE and only partially supported in Edge.

@@ -1,0 +1,24 @@
+You can use `jq` command-line JSON processor to minify JSON in a shell script. `jq` is a lightweight and flexible command-line JSON processor. It is like `sed` for JSON data.
+
+Here is how you can do it:
+
+```bash
+echo '{
+    "foo": "lorem",
+    "bar": "ipsum"
+}' | jq -c .
+```
+
+This will output:
+
+```bash
+{"foo":"lorem","bar":"ipsum"}
+```
+
+In the above command, `jq -c .` means "compact output" (`-c`) and "take the input as is" (`.`).
+
+If you don't have `jq` installed, you can install it using the package manager for your system:
+
+- On Ubuntu: `sudo apt-get install jq`
+- On MacOS: `brew install jq`
+- On Windows (using Chocolatey): `choco install jq`

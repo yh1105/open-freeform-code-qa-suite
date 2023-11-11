@@ -1,0 +1,38 @@
+In C++, you can use the `std::string` class and the `+` operator to concatenate strings and variables. Here's an example:
+
+```c++
+#include <iostream>
+#include <string>
+
+int main() {
+    int myVariable = 42;
+    std::string myString = "My variable has value " + std::to_string(myVariable);
+    std::cout << myString << std::endl;
+    return 0;
+}
+```
+
+Output:
+```
+My variable has value 42
+```
+
+Alternatively, you can use the `stringstream` class to achieve the same result:
+
+```c++
+#include <iostream>
+#include <sstream>
+
+int main() {
+    int myVariable = 42;
+    std::stringstream ss;
+    ss << "My variable has value " << myVariable;
+    std::cout << ss.str() << std::endl;
+    return 0;
+}
+```
+
+Output:
+```
+My variable has value 42
+```

@@ -1,0 +1,13 @@
+Yes, you can achieve similar results using an array formula with `INDEX` and `SMALL` functions in Excel versions that do not support the `FILTER` function. Here's how you can do it:
+
+Assuming your data starts from row 2, you can use the following formula:
+
+```excel
+=IFERROR(INDEX($B$2:$B$100, SMALL(IF($A$2:$A$100="x", ROW($A$2:$A$100)-ROW($A$2)+1), ROW(1:1))), "")
+```
+
+This is an array formula, so you need to enter it with Ctrl+Shift+Enter, not just Enter. After entering the formula, drag it down until you start getting blanks to get all the values.
+
+This formula works by creating an array of row numbers where column A is "x", then uses the `SMALL` function with `ROW(1:1)` to get the nth smallest value from that array, where n is the row number of the current cell. The `INDEX` function then returns the value from column B at that row number.
+
+Remember to adjust the ranges `$B$2:$B$100` and `$A$2:$A$100` to match your actual data.

@@ -1,0 +1,5 @@
+Yes, you can achieve the same result using the `INDEX` and `MATCH` functions in Excel. Here's the formula you can use:
+`=INDEX(B:B, MATCH("x", A:A, 0))`
+This will return the first value in `Column B` where `Column A` has a value of `x`. If you want to get all the values in `Column B` where `Column A` has a value of `x`, you can use the following formula:
+`=IFERROR(INDEX(B:B, SMALL(IF(A:A="x", ROW(A:A)-ROW(INDEX(A:A,1,1))+1), ROWS(A$1:A1))), "")`
+Note that this is an array formula, so you need to press `Ctrl+Shift+Enter` instead of just `Enter` when entering the formula. Then you can drag the formula down to get all the values.

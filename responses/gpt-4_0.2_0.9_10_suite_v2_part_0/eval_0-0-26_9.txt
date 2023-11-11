@@ -1,0 +1,21 @@
+The ESLint error you're seeing is because the anonymous function you're using in the `render` property of your column definition doesn't have a `displayName`. This is a rule in ESLint to help with debugging and testing.
+
+To fix this, you can assign the function to a variable and then assign a `displayName` to that function. Here's how you can do it:
+
+```jsx
+const renderGroup = ({ text }) => <span>{getCountForCountry(text)}</span>;
+renderGroup.displayName = 'renderGroup';
+
+const columns_payment_summary_table = [ 
+    {
+      title: FooConstants.LABEL_QUANTITY_SELECTED,
+      dataIndex: 'group',
+      key: 'group',
+      render: renderGroup,
+    }
+  ]
+```
+
+In this code, `renderGroup` is a function that takes `text` as a parameter and returns a JSX element. We then assign a `displayName` to `renderGroup` and use it in the `render` property of the column definition.
+
+This should resolve the ESLint error you're seeing.

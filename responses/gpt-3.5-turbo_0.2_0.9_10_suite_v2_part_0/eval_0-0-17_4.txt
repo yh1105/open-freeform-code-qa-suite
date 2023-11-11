@@ -1,0 +1,19 @@
+Sure! Here's how you can add an event listener for the "enter" key:
+
+```javascript
+mounted() {
+  let editor = new Editor({
+    extensions: [StarterKit],
+    content: this.value,
+    onKeyDown: (event, editor) => {
+      if (event.key === "Enter") {
+        console.log("good");
+        // submit chat and clear editor here
+      }
+    }
+  });
+  this.editor = editor;
+}
+```
+
+This code adds an `onKeyDown` event listener to the editor instance, which will be triggered whenever a key is pressed while the editor is in focus. The function checks if the key pressed was the "Enter" key, and if so, it logs "good" to the console. You can replace the `console.log` statement with your own code to submit the chat and clear the editor.

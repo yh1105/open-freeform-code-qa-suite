@@ -1,0 +1,26 @@
+The error is caused by using a non-primitive value as the key in the `v-for` loop. In your code, you are using `:key="comment"`, which means that the `comment` object is being used as the key. Instead, you should use a unique identifier for each comment as the key. 
+
+Assuming that each comment has a unique `id` property, you can update your code to:
+
+```html
+<template>
+    <div class="container">
+        <h2>{{ story.title }}</h2>
+        <p>Score: {{ story.score }}</p>
+        <p>{{ story.url }}</p>
+        <div v-for="comment in comments" :key="comment.id">
+          <div class="comment-wrap">
+                <div class="comment-block">
+                    <p class="comment-text">{{ comment.text }}</p>
+                    <div class="bottom-comment">
+                        <div class="comment-author">{{ comment.by }}</div>
+                        <div class="comment-date">{{ comment.time }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+```
+
+This should resolve the warning message.

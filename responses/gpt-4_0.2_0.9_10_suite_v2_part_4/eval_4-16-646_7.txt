@@ -1,0 +1,41 @@
+The error you're seeing is due to the fact that macOS Catalina dropped support for 32-bit applications, and `pdftk` is a 32-bit application. 
+
+You can try to use `pdftk-java` as an alternative. It's a rewrite of `pdftk` in Java, which should work on Catalina.
+
+Here are the steps to install `pdftk-java`:
+
+1. First, you need to install Homebrew if you haven't done so already. Open Terminal and paste the following command:
+
+```markdown
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+2. Once Homebrew is installed, you can install `pdftk-java` by running:
+
+```markdown
+brew install pdftk-java
+```
+
+3. After the installation, you can use `pdftk-java` in the same way as `pdftk`. However, you need to replace `pdftk` with `pdftk-java` in your commands.
+
+For example, if you used to run `pdftk input.pdf output output.pdf`, you should now run `pdftk-java input.pdf output output.pdf`.
+
+If you want to keep using `pdftk` instead of `pdftk-java`, you can create an alias. Add the following line to your `.zshrc` or `.bashrc` file:
+
+```markdown
+alias pdftk='pdftk-java'
+```
+
+Then, source your `.zshrc` or `.bashrc` file:
+
+```markdown
+source ~/.zshrc
+```
+
+or
+
+```markdown
+source ~/.bashrc
+```
+
+Now, you should be able to use `pdftk` command as before.

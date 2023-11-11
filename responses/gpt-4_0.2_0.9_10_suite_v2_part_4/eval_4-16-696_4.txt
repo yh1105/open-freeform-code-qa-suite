@@ -1,0 +1,9 @@
+The problem is that the command substitution `$(echo {} | sed 's/\?.*//g')` is evaluated before `find` starts its execution, so it doesn't replace `{}` with the actual file name. 
+
+You can use a bash loop to solve this issue:
+
+```bash
+find . -type f -name '*\?*' | while read file; do mv "$file" "${file%%\?*}"; done
+```
+
+This command will find all files with a question mark in their name, read them line by line, and then rename each file by removing the question mark and everything after it. The `${file%%\?*}` is a parameter expansion in bash which removes the longest match of `\?*` from the back of the variable `file`.

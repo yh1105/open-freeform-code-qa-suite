@@ -1,0 +1,14 @@
+Sure, you can try to use the `initialValue` prop in the `Form.Item` to set the initial value of the switch. Also, you can use the `onChange` prop in the `Switch` component to update the form value when the switch is toggled. Here is the revised code:
+
+```jsx
+<Form.Item name="switch" valuePropName="checked" initialValue={false}>
+    <Switch 
+        checkedChildren="Yes" 
+        unCheckedChildren="No" 
+        onChange={(checked) => form.setFieldsValue({ switch: checked })}
+    />
+    <span>Chargable</span>
+</Form.Item>
+```
+
+In this code, `initialValue={false}` sets the initial value of the switch to `false`. The `onChange` prop is used to update the form value when the switch is toggled. The `form.setFieldsValue({ switch: checked })` function call sets the form value of the switch to the current state of the switch.

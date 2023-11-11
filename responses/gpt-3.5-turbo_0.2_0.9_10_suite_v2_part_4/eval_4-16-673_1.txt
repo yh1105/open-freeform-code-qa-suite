@@ -1,0 +1,21 @@
+You can try the following steps to install the latest version of CMake on your Linux environment:
+
+1. Remove the existing CMake version using the command `sudo apt-get remove cmake`.
+
+2. Download the latest version of CMake from the official website using the command `wget https://github.com/Kitware/CMake/releases/download/v3.21.3/cmake-3.21.3.tar.gz`.
+
+3. Extract the downloaded file using the command `tar -zxvf cmake-3.21.3.tar.gz`.
+
+4. Navigate to the extracted directory using the command `cd cmake-3.21.3`.
+
+5. Run the following commands to configure, build, and install CMake:
+
+```
+./bootstrap
+make
+sudo make install
+```
+
+6. Verify the installation by running the command `cmake --version`.
+
+This should install the latest version of CMake on your Linux environment.

@@ -1,0 +1,32 @@
+The issue is that `CMD ["/bin/sh", "/workspace/launch.sh"]` in your Dockerfile is not running `launch.sh` in a login shell, which would normally load `~/.bashrc`. 
+
+To solve this, you can source `~/.bashrc` directly in your `launch.sh` script:
+
+```bash
+#!/bin/bash
+
+source ~/.bashrc
+
+cd /workspace/demo
+npm install
+node index.js
+```
+
+Or, you can change your Dockerfile's `CMD` to run `bash` as a login shell:
+
+```dockerfile
+CMD ["/bin/bash", "-l", "/workspace/launch.sh"]
+```
+
+This `-l` option will make bash act as if it had been invoked as a login shell, and read and execute commands from `/etc/profile` and the first readable of `~/.bash_profile`, `~/.bash_login`, and `~/.profile`, in that order.
+
+However, it's generally a better practice to avoid relying on `~/.bashrc` in Docker containers, and instead explicitly set up the environment in your Dockerfile or scripts. In this case, you could add the following lines to your Dockerfile:
+
+```dockerfile
+ENV NVM_DIR /root/.nvm
+ENV NODE_VERSION 7.9.0
+RUN . $NVM_DIR/nvm.sh && nvm install $NODE_VERSION && nvm alias default $NODE_VERSION
+ENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
+```
+
+This will make `node` and `npm` available in the `PATH` for all subsequent commands and scripts.

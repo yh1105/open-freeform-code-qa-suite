@@ -1,0 +1,49 @@
+One way to express this more idiomatically is to use the `Option::filter()` method, which returns `None` if the inner value does not meet the condition, and otherwise returns the original `Option`. Here's an example:
+
+```rust
+fn main() {
+    let mut foo: Option<u8> = None;
+    foo.filter(|&x| x < 5).or_else(|| {
+        foo = Some(5);
+        foo.clone()
+    });
+}
+```
+
+This code uses `filter()` to check if the inner value is less than 5. If it is, `filter()` returns the original `Option`. If it isn't, `filter()` returns `None`. We then use `or_else()` to replace `foo` with `Some(5)` if `filter()` returned `None`.
+
+Another way to express this is to use `Option::map_or_else()`, which takes two closures: one to execute if the `Option` is `None`, and one to execute if the `Option` is `Some` and the inner value meets the condition. Here's an example:
+
+```rust
+fn main() {
+    let mut foo: Option<u8> = None;
+    foo.map_or_else(|| {
+        foo = Some(5);
+    }, |x| {
+        if x < 5 {
+            foo = Some(5);
+        }
+    });
+}
+```
+
+This code uses `map_or_else()` to execute the first closure if `foo` is `None`, and the second closure if `foo` is `Some`. The second closure checks if the inner value is less than 5, and if it is, replaces `foo` with `Some(5)`.
+
+Finally, you can use the `Option::take()` method to replace the `Option` with `None` and return the inner value, and then use a simple `if` statement to check if the inner value meets the condition. Here's an example:
+
+```rust
+fn main() {
+    let mut foo: Option<u8> = None;
+    if let Some(foo_val) = foo.take() {
+        if foo_val < 5 {
+            foo.replace(5);
+        } else {
+            foo = Some(foo_val);
+        }
+    } else {
+        foo.replace(5);
+    }
+}
+```
+
+This code uses `take()` to replace `foo` with `None` and return the inner value. We then use an

@@ -1,0 +1,38 @@
+You can try the following steps to install the latest version of cmake on your Linux environment:
+
+1. Remove the existing cmake version by running the following command:
+
+   ```
+   sudo apt-get remove cmake
+   ```
+
+2. Add the Kitware APT repository to your system by running the following commands:
+
+   ```
+   wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | sudo apt-key add -
+   sudo apt-add-repository 'deb https://apt.kitware.com/ubuntu/ focal main'
+   ```
+
+   Note: Replace "focal" with your Ubuntu version name (e.g. bionic, xenial, etc.) if you are not using Ubuntu 20.04 (focal).
+
+3. Update the package list by running the following command:
+
+   ```
+   sudo apt-get update
+   ```
+
+4. Install the latest version of cmake by running the following command:
+
+   ```
+   sudo apt-get install cmake
+   ```
+
+   This should install the latest version of cmake available in the Kitware APT repository.
+
+5. Verify the installation by running the following command:
+
+   ```
+   cmake --version
+   ```
+
+   This should display the version number of the newly installed cmake version.

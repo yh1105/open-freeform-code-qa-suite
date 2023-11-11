@@ -1,0 +1,19 @@
+Yes, it is possible to detect if the user's system is in Dark Mode in Safari, Chrome, and Firefox using CSS media queries. 
+
+For Safari, you can use the `prefers-color-scheme` media query. Here's an example:
+
+```css
+@media (prefers-color-scheme: dark) {
+  /* styles for dark mode */
+}
+```
+
+For Chrome and Firefox, you can use the `@media (prefers-color-scheme: dark)` media query as well, but it may not work on all versions. Alternatively, you can use the `@media (-webkit-min-device-pixel-ratio: 2) and (color: #000000)` media query to detect Dark Mode in Chrome and Firefox. Here's an example:
+
+```css
+@media (-webkit-min-device-pixel-ratio: 2) and (color: #000000) {
+  /* styles for dark mode */
+}
+```
+
+Note that these media queries will only work if the user has enabled Dark Mode on their system. If Dark Mode is not enabled, the styles within the media queries will not be applied.

@@ -1,0 +1,27 @@
+Yes, you can modify the internal CSS of Firefox to reduce the spacing between menu items. Here's how you can do it:
+
+1. Open Firefox and type `about:config` in the address bar and press Enter. You'll see a warning page. Click on "Accept the Risk and Continue" to proceed.
+
+2. In the search bar, type `toolkit.legacyUserProfileCustomizations.stylesheets` and set its value to `true` by clicking on the toggle button.
+
+3. Now, navigate to your Firefox profile folder. You can find it by typing `about:support` in the address bar and pressing Enter. Under the "Application Basics" section, click on "Open Directory" next to "Profile Directory".
+
+4. In your profile directory, create a new folder named `chrome` if it doesn't exist.
+
+5. Inside the `chrome` folder, create a new file named `userChrome.css`. If the file already exists, open it.
+
+6. Paste the following CSS code into the `userChrome.css` file:
+
+    ```css
+    #appMenu-popup .subviewbutton,
+    #appMenu-popup .toolbarbutton-1 {
+      padding-top: 4px !important; /* reduce to your liking */
+      padding-bottom: 4px !important; /* reduce to your liking */
+    }
+    ```
+
+7. Save the `userChrome.css` file and restart Firefox.
+
+This CSS code will reduce the padding of the menu items, effectively reducing the spacing between them. You can adjust the `4px` value to your liking. The `!important` keyword is used to ensure that these styles override the default ones.
+
+Please note that modifying internal files can lead to unexpected behavior, so proceed with caution and at your own risk.

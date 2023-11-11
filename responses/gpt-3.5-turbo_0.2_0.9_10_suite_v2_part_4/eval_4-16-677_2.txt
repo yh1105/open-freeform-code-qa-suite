@@ -1,0 +1,18 @@
+The issue with your script is that the variable `$searchT` is enclosed in single quotes within the `if` statement. Single quotes prevent variable expansion, so the value of `$searchT` is not being passed to the `grep` command. To fix this, you can use double quotes instead of single quotes to enclose the `grep` command within the `if` statement. Here's the corrected script:
+
+```
+#!/bin/bash
+read -p "enter search term here: " searchT
+
+if [[ $(cat test.txt | grep -wi "$searchT") ]]; then     
+    echo "$(cat test.txt | grep "$searchT" | wc -l) number of matches found"
+    echo $(cat test.txt | grep "$searchT")
+
+else 
+    echo "no match found"    
+fi
+
+exit 0
+```
+
+In this updated script, the `grep` command within the `if` statement is enclosed in double quotes, which allows the value of `$searchT` to be passed to the command. Additionally, I've added a pipe to the `wc -l` command to count the number of matches found by `grep`.

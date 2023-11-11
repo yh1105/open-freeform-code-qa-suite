@@ -1,0 +1,19 @@
+The Docker build output on MacOS is different from Linux due to the way Docker Desktop for Mac is implemented. Docker Desktop for Mac runs a virtual machine and Docker runs inside that virtual machine, which means it doesn't have direct access to the MacOS file system. 
+
+The `ls -la` command in your Dockerfile is running inside the Docker build context, which is a temporary directory that Docker creates and destroys for each build. The output of `ls -la` is not shown because it's not part of the Docker build output, it's a command running inside the build context.
+
+If you want to see the output of commands like `ls -la` during the Docker build, you can use the `RUN` instruction in your Dockerfile to execute the command and print the output to the console. For example:
+
+```Dockerfile
+RUN ls -la && echo
+```
+
+This will execute `ls -la` and then `echo` the output to the console. The `&&` operator ensures that both commands are run in the same shell.
+
+If you want to see more detailed output during the Docker build, you can use the `-v` or `--verbose` option with the `docker build` command. This will print more detailed information about each step of the build process.
+
+```bash
+docker build -v .
+```
+
+However, please note that the `-v` or `--verbose` option is not available in all versions of Docker. If it's not available in your version, you may need to upgrade Docker or use a different method to get more detailed output.

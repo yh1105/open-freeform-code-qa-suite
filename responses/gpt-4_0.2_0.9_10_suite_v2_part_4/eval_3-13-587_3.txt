@@ -1,0 +1,9 @@
+The error message you're seeing is related to the Java version you're using. The `java.lang.Module` class is part of Java 9 and later, so if you're using a version of Java earlier than 9, you'll see this error.
+
+However, this error message is a debug message and not the cause of your task failure. It's just saying that Gradle tried to load a class that doesn't exist in your Java version, but it's not a fatal error.
+
+The actual error causing your task to fail is not included in the information you've provided. You'll need to look further up in your build log to find the actual error message. 
+
+If you're having trouble finding the error message, you can try running your Gradle task with the `--stacktrace` option to get more detailed output. This might help you find the error message.
+
+If you're still having trouble, please provide more information about your build configuration and the full output of your build log.

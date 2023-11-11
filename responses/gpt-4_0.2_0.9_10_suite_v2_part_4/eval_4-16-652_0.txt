@@ -1,0 +1,31 @@
+AWS CLI uses a pager program to handle its output. By default, it uses the `less` program. You can disable this feature by setting the `AWS_PAGER` environment variable to an empty string. 
+
+You can do this in two ways:
+
+1. **Setting the environment variable for a single command:**
+
+You can prepend your command with `AWS_PAGER=""` to disable the pager for that command:
+
+```bash
+for x in 1 2 3; do 
+  AWS_PAGER="" aws sqs purge-queue --queue-url https://sqs.<aws-region>.amazonaws.com/<id>/<env>-$x-<queueName>.fifo; 
+done
+```
+
+2. **Setting the environment variable for the entire session:**
+
+You can also set the `AWS_PAGER` environment variable for your entire session. This will disable the pager for all AWS CLI commands during that session:
+
+```bash
+export AWS_PAGER=""
+```
+
+After running this command, you can run your script as before:
+
+```bash
+for x in 1 2 3; do 
+  aws sqs purge-queue --queue-url https://sqs.<aws-region>.amazonaws.com/<id>/<env>-$x-<queueName>.fifo; 
+done
+```
+
+Remember that this will only affect the current session. If you want to disable the pager permanently, you can add the `export AWS_PAGER=""` line to your shell's startup file (like `~/.bashrc` or `~/.bash_profile` for bash, or `~/.zshrc` for zsh).

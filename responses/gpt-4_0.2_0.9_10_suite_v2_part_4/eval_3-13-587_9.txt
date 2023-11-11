@@ -1,0 +1,37 @@
+The error message you're seeing suggests that there's a problem with the version of Jacoco you're using. It seems like it's trying to use a Java 9 feature (`java.lang.Module`), but it's not finding it. 
+
+This could be due to a couple of reasons:
+
+1. The version of Java you're using is lower than Java 9. You can check your Java version by running `java -version` in your terminal.
+
+2. There's a compatibility issue between the versions of Jacoco, Gradle, and Kotlin you're using.
+
+Here are a few things you can try to resolve this issue:
+
+1. **Upgrade Jacoco:** The latest version of Jacoco at the time of writing this is 0.8.7. You can try upgrading to this version by changing your `toolVersion` to "0.8.7".
+
+2. **Downgrade Gradle or Kotlin:** If upgrading Jacoco doesn't work, you can try downgrading your Gradle or Kotlin version to a version that's known to work with your current Jacoco version.
+
+3. **Check your Java version:** If you're using a version of Java that's lower than 9, you can try upgrading to a newer version.
+
+Here's how you can upgrade Jacoco:
+
+```groovy
+jacoco {
+    toolVersion = "0.8.7"
+}
+```
+
+And here's how you can downgrade Gradle:
+
+```groovy
+distributionUrl=https\://services.gradle.org/distributions/gradle-6.8.3-all.zip
+```
+
+And Kotlin:
+
+```groovy
+kotlin_version = "1.4.32"
+```
+
+Remember to sync your project after making these changes. If none of these solutions work, please provide more details about your setup (like your Java version and full build.gradle file) so we can help you better.

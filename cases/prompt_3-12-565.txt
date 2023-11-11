@@ -1,0 +1,115 @@
+fix net::err_unknown_url_scheme whatsapp link on flutter webview
+
+Please I want to know how to launch WhatsApp in the Flutter `webview` app or launch WhatsApp from the browser in Flutter, have used many codes with no errors but they do not work.Am using mac m1
+and vscode
+```
+import 'package:coinpaga/Connectivity_Provider.dart';
+import 'package:coinpaga/services/local_notification_service.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'homepage.dart';
+import 'package:hexcolor/hexcolor.dart';
+import 'package:colorful_safe_area/colorful_safe_area.dart';
+
+///  Receive message when app is in background solution for on 
+message
+Future<void> backgroundHandler(RemoteMessage message)async{
+  print(message.data.toString());
+  print(message.notification!.title);
+}
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  LocalNotificationServices.initialize();
+  await Firebase.initializeApp();
+  FirebaseMessaging.onBackgroundMessage(backgroundHandler);
+  runApp(MyApp());
+}
+class MyApp extends StatelessWidget {
+@override
+  Widget build(BuildContext context) {
+return MultiProvider(
+  providers: [
+    ChangeNotifierProvider(
+      create: (context) => ConnectivityProvider(),
+      child: HomePage(),
+    )
+  ],
+  child:MaterialApp(
+  title: 'coinpaga',
+  theme: ThemeData(
+    primarySwatch: Colors.blue,
+  ),
+  debugShowCheckedModeBanner: false,
+  home: ColorfulSafeArea(
+    color: HexColor("#2e2a42"),
+    top: true,
+    bottom: false,
+    left: false,
+    right: false,
+    child: HomePage(),
+  )
+),
+);
+}
+}
+```
+
+Home.dart
+```
+import 'package:coinpaga/Connectivity_Provider.dart';
+   import 'package:coinpaga/no_internet.dart';
+   import 'package:flutter/material.dart';
+   import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
+   import 'package:provider/provider.dart';
+
+  class HomePage extends StatefulWidget {
+  // ignore: unused_field
+  final _flutterwebview = FlutterWebviewPlugin();
+  HomePage({ Key? key }) : super(key: key);
+
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+ @override
+  void initState() {
+    super.initState();
+    Provider.of<ConnectivityProvider>(context, listen: 
+false).startMonitoring();
+  }
+  @override
+  Widget build(BuildContext context) {
+    return pageUI();
+  }
+ @override
+  void dispose() {
+   _flutterwebview.dispose();
+ super.dispose();
+ }
+}
+  Widget pageUI() {
+ return Consumer<ConnectivityProvider>(
+builder: (context, model, child) {
+  return model.isOnline 
+? WebviewScaffold(
+url: 'https://coinpaga.com',
+
+withLocalStorage: true,
+withJavascript: true,
+scrollBar: false,
+initialChild: Center(child: Text('Loading...')),
+  ) : NoInternet();
+ },
+   );
+}
+
+  // ignore: camel_case_types
+ class _flutterwebview {
+  static void dispose() {}
+   }
+```
+
+Please help me go through it.

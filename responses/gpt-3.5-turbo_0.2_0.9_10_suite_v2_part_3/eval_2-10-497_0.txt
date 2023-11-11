@@ -1,0 +1,32 @@
+In Rust, a `Box` cannot be null, but it can be empty. An empty `Box` is created using the `Box::new()` function without passing any value to it. To check if a `Box` is empty, you can use the `Box::is_empty()` method. Here's an example:
+
+```rust
+let mut my_box: Box<i32> = Box::new(10);
+if my_box.is_empty() {
+    println!("Box is empty");
+} else {
+    println!("Box is not empty");
+}
+```
+
+In your case, you can check if the `next` field of a `Node` is empty by using the `Box::is_empty()` method:
+
+```rust
+struct Node {
+    value: i32,
+    next: Box<Node>,
+}
+
+struct Stack {
+    top: Box<Node>,
+}
+
+let my_stack = Stack { top: Box::new(Node { value: 10, next: Box::new(Node { value: 20, next: Box::new_empty() }) }) };
+if my_stack.top.next.is_empty() {
+    println!("Stack is empty");
+} else {
+    println!("Stack is not empty");
+}
+```
+
+In this example, the `next` field of the top node of the stack is not empty, so the output will be "Stack is not empty".

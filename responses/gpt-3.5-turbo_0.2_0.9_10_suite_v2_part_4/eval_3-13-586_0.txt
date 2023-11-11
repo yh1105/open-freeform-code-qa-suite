@@ -1,0 +1,16 @@
+The error message suggests that you need to specify either `FLAG_IMMUTABLE` or `FLAG_MUTABLE` when creating a `PendingIntent`. 
+
+You can try updating the `PendingIntent` creation code in your `MediaService` to include the `FLAG_IMMUTABLE` flag as follows:
+
+```
+val mediaButtonIntent = Intent(Intent.ACTION_MEDIA_BUTTON)
+mediaButtonIntent.setComponent(mbrComponent)
+val pendingIntent = PendingIntent.getBroadcast(
+    applicationContext,
+    0,
+    mediaButtonIntent,
+    PendingIntent.FLAG_IMMUTABLE
+)
+```
+
+This should resolve the issue and allow your app to target Android SDK 31.

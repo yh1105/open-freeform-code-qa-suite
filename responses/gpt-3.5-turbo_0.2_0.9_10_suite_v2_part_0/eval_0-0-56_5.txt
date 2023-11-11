@@ -1,0 +1,44 @@
+It seems that the issue might be related to the way you are running the Vite server inside the Docker container. By default, Vite binds to `localhost` which means that it can only be accessed from within the container itself. To make it accessible from outside the container, you need to bind it to `0.0.0.0` which will make it listen on all available network interfaces.
+
+To do this, you can modify the `server.host` option in your `vite.config.ts` file:
+
+```typescript
+export default defineConfig({
+  // ...
+  server: {
+    port: 8080,
+    host: '0.0.0.0'
+  }
+})
+```
+
+This will make the Vite server accessible from outside the container.
+
+Also, make sure that the Docker container is running and listening on the correct port. You can check this by running the following command inside the container:
+
+```bash
+$ netstat -tlnp
+```
+
+This will show you all the open ports and the processes that are listening on them. Make sure that you see something like this:
+
+```
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
+tcp        0      0 0.0.0.0:8080            0.0.0.0:*               LISTEN      1234/vite
+```
+
+If you see `0.0.0.0:8080` in the Local Address column, it means that the Vite server is listening on all available network interfaces and should be accessible from outside the container.
+
+If you still can't access the Vite server from outside the container, make sure that there are no firewall rules blocking the port. You can check this by running the following command on your host machine:
+
+```bash
+$ sudo ufw status
+```
+
+This will show you the status of the firewall and any rules that are currently in place. If you see a rule blocking port 8080, you can allow it by running the following command:
+
+```bash
+$ sudo ufw allow 8080
+```
+
+This should allow incoming traffic on port 8080 and allow you to access the Vite server from outside the container.

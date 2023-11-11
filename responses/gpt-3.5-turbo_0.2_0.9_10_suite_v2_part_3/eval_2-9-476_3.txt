@@ -1,0 +1,19 @@
+You need to add two things to your `~/.zshenv`. First, add the rbenv initialization code itself and second, add the ruby version. Here's what you can do:
+
+1. Open `~/.zshenv` in a text editor.
+2. Add the following line at the beginning of the file:
+   ```
+   export PATH="$HOME/.rbenv/bin:$PATH"
+   ```
+3. Add the following line after the line you added in step 2:
+   ```
+   eval "$(rbenv init -)"
+   ```
+4. Add the following line at the beginning of `~/.zshrc`:
+   ```
+   source $HOME/.zshenv
+   ```
+5. Save and close the file.
+6. Open a new terminal window or run `source ~/.zshrc` to apply the changes.
+
+You might also run the `rbenv doctor` command to check your installation.

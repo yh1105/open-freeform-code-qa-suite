@@ -1,0 +1,49 @@
+TailwindCSS is a utility-first CSS framework that provides pre-defined classes for common CSS properties. It doesn't provide a specific class for selecting direct children of a particular element. However, you can use the `@layer` directive to define your own custom classes.
+
+Here's an example of how you can define a custom class to select direct children of a div with class "section" using the `@layer` directive:
+
+```css
+@layer components {
+  .section > .child {
+    /* your styles here */
+  }
+}
+```
+
+In this example, `.section > .child` is the selector that targets direct children of a div with class "section". You can replace `.child` with any class or element that you want to target.
+
+After defining this custom class, you can use it in your HTML like this:
+
+```html
+<div class="section">
+  <div class="child">Direct child 1</div>
+  <div class="child">Direct child 2</div>
+</div>
+```
+
+Note that you need to include this custom class in your TailwindCSS configuration file for it to be compiled. You can do this by adding the following code to your `tailwind.config.js` file:
+
+```js
+module.exports = {
+  // ...
+  theme: {
+    // ...
+  },
+  variants: {
+    // ...
+  },
+  plugins: [
+    function ({ addComponents }) {
+      addComponents({
+        '@layer components': {
+          '.section > .child': {
+            /* your styles here */
+          },
+        },
+      });
+    },
+  ],
+};
+```
+
+This will add the custom class to the `components` layer, which is where you should put your custom component classes.

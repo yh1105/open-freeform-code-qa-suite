@@ -1,0 +1,32 @@
+You should be using `REDIS_TLS_URL` if you are connecting to Heroku Redis over TLS. Here is a simple example of how you can do this using the `node_redis` library:
+
+```javascript
+const redis = require('redis');
+const url = require('url');
+
+let redisURL = url.parse(process.env.REDIS_TLS_URL);
+let client = redis.createClient({
+    port: redisURL.port,
+    host: redisURL.hostname,
+    password: redisURL.auth.split(":")[1],
+    tls: {
+        rejectUnauthorized: false
+    }
+});
+
+client.on('connect', function() {
+    console.log('Connected to Redis');
+});
+
+client.on('error', function (err) {
+    console.error('Redis error', err);
+});
+```
+
+This code will create a new Redis client and connect to the Redis server specified in the `REDIS_TLS_URL` environment variable. The `tls` option is set to `{ rejectUnauthorized: false }` to allow connections to servers with self-signed certificates.
+
+Please note that `rejectUnauthorized: false` should only be used for development. In production, you should use a valid certificate and set `rejectUnauthorized: true`.
+
+Also, remember to replace `process.env.REDIS_TLS_URL` with your actual Redis TLS URL.
+
+If you're using Heroku, you can set this in your app's settings under the "Config Vars" section.

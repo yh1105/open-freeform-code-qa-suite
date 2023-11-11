@@ -1,0 +1,29 @@
+The error log shows that `node-gyp` is unable to find Python in your system. `node-gyp` is a cross-platform command-line tool written in Node.js for compiling native addon modules for Node.js, which requires Python, among other things.
+
+Here are the steps to fix this issue:
+
+1. **Install Python**: You need to have Python installed on your system. You can download it from the official Python website. For `node-gyp`, you need Python 2.7. Make sure to check the box that says "Add Python to PATH" during the installation.
+
+2. **Install Windows Build Tools**: You also need to have Windows build tools installed on your system. You can install them globally by running the following command in the command prompt (run as Administrator):
+
+    ```bash
+    npm install --global --production windows-build-tools
+    ```
+
+    This will install Python 2.7 and Visual Studio Build Tools, which are required for `node-gyp`.
+
+3. **Rebuild node-sass**: After installing Python and Windows build tools, you need to rebuild `node-sass` by running the following command:
+
+    ```bash
+    npm rebuild node-sass
+    ```
+
+4. **Set Python Environment Variable (Optional)**: If you're still having issues, you might need to manually set the Python environment variable. You can do this by running the following command:
+
+    ```bash
+    npm config set python /path/to/executable/python2.7
+    ```
+
+    Replace `/path/to/executable/python2.7` with the actual path to your Python 2.7 executable.
+
+After following these steps, your build should work without any issues.

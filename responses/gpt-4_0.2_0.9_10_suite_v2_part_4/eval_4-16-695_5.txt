@@ -1,0 +1,21 @@
+The Docker build output on OSX is different from Linux due to the way Docker works on OSX. Docker on OSX runs in a virtual machine, and the Docker client communicates with the Docker daemon running inside this VM. This can cause some differences in the output.
+
+If you want to see the full output of a command in a Dockerfile, you can use the `RUN` command in combination with a shell command that writes its output to a file, and then use the `RUN cat` command to display the contents of this file.
+
+Here is an example:
+
+```Dockerfile
+FROM debian:stretch-slim
+
+RUN apt-get update && apt-get upgrade -y
+RUN apt-get install wget -y
+RUN wget https://dev.mysql.com/get/Downloads/MySQL-5.7/mysql-5.7.22-linux-glibc2.12-x86_64.tar.gz
+RUN tar -zxvf mysql-5.7.22-linux-glibc2.12-x86_64.tar.gz
+RUN mv mysql-5.7.22-linux-glibc2.12-x86_64 mysql-5.7.22
+RUN ls -la > output.txt
+RUN cat output.txt
+```
+
+In this Dockerfile, the `ls -la` command writes its output to a file called `output.txt`, and then the `cat output.txt` command displays the contents of this file. This way, you can see the full output of the `ls -la` command.
+
+However, please note that this is a workaround and it might not be suitable for all situations. If you frequently need to see the full output of commands in Dockerfiles, you might want to consider using a Linux machine for your Docker work.

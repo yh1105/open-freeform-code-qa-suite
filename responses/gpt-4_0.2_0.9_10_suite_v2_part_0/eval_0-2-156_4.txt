@@ -1,0 +1,26 @@
+It seems like you want to align the "Stop Game" button with the "Begin Game" button. Here are a few suggestions:
+
+1. **Use CSS Flexbox:** You can use CSS Flexbox to align the buttons. Wrap the buttons in a container and apply `display: flex;` to it. This will align the buttons in a row by default. You can control the spacing between the buttons using `justify-content: space-between;` or `justify-content: space-around;`.
+
+2. **Use CSS Grid:** Another option is to use CSS Grid. Similar to Flexbox, wrap the buttons in a container and apply `display: grid;` to it. You can then use `grid-template-columns: repeat(2, 1fr);` to create two equal columns for the buttons.
+
+3. **Use Positioning:** If you want more control over the exact position of the buttons, you can use CSS positioning. For example, you can set `position: absolute;` on the buttons and then use `top`, `right`, `bottom`, and `left` to position them. Note that this will take the buttons out of the normal document flow, which can sometimes cause layout issues.
+
+Here is an example of how you might modify your HTML to use Flexbox:
+
+```html
+<div id="buttonContainer" style="display: flex; justify-content: space-between;">
+  <div id="GameStopped">
+    <button id="StartBtn" class="btnStyle" onclick="gameStarted=true;">Begin Game</button>
+    <div class="Status">Click Begin Game to start</div>
+  </div>
+  <div id="GameRunning">
+    <button id="StopBtn" class="btnStyle" onclick="self.close()">Stop Game</button>
+    <div id="Status" class="Status"></div>
+  </div>
+</div>
+```
+
+In this example, the `#buttonContainer` div is a new container that wraps the buttons. It uses Flexbox to align the buttons in a row and space them apart. You would need to add corresponding CSS in your `style.css` file to style the `#buttonContainer` div.
+
+Remember to adjust the layout according to your needs. You might need to adjust other elements on your page to accommodate these changes.

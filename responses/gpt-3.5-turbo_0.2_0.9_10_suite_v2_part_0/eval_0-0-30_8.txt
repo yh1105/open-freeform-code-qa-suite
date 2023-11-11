@@ -1,0 +1,10 @@
+Enzyme has not yet released an adapter for React 17, but there is a community-supported adapter called `@wojtekmaj/enzyme-adapter-react-17` that you can use. Here is how you can adapt the code snippet you provided to work with React 17 using this adapter:
+
+```javascript
+import Enzyme from 'enzyme';
+import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
+
+Enzyme.configure({ adapter: new Adapter() });
+```
+
+Make sure to install the adapter first by running `npm install @wojtekmaj/enzyme-adapter-react-17`. With this adapter, you should be able to write unit tests for your React 17 app using Enzyme.

@@ -1,0 +1,30 @@
+In C++, there is no built-in syntax for string interpolation like in C# or JavaScript. However, you can achieve a similar effect using `std::stringstream` or `std::to_string` function.
+
+Here is an example using `std::stringstream`:
+
+```cpp
+#include <sstream>
+
+int myVariable = 123;
+std::stringstream ss;
+ss << "My variable has value " << myVariable;
+std::string result = ss.str();
+```
+
+And here is an example using `std::to_string`:
+
+```cpp
+int myVariable = 123;
+std::string result = "My variable has value " + std::to_string(myVariable);
+```
+
+If you want a more modern and convenient way, you can use the `fmt` library (which is part of C++20 standard library), which allows Python-like string formatting:
+
+```cpp
+#include <fmt/core.h>
+
+int myVariable = 123;
+std::string result = fmt::format("My variable has value {}", myVariable);
+```
+
+Please note that the `fmt` library is not part of the standard library in C++ versions prior to C++20. If you're using an older version of C++, you'll need to install it separately.

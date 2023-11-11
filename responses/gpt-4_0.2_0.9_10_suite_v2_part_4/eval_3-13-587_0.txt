@@ -1,0 +1,19 @@
+This issue is likely due to the incompatibility between the versions of Gradle, Kotlin, and Jacoco you are using. 
+
+As of now, Jacoco 0.8.6 does not fully support Kotlin 1.5.10 and Gradle 7.0.2. 
+
+You can try the following solutions:
+
+1. Downgrade your Kotlin version to 1.4.32 and Gradle to 6.8.3, which are known to work with Jacoco 0.8.6.
+
+2. Use the latest version of Jacoco, which is 0.8.7 at the time of writing. It has better support for Kotlin 1.5.10 and Gradle 7.0.2. You can do this by changing your Jacoco configuration to:
+
+```groovy
+jacoco {
+    toolVersion = "0.8.7"
+}
+```
+
+3. If you still encounter issues, you might want to try using the [Kotlinx Jacoco Gradle plugin](https://github.com/Kotlin/kotlinx-kover), which is designed to work with Kotlin.
+
+Remember to clean and rebuild your project after making these changes.

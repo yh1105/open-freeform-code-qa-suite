@@ -1,0 +1,17 @@
+The error message you're seeing is because you're trying to override the `$theme-colors` map after it's already been defined in the Bootstrap's `_variables.scss` file. The `@import "../../node_modules/bootstrap/scss/variables";` line is importing the default Bootstrap variables, including the `$theme-colors` map.
+
+To override the `$theme-colors` map, you should define your custom colors before importing Bootstrap's main SCSS file. Here's how you can do it:
+
+```scss
+// Define your custom colors
+$theme-colors: (
+  "primary": #your-color-here
+);
+
+// Import Bootstrap after defining your custom colors
+@import "../../node_modules/bootstrap/scss/bootstrap";
+```
+
+In this case, you don't need to import the `_variables.scss` file separately, because it's already included in the main `bootstrap.scss` file.
+
+Also, make sure that the color value you're using is a valid CSS color. For example, you can use a hexadecimal color like `#ff0000`, a RGB color like `rgb(255, 0, 0)`, or a named color like `red`.

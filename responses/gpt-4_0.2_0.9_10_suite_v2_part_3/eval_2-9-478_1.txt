@@ -1,0 +1,15 @@
+The error you're experiencing is due to a compatibility issue between the version of Rails you're using and the version of Devise. 
+
+The latest version of Devise (4.8.0 at the time of writing) requires Rails 5.2 or later. If you're using an older version of Rails, you'll need to use an older version of Devise that is compatible with it.
+
+You can specify the version of Devise you want to use in your Gemfile. For example, if you're using Rails 5.1, you might use Devise 4.7.1:
+
+```ruby
+gem 'devise', '~> 4.7.1'
+```
+
+Then run `bundle install` to install the specified version of Devise.
+
+If you're not sure which version of Devise is compatible with your version of Rails, you can check the [Devise GitHub page](https://github.com/heartcombo/devise) for information on which versions are compatible.
+
+If you want to use the latest version of Devise, you'll need to upgrade your Rails application to a newer version that is compatible with it. You can do this by updating the Rails version in your Gemfile and running `bundle update rails`. Be aware that upgrading Rails can be a complex process, depending on the specifics of your application, and you should make sure to thoroughly test your application after the upgrade to ensure everything still works as expected.

@@ -1,0 +1,15 @@
+The error message you're seeing is related to the Java version you're using. The `java.lang.Module` class was introduced in Java 9, and it seems like your project is trying to use it but can't find it, which suggests that you're using a version of Java that's older than Java 9.
+
+Here are a few steps you can take to resolve this issue:
+
+1. **Check your Java version:** You can do this by running `java -version` in your terminal. If the version is less than 9, you'll need to update it.
+
+2. **Update your Java version:** If you're using a version of Java that's older than 9, you'll need to update it. You can download the latest version of Java from the [official Oracle website](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html).
+
+3. **Update your `JAVA_HOME` environment variable:** After installing a new version of Java, you'll need to update your `JAVA_HOME` environment variable to point to the new installation. The process for doing this varies depending on your operating system.
+
+4. **Check your Gradle settings:** Make sure that Gradle is using the correct version of Java. You can do this by checking the `org.gradle.java.home` property in your `gradle.properties` file. If this property is set, it should point to the location of your Java installation.
+
+5. **Update Jacoco version:** The version of Jacoco you're using might not be compatible with the new versions of Gradle and Kotlin. Try updating Jacoco to the latest version.
+
+If you've done all of the above and you're still seeing the error, it might be a bug in one of the tools you're using. In that case, you might want to consider filing a bug report with the relevant project.

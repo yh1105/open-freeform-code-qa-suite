@@ -1,0 +1,31 @@
+Your second way of removing duplicates using a `HashSet` is already quite simple and efficient. It leverages the fact that a `HashSet` only stores unique elements, so when you try to insert an element that is already in the set, the `insert` method returns `false`.
+
+However, if you want to make it even simpler, you can use the `dedup` method provided by Rust, but it only works if your array is sorted and only removes consecutive duplicate elements. Here is how you can use it:
+
+```rust
+fn main() {
+    let mut arr = [
+        Person { name: "aaa".to_string(), age: 10 },
+        Person { name: "bbb".to_string(), age: 20 },
+        Person { name: "bbb".to_string(), age: 20 },
+        Person { name: "ccc".to_string(), age: 30 },
+    ];
+
+    arr.sort_by(|a, b| a.name.cmp(&b.name));
+    arr.dedup();
+}
+```
+
+Please note that this method modifies the array in-place and does not create a new one. Also, it requires the elements to implement the `PartialEq` and `PartialOrd` traits.
+
+In your case, since `Person` is a struct, you need to implement `PartialEq` and `PartialOrd` for it:
+
+```rust
+#[derive(Debug, PartialEq, PartialOrd)]
+struct Person {
+    name: String,
+    age: u32,
+}
+```
+
+If your array is not sorted and you don't want to sort it, or if your elements are not `PartialEq` and `PartialOrd`, then your second way is already a good solution.

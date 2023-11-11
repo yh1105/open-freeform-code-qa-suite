@@ -1,0 +1,43 @@
+The error you're encountering is because Bootstrap requires `popper.js` for features like tooltips, popovers, modals, etc. and it seems like it's not installed in your project.
+
+You can install it using npm or yarn:
+
+**Using npm:**
+
+```bash
+npm install popper.js --save
+```
+
+**Using yarn:**
+
+```bash
+yarn add popper.js
+```
+
+After installing, you should import it in your file:
+
+```javascript
+import Popper from 'popper.js';
+```
+
+If you're using Bootstrap 4, you might need to install `@popperjs/core` instead of `popper.js`. You can do this using:
+
+**Using npm:**
+
+```bash
+npm install @popperjs/core --save
+```
+
+**Using yarn:**
+
+```bash
+yarn add @popperjs/core
+```
+
+And then import it:
+
+```javascript
+import { createPopper } from '@popperjs/core';
+```
+
+Remember to check your project's dependencies to ensure that the correct versions are installed and being used.

@@ -1,0 +1,7 @@
+In Kotlin, you can use the `ArrayList` constructor with an initial capacity, just like in Java. This is a perfectly valid and idiomatic way to create a `MutableList` in Kotlin when you know the eventual number of elements in advance. Here is an example:
+
+```kotlin
+val list = ArrayList<Int>(initialCapacity)
+```
+
+This can help to avoid the overhead of resizing the list, which can be beneficial in performance-critical code. However, the actual impact on performance may vary depending on the specific use case and the number of elements involved.

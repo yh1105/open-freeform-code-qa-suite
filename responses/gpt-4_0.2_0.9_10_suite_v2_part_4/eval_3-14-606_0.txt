@@ -1,0 +1,19 @@
+It seems like there's a bit of confusion here. iOS does not have a "Developer Mode" that can be enabled like Android. The alert you're seeing is likely related to the provisioning profile used to sign the app you're trying to install.
+
+If you're trying to install an app that's been signed with a development provisioning profile, you'll need to have your device's UDID registered with that provisioning profile. This is typically done through the Apple Developer portal.
+
+Here are the steps to do that:
+
+1. Connect your device to your Mac.
+2. Open Xcode.
+3. Go to `Window` -> `Devices and Simulators`.
+4. Select your device from the list on the left.
+5. You'll see a field labeled `Identifier`. This is your device's UDID.
+6. Copy this UDID and add it to the list of registered devices in the Apple Developer portal.
+7. Once the device is registered, regenerate your provisioning profiles and re-sign your app.
+
+If you're not the developer of the app, you'll need to contact the developer and provide them with your device's UDID so they can add it to their list of registered devices.
+
+If you're trying to install an app that's been signed with an ad-hoc or enterprise provisioning profile, you should be able to install the app without needing to register your device's UDID. However, you may need to trust the developer on your device before you can run the app. You can do this by going to `Settings` -> `General` -> `Device Management`, selecting the developer, and tapping `Trust`.
+
+If you're still having trouble, it's possible that there's an issue with the app itself, or with the way it was signed. In that case, you'll need to contact the developer for further assistance.

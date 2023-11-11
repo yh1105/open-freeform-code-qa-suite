@@ -1,0 +1,9 @@
+SwiftUI doesn't allow you to change @State in the initializer but you can initialize it.
+
+Remove the default value and use _fullText to set @State directly instead of going through the property wrapper accessor.
+
+@State var fullText: String // No default value of ""
+
+init(letter: String) {
+    _fullText = State(initialValue: list[letter]!)
+}

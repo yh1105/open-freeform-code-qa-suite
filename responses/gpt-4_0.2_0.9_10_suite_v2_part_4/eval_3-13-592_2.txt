@@ -1,0 +1,33 @@
+In AndroidX, the `ViewModelProvider.of()` method has been deprecated. You should use `ViewModelProvider()` constructor directly. 
+
+Here is how you can do it:
+
+```kotlin
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
+import com.example.myapplication.databinding.ActivityMainBinding
+
+class MainActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val binding: ActivityMainBinding = DataBindingUtil.setContentView(
+            this, R.layout.activity_main)
+        binding.lifecycleOwner = this
+
+        val model = ViewModelProvider(this).get(SheduleViewModel::class.java)
+
+    }
+}
+```
+
+Make sure you have the following dependencies in your `build.gradle` file:
+
+```groovy
+implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
+implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'
+```
+
+Remember to replace the version numbers with the latest ones.

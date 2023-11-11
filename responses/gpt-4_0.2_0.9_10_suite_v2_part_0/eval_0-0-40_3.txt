@@ -1,0 +1,29 @@
+The error message you're seeing (`/bin/sh^M: bad interpreter: No such file or directory`) is typically caused by Windows line endings (`\r\n`) being used in a Unix-like environment (like WSL), where only Unix line endings (`\n`) are expected.
+
+It seems like you have two installations of Node.js and npm - one on your Windows system (`/mnt/c/Program Files/nodejs/`) and one on your WSL Ubuntu system (`/usr/bin/`). The `npm` command is trying to use the Windows installation, which won't work because of the line ending issue.
+
+To solve this, you should change your PATH environment variable in WSL to prioritize the Ubuntu installation of Node.js and npm. You can do this by editing your `.bashrc` file (or `.zshrc` if you're using Zsh).
+
+Open the file with a text editor like nano:
+
+```bash
+nano ~/.bashrc
+```
+
+And add this line to the end of the file:
+
+```bash
+export PATH="/usr/bin:$PATH"
+```
+
+This line prepends `/usr/bin` to your PATH, which means that the system will look there first when trying to find executables like `node` and `npm`.
+
+Save the file and exit the editor (in nano, you can do this by pressing `Ctrl+X`, then `Y`, then `Enter`).
+
+Then, source the file to apply the changes:
+
+```bash
+source ~/.bashrc
+```
+
+Now, when you run `node -v` and `npm -v`, you should see the versions installed on your Ubuntu system.

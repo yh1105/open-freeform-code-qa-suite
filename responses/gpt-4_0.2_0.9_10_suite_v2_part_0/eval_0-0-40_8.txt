@@ -1,0 +1,21 @@
+The error message you're seeing is due to a conflict between the Node.js and npm installations on your Windows system and the ones in your WSL2 environment. 
+
+When you run `npm -v`, the shell is trying to execute the npm script located in your Windows system (`/mnt/c/Program Files/nodejs/npm`), which is not compatible with the Linux environment provided by WSL2.
+
+To resolve this issue, you need to adjust your `PATH` environment variable in the WSL2 environment to prioritize the Linux versions of Node.js and npm over the Windows ones. 
+
+You can do this by adding the following line to your `~/.bashrc` or `~/.zshrc` file (depending on which shell you're using):
+
+```bash
+export PATH=/usr/bin:$PATH
+```
+
+This line will ensure that the directories containing the Linux versions of Node.js and npm are searched before the ones containing the Windows versions.
+
+After adding this line, you need to reload your shell configuration file with the following command:
+
+```bash
+source ~/.bashrc  # or source ~/.zshrc
+```
+
+Now, when you run `node -v` and `npm -v`, you should see the versions installed in your WSL2 environment.

@@ -1,0 +1,15 @@
+The issue you're facing is due to a change in Android 12 (API level 31) that requires you to specify whether a `PendingIntent` is mutable or immutable. 
+
+The error message suggests that you should use `FLAG_IMMUTABLE` unless you need the `PendingIntent` to be mutable for specific functionality like inline replies or bubbles.
+
+The issue is that `MediaSessionCompat` is trying to create a `PendingIntent` without specifying either `FLAG_IMMUTABLE` or `FLAG_MUTABLE`. 
+
+This is a known issue and has been fixed in `androidx.media:media:1.4.3`. So, updating your library version should solve the problem.
+
+In your `build.gradle` file, update the version of the media library:
+
+```gradle
+implementation 'androidx.media:media:1.4.3'
+```
+
+Then sync your project with the Gradle files. This should resolve the issue.

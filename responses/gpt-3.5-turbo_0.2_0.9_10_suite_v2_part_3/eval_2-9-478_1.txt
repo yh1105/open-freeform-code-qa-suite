@@ -1,0 +1,11 @@
+This error occurs because the `reference` method was removed from `ActiveSupport::Dependencies` in Rails 6.0. To fix this error, you need to upgrade your version of Devise to at least version 4.8.1, which includes a fix for this issue.
+
+To upgrade Devise, update your Gemfile to include the latest version:
+
+```
+gem 'devise', '~> 4.8.1'
+```
+
+Then run `bundle update devise` to update your Gemfile.lock with the latest version of Devise.
+
+After updating Devise, restart your Rails server and try again. The error should be resolved.

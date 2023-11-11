@@ -1,0 +1,13 @@
+With Font Awesome 5, the syntax for calling an icon has changed. Instead of using the `font-family` property, you can use the `font-weight` and `font-style` properties to call the icon. Here's how you can modify your code to work with Font Awesome 5:
+
+```css
+#mainNav .navbar-collapse .navbar-sidenav .nav-link-collapse:after {
+  float: right;
+  content: "\f107";
+  font-weight: 900;
+  font-style: normal;
+  font-family: "Font Awesome 5 Free";
+}
+```
+
+In this example, we're using the `font-weight` property to call the icon, and setting it to `900` to ensure that the icon is bold. We're also setting the `font-style` property to `normal` to ensure that the icon is not italicized. Finally, we're specifying the font family as "Font Awesome 5 Free" to ensure that the correct font is used.

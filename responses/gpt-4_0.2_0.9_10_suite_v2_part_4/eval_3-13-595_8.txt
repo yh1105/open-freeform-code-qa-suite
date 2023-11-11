@@ -1,0 +1,38 @@
+The issue you're facing is likely due to the changes in the way Android 11 handles storage. Android 11 introduced the concept of "scoped storage" which restricts broad access to shared storage for all apps running Android 11 and higher.
+
+In your case, you're trying to create a file in the external storage directory which is not allowed by default in Android 11. You have two options:
+
+1. **Request legacy external storage in your manifest file**: This is a temporary solution and might not work in future Android versions.
+
+```xml
+<manifest ... >
+  <!-- This attribute is "false" by default on apps targeting
+       Android 10 or higher. -->
+  <application android:requestLegacyExternalStorage="true" ... >
+    ...
+  </application>
+</manifest>
+```
+
+2. **Use the app-specific directory**: Instead of using `Environment.getExternalStorageDirectory()`, you can use `Context.getExternalFilesDir()`. This method returns a path to the directory on the primary shared/external storage device where the application can place persistent files it owns. These files are internal to the application, and not typically visible to the user as media.
+
+Here's how you can modify your `getTempFolder()` method:
+
+```java
+private fun getTempFolder(): File {
+    val directoryFolder = File(context.getExternalFilesDir(null), "sample-take-image")
+    directoryFolder.mkdirs()
+    return directoryFolder
+}
+```
+
+Remember to replace `context` with your actual context.
+
+Also, make sure you have the necessary permissions in your manifest file:
+
+```xml
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+```
+
+And you're requesting these permissions at runtime.

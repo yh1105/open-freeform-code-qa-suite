@@ -1,0 +1,23 @@
+In C++, string interpolation isn't as straightforward as in languages like C# or JavaScript. However, you can achieve similar results using `std::stringstream` or the `std::format` function (available from C++20).
+
+Here is an example using `std::stringstream`:
+
+```cpp
+#include <sstream>
+
+int myVariable = 5;
+std::stringstream ss;
+ss << "My variable has value " << myVariable;
+std::string result = ss.str();
+```
+
+And here is an example using `std::format` (C++20):
+
+```cpp
+#include <format>
+
+int myVariable = 5;
+std::string result = std::format("My variable has value {}", myVariable);
+```
+
+Please note that `std::format` is not yet widely supported by all compilers as of the time of writing.

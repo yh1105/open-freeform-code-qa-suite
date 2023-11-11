@@ -1,0 +1,1 @@
+Looks like you're trying to run it on a physical device. On the iPhone, go to Settings > Privacy & Security on the iOS device -> Developer Mode -> toggle the Developer mode on.

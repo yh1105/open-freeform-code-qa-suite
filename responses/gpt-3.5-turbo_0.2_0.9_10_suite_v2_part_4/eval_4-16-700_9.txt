@@ -1,0 +1,7 @@
+You can use awk to achieve this task more efficiently. Here's an example command:
+
+```
+awk -F= '/name/ {name=$2} /value/ && name {print name "=" $2; name=""}' input.txt > output.txt
+```
+
+This command sets the field separator to "=" and then checks if the current line contains "name". If it does, it saves the name in a variable. If the current line contains "value" and the name variable is not empty, it prints the name and value separated by "=" and resets the name variable. This way, it only prints pairs where the name and value are on consecutive lines.

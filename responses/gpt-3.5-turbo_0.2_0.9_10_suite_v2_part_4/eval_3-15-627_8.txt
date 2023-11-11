@@ -1,0 +1,1 @@
+You can create a calendar input in VBA Excel without using any external ocx files by using the built-in DatePicker control. To add it to your userform, go to the Developer tab, click on Insert, and then select the DatePicker control. You can then customize it as needed using VBA code.

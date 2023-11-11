@@ -1,0 +1,29 @@
+Yes, you can achieve the same result using the `INDEX` and `SMALL` functions in Excel. Here's an example of how you can do it:
+
+```excel
+=INDEX($B$1:$B$100, SMALL(IF($A$1:$A$100="x", ROW($A$1:$A$100)-MIN(ROW($A$1:$A$100))+1, ""), ROW(A1)))
+```
+
+This formula will return the same result as the `FILTER` function. It will return the values from `Column B` if `Column A` on the same row has a value of `x`.
+
+Please note that this is an array formula, so you need to press `Ctrl+Shift+Enter` after typing the formula instead of just `Enter`.
+
+If you want to use a macro, you can use the following VBA code:
+
+```vba
+Sub FilterData()
+    Dim rng As Range
+    Dim outputRow As Long
+
+    outputRow = 2
+
+    For Each rng In ThisWorkbook.Sheets("Sheet1").Range("A1:A100")
+        If rng.Value = "x" Then
+            ThisWorkbook.Sheets("Sheet2").Cells(outputRow, "B").Value = rng.Offset(0, 1).Value
+            outputRow = outputRow + 1
+        End If
+    Next rng
+End Sub
+```
+
+This macro will copy the values from `Column B` to `Sheet2` if `Column A` on the same row has a value of `x`. You can adjust the range and the sheets according to your needs.

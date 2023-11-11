@@ -1,0 +1,17 @@
+This error usually occurs when there is an issue with the build settings or the script used in the build phase. Here are some steps you can try to resolve this issue:
+
+1. Clean the project: Go to Product > Clean Build Folder in Xcode and try building the project again.
+
+2. Check the build settings: Make sure that the build settings are correct for your project. Check the build settings for the target that is failing to build and compare them to a target that is building successfully. 
+
+3. Check the script used in the build phase: If you have added a custom script in the build phase, make sure that it is correct and does not have any errors. 
+
+4. Update the pods: Try updating the pods by running `pod update` in the terminal and then build the project again.
+
+5. Check for any missing files: Make sure that all the required files are present in the project and are added to the correct target.
+
+6. Check for any conflicting dependencies: If there are any conflicting dependencies, try removing them and then build the project again.
+
+7. Try creating a new project and adding the required dependencies to it.
+
+If none of the above steps work, try reaching out to the library developers for support or seek help from the Xcode community.

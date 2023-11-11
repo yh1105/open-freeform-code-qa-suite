@@ -1,0 +1,14 @@
+The problem you're facing might be due to the incorrect usage of the `Switch` component inside the `Form.Item`. The `Switch` component should be wrapped inside the `Form.Item` and the `name` prop should be provided to the `Form.Item` to correctly bind the value.
+
+Here is the revised version of your code:
+
+```jsx
+<Form.Item name="switch" valuePropName="checked" noStyle>
+    <Switch checkedChildren="Yes" unCheckedChildren="No" />
+    <span>Chargable</span>
+</Form.Item>
+```
+
+In the above code, the `Switch` component is wrapped inside the `Form.Item` and the `name` prop is provided to the `Form.Item`. The `valuePropName` prop is set to "checked" to bind the checked state of the `Switch` component to the form field. The `noStyle` prop is used to remove the additional styles applied by the `Form.Item` component.
+
+Now, when you submit the form, the value of the switch will be included in the form values.

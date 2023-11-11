@@ -1,0 +1,30 @@
+Unfortunately, Excel VBA doesn't have a built-in method to retrieve the local path of a file synced with OneDrive or SharePoint. The "Open File Location" button you mentioned uses the Windows Explorer, which is aware of the local path due to the OneDrive sync client, but this information is not directly accessible to VBA.
+
+However, there are some workarounds you can try:
+
+1. **Use the Environ function**: This function can be used to retrieve the local OneDrive path, which is stored in the system environment variables. Here's a simple example:
+
+    ```vba
+    Function GetOneDrivePath() As String
+        GetOneDrivePath = Environ("OneDrive")
+    End Function
+    ```
+
+    This will return the root path of the OneDrive folder. You can then append the relative path of your file to this root path.
+
+2. **Use the Office.FileDialog object**: This object allows the user to navigate to the file in question and select it. The selected file's path can then be retrieved. Here's an example:
+
+    ```vba
+    Function GetFilePath() As String
+        Dim fd As Office.FileDialog
+        Set fd = Application.FileDialog(msoFileDialogFilePicker)
+        fd.AllowMultiSelect = False
+        If fd.Show = True Then
+            GetFilePath = fd.SelectedItems(1)
+        End If
+    End Function
+    ```
+
+    This will return the full path of the selected file, including the local OneDrive path.
+
+Please note that these methods are not foolproof and may not work in all scenarios, especially if the users have unusual OneDrive setups.

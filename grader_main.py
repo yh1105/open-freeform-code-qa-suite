@@ -160,6 +160,8 @@ def grade_response(config: dict, case_dir: str, response: str, full_score: float
             lang = 'cpp'
         elif lang in ['js', 'javascript']:
             lang = 'javascript'
+        elif lang == 'custom-py':
+            lang = 'custom-py'
         elif lang in ['ts', 'typescript']:
             lang = 'typescript'
         else:

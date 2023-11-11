@@ -1,0 +1,28 @@
+The error message is indicating that you are using a non-primitive value (in this case, an object) as a key in your `v-for` loop. Vue.js recommends using primitive values (strings or numbers) as keys for better performance and predictability.
+
+In your case, `comment` is an object, and you're using it as a key in your `v-for` loop. If each `comment` object has a unique identifier (like an `id`), you should use that as the key instead.
+
+Here's how you can fix it:
+
+```html
+<template>
+    <div class="container">
+        <h2>{{ story.title }}</h2>
+        <p>Score: {{ story.score }}</p>
+        <p>{{ story.url }}</p>
+        <div v-for="comment in comments" :key="comment.id">
+          <div class="comment-wrap">
+                <div class="comment-block">
+                    <p class="comment-text">{{ comment.text }}</p>
+                    <div class="bottom-comment">
+                        <div class="comment-author">{{ comment.by }}</div>
+                        <div class="comment-date">{{ comment.time }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+```
+
+In the above code, I've replaced `:key="comment"` with `:key="comment.id"`. This assumes that each `comment` object has a unique `id` property. If it doesn't, you'll need to find another unique, primitive property to use as the key.

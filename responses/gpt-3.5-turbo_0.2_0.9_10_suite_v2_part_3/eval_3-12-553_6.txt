@@ -1,0 +1,14 @@
+The error message suggests that your app is not using AndroidX, which is a major change in the Android ecosystem that happened with the release of Android 9.0 (Pie). AndroidX replaces the original support library and provides backward compatibility for newer Android features.
+
+To fix this issue, you need to migrate your app to AndroidX. You can do this by following the steps provided in the error message or by using the Android Studio Refactor tool.
+
+Here are the steps to migrate your app to AndroidX using Android Studio:
+
+1. Open your project in Android Studio.
+2. Click on the "Refactor" menu and select "Migrate to AndroidX".
+3. Click on "Migrate" in the dialog box that appears.
+4. Wait for the migration process to complete.
+
+Once the migration is complete, you can try building the app again using the command "flutter build appbundle". This should generate the Android project study and its APK without any issues.
+
+If you still face issues, make sure that you have the latest version of Gradle installed and that your project is using the correct Gradle version. You can check this by opening the "build.gradle" file in your project and checking the "classpath" and "distributionUrl" properties.

@@ -1,0 +1,5 @@
+```javascript
+function test(b, func) {
+    return b !== null && b !== undefined ? b : func(b);
+}
+```

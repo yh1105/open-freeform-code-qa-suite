@@ -1,0 +1,24 @@
+You can achieve this by using the `-split` operator in PowerShell. This operator splits a string into substrings based on the characters in an array. You can specify multiple delimiters for splitting the string.
+
+Here is how you can modify your script:
+
+```powershell
+$FileArray = @("Name1-354-03.pdf", "Name23-354-H11.pdf", "Name354-354-02.pdf", "Name3545-354.pdf")
+ForEach ($n in $FileArray){
+     $split = $n -split '-354'
+     Write-Host ($split[0] + "-354")
+}
+```
+
+In this script, `-split '-354'` splits the string into substrings at '-354'. The first part of the split string is accessed by `$split[0]`, and then "-354" is appended back to it.
+
+This will give you the desired output:
+
+```
+Name1-354
+Name23-354
+Name354-354
+Name3545-354
+```
+
+Please note that this will only work correctly if "-354" appears only once in the filename. If "-354" can appear more than once and you want to cut off everything after the last occurrence, you would need a different approach.

@@ -1,0 +1,11 @@
+To conform to the ShapeStyle protocol in SwiftUI, you need to implement the `func _apply(to shape: inout _ShapeStyle_Self)` method. In your case, you can simply implement this method in your `RedView` struct and return `self`:
+
+```
+struct RedView: ShapeStyle {
+    func _apply(to shape: inout _ShapeStyle_Self) {
+        // do nothing
+    }
+}
+```
+
+This will allow you to use `RedView` as a fill for your `Circle` shape.

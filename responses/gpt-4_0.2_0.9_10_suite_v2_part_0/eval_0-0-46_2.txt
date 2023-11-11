@@ -1,0 +1,24 @@
+The error message `Parsing error: Cannot read file '.../tsconfig.json'.eslint` suggests that ESLint is having trouble finding your `tsconfig.json` file. This is likely because the `project` property in your `.eslintrc.js` file is set to `"tsconfig.json"`, which is a relative path. ESLint is trying to find `tsconfig.json` in the same directory as the file it's linting, but it's not there.
+
+To fix this, you need to provide an absolute path to your `tsconfig.json` file. You can use the `__dirname` global variable in Node.js, which gives you the directory name of the current module, to construct this path.
+
+Here's how you can modify your `.eslintrc.js` file:
+
+```javascript
+const path = require('path');
+
+module.exports = {
+  // ...
+  parserOptions: {
+    project: path.resolve(__dirname, './tsconfig.json'),
+    sourceType: 'module',
+  },
+  // ...
+};
+```
+
+This will tell ESLint to look for `tsconfig.json` in the same directory as your `.eslintrc.js` file, regardless of where the file being linted is located. 
+
+If your `tsconfig.json` file is not in the same directory as your `.eslintrc.js` file, adjust the path accordingly. For example, if `tsconfig.json` is one level up, you would use `'../tsconfig.json'` instead of `'./tsconfig.json'`.
+
+After making this change, restart your IDE or editor to ensure the changes are picked up.

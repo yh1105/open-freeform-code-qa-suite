@@ -1,0 +1,31 @@
+Yes, you can modify the internal CSS of Firefox to change the spacing between menu items. Here's how you can do it:
+
+1. Open your Firefox profile folder. You can do this by typing `about:support` in the address bar, then click on `Open Folder` in the `Profile Folder` row.
+
+2. In the profile folder, create a new folder named `chrome` if it doesn't exist.
+
+3. Inside the `chrome` folder, create a new file named `userChrome.css` if it doesn't exist.
+
+4. Open `userChrome.css` with a text editor.
+
+5. Paste the following code into the file:
+
+    ```css
+    :root {
+        --proton-dense-toolbar-vertical-padding: 4px !important;
+        --proton-toolbar-vertical-padding: 4px !important;
+        --proton-menu-vertical-padding: 4px !important;
+    }
+    ```
+
+6. Save the file and close it.
+
+7. In Firefox, go to `about:config`.
+
+8. Search for `toolkit.legacyUserProfileCustomizations.stylesheets` and set it to `true`.
+
+9. Restart Firefox.
+
+This CSS code reduces the vertical padding of the toolbar and menu items. You can adjust the `4px` value to your liking. The `!important` keyword is used to override the default style.
+
+Please note that modifying internal files can lead to unexpected behavior, and you do so at your own risk. Always make a backup of your data before making changes.

@@ -1,0 +1,21 @@
+The error "`Command PhaseScriptExecution failed with a nonzero exit code`" usually means that there's an issue with one of the scripts that your project is trying to run during the build phase.
+
+Here are some steps to troubleshoot this issue:
+
+1. **Check your build phases**: Go to your target in Xcode, then go to the "Build Phases" tab. Look for any scripts that are being run and try to identify if any of them could be causing the issue.
+
+2. **Check your dependencies**: The error message seems to indicate that there's an issue with the `IQKeyboardManagerSwift` framework. Try removing this framework from your project and see if the error persists. If the error goes away, then the issue is likely with this framework. You might need to update it or find an alternative.
+
+3. **Check your Podfile**: Make sure that your Podfile is correctly configured. Try running `pod deintegrate` and then `pod install` to reinstall your dependencies.
+
+4. **Check your keychain access**: Sometimes this error can be caused by issues with keychain access. Try the following steps:
+    - Open Keychain Access
+    - Right click on "login" in the Keychains list and select "Lock Keychain"
+    - Right click on "login" again and select "Unlock Keychain"
+    - Clean your Xcode project and try to build again
+
+5. **Check your Xcode version**: Make sure that your Xcode version is compatible with the libraries you are using. You might need to update Xcode or the libraries to make them compatible.
+
+6. **Check your Swift version**: Make sure that your Swift version is compatible with the libraries you are using. You might need to update Swift or the libraries to make them compatible.
+
+If none of these steps work, please provide more information about your project configuration and the exact error message you are seeing.

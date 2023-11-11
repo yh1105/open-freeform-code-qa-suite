@@ -1,0 +1,51 @@
+The ESLint error you're seeing is because you're using an anonymous function for the `render` property in your column definition. ESLint is expecting a named function or component here.
+
+You can fix this by either disabling the rule for that line or by creating a named function or component. Here's how you can do it:
+
+**Option 1: Disable the rule for that line**
+
+```jsx
+const columns_payment_summary_table = [ 
+    {
+      title: FooConstants.LABEL_QUANTITY_SELECTED,
+      dataIndex: 'group',
+      key: 'group',
+      render: text => (
+        // eslint-disable-next-line react/display-name
+        <span>{getCountForCountry(text)}</span>
+      ),
+    }
+  ]
+```
+
+**Option 2: Create a named function**
+
+```jsx
+const renderGroup = text => <span>{getCountForCountry(text)}</span>;
+
+const columns_payment_summary_table = [ 
+    {
+      title: FooConstants.LABEL_QUANTITY_SELECTED,
+      dataIndex: 'group',
+      key: 'group',
+      render: renderGroup,
+    }
+  ]
+```
+
+**Option 3: Create a named component**
+
+```jsx
+const GroupComponent = ({ text }) => <span>{getCountForCountry(text)}</span>;
+
+const columns_payment_summary_table = [ 
+    {
+      title: FooConstants.LABEL_QUANTITY_SELECTED,
+      dataIndex: 'group',
+      key: 'group',
+      render: (text) => <GroupComponent text={text} />,
+    }
+  ]
+```
+
+Any of these options should resolve the ESLint error.

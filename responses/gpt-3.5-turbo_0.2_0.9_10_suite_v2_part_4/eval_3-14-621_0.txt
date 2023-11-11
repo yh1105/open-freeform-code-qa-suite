@@ -1,0 +1,37 @@
+The error occurs because you are trying to access the `@State` variable outside of the `body` of the `View`. In SwiftUI, the `@State` variables can only be accessed and modified within the `body` of the `View`.
+
+To initialize the `@State` variable with a value from outside the `body`, you can use a `@Binding` variable instead. Here's an updated version of your code that uses a `@Binding` variable:
+
+```
+struct StateFromOutside: View {
+    let list = [
+        "a": "Letter A",
+        "b": "Letter B",
+        // ...
+    ]
+    @Binding var fullText: String
+
+    init(letter: String, fullText: Binding<String>) {
+        self._fullText = fullText
+        self.fullText = list[letter]!
+    }
+
+    var body: some View {
+        TextField("", text: $fullText)
+    }
+}
+```
+
+You can then use this `View` like this:
+
+```
+struct ContentView: View {
+    @State var text = ""
+
+    var body: some View {
+        StateFromOutside(letter: "a", fullText: $text)
+    }
+}
+```
+
+This will initialize the `text` variable with the value of `"Letter A"` from the `list` dictionary.

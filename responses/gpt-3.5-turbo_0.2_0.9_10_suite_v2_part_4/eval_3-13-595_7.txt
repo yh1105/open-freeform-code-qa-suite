@@ -1,0 +1,27 @@
+Starting from Android 11, there are some changes in the file system access policy. You need to use the `MediaStore` API to save files in the external storage directory. Here's an example of how you can modify your code to save the image using `MediaStore`:
+
+```
+private fun saveImageToFile(bitmap: Bitmap? = null): String? {
+    return try {
+        val resolver = context.contentResolver
+        val contentValues = ContentValues().apply {
+            put(MediaStore.Images.Media.DISPLAY_NAME, "image.jpg")
+            put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg")
+            put(MediaStore.Images.Media.RELATIVE_PATH, Environment.DIRECTORY_PICTURES + "/sample-take-image")
+        }
+        val imageUri = resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)
+        val outputStream = resolver.openOutputStream(imageUri!!)
+        bitmap?.apply {
+            this.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
+        }
+        outputStream?.flush()
+        outputStream?.close()
+        imageUri.toString()
+    } catch (e: Exception) {
+        e.printStackTrace()
+        ""
+    }
+}
+```
+
+This code creates a new file in the `Pictures/sample-take-image` directory and saves the image using the `MediaStore` API.

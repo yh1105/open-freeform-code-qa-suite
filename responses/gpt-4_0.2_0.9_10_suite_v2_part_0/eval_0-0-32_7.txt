@@ -1,0 +1,43 @@
+You can use the `react-intersection-observer` package from npm to detect when an element is in the viewport. This package uses the Intersection Observer API to tell you when an element enters or leaves the viewport.
+
+First, install the package using npm:
+
+```bash
+npm install react-intersection-observer
+```
+
+Then, you can use the `useInView` hook from the package in your component:
+
+```javascript
+import React from 'react';
+import { useInView } from 'react-intersection-observer';
+
+const MyComponent = () => {
+  const [ref, inView] = useInView({
+    triggerOnce: false, // Change this to true if you want the event to be triggered only once
+  });
+
+  return (
+    <div id="parent">
+      {data.map(item => {
+        const [refItem, inViewItem] = useInView({
+          triggerOnce: false,
+        });
+
+        return (
+          <div ref={refItem} id={item.id}>
+            {inViewItem ? 'In viewport' : 'Not in viewport'}
+            {data.title}
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+export default MyComponent;
+```
+
+In this code, `useInView` returns a `ref` and a boolean `inView`. You attach the `ref` to the element you want to observe, and `inView` will be `true` when the element is in the viewport and `false` when it's not.
+
+Please note that the Intersection Observer API is not supported in all browsers. You can check the current browser support on Can I use. If you need to support a browser that doesn't have native support, you can use a polyfill. The `react-intersection-observer` package recommends the `intersection-observer` polyfill.

@@ -1,0 +1,17 @@
+To create an animation after hovering over the link using Tailwind-CSS, you can use the `group-hover` variant and the `transform` property. Here's an example code:
+
+```html
+<a href="#" class="group text-sky-600 transition duration-300 relative">
+    Link
+    <span class="block max-w-0 duration-500 h-0.5 bg-sky-600 absolute bottom-0 left-0"></span>
+    <span class="block max-w-0 duration-500 h-0.5 bg-sky-600 absolute bottom-0 left-0 transform origin-right"></span>
+</a>
+```
+
+In this code, we added a second `span` element with the same class as the first one. We also added the `relative` class to the link to make the `span` elements positioned relative to it.
+
+Then, we added the `group-hover` variant to the link's class and the `transform` property to the second `span` element. The `transform` property will scale the `span` element from its origin, which we set to the right side of the link using the `origin-right` class.
+
+When you hover over the link, the second `span` element will scale from the right side of the link to the left side, creating an animation effect.
+
+Note: If you want to adjust the animation speed, you can change the `duration-500` class to a different value.

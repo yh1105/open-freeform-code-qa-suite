@@ -1,0 +1,12 @@
+This issue is caused by the way GitLab CI/CD processes variable expansion. In GitLab CI/CD, variables are expanded in two stages: first, the variables are expanded in the YAML file, and then they are expanded again in the runner environment. This means that nested variable expansion may not work as expected.
+
+To work around this issue, you can use a shell command to perform the nested expansion. For example, you can use the following script in your job:
+
+```
+job1:
+  script:
+    - GIT_BRANCH="${CI_MERGE_REQUEST_SOURCE_BRANCH_NAME:-${CI_COMMIT_BRANCH:-$CI_DEFAULT_BRANCH}}"
+    - echo $(eval echo $GIT_BRANCH)
+```
+
+This script sets the `GIT_BRANCH` variable using nested expansion, and then uses the `eval` command to perform the nested expansion in the runner environment. The `echo` command then outputs the expanded value of `GIT_BRANCH`.

@@ -1,0 +1,15 @@
+The Docker build output is different on macOS compared to Linux. On macOS, Docker runs in a virtual machine, and the Docker client communicates with the Docker daemon running inside this VM. This can lead to differences in the output of certain commands.
+
+The `--progress=plain` option is used to disable the build output being updated in-place, which is useful when the output is intended to be logged. However, it doesn't change the verbosity of the output.
+
+If you want to see the full output of a command run during the Docker build, you can try a couple of things:
+
+1. **Use the `RUN` command with `set -x`**: This will print out each command before it is executed. For example, you can change `RUN ls -la` to `RUN set -x && ls -la`.
+
+2. **Use the `docker logs` command**: If you want to see the output of a running container, you can use the `docker logs` command. For example, `docker logs <container_id>`.
+
+3. **Use the `-v` or `--verbose` option**: This option can increase the verbosity of the output. However, this option is not available for the `docker build` command.
+
+4. **Check the Docker documentation**: The Docker documentation might have more information on how to increase the verbosity of the Docker build output on macOS.
+
+Remember that the Docker build process on macOS might be different from Linux due to the use of a VM. This might affect the output of certain commands.

@@ -1,0 +1,14 @@
+The problem is that the command substitution `$(echo {} | sed 's/\?.*//g')` is evaluated before the `find` command is executed. So, the `mv` command sees the same name twice and hence the error.
+
+You can use a bash loop to solve this:
+
+```bash
+find . -type f -name '*\?*' | while read -r file
+do
+  mv "$file" "${file%%\?*}"
+done
+```
+
+This script finds all files with a '?' in their name, reads them line by line, and then renames each file by removing '?' and everything after it.
+
+Please note that this will overwrite files without any warning if a file with the new name already exists. Be careful when using this script.

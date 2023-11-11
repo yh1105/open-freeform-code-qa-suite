@@ -1,0 +1,32 @@
+You can use the `sort_by` method of the `Vec` struct to sort your vector of structs. This method takes a closure which receives two elements of the vector and must return an `Ordering`. You can use the `cmp` method of the `Ord` trait to compare the fields of your structs.
+
+Here's how you can do it:
+
+```rust
+my_vector.sort_by(|a, b| {
+    let row_cmp = a.row.cmp(&b.row);
+    if row_cmp == std::cmp::Ordering::Equal {
+        a.column.cmp(&b.column)
+    } else {
+        row_cmp
+    }
+});
+```
+
+In this code, we first compare the `row` fields of the structs. If they are equal, we compare the `column` fields. If they are not equal, we use the result of the first comparison.
+
+This will sort your vector in ascending order first by `row`, then by `column`. If you want to sort in descending order, you can use the `reverse` method of `Vec` after sorting:
+
+```rust
+my_vector.sort_by(|a, b| {
+    let row_cmp = a.row.cmp(&b.row);
+    if row_cmp == std::cmp::Ordering::Equal {
+        a.column.cmp(&b.column)
+    } else {
+        row_cmp
+    }
+});
+my_vector.reverse();
+```
+
+This will sort your vector in descending order first by `row`, then by `column`.

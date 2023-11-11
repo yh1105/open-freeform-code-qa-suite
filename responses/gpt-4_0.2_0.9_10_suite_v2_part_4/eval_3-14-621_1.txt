@@ -1,0 +1,29 @@
+You cannot directly initialize a `@State` variable in the `init()` method. Instead, you can use a workaround by using a temporary variable in the `init()` method and then assign that value to the `@State` variable in the `body`.
+
+Here is how you can do it:
+
+```swift
+struct StateFromOutside: View {
+    let list = [
+        "a": "Letter A",
+        "b": "Letter B",
+        // ...
+    ]
+    @State var fullText: String
+    var tempText: String
+
+    init(letter: String) {
+        self.tempText = list[letter]!
+        _fullText = State(initialValue: tempText)
+    }
+
+    var body: some View {
+        TextField("Enter text", text: $fullText)
+            .onAppear() {
+                self.fullText = self.tempText
+            }
+    }
+}
+```
+
+In this code, `tempText` is used to store the initial value from the `init()` method. Then, in the `body`, `fullText` is updated with the value of `tempText` when the view appears.

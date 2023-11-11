@@ -1,0 +1,60 @@
+The issue here is that you're mixing JavaScript and React event handling. In React, you don't use `onclick` and a separate `<script>` tag to define functions. Instead, you define your functions as methods in your component class and use `onClick` (note the capital 'C') to attach them to your elements.
+
+Here's a revised version of your code:
+
+```javascript
+import React, { Component } from 'react'
+
+class Main extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      imageURL: '',
+    };
+
+    this.handleUploadImage = this.handleUploadImage.bind(this);
+  }
+
+  handleUploadImage(ev) {
+    ev.preventDefault();
+
+    const data = new FormData();
+    data.append('file', this.uploadInput.files[0]);
+    data.append('filename', this.fileName.value);
+
+    fetch('http://localhost:8000/upload', {
+      method: 'POST',
+      body: data,
+    }).then((response) => {
+      response.json().then((body) => {
+        this.setState({ imageURL: `http://localhost:8000/${body.file}` });
+      });
+    });
+
+    alert("Your file is being uploaded!");
+  }
+
+  render() {
+    return (
+      <form onSubmit={this.handleUploadImage}>
+        <div>
+          <input ref={(ref) => { this.uploadInput = ref; }} type="file" />
+        </div>
+        <div>
+          <input ref={(ref) => { this.fileName = ref; }} type="text" placeholder="Enter the desired name of file" />
+        </div>
+        <br />
+        <div>
+          <button type="submit">Upload</button>
+        </div>
+        <img src={this.state.imageURL} alt="img" />
+      </form>
+    );
+  }
+}
+
+export default Main;
+```
+
+In this version, I've moved the `alert` call into the `handleUploadImage` method, which is called when the form is submitted. This way, the alert will only be shown when the user clicks the "Upload" button.

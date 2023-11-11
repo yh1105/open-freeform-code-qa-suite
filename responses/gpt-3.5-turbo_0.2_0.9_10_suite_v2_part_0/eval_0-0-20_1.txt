@@ -1,0 +1,26 @@
+To improve the efficiency and follow best practices, you should move the styled component outside of the functional component. This way, the component is only created once and reused instead of being recreated on every render. Here's the refactored code:
+
+```javascript
+import React from 'react'
+import styled from 'styled-components'
+
+const TabWrapper = styled.li`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 100px;
+  margin: 1px;
+  font-size: 3em;
+  color: ${props => (props.isSelected ? `white` : `black`)};
+  background-color: ${props => (props.isSelected ? `black` : `#C4C4C4`)};
+  cursor: ${props => (props.isSelected ? 'default' : `pointer`)};
+`
+
+const Tab = ({ onClick, isSelected, children }) => {
+  return <TabWrapper isSelected={isSelected} onClick={onClick}>{children}</TabWrapper>
+}
+
+export default Tab
+``` 
+
+In the refactored code, the `TabWrapper` is defined outside of the `Tab` component and is passed the `isSelected` prop as a styled-component prop. This way, the `TabWrapper` is only created once and reused every time the `Tab` component is rendered.

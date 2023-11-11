@@ -1,0 +1,15 @@
+The error message is telling you that you should use a string or a number as the value for the `key` attribute in your `v-for` loop, instead of using the entire `comment` object.
+
+To fix the error, you can change the `:key` attribute to use a unique identifier from the `comment` object, such as its `id` or `index`:
+
+```html
+<div v-for="(comment, index) in comments" :key="index">
+```
+
+Or, if your `comment` objects have a unique `id` property, you can use that instead:
+
+```html
+<div v-for="comment in comments" :key="comment.id">
+```
+
+Using a unique identifier as the `key` value helps Vue keep track of which elements have changed, been added, or been removed, and can improve performance when rendering lists.

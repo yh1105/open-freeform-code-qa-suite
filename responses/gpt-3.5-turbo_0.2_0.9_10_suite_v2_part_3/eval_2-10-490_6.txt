@@ -1,0 +1,13 @@
+Yes, there is a better way to write this code. You can use the `map()` and `and_then()` methods of the `Option` type to chain the calls together in a more readable way. Here's an example of how you could refactor the code:
+
+```rust
+if let Some(i) = func1().and_then(func2).and_then(func3).and_then(func4) {
+    // Do something with i
+} else {
+    println!("One of the functions returned None");
+}
+```
+
+In this code, the `and_then()` method is used to chain the calls together. If any of the functions return `None`, the chain is broken and the `else` block is executed. Otherwise, the final result is passed to the `if let` block for further processing.
+
+This code is much more readable and easier to understand than the nested `if let` statements.

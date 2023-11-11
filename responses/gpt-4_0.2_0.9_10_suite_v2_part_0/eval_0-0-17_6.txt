@@ -1,0 +1,26 @@
+Sure, you can use the `keydown` event to listen for the "enter" key. Here is your revised code:
+
+```javascript
+import { Editor, StarterKit } from '@tiptap/vue-2'
+import { Keymap } from '@tiptap/core'
+import { defaultKeymap } from '@tiptap/extension-paragraph'
+
+mounted() {
+  let editor = new Editor({
+    extensions: [
+      StarterKit,
+      Keymap({
+        ...defaultKeymap,
+        'Enter': () => {
+          console.log("good");
+          return true;
+        }
+      })
+    ],
+    content: this.value
+  });
+  this.editor = editor;
+}
+```
+
+In this code, we are using the `Keymap` extension from `@tiptap/core` to listen for the "enter" key. When the "enter" key is pressed, it will execute `console.log("good")`.

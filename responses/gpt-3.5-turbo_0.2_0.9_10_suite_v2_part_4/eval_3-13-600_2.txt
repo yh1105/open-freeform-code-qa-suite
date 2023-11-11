@@ -1,0 +1,7 @@
+You can disable the animation in ViewPager2 by using the `setCurrentItem` method with the `false` parameter. This will disable the smooth scrolling animation and directly show the new fragment. Here's an example:
+
+```
+viewPager2.setCurrentItem(position, false);
+```
+
+Where `position` is the index of the fragment you want to show.

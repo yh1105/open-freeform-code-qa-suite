@@ -124,6 +124,8 @@ def blank_filling_match(template: str, blank_str: str, escape: str, targets: Lis
                 anses = target['content']
                 if isinstance(anses, str):
                     anses = [anses]
+                if isinstance(anses, str):
+                    anses = [anses]
 
             matched = False
             now_status = 'unmatched'

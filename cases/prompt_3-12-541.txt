@@ -1,0 +1,60 @@
+How to change the background color of a button dynamically in onPressed()
+
+I have a list of Raised buttons, I want the background color of the selected button to change in its onPressed()
+
+I tried changing the color in setState but it doesn't do anything.
+
+This is the function that generates the list of Buttons
+
+```
+List<Widget> _makeZoneList(List<Zone> zones) {
+    List<Widget>Buttons = new List();
+    for (int i = 0; i < zones.length; i++) {
+      Buttons.add(RaisedButton(
+        color: zones[i].isSelected ? AppColors.primaryColor : AppColors.white,
+        onPressed: () {
+          setState(() {
+            if (zones[i].isSelected){
+              zones[i].isSelected = false;
+            }
+            else{
+              zones[i].isSelected = true;
+            }
+            print(zones[i].isSelected.toString());
+          });
+        },
+        child: Text(zones.elementAt(i).text)
+      ));
+    }
+    return Buttons;
+  }
+```
+
+
+This is where I call the function
+
+```
+Widget _zoneBody() {
+    return Padding(
+        padding: EdgeInsets.all(32),
+        child: StreamBuilder<List<Zone>>(
+            stream: GetterBloc.zonesStream,
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return new Container();
+              } else {
+                if (snapshot.hasData) {
+                     return Wrap(
+                          spacing: 6.0, // gap between adjacent chips
+                          children: _makeZoneList(snapshot.data));
+
+                } else {
+                  return new Container();
+                }
+              }
+            }));
+  }
+```
+
+
+When I press any button, its isSelected value changes but the background doesn't change accordingly

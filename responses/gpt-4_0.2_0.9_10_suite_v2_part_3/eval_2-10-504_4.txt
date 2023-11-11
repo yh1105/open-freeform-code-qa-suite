@@ -1,0 +1,45 @@
+The two ways you've implemented are already quite good. The first one uses the `itertools` crate's `unique` method to remove duplicates, and the second one uses a `HashSet` to filter out duplicates.
+
+However, if you want to simplify it further, you can use the `HashSet` method directly on the `Person` struct, but you need to implement `Hash`, `Eq`, and `PartialEq` for the `Person` struct. Here's how you can do it:
+
+```rust
+use std::collections::HashSet;
+use std::hash::{Hash, Hasher};
+
+#[derive(Debug)]
+struct Person {
+    name: String,
+    age: u32,
+}
+
+impl PartialEq for Person {
+    fn eq(&self, other: &Self) -> bool {
+        self.name == other.name && self.age == other.age
+    }
+}
+
+impl Eq for Person {}
+
+impl Hash for Person {
+    fn hash<H: Hasher>(&self, state: &mut H) {
+        self.name.hash(state);
+        self.age.hash(state);
+    }
+}
+
+fn main() {
+    let arr = [
+        Person { name: "aaa".to_string(), age: 10 },
+        Person { name: "bbb".to_string(), age: 20 },
+        Person { name: "bbb".to_string(), age: 20 },
+        Person { name: "ccc".to_string(), age: 30 },
+    ];
+
+    let unique: HashSet<_> = arr.iter().collect();
+    let arr2: Vec<_> = unique.into_iter().collect();
+
+    dbg!(arr2);
+}
+```
+
+In this code, we've implemented `PartialEq`, `Eq`, and `Hash` for `Person`, which allows us to use a `HashSet` directly on an array of `Person` objects. This will automatically remove duplicates because a `HashSet` only allows unique elements. Then we convert the `HashSet` back into a `Vec` for further use.

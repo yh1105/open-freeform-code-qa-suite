@@ -1,0 +1,10 @@
+You can use the `Contains` method of an array to check if a specified folder is in your PATH. Here is a function that does this:
+
+```powershell
+function FolderIsInPATH($Path_to_directory) {
+    $envPath = $env:Path -split ';'
+    return $envPath.Contains($Path_to_directory)
+}
+```
+
+This function splits the PATH environment variable into an array of directories and checks if the specified directory is in this array. It returns true if the directory is in the PATH, and false otherwise.

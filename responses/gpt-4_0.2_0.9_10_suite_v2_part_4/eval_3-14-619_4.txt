@@ -1,0 +1,37 @@
+The `@Binding` property wrapper is used to create a two-way connection between properties that store data. However, in your case, you're using `@Binding` in a root view (`ContentView`). 
+
+The `@Binding` should be used in a child view that needs to mutate the data owned by the parent view. The parent view should use `@State` to own the data.
+
+Here's how you can modify your code:
+
+```swift
+import SwiftUI
+
+struct ContentView: View {
+    @State private var isSelected: Bool = false
+
+    var body: some View {
+        ChildView(isSelected: $isSelected)
+    }
+}
+
+struct ChildView: View {
+    @Binding var isSelected: Bool
+
+    var body: some View {
+        Button(action: {
+            self.isSelected.toggle()
+        }) {
+            Text(isSelected ? "Selected" : "Not Selected")
+        }
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
+}
+```
+
+In this code, `ContentView` owns the `isSelected` state, and `ChildView` has a binding to it, allowing it to mutate the state.

@@ -1,0 +1,7 @@
+It sounds like you might be referring to Emmet, a tool that allows you to write HTML and CSS code faster and more efficiently. Emmet uses abbreviations to generate code snippets, such as `.classname` for a div with a class name. 
+
+To use Emmet, you need to have it installed in your code editor. Most popular code editors, such as Visual Studio Code, Sublime Text, and Atom, have Emmet built-in or available as an extension. 
+
+Once you have Emmet installed, you can use its abbreviations to generate code snippets. For example, typing `.classname` and then pressing the Tab key will generate `<div class="classname"></div>`.
+
+If you're still having trouble, make sure that Emmet is enabled in your code editor's settings and that you're using the correct syntax for the abbreviation. You can find more information and a list of Emmet abbreviations on the official Emmet website.

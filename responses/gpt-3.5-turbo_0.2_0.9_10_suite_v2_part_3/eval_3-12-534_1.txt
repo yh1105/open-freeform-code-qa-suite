@@ -1,0 +1,75 @@
+To use multiple Consumers for a single widget in Flutter Provider, you can wrap your widget with multiple Consumer widgets and provide each Consumer with the respective ChangeNotifier instance.
+
+Here's an example code snippet:
+
+```dart
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+
+import 'package:my_app/notifiers/item1_notifier.dart';
+import 'package:my_app/notifiers/item2_notifier.dart';
+import 'package:my_app/notifiers/item3_notifier.dart';
+import 'package:my_app/notifiers/item4_notifier.dart';
+
+class MyWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Consumer<Item1Notifier>(
+              builder: (context, item1Notifier, child) {
+                return Text('Item 1 count: ${item1Notifier.count}');
+              },
+            ),
+            Consumer<Item2Notifier>(
+              builder: (context, item2Notifier, child) {
+                return Text('Item 2 count: ${item2Notifier.count}');
+              },
+            ),
+            Consumer<Item3Notifier>(
+              builder: (context, item3Notifier, child) {
+                return Text('Item 3 count: ${item3Notifier.count}');
+              },
+            ),
+            Consumer<Item4Notifier>(
+              builder: (context, item4Notifier, child) {
+                return Text('Item 4 count: ${item4Notifier.count}');
+              },
+            ),
+          ],
+        ),
+      ),
+      bottomNavigationBar: CurvedNavigationBar(
+        items: [
+          Icon(Icons.home),
+          Icon(Icons.search),
+          Icon(Icons.favorite),
+          Icon(Icons.person),
+        ],
+        onTap: (index) {
+          switch (index) {
+            case 0:
+              Provider.of<Item1Notifier>(context, listen: false).increment();
+              break;
+            case 1:
+              Provider.of<Item2Notifier>(context, listen: false).increment();
+              break;
+            case 2:
+              Provider.of<Item3Notifier>(context, listen: false).increment();
+              break;
+            case 3:
+              Provider.of<Item4Notifier>(context, listen: false).increment();
+              break;
+          }
+        },
+      ),
+    );
+  }
+}
+```
+
+In this example, we have four different ChangeNotifier classes (`Item1Notifier`, `Item2Notifier`, `Item3Notifier

@@ -1,0 +1,5 @@
+You can try using the `--no-cache` flag with the `docker build` command to force a rebuild of all layers and see if that shows the full build output. 
+
+Additionally, you can try using the `docker build --progress=plain` command with the `--tty` flag to force Docker to output the full build log. 
+
+If neither of these solutions work, you can try using a third-party tool like `docker-compose` or `buildkit` to build your Docker images and see if they provide more detailed output.

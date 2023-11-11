@@ -1,0 +1,7 @@
+The issue is that the `$(echo {} | sed 's/\?.*//g')` part of your command is evaluated before the `find` command is run, so it doesn't have the expected effect. You need to use a shell command to delay the evaluation. Here's a corrected version of your command:
+
+```bash
+find . -type f -name '*\?*' -exec bash -c 'mv "$0" "${0%%\?*}"' {} \;
+```
+
+This command uses `bash -c` to run a shell command, and `${0%%\?*}` to remove the `?` and everything after it from the filename. The `{}` is passed as an argument to the shell command, and `$0` inside the shell command is replaced with the argument.

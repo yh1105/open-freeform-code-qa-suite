@@ -1,0 +1,31 @@
+The `SelectByID2` method requires the name of the entity to be selected. For faces, edges, and vertices, these are usually not named, so you can't select them directly using `SelectByID2`. 
+
+However, you can create reference geometry (like points) at the locations you're interested in, and then select those using `SelectByID2`, as they will have names. 
+
+Here's an example of how you might create a reference point at the midpoint of an edge:
+
+```vba
+Dim swRefPt As SldWorks.RefPoint
+Dim swEdge As SldWorks.Edge
+Dim swCurve As SldWorks.Curve
+Dim swRefPtData As SldWorks.RefPointFeatureData
+Dim swFeat As SldWorks.Feature
+
+Set swEdge = swSelMgr.GetSelectedObject6(1, -1)
+Set swCurve = swEdge.GetCurve
+Set swFeat = swPart.FeatureManager.InsertReferencePoint( _
+    swRefPointType_e.swRefPointAlongCurve, swCurve, 0.5)
+Set swRefPt = swFeat.GetSpecificFeature2
+```
+
+Now, you can select this reference point using `SelectByID2`:
+
+```vba
+swModel.Extension.SelectByID2(swRefPt.Name, "DATUMPOINT", 0, 0, 0, False, 0, Nothing, 0)
+```
+
+You can do something similar for the face: create a reference plane on the face, and then select that using `SelectByID2`. 
+
+Once you have both the point and the plane selected, you can use `InsertRefPlane` to create a reference plane. 
+
+Remember to clear the selection before each `SelectByID2` call if you don't want to append to the current selection.

@@ -1,0 +1,17 @@
+This issue is caused by the incompatibility between Jacoco 0.8.6 and Kotlin 1.5.10. To fix this issue, you can try upgrading Jacoco to version 0.8.7 or higher. 
+
+To upgrade Jacoco, change the `toolVersion` in your `build.gradle` file to:
+```
+jacoco {
+    toolVersion = "0.8.7"
+}
+```
+
+If upgrading Jacoco doesn't work, you can try downgrading Kotlin to version 1.5.0 or lower. 
+
+To downgrade Kotlin, change the `kotlin_version` in your `build.gradle` file to:
+```
+kotlin_version = "1.5.0"
+```
+
+After making these changes, run the test coverage report task again and it should work without any issues.

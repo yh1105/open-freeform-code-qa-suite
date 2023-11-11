@@ -1,0 +1,17 @@
+The code you've provided seems correct, but the issue might be that the state of `isSelected` isn't being managed properly. The `@Binding` property wrapper is used to create a two-way connection between a property that stores data, and a view that displays and changes the data. 
+
+In your case, `ContentView` is trying to modify `isSelected`, but there's no source of truth for this data. The `@State` property wrapper should be used in the parent view to create a source of truth for the data.
+
+Here's an example of how you might use `ContentView` in a parent view:
+
+```swift
+struct ParentView: View {
+    @State private var isSelected: Bool = false
+
+    var body: some View {
+        ContentView(isSelected: $isSelected)
+    }
+}
+```
+
+In this example, `ParentView` is the source of truth for `isSelected`. When `ContentView` modifies `isSelected`, the change is reflected in `ParentView`, which causes `ParentView` to re-render, and `ContentView` gets the updated value.

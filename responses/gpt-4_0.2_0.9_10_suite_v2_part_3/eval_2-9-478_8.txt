@@ -1,0 +1,23 @@
+The error you're encountering is likely due to a compatibility issue between the version of Rails you're using and the version of Devise. 
+
+Devise 4.8.0 is not compatible with Rails versions below 5.2. You might be using an older version of Rails which is causing this issue.
+
+You have two options to fix this:
+
+1. Upgrade your Rails version to a compatible one. You can do this by updating your Gemfile:
+
+```ruby
+gem 'rails', '~> 5.2'
+```
+
+Then run `bundle update rails` in your terminal.
+
+2. If you don't want to upgrade Rails, you can use an older version of Devise that is compatible with your Rails version. You can do this by specifying the version in your Gemfile:
+
+```ruby
+gem 'devise', '~> 4.7.0'
+```
+
+Then run `bundle update devise` in your terminal.
+
+Remember to restart your server after making these changes.

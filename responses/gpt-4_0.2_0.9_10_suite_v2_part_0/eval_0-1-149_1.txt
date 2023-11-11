@@ -1,0 +1,24 @@
+Sure, I can help you with that. Here's how you can achieve a hover animation effect using Tailwind CSS:
+
+```html
+<a href="#" class="group relative text-sky-600 transition duration-300">
+    Link
+    <span class="absolute left-0 w-0 h-0.5 bg-sky-600 transition-all duration-500 group-hover:w-full"></span>
+</a>
+```
+
+In the above code, I've made the following changes:
+
+1. I've added the `relative` class to the anchor tag. This is to position the span element relative to the anchor tag.
+
+2. I've added the `absolute` class to the span element. This is to position the span element absolutely within the anchor tag.
+
+3. I've added the `left-0` class to the span element. This is to position the span element at the left edge of the anchor tag.
+
+4. I've added the `w-0` class to the span element. This is to initially set the width of the span element to 0.
+
+5. I've added the `transition-all` class to the span element. This is to apply a transition effect to all properties of the span element.
+
+6. I've added the `group-hover:w-full` class to the span element. This is to set the width of the span element to full when the anchor tag is hovered over.
+
+With these changes, the span element will animate from a width of 0 to full width when the anchor tag is hovered over, creating a hover animation effect.

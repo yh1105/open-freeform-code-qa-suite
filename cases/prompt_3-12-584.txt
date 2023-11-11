@@ -1,0 +1,19 @@
+Flutter stuck at Installing build\app\outputs\apk\app.apk
+
+When I run:
+```
+$ flutter run
+```
+
+I'm getting a prompt on my mobile device asking if I want to install the app on my device. I give yes, then nothing happens!
+It's stuck here:
+```
+Launching lib/main.dart on POCO F1 in debug mode...
+Initializing gradle...                                           1.5s
+Resolving dependencies...                                        9.2s
+Gradle task 'assembleDebug'...                                  22.9s
+Built build\app\outputs\apk\debug\app-debug.apk.
+Installing build\app\outputs\apk\app.apk...                     14.9s
+```
+
+Then nothing.

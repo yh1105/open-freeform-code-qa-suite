@@ -1,0 +1,32 @@
+The error message indicates that the version of Kotlin used to compile the module is not compatible with the version expected by your project. To resolve this issue, you can try the following steps:
+
+1. Update the Kotlin version in your project to match the version used by the module. In this case, you need to update your Kotlin version to 1.5.1.
+
+2. Clean and rebuild your project to ensure that the changes take effect.
+
+Regarding adding email and cardholder name in Stripe, you can use the `com.stripe.android.model.Card` class to create a card object with the required information and then use the `com.stripe.android.Stripe` class to create a payment method with the card object. Here's an example:
+
+```kotlin
+val card = Card.create(
+    "4242424242424242",
+    12,
+    2022,
+    "123"
+)
+card.email = "test@example.com"
+card.name = "John Doe"
+
+val stripe = Stripe(context, "pk_test_...")
+stripe.createPaymentMethod(
+    PaymentMethodCreateParams.create(
+        card.toPaymentMethodParamsCard(),
+        PaymentMethod.BillingDetails.Builder()
+            .setEmail(card.email)
+            .setName(card.name)
+            .build()
+    ),
+    callback
+)
+```
+
+Note that you need to replace `"pk_test_..."` with your actual publishable key. Also, make sure to handle the callback appropriately.

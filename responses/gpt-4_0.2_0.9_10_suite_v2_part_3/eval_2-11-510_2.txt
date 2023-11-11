@@ -1,0 +1,27 @@
+The error you're encountering is because you're trying to use `std::filesystem` but you've included `<experimental/filesystem>`. In C++17, the filesystem library was still experimental and was under `std::experimental::filesystem`, not `std::filesystem`.
+
+Here's how you can fix your code:
+
+```c++
+#include <experimental/filesystem>
+#include <iostream>
+#include <vector>
+
+namespace fs = std::experimental::filesystem;
+
+int main(int argc, char** argv)
+{
+    std::string imageDirectory = "./image";
+    std::vector<std::string> imagePath;
+    for (const auto& entry: fs::directory_iterator(imageDirectory))
+    {
+        imagePath.push_back(entry.path());
+        std::cout << entry.path() << std::endl;
+    }
+    return 0;
+}
+```
+
+In this code, I've created a namespace alias `fs` for `std::experimental::filesystem` to make the code easier to read and write. Then, I've replaced `std::filesystem` with `fs`.
+
+If you're using a C++17 or later compiler and want to use `std::filesystem`, you should include `<filesystem>` instead of `<experimental/filesystem>`. However, note that not all compilers fully support `<filesystem>` in C++17. For example, GCC didn't fully support `<filesystem>` until version 8.1. If you're using an older compiler, you may need to stick with `<experimental/filesystem>`.

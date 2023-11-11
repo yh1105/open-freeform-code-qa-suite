@@ -1,0 +1,33 @@
+The `@State` property wrapper is designed to be used within the `body` property of a `View`. It's not designed to be manipulated directly in the `init()` method of a `View`. 
+
+However, you can use a different property wrapper, `@StateObject`, to create a class that will manage your state and can be initialized with a value. Here's an example:
+
+```swift
+class TextManager: ObservableObject {
+    @Published var fullText: String
+
+    init(fullText: String) {
+        self.fullText = fullText
+    }
+}
+
+struct StateFromOutside: View {
+    let list = [
+        "a": "Letter A",
+        "b": "Letter B",
+        // ...
+    ]
+
+    @StateObject var textManager: TextManager
+
+    init(letter: String) {
+        _textManager = StateObject(wrappedValue: TextManager(fullText: list[letter] ?? ""))
+    }
+
+    var body: some View {
+        TextField("Enter text", text: $textManager.fullText)
+    }
+}
+```
+
+In this example, `TextManager` is a class that manages the state of `fullText`. It's initialized with the value from the `list` dictionary. The `StateFromOutside` struct then uses a `@StateObject` to manage an instance of `TextManager`.

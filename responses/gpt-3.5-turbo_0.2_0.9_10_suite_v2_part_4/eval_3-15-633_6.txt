@@ -1,0 +1,9 @@
+Yes, you can achieve the same result as the FILTER function in Office 365 by using the combination of INDEX and MATCH functions in Excel. Here's an example formula that should work for you:
+
+`=INDEX(B:B, MATCH("x", A:A, 0))`
+
+This formula will return the first value in `Column B` that corresponds to the first occurrence of "x" in `Column A`. If you want to return all the values that correspond to "x" in `Column A`, you can use the following formula instead:
+
+`=IFERROR(INDEX(B:B, SMALL(IF(A:A="x", ROW(A:A)-ROW(INDEX(A:A,1,1))+1), ROWS(A$1:A1))), "")`
+
+This is an array formula, so you need to enter it with `Ctrl+Shift+Enter`. Then you can drag it down to return all the values that correspond to "x" in `Column A`.

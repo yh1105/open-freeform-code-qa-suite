@@ -1,0 +1,19 @@
+Sure, here is the completed JavaScript template:
+
+Way 1:
+
+```javascript
+cy.get(".ibxudA").find('.WildnessText-kRKTej').should('have.text', "Wildness")
+```
+
+Way 2:
+
+```javascript
+cy.get(".ibxudA").find('.WildnessText-kRKTej').invoke('text').then((text) => {
+    expect(text.trim()).to.equal('Wildness')
+});
+```
+
+In the first way, we are using `cy.get` to select the parent div with class `ibxudA`, then using `find` to select the child div with class `WildnessText-kRKTej`. We then use `should` to assert that the text of this div should be "Wildness".
+
+In the second way, we are doing the same selection, but instead of using `should`, we are invoking the `text` method to get the text of the div. We then use a callback function to trim the text (remove any leading or trailing whitespace) and use `expect` to assert that the trimmed text should be "Wildness".

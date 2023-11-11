@@ -1,0 +1,17 @@
+Sure, here is the code snippet with the blanks filled:
+
+```rust
+    let ix = anchor_lang::solana_program::system_instruction::transfer(
+        from_pubkey, // The account from which SOL will be transferred
+        to_pubkey, // The account to which SOL will be transferred
+        amount, // The amount of SOL to be transferred
+    );
+    anchor_lang::solana_program::program::invoke(
+        &ix,
+        &[
+            from_account_info, // The account info of the account from which SOL will be transferred
+            to_account_info, // The account info of the account to which SOL will be transferred
+        ],
+    );
+```
+In this code snippet, `from_pubkey` and `to_pubkey` are the public keys of the accounts involved in the transfer. `from_account_info` and `to_account_info` are the corresponding account info objects. `amount` is the amount of SOL to be transferred.

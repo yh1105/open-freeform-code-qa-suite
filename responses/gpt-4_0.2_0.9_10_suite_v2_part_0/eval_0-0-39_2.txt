@@ -1,0 +1,52 @@
+Yes, you can achieve this by using the `ref` attribute in React. You can create a reference to the form in the `CustomForm` component and then pass this reference to the parent component (`App`), which can use it to submit the form when the 'In Root' button is clicked.
+
+Here is how you can modify your code:
+
+```javascript
+import React, { Component, createRef } from "react";
+import ReactDOM from "react-dom";
+
+class CustomForm extends Component {
+  formRef = createRef();
+
+  componentDidMount() {
+    this.props.setFormRef(this.formRef);
+  }
+
+  render() {
+    return (
+      <form ref={this.formRef} id='my-form' onSubmit={(e) => {e.preventDefault(); alert('Form submitted!')}}>
+        <button type='submit'>Inside Custom</button>
+      </form>
+    );
+  }
+}
+
+class App extends Component {
+  formRef = null;
+
+  setFormRef = (ref) => {
+    this.formRef = ref;
+  }
+
+  handleSubmit = () => {
+    if (this.formRef.current) {
+      this.formRef.current.dispatchEvent(new Event('submit', { cancelable: true }));
+    }
+  }
+
+  render() {
+    return (
+      <div>
+        <CustomForm setFormRef={this.setFormRef} />
+        <button onClick={this.handleSubmit}>In Root</button>
+      </div>
+    );
+  }
+}
+
+const rootElement = document.getElementById("root");
+ReactDOM.render(<App />, rootElement);
+```
+
+In this code, `CustomForm` creates a `ref` to its form and passes it to `App` via a prop function `setFormRef`. `App` then uses this `ref` to submit the form when the 'In Root' button is clicked. The `handleSubmit` function in `App` dispatches a 'submit' event on the form when the 'In Root' button is clicked.

@@ -1,0 +1,20 @@
+To transfer native SOL directly into the event account's vault address in an anchor smart contract instruction, you can use the following code:
+
+```
+let ix = anchor_lang::solana_program::system_instruction::transfer(
+    from_wallet_address,
+    &event_account.vault,
+    amount,
+);
+anchor_lang::solana_program::program::invoke(
+    &ix,
+    &[
+        &event_account.vault,
+        &spl_token::id(),
+    ],
+)?;
+```
+
+Replace `from_wallet_address` with the address of the wallet that is sending the SOL, and `event_account` with the struct representing the event account in your program. 
+
+Note that the second argument of the `invoke` function is an array of program IDs, and in this case we are passing the ID of the SPL Token program. This is because the event account's vault address is a token account, and the SPL Token program is responsible for managing token accounts.

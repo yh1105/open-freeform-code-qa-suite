@@ -1,0 +1,12 @@
+The `truncate` class in TailwindCSS only works if the element has a fixed width. You can add the `w-` class to set the width of the element. Here's an example:
+
+```html
+<div class="ml-1 inline-block">
+   <span>Label: </span>
+   <span class="font-semibold truncate w-40">
+     long texttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt
+   </span>
+</div>
+```
+
+In this example, the `w-40` class sets the width of the element to 40rem. You can adjust the width to fit your needs.

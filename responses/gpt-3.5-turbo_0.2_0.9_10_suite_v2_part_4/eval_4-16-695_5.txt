@@ -1,0 +1,9 @@
+You can try using the `--no-cache` flag with the `docker build` command to force a rebuild of all layers, including the ones that were previously cached. This should show you the full output of each step, including steps 7 and 15 that you mentioned.
+
+For example, you can run the following command to rebuild your Docker image with the `--no-cache` flag:
+
+```
+docker build --no-cache -t myimage .
+```
+
+This should give you the full output of each step during the build process.

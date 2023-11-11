@@ -1,0 +1,9 @@
+The error you're facing is due to a change in Android 12 (API level 31) that requires you to specify whether a `PendingIntent` is mutable or immutable. 
+
+The `MediaSessionCompat` class in the AndroidX Media library version 1.4.0 is not yet fully compatible with Android 12. The TODO comment in the code you posted indicates that the Android team is aware of the issue and plans to fix it in a future release.
+
+In the meantime, you can work around this issue by downgrading your `targetSdkVersion` to 30 or lower until the AndroidX Media library is updated to fully support Android 12.
+
+If you need to target API level 31, you might have to wait for an update to the AndroidX Media library that fixes this issue. You can keep an eye on the [AndroidX releases page](https://developer.android.com/jetpack/androidx/versions/all-channel#september_29_2021) for updates.
+
+Remember to test your app thoroughly if you decide to downgrade your `targetSdkVersion`.

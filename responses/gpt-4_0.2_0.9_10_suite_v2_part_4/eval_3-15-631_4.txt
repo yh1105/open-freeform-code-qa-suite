@@ -1,0 +1,51 @@
+To remove the spaces from your output, you can simply replace the space character with an empty string. You can do this by modifying the `Case Else` line in your code. Here's how you can do it:
+
+```vba
+Sub ReplaceSpecial()
+    Dim cel As Range
+    Dim strVal As String
+    Dim i As Long
+    Application.ScreenUpdating = False
+    For Each cel In Selection
+        strVal = cel.Value
+        For i = 1 To Len(strVal)
+            Select Case Asc(Mid(strVal, i, 1))
+                Case 32, 48 To 57, 65 To 90, 97 To 122
+                    ' Leave ordinary characters alone
+                Case Else
+                    Mid(strVal, i, 1) = ""
+            End Select
+        Next i
+        cel.Value = strVal
+    Next cel
+    Application.ScreenUpdating = True
+End Sub
+```
+
+However, this code will not work as expected because the `Mid` function in VBA does not allow to replace a character with an empty string. 
+
+A better approach would be to build a new string with only the characters you want to keep. Here's how you can do it:
+
+```vba
+Sub ReplaceSpecial()
+    Dim cel As Range
+    Dim strVal As String
+    Dim i As Long
+    Dim newStr As String
+    Application.ScreenUpdating = False
+    For Each cel In Selection
+        strVal = cel.Value
+        newStr = ""
+        For i = 1 To Len(strVal)
+            Select Case Asc(Mid(strVal, i, 1))
+                Case 48 To 57, 65 To 90, 97 To 122
+                    newStr = newStr & Mid(strVal, i, 1)
+            End Select
+        Next i
+        cel.Value = newStr
+    Next cel
+    Application.ScreenUpdating = True
+End Sub
+```
+
+This code will create a new string (`newStr`) for each cell, and only add the characters to it that are numbers or letters. After it has checked all characters, it will replace the cell's value with the new string.

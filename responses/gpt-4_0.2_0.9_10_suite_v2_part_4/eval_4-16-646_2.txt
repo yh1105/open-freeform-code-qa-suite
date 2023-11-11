@@ -1,0 +1,15 @@
+The error message "bad CPU type in executable" usually means that the binary you're trying to run is not compatible with the architecture of your CPU. In the case of macOS Catalina, Apple dropped support for 32-bit applications, so if you're trying to run a 32-bit binary, you'll get this error.
+
+The `pdftk` tool has not been updated for a while, and the version you're trying to use is likely not compatible with macOS Catalina.
+
+Here are some alternatives you can use:
+
+1. **PDFtk Server**: This is a command-line tool that is a part of the PDFtk toolkit. It is updated and should work on macOS Catalina. You can download it from the [PDF Labs website](https://www.pdflabs.com/tools/pdftk-server/).
+
+2. **PDFsam**: This is a free, open-source tool that can perform many of the same functions as PDFtk. It has a graphical user interface, but also provides a command-line interface for scripting. You can download it from the [PDFsam website](https://pdfsam.org/).
+
+3. **Poppler**: This is a PDF rendering library that comes with a set of command-line tools for manipulating PDF files. It is updated regularly and should work on macOS Catalina. You can install it using Homebrew with the command `brew install poppler`.
+
+4. **QPDF**: This is another command-line tool that can manipulate PDF files. It is updated regularly and should work on macOS Catalina. You can install it using Homebrew with the command `brew install qpdf`.
+
+Remember to uninstall the old `pdftk` version before installing any of these alternatives. You can do this with the command `brew uninstall pdftk`.

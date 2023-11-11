@@ -1,0 +1,66 @@
+The error message you're seeing indicates that the Kotlin version used to compile one of your dependencies is not compatible with the Kotlin version you're using in your project. 
+
+To solve this issue, you should update your Kotlin version to match the version used by your dependencies. In your case, you should update your Kotlin version to 1.5.1 or above.
+
+Here's how you can do it:
+
+1. Open your project-level `build.gradle` file.
+2. Update the Kotlin version in the `buildscript` block:
+
+```gradle
+buildscript {
+    ext.kotlin_version = '1.5.1' // or the latest version
+    repositories {
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        // other classpath dependencies...
+    }
+}
+```
+
+3. Then, open your module-level `build.gradle` file and update the Kotlin standard library dependency to match the new version:
+
+```gradle
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    // other dependencies...
+}
+```
+
+4. Sync your project with Gradle files.
+
+As for the second part of your question, the `CardMultilineWidget` does not support collecting email and cardholder name. You would need to create separate input fields for these. You can use standard Android `EditText` fields for this purpose. 
+
+Here's a simple example:
+
+```xml
+<EditText
+    android:id="@+id/emailField"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:inputType="textEmailAddress"
+    android:hint="Email" />
+
+<EditText
+    android:id="@+id/cardholderNameField"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:inputType="textPersonName"
+    android:hint="Cardholder Name" />
+
+<com.stripe.android.view.CardMultilineWidget
+    android:id="@+id/cardInputWidget"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" />
+```
+
+Then in your code, you can retrieve the entered email and cardholder name like this:
+
+```kotlin
+val emailField = findViewById<EditText>(R.id.emailField)
+val cardholderNameField = findViewById<EditText>(R.id.cardholderNameField)
+
+val email = emailField

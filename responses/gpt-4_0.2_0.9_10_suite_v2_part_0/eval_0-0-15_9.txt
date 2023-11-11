@@ -1,0 +1,14 @@
+Sure, the issue here is that you're mocking the API class to return an object, but then you're trying to use the `new` keyword with it, which is causing the error. You should mock the API class to return a function that creates an object. Here's how you can do it:
+
+```javascript
+import API from 'utils/API';
+
+jest.mock('utils/API', () => {
+  // Returns a function that creates an object
+  return jest.fn().mockImplementation(() => {
+    return {someMethod: () => {}};
+  });
+});
+```
+
+Now, you can use `const api = new API()` without any issues.

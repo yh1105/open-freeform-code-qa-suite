@@ -1,0 +1,33 @@
+Yes, you can achieve the same result using an array formula in Excel 2019. Here's how you can do it:
+
+```excel
+=IFERROR(INDEX($B$1:$B$100, SMALL(IF($A$1:$A$100="x", ROW($A$1:$A$100)-ROW(INDEX($A$1:$A$100,1,1))+1), ROW(1:1))), "")
+```
+
+This is an array formula, so you need to press Ctrl+Shift+Enter after typing it, instead of just Enter. Excel will then surround the formula with curly braces `{}` to indicate that it's an array formula.
+
+This formula will return the first match. To get the next matches, you need to drag the formula down.
+
+If you want to use a VBA Macro, here's a simple one:
+
+```vba
+Sub FilterData()
+    Dim rng As Range
+    Dim outRng As Range
+    Dim i As Integer
+    Dim j As Integer
+
+    Set rng = Worksheets("Sheet1").Range("A1:B100")
+    Set outRng = Worksheets("Sheet1").Range("D1")
+
+    j = 0
+    For i = 1 To rng.Rows.Count
+        If rng.Cells(i, 1).Value = "x" Then
+            outRng.Offset(j, 0).Value = rng.Cells(i, 2).Value
+            j = j + 1
+        End If
+    Next i
+End Sub
+```
+
+This macro will copy the values from column B to column D if the corresponding value in column A is "x". You can adjust the range and output location as needed.

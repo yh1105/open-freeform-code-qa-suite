@@ -1,0 +1,22 @@
+You can achieve this by using the `-split` operator in PowerShell. The `-split` operator splits a string into sub-strings by dividing it where it finds a specified delimiter. Once the string is split, you can select the part you want.
+
+Here's how you can modify your script:
+
+```powershell
+$FileArray = @("Name1-354-03.pdf", "Name23-354-H11.pdf", "Name354-354-02.pdf", "Name3545-354.pdf")
+ForEach ($n in $FileArray){
+    $split = $n -split "-354", 2
+    Write-Host ($split[0] + "-354")
+}
+```
+
+In this script, `-split "-354", 2` splits the string into two parts at the first occurrence of "-354". The first part is `$split[0]` and the second part is `$split[1]`. We then concatenate "-354" to the first part and print it.
+
+This will give you the desired output:
+
+```
+Name1-354
+Name23-354
+Name354-354
+Name3545-354
+```

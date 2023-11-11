@@ -1,0 +1,34 @@
+You can align the contents of the Button to the left by adding `.frame(maxWidth: .infinity, alignment: .leading)` to the HStack. Here's the updated code:
+
+```
+struct HomeSection: View {
+    var body: some View {
+        Button(action: {
+
+        }) {
+            Group {
+                Spacer().frame(width: 0, height: 36.0, alignment: .topLeading)
+                HStack {
+                    Image("home")
+                        .resizable()
+                        .frame(width: 24, height: 24)
+                        .foregroundColor(.navigationTextGrey)
+
+                    Text("HOME")
+                        .bold()
+                        .font(.system(size: 17.0))
+                        .foregroundColor(Color.navigationTextGrey)
+                        .padding(.leading, 4.0)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading) // Add this line
+                Rectangle()
+                    .fill(Color.navigationTextGrey)
+                    .frame(width: UIScreen.main.bounds.width - 60, height: 1)
+                    .padding(.top, 6.0)
+            }
+        }
+    }
+}
+``` 
+
+This will make sure that the HStack takes up the entire width of the Button and aligns its contents to the left.

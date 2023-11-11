@@ -1,0 +1,41 @@
+The error you're encountering is because Bootstrap requires `Popper.js` for the tooltips, popovers, and dropdowns to function properly. 
+
+Here are the steps to fix this issue:
+
+1. Install `Popper.js` using npm:
+
+```bash
+npm install --save popper.js
+```
+
+2. After installing `Popper.js`, you need to import it in your project. If you're using ES6 modules or TypeScript, you can import it like so:
+
+```javascript
+import Popper from 'popper.js';
+```
+
+Or, if you're using CommonJS modules:
+
+```javascript
+const Popper = require('popper.js');
+```
+
+3. Now, you should be able to import Bootstrap's JavaScript without any issues:
+
+```javascript
+import 'bootstrap';
+```
+
+Remember, the order of imports is important. Make sure to import `Popper.js` before importing Bootstrap's JavaScript.
+
+If you're using a bundler like Webpack, you might need to add an alias to your configuration:
+
+```javascript
+resolve: {
+  alias: {
+    'popper.js': path.resolve(__dirname, 'node_modules/popper.js'),
+  },
+}
+```
+
+This tells Webpack to always use the version of `Popper.js` that you've installed in your `node_modules` directory, even if other dependencies might have their own versions of `Popper.js`.

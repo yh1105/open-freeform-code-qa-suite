@@ -1,0 +1,29 @@
+The error log shows that the Python executable cannot be found in your PATH. Node-gyp, which is a cross-platform command-line tool written in Node.js for compiling native addon modules for Node.js, requires Python to work.
+
+Here's how you can fix this:
+
+1. Install Python 2.7.x (node-gyp does not work with Python 3.x). You can download it from the [official Python website](https://www.python.org/downloads/).
+
+2. After installing Python, add it to your system PATH. Here's how you can do it:
+
+   - Open the System Properties (Press Windows Key + Pause).
+   - Click on the "Advanced" tab.
+   - Click on "Environment Variables".
+   - Under "System Variables", find the PATH variable, select it, and click on "Edit".
+   - In the Edit window, append the path of your Python installation directory to the PATH variable. Make sure to separate it from the existing paths by a semicolon (`;`). For example, if you installed Python in `C:\Python27\`, add `;C:\Python27\` at the end of the PATH variable.
+   - Click OK in all windows to apply the changes.
+
+3. Restart your system or open a new command prompt for the changes to take effect.
+
+4. Try building your Node.js project again.
+
+If you still encounter issues, you can set the PYTHON environment variable to the path of your Python executable. Here's how you can do it:
+
+1. Open the System Properties (Press Windows Key + Pause).
+2. Click on the "Advanced" tab.
+3. Click on "Environment Variables".
+4. Under "User variables", click on "New".
+5. Set "Variable name" to `PYTHON` and "Variable value" to the path of your Python executable (e.g., `C:\Python27\python.exe`).
+6. Click OK in all windows to apply the changes.
+7. Restart your system or open a new command prompt for the changes to take effect.
+8. Try building your Node.js project again.

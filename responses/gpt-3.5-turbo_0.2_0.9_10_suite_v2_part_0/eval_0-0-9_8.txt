@@ -1,0 +1,17 @@
+Sure! You need to provide a callback function to the `req.logout()` method. Here's the revised code:
+
+```javascript
+app.get("/logout", (req, res) => {
+    req.logout();
+    req.session.destroy((err) => {
+        if (err) {
+            console.log(err);
+        }
+        res.redirect("/");
+    });
+});
+```
+
+In this code, we are calling `req.session.destroy()` to destroy the session and remove the user's session data. The `req.logout()` method clears the login session, but it does not remove the session data. Therefore, we need to call `req.session.destroy()` to remove the session data.
+
+I hope this helps!

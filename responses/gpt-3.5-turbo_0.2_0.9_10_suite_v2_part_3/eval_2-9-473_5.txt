@@ -1,0 +1,21 @@
+The error message suggests that there is an issue with message encryption. To fix this error, you can try the following steps:
+
+1. Remove the `master.key` file:
+```
+rm -rf config/master.key
+```
+
+2. Create a new `master.key` file:
+```
+EDITOR="mate --wait" bin/rails credentials:edit
+```
+This will open the credentials file in your text editor. Save and close the file to generate a new `master.key` file.
+
+3. Add the new `master.key` file to your repository and deploy to Heroku:
+```
+git add config/master.key
+git commit -m "Add new master.key file"
+git push heroku master
+```
+
+This should fix the message encryption error and allow you to deploy your app to Heroku successfully.

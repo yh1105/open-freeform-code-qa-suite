@@ -1,0 +1,13 @@
+From your HTML code, it seems like the "Stop Game" button is inside the `#GameRunning` div, which might be positioned or styled in a way that places it behind the game frame. 
+
+Here are a few suggestions:
+
+1. **Change the HTML structure**: You can move the "Stop Game" button to be in the same container as the "Begin Game" button. This way, they will be in the same context and should align naturally.
+
+2. **Use CSS positioning**: If you can't or don't want to change the HTML structure, you can use CSS to position the "Stop Game" button. You can use properties like `position`, `top`, `right`, `bottom`, and `left` to move the button to the desired location. 
+
+3. **Use CSS Flexbox or Grid**: If the parent container of these buttons is a flex container (i.e., `display: flex`), you can use properties like `align-items`, `justify-content`, or `align-self` to align the buttons. If it's a grid container (i.e., `display: grid`), you can use properties like `grid-column`, `grid-row`, or `align-self`.
+
+4. **Use CSS Z-index**: If the "Stop Game" button is behind the game frame because of stacking context issues, you can use the `z-index` property to bring it to the front. 
+
+Remember to inspect your elements using browser developer tools to understand how your CSS is affecting the layout. This can help you debug and fix issues more effectively.

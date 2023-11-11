@@ -1,0 +1,21 @@
+Sure! Here's the revised code that listens for the "enter" key and executes `console.log("good")`:
+
+```javascript
+mounted() {
+  let editor = new Editor({
+    extensions: [
+      StarterKit.configure({
+        onKeyDown({ event }) {
+          if (event.key === "Enter") {
+            console.log("good");
+          }
+        }
+      })
+    ],
+    content: this.value
+  });
+  this.editor = editor;
+}
+```
+
+This code adds an `onKeyDown` event listener to the `StarterKit` extension, which listens for the "enter" key and executes `console.log("good")` when it's pressed.

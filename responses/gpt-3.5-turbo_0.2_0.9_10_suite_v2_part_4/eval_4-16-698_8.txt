@@ -1,0 +1,13 @@
+You can try running the following command in your terminal:
+
+```
+source ~/.bash_profile
+```
+
+This will reload your updated `.bash_profile` without closing the terminal window. Alternatively, you can also use the following command:
+
+```
+. ~/.bash_profile
+```
+
+Both of these commands will reload your `.bash_profile` and apply any changes you made to it.

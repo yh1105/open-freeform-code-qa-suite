@@ -1,0 +1,13 @@
+This error usually occurs when the SwiftUI preview can't find the target to which the file belongs. Here are some steps you can try:
+
+1. **Check File's Target Membership**: Open the file inspector (the first tab in the right sidebar) with your SwiftUI file selected. Under "Target Membership", make sure your app's target is checked.
+
+2. **Clean Build Folder**: Go to `Product -> Clean Build Folder` or press `Shift + Command + K`.
+
+3. **Restart Xcode**: Sometimes, Xcode gets stuck and needs a restart.
+
+4. **Update Xcode**: Make sure you're using the latest version of Xcode.
+
+5. **Create a New SwiftUI View**: If none of the above works, try creating a new SwiftUI view to see if the preview works there. If it does, you can move your code over.
+
+If none of these steps work, it might be a bug with Xcode itself. In that case, you should report it to Apple.

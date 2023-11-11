@@ -1,0 +1,25 @@
+TailwindCSS is a utility-first CSS framework, which means it provides pre-defined classes that you can use to style your HTML elements. In order to select the direct children of a div with class "section", you can use the `>` selector in combination with the `@apply` directive to apply the desired styles.
+
+Here's an example:
+
+```html
+<div class="section">
+  <div class="child">Child 1</div>
+  <div class="child">Child 2</div>
+</div>
+```
+
+```css
+/* Define the styles for the direct children of .section */
+.section > .child {
+  /* Your styles here */
+}
+
+/* Apply the styles using TailwindCSS */
+<div class="section">
+  <div class="child @apply mt-4">Child 1</div>
+  <div class="child @apply mt-4">Child 2</div>
+</div>
+```
+
+In the example above, we define the styles for the direct children of `.section` using the `>` selector. Then, we apply those styles using the `@apply` directive in combination with the `mt-4` class from TailwindCSS to add a margin-top of 1rem to each child element.

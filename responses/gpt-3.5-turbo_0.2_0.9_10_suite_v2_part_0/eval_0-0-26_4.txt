@@ -1,0 +1,18 @@
+Yes, you can add a `displayName` property to your functional component to shut down the ESLint error. Here's an example:
+
+```jsx
+const columns_payment_summary_table = [ 
+    {
+      title: FooConstants.LABEL_QUANTITY_SELECTED,
+      dataIndex: 'group',
+      key: 'group',
+      render: function CustomRender(text) {
+        return <span>{getCountForCountry(text)}</span>;
+      },
+    }
+  ];
+
+CustomRender.displayName = 'CustomRender';
+```
+
+By adding the `displayName` property to the `CustomRender` function, you are giving it a name that ESLint can recognize and use to validate your code.

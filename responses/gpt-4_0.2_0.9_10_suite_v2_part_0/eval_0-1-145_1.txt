@@ -1,0 +1,16 @@
+The `truncate` class in Tailwind CSS only works for single line text. It sets `overflow: hidden`, `text-overflow: ellipsis`, and `white-space: nowrap` on an element. So, if you want to truncate text that spans multiple lines, you'll need to use a different approach because CSS doesn't natively support multiline text truncation.
+
+However, you can limit the height of the container to simulate multiline text truncation. Here's an example:
+
+```html
+<div className="ml-1 inline-block">
+   <span>Label: </span>
+   <span className="font-semibold overflow-hidden" style={{display: '-webkit-box', WebkitBoxOrient: 'vertical', WebkitLineClamp: '2'}}>
+     long texttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt
+   </span>
+</div>
+```
+
+In this example, `WebkitLineClamp: '2'` means that the text will be truncated after 2 lines. Note that this is not a perfect solution because it only works in webkit-based browsers (like Chrome and Safari) and it might not work as expected in all situations. 
+
+If you need a more robust solution, you might need to use JavaScript to calculate the height of the text and add an ellipsis where necessary.

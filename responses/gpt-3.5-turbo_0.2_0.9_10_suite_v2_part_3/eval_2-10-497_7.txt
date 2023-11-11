@@ -1,0 +1,35 @@
+In Rust, a `Box` cannot be null. Instead, you can use an `Option<Box<Node>>` to represent a nullable pointer. Here's an updated version of your code:
+
+```rust
+struct Node {
+    value: i32,
+    next: Option<Box<Node>>,
+}
+
+struct Stack {
+    top: Option<Box<Node>>,
+}
+```
+
+To check if a `Box<Node>` is null, you can simply check if it is `None`:
+
+```rust
+let node: Option<Box<Node>> = /* ... */;
+if node.is_none() {
+    // `node` is null
+}
+```
+
+Alternatively, you can use pattern matching to extract the inner `Box<Node>` and check if it is null:
+
+```rust
+let node: Option<Box<Node>> = /* ... */;
+match node {
+    Some(boxed_node) => {
+        // `boxed_node` is not null
+    },
+    None => {
+        // `node` is null
+    },
+}
+```

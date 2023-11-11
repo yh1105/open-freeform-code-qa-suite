@@ -1,0 +1,26 @@
+The error message you're seeing indicates that the `/data` directory is on a read-only file system, so you can't create new directories in it. 
+
+On macOS Catalina and later, the system disk is split into two volumes: one for system files and another for data files. The system volume is mounted as read-only to protect system files. This is why you're unable to create a directory at the root level.
+
+Here are a few alternatives:
+
+1. **Create the directory under your home directory**. This is the recommended approach for most use cases. You can create a new directory in your home directory like this:
+
+```bash
+mkdir ~/data/db
+```
+
+2. **Use the /Users/Shared directory**. If you need a location that's accessible to all users, you can use the `/Users/Shared` directory:
+
+```bash
+sudo mkdir -p /Users/Shared/data/db
+```
+
+3. **Disable the read-only file system**. This is not recommended because it can make your system vulnerable to attacks. However, if you really need to do this, you can follow these steps:
+
+    - Restart your Mac and hold down Command + R to enter Recovery Mode.
+    - From the Utilities menu, select Terminal.
+    - In the Terminal, type `csrutil disable` and press Enter.
+    - Restart your Mac.
+
+After you've disabled the read-only file system, you should be able to create the directory. However, remember to re-enable the read-only file system by following the same steps and typing `csrutil enable` in the Terminal.

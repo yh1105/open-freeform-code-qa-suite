@@ -1,0 +1,16 @@
+The error you're encountering is related to the initialization of Flutter engine. In Flutter, you need to ensure that the Flutter engine is fully initialized before you can use any plugins. This is because plugins might require binary messenger, method channels, and other engine components to work properly.
+
+In your case, you're trying to use the `path_provider` plugin before Flutter engine is fully initialized. To fix this, you need to ensure that your `main()` function is annotated with `WidgetsFlutterBinding.ensureInitialized()` before any usage of plugins.
+
+Here's how you can modify your code:
+
+```dart
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final appDocsDir = await getApplicationDocumentsDirectory();
+  Hive.init(appDocsDir.path);
+  runApp(MyApp());
+}
+```
+
+The `WidgetsFlutterBinding.ensureInitialized()` method ensures that the Flutter engine is fully initialized. It must be called if you're going to use any plugins in your app before calling `runApp()`.

@@ -1,0 +1,13 @@
+When deploying a NextJS app to Vercel, it is important to ensure that the app is properly configured for deployment. Here are some steps you can take to troubleshoot the issue:
+
+1. Check the Vercel logs: Vercel provides detailed logs for each deployment. Check the logs to see if there are any errors or warnings that could be causing the issue.
+
+2. Check the file structure: Make sure that the file structure of your app is correct. Vercel expects the pages to be in the `pages` directory and the API routes to be in the `api` directory. If your app has a different file structure, you may need to configure Vercel to use a custom build command.
+
+3. Check the dynamic route: If you have a dynamic route in your app, make sure that it is properly configured. Dynamic routes in NextJS require a specific file naming convention. For example, a dynamic route with the path `/posts/[id]` would require a file named `pages/posts/[id].js`.
+
+4. Check the build command: Make sure that the build command in your `package.json` file is correct. The build command for a NextJS app should be `next build`.
+
+5. Check the Vercel configuration: Make sure that your Vercel configuration is correct. You can configure your app's settings in the Vercel dashboard.
+
+If none of these steps solve the issue, you may need to provide more information about your app's configuration and file structure.

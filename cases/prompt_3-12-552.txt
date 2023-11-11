@@ -1,0 +1,32 @@
+Custom AppBar Flutter
+
+Im trying to achieve something like the following, 
+[](https://i.stack.imgur.com/xRIAc.png)
+
+I'm very new to flutter so I couldn't figure it out.
+I need a custom AppBar with drawer and actions but arranged like the image.
+
+I tried a StackView in the title widget
+
+```
+appBar: AppBar(
+    title: Stack(
+      children: <Widget>[
+        Container(
+          width: double.infinity,
+          color: CustomColors.accentColor,
+        ),
+        Text(
+          'Title',
+          style: TextStyle(fontSize: 22.0, color: CustomColors.primaryDark),
+        ),
+      ],
+    ),
+  ),
+```
+
+
+But I get something like this
+[](https://i.stack.imgur.com/UQW46.png)
+
+Can someone help me out? Thank you.

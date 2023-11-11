@@ -1,0 +1,12 @@
+Sure, you can use async/await to make your code wait for the response. Here is the revised code:
+
+```javascript
+async getData() {
+  this.newIds = await this.repository.getById(Ids).toPromise();
+  console.log(this.newIds);
+}
+
+this.getData();
+```
+
+Please note that you need to convert the Observable to a Promise using `toPromise()`. Also, the function containing the await keyword must be declared as async.

@@ -1,0 +1,38 @@
+You can wrap your `Scaffold` with a `GestureDetector` instead of just wrapping the `QQBody` widget. This way, the `onTap` event will be triggered whenever the user taps anywhere on the screen. Here's an example:
+
+```dart
+class QQHome extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primaryColor: Colors.blueGrey,
+      ),
+      home: GestureDetector(
+        onTap: () => print('Tapped'),
+        child: Scaffold(
+          appBar: AppBar(
+            centerTitle: true,
+            title: Text('QuoteQuota'),
+          ),
+          body: QQBody(),
+        ),
+      ),
+    );
+  }
+}
+
+class QQBody extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Text(
+        'Hello, World!'
+      ),
+    );
+  }
+}
+```
+
+Now, whenever the user taps anywhere on the screen, the `onTap` event will be triggered and "Tapped" will be printed to the console.

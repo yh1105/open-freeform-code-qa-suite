@@ -1,0 +1,11 @@
+It seems like there's a misunderstanding. iOS doesn't have a "Developer Mode" like Android does. The alert you're seeing is likely related to the fact that the app you're trying to run is a developer-signed app, not a store-signed app.
+
+Here are the steps you can follow to trust an app on your iPhone:
+
+1. Tap Settings > General.
+2. Scroll down and tap Device Management or Profile Downloaded. On some iOS versions, this option might be available at General > Profile(s) & Device Management or General > VPN & Device Management.
+3. Tap the name of the developer profile under the Enterprise App heading to establish trust for this developer.
+4. Then you see a prompt to confirm your choice. After you trust this profile, you can manually install other apps from the same developer and open them immediately. This developer remains trusted until you use the Delete App button to remove all apps from the developer.
+5. You must be connected to the Internet to verify the app developer's certificate when establishing trust.
+
+If you're still having issues, it might be that the provisioning profile used to sign the app has expired or been revoked. In that case, you'll need to get a new build of the app signed with a valid provisioning profile.

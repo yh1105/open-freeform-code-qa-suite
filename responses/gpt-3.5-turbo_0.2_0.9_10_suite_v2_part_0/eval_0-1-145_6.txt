@@ -1,0 +1,14 @@
+The `truncate` class in TailwindCSS only works if the parent element has a fixed width. In your code, the parent element does not have a fixed width, so the `truncate` class will not work.
+
+To fix this, you can either give the parent element a fixed width or use the `max-w` class to set a maximum width for the parent element. Here's an example:
+
+```html
+<div class="ml-1 inline-block max-w-xs">
+   <span>Label: </span>
+   <span class="font-semibold truncate">
+     long texttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt
+   </span>
+</div>
+```
+
+In this example, the `max-w-xs` class sets a maximum width of `20rem` for the parent element. You can adjust the width as needed for your layout.

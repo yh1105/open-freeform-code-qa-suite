@@ -1,0 +1,13 @@
+This issue seems to be related to the version of Groovy that is being used by Jacoco. Starting from version 0.8.6, Jacoco requires Groovy 3.x, which is not compatible with Java 8.
+
+To fix this issue, you can either upgrade your Java version to Java 9 or later, or downgrade your Jacoco version to 0.8.5 or earlier, which is compatible with Groovy 2.x and Java 8.
+
+To downgrade Jacoco to version 0.8.5, you can change the `toolVersion` property in your `build.gradle` file to:
+
+```
+jacoco {
+    toolVersion = "0.8.5"
+}
+```
+
+After making this change, run the test coverage report task again and it should work without any issues.

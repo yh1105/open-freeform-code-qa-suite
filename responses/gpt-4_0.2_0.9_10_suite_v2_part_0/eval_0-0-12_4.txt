@@ -1,0 +1,11 @@
+The error message you're seeing is indicating that the username and password you're providing for Gmail SMTP authentication are not being accepted. This could be due to a few reasons:
+
+1. **Incorrect Credentials**: The username or password you've entered is incorrect. Double-check your credentials to make sure they're correct.
+
+2. **Less Secure Apps**: Google may block sign-in attempts from some apps or devices that do not use modern security standards. You need to allow less secure apps to access your account. You can do this by going to your Google Account settings, then to 'Security', and then turn on 'Less secure app access'. However, this is not recommended by Google.
+
+3. **Two-Step Verification**: If you have 2-Step Verification enabled for your Google account, you may need to generate and use an app password instead of your regular password. You can do this by going to your Google Account settings, then to 'Security', then to 'App passwords'.
+
+4. **Display Unlock Captcha**: Sometimes Google may require a CAPTCHA unlock, especially if it detects unusual activity. You can unlock it by visiting this URL: https://accounts.google.com/DisplayUnlockCaptcha
+
+Remember, it's not recommended to hardcode your credentials in your code. Consider using environment variables or some form of secure configuration to store your sensitive data.

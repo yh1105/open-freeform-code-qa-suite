@@ -1,0 +1,23 @@
+TailwindCSS is a utility-first CSS framework, which means it provides pre-defined classes that you can use to style your HTML elements. It doesn't provide a way to select elements using CSS selectors like `div.section > div`.
+
+However, you can use the `@layer` directive in TailwindCSS to define your own custom CSS rules. Here's an example of how you can define a custom rule to select direct children of `div` elements with the class `section`:
+
+```css
+@layer components {
+  div.section > div {
+    /* your styles here */
+  }
+}
+```
+
+You can place this code in your `tailwind.config.js` file, inside the `theme` object. This will create a new layer called `components` and add your custom rule to it.
+
+Then, you can use the `@apply` directive in your HTML to apply the custom rule:
+
+```html
+<div class="section">
+  <div class="my-custom-class @apply components-div">...</div>
+</div>
+```
+
+In this example, `my-custom-class` is your own custom class, and `components-div` is the class name of the custom rule you defined earlier. The `@apply` directive tells TailwindCSS to apply the styles defined in the `components-div` rule to the element.

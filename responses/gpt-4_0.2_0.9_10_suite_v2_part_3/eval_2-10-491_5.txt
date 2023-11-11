@@ -1,0 +1,32 @@
+In Rust, you can use the `Option::map_or` method to provide a default value when the `Option` is `None` and to transform the inner value when it is `Some`. Here's how you can use it:
+
+```rust
+fn main() {
+    let mut foo: Option<u8> = None;
+    foo = foo.map_or(Some(5), |foo_val| if foo_val < 5 { Some(foo_val) } else { None });
+}
+```
+
+In this example, `map_or` takes two arguments: the first is the default value to use if `foo` is `None`, and the second is a closure that transforms the inner value of `foo` if it is `Some`. The closure takes the inner value as an argument and returns a new `Option`.
+
+Another way is to use `Option::map_or_else` method, which is similar to `map_or` but allows for lazy evaluation of the default value:
+
+```rust
+fn main() {
+    let mut foo: Option<u8> = None;
+    foo = foo.map_or_else(|| Some(5), |foo_val| if foo_val < 5 { Some(foo_val) } else { None });
+}
+```
+
+In this example, the default value is computed by a closure that is only called if `foo` is `None`.
+
+Yet another way is to use `Option::filter` method, which transforms `Some` to `None` if the inner value does not satisfy a certain condition:
+
+```rust
+fn main() {
+    let mut foo: Option<u8> = None;
+    foo = foo.filter(|&foo_val| foo_val >= 5).or(Some(5));
+}
+```
+
+In this example, `filter` transforms `foo` to `None` if its inner value is less than 5. The `or` method then provides a default value if `foo` is `None`.

@@ -1,0 +1,13 @@
+Sure, the issue is that you are mocking the API as an object, but you are trying to use it as a class. You should mock it as a class instead. Here is the revised version of your code:
+
+```javascript
+import API from 'utils/API';
+
+jest.mock('utils/API', () => {
+  return jest.fn().mockImplementation(() => {
+    return {someMethod: () => {}};
+  });
+});
+```
+
+In this revised version, `jest.fn().mockImplementation()` is used to mock the API as a class. Now, you can use `const api = new API()` without any errors.

@@ -1,0 +1,49 @@
+The error message you're seeing is because your project is using a different version of Kotlin than the one used to compile the Stripe library. 
+
+To resolve this issue, you should update your Kotlin version to match the one used by the Stripe library. In your case, you should update your Kotlin version to 1.5.1 or higher.
+
+Here's how you can do it:
+
+1. Open your project level `build.gradle` file.
+2. Update the Kotlin version in the `buildscript` block:
+
+```gradle
+buildscript {
+    ext.kotlin_version = '1.5.1' // or the latest version
+    repositories {
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:4.1.3"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+```
+
+3. Sync your project.
+
+If you still encounter the same error, try invalidating the cache and restarting Android Studio. You can do this by navigating to `File -> Invalidate Caches / Restart -> Invalidate and Restart`.
+
+Regarding the Stripe payment UI, the `CardMultilineWidget` does not provide fields for email and cardholder name. You will need to create these fields in your application and pass the data to Stripe when creating a payment method or token. 
+
+Here's an example of how you can create a payment method with cardholder name and email:
+
+```kotlin
+val card = cardMultilineWidget.card
+if (card != null) {
+    val billingDetails = PaymentMethod.BillingDetails.Builder()
+        .setName("Cardholder Name")
+        .setEmail("email@example.com")
+        .build()
+
+    val paymentMethodCreateParams = PaymentMethodCreateParams
+        .create(card, billingDetails)
+
+    // Then use Stripe API to create PaymentMethod
+}
+```
+
+Remember to replace `"Cardholder Name"` and `"email@example.com"` with the actual data from your application.

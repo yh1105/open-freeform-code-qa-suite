@@ -1,0 +1,26 @@
+The Docker build output on MacOS is different from Linux due to the way Docker runs on MacOS. Docker for Mac runs in a virtual machine, and the Docker daemon is running in that Linux VM, not on your Mac directly. This is why the output is different.
+
+To see the full output of a command in a Dockerfile, you can use the `RUN` command with a shell command and redirect the output to a file, then use the `cat` command to display the content of the file.
+
+For example, change your Dockerfile from:
+
+```Dockerfile
+RUN ls -la
+```
+
+to:
+
+```Dockerfile
+RUN ls -la > output.txt
+RUN cat output.txt
+```
+
+This will print the output of `ls -la` to a file named `output.txt` and then print the content of `output.txt` to the console.
+
+Remember that each `RUN` command creates a new layer in the Docker image, so it's better to combine commands using `&&` to reduce the number of layers:
+
+```Dockerfile
+RUN ls -la > output.txt && cat output.txt
+```
+
+This way, you can see the full output of the `ls -la` command when building the Docker image.

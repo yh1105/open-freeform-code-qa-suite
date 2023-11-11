@@ -1,0 +1,13 @@
+Sure, you are mocking the API class as an object, not as a class. That's why you're getting a `TypeError... is not a constructor` error. You should mock it as a class like so:
+
+```javascript
+import API from 'utils/API';
+
+jest.mock('utils/API', () => {
+  return jest.fn().mockImplementation(() => {
+    return {someMethod: () => {}};
+  });
+});
+```
+
+In this way, you are mocking the API as a class with a constructor, which can be instantiated with the `new` keyword.

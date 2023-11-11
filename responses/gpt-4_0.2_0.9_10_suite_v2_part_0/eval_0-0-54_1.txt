@@ -1,0 +1,73 @@
+In your current code, you are already getting the value from the input field and storing it in the state. If you want to get the value on button click, you can simply create a button and define an `onClick` event for it. Here is how you can do it:
+
+```javascript
+import React, { useState } from 'react';
+
+export default function InputField({name,label}) {
+  const [state, setState] = useState('')
+
+  const handleClick = () => {
+    alert(state); // or do whatever you want with the value
+  }
+
+  return (
+    <div>
+      <label>{label}</label>
+      <input 
+        type="text" 
+        value={state} 
+        name={name}
+        onChange={(e) => setState(e.target.value)} 
+      />
+      <button onClick={handleClick}>Click me</button>
+      {state}
+    </div>
+  );
+}
+```
+In the above code, `handleClick` function will be called when the button is clicked. Inside `handleClick`, you can access the value of the input field from the state. 
+
+If you have multiple input fields (like first name and last name), you can use an object to store the state:
+
+```javascript
+import React, { useState } from 'react';
+
+export default function InputField({name,label}) {
+  const [state, setState] = useState({
+    firstName: '',
+    lastName: ''
+  })
+
+  const handleChange = (e) => {
+    setState({
+      ...state,
+      [e.target.name]: e.target.value
+    });
+  }
+
+  const handleClick = () => {
+    alert(`First Name: ${state.firstName}, Last Name: ${state.lastName}`);
+  }
+
+  return (
+    <div>
+      <label>First Name</label>
+      <input 
+        type="text" 
+        value={state.firstName} 
+        name="firstName"
+        onChange={handleChange} 
+      />
+      <label>Last Name</label>
+      <input 
+        type="text" 
+        value={state.lastName} 
+        name="lastName"
+        onChange={handleChange} 
+      />
+      <button onClick={handleClick}>Click me</button>
+    </div>
+  );
+}
+```
+In the above code, `handleChange` function is updating the state based on the `name` attribute of the input field. So, you can use the same function for multiple input fields.

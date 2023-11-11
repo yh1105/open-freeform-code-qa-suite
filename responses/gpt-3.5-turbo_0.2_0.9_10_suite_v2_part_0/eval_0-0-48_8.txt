@@ -1,0 +1,11 @@
+Sure! The correct definition of `FruitsAndColors` would be:
+
+```typescript
+type FruitsAndColors = {
+  [key in fruit]: number;
+} & {
+  [key in color]: boolean;
+}
+```
+
+This creates an intersection type (`&`) between two mapped types. The first mapped type maps each `fruit` to a `number`, and the second mapped type maps each `color` to a `boolean`. By using an intersection type, we combine both mapped types into a single type that has a numeric property for each fruit and a boolean property for each color.

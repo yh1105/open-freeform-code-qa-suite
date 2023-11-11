@@ -1,0 +1,1 @@
+Apple has changed the default shell to zsh. Therefore you have to rename your configuration files. .bashrc is now .zshrc and .bash_profile is now .zprofile.

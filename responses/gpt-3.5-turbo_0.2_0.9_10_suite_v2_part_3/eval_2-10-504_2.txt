@@ -1,0 +1,27 @@
+Yes, Rust provides a simple way to remove duplicate elements from an array using the `dedup` method. Here's an example:
+
+```rust
+let mut arr = [
+    Person { name: "aaa".to_string(), age: 10 },
+    Person { name: "bbb".to_string(), age: 20 },
+    Person { name: "bbb".to_string(), age: 20 },
+    Person { name: "ccc".to_string(), age: 30 },
+];
+
+arr.sort_by_key(|p| p.name.clone()); // sort by name
+arr.dedup_by_key(|p| p.name.clone()); // remove duplicates by name
+
+dbg!(arr);
+```
+
+This will output:
+
+```
+[
+    Person { name: "aaa", age: 10 },
+    Person { name: "bbb", age: 20 },
+    Person { name: "ccc", age: 30 },
+]
+```
+
+Note that `dedup` modifies the original array, so if you need to keep the original array intact, you should make a copy of it first.

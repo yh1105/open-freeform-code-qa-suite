@@ -1,0 +1,14 @@
+Select all characters in a string until a specific character Ruby
+
+So what I want is to get n characters until it hits a specific character.
+i have this String :
+```
+a='2.452811139617034,42.10874821716908|3.132087902867818,42.028314077306646|-0.07934861041448178,41.647538468746916|-0.07948265046522918,41.64754863599606'
+```
+
+How can I make it to only get to the character | , but without getting that character,
+and get it like this:
+```
+2.452811139617034,42.10874821716908
+```
+

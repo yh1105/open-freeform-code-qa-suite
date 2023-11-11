@@ -1,0 +1,16 @@
+Is Provider.of(context, listen: false) equivalent to context.read()?
+
+```
+// Are these the same?
+final model = Provider.of<Model>(context, listen: false); 
+final model = context.read<Model>(); 
+
+// Are these the same?
+final model = Provider.of<Model>(context);
+final model = context.watch<Model>();
+```
+
+
+Are they the same or aren't they? If they are, then why do I get this error when I use `read` inside the `build()` method, while `Provider.of()` works?
+
+> Tried to use `context.read<Model>` inside either a `build` method or the `update` callback of a provider. 

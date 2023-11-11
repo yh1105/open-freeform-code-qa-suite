@@ -1,0 +1,7 @@
+The error message you are getting suggests that the username and password you are using to authenticate with Gmail are not correct. Here are a few things you can try to fix this issue:
+
+1. Double-check that you are using the correct email address and password for the Gmail account you want to use to send emails.
+2. Make sure that you have enabled "Less secure app access" for the Gmail account you are using. You can do this by going to your Google Account settings and navigating to the "Security" tab. From there, you should see an option to enable "Less secure app access". Turn this on and try running your code again.
+3. If you have two-factor authentication enabled for your Gmail account, you will need to generate an app password to use instead of your regular password. You can do this by going to your Google Account settings and navigating to the "Security" tab. From there, you should see an option to generate an app password. Use this password instead of your regular password in your code.
+
+If none of these solutions work, you may need to check your Gmail account settings for any other security measures that could be blocking your login attempts.

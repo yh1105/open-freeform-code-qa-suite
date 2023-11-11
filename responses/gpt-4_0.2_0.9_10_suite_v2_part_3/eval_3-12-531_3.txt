@@ -1,0 +1,23 @@
+The warning is because Dart's type system (since null safety was introduced in Dart 2.12) doesn't allow you to assign a nullable value to a non-nullable variable. In your case, `myMap[1]` can potentially return `null` if the key `1` doesn't exist in the map, so it's type is `String?` (nullable String), but you're trying to assign it to `s` which is of type `String` (non-nullable String).
+
+To solve the warning, you can either make `s` nullable:
+
+```dart
+void foo(Map<int, String> myMap) {
+  if (myMap.containsKey(1)) {
+    String? s = myMap[1];
+  }
+}
+```
+
+Or, if you're sure that `myMap` will always contain the key `1` when this code is run, you can use the `!` operator to cast `myMap[1]` to a non-nullable `String`:
+
+```dart
+void foo(Map<int, String> myMap) {
+  if (myMap.containsKey(1)) {
+    String s = myMap[1]!;
+  }
+}
+```
+
+The `!` operator should be used with caution, because if `myMap[1]` is `null`, this will cause a runtime error.

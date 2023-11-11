@@ -1,0 +1,3 @@
+No. 
+
+In C++, there is no direct way to query the properties of individual cores or threads. The operating system is responsible for scheduling threads on available cores, and the programmer has limited control over this process. While some operating systems may provide APIs for setting thread affinity (i.e., specifying which core a thread should run on), this is not part of the C++ standard library and is highly platform-specific. Additionally, even if thread affinity is set, it may not guarantee high performance as the operating system may still schedule other threads on the same core.

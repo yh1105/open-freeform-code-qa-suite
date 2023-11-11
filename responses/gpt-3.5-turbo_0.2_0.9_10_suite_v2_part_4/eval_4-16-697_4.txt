@@ -1,0 +1,7 @@
+When you run the container with `docker run IMAGE_NAME`, it does not start an interactive shell, so the `.bashrc` file is not sourced. To source the `.bashrc` file, you can add the following line to your `launch.sh` script before the `npm install` command:
+
+```
+source /root/.bashrc
+```
+
+This will execute the `.bashrc` file and set up the environment variables, including the `nvm` script, before running the `npm install` command.

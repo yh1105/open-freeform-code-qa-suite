@@ -1,0 +1,31 @@
+The error message `bad CPU type in executable` typically means that the binary you are trying to run is not compatible with the architecture of your CPU. This is a common issue on Macs running macOS Catalina or later, as these versions of macOS dropped support for 32-bit applications.
+
+The `pdftk` tool is a 32-bit application, and therefore it will not run on macOS Catalina or later. However, there is a solution to this problem. You can use a tool called `pdftk-java`, which is a port of `pdftk` that runs on the Java platform, and thus is compatible with macOS Catalina and later.
+
+Here are the steps to install `pdftk-java` on your Mac:
+
+1. First, you need to install Homebrew if you haven't already. Open Terminal and paste the following command:
+
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+2. Once Homebrew is installed, you can install `pdftk-java` by running the following command:
+
+```bash
+brew install pdftk-java
+```
+
+3. Since `pdftk-java` is a bit long to type, you might want to create an alias for it. You can do this by adding the following line to your `.zshrc` file:
+
+```bash
+alias pdftk='pdftk-java'
+```
+
+4. Finally, apply the changes to your current shell session with the following command:
+
+```bash
+source ~/.zshrc
+```
+
+Now, you should be able to use `pdftk` command as you did before upgrading to macOS Catalina.

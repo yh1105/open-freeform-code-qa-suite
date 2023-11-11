@@ -1,0 +1,14 @@
+GitLab CI/CD doesn't support nested variable expansion in the `variables` section. This is a limitation of GitLab CI/CD, not the bash runner. 
+
+The `variables` section is processed by GitLab before the bash runner gets the script. GitLab CI/CD only supports a single level of variable expansion, so when it sees `${CI_MERGE_REQUEST_SOURCE_BRANCH_NAME:-${CI_COMMIT_BRANCH:-$CI_DEFAULT_BRANCH}}`, it doesn't know how to handle the nested `${CI_COMMIT_BRANCH:-$CI_DEFAULT_BRANCH}` part and stops at the first closing `}`, resulting in the output `}`.
+
+To work around this limitation, you can move the variable expansion to the `script` section where it will be processed by the bash runner:
+
+```yaml
+job1:
+  script:
+    - GIT_BRANCH="${CI_MERGE_REQUEST_SOURCE_BRANCH_NAME:-${CI_COMMIT_BRANCH:-$CI_DEFAULT_BRANCH}}"
+    - echo $GIT_BRANCH
+```
+
+In this case, the bash runner will correctly handle the nested variable expansion.

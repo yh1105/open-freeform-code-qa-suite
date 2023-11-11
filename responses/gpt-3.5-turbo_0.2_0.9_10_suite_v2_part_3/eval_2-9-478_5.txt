@@ -1,0 +1,11 @@
+This error occurs because the latest version of Devise (4.8.0) is not compatible with the version of ActiveSupport that you are using. 
+
+To fix this issue, you can try downgrading the version of Devise to a version that is compatible with your version of Rails and ActiveSupport. You can do this by specifying the version of Devise in your Gemfile:
+
+```
+gem 'devise', '~> 4.7.3'
+```
+
+Then, run `bundle install` to install the specified version of Devise.
+
+Alternatively, you can try upgrading your version of Rails and ActiveSupport to a version that is compatible with the latest version of Devise. You can check the Devise documentation to see which versions of Rails and ActiveSupport are compatible with the latest version of Devise.

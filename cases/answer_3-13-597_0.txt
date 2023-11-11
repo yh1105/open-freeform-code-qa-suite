@@ -1,0 +1,4 @@
+fun <T> mutableListWithCapacity(capacity: Int): MutableList<T> =
+    ArrayList(capacity)
+
+val mutableList = mutableListWithCapacity<Int>(5)

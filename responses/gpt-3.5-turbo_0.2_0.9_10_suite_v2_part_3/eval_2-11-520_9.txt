@@ -1,0 +1,37 @@
+The issue is that you are not correctly overriding the `operator==` function from the base class `IClient`. The signature of the function in the base class is `bool operator==(const IClient& anotherClient)`, but in your derived class `SeviceClient`, you are defining the function as `bool operator==(const SeviceClient& anotherClient)`. 
+
+To fix this, you need to change the signature of the `operator==` function in your derived class to match the signature in the base class. Here's the corrected code:
+
+```c++
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+template <typename T>
+class IClient {
+  virtual const std::vector<T>& getID() = 0;
+  virtual bool isEqual(const std::vector<T>& anotherID) = 0;
+  virtual bool operator==(const IClient& anotherClient) = 0;
+};
+
+class SeviceClient : public IClient<int8_t> {
+  const std::vector<int8_t> ID;
+
+ public:
+  SeviceClient(const std::vector<int8_t>& ID) : ID(std::move(ID)) {}
+  SeviceClient(const std::vector<int8_t>&& ID) : ID(std::move(ID)) {}
+
+  const std::vector<int8_t>& getID() override {
+      return ID;
+  }
+  bool isEqual(const std::vector<int8_t>& anotherID) override {
+      return true;
+  }
+  bool operator==(const IClient<int8_t>& anotherClient) override {
+      return true;
+  }
+};
+```
+
+Note that we changed the signature of the `operator==` function to `bool operator==(const IClient<int8_t>& anotherClient) override`. This now correctly overrides the function from the base class.

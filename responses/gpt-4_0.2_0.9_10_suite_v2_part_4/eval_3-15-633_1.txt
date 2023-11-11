@@ -1,0 +1,21 @@
+Yes, you can achieve the same result using the `INDEX` and `SMALL` functions in combination with `IF` and `ROW` functions. Here's how you can do it:
+
+Assuming your data starts from row 2, you can use the following array formula:
+
+```excel
+=INDEX($B$2:$B$100, SMALL(IF($A$2:$A$100="x", ROW($A$2:$A$100)-ROW($A$2)+1), ROW(1:1)))
+```
+
+This formula should be entered as an array formula. After typing the formula, instead of pressing Enter, press Ctrl+Shift+Enter. Excel will surround the formula with curly braces `{}` if you've done it correctly. 
+
+Drag this formula down as far as you need.
+
+This formula works by creating an array of row numbers for rows where Column A is "x". The `SMALL` function then returns the smallest row number on the first row, the second smallest on the second row, and so on. The `INDEX` function then returns the value from Column B for that row number.
+
+Please note that this formula will return `#NUM!` error when there are no more matches. You can wrap the formula in `IFERROR` to handle this:
+
+```excel
+=IFERROR(INDEX($B$2:$B$100, SMALL(IF($A$2:$A$100="x", ROW($A$2:$A$100)-ROW($A$2)+1), ROW(1:1))), "")
+```
+
+This formula will return an empty string ("") when there are no more matches.

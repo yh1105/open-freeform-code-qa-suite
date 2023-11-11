@@ -1,0 +1,19 @@
+The error message you're seeing is related to the Java version you're using. Jacoco 0.8.6 is not compatible with Java 9 or later versions. 
+
+You can try to downgrade your Java version to 8 or upgrade your Jacoco version to 0.8.7 which supports Java 15.
+
+Here is how you can upgrade your Jacoco version:
+
+```groovy
+jacoco {
+    toolVersion = "0.8.7"
+}
+```
+
+If you still encounter issues, you may need to check your Java version and ensure it's compatible with your Jacoco version. You can check your Java version by running the following command in your terminal:
+
+```bash
+java -version
+```
+
+If you're using a version of Java that's not compatible with your Jacoco version, you'll need to either upgrade or downgrade your Java version accordingly.

@@ -1,0 +1,17 @@
+You can use the `MSForms.DataObject` to interact with the clipboard. This object is not directly available in Access, but it is part of the library used for UserForms in Excel. You can add it to your Access VBA project by following these steps:
+
+1. Go to the VBA editor (Alt+F11)
+2. Go to Tools > References
+3. Check "Microsoft Forms 2.0 Object Library"
+
+After you've added the reference, you can use the `DataObject` like this:
+
+```vba
+Dim MyData As DataObject
+Set MyData = New DataObject
+
+MyData.SetText Me.NodeKey.Value
+MyData.PutInClipboard
+```
+
+This will put the value of `Me.NodeKey.Value` into the clipboard.

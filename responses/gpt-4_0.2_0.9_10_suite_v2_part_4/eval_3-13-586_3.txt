@@ -1,0 +1,15 @@
+The error message you're seeing is due to a change in Android 12 (API level 31) that requires you to specify whether a `PendingIntent` is mutable or immutable when you create it. 
+
+The AndroidX Media library version 1.4.0, which you're using, should handle this requirement. However, it seems like there's an issue with the library itself, as it's not correctly setting the `FLAG_IMMUTABLE` or `FLAG_MUTABLE` when creating the `PendingIntent`.
+
+This issue has been reported to Google and they have fixed it in the `1.4.1` version of the library. So, updating the library to the latest version should resolve the issue.
+
+Update your `build.gradle` file to use the latest version of the library:
+
+```groovy
+dependencies {
+    implementation 'androidx.media:media:1.4.1'
+}
+```
+
+After updating the library, clean and rebuild your project. If the problem persists, please let me know.
