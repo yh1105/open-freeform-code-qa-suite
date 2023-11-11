@@ -1,0 +1,31 @@
+The error message you're seeing is indicating that the `req.logout()` function requires a callback function. However, `req.logout()` from Passport.js does not actually require a callback function. This error might be caused by something else in your code.
+
+The `req.logout()` function is used to log the user out by removing the `req.user` property and clear the login session (if any). It does not take any arguments.
+
+Your logout route seems fine:
+
+```javascript
+app.get("/logout", (req, res) => {
+    req.logout();
+    res.redirect("/");
+});
+```
+
+This should log the user out and then redirect them to the root URL ("/").
+
+However, the error might be caused by the session not being properly initialized. Make sure that you have properly set up the session middleware before initializing Passport and its session handling middleware.
+
+Here is the correct order:
+
+```javascript
+app.use(session({
+    secret: process.env.SECRET,
+    resave: false,
+    saveUninitialized: false
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+```
+
+If you've done all of this correctly, the error might be caused by something else in your code. You might want to check other parts of your code for potential issues.

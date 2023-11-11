@@ -20,7 +20,7 @@ Each of these are updated as follows.
 
 Is there a more succint way to do this using an object as the variable?
 
-I found this template from the web. Could you help me finish `changeHandler` function by filling [blank]? Specifically, pelase don't add other text and just repeat the following paragraph with [blank] filled:
+I found this template from the web. Could you help me finish `changeHandler` function by filling ***blank***? Specifically, pelase don't add other text and just repeat the following paragraph with [blank] filled:
 
 ```javascript
 const [allValues, setAllValues] = useState({
@@ -30,7 +30,8 @@ const [allValues, setAllValues] = useState({
    password: '',
    confirmPassword: ''
 });
-const changeHandler = e => [blank]
+const changeHandler = e => ***blank***
+// end filling
 return (
    <input type="text"
        className="form-control"

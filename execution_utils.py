@@ -14,6 +14,7 @@ From https://github.com/bigcode-project/bigcode-evaluation-harness/blob/main/lm_
 import os
 from typing import Dict, List, Tuple
 os.environ["HF_ALLOW_CODE_EVAL"] = "1"
+# Note: the following allows running only on linux yet
 # os.environ['PATH'] = '/usr/local/lib/nodejs/node/bin:' + os.environ['PATH']
 # os.environ['NODE_PATH'] = '/usr/local/lib/node_modules'
 import contextlib
@@ -43,6 +44,28 @@ def create_tempdir():
     with tempfile.TemporaryDirectory() as dirname:
         with chdir(dirname):
             yield dirname
+
+@contextlib.contextmanager
+def chdir(root):
+    if root == ".":
+        yield
+        return
+    cwd = os.getcwd()
+    os.chdir(root)
+    try:
+        yield
+    except BaseException as exc:
+        raise exc
+    finally:
+        os.chdir(cwd)
+
+
+@contextlib.contextmanager
+def create_tempdir():
+    with tempfile.TemporaryDirectory() as dirname:
+        with chdir(dirname):
+            yield dirname
+
 
 class TimeoutException(Exception):
     pass
@@ -76,8 +99,8 @@ def python_unsafe_executor(references, predictions, timeout):
 
     logs = [[(0, dict(
         task_id=0,
-        passed=result[0] == "passed",
-        result=result[0],
+        passed=result[0].startswith("passed"),
+        result=result,
         completion_id=0,
     ))]]
 
@@ -209,21 +232,98 @@ def sql_unsafe_executor(references, predictions, timeout):
 
     logs = [[(0, dict(
         task_id=0,
-        passed=result[0] == "passed",
-        result=result[0],
+        passed=result[0].startswith("passed"),
+        result=result,
         completion_id=0,
     ))]]
 
     return {'pass@1': float(int(result[0] == "passed"))}, logs
 
 
-# language supported by humanevalpack
-LANGUAGES = ["python", "cpp", "javascript", "java", "go", "rust", "c#"]
+def js_unsafe_executor(references, predictions, timeout):
+
+    check_program = predictions[0][0] + '\n' + references[0]
+
+    result = []
+
+    with create_tempdir():
+        open(f"test.js", 'w').write(check_program)
+        # Run program.
+        try:
+            exec_result = subprocess.run(["node", "test.js"], timeout=timeout, capture_output=True)
+            # print(exec_result.returncode)
+            if exec_result.stderr.decode():
+                err = exec_result.stderr.decode()
+                result.append(f"stderr: {err}")
+            elif exec_result.stdout.decode():
+                err = exec_result.stdout.decode()
+                result.append(f"stdout: {err}")
+            else:
+                result.append('')
+            if exec_result.returncode != 0:
+                result[-1] = f"failed: returncode: {exec_result.returncode} " + result[-1] 
+            else:
+                result[-1] = "passed " + result[-1]
+        except subprocess.TimeoutExpired as e:
+            result[-1] = "time out " + result[-1]  
+    
+    logs = [[(0, dict(
+        task_id=0,
+        passed=result[0].startswith("passed"),
+        result=result,
+        completion_id=0,
+    ))]]
+
+    return {'pass@1': float(int(result[0].startswith("passed")))}, logs
+
+
+def ts_unsafe_executor(references, predictions, timeout):
+
+    check_program = predictions[0][0] + '\n' + references[0]
+
+    result = []
+
+    with create_tempdir():
+        open(f"test.ts", 'w').write(check_program)
+        # Compile to js then run program.
+        try:
+            exec_result = subprocess.run(["npx tsc test.ts --outfile test.js; node test.js"], timeout=timeout, capture_output=True, shell=True)
+            # with open('test.js', 'r') as f:
+            #     print(f.read())
+            # print(exec_result.returncode)
+            if exec_result.stderr.decode():
+                err = exec_result.stderr.decode()
+                result.append(f"stderr: {err}")
+            elif exec_result.stdout.decode():
+                err = exec_result.stdout.decode()
+                result.append(f"stdout: {err}")
+            else:
+                result.append('')
+            if exec_result.returncode != 0:
+                result[-1] = f"failed: returncode: {exec_result.returncode} " + result[-1] 
+            else:
+                result[-1] = "passed " + result[-1]
+        except subprocess.TimeoutExpired as e:
+            result[-1] = "time out " + result[-1]  
+    
+    logs = [[(0, dict(
+        task_id=0,
+        passed=result[0].startswith("passed"),
+        result=result,
+        completion_id=0,
+    ))]]
+
+    return {'pass@1': float(int(result[0].startswith("passed")))}, logs
+
+
+# language supported by us
+LANGUAGES = ["python", "cpp", "javascript", "typescript", "java", "go", "rust", "c#"]
 
 LANGUAGE_TO_NAME = {
     "python": "Python",
     "cpp": "C++",
     "javascript": "JavaScript",
+    "typescript": "TypeScript",
     "java": "Java",
     "go": "Go",
     "rust": "Rust",
@@ -234,6 +334,7 @@ LANGUAGE_TO_EXTENSION = {
     "python": "py",
     "cpp": "cpp",
     "javascript": "js",
+    "typescript": "ts",
     "java": "java",
     "go": "go",
     "rust": "rs",
@@ -261,6 +362,7 @@ LANGUAGE_TO_TIMEOUT = {
     "python": 10,
     "cpp": 60,
     "javascript": 10,
+    "typescript": 20,
     "java": 10,
     "go": 20,
     "rust": 300,  # Necessary for first-time compilation of cargo
@@ -273,6 +375,7 @@ LANGUAGE_TO_NUM_WORKERS = {
     "python": 4,
     "cpp": 4,
     "javascript": 4,
+    "typescript": 4,
     "java": 1,
     "go": 4,
     "rust": 1,
@@ -426,7 +529,7 @@ def get_exec_results(prefix_from_file: str, generations: List[str], references: 
     :param references: str
          str containing the test case
     """
-    generations = [prefix_from_file + gen for gen in generations]
+    generations = [prefix_from_file + '\n' + gen for gen in generations]
     code_metric = load("code_eval_octopack")
 
     timeout = LANGUAGE_TO_TIMEOUT[lang] if timeout is None else timeout
@@ -525,6 +628,18 @@ def get_exec_results(prefix_from_file: str, generations: List[str], references: 
         )
     elif lang == 'java':
         results, logs = java_unsafe_executor(
+            references=references,
+            predictions=generations,
+            timeout=timeout,
+        )
+    elif lang in ['javascript', 'js']:
+        results, logs = js_unsafe_executor(
+            references=references,
+            predictions=generations,
+            timeout=timeout,
+        )
+    elif lang == 'typescript':
+        results, logs = ts_unsafe_executor(
             references=references,
             predictions=generations,
             timeout=timeout,

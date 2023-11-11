@@ -1,0 +1,29 @@
+The error log indicates that Python is not found in your system. Node-gyp, which is a part of your project dependencies, requires Python to be installed in your system.
+
+Here are the steps to fix this issue:
+
+1. Install Python 2.7.x (node-gyp does not work with Python 3.x). You can download it from the [official Python website](https://www.python.org/downloads/).
+
+2. After installing Python, you need to add it to your system PATH. Here is how you can do it:
+
+   - Open the System Properties (Right click Computer in the start menu, or use the keyboard shortcut Win+Pause)
+   - Click Advanced system settings in the sidebar.
+   - Click Environment Variables...
+   - Select PATH in the System variables section
+   - Click Edit
+   - Add Python's path to the end of the list (the paths are separated by semicolons). For example:
+     ```
+     C:\Program Files;C:\Winnt;C:\Winnt\System32;C:\Python27
+     ```
+
+3. After Python is installed and set up, you can verify the installation by opening a new command prompt and typing `python --version`. It should display the Python version that you installed.
+
+4. Now, you should be able to build your project without the Python error.
+
+If you still encounter issues, you might need to install the Windows build tools which include other dependencies required by node-gyp. You can do this by running the following command in the command prompt with administrative privileges:
+
+```shell
+npm install --global --production windows-build-tools
+```
+
+This will install Python 2.7 and Visual Studio Build Tools, which are required by node-gyp.

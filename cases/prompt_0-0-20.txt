@@ -24,13 +24,15 @@ const Tab = ({ onClick, isSelected, children }) => {
 export default Tab
 ```
 
-Specifically, pelase don't add other text and repeat the following code with [blank] filled:
+Specifically, pelase don't add other text and repeat the following code with ****** filled:
 
 ```javascript
 import React from 'react'
 import styled from 'styled-components'
 
+// start
 const TabWrapper = [blank]
+// end
 
 const Tab = ({ onClick, isSelected, children }) => {
   return <TabWrapper onClick={onClick}>{children}</TabWrapper>

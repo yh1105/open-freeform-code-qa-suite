@@ -1,9 +1,0 @@
-id: 378
-prompt_path: prompt_378.txt
-type: code completion
-lang: java
-grading:
-  keywords:
-    - 'DateTimeFormatter'
-    - 'ofPattern'
-    - "\"uuuu-MM-dd'T'HH:mm:ssX\""

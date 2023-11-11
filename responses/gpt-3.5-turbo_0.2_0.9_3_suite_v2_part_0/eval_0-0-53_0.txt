@@ -1,0 +1,62 @@
+You have added a script tag inside the render method which is causing the function to run every time the component is rendered. Instead, you can add an onClick event to the upload button and call the function from there. Here's the revised code:
+
+```javascript
+import React, { Component } from 'react'
+import { Alert } from 'react-alert'
+
+class Main extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      imageURL: '',
+    };
+
+    this.handleUploadImage = this.handleUploadImage.bind(this);
+    this.showAlert = this.showAlert.bind(this);
+  }
+
+  handleUploadImage(ev) {
+    ev.preventDefault();
+
+    const data = new FormData();
+    data.append('file', this.uploadInput.files[0]);
+    data.append('filename', this.fileName.value);
+
+    fetch('http://localhost:8000/upload', {
+      method: 'POST',
+      body: data,
+    }).then((response) => {
+      response.json().then((body) => {
+        this.setState({ imageURL: `http://localhost:8000/${body.file}` });
+      });
+    });
+  }
+
+  showAlert() {
+    alert("Your file is being uploaded!");
+  }
+
+  render() {
+    return (
+      <form onSubmit={this.handleUploadImage}>
+        <div>
+          <input ref={(ref) => { this.uploadInput = ref; }} type="file" />
+        </div>
+        <div>
+          <input ref={(ref) => { this.fileName = ref; }} type="text" placeholder="Enter the desired name of file" />
+        </div>
+        <br />
+        <div>
+          <button onClick={this.showAlert}>Upload</button>
+        </div>
+        <img src={this.state.imageURL} alt="img" />
+      </form>
+    );
+  }
+}
+
+export default Main;
+``` 
+
+In the revised code, I have removed the script tag and added a new function called showAlert which will display the alert message. I have also added an onClick event to the upload button which will call the showAlert function.

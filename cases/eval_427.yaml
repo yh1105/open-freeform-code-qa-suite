@@ -1,7 +1,0 @@
-id: 427
-prompt_path: prompt_427.txt
-type: code debugging
-lang: php
-grading:
-  keywords:
-    - 'ob_start()'

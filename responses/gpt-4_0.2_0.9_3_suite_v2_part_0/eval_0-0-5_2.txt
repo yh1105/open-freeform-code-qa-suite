@@ -1,0 +1,25 @@
+The error log indicates that Python is not found in your PATH. Node-gyp, which is a part of the node-sass package, requires Python to be installed and accessible in your PATH. 
+
+Here are the steps to fix this issue:
+
+1. Install Python 2.7.x. You can download it from the [official Python website](https://www.python.org/downloads/). Node-gyp does not work with Python 3.x, so make sure to install a 2.7.x version.
+
+2. During the installation, there will be an option "Add python.exe to Path". Make sure to check this option. If you have already installed Python but didn't add it to the PATH, you can do it manually:
+
+    - Open the System Properties (WinKey + Pause)
+    - Select the "Advanced" tab
+    - Click the "Environment Variables" button
+    - In the section "System Variables" find the PATH environment variable and select it. Click the "Edit" button.
+    - In the Edit Environment Variable window, append the path of your Python installation to the existing PATH variable. Make sure to separate it from the existing paths with a semicolon. The path should look something like this: `C:\Python27\`.
+
+3. After the installation, open a new command prompt and type `python --version`. If Python is correctly installed and added to your PATH, it should return the version of the Python interpreter.
+
+4. Now try to build your Node.js application again. The node-gyp should be able to find Python in the PATH and the build should pass.
+
+If you still encounter issues, you might need to configure npm to know the path of Python by running the following command:
+
+```bash
+npm config set python /path/to/executable/python2.7
+```
+
+Replace `/path/to/executable/python2.7` with the actual path to your Python 2.7 executable.

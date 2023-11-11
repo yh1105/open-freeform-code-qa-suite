@@ -1,0 +1,1 @@
+`attrs` is for mentioning the attributes of that very same DOM element in the attrs constructor without the need to even mention it in actual component call.

@@ -1,4 +1,4 @@
-I have a form in one of my React components, and and in the outside component that calls it I want to pass a reference to a button there, so that I can also submit that using that button.
+I have a form in one of my React components, and in the outside component that calls it I want to pass a reference to a button there, so that I can also submit that using that button.
 
 To make it more clear I have the following:
 

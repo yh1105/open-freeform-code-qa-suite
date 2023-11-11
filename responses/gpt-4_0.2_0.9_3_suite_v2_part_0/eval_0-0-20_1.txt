@@ -1,0 +1,30 @@
+The issue with your current code is that you are defining the `TabWrapper` styled component inside the `Tab` component. This means that a new `TabWrapper` is created every time the `Tab` component is rendered, which is inefficient. 
+
+Instead, you should define `TabWrapper` outside of the `Tab` component. You can still make the styles dependent on the `isSelected` prop by passing it to the `TabWrapper` when it is used in the `Tab` component.
+
+Here is the refactored code:
+
+```javascript
+import React from 'react'
+import styled from 'styled-components'
+
+const TabWrapper = styled.li`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 100px;
+  margin: 1px;
+  font-size: 3em;
+  color: ${props => (props.isSelected ? `white` : `black`)};
+  background-color: ${props => (props.isSelected ? `black` : `#C4C4C4`)};
+  cursor: ${props => (props.isSelected ? 'default' : `pointer`)};
+`
+
+const Tab = ({ onClick, isSelected, children }) => {
+  return <TabWrapper onClick={onClick} isSelected={isSelected}>{children}</TabWrapper>
+}
+
+export default Tab
+```
+
+In this refactored code, `TabWrapper` is defined outside of `Tab`, so it is not recreated on every render. The `isSelected` prop is passed to `TabWrapper` in the `Tab` component, so the styles can still be dependent on it.

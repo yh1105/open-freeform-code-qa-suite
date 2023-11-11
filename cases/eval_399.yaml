@@ -1,9 +1,0 @@
-id: 399
-prompt_path: prompt_399.txt
-type: code debugging
-lang: c#
-grading:
-  similarity:
-    - metric: rougeLsum
-      references:
-        - path: answer_399_0.txt

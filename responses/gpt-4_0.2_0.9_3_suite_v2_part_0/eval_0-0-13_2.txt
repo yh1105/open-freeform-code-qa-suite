@@ -1,0 +1,3 @@
+```javascript
+const changeHandler = e => setAllValues({ ...allValues, [e.target.name]: e.target.value });
+```

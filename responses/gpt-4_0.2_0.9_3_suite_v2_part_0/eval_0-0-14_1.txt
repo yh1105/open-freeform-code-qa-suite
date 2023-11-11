@@ -1,0 +1,14 @@
+The `Switch` component from Ant Design should be used with `onChange` prop to handle the state changes. Here is how you can revise your code:
+
+```jsx
+<Form.Item name="switch" valuePropName="checked">
+  <Switch 
+    checkedChildren="Yes" 
+    unCheckedChildren="No" 
+    onChange={(checked) => form.setFieldsValue({ switch: checked })}
+  />
+  <span>Chargable</span>
+</Form.Item>
+```
+
+In this code, `onChange` is used to set the form field value when the switch is toggled. The `checked` parameter represents the current state of the switch. When the switch is toggled, the form field value is updated with the current state of the switch.

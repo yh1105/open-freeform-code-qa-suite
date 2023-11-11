@@ -1,8 +1,0 @@
-id: 394
-prompt_path: prompt_394.txt
-type: code debugging
-lang: c#
-grading:
-  keywords:
-    - 'await'
-    - 'Image.LoadAsync'

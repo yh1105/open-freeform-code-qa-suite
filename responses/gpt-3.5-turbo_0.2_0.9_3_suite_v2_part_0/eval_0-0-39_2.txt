@@ -1,0 +1,45 @@
+Yes, you can achieve this by using refs in React. You can create a ref in the parent component and pass it as a prop to the child component. Then, you can attach the ref to the form element in the child component. Finally, you can add an onClick event to the 'In Root' button that triggers the form submission using the ref.
+
+Here's an example of how you can modify your code to achieve this:
+
+```javascript
+import React, { Component } from "react";
+import ReactDOM from "react-dom";
+
+class CustomForm extends Component {
+  render() {
+    return (
+      <form ref={this.props.formRef} onSubmit={() => alert('Form submitted!')}>
+        <button type='submit'>Inside Custom</button>
+      </form>
+    );
+  }
+}
+
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.formRef = React.createRef();
+  }
+
+  handleSubmit = () => {
+    this.formRef.current.submit();
+  }
+
+  render() {
+    return (
+      <div>
+        <CustomForm formRef={this.formRef} />
+        <button onClick={this.handleSubmit}>In Root</button>
+      </div>
+    );
+  }
+}
+
+const rootElement = document.getElementById("root");
+ReactDOM.render(<App />, rootElement);
+```
+
+In this modified code, we create a ref using `React.createRef()` in the parent component's constructor. We pass this ref as a prop to the child component, and attach it to the form element using `ref={this.props.formRef}`. Finally, we add an `onClick` event to the 'In Root' button that calls `this.formRef.current.submit()` to submit the form.
+
+Note that we've also changed the `onSubmit` event in the child component to use an arrow function, so that it doesn't get called immediately when the component is rendered.

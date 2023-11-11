@@ -1,0 +1,34 @@
+Sure, here's the updated code:
+
+```javascript
+const { MongoClient } = require('mongodb');
+const session = require('express-session');
+const MongoStore = require('connect-mongo');
+
+...
+
+const client = new MongoClient(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+
+client.connect((err) => {
+  if (err) {
+    console.error('Error connecting to MongoDB:', err);
+    return;
+  }
+
+  const store = MongoStore.create({
+    client: client,
+    dbName: 'your-db-name',
+    collectionName: 'your-collection-name',
+    ttl: 3600 // session TTL in seconds
+  });
+
+  app.use(session({
+    secret: 'story book',
+    resave: false,
+    saveUninitialized: false,
+    store: store
+  }));
+});
+```
+
+Note that you need to replace `'your-db-name'` and `'your-collection-name'` with the actual names of your database and collection. Also, you can adjust the `ttl` option to set the time-to-live for sessions in seconds.

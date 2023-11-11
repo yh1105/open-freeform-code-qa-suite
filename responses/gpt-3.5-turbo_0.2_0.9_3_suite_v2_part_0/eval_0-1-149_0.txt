@@ -1,0 +1,14 @@
+Yes, you can use Tailwind's `hover` and `transition` utilities to achieve the animation effect. Here's an example code snippet that you can use:
+
+```html
+<a href="#" class="group relative text-sky-600">
+  Link
+  <span class="absolute inset-x-0 bottom-0 h-0.5 bg-sky-600 transform origin-center scale-x-0 transition duration-500 group-hover:scale-x-100"></span>
+</a>
+```
+
+In this code, we added the `relative` class to the link container and the `absolute` class to the span element to position it relative to the link container. We also added the `transform` and `transition` classes to the span element to scale it horizontally and animate it smoothly.
+
+When the user hovers over the link, the `group-hover:scale-x-100` class is added to the span element, which scales it horizontally to its original size. The `origin-center` class is used to ensure that the scaling happens from the center of the span element.
+
+Note that we also removed the `max-w-0` and `h-0.5` classes from the span element, as they are not needed for this animation effect.

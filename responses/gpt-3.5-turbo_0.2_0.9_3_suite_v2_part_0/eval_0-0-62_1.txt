@@ -1,0 +1,26 @@
+The error message is indicating that you are using a non-primitive value as a key in your `v-for` loop. In your code, you are using `:key="comment"`, which means that Vue is trying to use the entire `comment` object as the key for each item in the loop.
+
+To fix this, you should use a unique identifier for each item as the key. In this case, you can use the `comment.id` property as the key:
+
+```html
+<template>
+    <div class="container">
+        <h2>{{ story.title }}</h2>
+        <p>Score: {{ story.score }}</p>
+        <p>{{ story.url }}</p>
+        <div v-for="comment in comments" :key="comment.id">
+          <div class="comment-wrap">
+                <div class="comment-block">
+                    <p class="comment-text">{{ comment.text }}</p>
+                    <div class="bottom-comment">
+                        <div class="comment-author">{{ comment.by }}</div>
+                        <div class="comment-date">{{ comment.time }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+```
+
+By using `comment.id` as the key, Vue will be able to track each item in the loop correctly and avoid the warning message.

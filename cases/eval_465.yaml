@@ -1,9 +1,0 @@
-id: 465
-prompt_path: prompt_465.txt
-type: non-code debugging
-lang: go
-grading:
-  keywords:
-    - 'set GOOS=linux'
-    - 'set GOARCH=amd64'
-    - 'set CGO_ENABLED=0'

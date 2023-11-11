@@ -1,0 +1,62 @@
+The issue you're facing is due to the fact that you're trying to use inline JavaScript within your React component. React uses a virtual DOM and handles events differently, so you can't use inline JavaScript like you would in a regular HTML file.
+
+Instead, you should define the function that shows the alert within your React component and then reference it in your button's onClick prop.
+
+Here's the revised version of your code:
+
+```javascript
+import React, { Component } from 'react'
+
+class Main extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      imageURL: '',
+    };
+
+    this.handleUploadImage = this.handleUploadImage.bind(this);
+  }
+
+  handleUploadImage(ev) {
+    ev.preventDefault();
+
+    alert("Your file is being uploaded!");
+
+    const data = new FormData();
+    data.append('file', this.uploadInput.files[0]);
+    data.append('filename', this.fileName.value);
+
+    fetch('http://localhost:8000/upload', {
+      method: 'POST',
+      body: data,
+    }).then((response) => {
+      response.json().then((body) => {
+        this.setState({ imageURL: `http://localhost:8000/${body.file}` });
+      });
+    });
+  }
+
+  render() {
+    return (
+      <form onSubmit={this.handleUploadImage}>
+        <div>
+          <input ref={(ref) => { this.uploadInput = ref; }} type="file" />
+        </div>
+        <div>
+          <input ref={(ref) => { this.fileName = ref; }} type="text" placeholder="Enter the desired name of file" />
+        </div>
+        <br />
+        <div>
+          <button type="submit">Upload</button>
+        </div>
+        <img src={this.state.imageURL} alt="img" />
+      </form>
+    );
+  }
+}
+
+export default Main;
+```
+
+In this revised version, I've removed the inline JavaScript and added the alert to the `handleUploadImage` function. The alert will now show when the form is submitted, which is when the Upload button is clicked.

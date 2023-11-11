@@ -1,0 +1,19 @@
+Sure, here is the completed Javascript code:
+
+Way 1:
+
+```javascript
+cy.get(".ibxudA").find('.WildnessText-kRKTej').should('have.text', "Wildness")
+```
+
+Way 2:
+
+```javascript
+cy.get(".ibxudA").find('.WildnessText-kRKTej').invoke('text').then((text) => {
+    expect(text.trim()).to.equal('Wildness')
+});
+```
+
+In the first way, `'.WildnessText-kRKTej'` is the class of the div you want to find, and `'have.text'` is the assertion you want to make about that div. 
+
+In the second way, `'text'` is the method you're invoking on the div, and `expect(text.trim()).to.equal('Wildness')` is the assertion you're making about the result.

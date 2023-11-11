@@ -1,0 +1,20 @@
+You can modify the CSS of Firefox by creating a userChrome.css file. Here are the steps to reduce the spacing between menu items:
+
+1. Open Firefox and type `about:config` in the address bar.
+2. Search for `toolkit.legacyUserProfileCustomizations.stylesheets` and set it to `true`.
+3. Open your Firefox profile folder. You can find the location of your profile folder by typing `about:support` in the address bar and looking for the "Profile Folder" entry.
+4. If it doesn't exist, create a folder named `chrome` in your profile folder.
+5. Inside the `chrome` folder, create a file named `userChrome.css`.
+6. Open the `userChrome.css` file in a text editor.
+7. Add the following code to the file:
+
+```
+/* Reduce spacing between menu items */
+menupopup > menuitem {
+  padding-block: 4px !important;
+}
+```
+
+8. Save the `userChrome.css` file and restart Firefox.
+
+This code reduces the padding between menu items to 4 pixels. You can adjust the value to your liking.

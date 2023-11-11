@@ -60,7 +60,11 @@ def LCS(template: str, tgt: str) -> Tuple[np.ndarray, np.ndarray]:
                     s_all[i][j] = j
                 else:
                     f[i][j] = max(f[i][j-1], f[i-1][j])
-                    s_all[i][j] = s_all[i][j-1] if f[i][j-1] >= f[i-1][j] else s_all[i-1][j]
+                    if f[i][j-1] == f[i-1][j]:
+                        # break tie by preferring the latter match
+                        s_all[i][j] = max(s_all[i][j-1], s_all[i-1][j])
+                    else:
+                        s_all[i][j] = s_all[i][j-1] if f[i][j-1] >= f[i-1][j] else s_all[i-1][j]
             else:
                 if template[i] == tgt[j]:
                     f[i][j] = 1
@@ -92,7 +96,7 @@ def blank_filling_match(template: str, blank_str: str, escape: str, targets: Lis
         "Number of targets should be equal to number of blanks"
 
     matched_rate = f[len(template)-1][len(response)-1] / (len(template) - n_blank * len(blank_str))
-    print(f'Template following rate = {matched_rate:.3f}')
+    # print(f'Template following rate = {matched_rate:.3f}')
 
     now_score, tot_score = 0., 0.
     grading_details = []
@@ -100,12 +104,17 @@ def blank_filling_match(template: str, blank_str: str, escape: str, targets: Lis
     for no, target in enumerate(targets):
         weight = 1.0 if isinstance(target, str) else target.get('weight', 1.0)
         to_lower = False if isinstance(target, str) else target.get('to_lower', False)
+        substr_match = False if isinstance(target, str) else target.get('substr_match', False)
         tot_score += weight
 
         if matched_rate < 0.8:
             grading_details.append(f'unmatched: match rate too low - {matched_rate}')
         else:
-            response_str = response[s[blank_places[no]]: s[blank_places[no] + len(blank_str)]]
+            if blank_places[no] == 0:
+                response_str = response[s[blank_places[no]]: s[blank_places[no] + len(blank_str)]]
+            else:
+                # match longer
+                response_str = response[s[blank_places[no] - 1] + 1: s[blank_places[no] + len(blank_str)]]
             response_str = response_str.strip(escape)
 
             # anses are or-clauses
@@ -113,6 +122,8 @@ def blank_filling_match(template: str, blank_str: str, escape: str, targets: Lis
                 anses = [target]
             else:
                 anses = target['content']
+                if isinstance(anses, str):
+                    anses = [anses]
                 if isinstance(anses, str):
                     anses = [anses]
 
@@ -130,12 +141,19 @@ def blank_filling_match(template: str, blank_str: str, escape: str, targets: Lis
                 # - ans_str: str
                 # - ans_re: bool
                 # - response_str: str
-                if (((not ans_re and response_str == ans_str) or (ans_re and re.fullmatch(ans_str, response_str) is not None))
-                        and (ans_cond is None or eval(ans_cond))):
-                    now_score += weight
-                    now_status = 'matched: ' + now_status
-                    matched = True
-                    break
+                if not substr_match:
+                    if (((not ans_re and response_str == ans_str) or (ans_re and re.fullmatch(ans_str, response_str) is not None))
+                            and (ans_cond is None or eval(ans_cond))):
+                        now_score += weight
+                        now_status = 'matched: ' + now_status
+                        matched = True
+                        break
+                else:
+                    if (((not ans_re and response_str.count(ans_str) > 0) or (ans_re and re.search(ans_str, response_str))) and (ans_cond is None or eval(ans_cond))):
+                        now_score += weight
+                        now_status = 'matched: ' + now_status
+                        matched = True
+                        break
 
             if matched:
                 grading_details.append(now_status)
@@ -149,9 +167,9 @@ def blank_filling_match(template: str, blank_str: str, escape: str, targets: Lis
         func_name = post_handler['func']
 
         custom_module = importlib.import_module(module_name)
-        new_ans, new_tot, post_handler_detail = getattr(custom_module, func_name)(now_ans, now_tot, grading_details)
-        now_ans = new_ans
-        now_tot = new_tot
+        new_ans, new_tot, post_handler_detail = getattr(custom_module, func_name)(now_score, tot_score, grading_details)
+        now_score = new_ans
+        tot_score = new_tot
 
     return now_score, tot_score, grading_details, post_handler_detail
 

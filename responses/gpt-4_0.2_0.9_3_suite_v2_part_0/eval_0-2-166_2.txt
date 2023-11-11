@@ -1,0 +1,21 @@
+Tailwind CSS is a utility-first CSS framework that provides low-level utility classes to build custom designs. It doesn't directly provide a way to target child elements like you would in traditional CSS with the child combinator (`>`).
+
+However, you can create a custom CSS file where you define these specific styles and then use Tailwind's `@apply` directive to apply utility styles to your custom class.
+
+Here's an example:
+
+```css
+/* In your custom CSS file */
+.section-child {
+  @apply some-tailwind-utilities;
+}
+
+/* In your HTML */
+<div class="section">
+  <div class="section-child">...</div>
+</div>
+```
+
+In this example, replace `some-tailwind-utilities` with the Tailwind CSS utility classes you want to apply to the direct children of the `.section` div.
+
+Remember to include your custom CSS file in your project and ensure it's being processed by Tailwind, typically done in your `tailwind.config.js` file.

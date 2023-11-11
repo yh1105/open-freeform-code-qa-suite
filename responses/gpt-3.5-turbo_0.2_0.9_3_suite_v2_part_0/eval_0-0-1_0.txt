@@ -1,0 +1,26 @@
+If you are receiving a 404 error when deploying your NextJS app to Vercel, it is likely that there is an issue with your routing configuration. Here are some steps you can take to troubleshoot the issue:
+
+1. Check your `package.json` file to make sure that your `start` script is set to `next start`. This is the command that Vercel will use to start your app.
+
+2. Make sure that you have a `next.config.js` file in the root of your project. This file is required for custom routing in NextJS. Here is an example of a basic `next.config.js` file:
+
+```
+module.exports = {
+  async rewrites() {
+    return [
+      {
+        source: '/api/:path*',
+        destination: 'https://example.com/:path*',
+      },
+    ]
+  },
+}
+```
+
+3. Check your dynamic route to make sure that it is set up correctly. Dynamic routes in NextJS are defined using square brackets (`[]`). For example, if you have a dynamic route for blog posts, it might look like this: `pages/posts/[slug].js`. Make sure that your dynamic route is set up correctly and that you are using the correct variable name in your code.
+
+4. Check your `pages` directory to make sure that all of your pages are named correctly and are in the correct directory. For example, if you have a page for your home page, it should be named `index.js` and should be located in the `pages` directory.
+
+5. Check the Vercel logs to see if there are any error messages that can help you diagnose the issue. You can access the logs by clicking on the "Logs" button in the Vercel dashboard.
+
+I hope this helps you resolve the issue with your NextJS app on Vercel!

@@ -1,0 +1,34 @@
+It seems like the issue is with the URI you are using in your `ApolloClient`. The URI `https://48p1r2roz4.sse.codesandbox.io` is a demo GraphQL server provided by Apollo Client, and it may not be working properly at the moment.
+
+You should replace the URI with the endpoint of your own GraphQL server or use a different demo server that is currently working. You can find a list of demo servers in the Apollo Client documentation.
+
+If you don't have your own GraphQL server, you can try using the following URI instead:
+
+```
+https://countries.trevorblades.com/
+```
+
+This is a demo GraphQL server that provides information about countries. You can modify your `EXCHANGE_RATES` query to fetch data from this server:
+
+```javascript
+const EXCHANGE_RATES = gql`
+    query GetExchangeRates {
+        countries {
+            code
+            name
+            currency
+        }
+    }
+`;
+```
+
+Make sure to update the `uri` property of your `ApolloClient` to use this new URI:
+
+```javascript
+const apolloClient = new ApolloClient({
+    uri: 'https://countries.trevorblades.com/',
+    cache: new InMemoryCache(),
+});
+```
+
+This should resolve the issue and allow you to fetch data using `useQuery`.

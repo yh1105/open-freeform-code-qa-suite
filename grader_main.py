@@ -26,6 +26,13 @@ def grade_response(config: dict, case_dir: str, response: str, full_score: float
     ans = 0.
     tot = 0.
 
+    if 'lang' not in config:
+        print(f'Warning: language not specified in case {config["id"]}')
+    if 'type' not in config:
+        print(f'Warning: question type not specified in case {config["id"]}')
+    elif config['type'] not in ['code debugging', 'code completion', 'knowledge question-answering', 'non-code debugging']:
+        print(f'Warning: unusual question type (config["type"]) in case {config["id"]}')
+
     # four types of evaluation metrics + customized
     if 'keywords' in config['grading']:
         """
@@ -160,12 +167,14 @@ def grade_response(config: dict, case_dir: str, response: str, full_score: float
             lang = 'cpp'
         elif lang in ['js', 'javascript']:
             lang = 'javascript'
-        elif lang == 'custom-py':
-            lang = 'custom-py'
+        # elif lang == 'custom-py':
+        #     lang = 'custom-py'
         elif lang == 'java':
             lang = 'java'
         elif lang in ['c#', 'c-sharp', 'csharp', 'cs']:
             lang = 'c#'
+        elif lang in ['ts', 'typescript']:
+            lang = 'typescript'
         else:
             raise NotImplementedError(f'Does not support this language yet: {lang}.')
 
@@ -221,7 +230,10 @@ def grade_response(config: dict, case_dir: str, response: str, full_score: float
     if 'min_score' in config['grading']:
         ans = max(ans, config['grading']['min_score'])
 
-    print(f'Score: {ans} / {tot} -> {(ans / tot) * full_score:.3f}')
+    if ans < 0.:
+        print(f'Warning: negative score ({ans}) found in case id {config["id"]}')
+
+    # print(f'Score: {ans} / {tot} -> {(ans / tot) * full_score:.3f}')
     return (ans / tot) * full_score, status
 
 

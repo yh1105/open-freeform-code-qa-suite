@@ -1,0 +1,18 @@
+The issue seems to be with the format of the `$theme-colors` map. The values in the map should be in valid CSS format, which means they should be enclosed in quotes and end with a semicolon.
+
+Try updating your `$theme-colors` map to the following format:
+
+```scss
+$theme-colors: (
+  "primary": "#0d6efd",
+  "secondary": "#6c757d",
+  "success": "#198754",
+  "info": "#0dcaf0",
+  "warning": "#ffc107",
+  "danger": "#dc3545",
+  "light": "#f8f9fa",
+  "dark": "#212529"
+);
+```
+
+Make sure to include the quotes and semicolons for each color value. This should resolve the invalid CSS value error you're seeing.

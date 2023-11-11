@@ -1,7 +1,0 @@
-id: 452
-prompt_path: prompt_452.txt
-type: knowledge question-answering
-lang: go
-grading:
-  keywords:
-    - 'go mod download'

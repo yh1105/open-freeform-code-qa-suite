@@ -1,0 +1,27 @@
+Yes, you can modify the internal CSS of Firefox to adjust the spacing between menu items. Here's how you can do it:
+
+1. Open your Firefox profile folder. You can do this by typing `about:support` in the address bar and then clicking on `Open Folder` in the `Profile Folder` row.
+
+2. In the profile folder, create a new folder and name it `chrome`.
+
+3. Inside the `chrome` folder, create a new file named `userChrome.css`. Make sure the file extension is `.css`.
+
+4. Open the `userChrome.css` file in a text editor and paste the following code:
+
+    ```css
+    :root {
+        --arrowpanel-menuitem-padding: 4px 8px !important;
+    }
+    ```
+
+    This code reduces the padding around menu items. You can adjust the `4px 8px` values to your liking. The first value is the vertical padding (top and bottom) and the second value is the horizontal padding (left and right).
+
+5. Save the `userChrome.css` file and close it.
+
+6. Now, you need to tell Firefox to use your custom CSS. Type `about:config` in the address bar and press Enter. Click on `Accept the Risk and Continue`.
+
+7. In the search bar, type `toolkit.legacyUserProfileCustomizations.stylesheets` and set its value to `true` by clicking on the toggle button.
+
+8. Restart Firefox for the changes to take effect.
+
+Please note that modifying internal files can lead to unexpected behavior and is generally not recommended unless you know what you're doing. Always make a backup of your profile folder before making any changes.

@@ -1,0 +1,14 @@
+With Font Awesome 5, the syntax for using icons has changed. You need to use the `font-weight` property to specify the icon style (solid, regular, or light) and the `font-family` property to specify the font family.
+
+Here's an example of how to update your code to work with Font Awesome 5:
+
+```css
+#mainNav .navbar-collapse .navbar-sidenav .nav-link-collapse:after {
+  float: right;
+  content: "\f107";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900; /* This specifies the solid style */
+}
+```
+
+Note that you need to use the correct font family name for the version of Font Awesome you are using. In this example, I used the font family name for Font Awesome 5 Free. If you are using a different version (such as Font Awesome 5 Pro), you will need to use the appropriate font family name.

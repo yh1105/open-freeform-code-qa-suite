@@ -1,0 +1,16 @@
+The error you're getting is because you're trying to overwrite the `$theme-colors` map after it's been used in the Bootstrap's `_variables.scss` file. The map is used to generate a number of other variables, and when you try to overwrite it after it's been used, SASS throws an error.
+
+To fix this, you need to define your `$theme-colors` map before you import the Bootstrap's `_variables.scss` file. Here's how you can do it:
+
+```scss
+$theme-colors: (
+  "primary": #your-color,
+  // Add other colors if needed
+);
+
+@import "../../node_modules/bootstrap/scss/bootstrap";
+```
+
+This way, when the `_variables.scss` file is imported, it will use your `$theme-colors` map instead of the default one.
+
+Also, make sure that the color you're using is a valid CSS color. You can use named colors (like `red`, `blue`, etc.), hex colors (like `#ff0000`, `#00ff00`, etc.), rgb colors (like `rgb(255, 0, 0)`, `rgb(0, 255, 0)`, etc.), or rgba colors (like `rgba(255, 0, 0, 0.5)`, `rgba(0, 255, 0, 0.5)`, etc.).

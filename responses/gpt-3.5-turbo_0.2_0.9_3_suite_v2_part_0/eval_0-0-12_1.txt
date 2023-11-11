@@ -1,0 +1,7 @@
+The error message you are receiving indicates that the username and password you are using to authenticate with Gmail's SMTP server are incorrect. Here are a few things you can try to fix this issue:
+
+1. Double-check your Gmail account credentials to ensure that you are using the correct username and password.
+2. Make sure that you have enabled "Less secure app access" in your Gmail account settings. You can do this by going to your Google Account settings, clicking on "Security" in the left-hand menu, and then scrolling down to the "Less secure app access" section. Toggle the switch to "On" to enable this feature.
+3. If you have two-factor authentication enabled for your Gmail account, you will need to generate an app-specific password to use with your Node.js code. You can do this by going to your Google Account settings, clicking on "Security" in the left-hand menu, and then scrolling down to the "App passwords" section. Generate a new app-specific password and use this in your Node.js code instead of your regular Gmail password.
+
+Once you have made these changes, try running your Node.js code again and see if the error persists.

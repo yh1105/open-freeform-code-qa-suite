@@ -1,0 +1,15 @@
+Sure! Here's the revised route pattern that should work for your requirements:
+
+```
+/route/:param1/config/:OptionalParam2?/:OptionalParam3?
+```
+
+This pattern includes two optional parameters, `OptionalParam2` and `OptionalParam3`, which can be included in the URL after the `config` segment. The `?` character after each optional parameter indicates that it is optional.
+
+So, the route will match the following URLs:
+
+- `/route/aa/config`
+- `/route/aa/config/bb`
+- `/route/aa/config/bb/cc`
+
+Note that the parameter names in the pattern should match the parameter names used in your Nestjs controller method.
