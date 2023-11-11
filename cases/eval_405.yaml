@@ -1,0 +1,9 @@
+id: 405
+prompt_path: prompt_405.txt
+type: code completion
+lang: c#
+grading:
+  unit_test:
+    tests:
+      - prefix_path: 'test_405/Program.cs'
+        content: ''

@@ -156,12 +156,16 @@ def grade_response(config: dict, case_dir: str, response: str, full_score: float
 
         if lang == 'python':
             lang = 'python'
-        elif lang in ['c', 'c++', 'cpp']:
+        elif lang in ['c', 'c++', 'cpp', 'c/c++', 'c++/c', 'cpp/c', 'c/cpp']:
             lang = 'cpp'
         elif lang in ['js', 'javascript']:
             lang = 'javascript'
         elif lang == 'custom-py':
             lang = 'custom-py'
+        elif lang == 'java':
+            lang = 'java'
+        elif lang in ['c#', 'c-sharp', 'csharp', 'cs']:
+            lang = 'c#'
         else:
             raise NotImplementedError(f'Does not support this language yet: {lang}.')
 

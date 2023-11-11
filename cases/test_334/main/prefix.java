@@ -1,4 +1,3 @@
-package main;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,9 +7,8 @@ public class Main {
         String sub;
         Integer marks;
         boolean status;
-        // getters & setters
+        
+        public boolean isStatus() {
+            return this.status;
+        }
     }
-    public static void removeFalseSubjects(List<Subject> subjects){
-        [blank]
-    }
-}

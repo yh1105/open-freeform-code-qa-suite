@@ -4,7 +4,7 @@ type: code completion
 lang: java
 grading:
   unit_test:
-    lang: custom-py
     tests:
-      - content: "This is content"
-        prefix: "This is prefix"
+      - prefix_path: 'test_334/main/prefix.java'
+        path: 'test_334/main/case0.java'
+      

@@ -1,3 +1,5 @@
+# First check the runtime env
+python env_check.py
 
 # Generate responses with 10 trails using GPT4 and GPT3.5, saved to responses/
 python openai_caller.py suite_v1.yaml gpt-4 --n 10

@@ -241,6 +241,28 @@ answer_paths:
   - eval_470_7.txt
   - eval_470_8.txt
   - eval_470_9.txt
+  cases/eval_334.yaml:
+  - eval_334_0.txt
+  - eval_334_1.txt
+  - eval_334_2.txt
+  - eval_334_3.txt
+  - eval_334_4.txt
+  - eval_334_5.txt
+  - eval_334_6.txt
+  - eval_334_7.txt
+  - eval_334_8.txt
+  - eval_334_9.txt
+  cases/eval_337.yaml:
+  - eval_337_0.txt
+  - eval_337_1.txt
+  - eval_337_2.txt
+  - eval_337_3.txt
+  - eval_337_4.txt
+  - eval_337_5.txt
+  - eval_337_6.txt
+  - eval_337_7.txt
+  - eval_337_8.txt
+  - eval_337_9.txt
 max_tokens: null
 model_name: gpt-4
 qa_system_prompt: You are a professional assistant for programmers. By default, questions

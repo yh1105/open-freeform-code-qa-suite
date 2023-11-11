@@ -11,3 +11,4 @@ responses/old*
 responses/*mogao*
 batched_responses/
 .*
+responses/debug*
