@@ -96,7 +96,7 @@ def blank_filling_match(template: str, blank_str: str, escape: str, targets: Lis
         "Number of targets should be equal to number of blanks"
 
     matched_rate = f[len(template)-1][len(response)-1] / (len(template) - n_blank * len(blank_str))
-    print(f'Template following rate = {matched_rate:.3f}')
+    # print(f'Template following rate = {matched_rate:.3f}')
 
     now_score, tot_score = 0., 0.
     grading_details = []
