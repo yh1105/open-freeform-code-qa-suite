@@ -26,7 +26,7 @@ The nested object tree example:
 }
 ```
 
-You are required to write a function `findObject(id)` that returns the object. In the above example, the execution result of `findObject("C")` should be:
+You are required to write a function `findObject(id, root_node)` that returns the object. In the above example, the execution result of `findObject("C", root_node)` should be:
 
 ```javascript
 {
@@ -36,4 +36,4 @@ You are required to write a function `findObject(id)` that returns the object. I
 }
 ```
 
-The object is guaranteed to be existing and unique when the function is called. Could you help me to implement this function?
+The object is guaranteed to be existing and unique when the function is called. Could you help me to implement this function? Just output the function without any other things.

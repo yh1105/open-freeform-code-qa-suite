@@ -47,8 +47,8 @@ def check_correctness(check_program, timeout, task_id, completion_id, language, 
 
     return dict(
         task_id=task_id,
-        passed=result[0] == "passed",
-        result=result[0],
+        passed=result[0].startswith("passed"),
+        result=list(result),
         completion_id=completion_id,
     )
 
@@ -191,21 +191,22 @@ def unsafe_execute_js(check_program, result, timeout):
 
     with create_tempdir():
         open(f"test.js", 'w').write(check_program)
-
         # Run program.
         try:
-            exec_result =  subprocess.run(["node", "test.js"], timeout=timeout, capture_output=True)
+            exec_result = subprocess.run(["node", "test.js"], timeout=timeout, capture_output=True)
+            # print(exec_result.returncode)
             if exec_result.stderr.decode():
                 err = exec_result.stderr.decode()
-                result.append(f"failed: {err}")
+                result.append(f"stderr: {err}")
             elif exec_result.stdout.decode():
                 err = exec_result.stdout.decode()
-                result.append(f"failed: {err}")
+                result.append(f"stdout: {err}")
+            if exec_result.returncode != 0:
+                result[-1] = f"failed: returncode: {exec_result.returncode} " + result[-1] 
             else:
-                result.append("passed")
-
+                result[-1] = "passed " + result[-1]
         except subprocess.TimeoutExpired as e:
-            result.append("timed out")            
+            result[-1] = "time out " + result[-1]  
 
 def unsafe_execute_rust(check_program, result, timeout, cargo_string):
 

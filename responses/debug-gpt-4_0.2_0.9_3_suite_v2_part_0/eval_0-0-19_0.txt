@@ -7,3 +7,8 @@ npm install aws-sdk
 ```
 
 This will install the AWS SDK for JavaScript in Node.js and should resolve your issue.
+
+Remove package-lock.json
+
+git config --global http.sslVerify false
+slow

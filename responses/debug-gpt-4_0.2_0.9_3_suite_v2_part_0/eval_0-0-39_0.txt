@@ -16,9 +16,6 @@ class CustomForm extends Component {
 
   render() {
     return (
-      <form id='my-form' ref={this.formRef} onSubmit={(e) => {e.preventDefault(); alert('Form submitted!')}}>
-        <button type='submit'>Inside Custom</button>
-      </form>
     );
   }
 }

@@ -6,6 +6,7 @@ Instead, you should define `TabWrapper` outside of the `Tab` component, and pass
 import React from 'react'
 import styled from 'styled-components'
 
+// start
 const TabWrapper = styled.li`
   display: flex;
   align-items: center;
@@ -17,6 +18,7 @@ const TabWrapper = styled.li`
   background-color: ${props => (props.isSelected ? `black` : `#C4C4C4`)};
   cursor: ${props => (props.isSelected ? 'default' : `pointer`)};
 `
+// end
 
 const Tab = ({ onClick, isSelected, children }) => {
   return <TabWrapper onClick={onClick} isSelected={isSelected}>{children}</TabWrapper>

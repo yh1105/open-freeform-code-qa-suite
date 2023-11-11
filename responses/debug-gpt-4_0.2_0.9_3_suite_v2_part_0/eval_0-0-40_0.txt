@@ -6,6 +6,9 @@ To solve this issue, you need to update your `PATH` environment variable to prio
 export PATH="/usr/bin:$PATH"
 ```
 
+wsl.conf
+[interop] appendWindowsPath = false
+
 This line will ensure that the shell looks for executables in `/usr/bin` (where the Linux version of npm is located) before it looks in other directories.
 
 After adding this line, you need to reload your shell configuration. You can do this by closing and reopening your terminal, or by running the following command:

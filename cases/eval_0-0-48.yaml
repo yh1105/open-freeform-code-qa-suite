@@ -6,11 +6,11 @@ prompt_path: prompt_0-0-48.txt
 # relative path to the prompt text
 
 # type: code debugging
-# type: code completion
+type: code completion
 # type: knowledge question-answering
 # question type, for later statistics
 
-lang: javascript
+lang: typescript
 # question language or area, for later statistics
 
 # full_score: 1.0
@@ -26,35 +26,6 @@ grading:
   
   # min_score: float
   # the minimum score within the test case for clipping purpose, if not specified, no minimum clipping
-  
-  blank_filling:
-    template: ""
-    
-    # blank_str: "[blank]"
-    # [optional] how blanks are represented in the template
-
-    # escape: " '\"\n`"
-    # [optional] list of characters to be pre-filtered for model responses for blanks, default: " '"·"
-
-    targets: 
-        # list gold answers for blanks sequentially
-        - ...
-        # - ...
-        # - content: ...
-        #   weight: 1.0
-        #   # [optional] customized blank weight 
-        #   to_lower: false
-        #   # [optional] whether to be case-sensitive (default is sensitive, set to true will apply lower() then match)
-
-  keywords:
-    - ...
-    # - content: ...
-    #   weight: 1.0
-    #   # [optional] customized keyword weight 
-    #   to_lower: false
-    #   # [optional] whether to be case-sensitive (default is sensitive, set to true will apply lower() then match)
-    #   neg: false
-    #   # [optional] if neg=true, match means subtracting the score (use for common wrong answers)
 
   unit_test:
 
@@ -62,7 +33,10 @@ grading:
     # [optional] overwrite the root lang field and decide how to execute the code
 
     tests:
-        - ...
+        - path: test_0-0-48_0.ts
+          prefix_path: test_0-0-48_prefix.ts
+        - path: test_0-0-48_1.ts
+          prefix_path: test_0-0-48_prefix.ts
         # - content: str
         #   # source code in string
         #   path: str
@@ -81,21 +55,3 @@ grading:
         #   timetout: float
         #   # [optional] set customized timeout in seconds, default python,js,java 10s, cpp 60s, go 20s, rust 300s
   
-  similarity: # refrain from use if other metric works
-    - metric: rougeL # select from rouge1 / rouge2 / rougeL / rougeLsum
-      references:
-        - ...
-        # - answer_str
-        # or
-        # - path: answer_path
-      # max_score: float
-      # [optional] decide how to scale ROUGE score to our score, default 0.53 for rouge1 and 0.51 for others
-      # min_score: float
-      # [optional] decide how to scale ROUGE score to our score, default: 0.30
-      # weight: 1.0
-      # [optional] default is 1.0
-  
-  customized:
-    module: str
-    func: str
-    # we will call module.func(response), expected to return (now_score: float, full_score: float, detail: any type)

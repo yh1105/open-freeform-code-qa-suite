@@ -33,6 +33,10 @@ answer_paths:
   - eval_0-0-29_0.txt
   cases/eval_0-0-30.yaml:
   - eval_0-0-30_0.txt
+  cases/eval_0-0-31.yaml:
+  - eval_0-0-31_0.txt
+  cases/eval_0-0-32.yaml:
+  - eval_0-0-32_0.txt
   cases/eval_0-0-35.yaml:
   - eval_0-0-35_0.txt
   cases/eval_0-0-36.yaml:

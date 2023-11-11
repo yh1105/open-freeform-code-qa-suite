@@ -160,6 +160,8 @@ def grade_response(config: dict, case_dir: str, response: str, full_score: float
             lang = 'cpp'
         elif lang in ['js', 'javascript']:
             lang = 'javascript'
+        elif lang in ['ts', 'typescript']:
+            lang = 'typescript'
         else:
             raise NotImplementedError(f'Does not support this language yet: {lang}.')
 

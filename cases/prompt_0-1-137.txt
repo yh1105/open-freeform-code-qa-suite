@@ -26,3 +26,5 @@ CSS value.
    │                             ^^^^^^^^^^^^^
    ╵
 ```
+
+Could you tell me how to fix it? Please provide me a revised code if possible.

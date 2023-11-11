@@ -6,7 +6,7 @@ prompt_path: prompt_0-0-0.txt
 # relative path to the prompt text
 
 # type: code debugging
-# type: code completion
+type: code completion
 # type: knowledge question-answering
 # question type, for later statistics
 
@@ -20,4 +20,7 @@ lang: javascript
 # [optional]the score of providing no response
 
 grading:
-  
+  unit_test: 
+    tests:
+      - path: test_0-0-0_0.js
+      - path: test_0-0-0_1.js
