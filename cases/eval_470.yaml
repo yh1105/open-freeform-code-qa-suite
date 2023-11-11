@@ -10,7 +10,7 @@ syntax="proto3";
 
 package main;
 
-[block]
+[blank]
 
 message Person {
       string name = 1;
@@ -19,6 +19,5 @@ message Person {
 ```'
     escape: " '\"\n`"
     targets:
-      - 'contains: option go_package = '
-
-
+      - content: 'option go_package ='
+        substr_match: True

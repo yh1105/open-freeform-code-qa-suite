@@ -4,7 +4,7 @@ type: code completion
 lang: java
 grading:
   unit_test:
-    lang: python
+    lang: custom-py
     tests:
       - content: "This is content"
         prefix: "This is prefix"

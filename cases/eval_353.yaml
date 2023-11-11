@@ -1,6 +1,6 @@
 id: 353
 prompt_path: prompt_353.txt
-type: code debugging
+type: non-code debugging
 lang: java
 grading:
   keywords:

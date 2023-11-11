@@ -2,7 +2,7 @@ id: 335
 # for case self identificaton
 prompt_path: prompt_335.txt
 # relative path to the prompt text
-type: code completion
+type: knowledge question answering
 # question type, for later statistics, e.g., 'knowledge question-answering'
 lang: java
 grading:

@@ -4,7 +4,31 @@ type: code debugging
 lang: go
 grading:
   blank_filling:
-    template: 'TBD'
+    template: 'You can rewrite code as follows:
+```go
+type A struct {
+}
+
+type B struct {
+}
+
+type AB interface {
+    *A | *B
+    [blank]
+}
+
+func (a *A) some() bool {
+    return true
+}
+
+func (b *B) some() bool {
+    return false
+}
+
+func some[T AB](x T) bool {
+    return x.some()   // <- error
+}
+```'
     escape: " '\"\n`"
     targets:
-      - 'TBD'
+      - 'some() bool'
