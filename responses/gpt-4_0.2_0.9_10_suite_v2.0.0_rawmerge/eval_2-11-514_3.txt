@@ -1,0 +1,28 @@
+Sure, here is an implementation of the function `fun` using variadic templates and `std::array`. This function will take multiple parameters of the same type and store them in a `std::array`. The number of arguments is known at compile time.
+
+```c++
+#include <array>
+#include <type_traits>
+
+struct Foo
+{
+    int a, b, c;
+};
+
+template <uint32_t argsCount, typename... T>
+typename std::enable_if<(sizeof...(T) == argsCount)>::type fun(T... args)
+{
+    std::array<Foo, argsCount> arr{ args... };
+    // Now you can use arr for further processing
+}
+
+int main()
+{
+    fun<3>( { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } );
+    return 0;
+}
+```
+
+In this code, `std::enable_if` is used to ensure that the number of arguments passed to the function matches the template parameter `argsCount`. If the number of arguments does not match `argsCount`, the function will not be a valid template and will not compile.
+
+Please note that this code does not perform any heap memory allocations and does not use `va_args`, satisfying your constraints.

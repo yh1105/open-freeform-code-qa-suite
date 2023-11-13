@@ -1,3 +1,0 @@
-No. 
-
-The C++ standard library does not provide a way to query or enforce the properties of threads related to their performance or the cores they run on. The behavior of threads is implementation-defined and depends on the operating system and hardware. However, some operating systems may provide APIs or libraries that allow you to control the affinity of threads to specific cores.

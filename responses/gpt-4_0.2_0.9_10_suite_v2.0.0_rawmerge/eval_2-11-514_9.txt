@@ -1,0 +1,27 @@
+Here is a function `fun` that meets your requirements:
+
+```c++
+#include <array>
+#include <utility>
+
+struct Foo
+{
+    int a, b, c;
+};
+
+template <uint32_t argsCount, typename T, typename... Args>
+void fun(Args... args) // max number of args == argsCount
+{
+    static_assert(sizeof...(Args) <= argsCount, "Too many arguments provided");
+    std::array<T, argsCount> arr{ args... };
+    // Now you can use arr for your needs
+}
+
+int main()
+{
+    fun<3, Foo>( { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } );
+    return 0;
+}
+```
+
+This function uses variadic templates to accept an arbitrary number of arguments of the same type. The `static_assert` ensures that the number of arguments does not exceed `argsCount`. The arguments are then stored in a `std::array` on the stack, so no heap memory is allocated.

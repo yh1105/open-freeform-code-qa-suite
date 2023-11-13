@@ -1,1 +1,0 @@
-The purpose of MaterialStateProperty is to make it possible to specify different properties for different states of a button.

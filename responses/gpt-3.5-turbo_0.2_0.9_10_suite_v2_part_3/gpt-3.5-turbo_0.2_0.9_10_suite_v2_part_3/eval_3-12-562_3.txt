@@ -1,2 +1,0 @@
-You can use the `add()` and `subtract()` methods to add or subtract months/years to a date in Dart.
-Also you can use `DateTime` constructor to define the base time and change the day/month/year properties.

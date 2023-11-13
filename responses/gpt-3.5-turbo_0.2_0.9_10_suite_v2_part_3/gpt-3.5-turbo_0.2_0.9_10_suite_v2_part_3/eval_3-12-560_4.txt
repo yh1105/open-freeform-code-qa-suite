@@ -1,1 +1,0 @@
-The purpose of MaterialStateProperty is to make it possible to specify different properties for different states of a widget. In the case of ButtonStyle, MaterialStateProperty is used to define the appearance of a button in different states such as when it is pressed, disabled, or hovered over.

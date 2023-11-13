@@ -1,7 +1,0 @@
-The Rule of 5 is not outdated, as there are still cases where you may need to define these special member functions. While it is true that implicit constructors and destructors work fine for aggregate data structures, there are situations where you may need to manage resources manually.
-
-For example, if you are working with a legacy codebase that uses raw pointers to manage resources, you may need to define a custom destructor to properly deallocate those resources. Similarly, if you are working with a class that manages a complex data structure, you may need to define custom copy and move constructors to ensure that the data is properly copied or moved.
-
-While smart pointers can help simplify resource management, they are not always a suitable replacement for custom constructors and destructors. Smart pointers can add overhead and may not be appropriate for certain types of resources, such as file handles or network connections.
-
-In summary, while the Rule of 5 may not apply to all classes, it is still an important guideline to follow when working with resource-managing classes.

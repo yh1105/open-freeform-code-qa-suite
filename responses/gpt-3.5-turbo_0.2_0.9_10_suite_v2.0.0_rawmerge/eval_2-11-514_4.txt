@@ -1,0 +1,28 @@
+Here's an implementation of the `fun` function in C++14 that satisfies the given constraints:
+
+```c++
+#include <array>
+
+struct Foo
+{
+    int a, b, c;
+};
+
+template <uint32_t argsCount, typename T>
+void fun(T ...args)
+{
+    static_assert(sizeof...(args) == argsCount * 3, "Incorrect number of arguments");
+
+    std::array<T, argsCount> arr{ args... };
+
+    // Do something with the array...
+}
+
+int main()
+{
+    fun<3, Foo>( { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } );
+    return 0;
+}
+```
+
+The `static_assert` ensures that the correct number of arguments are passed in, and the `std::array` is used to store the arguments in a fixed-size array without any heap memory allocations.

@@ -1,0 +1,23 @@
+Here's an implementation of the `fun` function that meets the given constraints:
+
+```c++
+#include <array>
+
+template <uint32_t argsCount, typename T>
+void fun(T ...args)
+{
+    static_assert(sizeof...(args) == argsCount * 3, "Incorrect number of arguments");
+
+    std::array<T, argsCount> arr{ args... };
+
+    // Do something with the array...
+}
+```
+
+Explanation:
+- The function takes a template parameter `argsCount` which specifies the number of `Foo` arguments to expect.
+- The function also takes a template parameter `T` which specifies the type of the `Foo` struct.
+- The function uses a variadic template parameter pack to accept an arbitrary number of `Foo` arguments.
+- The `static_assert` checks that the number of arguments passed in is equal to `argsCount * 3`, since each `Foo` struct has three integer members.
+- The function creates a `std::array` of size `argsCount` and initializes it with the `Foo` arguments using the fold expression `args...`.
+- The `std::array` can then be used as needed within the function.

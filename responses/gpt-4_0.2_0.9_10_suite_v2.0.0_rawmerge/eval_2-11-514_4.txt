@@ -1,0 +1,31 @@
+Sure, here is a possible implementation of the function `fun` using C++14 features. This function uses variadic templates and `std::array` to store the arguments. The `std::array` is allocated on the stack, so no heap memory allocations are made.
+
+```c++
+#include <array>
+#include <cstdint>
+
+struct Foo
+{
+    int a, b, c;
+};
+
+template <uint32_t argsCount, typename T, typename... Args>
+void fun(Args... args) // max number of args == argsCount
+{
+    static_assert(sizeof...(args) <= argsCount, "Too many arguments provided");
+    std::array<T, argsCount> arr{ args... };
+    // Now you can use arr to access the arguments
+    // For example, to print the first element of each Foo:
+    for (const auto& foo : arr) {
+        std::cout << foo.a << std::endl;
+    }
+}
+
+int main()
+{
+    fun<3, Foo>( { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } );
+    return 0;
+}
+```
+
+In this code, the `static_assert` is used to ensure that the number of arguments provided does not exceed `argsCount` at compile time. The `std::array` `arr` is used to store the arguments, and then a range-based for loop is used to iterate over the array and print the first element of each `Foo`.

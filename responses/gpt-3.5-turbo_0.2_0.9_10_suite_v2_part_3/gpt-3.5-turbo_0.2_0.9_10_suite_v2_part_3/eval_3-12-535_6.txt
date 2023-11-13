@@ -1,1 +1,0 @@
-You probably configured the emulator's storage space too small and you get this error when the emulator runs out of storage space when you install. Open the AVD manager in Android Studio, edit the emulator and increase "Internal Storage" and restart the emulator.

@@ -1,0 +1,32 @@
+Here is a possible implementation of the function ```fun``` using variadic templates and std::array. This function will take multiple parameters of the same type and store them in a std::array. The number of arguments is known at compile time and there are no heap memory allocations or use of va_args.
+
+```c++
+#include <array>
+#include <iostream>
+
+struct Foo
+{
+    int a, b, c;
+};
+
+template <uint32_t argsCount, typename T, typename... Args>
+void fun(Args... args) // max number of args == argsCount
+{
+    static_assert(sizeof...(Args) <= argsCount, "Too many arguments");
+
+    std::array<T, argsCount> arr{ args... };
+
+    // For testing purposes, print the array
+    for (const auto& a : arr)
+    {
+        std::cout << a.a << " " << a.b << " " << a.c << std::endl;
+    }
+}
+
+int main()
+{
+    fun<3, Foo>( { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } );
+    return 0;
+}
+```
+In this code, the function ```fun``` is a template function that takes a variadic number of arguments of type ```T```. The arguments are stored in a std::array of size ```argsCount```. The static_assert ensures that the number of arguments does not exceed ```argsCount```. The for loop is used to print the contents of the array for testing purposes.

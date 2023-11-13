@@ -1,7 +1,0 @@
-No, C++ standard library does not provide a direct way to query or enforce on which cores the threads will run. 
-
-The C++ standard library's threading model is designed to be platform-independent, and as such, it does not provide any direct control over the specific cores that threads run on. This is typically handled by the operating system's scheduler, which assigns threads to cores based on a variety of factors, including load balancing and power efficiency.
-
-If you need more control over thread placement, you will need to use platform-specific APIs. For example, on Linux, you can use the `pthread_setaffinity_np` function to bind a thread to a specific core. On Windows, you can use the `SetThreadAffinityMask` function.
-
-However, keep in mind that manually controlling thread placement can often lead to worse performance, not better. The OS's scheduler is usually very good at managing CPU resources, and interfering with it can have unintended side effects. Unless you have a very specific reason to control thread placement (such as real-time requirements or NUMA considerations), it's usually best to let the OS handle it.

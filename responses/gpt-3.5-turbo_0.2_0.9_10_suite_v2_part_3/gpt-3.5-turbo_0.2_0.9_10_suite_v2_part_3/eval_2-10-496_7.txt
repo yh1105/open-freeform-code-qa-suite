@@ -1,9 +1,0 @@
-You can use the `sort_by` method of the `Vec` to sort by multiple fields. Here's an example of how to sort your `my_vector` by `row` and then by `column`:
-
-```rust
-my_vector.sort_by(|a, b| a.row.cmp(&b.row).then(a.column.cmp(&b.column)));
-```
-
-This will sort the vector by `row` first, and then by `column` within each `row`. The `then` method is used to specify a secondary comparison to be used when the first comparison returns `Ordering::Equal`.
-
-You can also use the `sort_by_key` method to sort by a single key, but in your case, you need to sort by multiple keys.

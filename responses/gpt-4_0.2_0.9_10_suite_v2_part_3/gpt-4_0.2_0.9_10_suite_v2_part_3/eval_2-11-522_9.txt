@@ -1,7 +1,0 @@
-No, C++ standard library does not provide a direct way to query a thread's properties or enforce on which cores they will run.
-
-The C++ standard library's threading model is designed to be platform-independent, and as such, it does not provide any facilities for interacting with specific hardware details such as cores or threads. This is because these details can vary widely between different systems, and providing a standard interface for them would be difficult and potentially limiting.
-
-However, you can use platform-specific APIs to achieve this. For example, on a POSIX system, you can use the `pthread_setaffinity_np` function to set the CPU affinity of a thread, which determines the set of CPU cores on which it can run. On Windows, you can use the `SetThreadAffinityMask` function.
-
-Remember that manipulating thread affinity can have complex effects on performance and is generally best left to the operating system unless you have a specific reason to control it.

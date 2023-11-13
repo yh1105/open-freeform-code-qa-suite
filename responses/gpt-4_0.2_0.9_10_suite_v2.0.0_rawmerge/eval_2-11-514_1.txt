@@ -1,0 +1,31 @@
+Here is a possible implementation of the function `fun` using variadic templates and `std::array`:
+
+```c++
+#include <array>
+
+struct Foo
+{
+    int a, b, c;
+};
+
+template <uint32_t argsCount, typename T, typename... Args>
+void fun(Args... args) // max number of args == argsCount
+{
+    static_assert(sizeof...(Args) <= argsCount, "Too many arguments passed to fun");
+
+    std::array<T, argsCount> arr{ args... };
+    // Now you can use arr as you wish
+    // For example, print all elements
+    for (const auto& elem : arr) {
+        std::cout << "a: " << elem.a << ", b: " << elem.b << ", c: " << elem.c << std::endl;
+    }
+}
+
+int main()
+{
+    fun<3, Foo>( { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } );
+    return 0;
+}
+```
+
+This function `fun` takes a variadic number of arguments of type `T` and stores them in a `std::array`. The `static_assert` ensures that the number of arguments passed to the function does not exceed `argsCount`. The function then prints out the elements of the array.

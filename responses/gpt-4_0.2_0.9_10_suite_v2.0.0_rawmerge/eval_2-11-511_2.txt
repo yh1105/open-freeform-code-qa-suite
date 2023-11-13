@@ -1,0 +1,15 @@
+Here is the implementation of the `my_2d_array` function:
+
+```c++
+std::vector<std::string> my_2d_array(int N, int M) {
+    std::vector<std::string> A(N*M);
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < M; j++) {
+            A[i*M+j] = std::to_string(i) + std::to_string(j);
+        }
+    }
+    return A;
+}
+```
+
+This function creates a 1D vector of strings `A` with size `N*M`. It then iterates over the dimensions of the desired 2D array, converting the indices to strings and storing them in the corresponding position in `A`. The resulting vector `A` represents the 2D array in row-major order.

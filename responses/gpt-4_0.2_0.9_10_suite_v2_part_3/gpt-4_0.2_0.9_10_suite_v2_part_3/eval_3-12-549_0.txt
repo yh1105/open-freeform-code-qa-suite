@@ -1,1 +1,0 @@
-Use ```mylist = List.from(mynewlist)```

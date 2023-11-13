@@ -1,5 +1,0 @@
-The Rule of 5 is not outdated, and it is still relevant today. While it is true that implicit constructors and destructors work fine for aggregate data structures, there are many cases where a class needs to manage resources, and in those cases, user-defined constructors and destructors are necessary.
-
-Smart pointers can indeed be used to manage resources, but they are not always the best solution. For example, if you need to manage a resource that is not memory, such as a file handle or a network connection, a smart pointer may not be appropriate. Additionally, smart pointers can introduce overhead and complexity, which may not be desirable in some cases.
-
-In short, while smart pointers can be a useful tool for managing resources, they are not always the best solution, and there are still many cases where user-defined constructors and destructors are necessary.

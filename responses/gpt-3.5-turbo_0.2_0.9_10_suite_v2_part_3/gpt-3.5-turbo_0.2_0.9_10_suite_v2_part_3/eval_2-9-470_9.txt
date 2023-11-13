@@ -1,7 +1,0 @@
-This error occurs because the libffi6 package is not installed on your system. You can fix it by installing the libffi6 package using the following command:
-
-```
-sudo apt-get install libffi6
-```
-
-After installing the package, try running the rails command again. It should work without any issues.

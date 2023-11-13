@@ -1,3 +1,0 @@
-This error is caused by a bug in rust-analyzer, which is a language server for Rust that provides IDE-like features such as code completion and error highlighting. The error message is indicating that rust-analyzer is having trouble resolving the `format_args` macro, which is used internally by the `pad_str` function.
-
-Fortunately, this error should not affect the functionality of your code, and it is safe to ignore. However, if you want to get rid of the error message, you can try updating your dependencies to the latest versions and see if that resolves the issue. Alternatively, you can try using a different IDE or text editor that does not use rust-analyzer.

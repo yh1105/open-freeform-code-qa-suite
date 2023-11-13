@@ -1,7 +1,0 @@
-Yes, it is possible to distinguish between high- and low-performance cores/threads in C++. 
-
-No, it is not possible to query std::thread's properties and enforce on which cores they'll run in C++. 
-
-The reason for the first answer is that modern processors often have different types of cores, such as high-performance and low-power cores, and it is possible to assign tasks to specific cores based on their performance characteristics. This can be done using various techniques such as thread affinity or task scheduling.
-
-The reason for the second answer is that the C++ standard does not provide a way to query or control the specific hardware resources used by std::thread. The operating system and hardware architecture determine how threads are scheduled and executed, and the C++ standard only provides a portable interface for creating and managing threads.

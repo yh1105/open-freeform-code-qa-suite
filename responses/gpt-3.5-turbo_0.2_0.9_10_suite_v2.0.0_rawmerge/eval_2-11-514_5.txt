@@ -1,0 +1,19 @@
+Here's an implementation of the `fun` function that meets the requirements:
+
+```c++
+#include <array>
+
+template <uint32_t argsCount, typename T>
+void fun(T ...args)
+{
+    static_assert(sizeof...(args) == argsCount * 3, "Incorrect number of arguments");
+
+    std::array<T, argsCount> arr{ args... };
+
+    // Do something with the array...
+}
+```
+
+This implementation uses a `std::array` to store the arguments and performs a compile-time check to ensure that the correct number of arguments is passed in. The `static_assert` statement checks that the total number of arguments is equal to `argsCount * 3`, since each `Foo` struct has three members. If the number of arguments is incorrect, a compile-time error will be generated.
+
+Note that this implementation assumes that the number of arguments passed in is a multiple of `argsCount`. If this is not the case, the `std::array` will be partially filled with garbage values.

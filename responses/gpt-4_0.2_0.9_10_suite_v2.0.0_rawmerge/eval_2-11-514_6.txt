@@ -1,0 +1,30 @@
+Here is an implementation of the function `fun` that meets your requirements. This function uses C++14's parameter pack expansion to handle multiple arguments of the same type. The function creates a `std::array` of `Foo` objects on the stack, avoiding heap memory allocations.
+
+```c++
+#include <array>
+
+struct Foo
+{
+    int a, b, c;
+};
+
+template <uint32_t argsCount, typename T, typename... Args>
+void fun(Args... args) // max number of args == argsCount
+{
+    static_assert(sizeof...(Args) <= argsCount, "Too many arguments provided");
+    std::array<T, argsCount> arr{ args... };
+    // Now you can use arr as you wish
+}
+
+int main()
+{
+    fun<3, Foo>( { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } );
+    return 0;
+}
+```
+
+In this code, `Args... args` is a parameter pack that represents zero or more arguments of type `T`. The `sizeof...(Args)` expression gives the number of arguments in the parameter pack. The `static_assert` checks that the number of arguments does not exceed `argsCount`.
+
+The `std::array<T, argsCount> arr{ args... };` line creates a `std::array` of `Foo` objects from the arguments. The `{ args... }` syntax is a parameter pack expansion that generates a comma-separated list of the arguments.
+
+Please note that the `std::array` will always have `argsCount` elements. If fewer arguments are provided, the remaining elements will be default-constructed. If you want to avoid this, you could use a `std::tuple` instead of a `std::array`, which will exactly match the number and types of the provided arguments.

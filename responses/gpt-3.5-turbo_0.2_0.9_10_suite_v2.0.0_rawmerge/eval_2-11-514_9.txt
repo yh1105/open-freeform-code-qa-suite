@@ -1,0 +1,33 @@
+Here's an implementation of the `fun` function in C++14 that meets the given constraints:
+
+```c++
+#include <array>
+
+template <uint32_t argsCount, typename T, std::size_t... Is>
+void fun_impl(std::array<T, argsCount> arr, std::index_sequence<Is...>)
+{
+    // Do something with the array of arguments
+    // ...
+}
+
+template <uint32_t argsCount, typename T>
+void fun(T... args)
+{
+    static_assert(sizeof...(args) == argsCount * 3, "Incorrect number of arguments");
+
+    std::array<T, argsCount> arr{ args... };
+    fun_impl(arr, std::make_index_sequence<argsCount>{});
+}
+
+int main()
+{
+    fun<3, Foo>({ 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 });
+    return 0;
+}
+```
+
+The `fun` function takes a variable number of arguments of type `T`, which is a struct `Foo` in this case. The number of arguments is checked at compile time to ensure that it matches the expected number of arguments (`argsCount * 3` in this case, since each `Foo` struct has three members).
+
+The arguments are stored in an `std::array` of size `argsCount`, which is then passed to the `fun_impl` function along with an `std::index_sequence` of integers from 0 to `argsCount - 1`. This allows us to unpack the array of arguments in `fun_impl` using a fold expression and do something with each argument.
+
+Note that the `std::index_sequence` and `std::make_index_sequence` utilities were introduced in C++14. If you're using an earlier version of C++, you can implement them yourself or use a third-party library like Boost.

@@ -1,9 +1,0 @@
-Yes, it is possible to distinguish between high- and low-performance cores/threads in C++. However, it is not possible to query std::thread's properties and enforce on which cores they'll run in C++. 
-
-The reason for this is that the C++ standard does not provide any direct support for thread affinity or thread prioritization. However, some operating systems provide APIs that allow you to set thread affinity and/or thread priorities. 
-
-For example, on Windows, you can use the SetThreadAffinityMask function to set the affinity of a thread to a specific processor or set of processors. Similarly, you can use the SetThreadPriority function to set the priority of a thread. 
-
-On Linux, you can use the sched_setaffinity function to set the affinity of a thread to a specific CPU or set of CPUs. You can also use the sched_setscheduler function to set the scheduling policy and priority of a thread. 
-
-So, while it is not possible to do this directly in C++, you can use platform-specific APIs to achieve the desired behavior.

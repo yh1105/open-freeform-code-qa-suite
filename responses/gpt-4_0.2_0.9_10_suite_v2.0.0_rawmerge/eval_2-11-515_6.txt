@@ -1,0 +1,18 @@
+```c++
+#include <vector>
+#include <utility>
+#include <algorithm>
+#include <iterator>
+
+std::vector<std::pair<int, int>> origin_to_goal(std::vector<int> origin) {
+    std::vector<std::pair<int, int>> goal(origin.size() / 2);
+    std::transform(origin.begin(), origin.end(), goal.begin(), 
+        [&origin](int& n) {
+            static int i = 0;
+            return std::make_pair(origin[i++], origin[i++]);
+        }
+    );
+    return goal;
+}
+```
+This function uses the `std::transform` function from the standard library to create the pairs. It uses a lambda function which captures the `origin` vector and an index `i` by reference. The lambda function then uses `std::make_pair` to create a pair from the current and next element in the `origin` vector. The index `i` is incremented twice for each call to the lambda function to ensure that each pair consists of two different elements from the `origin` vector. The resulting pairs are stored in the `goal` vector.

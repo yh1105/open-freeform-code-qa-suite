@@ -1,9 +1,0 @@
-No, C++ standard library does not provide a direct way to query a thread's properties or enforce on which cores they will run.
-
-The C++ standard library's threading model is designed to be platform-independent, and as such, it does not provide direct access to many low-level details. The decision of which core a thread runs on is typically left up to the operating system's scheduler, and the C++ standard does not provide a way to influence this.
-
-However, you can use platform-specific code to control thread affinity (i.e., which cores a thread can run on). For example, on a POSIX system, you can use the `pthread_setaffinity_np` function, and on Windows, you can use the `SetThreadAffinityMask` function. But remember, these are not portable solutions and will only work on specific platforms.
-
-For high- and low-performance cores distinction, it's even more platform and hardware specific. You would need to use something like Intel's Thread Building Blocks (TBB) library which has support for identifying high- and low-performance cores on some of their processors.
-
-In general, it's recommended to let the operating system handle thread scheduling and core assignment, unless you have a very specific reason to control it yourself and you understand the implications.

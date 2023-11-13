@@ -1,8 +1,0 @@
-1. Remove the `credentials.yml.enc`:
-```
-rm -rf config/credentials.yml.enc
-```
-2. Create a new `credentials.yml.enc`:
-```
-EDITOR=\"mate --wait\" bin/rails credentials:edit
-```
