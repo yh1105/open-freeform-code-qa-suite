@@ -22,6 +22,7 @@ parser.add_argument('--timeout', type=int, help='timeout in seconds', default=30
 parser.add_argument('--patience', type=int, help='failure trials', default=3)
 parser.add_argument('--key_path', help='API key to call OpenAI', default='openai_token.key')
 parser.add_argument('--storage', help='Directory to store the prompting result', default='responses')
+parser.add_argument('--expdir_suffix', help='Optional suffix added to the exp dir', default='')
 parser.add_argument('--system_prompt', help='Prefix prompt as the system role',
                     default='You are a professional assistant for programmers. '
                             'By default, questions and answers are in Markdown format.')
@@ -90,7 +91,7 @@ if __name__ == '__main__':
 
     # create folder
     suite_basename = os.path.basename(args.suite_path)
-    exp_name = f'{args.model_name}_{args.temp}_{args.top_p}_{args.n}_{suite_basename.split(".")[0]}'
+    exp_name = f'{args.model_name}_{args.temp}_{args.top_p}_{args.n}_{suite_basename.rsplit(".", 1)[0]}{args.expdir_suffix}'
     exp_folder = os.path.join(args.storage, exp_name)
     if not os.path.exists(exp_folder):
         os.makedirs(exp_folder)

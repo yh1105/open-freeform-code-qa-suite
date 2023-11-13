@@ -10,7 +10,7 @@ type: code completion
 # type: knowledge question-answering
 # question type, for later statistics
 
-lang: typescript
+lang: javascript
 # question language or area, for later statistics
 
 # full_score: 1.0
@@ -29,7 +29,7 @@ grading:
 
   unit_test:
 
-    # lang: ...
+    lang: typescript
     # [optional] overwrite the root lang field and decide how to execute the code
 
     tests:
