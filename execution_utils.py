@@ -22,6 +22,7 @@ import signal
 import json
 import tempfile
 import subprocess
+import rpy2.robjects as robjects
 from evaluate import load
 
 @contextlib.contextmanager
@@ -89,7 +90,6 @@ def r_executor(references, predictions, timeout):
         with time_limit(timeout):
             #print(program)
             #print('*' * 80)
-            import rpy2.robjects as robjects
             robjects.r(program)
         result.append('passed')
     except TimeoutException:

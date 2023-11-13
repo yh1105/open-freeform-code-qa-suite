@@ -302,7 +302,8 @@ if __name__ == '__main__':
     tot_now_score = 0.
     results = {}
     keyboard_interrupt = False
-    for case in tqdm(suite_defs['cases']):
+    pbar = tqdm(suite_defs['cases'])
+    for case in pbar:
         if args.select and len(args.select) > 0 and case not in args.select: continue
 
         tot_cases += 1
@@ -328,6 +329,9 @@ if __name__ == '__main__':
             case_config = yaml.load(f, yaml.Loader)
         case_dir = os.path.dirname(rebased_case_fname)
 
+        # 
+        # print(case_fname)
+
         try:
             now_score, full_score, detail_info = grade_responses(
                 case_config, case_dir, now_responses,
@@ -347,6 +351,7 @@ if __name__ == '__main__':
             # add other fields to detail results for later statistics
             if field != 'grading':
                 results[case_fname][field] = case_config[field]
+        pbar.set_description(f'Lang:{case_config["lang"]} CurScore={tot_now_score}/{tot_full_score}={(tot_now_score / tot_full_score * 100. if full_score > 0. else 0.):5.2f}%')
 
     summary_txt = f"""Total score: {tot_now_score} / {tot_full_score}
 Total cases: {tot_cases}
