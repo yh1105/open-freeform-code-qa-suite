@@ -15,4 +15,4 @@ matplotlib
 Pillow
 plotly
 kaleido
-transformers # for autotokenizer
+rpy2

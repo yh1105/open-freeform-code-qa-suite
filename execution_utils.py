@@ -82,6 +82,31 @@ def time_limit(seconds):
     finally:
         signal.setitimer(signal.ITIMER_REAL, 0)
 
+def r_executor(references, predictions, timeout):
+    program = predictions[0][0] + '\n' + references[0]
+    result = []
+    try:
+        with time_limit(timeout):
+            #print(program)
+            #print('*' * 80)
+            import rpy2.robjects as robjects
+            robjects.r(program)
+        result.append('passed')
+    except TimeoutException:
+        result.append("timed out")
+    except BaseException as e:
+        result.append(f"failed: {e}")
+    logs = [[(0, dict(
+        task_id=0,
+        passed=result[0] == "passed",
+        result=result[0],
+        completion_id=0,
+    ))]]
+
+    return {'pass@1': float(int(result[0] == "passed"))}, logs
+
+
+
 def python_unsafe_executor(references, predictions, timeout):
 
     check_program = predictions[0][0] + '\n' + references[0]
@@ -356,7 +381,7 @@ def go_unsafe_executor(references, predictions, timeout):
 
 
 # language supported by us
-LANGUAGES = ["python", "cpp", "javascript", "typescript", "java", "go", "rust", "c#"]
+LANGUAGES = ["python", "cpp", "javascript", "typescript", "java", "go", "rust", "c#", 'r']
 
 LANGUAGE_TO_NAME = {
     "python": "Python",
@@ -366,7 +391,8 @@ LANGUAGE_TO_NAME = {
     "java": "Java",
     "go": "Go",
     "rust": "Rust",
-    "c#": "C#"
+    "c#": "C#",
+    'r': 'R'
 }
 
 LANGUAGE_TO_EXTENSION = {
@@ -377,7 +403,8 @@ LANGUAGE_TO_EXTENSION = {
     "java": "java",
     "go": "go",
     "rust": "rs",
-    "c#": "cs"
+    "c#": "cs",
+    'r': 'r'
 }
 
 # Taken from https://huggingface.co/datasets/nuprl/MultiPL-E/ & https://github.com/THUDM/CodeGeeX
@@ -394,7 +421,8 @@ LANGUAGE_TO_STOP_WORDS = {
     "java": [],
     "rust": [],
     "sql": [],
-    "c#": []
+    "c#": [],
+    'r': []
 }
 
 LANGUAGE_TO_TIMEOUT = {
@@ -407,6 +435,7 @@ LANGUAGE_TO_TIMEOUT = {
     "rust": 300,  # Necessary for first-time compilation of cargo
     "sql": 10,
     "c#": 20,
+    'r': 20
 }
 
 # Java sometimes fails with more workers; For JS it's twice as fast with 4 workers
@@ -420,6 +449,7 @@ LANGUAGE_TO_NUM_WORKERS = {
     "rust": 1,
     "sql": 1,
     "c#": 4,
+    'r': 4
 }
 
 # https://github.com/THUDM/CodeGeeX/blob/23ee51505a2bcd34d59d2e271b22e5bd91475462/codegeex/benchmark/utils.py#L6
@@ -477,7 +507,11 @@ IMPORT_HELPER = {
         "#include<sstream>",
         "#include<fstream>",
     ],
-    "c#": []
+    "c#": [],
+    'r': [
+        'rm(list=ls())',
+        'library(assert)',
+    ]
 }
 
 
@@ -588,6 +622,12 @@ def get_exec_results(prefix_from_file: str, generations: List[str], references: 
             # (cpp_imports + "\n" + g.split("int main")[0]).strip() for g in generations
             (cpp_imports + "\n" + g).strip() for g in generations
         ]
+    elif lang == 'r':
+        r_imports = '\n'.join(IMPORT_HELPER['r'])
+        generations = [
+            (r_imports + "\n" + g).strip() for g in generations
+        ]
+
     # elif lang == "java":
     #     generations = [
     #         g.replace("public class Main {\n    }", "").strip() for g in generations
@@ -694,6 +734,12 @@ def get_exec_results(prefix_from_file: str, generations: List[str], references: 
             references=references,
             predictions=generations,
             timeout=timeout,
+        )
+    elif lang == 'r':
+        results, logs = r_executor(
+            references=references,
+            predictions=generations,
+            timeout=timeout
         )
     elif lang == 'go':
         results, logs = go_unsafe_executor(
