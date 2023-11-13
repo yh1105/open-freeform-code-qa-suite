@@ -174,7 +174,7 @@ def blank_filling_match(template: str, blank_str: str, escape: str, targets: Lis
     return now_score, tot_score, grading_details, post_handler_detail
 
 
-def unit_test_execution(lang: str, response: str, unit_tests: List[Union[str, Dict]], case_dir: str, only_longest: bool = False) \
+def unit_test_execution(lang: str, response: str, unit_tests: List[Union[str, Dict]], case_dir: str) \
         -> Tuple[float, float, List[Dict[str, str]]]:
 
     grading_details = []
@@ -186,6 +186,7 @@ def unit_test_execution(lang: str, response: str, unit_tests: List[Union[str, Di
         prefix_from_file = ''
         timeout = None
         clean_up_code = ''
+        only_longest = False
         if isinstance(unit_test, str):
             reference = unit_test
         else:
@@ -205,6 +206,7 @@ def unit_test_execution(lang: str, response: str, unit_tests: List[Union[str, Di
                 with open(os.path.join(case_dir, unit_test['cleanup_path']), 'r') as f:
                     clean_up_code = f.read()
             weight = unit_test.get('weight', 1.0)
+            only_longest = unit_test.get('only_longest', False)
         combined_response = prefix + '\n' + response
 
         tot_score += weight
