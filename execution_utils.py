@@ -12,6 +12,7 @@ From https://github.com/bigcode-project/bigcode-evaluation-harness/blob/main/lm_
 """
 
 import os
+from typing import Dict, List, Tuple
 os.environ["HF_ALLOW_CODE_EVAL"] = "1"
 # Note: the following allows running only on linux yet
 # os.environ['PATH'] = '/usr/local/lib/nodejs/node/bin:' + os.environ['PATH']
@@ -86,6 +87,8 @@ def r_executor(references, predictions, timeout):
     result = []
     try:
         with time_limit(timeout):
+            #print(program)
+            #print('*' * 80)
             import rpy2.robjects as robjects
             robjects.r(program)
         result.append('passed')
@@ -101,6 +104,7 @@ def r_executor(references, predictions, timeout):
     ))]]
 
     return {'pass@1': float(int(result[0] == "passed"))}, logs
+
 
 
 def python_unsafe_executor(references, predictions, timeout):
@@ -338,7 +342,7 @@ def ts_unsafe_executor(references, predictions, timeout):
 
 
 # language supported by us
-LANGUAGES = ["python", "cpp", "javascript", "typescript", "java", "go", "rust", "c#"]
+LANGUAGES = ["python", "cpp", "javascript", "typescript", "java", "go", "rust", "c#", 'r']
 
 LANGUAGE_TO_NAME = {
     "python": "Python",
@@ -348,7 +352,8 @@ LANGUAGE_TO_NAME = {
     "java": "Java",
     "go": "Go",
     "rust": "Rust",
-    "c#": "C#"
+    "c#": "C#",
+    'r': 'R'
 }
 
 LANGUAGE_TO_EXTENSION = {
@@ -359,7 +364,8 @@ LANGUAGE_TO_EXTENSION = {
     "java": "java",
     "go": "go",
     "rust": "rs",
-    "c#": "cs"
+    "c#": "cs",
+    'r': 'r'
 }
 
 # Taken from https://huggingface.co/datasets/nuprl/MultiPL-E/ & https://github.com/THUDM/CodeGeeX
@@ -376,7 +382,8 @@ LANGUAGE_TO_STOP_WORDS = {
     "java": [],
     "rust": [],
     "sql": [],
-    "c#": []
+    "c#": [],
+    'r': []
 }
 
 LANGUAGE_TO_TIMEOUT = {
@@ -388,8 +395,8 @@ LANGUAGE_TO_TIMEOUT = {
     "go": 20,
     "rust": 300,  # Necessary for first-time compilation of cargo
     "sql": 10,
-    'r': 10,
-    "c#": 20
+    "c#": 20,
+    'r': 20
 }
 
 # Java sometimes fails with more workers; For JS it's twice as fast with 4 workers
@@ -402,8 +409,8 @@ LANGUAGE_TO_NUM_WORKERS = {
     "go": 4,
     "rust": 1,
     "sql": 1,
-    "r": 4,
-    "c#": 4
+    "c#": 4,
+    'r': 4
 }
 
 # https://github.com/THUDM/CodeGeeX/blob/23ee51505a2bcd34d59d2e271b22e5bd91475462/codegeex/benchmark/utils.py#L6
@@ -461,11 +468,11 @@ IMPORT_HELPER = {
         "#include<sstream>",
         "#include<fstream>",
     ],
+    "c#": [],
     'r': [
         'rm(list=ls())',
         'library(assert)',
-    ],
-    "c#": []
+    ]
 }
 
 
@@ -546,8 +553,8 @@ def preprocess(generations: List[str], lang: str, only_longest: bool) -> List[st
     return ans
 
 
-def get_exec_results(prefix_from_file: str, generations: list[str], references: str, lang: str,
-                     timeout: None) -> tuple[dict[str, float], dict[int, list], str]:
+def get_exec_results(prefix_from_file: str, generations: List[str], references: str, lang: str,
+                     timeout: None) -> Tuple[Dict[str, float], Dict[int, List], str]:
     """Takes the list of LM generations and evaluates them against ground truth references.
 
     :param prefix_from_file: universal setup code
@@ -581,6 +588,7 @@ def get_exec_results(prefix_from_file: str, generations: list[str], references: 
         generations = [
             (r_imports + "\n" + g).strip() for g in generations
         ]
+
     # elif lang == "java":
     #     generations = [
     #         g.replace("public class Main {\n    }", "").strip() for g in generations
@@ -658,12 +666,6 @@ def get_exec_results(prefix_from_file: str, generations: list[str], references: 
             predictions=generations,
             timeout=timeout,
         )
-    elif lang == 'r':
-        results, logs = r_executor(
-            references=references,
-            predictions=generations,
-            timeout=timeout
-        )
     elif lang == 'java':
         results, logs = java_unsafe_executor(
             references=references,
@@ -693,6 +695,12 @@ def get_exec_results(prefix_from_file: str, generations: list[str], references: 
             references=references,
             predictions=generations,
             timeout=timeout,
+        )
+    elif lang == 'r':
+        results, logs = r_executor(
+            references=references,
+            predictions=generations,
+            timeout=timeout
         )
     else:
         results, logs = code_metric.compute(

@@ -1,15 +1,16 @@
 import re
-from typing import Union
+from typing import Union, Optional, List, Dict, Tuple
 import numpy as np
 from numba import njit
 import time
 import os
+import importlib
 import evaluate
 
 from execution_utils import preprocess, get_exec_results
 
 
-def keyword_match(rule: Union[str, dict], to_lower: bool, regex: bool, response: str, context: list[str]) -> bool:
+def keyword_match(rule: Union[str, Dict], to_lower: bool, regex: bool, response: str, context: List[str]) -> bool:
     if isinstance(rule, str):
         if to_lower:
             rule, response = rule.lower(), response.lower()
@@ -41,7 +42,7 @@ def keyword_match(rule: Union[str, dict], to_lower: bool, regex: bool, response:
         return ans
 
 @njit
-def LCS(template: str, tgt: str) -> tuple[np.ndarray, np.ndarray]:
+def LCS(template: str, tgt: str) -> Tuple[np.ndarray, np.ndarray]:
     '''
         Longest Common Subsequence via dynamic programming
     :param template:
@@ -84,8 +85,9 @@ def LCS(template: str, tgt: str) -> tuple[np.ndarray, np.ndarray]:
     return f, s
 
 
-def blank_filling_match(template: str, blank_str: str, escape: str, targets: list[Union[dict, str]], response: str) \
-        -> tuple[float, float, list[str]]:
+def blank_filling_match(template: str, blank_str: str, escape: str, targets: List[Union[dict, str]], response: str,
+                        post_handler: Optional[dict] = None) \
+        -> Tuple[float, float, List[str]]:
 
     f, s = LCS(template, response)
     n_blank = template.count(blank_str)
@@ -174,6 +176,7 @@ def blank_filling_match(template: str, blank_str: str, escape: str, targets: lis
 
 def unit_test_execution(lang: str, response: str, unit_tests: List[Union[str, Dict]], case_dir: str, only_longest: bool = False) \
         -> Tuple[float, float, List[Dict[str, str]]]:
+
     grading_details = []
     now_score = 0.
     tot_score = 0.
@@ -221,8 +224,8 @@ def unit_test_execution(lang: str, response: str, unit_tests: List[Union[str, Di
     return now_score, tot_score, grading_details
 
 
-def similarity_assessment(response: str, similarity_metrics: list[dict], case_dir: str) \
-        -> tuple[float, float, list[dict[str, float]]]:
+def similarity_assessment(response: str, similarity_metrics: List[Dict], case_dir: str) \
+        -> Tuple[float, float, List[Dict[str, float]]]:
     now_score, tot_score = 0.0, 0.0
     grading_details = []
 

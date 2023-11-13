@@ -2,8 +2,9 @@ import os
 import argparse
 import importlib
 import traceback
+
 import yaml
-from typing import Optional
+from typing import Optional, List, Dict, Tuple
 import numpy as np
 
 from tqdm import tqdm
@@ -11,7 +12,7 @@ from tqdm import tqdm
 import grader_utils as utils
 
 
-def grade_response(config: dict, case_dir: str, response: str, full_score: float, null_score: float) -> tuple[float, dict]:
+def grade_response(config: dict, case_dir: str, response: str, full_score: float, null_score: float) -> Tuple[float, dict]:
     """
         Return current score and detail explanation
     :param config:
@@ -54,6 +55,8 @@ def grade_response(config: dict, case_dir: str, response: str, full_score: float
 
         default_weight = 1.0
 
+        post_handler = None
+
         status['keywords'] = list()
         for rule in config['grading']['keywords']:
             if isinstance(rule, str):
@@ -62,6 +65,9 @@ def grade_response(config: dict, case_dir: str, response: str, full_score: float
                 to_lower = False
                 neg = False
             else:
+                if 'post_handler' in rule:
+                    post_handler = rule['post_handler']
+                    continue
                 rule_content = rule['content']
                 rule_weight = float(rule.get('weight', default_weight))
                 to_lower = bool(rule.get('to_lower', False))
@@ -125,12 +131,15 @@ def grade_response(config: dict, case_dir: str, response: str, full_score: float
         escape = blank_filling_config.get('escape', default_escape)
         targets = blank_filling_config['targets']
         prefix = blank_filling_config.get('prefix', '')
+        post_handler = blank_filling_config.get('post_handler', None)
 
-        now_ans, now_tot, now_detail = utils.blank_filling_match(template, blank_str, escape, targets, prefix + response)
+        now_ans, now_tot, now_detail, post_handler_detail = utils.blank_filling_match(template, blank_str, escape, targets, prefix + response, post_handler)
 
         status['blank_filling_score'] = now_ans
         status['blank_filling_totscore'] = now_tot
         status['blank_filling_detail'] = now_detail
+        if post_handler_detail is not None:
+            status['blank_filling_post_handler_detail'] = post_handler_detail
         ans, tot = ans + now_ans, tot + now_tot
 
     if 'unit_test' in config['grading']:
@@ -158,8 +167,6 @@ def grade_response(config: dict, case_dir: str, response: str, full_score: float
             lang = 'cpp'
         elif lang in ['js', 'javascript']:
             lang = 'javascript'
-        elif lang == 'r':
-            lang = 'r'
         # elif lang == 'custom-py':
         #     lang = 'custom-py'
         elif lang == 'java':
@@ -168,6 +175,8 @@ def grade_response(config: dict, case_dir: str, response: str, full_score: float
             lang = 'c#'
         elif lang in ['ts', 'typescript']:
             lang = 'typescript'
+        elif lang == 'r':
+            lang = 'r'
         else:
             raise NotImplementedError(f'Does not support this language yet: {lang}.')
 
@@ -230,8 +239,8 @@ def grade_response(config: dict, case_dir: str, response: str, full_score: float
     return (ans / tot) * full_score, status
 
 
-def grade_responses(config: dict, case_dir: str, responses: Optional[list[str]],
-                    reduce_mode: str, suite_full_score: float, suite_null_score: float) -> tuple[float, float, list[dict]]:
+def grade_responses(config: dict, case_dir: str, responses: Optional[List[str]],
+                    reduce_mode: str, suite_full_score: float, suite_null_score: float) -> Tuple[float, float, List[dict]]:
     """
 
     :param config:
@@ -290,6 +299,7 @@ if __name__ == '__main__':
     tot_full_score = 0.
     tot_now_score = 0.
     results = {}
+    keyboard_interrupt = False
     for case in tqdm(suite_defs['cases']):
         if args.select and len(args.select) > 0 and case not in args.select: continue
 
@@ -323,6 +333,10 @@ if __name__ == '__main__':
             tot_full_score += full_score
             tot_now_score += now_score
             results[case_fname] = {'full_score': full_score, 'now_score': now_score, 'detail': detail_info}
+        except KeyboardInterrupt as e:
+            # User interrupted
+            keyboard_interrupt = True
+            break
         except BaseException as e:
             results[case_fname] = {'full_score': 0., 'now_score': 0.,
                                    'detail': {'info': 'error encountered', 'error_obj': str(e)}}
@@ -337,13 +351,20 @@ Total cases: {tot_cases}
 Total cases with response: {tot_cases_with_response}
     """
     print(summary_txt)
+    if keyboard_interrupt:
+        print('Keyboard interrupted')
+        exit(1)
     if args.result_summary_path is None:
         stem_filename = f'results/{os.path.basename(args.suite_path).rsplit(".", 1)[0]}_{os.path.basename(args.responses_dir.strip("/"))}'
         print(f'Output to {stem_filename}.(txt/yaml)')
         args.result_summary_path = stem_filename + '.txt'
         args.result_detail_path = stem_filename + '.yaml'
+    if os.path.dirname(args.result_detail_path):
         if not os.path.exists(os.path.dirname(args.result_detail_path)):
             os.makedirs(os.path.dirname(args.result_detail_path))
+    if os.path.dirname(args.result_summary_path):
+        if not os.path.exists(os.path.dirname(args.result_summary_path)):
+            os.makedirs(os.path.dirname(args.result_summary_path))
     with open(args.result_summary_path, 'w') as f:
         f.write(summary_txt)
     with open(args.result_detail_path, 'w') as f:
