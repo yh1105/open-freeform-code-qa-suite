@@ -27,7 +27,18 @@ grading:
   # min_score: float
   # the minimum score within the test case for clipping purpose, if not specified, no minimum clipping
   
-  similarity:
-    - metric: rougeLsum
-      references:
-        - path: answer_3-15-638_0.txt
+#  similarity:
+#    - metric: rougeLsum
+#      references:
+#        - path: answer_3-15-638_0.txt
+  max_score: 3.0
+  # the maximum score within the test case for clipping purpose, if not specified, no maximum clipping
+
+  min_score: 0.0
+  # the minimum score within the test case for clipping purpose, if not specified, no minimum clipping
+
+
+  keywords:
+    - content: Settings
+    - content: Privacy & Security
+    - content: Developer Mode

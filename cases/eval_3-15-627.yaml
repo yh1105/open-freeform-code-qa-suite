@@ -31,3 +31,4 @@ grading:
     - metric: rougeLsum
       references:
         - path: answer_3-13-627_0.txt
+      min_score: 0.1
