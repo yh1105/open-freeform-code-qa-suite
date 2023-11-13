@@ -1,0 +1,36 @@
+The error message indicates that the ffi gem is trying to load `libffi.so.6`, but it can't find it. This usually happens when you upgrade your OS and the system updates the libffi library to a newer version, but the ffi gem is still looking for the old version.
+
+You can confirm this by checking the version of libffi in your system. Run this command in your terminal:
+
+```bash
+find /usr -name libffi.so*
+```
+
+You'll probably see `libffi.so.7` (or a higher version), but not `libffi.so.6`.
+
+To fix this issue, you need to reinstall the ffi gem. Here are the steps:
+
+1. Uninstall the ffi gem:
+
+    ```bash
+    gem uninstall ffi
+    ```
+
+2. Reinstall the ffi gem:
+
+    ```bash
+    gem install ffi
+    ```
+
+This will make the ffi gem compile against the newer version of libffi in your system.
+
+If you're using Bundler and you have a `Gemfile`, you might need to run `bundle install` to reinstall the gems specified in your `Gemfile`.
+
+If the problem persists, try reinstalling your Ruby version with rbenv. This will ensure that all the built-in gems are compiled against the correct libraries in your system.
+
+```bash
+rbenv uninstall 2.7.1
+rbenv install 2.7.1
+```
+
+Remember to replace `2.7.1` with your actual Ruby version.

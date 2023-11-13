@@ -1,0 +1,13 @@
+The Rule of 5 is not necessarily outdated, but it's true that modern C++ practices and features like smart pointers can reduce the need for it.
+
+The Rule of 5 is a guideline that helps ensure that you correctly manage dynamic resources. If your class is managing a resource (like raw pointers), you need to ensure that copying and moving the class behaves correctly. This is where the Rule of 5 comes in.
+
+However, you're correct that smart pointers can often eliminate the need for this. A `std::unique_ptr` or `std::shared_ptr` automatically cleans up the resource it points to when it's destroyed. This means you don't need a custom destructor, and since they can't be copied (in the case of `std::unique_ptr`) or automatically handle copying (in the case of `std::shared_ptr`), you don't need custom copy constructors or assignment operators either.
+
+That said, there are still cases where you might need to follow the Rule of 5:
+
+- If you're working with a resource that isn't memory, like a file or a network connection, you can't use a smart pointer to manage it. You'll need to follow the Rule of 5 to correctly manage the resource.
+- If you're working with a class that has a raw pointer and you can't change it to use a smart pointer for some reason (like maintaining compatibility with existing code), you'll need to follow the Rule of 5.
+- If you need to do something unusual when copying or moving your class, like keep track of how many copies exist, you'll need to follow the Rule of 5.
+
+So while smart pointers and other modern C++ features can reduce the need for the Rule of 5, it's not completely outdated. It's a tool that can be very useful in certain situations.

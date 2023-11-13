@@ -1,0 +1,9 @@
+The comment is partially correct. 
+
+In object-oriented programming, a constructor is a special type of subroutine called to create an object. It prepares the new object for use, often accepting arguments that the constructor uses to set required member variables. 
+
+While it's true that a constructor is automatically invoked when a new object is created, it's not entirely accurate to say that a constructor "cannot be called" or "is not a function". In many languages, like JavaScript and Python, constructors are indeed functions (specifically, special methods) that can be explicitly called if needed. 
+
+However, in languages like Java and C++, constructors have the same name as the class and cannot be called like regular methods. Instead, they are invoked using the `new` keyword. 
+
+So, the accuracy of the comment depends on the programming language in context.

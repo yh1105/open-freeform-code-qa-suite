@@ -1,0 +1,1 @@
+Use `mylist = List.from(mynewlist)` to copy the values from `mynewlist` to `mylist` in Flutter.

@@ -1,0 +1,23 @@
+The error message indicates that the ffi gem is unable to find the libffi.so.6 shared library file. This could be due to the upgrade of your Ubuntu OS. The libffi library might have been upgraded to a newer version, and the ffi gem is still looking for the old version.
+
+Here are the steps to fix this issue:
+
+1. First, you need to find out the version of libffi that is currently installed on your system. You can do this by running the following command in your terminal:
+
+```bash
+find /usr -name 'libffi.so*'
+```
+
+This command will search for all files in the /usr directory that start with 'libffi.so'. The output of this command should give you the path to the libffi shared library file.
+
+2. If you see `libffi.so.7` (or any version higher than 6), it means your system has been upgraded to a newer version of libffi. You need to create a symbolic link to libffi.so.6. You can do this by running the following command:
+
+```bash
+sudo ln -s /usr/lib/x86_64-linux-gnu/libffi.so.7 /usr/lib/x86_64-linux-gnu/libffi.so.6
+```
+
+Replace `/usr/lib/x86_64-linux-gnu/libffi.so.7` with the path you got from the first command if it's different.
+
+3. After creating the symbolic link, try running your rails command again. It should now work without any errors.
+
+Please note that this is a temporary fix. The ffi gem developers will need to update the gem to support the newer version of libffi. You should keep an eye on the ffi gem's GitHub page for any updates regarding this issue.

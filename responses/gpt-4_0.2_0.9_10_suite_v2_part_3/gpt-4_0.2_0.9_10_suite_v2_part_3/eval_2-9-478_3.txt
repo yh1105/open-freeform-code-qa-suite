@@ -1,0 +1,31 @@
+The error you're encountering is likely due to a version mismatch between Devise and Rails. Devise 4.8.0 is not compatible with some older versions of Rails. 
+
+Here are a few steps you can take to resolve this issue:
+
+1. **Update Rails:** If you're using an older version of Rails, you might want to consider updating it. You can do this by changing the version in your Gemfile and running `bundle update rails`. 
+
+    ```ruby
+    gem 'rails', '~> 6.1.4'
+    ```
+
+    Then run:
+
+    ```bash
+    bundle update rails
+    ```
+
+2. **Use a compatible version of Devise:** If you can't update Rails, you might want to use a version of Devise that's compatible with your version of Rails. You can specify the version in your Gemfile like this:
+
+    ```ruby
+    gem 'devise', '~> 4.7.3'
+    ```
+
+    Then run:
+
+    ```bash
+    bundle update devise
+    ```
+
+3. **Check your Ruby version:** Devise 4.8.0 requires Ruby 2.5.0 or newer. If you're using an older version of Ruby, you'll need to update it.
+
+Remember to restart your Rails server after making these changes.

@@ -1,0 +1,31 @@
+It seems like you're missing the `libffi` library, which is a dependency for the `travis-cli` gem. You can install it using Homebrew.
+
+First, you need to install Homebrew if you haven't already. You can install it by running the following command in your terminal:
+
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+After installing Homebrew, you can install `libffi` by running:
+
+```bash
+brew install libffi
+```
+
+Once `libffi` is installed, you need to set the `PKG_CONFIG_PATH` environment variable to point to the `libffi` package configuration file. You can do this by adding the following line to your shell profile file (`~/.bashrc`, `~/.bash_profile`, `~/.zshrc`, etc.):
+
+```bash
+export PKG_CONFIG_PATH="/usr/local/opt/libffi/lib/pkgconfig"
+```
+
+Then, source your shell profile file. For example, if you added the line to `~/.bashrc`, you would run:
+
+```bash
+source ~/.bashrc
+```
+
+Now you should be able to install the `travis-cli` gem without any issues:
+
+```bash
+gem install travis
+```

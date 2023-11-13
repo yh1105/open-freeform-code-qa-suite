@@ -1,0 +1,15 @@
+The Rule of Five is not necessarily outdated, but it is true that modern C++ practices and features like smart pointers can reduce the need for user-defined copy/move constructors and assignment operators.
+
+Smart pointers, such as `std::unique_ptr` and `std::shared_ptr`, handle their own memory and can often eliminate the need for a custom destructor, copy constructor, copy assignment operator, move constructor, or move assignment operator. However, there are still cases where you might need to define these yourself.
+
+For example:
+
+1. **Performance considerations**: Sometimes, for performance reasons, you might want to manage memory in a specific way that is not covered by the default behavior or by smart pointers. In such cases, you would need to define your own constructors, destructor, and assignment operators.
+
+2. **Non-memory resources**: If your class manages resources other than memory, such as file handles, network connections, or database connections, you might need to define these functions to manage those resources correctly.
+
+3. **Deep copy vs shallow copy**: The default copy constructor and copy assignment operator perform a shallow copy. If your class contains pointers and you want a deep copy, you will need to define your own copy constructor and copy assignment operator.
+
+4. **Ownership semantics**: If your class has unique ownership semantics that aren't covered by `std::unique_ptr` or `std::shared_ptr`, you would need to define these functions.
+
+So, while it's true that modern C++ features can often eliminate the need for these functions, there are still cases where they are necessary. The Rule of Five is a guideline to ensure that if you do need to define one of these functions, you define all of them to ensure correct behavior.

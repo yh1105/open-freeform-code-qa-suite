@@ -1,0 +1,23 @@
+The warning is because Dart's null safety feature is enabled. The `myMap[1]` expression can return `null` if there is no entry with key `1` in the map, but you are trying to assign it to a non-nullable `String` variable.
+
+To solve this warning, you can use the null check operator (`!`). This will throw an exception if the value is `null`.
+
+```dart
+void foo(Map<int, String> myMap) {
+  if (myMap.containsKey(1)) {
+    String s = myMap[1]!;
+  }
+}
+```
+
+Alternatively, you can change the type of `s` to be nullable (`String?`), if you want to allow `s` to be `null`.
+
+```dart
+void foo(Map<int, String> myMap) {
+  if (myMap.containsKey(1)) {
+    String? s = myMap[1];
+  }
+}
+```
+
+Please note that using the null check operator (`!`) is potentially unsafe if you are not sure whether the value is `null` or not. If you use it on a `null` value, it will cause a runtime error. So, use it only when you are sure that the value cannot be `null`.

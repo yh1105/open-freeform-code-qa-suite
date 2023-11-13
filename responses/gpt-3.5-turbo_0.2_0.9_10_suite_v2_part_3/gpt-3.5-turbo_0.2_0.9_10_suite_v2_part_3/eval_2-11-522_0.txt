@@ -1,0 +1,5 @@
+No. 
+
+C++ does not provide a standard way to query the properties of threads or enforce on which cores they will run. The behavior of threads is largely determined by the operating system and hardware, and C++ provides only a high-level interface for creating and managing threads. 
+
+However, some operating systems may provide platform-specific APIs or libraries that allow for more fine-grained control over thread behavior. For example, on Linux, the `sched_setaffinity` function can be used to set the CPU affinity of a thread, which determines on which cores it will run. But this is not part of the C++ standard library.

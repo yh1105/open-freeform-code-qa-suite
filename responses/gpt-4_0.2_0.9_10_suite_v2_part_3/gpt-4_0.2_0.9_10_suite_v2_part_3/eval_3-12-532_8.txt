@@ -1,0 +1,34 @@
+The error message you're seeing typically indicates that the response you're getting from your server is not valid JSON. The `json.decode` function expects a string of valid JSON and will throw a `FormatException` if this is not the case.
+
+Here are a few things you can do to debug and potentially solve the issue:
+
+1. **Print the response body**: Before you try to decode the response, print it out to the console. This will allow you to see exactly what you're trying to decode.
+
+```dart
+print('Response body: ${response.body}');
+```
+
+2. **Check the server-side script**: Make sure that the PHP script you're calling is correctly outputting JSON. You can do this by calling the script directly in your browser or using a tool like Postman.
+
+3. **Check the response status code**: Before decoding the response, check the status code to make sure the request was successful.
+
+```dart
+if (response.statusCode == 200) {
+  List data = json.decode(response.body);
+} else {
+  print('Request failed with status: ${response.statusCode}.');
+}
+```
+
+4. **Catch the FormatException**: You can catch the `FormatException` to prevent it from crashing your app and print out some debugging information.
+
+```dart
+try {
+  List data = json.decode(response.body);
+} catch (e) {
+  print('Error: $e');
+  print('Response body: ${response.body}');
+}
+```
+
+Remember that the `json.decode` function expects a string of valid JSON. If the server is returning something else (like HTML or plain text), you'll need to handle that appropriately in your Dart code.

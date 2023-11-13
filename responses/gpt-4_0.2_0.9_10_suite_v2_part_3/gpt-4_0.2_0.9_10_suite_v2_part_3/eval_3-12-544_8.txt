@@ -1,0 +1,16 @@
+The error you're encountering is due to the fact that you're trying to access platform-specific functionality before `runApp()` is called. Before `runApp()` is called, the Flutter engine isn't fully initialized, so you can't access platform channels.
+
+To fix this, you should move your platform-specific code inside the `main()` function after `runApp()`. However, since `Hive.init()` needs to be called before you run your app, you should use `WidgetsFlutterBinding.ensureInitialized()` to make sure that the Flutter engine is fully initialized before you call `Hive.init()`.
+
+Here's how you can modify your code:
+
+```dart
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final appDocsDir = await getApplicationDocumentsDirectory();
+  Hive.init(appDocsDir.path);
+  runApp(MyApp());
+}
+```
+
+`WidgetsFlutterBinding.ensureInitialized()` ensures that the Flutter engine is fully up and running, which allows you to use platform channels before `runApp()`.

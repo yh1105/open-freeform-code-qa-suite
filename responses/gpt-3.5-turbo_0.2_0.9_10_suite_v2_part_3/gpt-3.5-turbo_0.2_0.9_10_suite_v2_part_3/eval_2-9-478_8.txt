@@ -1,0 +1,11 @@
+This error occurs because the latest version of Devise (4.8.0) is not compatible with Rails 4.2. To fix this, you can either upgrade your Rails version to 5.0 or higher, or downgrade your Devise version to a version that is compatible with Rails 4.2.
+
+To downgrade Devise to a compatible version, you can specify the version number in your Gemfile like this:
+
+```
+gem 'devise', '~> 4.7.3'
+```
+
+Then run `bundle install` to install the specified version of Devise.
+
+Alternatively, you can upgrade your Rails version to 5.0 or higher by changing the Rails version in your Gemfile and running `bundle update rails`. Keep in mind that upgrading Rails may require additional changes to your application code.

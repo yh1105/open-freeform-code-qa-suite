@@ -1,0 +1,18 @@
+The reason it didn't work is that this needs to be done inside a function or a method, not at the top level.
+
+Another solution is to declare your map in Flutter with the keyword "late". Here's an example:
+
+```dart
+late Map<String, int> someMap;
+
+void main() {
+  someMap = {
+    "a": 1,
+    "b": 2,
+  };
+
+  someMap["c"] = 3;
+}
+``` 
+
+This way, you can declare the map outside of any function or method, but you need to initialize it later before using it.

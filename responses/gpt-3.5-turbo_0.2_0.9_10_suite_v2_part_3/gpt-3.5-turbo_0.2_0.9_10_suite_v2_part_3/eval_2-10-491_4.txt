@@ -1,0 +1,24 @@
+One way to express this more idiomatically is to use the `map_or_else` method on `Option`. Here's an example:
+
+```rust
+fn main() {
+    let mut foo: Option<u8> = None;
+    foo = foo.map_or_else(|| Some(5), |val| if val < 5 { Some(5) } else { None });
+}
+```
+
+This code uses the `map_or_else` method to check if `foo` is `None`. If it is, it returns `Some(5)`. If it is not, it checks if the inner value meets the condition. If it does, it returns `Some(5)`. If it does not, it returns `None`. Finally, it assigns the result back to `foo`.
+
+Another way to express this is to use the `and_then` method on `Option`. Here's an example:
+
+```rust
+fn main() {
+    let mut foo: Option<u8> = None;
+    foo = foo.and_then(|val| if val < 5 { Some(5) } else { None });
+    if foo.is_none() {
+        foo = Some(5);
+    }
+}
+```
+
+This code uses the `and_then` method to check if the inner value meets the condition. If it does, it returns `Some(5)`. If it does not, it returns `None`. If `foo` is `None`, it assigns `None` back to `foo`. If `foo` is not `None`, it assigns the result back to `foo`. Finally, it checks if `foo` is `None` again and assigns `Some(5)` if it is.

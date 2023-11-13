@@ -1,0 +1,12 @@
+This error is caused by a bug in rust-analyzer, a popular Rust language server. It is a false positive and does not indicate any actual issues with your code. 
+
+You can try updating rust-analyzer to the latest version to see if the error goes away. If it persists, you can ignore it or disable the macro-error lint for rust-analyzer in your `rustfmt.toml` file:
+
+```toml
+[unstable]
+rust-analyzer = {
+    lint-macros = false
+}
+```
+
+This will disable the macro-error lint for rust-analyzer.
