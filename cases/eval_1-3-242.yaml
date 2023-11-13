@@ -42,4 +42,5 @@ grading:
 
     tests:
       - path: test/test_1-3-242.py
+        only_longest: true
         prefix_path: test/prefix_1-3-242.py

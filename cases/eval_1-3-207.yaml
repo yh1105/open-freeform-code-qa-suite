@@ -34,6 +34,7 @@ grading:
 
     tests:
         - path: test/test_1-3-207.py
+          only_longest: true
         # - content: str
         #   # source code in string
         #   path: str

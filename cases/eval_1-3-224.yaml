@@ -23,4 +23,5 @@ grading:
   unit_test:
     tests:
       - path: test/test_1-3-224.py
+        only_longest: true
         prefix: "my_set = ['LUNAUSDT', 'ETHBTC', 'ETHBNB', 'BTCUSDT', 'MANATUSD', 'ALICEETH', 'AAAUSDT', 'BBBUSDT', 'USDT', 'USDTAAA', 'USDTBBB']"

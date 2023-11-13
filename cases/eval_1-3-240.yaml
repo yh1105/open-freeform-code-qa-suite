@@ -23,6 +23,7 @@ grading:
   unit_test:
     tests:
         - path: test/test_1-3-240.py
+          only_longest: true
         # - content: str
         #   # source code in string
         #   path: str

@@ -29,4 +29,5 @@ grading:
 
     tests:
         - path: test/test_1-4-320.r
+          only_longest: true
           prefix_path: test/prefix_1-4-320.r

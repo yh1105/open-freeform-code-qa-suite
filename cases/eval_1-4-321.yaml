@@ -30,4 +30,5 @@ grading:
 
     tests:
         - path: test/test_1-4-321.r
+          only_longest: true
         # - content: str

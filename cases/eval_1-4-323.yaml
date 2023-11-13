@@ -28,3 +28,4 @@ grading:
 
     tests:
         - path: test/test_1-4-323.r
+          only_longest: true

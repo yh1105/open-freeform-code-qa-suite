@@ -24,3 +24,4 @@ grading:
     tests:
       - path: test/test_1-3-184.py
         cleanup_path: test/clean_1-3-184.py
+        only_longest: true

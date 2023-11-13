@@ -34,4 +34,5 @@ grading:
 
     tests:
         - path: test/test_1-3-244.py
+          only_longest: true
         # - content: str
