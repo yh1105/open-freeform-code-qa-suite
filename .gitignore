@@ -15,3 +15,4 @@ batched_responses/
 package-lock.json
 package.json
 node_modules/
+bin/
