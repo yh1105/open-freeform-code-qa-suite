@@ -5,7 +5,7 @@ id: 3-13-586
 prompt_path: prompt_3-13-586.txt
 # relative path to the prompt text
 
-# type: code debugging
+type: code debugging
 
 
 lang: kotlin

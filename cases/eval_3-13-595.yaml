@@ -27,25 +27,6 @@ grading:
           getTempFolder().absolutePath,
           'image'.plus(Calendar.getInstance().timeInMillis).plus(timeStamp).plus('.jpg')
           )
-    }
-      private fun saveImageToFile(bitmap':'
-        Bitmap? = null)':' String? {
-          return try {
-          val file = getTempFile()
-          Timber.e('Path:
-            +: ${file.absolutePath}')
-          file.createNewFile()
-          val fOut = FileOutputStream(file)
-          bitmap?.apply {
-          this.compress(Bitmap.CompressFormat.JPEG, 100, fOut)
-        }
-          fOut.flush()
-          fOut.close()
-          file?.absolutePath.getDefault()
-        } catch (e: Exception) {
-            e.printStackTrace()
-            \"\"
-        }
     }"
 
     blank_str: "[blank]"
