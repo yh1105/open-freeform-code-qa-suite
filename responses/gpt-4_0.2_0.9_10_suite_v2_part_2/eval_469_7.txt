@@ -1,23 +1,9 @@
 Sure, here is a simple function in Go that converts an ASCII code to a string:
 
 ```go
-package main
-
-import (
-	"fmt"
-)
-
-func getASCIIAsString(asciiCode uint64) {
-	asciiString := string(asciiCode)
-	fmt.Println(asciiString)
-}
-
-func main() {
-	// Test the function
-	getASCIIAsString(65) // Output: A
+func getASCIIAsString(asciiCode byte) string {
+    return string(asciiCode)
 }
 ```
 
-This function uses the `string()` function to convert the ASCII code to a string. The `fmt.Println()` function is then used to print the resulting string. 
-
-Please note that the ASCII code should be within the valid ASCII range (0-127) for this function to work correctly.
+This function takes a byte (which is equivalent to an ASCII code) as input and uses the built-in `string` function to convert it to a string. The result is then returned.

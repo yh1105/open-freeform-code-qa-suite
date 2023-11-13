@@ -316,6 +316,45 @@ def ts_unsafe_executor(references, predictions, timeout):
     return {'pass@1': float(int(result[0].startswith("passed")))}, logs
 
 
+def go_unsafe_executor(references, predictions, timeout):
+
+    check_program = predictions[0][0] + '\n' + references[0]
+
+    result = []
+
+    with create_tempdir():
+        open(f"main.go", 'w').write(check_program)
+
+        try:
+            exec_result = subprocess.run(["go", "run", "main.go"], timeout=timeout, capture_output=True)
+
+            if exec_result.returncode == 0:
+                result.append("passed")
+            else:
+                if exec_result.stderr:
+                    try:
+                        err = exec_result.stderr.decode()
+                    except:
+                        err = exec_result.stderr
+                else:
+                    try:
+                        err = exec_result.stdout.decode()
+                    except:
+                        err = exec_result.stdout
+                result.append(f"failed: {err}")
+        except subprocess.TimeoutExpired as e:
+            result.append("timed out")
+    
+    logs = [[(0, dict(
+        task_id=0,
+        passed=result[0].startswith("passed"),
+        result=result,
+        completion_id=0,
+    ))]]
+
+    return {'pass@1': float(int(result[0].startswith("passed")))}, logs
+
+
 # language supported by us
 LANGUAGES = ["python", "cpp", "javascript", "typescript", "java", "go", "rust", "c#"]
 
@@ -652,6 +691,12 @@ def get_exec_results(prefix_from_file: str, generations: List[str], references: 
         )
     elif lang == 'c#':
         results, logs = cs_unsafe_executor(
+            references=references,
+            predictions=generations,
+            timeout=timeout,
+        )
+    elif lang == 'go':
+        results, logs = go_unsafe_executor(
             references=references,
             predictions=generations,
             timeout=timeout,

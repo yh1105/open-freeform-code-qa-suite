@@ -1,0 +1,10 @@
+id: 407
+prompt_path: prompt_407.txt
+type: code debugging
+lang: c#
+grading:
+  keywords:
+    - 'Microsoft.Extensions.Configuration'
+    - 'Microsoft.Extensions.Configuration.Json'
+    - 'ConfigurationBuilder'
+    - 'Build()'

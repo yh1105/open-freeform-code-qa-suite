@@ -1,0 +1,10 @@
+id: 402
+prompt_path: prompt_402.txt
+type: code debugging
+lang: c#
+grading:
+  keywords:
+    - 'AddServiceBusClient'
+    - 'AddAzureClients'
+    - 'IAzureClientFactory<ServiceBusClient>'
+    - 'ServiceBusClientBuilderExtensions'

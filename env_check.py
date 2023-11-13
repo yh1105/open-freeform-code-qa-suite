@@ -11,6 +11,7 @@ command_to_check = [
     ['g++ -v', 'Need to install C++ compiler (g++)'],
     ['mcs --version', 'Need to install mono-complete for C# support in Ubuntu'],
     ['mono --version', 'Need to install mono-complete for C# support in Ubuntu'],
+    ['go version', 'Need to install mono-complete for C# support in Ubuntu'],
 ]
 
 if __name__ == '__main__':

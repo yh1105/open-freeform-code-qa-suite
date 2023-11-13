@@ -1,9 +1,9 @@
 Here's the implementation of the `getASCIIAsString` function in Go:
 
 ```go
-func getASCIIAsString(asciiCode uint64) string {
+func getASCIIAsString(asciiCode byte) string {
     return string(asciiCode)
 }
 ```
 
-This function takes an unsigned 64-bit integer `asciiCode` as input and returns the corresponding ASCII character as a string. The `string()` function in Go converts a numeric value to its corresponding ASCII character.
+This function takes an ASCII code as a `byte` and converts it to a string using the `string()` function in Go. The resulting string is returned by the function.

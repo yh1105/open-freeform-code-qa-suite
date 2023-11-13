@@ -285,6 +285,28 @@ answer_paths:
   - eval_402_7.txt
   - eval_402_8.txt
   - eval_402_9.txt
+  cases/eval_404.yaml:
+  - eval_404_0.txt
+  - eval_404_1.txt
+  - eval_404_2.txt
+  - eval_404_3.txt
+  - eval_404_4.txt
+  - eval_404_5.txt
+  - eval_404_6.txt
+  - eval_404_7.txt
+  - eval_404_8.txt
+  - eval_404_9.txt
+  cases/eval_405.yaml:
+  - eval_405_0.txt
+  - eval_405_1.txt
+  - eval_405_2.txt
+  - eval_405_3.txt
+  - eval_405_4.txt
+  - eval_405_5.txt
+  - eval_405_6.txt
+  - eval_405_7.txt
+  - eval_405_8.txt
+  - eval_405_9.txt
   cases/eval_407.yaml:
   - eval_407_0.txt
   - eval_407_1.txt

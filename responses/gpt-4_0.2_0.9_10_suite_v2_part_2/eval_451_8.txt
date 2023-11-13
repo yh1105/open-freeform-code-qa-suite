@@ -1,50 +1,12 @@
-You can create the JSON object using Go by creating a struct to represent the data structure, and then use the `json.Marshal` function to convert the struct to JSON. Here's an example:
+Sure, here is the `ClientInfo` struct that matches the JSON structure you provided:
 
 ```go
-package main
-
-import (
-	"encoding/json"
-	"fmt"
-)
-
-type Client struct {
-	Hostname string `json:"Hostname"`
-	IP       string `json:"IP"`
-	MacAddr  string `json:"MacAddr"`
-}
-
-type Clients struct {
-	Clients []Client `json:"Clients"`
-}
-
-func main() {
-	clients := Clients{
-		Clients: []Client{
-			{
-				Hostname: "example.com",
-				IP:       "127.0.0.1",
-				MacAddr:  "mactonight",
-			},
-			{
-				Hostname: "foo.biz",
-				IP:       "0.0.0.0",
-				MacAddr:  "12:34:56:78",
-			},
-		},
-	}
-
-	jsonData, err := json.MarshalIndent(clients, "", "  ")
-	if err != nil {
-		fmt.Println(err)
-	}
-	fmt.Println(string(jsonData))
+type ClientInfo struct {
+	Clients []struct {
+		Hostname string `json:"Hostname"`
+		IP       string `json:"IP"`
+		MacAddr  string `json:"MacAddr"`
+	} `json:"Clients"`
 }
 ```
-
-In this code:
-
-- We define a `Client` struct to represent each client. The struct tags (e.g., `json:"Hostname"`) tell the `json` package how to convert between JSON and our struct.
-- We define a `Clients` struct that contains a slice of `Client` objects.
-- In the `main` function, we create a `Clients` object with two clients, and then use `json.MarshalIndent` to convert it to JSON. The second and third arguments to `json.MarshalIndent` specify the prefix and indent for each level of output.
-- If `json.MarshalIndent` returns an error, we print the error and exit. Otherwise, we print the JSON data.
+This struct can be used to unmarshal the JSON into Go objects. The `json` tags in the struct fields are used to map the JSON keys to the struct fields.

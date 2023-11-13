@@ -1,0 +1,8 @@
+id: 373
+prompt_path: prompt_373.txt
+type: code debugging
+lang: java
+grading:
+  keywords:
+    - '@NotEmpty'
+    - '@Size(value=1, message= "whatever")'

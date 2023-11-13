@@ -1,0 +1,9 @@
+id: 425
+prompt_path: prompt_425.txt
+type: non-code debugging
+lang: php
+grading:
+  similarity:
+    - metric: rougeLsum
+      references:
+        - path: answer_425_0.txt

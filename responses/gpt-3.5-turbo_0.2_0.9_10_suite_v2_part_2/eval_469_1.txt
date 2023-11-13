@@ -1,9 +1,5 @@
-Here's the implementation of the `getASCIIAsString` function in Go:
-
 ```go
-func getASCIIAsString(asciiCode uint64) string {
+func getASCIIAsString(asciiCode byte) string {
     return string(asciiCode)
 }
 ```
-
-This function takes an `uint64` ASCII code as input and returns the corresponding ASCII character as a string. The `string()` function in Go converts the given ASCII code to its corresponding character.

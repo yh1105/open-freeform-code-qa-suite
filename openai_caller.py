@@ -132,6 +132,10 @@ if __name__ == '__main__':
         case_stemname = case_fpath.split('/')[-1].split('.')[0]
 
         if args.skip and all([os.path.exists(os.path.join(exp_folder, f'{case_stemname}_{j}.txt')) for j in range(args.n)]):
+            answer_mapping[case_fpath] = []
+            for j in range(args.n):
+                outpath = f'{case_stemname}_{j}.txt'
+                answer_mapping[case_fpath].append(outpath)
             continue
 
         with open(case_fpath, 'r') as f:
