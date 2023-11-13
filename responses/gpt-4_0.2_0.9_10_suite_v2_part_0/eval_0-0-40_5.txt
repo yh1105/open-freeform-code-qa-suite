@@ -1,27 +1,29 @@
-The problem you're encountering is due to the conflict between the Node.js installed in your Windows system and the one installed in your WSL2 Ubuntu 20.04. 
+The problem you're experiencing is due to a conflict between the Node.js and npm installed in your WSL2 Ubuntu and the Node.js and npm installed in your Windows 10.
 
-When you're running `npm -v`, it's trying to execute the npm installed in your Windows system (`/mnt/c/Program Files/nodejs/npm`), which is not compatible with the Linux environment.
+When you run `node -v` or `npm -v`, the system will look for the `node` or `npm` command in the directories listed in your `PATH` environment variable, in the order they are listed. It seems that the `/mnt/c/Program Files/nodejs` directory (which contains the Windows version of Node.js and npm) is listed before `/usr/bin` (which contains the WSL2 Ubuntu version) in your `PATH`.
 
-To solve this issue, you need to remove the Windows PATH from your WSL environment. You can do this by editing your `.bashrc` or `.bash_profile` file.
+To solve this issue, you can modify your `PATH` to prioritize the Ubuntu version of Node.js and npm. Here's how:
 
-Open your `.bashrc` file with a text editor. You can use `nano`:
+1. Open your `.bashrc` file in a text editor. You can use `nano` for this:
 
-```bash
-nano ~/.bashrc
-```
+   ```bash
+   nano ~/.bashrc
+   ```
 
-At the end of the file, add the following line:
+2. Add the following line to the end of the file:
 
-```bash
-export PATH="$HOME/.npm-global/bin:$PATH"
-```
+   ```bash
+   export PATH="/usr/bin:$PATH"
+   ```
 
-Then, save and close the file. After that, reload the `.bashrc` file:
+   This line prepends `/usr/bin` to your `PATH`, so the system will look for commands in `/usr/bin` before it looks in any other directory.
 
-```bash
-source ~/.bashrc
-```
+3. Save the file and exit the text editor. If you're using `nano`, you can do this by pressing `Ctrl+X`, then `Y`, then `Enter`.
 
-Now, you should be able to use the correct version of npm installed in your WSL environment.
+4. Close your terminal and open a new one, or source your `.bashrc` file to apply the changes immediately:
 
-If you still encounter the problem, you might need to uninstall the Node.js and npm installed in your Windows system, or adjust the PATH variable in your Windows system to not include the Node.js and npm paths.
+   ```bash
+   source ~/.bashrc
+   ```
+
+5. Now, when you run `node -v` or `npm -v`, you should see the version of Node.js and npm installed in your WSL2 Ubuntu.

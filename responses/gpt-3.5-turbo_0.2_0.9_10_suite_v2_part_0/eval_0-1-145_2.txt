@@ -1,6 +1,15 @@
-The `truncate` class in TailwindCSS only works if the element has a fixed width or a max-width set. You can try adding `max-w-xs` or `max-w-sm` class to the `span` element to limit its width and make the `truncate` class work.
+The `truncate` class in TailwindCSS only works if the element has a fixed width. You can add the `w-` class to set the width of the element. For example, you can add `w-40` to set the width to 40 pixels:
 
-Here's an example:
+```html
+<div class="ml-1 inline-block">
+   <span>Label: </span>
+   <span class="font-semibold truncate w-40">
+     long texttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt
+   </span>
+</div>
+```
+
+Alternatively, you can use the `max-w-` class to set the maximum width of the element. For example, you can add `max-w-xs` to set the maximum width to extra small:
 
 ```html
 <div class="ml-1 inline-block">
@@ -9,6 +18,6 @@ Here's an example:
      long texttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt
    </span>
 </div>
-```
+``` 
 
-You can adjust the `max-w-xs` value to fit your needs.
+Choose the appropriate width or maximum width based on your design.

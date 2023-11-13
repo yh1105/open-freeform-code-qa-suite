@@ -1,4 +1,4 @@
-To mock a class with Jest, you need to return a constructor function that creates an instance of the mocked class. Here's the revised code:
+To mock the `API` class, you need to return a constructor function that returns an object with the mocked methods. Here's the revised version of the code:
 
 ```javascript
 import API from 'utils/API';
@@ -6,7 +6,7 @@ import API from 'utils/API';
 jest.mock('utils/API', () => {
   return jest.fn().mockImplementation(() => {
     return {
-      someMethod: () => {}
+      someMethod: jest.fn()
     };
   });
 });
@@ -14,4 +14,4 @@ jest.mock('utils/API', () => {
 const api = new API();
 ```
 
-This code creates a mock constructor function that returns an object with a `someMethod` function. When you call `new API()`, Jest will use this mock constructor to create a new instance of the mocked class.
+This code creates a mock implementation of the `API` class using `jest.fn()` and returns a constructor function that returns an object with the mocked `someMethod` method. When you call `new API()`, Jest will use this constructor function to create a new instance of the mocked `API` class.

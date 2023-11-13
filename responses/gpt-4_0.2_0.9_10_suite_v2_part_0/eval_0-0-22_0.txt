@@ -1,6 +1,6 @@
 First way:
 
-In the first way, you can use the `tabBarVisible` option to hide the tab bar. Set it to `false` to hide the tab bar.
+In the first way, you can use the `tabBarVisible` option to hide the tab bar when the "Settings" screen is active. You should set this option to `false`.
 
 ```javascript
 export default function App() {
@@ -17,18 +17,14 @@ export default function App() {
 
 Second way:
 
-In the second way, you can use the `useEffect` hook to hide the tab bar when the `SettingsStackScreen` is focused.
+In the second way, you can use the `useEffect` hook to hide the tab bar when the "Settings" screen is mounted. You should call the `setOptions` method of the `navigation` prop and set the `tabBarVisible` option to `false`.
 
 ```javascript
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 function SettingsStackScreen({ navigation }) {
     useEffect(() => {
-        const unsubscribe = navigation.addListener('focus', () => {
-            navigation.setOptions({ tabBarVisible: false });
-        });
-
-        return unsubscribe;
+        navigation.setOptions({ tabBarVisible: false });
     }, [navigation]);
 
     return (
@@ -39,4 +35,4 @@ function SettingsStackScreen({ navigation }) {
 }
 ```
 
-In this code, `useEffect` is used to add an event listener that hides the tab bar when the `SettingsStackScreen` is focused. The `unsubscribe` function is returned to clean up the event listener when the component is unmounted.
+Please note that hiding the tab bar will not prevent the user from navigating to the "Settings" screen using gestures or the back button.

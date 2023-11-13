@@ -1,18 +1,30 @@
-In Tailwind CSS, you don't directly select elements like you do in traditional CSS. Instead, you apply utility classes directly to the elements you want to style. 
+Tailwind CSS is a utility-first CSS framework that provides low-level utility classes to build custom designs. It doesn't provide a direct way to target child elements like you would do in traditional CSS with the child combinator (`>`).
 
-For example, if you have a div with the class "section" and you want to style its direct div children, you would apply the styles directly to those child divs in your HTML:
+However, you can use `@apply` directive in your CSS to apply Tailwind classes to your specific selector. Here's an example:
 
-```html
-<div class="section">
-  <div class="bg-red-500"> <!-- Apply your styles here -->
-    <!-- Content -->
-  </div>
-  <div class="text-xl"> <!-- Apply your styles here -->
-    <!-- Content -->
-  </div>
-</div>
+```css
+div.section > div {
+  @apply bg-red-500 text-white;
+}
 ```
 
-In this example, `bg-red-500` and `text-xl` are Tailwind CSS utility classes that apply specific styles. You would replace these with whatever styles you want to apply to the direct children of your "section" div.
+In this example, direct children `div` of `div` with class `section` will have a red background and white text.
 
-Remember, the philosophy of Tailwind CSS is different from traditional CSS. Instead of selecting elements and defining styles inside a separate CSS block, you apply pre-defined utility classes directly to the elements in your HTML.
+Remember to enable this feature in your Tailwind CSS configuration file (`tailwind.config.js`) if it's not enabled:
+
+```js
+module.exports = {
+  theme: {
+    extend: {},
+  },
+  variants: {},
+  plugins: [],
+  corePlugins: {
+    preflight: true,
+  },
+}
+```
+
+The `preflight` option includes Normalize.css and additional base styles for you, which is a set of modern, sensible reset styles.
+
+Please note that using `@apply` is not the "utility-first" way of doing things in Tailwind and should be used sparingly. The utility-first way would be to add the classes directly to the HTML elements.

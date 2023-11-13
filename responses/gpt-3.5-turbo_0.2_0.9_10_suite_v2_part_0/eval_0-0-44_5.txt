@@ -1,50 +1,32 @@
-To create an index on a property in a Mongoose schema using Nest.js, you can use the `@Schema()` decorator to define the schema and the `@Prop()` decorator to define the properties. To create an index on a property, you can use the `@Index()` decorator.
+To create an index on a property in a Mongoose schema using Nest.js, you can use the `@Schema` decorator to define the schema and the `@Prop` decorator to define the properties. To create an index on a property, you can pass an object with the `index` property set to `true` as an option to the `@Prop` decorator.
 
 Here's an example:
 
 ```javascript
-import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 
 @Schema()
 export class MySchema extends Document {
-  @Prop({ required: true })
+  @Prop({ required: true, index: true })
+  type: string;
+
+  @Prop()
+  creationDate: string;
+
+  @Prop()
   name: string;
-
-  @Prop({ required: true })
-  email: string;
-
-  @Index({ unique: true })
-  @Prop({ required: true })
-  username: string;
 }
 
 export const MySchema = SchemaFactory.createForClass(MySchema);
 ```
 
-In this example, an index is created on the `username` property with the `@Index()` decorator. The `unique` option is set to `true` to ensure that the values in the `username` property are unique.
+In this example, an index is created on the `type` property by passing `{ index: true }` as an option to the `@Prop` decorator.
 
-You can also create indexes using the `SchemaFactory.createForClass()` method. Here's an example:
+You can also create indexes using the `SchemaFactory.createForClass()` method by chaining the `index()` method to the schema definition:
 
 ```javascript
-import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
-
-@Schema()
-export class MySchema extends Document {
-  @Prop({ required: true })
-  name: string;
-
-  @Prop({ required: true })
-  email: string;
-
-  @Prop({ required: true })
-  username: string;
-}
-
-MySchema.index({ username: 1 }, { unique: true });
-
-export const MySchema = SchemaFactory.createForClass(MySchema);
+export const MySchema = SchemaFactory.createForClass(MySchema).index({ type: 1 });
 ```
 
-In this example, the `MySchema.index()` method is used to create an index on the `username` property. The `unique` option is set to `true` to ensure that the values in the `username` property are unique.
+In this example, an index is created on the `type` property by calling the `index()` method on the schema definition and passing an object with the property name and the index direction (1 for ascending, -1 for descending).

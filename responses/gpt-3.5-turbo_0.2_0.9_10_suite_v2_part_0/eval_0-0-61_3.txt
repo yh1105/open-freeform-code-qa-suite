@@ -24,7 +24,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Button onClick={handleThemeChange}>
-        {darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+        {darkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
       </Button>
       {/* Your app content goes here */}
     </ThemeProvider>
@@ -34,8 +34,8 @@ function App() {
 export default App;
 ```
 
-In this example, we're using the `createMuiTheme` function to create a theme object with a `palette` property that specifies the type of the palette (either `'light'` or `'dark'`). We're also using the `CssBaseline` component to apply some basic global styles to the document.
+In this example, we're using the `createMuiTheme` function to create a theme object with a `palette` property that specifies the type of the theme (either `'light'` or `'dark'`). We're also using the `CssBaseline` component to apply some basic global styles to the document.
 
-The `ThemeProvider` component is used to apply the theme to all the Material-UI components in the app. We're passing the `theme` object we created as a prop to the `ThemeProvider`.
+The `ThemeProvider` component is used to wrap your app content and provide the theme object to all Material-UI components. We're also using a `Button` component to toggle the `darkMode` state and update the theme dynamically.
 
-Finally, we're using a `Button` component to toggle the `darkMode` state, which will trigger a re-render of the app with the new theme applied.
+With this setup, you should be able to switch between light and dark themes and have the root element background color change accordingly.

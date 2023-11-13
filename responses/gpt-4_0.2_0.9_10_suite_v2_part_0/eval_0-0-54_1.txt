@@ -1,52 +1,14 @@
-In your current code, you are already getting the value from the input field and storing it in the state. If you want to get the value on button click, you can simply create a button and define an `onClick` event for it. Here is how you can do it:
+You can use two separate states for first name and last name. Then, on button click, you can get the values of these states. Here is an example:
 
 ```javascript
 import React, { useState } from 'react';
 
-export default function InputField({name,label}) {
-  const [state, setState] = useState('')
+function App() {
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
 
   const handleClick = () => {
-    alert(state); // or do whatever you want with the value
-  }
-
-  return (
-    <div>
-      <label>{label}</label>
-      <input 
-        type="text" 
-        value={state} 
-        name={name}
-        onChange={(e) => setState(e.target.value)} 
-      />
-      <button onClick={handleClick}>Click me</button>
-      {state}
-    </div>
-  );
-}
-```
-In the above code, `handleClick` function will be called when the button is clicked. Inside `handleClick`, you can access the value of the input field from the state. 
-
-If you have multiple input fields (like first name and last name), you can use an object to store the state:
-
-```javascript
-import React, { useState } from 'react';
-
-export default function InputField({name,label}) {
-  const [state, setState] = useState({
-    firstName: '',
-    lastName: ''
-  })
-
-  const handleChange = (e) => {
-    setState({
-      ...state,
-      [e.target.name]: e.target.value
-    });
-  }
-
-  const handleClick = () => {
-    alert(`First Name: ${state.firstName}, Last Name: ${state.lastName}`);
+    console.log(`First Name: ${firstName}, Last Name: ${lastName}`);
   }
 
   return (
@@ -54,20 +16,23 @@ export default function InputField({name,label}) {
       <label>First Name</label>
       <input 
         type="text" 
-        value={state.firstName} 
-        name="firstName"
-        onChange={handleChange} 
+        value={firstName} 
+        onChange={(e) => setFirstName(e.target.value)} 
       />
+
       <label>Last Name</label>
       <input 
         type="text" 
-        value={state.lastName} 
-        name="lastName"
-        onChange={handleChange} 
+        value={lastName} 
+        onChange={(e) => setLastName(e.target.value)} 
       />
-      <button onClick={handleClick}>Click me</button>
+
+      <button onClick={handleClick}>Submit</button>
     </div>
   );
 }
+
+export default App;
 ```
-In the above code, `handleChange` function is updating the state based on the `name` attribute of the input field. So, you can use the same function for multiple input fields.
+
+In this code, `setFirstName` and `setLastName` are used to update the state of `firstName` and `lastName` respectively. The `handleClick` function is called when the button is clicked, and it logs the current values of `firstName` and `lastName`.

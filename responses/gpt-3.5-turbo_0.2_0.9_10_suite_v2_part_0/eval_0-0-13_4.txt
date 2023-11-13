@@ -1,4 +1,4 @@
-Yes, you can use an object to store all the values and update them using a single `changeHandler` function. Here's an example:
+Yes, you can use an object to store all the values and update them using a single `changeHandler` function. Here's how you can do it:
 
 ```javascript
 const [allValues, setAllValues] = useState({
@@ -12,7 +12,7 @@ const [allValues, setAllValues] = useState({
 const changeHandler = e => {
    const { name, value } = e.target;
    setAllValues(prevState => ({ ...prevState, [name]: value }));
-}
+};
 
 return (
    <input type="text"
@@ -20,10 +20,13 @@ return (
        id="mobile"
        name="mobile"
        placeholder="Enter a valid mobile number"
+       value={allValues.mobile}
        onChange={changeHandler}
    />
    // ...
 )
 ```
 
-In the `changeHandler` function, we use destructuring to get the `name` and `value` of the input field that triggered the change event. Then, we update the `allValues` state by spreading the previous state and updating the value of the input field using the `name` property as the key.
+In the `changeHandler` function, we use destructuring to get the `name` and `value` of the input field that triggered the change event. We then use the spread operator to create a new object that copies all the previous values of `allValues` and updates the value of the input field that triggered the change event. Finally, we pass this new object to `setAllValues` to update the state.
+
+In the input field, we set the `value` to `allValues.mobile` and pass the `changeHandler` function to the `onChange` event. You can repeat this for all the other input fields, just make sure to update the `name` and `id` attributes accordingly.

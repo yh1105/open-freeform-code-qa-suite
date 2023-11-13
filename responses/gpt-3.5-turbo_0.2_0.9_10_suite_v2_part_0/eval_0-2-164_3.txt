@@ -1,40 +1,25 @@
-The `.attrs()` function in styled components allows you to set default props for a styled component. This means that you can define default values for props that are not explicitly passed to the component.
+The `.attrs()` function in styled components allows you to set default props for a styled component. This means that you can define default values for props that may not be passed in when the component is used.
 
-Here's a simple example:
+For example, let's say you have a button component that you want to use throughout your application. You want to set a default background color for the button, but you also want to allow the user to override this color if they want to. You can use `.attrs()` to set the default background color like this:
 
 ```
 import styled from 'styled-components';
 
-const Button = styled.button.attrs({
-  type: 'button',
-  disabled: false
-})`
-  background-color: ${props => props.disabled ? 'gray' : 'blue'};
+const Button = styled.button.attrs(props => ({
+  backgroundColor: props.backgroundColor || 'blue'
+}))`
+  background-color: ${props => props.backgroundColor};
   color: white;
   padding: 10px;
 `;
 
-<Button>Click me!</Button>
+// Usage:
+<Button /> // Button with default blue background color
+<Button backgroundColor="red" /> // Button with red background color
 ```
 
-In this example, we define a `Button` component that has default props for `type` and `disabled`. If we don't pass these props explicitly when using the `Button` component, it will use the default values.
+In this example, we use `.attrs()` to set the default background color to blue. We then use the `props` object to check if the `backgroundColor` prop has been passed in, and if it hasn't, we use the default value of blue.
 
-The `attrs()` function can also take a function as an argument, which allows you to dynamically set default props based on the props passed to the component. Here's an example:
-
-```
-import styled from 'styled-components';
-
-const Input = styled.input.attrs(props => ({
-  type: props.type || 'text',
-  size: props.size || 'medium'
-}))`
-  border: 1px solid gray;
-  padding: 10px;
-`;
-
-<Input placeholder="Enter your name" />
-```
-
-In this example, we define an `Input` component that has default props for `type` and `size`. If we don't pass these props explicitly when using the `Input` component, it will use the default values. However, if we do pass these props, the default values will be overridden.
+This allows us to use the `Button` component without passing in a `backgroundColor` prop, and it will still have a blue background color. If we want to override the default value, we can pass in a `backgroundColor` prop with the desired color.
 
 I hope this helps!

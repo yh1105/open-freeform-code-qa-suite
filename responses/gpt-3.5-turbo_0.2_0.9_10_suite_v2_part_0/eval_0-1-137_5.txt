@@ -1,18 +1,15 @@
-It looks like you are missing a comma after the value of the "primary" color in your `$theme-colors` map. Try adding a comma after the color value like this:
+The issue is that you are missing a comma after the color value for the "primary" key in your `$theme-colors` map. Here's the corrected code:
 
 ```scss
+@import "../../node_modules/bootstrap/scss/variables";
+
 $theme-colors: (
-  "primary": #0d6efd,
+  "primary": #your-color-here,
 );
+
+@import "../../node_modules/bootstrap/scss/bootstrap";
 ```
 
-Also, make sure that you are using valid CSS color values in your map. If you are using a color variable or function, make sure to evaluate it to a color value before adding it to the map. For example:
+Make sure to replace `#your-color-here` with the actual color value you want to use for the primary color.
 
-```scss
-$my-color: #ff0000;
-$theme-colors: (
-  "primary": $my-color,
-);
-```
-
-If you still encounter issues, try updating your SASS version to the latest version (currently 1.37.5) and recompiling your SCSS file.
+Also, make sure that you are using a valid CSS color value. If you are using a named color, make sure it is spelled correctly. If you are using a hexadecimal color value, make sure it is in the correct format (e.g. `#ff0000` for red).

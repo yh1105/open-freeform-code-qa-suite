@@ -1,12 +1,14 @@
-The issue you're facing might be due to the incorrect usage of the `Switch` component inside the `Form.Item`. The `Switch` component should be wrapped with the `Form.Item` and the `name` prop should be passed to the `Form.Item` to correctly bind the value.
+The code you provided seems to be correct. However, if you're having trouble getting the value from the switch in the `onCreate` function, you might want to ensure that the `onCreate` function is correctly handling the `values` object.
 
-Here's the corrected version of your code:
+The `values` object should contain a key-value pair where the key is the name of the form item and the value is the current value of the form item. In your case, the key should be "switch" and the value should be either `true` or `false`.
 
-```jsx
+Here is the revised version of your code:
+
+```html
 <Form.Item name="switch" valuePropName="checked">
-  <Switch checkedChildren="Yes" unCheckedChildren="No" />
-  <span>Chargable</span>
+    <Switch checkedChildren="Yes" unCheckedChildren="No" />
+    <span>Chargable</span>
 </Form.Item>
 ```
 
-In this code, the `Switch` component is correctly wrapped with the `Form.Item` and the `name` prop is passed to the `Form.Item`. This will ensure that the value of the `Switch` is correctly bound to the form data.
+In your `onCreate` function, you should be able to access the value of the switch with `values.switch`. If `values.switch` is `true`, the switch is checked. If `values.switch` is `false`, the switch is not checked.

@@ -1,12 +1,14 @@
-The error you're encountering is because Bootstrap requires `Popper.js` for the dropdowns and other interactive components to work. 
+The error message you're seeing is because Bootstrap 4 requires `popper.js` for popover and tooltip components. If you're not using these components, you can import Bootstrap without `popper.js`. But if you're using them, you need to install `popper.js`.
 
-You can install `Popper.js` via npm by running the following command in your terminal:
+Here are the steps to fix this issue:
+
+1. Install `popper.js` via npm:
 
 ```bash
 npm install popper.js --save
 ```
 
-After installing `Popper.js`, you need to import it in your file before importing Bootstrap:
+2. After installing `popper.js`, you need to import it in your file before importing Bootstrap:
 
 ```javascript
 import Popper from 'popper.js';
@@ -14,18 +16,19 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
 ```
 
-If you're using Bootstrap 4, you might need to install `@popperjs/core` instead of `popper.js`. You can do this by running:
-
-```bash
-npm install @popperjs/core --save
-```
-
-And then import it in your file:
+3. If you're using Webpack, you can add the following to your Webpack configuration file:
 
 ```javascript
-import { createPopper } from '@popperjs/core';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.min.js';
+plugins: [
+  new webpack.ProvidePlugin({
+    $: 'jquery',
+    jQuery: 'jquery',
+    'window.jQuery': 'jquery',
+    Popper: ['popper.js', 'default'],
+  }),
+]
 ```
 
-Remember to restart your development server after installing the new package.
+This will make `Popper` available to all your modules without having to import it explicitly.
+
+Remember to restart your development server after making these changes.

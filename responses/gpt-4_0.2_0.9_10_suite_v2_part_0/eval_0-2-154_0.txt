@@ -1,30 +1,29 @@
-Sure, here is a generator function that can parse the HTML string and yield objects with the required format:
+Sure, here is a generator function that should do what you want:
 
 ```javascript
-function* iterLeafNodes(strHTML, format = []) {
+function* iterLeafNodes(strHTML, format=[]) {
   const parser = new DOMParser();
-  const doc = parser.parseFromString(strHTML, 'text/html');
-  const stack = [...doc.body.childNodes];
+  const doc = parser.parseFromString(strHTML, "text/html");
+  const body = doc.body;
 
-  while (stack.length) {
-    const node = stack.shift();
-
+  function* walk(node, format) {
     if (node.nodeType === Node.TEXT_NODE) {
       if (node.textContent.trim() !== '') {
-        yield {
-          text: node.textContent,
-          format: format.slice()
-        };
+        yield { text: node.textContent, format };
       }
     } else if (node.nodeType === Node.ELEMENT_NODE) {
-      format.push(node.tagName.toLowerCase());
-      stack.unshift(...Array.from(node.childNodes));
-      continue;
+      const newFormat = format.slice();
+      newFormat.push(node.tagName.toLowerCase());
+      for (const child of node.childNodes) {
+        yield* walk(child, newFormat);
+      }
     }
+  }
 
-    format.pop();
+  for (const child of body.childNodes) {
+    yield* walk(child, format);
   }
 }
 ```
 
-This function uses a depth-first search to traverse the DOM tree. It uses a stack to keep track of the nodes to be processed. When it encounters a text node, it yields an object with the text and the current format. When it encounters an element node, it adds the tag name to the format and adds the child nodes to the stack. After processing a node, it removes the tag name from the format.
+This function uses a recursive approach to walk through the DOM tree. It checks if the current node is a text node, and if it is, it yields an object with the text content and the current format. If the node is an element node, it adds the tag name to the format and recursively walks through its child nodes.

@@ -1,32 +1,29 @@
-You can connect to Heroku Redis using TLS on Node.js by using the `REDIS_TLS_URL` environment variable. This URL contains all the necessary information to connect to the Redis instance, including the host, port, password, and whether to use TLS.
-
-Here's a simple example using the `node_redis` library:
+You should be using `REDIS_TLS_URL` if you want to connect to Heroku Redis using TLS. Here's a simple example of how to do this using `node_redis`:
 
 ```javascript
-const redis = require('redis');
-const url = require('url');
+var redis = require('redis');
+var url = require('url');
 
-let redisURL = url.parse(process.env.REDIS_TLS_URL);
-let client = redis.createClient({
-    port: redisURL.port,
-    host: redisURL.hostname,
-    password: redisURL.auth.split(":")[1],
-    tls: {
-        rejectUnauthorized: false
-    }
-});
+var redisURL = url.parse(process.env.REDIS_TLS_URL);
+var client = redis.createClient(redisURL.port, redisURL.hostname, { no_ready_check: true });
+
+client.auth(redisURL.auth.split(":")[1]);
 
 client.on('connect', function() {
-    console.log('Connected to Redis');
+    console.log('connected to Redis');
 });
 
-client.on('error', function(err) {
-    console.log('Redis error: ' + err);
+client.on('error', function (err) {
+    console.log('Error ' + err);
 });
 ```
 
-In this example, we're parsing the `REDIS_TLS_URL` environment variable to get the host, port, and password. We're also setting `rejectUnauthorized` to `false` in the `tls` options to allow connections to the Redis server even if the server's certificate is not trusted.
+In this example, we're using the `url` module to parse the `REDIS_TLS_URL` environment variable, which should contain the URL of your Heroku Redis instance. We then create a new Redis client using the parsed URL's port and hostname.
 
-Please note that setting `rejectUnauthorized` to `false` is not recommended for production environments as it disables certain security checks. You should only use it for testing purposes or if you're sure that your Redis server's certificate can be trusted.
+The `no_ready_check` option is set to `true` to prevent the client from checking if the server is ready before commands are sent.
 
-Also, make sure that you have the `REDIS_TLS_URL` environment variable set in your Heroku app's settings. You can do this by going to the "Settings" tab of your app in the Heroku dashboard, clicking on "Reveal Config Vars", and then adding a new config var with the name `REDIS_TLS_URL` and the value of your Redis server's TLS URL.
+The `auth` method is used to authenticate with the server using the password from the parsed URL.
+
+Finally, we're setting up a couple of event handlers to log when the client is connected to the server and when an error occurs.
+
+Remember to replace `REDIS_TLS_URL` with your actual Heroku Redis URL.

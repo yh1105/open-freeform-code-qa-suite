@@ -1,14 +1,13 @@
-Sure, you can define your route in NestJS like this:
+Sure, you can use the `*` wildcard in your route to catch all the remaining segments of your URL. Here is the revised route pattern:
 
 ```javascript
-@Get('route/:param1/config/:OptionalParam2?/:OptionalParam3?')
-async function getRoute(
-  @Param('param1') param1: string,
-  @Param('OptionalParam2') OptionalParam2?: string,
-  @Param('OptionalParam3') OptionalParam3?: string,
-) {
-  // Your code here
-}
+/route/:param1/config/:OptionalParam2?/:OptionalParam3*
 ```
 
-In this code, `:OptionalParam2?` and `:OptionalParam3?` are optional parameters. The `?` at the end of the parameter name indicates that the parameter is optional. If the parameter is not provided in the URL, its value will be `undefined`.
+This route will match:
+
+- `route/aa/config`
+- `route/aa/config/bb`
+- `route/aa/config/bb/cc`
+
+Please note that `OptionalParam3*` will catch everything after `OptionalParam2`, including slashes, so you will need to parse it manually if you want to get individual segments.

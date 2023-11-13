@@ -1,4 +1,4 @@
-Yes, you can use the `first` and `last` pseudo-class variants in Tailwind to achieve this. Here's the revised code:
+Yes, Tailwind CSS has first and last pseudo-class variants that can be used to target the first and last elements of a list. Here's how you can modify your code to add a border-bottom to all the `li` elements except the last one:
 
 ```html
 <ul>
@@ -12,6 +12,6 @@ Yes, you can use the `first` and `last` pseudo-class variants in Tailwind to ach
 </ul>
 ```
 
-In the `class` attribute of the `li` element, we're using the `pb-4` class to add a bottom padding to all the `li` elements except the last one. We're using the ternary operator to conditionally apply this class based on whether the current `li` element is the last one or not.
+In the above code, we have added a conditional class `pb-4` to all the `li` elements except the last one. `pb-4` adds a padding-bottom of 1rem to the element, which will create a space between the border-bottom of the current `li` element and the top of the next `li` element. 
 
-Note that we're also removing the `border-b` class from the last `li` element by not applying any classes to it. This is because we don't want a border-bottom on the last element.
+The conditional class is added using the ternary operator, which checks if the current element is the last element in the `items` array. If it is the last element, an empty string is added as the class, which means no padding will be added. If it is not the last element, `pb-4` is added as the class, which will add the required padding.

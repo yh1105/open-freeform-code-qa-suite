@@ -1,23 +1,29 @@
-You can use the `CssBaseline` component from Material-UI to apply a baseline CSS for the whole application. This component can help you to set the background color of the root element dynamically.
+You can use the `CssBaseline` component from Material-UI to set the background color of the root element dynamically. 
 
-Here is an example of how you can use it:
+`CssBaseline` is a component in Material-UI that provides an HTML5-ready alternative to CSS's traditional normalize. It sets up a baseline CSS for your application that helps to maintain consistency across different browsers. 
+
+Here's an example of how you can use it:
 
 ```jsx
 import React from 'react';
-import { ThemeProvider, createMuiTheme, CssBaseline } from '@material-ui/core';
+import { createMuiTheme, ThemeProvider, CssBaseline } from '@material-ui/core';
 
 const lightTheme = createMuiTheme({
   palette: {
     type: 'light',
-    // other options
-  },
+    background: {
+      default: '#fff' // your light background color here
+    }
+  }
 });
 
 const darkTheme = createMuiTheme({
   palette: {
     type: 'dark',
-    // other options
-  },
+    background: {
+      default: '#000' // your dark background color here
+    }
+  }
 });
 
 function App() {
@@ -28,7 +34,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      {/* other components */}
+      {/* your other components */}
     </ThemeProvider>
   );
 }
@@ -36,4 +42,6 @@ function App() {
 export default App;
 ```
 
-In this example, `CssBaseline` will apply the background color defined in the theme to the root element of your application. You can switch between the light and dark theme by changing the `darkMode` state.
+In this example, `CssBaseline` is used inside the `ThemeProvider` to apply the background color to the root element. The color is determined by the current theme, which can be toggled between light and dark. 
+
+Remember to use `palette.background.default` to set the background color, as this is the property that `CssBaseline` uses to style the root element.

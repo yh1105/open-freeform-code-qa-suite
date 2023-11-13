@@ -1,25 +1,9 @@
-Sure, you can define an array of a specific object type like this:
-
-```typescript
-type Product = {
-  name: string;
-  price: number;
-  description: string;
-};
-
-bagTotal = (products: Product[]) => {
-  // function does stuff
-}
-```
-
-In this code, `Product` is a type that represents an object with `name`, `price`, and `description` properties. `Product[]` is an array of `Product` objects. 
-
-If you want to define the type inline without creating a separate `Product` type, you can do it like this:
+In TypeScript, you can define an array of a certain type using the `Array<Type>` syntax or the `Type[]` syntax. In your case, you want an array of objects with certain properties. You can define this inline in your function parameter like so:
 
 ```typescript
 bagTotal = (products: {name: string, price: number, description: string}[]) => {
-  // function does stuff
+ // function does stuff
 }
 ```
 
-In this case, `{name: string, price: number, description: string}[]` is an array of objects, each with `name`, `price`, and `description` properties.
+This tells TypeScript that `products` is an array of objects, where each object has a `name` property of type `string`, a `price` property of type `number`, and a `description` property of type `string`.

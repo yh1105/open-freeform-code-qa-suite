@@ -1,32 +1,71 @@
-You can create a button and an event handler function to get the input field value on button click. Here's how you can modify your code:
+You can create a button and add an `onClick` event to it. When the button is clicked, you can access the state value which holds the input field value. Here is how you can do it:
 
 ```javascript
 import React, { useState } from 'react';
-import { render } from 'react-dom';
 
 export default function InputField({name,label}) {
   const [state, setState] = useState('')
 
   const handleClick = () => {
-    alert(`Input field value: ${state}`);
+    console.log(state); // This will log the input field value
   }
 
   return (
     <div>
-     <label>{label}</label>
-      <input type="text" 
-      value={state} 
-      name={name}
-      onChange={(e) => setState(e.target.value)} />
-
-      <button onClick={handleClick}>Get Value</button>
-
+      <label>{label}</label>
+      <input 
+        type="text" 
+        value={state} 
+        name={name}
+        onChange={(e) => setState(e.target.value)} 
+      />
+      <button onClick={handleClick}>Click me</button>
       {state}
     </div>
   );
 }
 ```
 
-In this code, `handleClick` is a function that gets called when the button is clicked. It alerts the current value of the input field. The `onClick` attribute on the button is used to attach this event handler to the button.
+In the above code, I have added a `handleClick` function which is triggered when the button is clicked. This function logs the current state value which is the value of the input field.
 
-Please replace `alert` with whatever you want to do with the input field value.
+If you want to get the values of multiple input fields (like first name and last name), you can use an object as the state:
+
+```javascript
+import React, { useState } from 'react';
+
+export default function InputField() {
+  const [state, setState] = useState({ firstName: '', lastName: '' })
+
+  const handleChange = (e) => {
+    setState({ ...state, [e.target.name]: e.target.value });
+  }
+
+  const handleClick = () => {
+    console.log(state); // This will log the input field values
+  }
+
+  return (
+    <div>
+      <label>First Name</label>
+      <input 
+        type="text" 
+        value={state.firstName} 
+        name="firstName"
+        onChange={handleChange} 
+      />
+
+      <label>Last Name</label>
+      <input 
+        type="text" 
+        value={state.lastName} 
+        name="lastName"
+        onChange={handleChange} 
+      />
+
+      <button onClick={handleClick}>Click me</button>
+    </div>
+  );
+}
+```
+
+In this code, `state` is an object with `firstName` and `lastName` properties. The `handleChange` function updates the appropriate property in the state when an input field value changes. The `handleClick` function logs the current state which includes the values of both input fields.

@@ -1,7 +1,21 @@
-It seems like the issue is with the `uri` you are using in your `ApolloClient`. The `uri` you are using is a demo server provided by Apollo Client, which may not be working properly at the moment. 
+It seems like you are trying to fetch data from a GraphQL API endpoint that is not available. The `uri` provided in your `ApolloClient` configuration is for a demo endpoint that may not be available all the time.
 
-You should replace the `uri` with the actual GraphQL endpoint of your server. You can check with your backend team to get the correct `uri`. 
+You can try changing the `uri` to a different GraphQL API endpoint that is available and has the schema that matches your query.
 
-For example, if you are using a local server, you can replace the `uri` with `http://localhost:4000/graphql` (assuming your server is running on port 4000). 
+For example, you can try using the following `uri`:
 
-Once you have updated the `uri`, try running the app again and see if it works.
+```
+uri: 'https://countries.trevorblades.com/graphql'
+```
+
+This endpoint has a public GraphQL API with a simple schema that you can use to test your query.
+
+If you still face issues, you can try adding the `networkError` property to your `useQuery` hook to see if there are any network errors:
+
+```javascript
+const { loading, error, data, networkError } = useQuery(EXCHANGE_RATES);
+
+console.log(loading, error, data, networkError);
+```
+
+This will log any network errors that occur during the query.

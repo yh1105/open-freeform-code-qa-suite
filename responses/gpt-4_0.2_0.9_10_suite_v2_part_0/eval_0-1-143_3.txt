@@ -4,18 +4,22 @@ Yes, you can modify the internal CSS of Firefox to adjust the spacing between me
 
 2. In the profile folder, create a new folder named `chrome` if it doesn't exist.
 
-3. Inside the `chrome` folder, create a new file named `userChrome.css`. If the file already exists, you can just edit it.
+3. Inside the `chrome` folder, create a new file named `userChrome.css`. If the file already exists, open it.
 
-4. Open `userChrome.css` with a text editor and paste the following CSS code:
+4. Paste the following CSS code into the `userChrome.css` file:
 
-```css
-/* Reduce Spacing in Menus for Proton UI in Firefox */
-:root {
-  --arrowpanel-menuitem-padding: 4px 8px !important;
-}
-```
+    ```css
+    :root {
+        --proton-toolbar-dense-height: 29px !important;
+        --proton-toolbar-regular-height: 33px !important;
+        --proton-toolbar-touch-height: 37px !important;
+        --proton-menupopup-item-height: 25px !important;
+    }
+    ```
 
-5. Save the file and close it.
+    This code reduces the height of the toolbar and menu items. You can adjust the pixel values to your liking.
+
+5. Save the `userChrome.css` file and close it.
 
 6. Now, you need to enable the usage of this file in Firefox. Type `about:config` in the address bar and press Enter.
 
@@ -23,6 +27,6 @@ Yes, you can modify the internal CSS of Firefox to adjust the spacing between me
 
 8. In the search bar, type `toolkit.legacyUserProfileCustomizations.stylesheets` and set its value to `true` by clicking on the toggle button.
 
-9. Restart Firefox.
+9. Restart Firefox for the changes to take effect.
 
-This CSS code reduces the padding around each menu item, effectively reducing the spacing between them. You can adjust the padding values (4px 8px in this case) to your liking. The first value is for top and bottom padding, and the second value is for left and right padding.
+Please note that modifying internal files can potentially lead to unexpected behavior in Firefox. Always make a backup of your profile folder before making any changes.

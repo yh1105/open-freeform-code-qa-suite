@@ -1,21 +1,32 @@
-If you are receiving a 404 error when deploying your NextJS app to Vercel, it is likely that the issue is related to your routing configuration. Here are some steps you can take to troubleshoot the issue:
+If you are receiving a 404 error when deploying your NextJS app to Vercel, it is likely that there is an issue with your routing configuration. Here are some steps you can take to troubleshoot the issue:
 
-1. Check your `package.json` file to ensure that your `start` script is set to `next start`. This is the command that Vercel will use to start your app.
+1. Check your `package.json` file to ensure that the `start` script is set to `next start`. This is the command that Vercel will use to start your app.
 
 2. Check your `pages` directory to ensure that all of your pages are named correctly and are in the correct location. For example, if you have a page at `/pages/about.js`, make sure that the file is named `about.js` and is located in the `pages` directory.
 
-3. Check your dynamic routes to ensure that they are set up correctly. Dynamic routes in NextJS are defined using square brackets, like this: `/pages/posts/[id].js`. Make sure that your dynamic routes are set up correctly and that any necessary parameters are being passed correctly.
+3. Check your dynamic route to ensure that it is set up correctly. Dynamic routes in NextJS use square brackets to indicate dynamic segments in the URL. For example, if you have a dynamic route for blog posts, the file should be named `[slug].js` and should be located in the `pages` directory.
 
-4. If you are using any custom server-side code, make sure that it is compatible with Vercel's serverless architecture. Vercel does not support custom server-side code that requires a dedicated server.
+4. If you are using any custom server-side code, make sure that it is compatible with Vercel's deployment environment. Vercel uses a serverless architecture, so any server-side code should be written in a way that is compatible with this architecture.
 
-5. If none of the above steps resolve the issue, try creating a `next.config.js` file in the root of your project and adding the following code:
+5. Check your Vercel deployment logs for any error messages that might indicate the cause of the issue. You can view the deployment logs by clicking on the "Logs" button in the Vercel dashboard.
+
+If none of these steps resolve the issue, you may need to create a `next.config.js` file to configure your routing. Here is an example configuration that you can use:
 
 ```
 module.exports = {
-  target: "serverless",
-};
+  async rewrites() {
+    return [
+      {
+        source: '/api/:path*',
+        destination: 'https://example.com/api/:path*',
+      },
+      {
+        source: '/:path*',
+        destination: '/:path*.html',
+      },
+    ]
+  },
+}
 ```
 
-This will ensure that your app is built with Vercel's serverless architecture in mind.
-
-I hope this helps! Let me know if you have any further questions.
+This configuration sets up rewrites for an API route and for all other routes to add a `.html` extension to the URL. You can customize this configuration to fit your specific needs.

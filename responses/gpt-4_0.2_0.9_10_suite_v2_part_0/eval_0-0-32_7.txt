@@ -1,4 +1,4 @@
-You can use the `react-intersection-observer` package from npm to detect when an element is in the viewport. This package uses the Intersection Observer API to tell you when an element enters or leaves the viewport.
+You can use the `react-intersection-observer` npm package to achieve this. This package provides a set of React components and hooks to connect your project with the Intersection Observer API.
 
 First, install the package using npm:
 
@@ -6,28 +6,24 @@ First, install the package using npm:
 npm install react-intersection-observer
 ```
 
-Then, you can use the `useInView` hook from the package in your component:
+Then, you can use the `useInView` hook from `react-intersection-observer` to track the visibility of each div. Here's an example of how you can use it:
 
 ```javascript
 import React from 'react';
 import { useInView } from 'react-intersection-observer';
 
-const MyComponent = () => {
-  const [ref, inView] = useInView({
-    triggerOnce: false, // Change this to true if you want the event to be triggered only once
-  });
-
+const MyComponent = ({ data }) => {
   return (
     <div id="parent">
       {data.map(item => {
-        const [refItem, inViewItem] = useInView({
-          triggerOnce: false,
+        const { ref, inView } = useInView({
+          triggerOnce: false, // Change this to true if you want the event to trigger only once
         });
 
         return (
-          <div ref={refItem} id={item.id}>
-            {inViewItem ? 'In viewport' : 'Not in viewport'}
-            {data.title}
+          <div id={item.id} ref={ref}>
+            {inView ? 'In viewport' : 'Not in viewport'}
+            {item.title}
           </div>
         );
       })}
@@ -38,6 +34,6 @@ const MyComponent = () => {
 export default MyComponent;
 ```
 
-In this code, `useInView` returns a `ref` and a boolean `inView`. You attach the `ref` to the element you want to observe, and `inView` will be `true` when the element is in the viewport and `false` when it's not.
+In this example, `useInView` returns an object containing `ref` and `inView`. You assign `ref` to the `ref` prop of the div, and `inView` will be a boolean indicating whether the div is in the viewport or not.
 
-Please note that the Intersection Observer API is not supported in all browsers. You can check the current browser support on Can I use. If you need to support a browser that doesn't have native support, you can use a polyfill. The `react-intersection-observer` package recommends the `intersection-observer` polyfill.
+Please note that the Intersection Observer API is not supported in all browsers. You may need to use a polyfill for unsupported browsers.

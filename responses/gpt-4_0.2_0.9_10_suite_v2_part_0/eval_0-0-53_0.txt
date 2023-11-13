@@ -1,6 +1,6 @@
-The issue with your code is that you're mixing JavaScript and React event handling. In React, you should use the `onClick` prop to handle click events, not the `onclick` attribute you'd use in regular JavaScript. Also, you don't need to define a script tag inside your component's render method.
+The issue is that you're mixing JavaScript and React event handling. In React, you should use the `onClick` prop to handle click events, not the `onclick` attribute. Also, you don't need to define a new function inside the `render` method. You can define `myFunction` as a method in the component and call it in the `onClick` prop.
 
-Here's the corrected version of your code:
+Here's the revised version of your code:
 
 ```javascript
 import React, { Component } from 'react'
@@ -15,6 +15,7 @@ class Main extends React.Component {
     };
 
     this.handleUploadImage = this.handleUploadImage.bind(this);
+    this.myFunction = this.myFunction.bind(this);
   }
 
   handleUploadImage(ev) {
@@ -32,8 +33,10 @@ class Main extends React.Component {
         this.setState({ imageURL: `http://localhost:8000/${body.file}` });
       });
     });
+  }
 
-    alert("Your file is being uploaded!");
+  myFunction() {
+    alert("Your file is being uploaded!")
   }
 
   render() {
@@ -47,7 +50,7 @@ class Main extends React.Component {
         </div>
         <br />
         <div>
-          <button type="submit">Upload</button>
+          <button onClick={this.myFunction}>Upload</button>
         </div>
         <img src={this.state.imageURL} alt="img" />
       </form>
@@ -58,4 +61,4 @@ class Main extends React.Component {
 export default Main;
 ```
 
-In this version, the alert is triggered when the form is submitted, which is when the `handleUploadImage` function is called. The `onClick` prop is not needed because the form's `onSubmit` prop is handling the event.
+In this code, I've defined `myFunction` as a method in the `Main` component and bound it to `this` in the constructor. Then, I've used the `onClick` prop to call `myFunction` when the button is clicked.

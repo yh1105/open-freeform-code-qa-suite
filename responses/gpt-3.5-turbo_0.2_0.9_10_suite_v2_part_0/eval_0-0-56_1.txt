@@ -1,19 +1,11 @@
-It seems that the issue is related to the way you are running the Vite server inside the Docker container. By default, Vite binds to `localhost` which means that it can only be accessed from within the container itself. To make it accessible from outside the container, you need to bind it to `0.0.0.0` which will make it listen on all available network interfaces.
+It looks like the issue might be with the way you're running the container. Specifically, you're using `docker-compose run` instead of `docker-compose up`. 
 
-To do this, you can modify the `server.host` option in your `vite.config.ts` file like this:
+The `run` command is used to run a one-off command in a container, whereas `up` is used to start the containers defined in your `docker-compose.yml` file. When you use `run`, it creates a new container each time, which means that the ports you've exposed in your `docker-compose.yml` file won't be available.
 
-```typescript
-export default defineConfig({
-  // ...
-  server: {
-    port: 8080,
-    host: '0.0.0.0'
-  }
-})
+To fix this, try using `docker-compose up` instead:
+
+```bash
+docker-compose up --build
 ```
 
-This will make the Vite server accessible from outside the container.
-
-Also, make sure that the Docker container is running and that the port is correctly mapped. You can check this by running `docker ps` and looking for the container that is running your app. The output should show that the container is listening on port `8080`.
-
-If you still can't access the Vite server from outside the container, you may need to check your firewall settings to make sure that the port is not blocked.
+This will start the containers defined in your `docker-compose.yml` file and build any images that need to be built. Once the containers are running, you should be able to access your app at `localhost:8080`.

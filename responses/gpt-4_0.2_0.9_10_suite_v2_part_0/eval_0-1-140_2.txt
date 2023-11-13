@@ -1,16 +1,22 @@
-In Font Awesome 5, the way to use icons in CSS has changed slightly. You need to specify the style of the icon you want to use in the `font-family` property. The styles can be `Font Awesome 5 Free`, `Font Awesome 5 Brands`, or `Font Awesome 5 Pro`. 
+Font Awesome 5 has changed a bit in how it's used compared to Font Awesome 4. The `font-family` is now separated into three different families: `Font Awesome 5 Free`, `Font Awesome 5 Brands`, and `Font Awesome 5 Pro`. The `content` values have also changed for some icons.
 
-Also, the `font-weight` property is now used to determine whether the icon is solid (`900`), regular (`400`), or light (`300`). 
+The `f107` content value corresponds to the `angle-down` icon in Font Awesome 4. In Font Awesome 5, the `angle-down` icon is still represented by `f107`, but you need to use the correct `font-family`.
 
-Here's how you can modify your CSS to work with Font Awesome 5:
+Here is how you can update your CSS for Font Awesome 5:
 
 ```css
 #mainNav .navbar-collapse .navbar-sidenav .nav-link-collapse:after {
   float: right;
   content: "\f107";
-  font-family: "Font Awesome 5 Free"; /* Change this to the style you want */
-  font-weight: 900; /* Add this line. Change the value to 400 for regular, 300 for light */
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900; /* Use this for solid icons (fas), for regular (far) use 400, for light (fal) use 300 */
 }
 ```
 
-Please note that the unicode `\f107` corresponds to the "angle-down" icon in Font Awesome. If you want to use a different icon, you need to look up its unicode in the Font Awesome 5 documentation.
+Remember to include the Font Awesome 5 CSS in your project:
+
+```html
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
+```
+
+Also, make sure that you are using the correct version of Font Awesome 5, as the `content` values can change between versions.

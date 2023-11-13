@@ -1,35 +1,20 @@
-Tailwind CSS is a utility-first CSS framework that provides low-level utility classes to build custom designs. It doesn't directly support child selectors or any other complex CSS selectors as it's not a preprocessor like SASS or LESS. 
+In Tailwind CSS, you don't directly select elements like you do in traditional CSS. Instead, you apply utility classes directly to the elements you want to style. 
 
-However, you can use Tailwind CSS with PostCSS (a tool for transforming CSS with JavaScript), and you can use it to add a plugin like `postcss-nested` to enable support for nested rules, like child selectors.
+So, if you want to style the direct children of a `div` with class "section", you would apply the styles directly to those child `div` elements in your HTML.
 
-Here's an example of how you might set this up:
+Here's an example:
 
-1. Install `postcss-nested`:
-
-```bash
-npm install postcss-nested
+```html
+<div class="section">
+  <div class="bg-red-500"> <!-- Apply your styles here -->
+    <!-- Content -->
+  </div>
+  <div class="text-blue-500"> <!-- Apply your styles here -->
+    <!-- Content -->
+  </div>
+</div>
 ```
 
-2. Then, in your `postcss.config.js`, add `postcss-nested`:
+In this example, `bg-red-500` and `text-blue-500` are Tailwind CSS utility classes that apply specific styles. You would replace these with whatever styles you want to apply to the direct children of your `.section` div.
 
-```javascript
-module.exports = {
-  plugins: [
-    require('tailwindcss'),
-    require('postcss-nested'),
-    require('autoprefixer'),
-  ]
-}
-```
-
-3. Now, you can use child selectors in your CSS:
-
-```css
-div.section > div {
-  @apply bg-red-500;
-}
-```
-
-In this example, direct children `div` of `div` with class `section` will have a red background.
-
-Remember, Tailwind CSS is designed to be used directly in your HTML or JSX files, not in your CSS files. The `@apply` directive is useful for extracting component classes, but it's not recommended to build entire layouts or pages with it.
+If you want to apply the same styles to all direct children, you would need to add the same classes to each child. If you have a lot of direct children and don't want to add the classes to each one, you might want to consider using a preprocessor like PostCSS or Sass, which can help you automate this.

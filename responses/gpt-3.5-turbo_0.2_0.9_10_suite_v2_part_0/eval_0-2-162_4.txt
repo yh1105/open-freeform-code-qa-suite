@@ -1,4 +1,6 @@
-You can change the background color dynamically on scroll by using the `scroll` event and setting the `style.backgroundColor` property of the element. Here's the completed code:
+You can change the background color dynamically on scroll by using the `scroll` event and setting the `style.backgroundColor` property of the desired element. 
+
+Here's the completed code:
 
 ```javascript
 const [red, green, blue] = [69, 111, 225]

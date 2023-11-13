@@ -1,39 +1,48 @@
-Yes, you can achieve this by using `ref` to create a reference to the form in the `CustomForm` component, and then passing that reference to the `App` component as a prop. Here's how you can modify your code to accomplish this:
+Yes, you can achieve this by using refs in React. Here's how you can modify your code to accomplish this:
 
 ```javascript
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 
 class CustomForm extends Component {
-  formRef = React.createRef(); // create a reference to the form
+  handleSubmit = (event) => {
+    event.preventDefault();
+    alert('Form submitted!');
+  }
 
   render() {
     return (
-      <form ref={this.formRef}>
+      <form id='my-form' onSubmit={this.handleSubmit}>
         <button type='submit'>Inside Custom</button>
       </form>
     );
   }
 }
 
-function App() {
-  const formRef = React.createRef(); // create a reference to the form in App
+class App extends Component {
+  customFormRef = React.createRef();
 
-  const handleSubmit = (event) => {
+  handleSubmit = (event) => {
     event.preventDefault();
-    formRef.current.submit(); // submit the form using the reference
-  };
+    this.customFormRef.current.handleSubmit(event);
+  }
 
-  return (
-    <div>
-      <CustomForm ref={formRef} />
-      <button onClick={handleSubmit}>In Root</button>
-    </div>
-  );
+  render() {
+    return (
+      <div>
+        <CustomForm ref={this.customFormRef} />
+        <button onClick={this.handleSubmit}>In Root</button>
+      </div>
+    );
+  }
 }
 
 const rootElement = document.getElementById("root");
 ReactDOM.render(<App />, rootElement);
 ```
 
-In this modified code, we create a reference to the form in the `CustomForm` component using `React.createRef()`, and then pass that reference to the `App` component as a prop. In the `App` component, we create a reference to the form using `React.createRef()`, and then define a `handleSubmit` function that prevents the default form submission behavior and submits the form using the reference. Finally, we render the `CustomForm` component with the reference passed as a prop, and render the 'In Root' button with an `onClick` handler that calls the `handleSubmit` function.
+In this modified code, we create a ref using `React.createRef()` in the `App` component and pass it to the `CustomForm` component using the `ref` prop. We also define a `handleSubmit` method in the `App` component that calls the `handleSubmit` method in the `CustomForm` component using the ref.
+
+Then, we modify the 'In Root' button to call the `handleSubmit` method in the `App` component when clicked. This will trigger the `handleSubmit` method in the `CustomForm` component and submit the form.
+
+Note that we also define the `handleSubmit` method in the `CustomForm` component to prevent the default form submission behavior and display an alert instead.

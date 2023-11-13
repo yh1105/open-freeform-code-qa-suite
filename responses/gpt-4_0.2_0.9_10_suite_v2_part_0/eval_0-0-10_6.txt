@@ -14,6 +14,6 @@ cy.get(".ibxudA").find('.WildnessText-kRKTej').invoke('text').then((text) => {
 });
 ```
 
-In the first way, we are using `.should('have.text', "Wildness")` to assert that the text of the selected element is "Wildness".
+In the first way, we are using the `should` function to assert that the text of the selected element is "Wildness".
 
-In the second way, we are using `.invoke('text')` to get the text of the selected element, and then using the `expect` function from Chai.js to assert that the trimmed text is equal to "Wildness".
+In the second way, we are using the `invoke` function to get the text of the selected element, then using the `then` function to handle the returned Promise. Inside the `then` function, we are using `expect` to assert that the trimmed text is "Wildness".

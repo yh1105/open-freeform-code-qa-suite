@@ -15,7 +15,7 @@ const changeHandler = e => {
       ...prevState,
       [name]: value
    }));
-}
+};
 
 return (
    <input type="text"
@@ -23,10 +23,11 @@ return (
        id="mobile"
        name="mobile"
        placeholder="Enter a valid mobile number"
+       value={allValues.mobile}
        onChange={changeHandler}
    />
    // ...
 )
 ```
 
-In the `changeHandler` function, we destructure the `name` and `value` properties from the `e.target` object. Then, we use the spread operator to create a copy of the previous state of `allValues` and update the property with the corresponding `name` using the `value` from the input. Finally, we pass the updated object to the `setAllValues` function to update the state.
+In the `changeHandler` function, we use destructuring to get the `name` and `value` of the input field that triggered the change event. Then, we update the `allValues` object using the previous state and the new `name` and `value` using the spread operator and computed property names. Finally, we pass the `value` of the input field and the `changeHandler` function to the input element.

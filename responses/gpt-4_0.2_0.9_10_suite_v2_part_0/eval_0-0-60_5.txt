@@ -1,41 +1,47 @@
-The error you're encountering is because Bootstrap requires `Popper.js` for the tooltips, popovers, and dropdowns to function properly. 
+The error you're encountering is because Bootstrap requires `popper.js` for tooltips, popovers, and dropdowns. You need to install it as a project dependency.
 
-Here are the steps to fix this issue:
+You can install `popper.js` using npm or yarn:
 
-1. Install `Popper.js` using npm:
+**npm:**
 
 ```bash
-npm install --save popper.js
+npm install popper.js --save
 ```
 
-2. After installing `Popper.js`, you need to import it in your project. If you're using ES6 modules or TypeScript, you can import it like so:
+**yarn:**
+
+```bash
+yarn add popper.js
+```
+
+After installing `popper.js`, you need to import it in your file before importing Bootstrap:
 
 ```javascript
 import Popper from 'popper.js';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.min.js';
 ```
 
-Or, if you're using CommonJS modules:
+If you're using Bootstrap 5, you should know that they've replaced `popper.js` with `@popperjs/core`. So if you're using Bootstrap 5, you should install `@popperjs/core` instead:
+
+**npm:**
+
+```bash
+npm install @popperjs/core --save
+```
+
+**yarn:**
+
+```bash
+yarn add @popperjs/core
+```
+
+And then import it:
 
 ```javascript
-const Popper = require('popper.js');
+import { createPopper } from '@popperjs/core';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.min.js';
 ```
 
-3. Now, you should be able to import Bootstrap's JavaScript without any issues:
-
-```javascript
-import 'bootstrap';
-```
-
-Remember, the order of imports is important. Make sure to import `Popper.js` before importing Bootstrap's JavaScript.
-
-If you're using a bundler like Webpack, you might need to add an alias to your configuration:
-
-```javascript
-resolve: {
-  alias: {
-    'popper.js': path.resolve(__dirname, 'node_modules/popper.js'),
-  },
-}
-```
-
-This tells Webpack to always use the version of `Popper.js` that you've installed in your `node_modules` directory, even if other dependencies might have their own versions of `Popper.js`.
+Remember to restart your development server after installing new dependencies.

@@ -1,34 +1,58 @@
-Sure, you can create a function that will be called on button click and will get the values of the input fields. Here's an example:
+To get the input field value on button click in React, you can create a state for each input field and update the state on input change. Then, you can pass the state values as props to the parent component and handle the button click event in the parent component to get the values.
+
+Here's an example of how you can modify your `InputField` component to achieve this:
 
 ```javascript
-import React, { Component, useState } from 'react';
-import { render } from 'react-dom';
+import React, { useState } from 'react';
 
-export default function InputField({name,label}) {
-  const [firstName, setFirstName] = useState('')
-  const [lastName, setLastName] = useState('')
+export default function InputField({ name, label, onButtonClick }) {
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
 
-  const handleClick = () => {
-    console.log(`First Name: ${firstName}, Last Name: ${lastName}`)
-  }
+  const handleButtonClick = () => {
+    onButtonClick(firstName, lastName);
+  };
 
   return (
     <div>
-     <label>{label}</label>
-      <input type="text" 
-      value={firstName} 
-      name="firstName"
-      onChange={(e) => setFirstName(e.target.value)} />
-
-      <input type="text" 
-      value={lastName} 
-      name="lastName"
-      onChange={(e) => setLastName(e.target.value)} />
-
-      <button onClick={handleClick}>Submit</button>
+      <label>{label}</label>
+      <input
+        type="text"
+        value={firstName}
+        name={`${name}-firstName`}
+        onChange={(e) => setFirstName(e.target.value)}
+      />
+      <input
+        type="text"
+        value={lastName}
+        name={`${name}-lastName`}
+        onChange={(e) => setLastName(e.target.value)}
+      />
+      <button onClick={handleButtonClick}>Submit</button>
     </div>
   );
 }
 ```
 
-In this example, we have created two state variables `firstName` and `lastName` to store the values of the input fields. We have also created a function `handleClick` that will be called on button click. Inside this function, we are logging the values of the input fields to the console. Finally, we have added a button with `onClick` event that will call the `handleClick` function.
+In this modified component, we have created two state variables `firstName` and `lastName` to store the input field values. We have also added a `handleButtonClick` function that calls the `onButtonClick` prop function with the `firstName` and `lastName` values as arguments.
+
+In the parent component where you are using the `InputField` component, you can pass a function as the `onButtonClick` prop to handle the button click event and get the input field values. Here's an example:
+
+```javascript
+import React from 'react';
+import InputField from './InputField';
+
+export default function ParentComponent() {
+  const handleButtonClick = (firstName, lastName) => {
+    console.log(`First Name: ${firstName}, Last Name: ${lastName}`);
+  };
+
+  return (
+    <div>
+      <InputField name="name" label="Name" onButtonClick={handleButtonClick} />
+    </div>
+  );
+}
+```
+
+In this example, we have passed the `handleButtonClick` function as the `onButtonClick` prop to the `InputField` component. When the button is clicked, this function will be called with the `firstName` and `lastName` values as arguments, which we can then use to perform any

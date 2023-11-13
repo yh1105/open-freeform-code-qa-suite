@@ -1,4 +1,4 @@
-Sure, here's the implementation code for `test(b, func)` function:
+Sure! Here's the implementation code for the `test` function:
 
 ```javascript
 function test(b, func) {
@@ -6,4 +6,4 @@ function test(b, func) {
 }
 ```
 
-This function checks if `b` is not nullish by explicitly comparing it to both `null` and `undefined`. If `b` is not nullish, it simply returns `b`. Otherwise, it calls `func(b)` and returns its result.
+This function checks if `b` is not nullish using the strict inequality operator `!==` with both `null` and `undefined`. If `b` is not nullish, it simply returns `b`. Otherwise, it calls `func(b)` and returns the result.

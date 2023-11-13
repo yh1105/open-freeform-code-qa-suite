@@ -1,34 +1,35 @@
-The issue you're experiencing is due to a conflict between the Node.js and npm versions installed in your WSL2 Ubuntu and those installed in your Windows system. The `whereis` command shows that the system is trying to run npm from the Windows directory (`/mnt/c/Program Files/nodejs/npm`), which is not compatible with the Linux environment.
+The error message you're seeing is due to a conflict between the Windows and WSL versions of Node.js and npm. The Windows version of npm is being called instead of the WSL version, and because the Windows version is a DOS program, it can't be run directly in WSL.
 
-To resolve this issue, you need to remove the Windows PATH from the WSL environment. Here are the steps:
+You can solve this problem by adding the following lines to your `.bashrc` or `.zshrc` file:
 
-1. Open your bash profile file. If you're using bash, it's usually `~/.bashrc`. If you're using zsh, it's `~/.zshrc`. You can open it with a text editor like vim or nano:
+```bash
+export PATH="/usr/bin:$PATH"
+```
 
-   ```bash
-   nano ~/.bashrc
-   ```
+This line will ensure that the WSL versions of Node.js and npm are found first when you type `node` or `npm`.
 
-2. Add the following line at the end of the file:
+After adding this line, you need to source your `.bashrc` or `.zshrc` file to apply the changes:
 
-   ```bash
-   export PATH="$HOME/.local/bin:$HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin"
-   ```
+```bash
+source ~/.bashrc
+```
 
-   This line sets the PATH to only include directories within the WSL environment, excluding the Windows directories.
+or
 
-3. Save the file and exit the editor. If you're using nano, you can do this by pressing `Ctrl+X`, then `Y` to confirm, and then `Enter`.
+```bash
+source ~/.zshrc
+```
 
-4. Reload your bash profile:
+Now, when you type `node -v` or `npm -v`, you should see the versions of Node.js and npm that you installed in WSL.
 
-   ```bash
-   source ~/.bashrc
-   ```
+If you still face the issue, you might need to reinstall `npm` using the following command:
 
-5. Now, check the versions of Node.js and npm again:
+```bash
+sudo apt-get install -y npm
+```
 
-   ```bash
-   node -v
-   npm -v
-   ```
+And then check the version again:
 
-You should now see the correct versions that you installed in your WSL2 Ubuntu environment.
+```bash
+npm -v
+```

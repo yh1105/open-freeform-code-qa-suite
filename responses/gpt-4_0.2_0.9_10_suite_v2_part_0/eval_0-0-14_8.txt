@@ -1,10 +1,16 @@
-Sure, you need to wrap the `Switch` component with the `Form.Item` component and give it a `name` prop. This way, the form will be able to track the value of the switch. Here is the revised code:
+Sure, you can use the `onChange` event of the `Switch` component to update the value of the form field. Here is how you can do it:
 
 ```jsx
-<Form.Item name="switch" valuePropName="checked" noStyle>
-  <Switch checkedChildren="Yes" unCheckedChildren="No" />
+<Form.Item name="switch" valuePropName="checked">
+  <Switch 
+    checkedChildren="Yes" 
+    unCheckedChildren="No" 
+    onChange={(checked) => {
+      form.setFieldsValue({ switch: checked });
+    }}
+  />
   <span>Chargable</span>
 </Form.Item>
 ```
 
-This way, the `Switch` component is now a part of the form and its value will be included when the form values are collected.
+In this code, whenever the switch is toggled, the `onChange` event is triggered, and the new value of the switch is set in the form field named "switch".

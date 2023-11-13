@@ -1,6 +1,6 @@
-You can use the `CssBaseline` component from Material-UI to set the background color of the root element dynamically. The `CssBaseline` component is a modern, consistent reset for an array of browsers. It also provides an API to set global CSS properties such as the background color.
+You can use the `CssBaseline` component from Material-UI to apply a baseline CSS for your application and to normalize styles. This component can also help you to set the background color for the root element of your application.
 
-Here's an example of how you can use it:
+Here's a simple example of how you can use it:
 
 ```jsx
 import React from 'react';
@@ -10,7 +10,7 @@ const lightTheme = createMuiTheme({
   palette: {
     type: 'light',
     background: {
-      default: '#fff' // light background color
+      default: '#fff' // your light background color
     }
   }
 });
@@ -19,12 +19,12 @@ const darkTheme = createMuiTheme({
   palette: {
     type: 'dark',
     background: {
-      default: '#000' // dark background color
+      default: '#000' // your dark background color
     }
   }
 });
 
-export default function App() {
+function App() {
   const [theme, setTheme] = React.useState(lightTheme);
 
   const toggleTheme = () => {
@@ -34,11 +34,13 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      {/* Your other components */}
+      {/* Your application */}
       <button onClick={toggleTheme}>Toggle theme</button>
     </ThemeProvider>
   );
 }
+
+export default App;
 ```
 
-In this example, the `ThemeProvider` component is used to pass the theme down the React component tree. The `CssBaseline` component is used to apply the background color to the root element. The `toggleTheme` function is used to switch between the light and dark themes.
+In this example, `CssBaseline` will apply the background color specified in the theme to the root element of your application. The `toggleTheme` function allows you to switch between the light and dark themes.

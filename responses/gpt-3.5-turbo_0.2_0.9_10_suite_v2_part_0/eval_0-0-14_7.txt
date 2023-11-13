@@ -1,4 +1,6 @@
-To get the value of the switch in the `onCreate` function, you need to add `switch` to the `values` object that is passed to the function. Here's the revised code:
+To get the value of the switch in the `onCreate` function, you need to add the `name` attribute to the `Switch` component and set it to `"chargable"` (or any other name you prefer). Then, you can access the value of the switch using `values.chargable` in the `onCreate` function.
+
+Here's the revised code:
 
 ```html
 <Form form={form} layout="vertical">
@@ -10,8 +12,8 @@ To get the value of the switch in the `onCreate` function, you need to add `swit
     <Input placeholder="Enter Description" />
   </Form.Item>
 
-  <Form.Item name="switch" valuePropName="checked">
-    <Switch checkedChildren="Yes" unCheckedChildren="No" />
+  <Form.Item name="chargable" noStyle valuePropName="checked">
+    <Switch checkedChildren="Yes" unCheckedChildren="No" name="chargable" />
     <span>Chargable</span>
   </Form.Item>
 
@@ -21,7 +23,7 @@ To get the value of the switch in the `onCreate` function, you need to add `swit
         .validateFields()
         .then((values) => {
           form.resetFields()
-          onCreate({ ...values, switch: values.switch ? "Yes" : "No" })
+          onCreate(values)
         })
         .catch((info) => {
           console.log('Validate Failed:', info)
@@ -31,6 +33,6 @@ To get the value of the switch in the `onCreate` function, you need to add `swit
     Save
   </Button>
 </Form>
-```
+``` 
 
-In the `onCreate` function, we spread the `values` object and add a new property `switch` to it. The value of `switch` is set to `"Yes"` if it is checked and `"No"` if it is unchecked.
+In the `onCreate` function, you can access the value of the switch using `values.chargable`.

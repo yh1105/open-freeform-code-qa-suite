@@ -1,4 +1,4 @@
-Sure, you can define an inline type for the `products` parameter like this:
+Sure, you can define an inline type for your `products` array like this:
 
 ```typescript
 bagTotal = (products: {name: string, price: number, description: string}[]) => {
@@ -6,4 +6,4 @@ bagTotal = (products: {name: string, price: number, description: string}[]) => {
 }
 ```
 
-This means `products` is an array of objects, where each object has a `name` property of type `string`, a `price` property of type `number`, and a `description` property of type `string`.
+This tells TypeScript that `products` is an array of objects, where each object has a `name` property of type `string`, a `price` property of type `number`, and a `description` property of type `string`.

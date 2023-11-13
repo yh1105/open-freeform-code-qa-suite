@@ -1,19 +1,14 @@
-The issue might be related to the fact that the GraphQL server you are trying to query is not accessible from your React Native app. 
+It seems like the issue is with the `uri` provided in the `ApolloClient` configuration. The `uri` you are using is for a demo server provided by Apollo, which may not be working properly at the moment.
 
-You are using the `https://48p1r2roz4.sse.codesandbox.io` endpoint, which is a public endpoint provided by Apollo Client for testing purposes. However, this endpoint might not be accessible from your local environment due to network restrictions.
-
-To test if this is the issue, you can try using a different GraphQL endpoint that is accessible from your local environment. For example, you can use the GraphQL API provided by GitHub:
+You should replace the `uri` with the endpoint of your GraphQL server. For example:
 
 ```javascript
 const apolloClient = new ApolloClient({
-    uri: 'https://api.github.com/graphql',
-    headers: {
-        Authorization: `Bearer YOUR_GITHUB_TOKEN`,
-    },
+    uri: 'https://my-graphql-server.com/graphql',
     cache: new InMemoryCache(),
 });
 ```
 
-Make sure to replace `YOUR_GITHUB_TOKEN` with a valid GitHub personal access token that has the `read:user` scope.
+Make sure to replace `https://my-graphql-server.com/graphql` with the actual endpoint of your GraphQL server.
 
-If this works, then the issue is related to the accessibility of the original GraphQL endpoint. You might need to configure your network settings or use a different endpoint that is accessible from your environment.
+If you don't have a GraphQL server set up yet, you can follow the instructions in the Apollo Client documentation to set up a server and use it with your client.

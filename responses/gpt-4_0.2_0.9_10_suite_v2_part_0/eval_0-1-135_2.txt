@@ -1,8 +1,8 @@
-Yes, there is a known issue with Safari and flexbox where images with `height: auto` can be stretched. This is because Safari calculates the height before it applies the aspect ratio of the image.
+Yes, there is a known issue with Safari and flexbox where images don't respect the `height: auto` rule. This is because Safari has a different interpretation of the flexbox specification.
 
-To fix this, you can use `align-self: flex-start` on the image. This will align the image to the start of the cross axis, preventing it from stretching.
+To fix this issue, you can set `align-self: flex-start` to the image. This will align the image at the start of the cross axis, and it will no longer stretch to fill the container.
 
-Here is the updated CSS:
+Here's the updated CSS:
 
 ```css
 .container {
@@ -22,4 +22,4 @@ Here is the updated CSS:
 }
 ```
 
-This should ensure that your images are not stretched in Safari.
+This should make the image respect the `height: auto` rule in Safari.

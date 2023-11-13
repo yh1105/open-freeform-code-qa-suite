@@ -1,17 +1,17 @@
-Yes, you can use the `first` and `last` pseudo-class variants in Tailwind to achieve this effect. Here's the revised code:
+Yes, you can use the `first` and `last` pseudo-class variants in Tailwind to achieve this. Here's the revised code:
 
 ```html
 <ul>
   <li
     v-for="(item, index) in items"
     :key="`item-${index}`"
-    class="border-solid border-b border-black {{ index === items.length - 1 ? '' : 'pb-2' }}"
+    class="border-solid border-b border-black {{ index === items.length - 1 ? '' : 'pb-4' }}"
   >
     Item
   </li>
 </ul>
 ```
 
-In the above code, we're using the `pb-2` class to add a bottom padding to all `li` elements except the last one. We're using a ternary operator to conditionally apply this class based on the index of the current item. If the current item is the last one, we don't apply any padding.
+In the `class` attribute of the `<li>` element, we're using the `pb-4` utility class to add a bottom padding of 1rem (which is the default value of Tailwind's `$spacing` variable) to all the `<li>` elements except the last one. We're using the ternary operator to conditionally apply this class based on whether the current item is the last one or not.
 
-Note that we're also using string interpolation to dynamically generate the `key` attribute for each `li` element. This is a best practice when using `v-for` in Vue.js.
+Note that we're also removing the `border-b` class from the last `<li>` element by not applying any class to it. This will remove the border from the last element and give the desired effect.

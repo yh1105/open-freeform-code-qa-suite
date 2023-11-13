@@ -1,4 +1,4 @@
-You can use the `querySelectorAll` method to select all the required elements in your form. Here is the filled code:
+You can use the `querySelectorAll` method to select all required fields in the form. Here is the completed code:
 
 ```javascript
 document.getElementById('check').onclick = function() {
@@ -21,4 +21,4 @@ document.getElementById('check').onclick = function() {
 };
 ```
 
-This script will check all required fields in the form. If any required field is not filled, it will alert 'Fill all the fields'. For radio buttons, it will check if at least one radio button in the group is checked.
+In this code, `querySelectorAll('[required]')` selects all elements that have the `required` attribute. `querySelectorAll(`[name=${i.name}]`)` selects all elements that have the same `name` attribute as the current element in the loop.

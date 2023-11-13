@@ -1,36 +1,53 @@
-To identify if a div is visible on the viewport on scroll, you can use the `Intersection Observer API`. This API allows you to observe changes in the intersection of a target element with an ancestor element or with a top-level document's viewport.
-
-Here's an example of how you can use the `Intersection Observer API` to get the list of divs inside of `#parent` which are visible on viewport on scroll:
+To identify if a div is visible on the viewport, you can use the Intersection Observer API. Here's an example of how you can use it:
 
 ```javascript
-import React, { useEffect, useRef, useState } from "react";
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      console.log(`${entry.target.id} is visible on the viewport`);
+    }
+  });
+});
+
+data.forEach(item => {
+  const div = document.createElement('div');
+  div.id = item.id;
+  div.textContent = item.title;
+  document.querySelector('#parent').appendChild(div);
+  observer.observe(div);
+});
+```
+
+This code creates an `IntersectionObserver` instance and observes each div inside `#parent`. When a div becomes visible on the viewport, the `isIntersecting` property of the `entry` object is `true`, and you can log a message to the console.
+
+You can also use the `react-intersection-observer` package from npm to use the Intersection Observer API in a React component. Here's an example of how you can use it:
+
+```javascript
+import React, { useRef } from 'react';
+import { useInView } from 'react-intersection-observer';
 
 const MyComponent = ({ data }) => {
-  const [visibleDivs, setVisibleDivs] = useState([]);
   const parentRef = useRef(null);
+  const [visibleIds, setVisibleIds] = useState([]);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visibleIds = entries
-          .filter((entry) => entry.isIntersecting)
-          .map((entry) => entry.target.id);
-        setVisibleDivs(visibleIds);
-      },
-      { rootMargin: "0px", threshold: 1.0 }
-    );
+  const handleIntersection = (entries) => {
+    const newVisibleIds = entries
+      .filter(entry => entry.isIntersecting)
+      .map(entry => entry.target.id);
+    setVisibleIds(newVisibleIds);
+  };
 
-    const divs = parentRef.current.querySelectorAll("div");
-    divs.forEach((div) => observer.observe(div));
-
-    return () => {
-      divs.forEach((div) => observer.unobserve(div));
-    };
-  }, [data]);
+  const { ref: parentObserverRef } = useInView({
+    threshold: 0,
+    rootMargin: '0px',
+    triggerOnce: false,
+    onEnter: handleIntersection,
+    onLeave: handleIntersection,
+  });
 
   return (
-    <div id="parent" ref={parentRef}>
-      {data.map((item) => (
+    <div id="parent" ref={parentObserverRef}>
+      {data.map(item => (
         <div key={item.id} id={item.id}>
           {item.title}
         </div>
@@ -40,6 +57,4 @@ const MyComponent = ({ data }) => {
 };
 ```
 
-In this example, we create a state `visibleDivs` to store the list of visible divs. We also create a `useRef` to get a reference to the parent div. In the `useEffect` hook, we create a new `IntersectionObserver` and observe all the child divs of the parent div. Whenever the intersection of a child div with the viewport changes, the observer callback is called with an array of `IntersectionObserverEntry` objects. We filter out the entries that are intersecting and extract their `id` attributes to update the `visibleDivs` state. Finally, we return a cleanup function to unobserve all the child divs when the component unmounts.
-
-You don't need any external npm modules to use the `Intersection Observer API`. It's a built-in API in modern browsers.
+This code uses the `useInView` hook from `react-intersection-observer` to observe the `#parent` div. When a child div becomes visible on the viewport, the `handleIntersection` function is called, and the `visibleIds` state is updated with the ids of the visible divs. You can then use this state to render the visible divs differently, for example

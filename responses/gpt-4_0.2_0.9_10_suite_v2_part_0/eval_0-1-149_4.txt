@@ -1,30 +1,29 @@
-To create an animation after hovering over the link using Tailwind CSS, you can use the `group-hover` variant. The `group-hover` variant is used to style an element when its parent is being hovered over.
-
-Here is an example of how you can use it:
+Sure, you can achieve this by using the `group-hover` utility in Tailwind CSS. Here's how you can modify your code:
 
 ```html
 <a href="#" class="group">
-    <span class="text-sky-600 transition-all duration-300">Link</span>
-    <span class="block w-0 h-0.5 bg-sky-600 transition-all duration-500 group-hover:w-full"></span>
+    <span class="text-sky-600 transition duration-300 group-hover:underline">Link</span>
+    <span class="block h-0.5 bg-sky-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
 </a>
 ```
 
-In the above code, the width of the second span (which is the underline) is initially set to 0. When you hover over the parent element (which is the link), the width of the underline will transition to full width (`w-full`). The transition duration is set to 500ms (`duration-500`).
+In this code, `group-hover:underline` applies an underline to the text when you hover over the link. The `transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300` applies a scaling transformation to the span element, making it grow in width from 0 to full width when you hover over the link.
 
-Please note that you need to enable the `group-hover` variant in your Tailwind CSS configuration file (`tailwind.config.js`) for this to work. Here is how you can do it:
+Please note that you need to enable `group-hover` variant for `scale` and `transform` in your tailwind.config.js file if it's not enabled by default:
 
 ```javascript
 module.exports = {
-  theme: {
-    extend: {},
-  },
+  theme: {},
   variants: {
     extend: {
-      width: ['group-hover'],
+      scale: ['group-hover'],
+      transform: ['group-hover'],
     },
   },
   plugins: [],
 }
 ```
 
-In the above configuration, `width: ['group-hover']` is added to the `variants` section. This means that the `group-hover` variant is enabled for the `width` utility.
+After updating the config file, you need to rebuild your CSS.
+
+This solution assumes that you are using Tailwind CSS v2.0 or later. If you are using an older version, you may need to update your Tailwind CSS or adjust the code accordingly.

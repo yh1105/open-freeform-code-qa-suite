@@ -1,4 +1,4 @@
-Yes, you can use the `first` and `last` pseudo-class variants in Tailwind to achieve this effect. Here's the revised code:
+Yes, you can use the `first` and `last` pseudo-class variants in Tailwind to achieve this. Here's the revised code:
 
 ```html
 <ul>
@@ -12,6 +12,8 @@ Yes, you can use the `first` and `last` pseudo-class variants in Tailwind to ach
 </ul>
 ```
 
-In the `class` attribute of the `li` element, we're using the `pb-2` utility class to add a bottom padding of 2 units to all but the last `li` element. We're also using a ternary operator to conditionally apply this class based on whether the current `li` element is the last one in the list.
+In the `class` attribute of the `li` element, we added the `pb-2` class only for all the items except the last one. `pb-2` adds a padding-bottom of 0.5rem to the element. 
 
-Note that we're also removing the `border-b` class from the last `li` element by not applying any border-bottom to it.
+We used the ternary operator to conditionally add the `pb-2` class. If the current item is the last item in the `items` array, we add an empty string instead of `pb-2`. 
+
+Note that we also removed the `border-b` class from the `li` element's class attribute since we only want to add the border to all but the last item.

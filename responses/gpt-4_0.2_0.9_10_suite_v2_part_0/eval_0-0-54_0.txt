@@ -1,46 +1,34 @@
-You can achieve this by creating a parent component that will hold the state for both the first name and last name. Then, you can pass a function to the `InputField` component that will update the parent component's state. Finally, you can create a button that, when clicked, will log the current state (i.e., the first name and last name).
-
-Here is an example:
+You can create two state variables, one for the first name and one for the last name. Then, you can create a button that, when clicked, logs the current values of the first name and last name to the console. Here's how you can do it:
 
 ```javascript
 import React, { useState } from 'react';
-import { render } from 'react-dom';
 
-function InputField({name, label, value, handleChange}) {
-  return (
-    <div>
-     <label>{label}</label>
-      <input type="text" 
-      value={value} 
-      name={name}
-      onChange={handleChange} />
-
-      {value}
-    </div>
-  );
-}
-
-function ParentComponent() {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-
-  const handleFirstNameChange = (e) => setFirstName(e.target.value);
-  const handleLastNameChange = (e) => setLastName(e.target.value);
+export default function InputField() {
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
 
   const handleClick = () => {
     console.log(`First Name: ${firstName}, Last Name: ${lastName}`);
-  };
+  }
 
   return (
     <div>
-      <InputField name="firstName" label="First Name" value={firstName} handleChange={handleFirstNameChange} />
-      <InputField name="lastName" label="Last Name" value={lastName} handleChange={handleLastNameChange} />
-      <button onClick={handleClick}>Log Name</button>
+      <label>First Name</label>
+      <input type="text" 
+        value={firstName} 
+        name="firstName"
+        onChange={(e) => setFirstName(e.target.value)} />
+
+      <label>Last Name</label>
+      <input type="text" 
+        value={lastName} 
+        name="lastName"
+        onChange={(e) => setLastName(e.target.value)} />
+
+      <button onClick={handleClick}>Submit</button>
     </div>
   );
 }
-
-render(<ParentComponent />, document.getElementById('root'));
 ```
 
-In this example, `ParentComponent` is the parent component that holds the state for the first name and last name. `InputField` is a controlled component, which means that its value is being controlled by the parent component. When the value of the input field changes, it calls the `handleChange` function passed as a prop from the parent component, which updates the state in the parent component. When the button is clicked, it calls the `handleClick` function, which logs the current state.
+In this code, `setFirstName` and `setLastName` are used to update the state of `firstName` and `lastName` respectively whenever the value of the corresponding input field changes. When the button is clicked, the `handleClick` function is called, which logs the current values of `firstName` and `lastName` to the console.

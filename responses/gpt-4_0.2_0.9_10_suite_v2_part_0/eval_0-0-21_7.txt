@@ -1,4 +1,4 @@
-Here is the code snippet with the `copyText` method filled:
+Here is your code with the `copyText` method filled:
 
 ```html
 <template>
@@ -23,9 +23,9 @@ Here is the code snippet with the `copyText` method filled:
       },
       methods: {
         copyText () {
-          navigator.clipboard.writeText(this.text1).then(() => {
+          navigator.clipboard.writeText(this.text1).then(function() {
             console.log('Copying to clipboard was successful!');
-          }, err => {
+          }, function(err) {
             console.error('Could not copy text: ', err);
           });
         }
@@ -34,4 +34,4 @@ Here is the code snippet with the `copyText` method filled:
 </script>
 ```
 
-In the `copyText` method, we're using the Clipboard API's `writeText` method to copy the text from `text1` to the clipboard. This method returns a promise that resolves once the text is successfully written to the clipboard. If the operation fails for any reason, the promise will reject and we can catch that error and log it to the console.
+In the `copyText` method, we are using the Clipboard API's `writeText` method to copy the text from `text1` to the clipboard. This method returns a promise that resolves once the text is successfully written to the clipboard. If the operation fails for any reason, the promise will be rejected with an error.

@@ -14,4 +14,4 @@ const columns_payment_summary_table = [
   ]
 ```
 
-By adding the `displayName` property, you are giving a name to the anonymous function that is used as the `render` function. This will satisfy the `react/display-name` ESLint rule.
+In the above example, `CustomRender` is the name of the function component and it is assigned to the `displayName` property. This will tell ESLint to ignore the missing `displayName` error for this component.

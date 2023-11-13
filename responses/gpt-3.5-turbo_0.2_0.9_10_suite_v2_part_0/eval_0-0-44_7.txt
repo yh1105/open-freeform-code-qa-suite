@@ -1,18 +1,14 @@
-To create an index of a property in Mongoose schema using Nest.js, you can use the `@Schema` decorator to define the schema and then use the `@Index` decorator to create the index.
+To create an index of a property in Mongoose schema using Nest.js, you can use the `@Schema()` decorator to define your schema and then use the `@Prop()` decorator to define your properties. To create an index on a property, you can pass an object with the `index` property set to `true` as an option to the `@Prop()` decorator.
 
-Here's an example:
+Here's an example of how to create an index on the `type` property:
 
 ```javascript
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
-import { Index } from '@nestjs/mongoose';
 
 @Schema()
 export class MySchema extends Document {
-  @Prop()
-  _id: string;
-
-  @Prop({ required: true })
+  @Prop({ required: true, index: true })
   type: string;
 
   @Prop()
@@ -22,11 +18,17 @@ export class MySchema extends Document {
   name: string;
 }
 
-Index({ type: 1 })(MySchema);
-
-export const MySchemaModel = SchemaFactory.createForClass(MySchema);
+export const MySchema = SchemaFactory.createForClass(MySchema);
 ```
 
-In this example, we use the `@Index` decorator to create an index on the `type` property with a sorting order of 1 (ascending). We then pass the `MySchema` class to the `@Index` decorator to apply the index to the schema.
+In this example, the `type` property is marked as required and has an index created on it. The `creationDate` and `name` properties are not indexed.
 
-Note that we also use the `SchemaFactory.createForClass` method to create a Mongoose model from the schema. This model can then be used to perform CRUD operations on the MongoDB collection associated with the schema.
+You can also create indexes on multiple properties by passing an object with the property names as keys and the index direction (1 for ascending, -1 for descending) as values. For example:
+
+```javascript
+@Prop({ index: { type: 1, creationDate: -1 } })
+```
+
+This creates a compound index on the `type` property in ascending order and the `creationDate` property in descending order.
+
+Note that the `index()` method you tried to use is not applicable in this case, as it is used to create indexes on the schema level, not on individual properties.

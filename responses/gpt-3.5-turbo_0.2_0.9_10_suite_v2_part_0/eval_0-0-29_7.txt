@@ -1,18 +1,16 @@
-To make sure the second query runs only after the first one is fulfilled, you can use the `useEffect` hook and add `user.id` as a dependency. Here's the updated code for the second query:
+To make sure the second query runs only after the first one is fulfilled, you can use the `useEffect` hook to watch for changes in the `userFulfilled` variable. Here's an example of how you can modify the second query code:
 
 ```javascript
-const { data: userBio, isFulfilled: userBioFulfilled } = useGetUserBioQuery(user.id);
+const { data: userBio, isFulfilled: userBioFulfilled } = useGetUserBioQuery(user?.id);
 
 useEffect(() => {
   if (userFulfilled) {
-    // user query has been fulfilled, so we can safely run the second query
-    userBioFulfilled || refetch(); // refetch only if the second query hasn't been fulfilled yet
+    // Only run the second query if the first one is fulfilled and user.id is available
+    user?.id && refetch();
   }
-}, [user.id, userFulfilled, userBioFulfilled, refetch]);
+}, [userFulfilled, user?.id]);
 ```
 
-In this code, we're using the `useEffect` hook to run some code after the component has rendered and whenever the `user.id`, `userFulfilled`, `userBioFulfilled`, or `refetch` values change. 
+In this code, we're using the `useEffect` hook to watch for changes in the `userFulfilled` and `user?.id` variables. If `userFulfilled` is true and `user?.id` is available, we call the `refetch` function to run the second query with the `user.id` parameter.
 
-Inside the `useEffect` hook, we're checking if the `user` query has been fulfilled (`userFulfilled` is `true`). If it has, we're checking if the `userBio` query has been fulfilled (`userBioFulfilled` is `true`). If it hasn't, we're calling the `refetch` function to run the query again. 
-
-Note that we're using the `||` operator to only call `refetch` if `userBioFulfilled` is `false`. This is because `refetch` will automatically run the query again if it hasn't been fulfilled yet, so we don't want to call it unnecessarily.
+Note that we're using optional chaining (`user?.id`) to make sure that the code doesn't break if `user` is not yet available.

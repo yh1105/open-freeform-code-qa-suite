@@ -1,7 +1,7 @@
-Sure, here's an implementation of the `iterLeafNodes` function that should give you the desired result:
+Sure, here's an implementation of the `iterLeafNodes` function that should work for your use case:
 
 ```javascript
-function* iterLeafNodes(strhtml, format=[]) {
+function* iterLeafNodes(strhtml, format = []) {
   const parser = new DOMParser();
   const doc = parser.parseFromString(strhtml, "text/html");
   const nodes = doc.body.childNodes;
@@ -17,24 +17,23 @@ function* iterLeafNodes(strhtml, format=[]) {
 }
 ```
 
-You can use it like this:
+To use it, you can simply call it with your HTML string and spread the result into an array:
 
 ```javascript
-const strHTML = "<p>Hello World</p><p>I am a text with <strong>bold</strong> word</p><p><strong>I am bold text with nested <em>italic</em> Word.</strong></p>";
 const result = [...iterLeafNodes(strHTML)];
 console.log(result);
 ```
 
-This should output the following:
+This should output the expected array of objects:
 
 ```javascript
 [
-  { text: 'Hello World', format: [] },
-  { text: 'I am a text with', format: [] },
-  { text: 'bold', format: [ 'strong' ] },
-  { text: ' word', format: [] },
-  { text: 'I am bold text with nested', format: [ 'strong' ] },
-  { text: 'italic', format: [ 'strong', 'em' ] },
-  { text: 'Word.', format: [ 'strong' ] }
+  { text: "Hello World", format: [] },
+  { text: "I am a text with", format: [] },
+  { text: "bold", format: ["strong"] },
+  { text: " word", format: [] },
+  { text: "I am bold text with nested", format: ["strong"] },
+  { text: "italic", format: ["strong", "em"] },
+  { text: "Word.", format: ["strong"] }
 ]
 ```

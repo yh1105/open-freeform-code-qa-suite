@@ -1,13 +1,13 @@
-Sure, the problem with your code is that you are trying to use the same key for two different types of properties. You can't have a key be both a number and a boolean. 
+The TypeScript compiler doesn't allow you to use multiple mapped types in a single type definition. You can solve this by creating two separate types and then merging them using the `&` operator.
 
-Instead, you can create a new type that combines both the `fruit` and `color` types. Here's how you can do it:
+Here is the corrected code:
 
 ```typescript
 type FruitsAndColors = {
-  [K in fruit]: number;
+  [key in fruit]: number;
 } & {
-  [K in color]: boolean;
+  [key in color]: boolean;
 }
 ```
 
-In this code, the `FruitsAndColors` type is a combination of two types. The first type has a numeric property for each fruit, and the second type has a boolean property for each color. The `&` operator is used to combine these two types into one.
+This will create a type `FruitsAndColors` where each fruit is a key to a number, and each color is a key to a boolean.

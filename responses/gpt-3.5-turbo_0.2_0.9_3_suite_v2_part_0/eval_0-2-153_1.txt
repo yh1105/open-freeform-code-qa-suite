@@ -1,7 +1,0 @@
-You can use the `border-t` class instead of `border` to apply the border only to the top edge. Here's an example:
-
-```html
-<div class="border-t border-blue-900 border-t-1">foo</div>
-```
-
-This will apply a border only to the top edge of the `div` element, with a thickness of 1 pixel and a blue color. The `border-t` class is part of the Tailwind CSS framework and is specifically designed to apply borders to the top edge of an element.

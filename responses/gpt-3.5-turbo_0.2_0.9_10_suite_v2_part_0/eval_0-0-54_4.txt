@@ -1,9 +1,12 @@
-Sure, you can create a function that will be called on button click and get the values of the input fields using the `useState` hook. Here's an example:
+You can create a state for first name and last name in your parent component and pass them as props to your `InputField` component. Then, you can use `useState` hook to update the state of first name and last name on input change. Finally, you can use these values on button click.
+
+Here's an example:
 
 ```javascript
 import React, { useState } from 'react';
+import InputField from './InputField';
 
-export default function InputField({ name, label }) {
+export default function ParentComponent() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
 
@@ -14,17 +17,16 @@ export default function InputField({ name, label }) {
 
   return (
     <div>
-      <label>{label}</label>
-      <input
-        type="text"
+      <InputField
+        label="First Name"
+        name="firstName"
         value={firstName}
-        name={`${name}-firstName`}
         onChange={(e) => setFirstName(e.target.value)}
       />
-      <input
-        type="text"
+      <InputField
+        label="Last Name"
+        name="lastName"
         value={lastName}
-        name={`${name}-lastName`}
         onChange={(e) => setLastName(e.target.value)}
       />
       <button onClick={handleClick}>Submit</button>
@@ -33,6 +35,19 @@ export default function InputField({ name, label }) {
 }
 ```
 
-In this example, we have created two state variables `firstName` and `lastName` using the `useState` hook. We have also created a function `handleClick` that will be called on button click. Inside this function, we are logging the values of the input fields to the console.
+In your `InputField` component, you can remove the `state` and `setState` variables and use the `value` and `onChange` props instead:
 
-To get the values of the input fields, we have used the `value` attribute of the input fields and passed the `onChange` function to update the state variables. We have also added a `name` attribute to the input fields to differentiate between them.
+```javascript
+import React from 'react';
+
+export default function InputField({ name, label, value, onChange }) {
+  return (
+    <div>
+      <label>{label}</label>
+      <input type="text" value={value} name={name} onChange={onChange} />
+    </div>
+  );
+}
+``` 
+
+This way, the `InputField` component is now a controlled component, meaning that its value is controlled by the parent component.

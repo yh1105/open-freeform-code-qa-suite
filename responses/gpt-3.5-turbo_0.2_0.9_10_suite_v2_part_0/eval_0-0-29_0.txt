@@ -5,10 +5,10 @@ const { data: userBio, isFulfilled: userBioFulfilled } = useGetUserBioQuery(user
 
 useEffect(() => {
   if (userFulfilled) {
-    // First query is fulfilled, so we can run the second query
-    userBioFulfilled || refetch(); // refetch() is optional, it will re-run the query if it's not already fulfilled
+    // The user query has been fulfilled, so we can safely run the userBio query
+    userBioFulfilled || refetch(); // refetch only if the userBio query hasn't been fulfilled yet
   }
-}, [user.id, userFulfilled, userBioFulfilled]);
+}, [user.id, userFulfilled, userBioFulfilled, refetch]);
 ```
 
-This code will run the second query only after the first one is fulfilled and `user.id` is available. The `useEffect` hook will watch for changes in `user.id`, `userFulfilled`, and `userBioFulfilled`. If `userFulfilled` is true, it will check if `userBioFulfilled` is also true. If it's not, it will run `refetch()` to fetch the data.
+In this code, we're using the `useEffect` hook to run a function whenever the `user.id`, `userFulfilled`, `userBioFulfilled`, or `refetch` values change. Inside the function, we're checking if the `user` query has been fulfilled (`userFulfilled` is true). If it has, we're checking if the `userBio` query has been fulfilled (`userBioFulfilled` is true). If it hasn't, we're calling the `refetch` function to run the `userBio` query again.

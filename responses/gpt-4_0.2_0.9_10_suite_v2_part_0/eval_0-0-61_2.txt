@@ -1,6 +1,6 @@
-You can use the `CssBaseline` component from Material-UI to apply a baseline CSS for your application and to normalize styles across different browsers. The `CssBaseline` component also allows you to customize the background color of your application.
+You can use the `CssBaseline` component from Material-UI. This component is a simple normalization of CSS, providing low-level utility classes and setting up default styles for your application. 
 
-Here is an example of how you can use it:
+In your case, you can use it to set a background color for your root element. Here's how you can do it:
 
 ```jsx
 import React from 'react';
@@ -29,17 +29,21 @@ export default function App() {
   const [theme, setTheme] = React.useState(lightTheme);
 
   const toggleTheme = () => {
-    setTheme(theme.palette.type === 'light' ? darkTheme : lightTheme);
+    if (theme === lightTheme) {
+      setTheme(darkTheme);
+    } else {
+      setTheme(lightTheme);
+    }
   };
 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      {/* Your other components */}
+      {/* your other components */}
       <button onClick={toggleTheme}>Toggle theme</button>
     </ThemeProvider>
   );
 }
 ```
 
-In this example, `ThemeProvider` makes the theme available down the React tree thanks to React context. `CssBaseline` applies the background color (and other styles) defined in the theme. The `toggleTheme` function switches between the light and dark themes when the button is clicked.
+In this example, `CssBaseline` will apply the background color defined in your theme to the root element. The `toggleTheme` function allows you to switch between the light and dark theme.

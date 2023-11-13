@@ -1,4 +1,4 @@
-Sure, here is a function that does what you want:
+Sure, here is a function that does exactly what you asked for:
 
 ```javascript
 function keys_and_prices(raw_obj) {
@@ -8,7 +8,7 @@ function keys_and_prices(raw_obj) {
 }
 ```
 
-This function works by first getting all the keys of the object using `Object.keys()`. Then it maps over these keys and for each key, it gets the `price` property of the corresponding value in the object. Finally, it returns an array containing the keys and prices arrays.
+This function first extracts the keys from the input object using `Object.keys()`. Then it uses `Array.prototype.map()` to create a new array containing the prices associated with each key. Finally, it returns an array containing the keys and prices arrays.
 
 Here is how you can use it:
 
@@ -19,4 +19,9 @@ console.log(ret[0]) // ["milk", "bread", "potato"]
 console.log(ret[1]) // [20, 15, 10]
 ```
 
-Please note that the `==` operator in JavaScript does not compare arrays by their content. So `assert(ret[0] == ["milk", "bread", "potato"])` will not work as expected. You may want to use a deep equality check function or library for that.
+Note: The `assert` function you used in your example is not a built-in JavaScript function. If you want to check the equality of arrays, you can use `JSON.stringify()` to convert them to strings first:
+
+```javascript
+console.log(JSON.stringify(ret[0]) === JSON.stringify(["milk", "bread", "potato"])) // true
+console.log(JSON.stringify(ret[1]) === JSON.stringify([20, 15, 10])) // true
+```

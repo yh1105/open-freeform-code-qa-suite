@@ -1,5 +1,0 @@
-When `sourceMap` is set to `true` in `tsconfig.json`, the TypeScript compiler generates a source map file for each TypeScript file. This source map file contains information about the original TypeScript code and its corresponding JavaScript code. This information is used by the browser's developer tools to map the JavaScript code back to the original TypeScript code, making it easier to debug.
-
-When you set `sourceMap` to `false`, the TypeScript compiler will not generate the source map files. This means that the browser's developer tools will not be able to map the JavaScript code back to the original TypeScript code. However, this can result in a smaller bundle size, as the source map files can be quite large.
-
-If you didn't notice any change in your app after setting `sourceMap` to `false`, it's likely because you didn't rebuild your app after making the change. Make sure to rebuild your app and check the bundle size to see if it has decreased.

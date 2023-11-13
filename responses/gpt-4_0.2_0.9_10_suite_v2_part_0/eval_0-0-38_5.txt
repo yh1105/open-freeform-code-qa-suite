@@ -1,12 +1,15 @@
-Sure, you can move the `console.log(this.newIds);` inside the subscribe block to ensure it runs after the response is received. Here is the revised code:
+Sure, you can use `async/await` with `toPromise()` to wait for the Observable to complete. Here is your revised code:
 
 ```javascript
-this.repository.getById(Ids).subscribe((response) => {
-  console.log(response);
-  this.newIds = response.map((id) => {
-    return id;
-  });
+async getData() {
+  this.newIds = await this.repository.getById(Ids).pipe(map((response) => {
+    console.log(response);
+    return response.map((id) => {
+      return id;
+    });
+  })).toPromise();
   console.log(this.newIds);
-});
+}
 ```
-This way, the `console.log(this.newIds);` will only run after the response is received and `this.newIds` is updated.
+
+Please note that you need to call `getData()` function to execute the code.

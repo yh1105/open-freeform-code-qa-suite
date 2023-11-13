@@ -1,16 +1,25 @@
-The `truncate` class in Tailwind CSS only works for single line text. It doesn't work for multiline text. If you want to truncate text that spans multiple lines, you'll need to use some additional CSS.
+The `truncate` class in Tailwind CSS only works for single line text. It sets `overflow: hidden`, `text-overflow: ellipsis`, and `white-space: nowrap` on an element. So, if you want to truncate text that spans multiple lines, you'll need to use a different approach.
 
-Here is an example of how you can do it:
+Unfortunately, Tailwind CSS does not support multiline text truncation out of the box. You would need to write custom CSS for this. Here is an example of how you can do it:
+
+```css
+.truncate-multiline {
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Number of lines to display before truncation */
+  -webkit-box-orient: vertical;  
+  overflow: hidden;
+}
+```
+
+Then, you can use this class in your HTML:
 
 ```html
 <div className="ml-1 inline-block">
    <span>Label: </span>
-   <span className="font-semibold line-clamp-1">
-     long texttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt
+   <span className="font-semibold truncate-multiline">
+     long texttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt
    </span>
 </div>
 ```
 
-In the above example, `line-clamp-1` is used to limit the text to 1 line. If you want to limit the text to 2 lines, you can use `line-clamp-2`, and so on.
-
-Please note that `line-clamp` is not fully supported in all browsers. It is not supported in IE and has partial support in Edge. It is fully supported in Firefox, Chrome, Safari, and Opera.
+Please note that this solution uses the `-webkit-line-clamp` property, which is not a standard CSS property but a non-standard line-clamping property that is only supported in WebKit-based browsers (like Chrome and Safari). It may not work in all browsers.

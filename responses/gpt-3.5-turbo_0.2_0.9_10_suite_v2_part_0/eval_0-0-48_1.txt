@@ -8,4 +8,4 @@ type FruitsAndColors = {
 }
 ```
 
-This uses the intersection operator `&` to combine two separate mapped types, one for the fruit keys and one for the color keys.
+This creates an intersection type between two objects, where the first object has a numeric property for each fruit and the second object has a boolean property for each color.

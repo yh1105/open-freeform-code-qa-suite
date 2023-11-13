@@ -1,4 +1,4 @@
-Sure, you should put your `console.log(this.newIds);` inside the subscribe block to ensure it runs after the response is received. Here is the revised code:
+Sure, here's the revised code:
 
 ```javascript
 this.repository.getById(Ids).subscribe((response) => {
@@ -9,3 +9,5 @@ this.repository.getById(Ids).subscribe((response) => {
   console.log(this.newIds);
 });
 ```
+
+The `console.log(this.newIds);` is moved inside the subscribe block to ensure it is executed after the response is received and processed.

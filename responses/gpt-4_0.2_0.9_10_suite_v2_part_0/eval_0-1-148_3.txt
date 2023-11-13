@@ -1,19 +1,6 @@
-Sure, you can use the `last` pseudo-class variant in Tailwind CSS to target the last element of a group. However, you need to enable it in your Tailwind CSS configuration file (`tailwind.config.js`) because it's not enabled by default.
+Sure, you can use the `last:` variant provided by Tailwind CSS to apply styles to the last element of a container. In your case, you can use the `last:border-b-0` class to remove the bottom border from the last `<li>` element.
 
-Here is how to enable it:
-
-```javascript
-module.exports = {
-  variants: {
-    extend: {
-      borderWidth: ['last'],
-    }
-  },
-  plugins: [],
-}
-```
-
-After enabling the `last` variant, you can use it in your HTML like this:
+Here is your revised code:
 
 ```html
 <ul>
@@ -27,4 +14,18 @@ After enabling the `last` variant, you can use it in your HTML like this:
 </ul>
 ```
 
-In the above code, `last:border-b-0` removes the bottom border from the last `<li>` element.
+This code will apply a bottom border to all `<li>` elements except the last one.
+
+Please note that by default, the `last` variant is not enabled for any utilities. You need to enable it in your Tailwind CSS configuration file (`tailwind.config.js`) like this:
+
+```javascript
+module.exports = {
+  variants: {
+    extend: {
+      borderWidth: ['last'],
+    }
+  }
+}
+```
+
+After you've done this, you should be able to use the `last:` variant as shown in the HTML code above.

@@ -1,28 +1,30 @@
-The error log indicates that Python is not found in your system. Node-gyp, which is a dependency of node-sass, requires Python to be installed in your system. 
+The error log indicates that Python is not found in your system PATH. `node-gyp`, which is a part of the build process, requires Python to be installed and accessible.
 
 Here are the steps to fix this issue:
 
-1. Install Python 2.7.x. You can download it from the [official Python website](https://www.python.org/downloads/). Node-gyp does not support Python 3.x, so make sure to install a 2.7.x version.
+1. **Install Python**: If Python is not installed on your system, download and install it. You can download Python from the official website. `node-gyp` requires Python 2.7, so make sure to install that version. Python 3.x is not compatible with `node-gyp`.
 
-2. After installing Python, you need to add it to your system's PATH. Here's how to do it:
+2. **Add Python to PATH**: After installing Python, you need to add it to your system PATH. Here's how to do it:
 
-    - Open the System Properties (Right click Computer in the start menu, or use the keyboard shortcut Win+Pause)
-    - Click Advanced system settings in the sidebar.
-    - Click Environment Variables...
-    - Select PATH in the System variables section
-    - Click Edit
-    - Add Python's path to the end of the list (the paths are separated by semicolons). For example, if you installed Python to 'C:\Python27', then you would add ';C:\Python27' to the end of the text in the Variable value field.
+   - Open the System Properties (Right click Computer in the start menu, or use the keyboard shortcut Win+Pause)
+   - Click Advanced system settings in the sidebar.
+   - Click Environment Variables...
+   - Select PATH in the System variables section
+   - Click Edit
+   - Add Python's path to the end of the list (the paths are separated by semicolons). For example, if you installed Python to `C:\Python27\`, then you would add `C:\Python27\;` to the end of the PATH.
 
-3. After adding Python to the PATH, you should be able to run Python from the command line. You can test this by opening a command prompt (Win+R, cmd, Enter) and typing 'python'. If you see the Python interpreter prompt (>>>), then Python is installed and working correctly.
+3. **Install Windows Build Tools**: You also need to install the Windows build tools which include other dependencies required by `node-gyp`. You can do this using npm (Node.js package manager) by running the following command in the command prompt (Run as Administrator):
 
-4. Now, you should be able to build your Node.js project without any issues.
+   ```
+   npm install --global --production windows-build-tools
+   ```
 
-If you still encounter issues, you might need to configure npm to know the path of Python by running the following command:
+   This will install Python 2.7 and Microsoft Visual Studio C++ Build Tools, both are required dependencies.
 
-```bash
-npm config set python /path/to/executable/python
-```
+4. **Rebuild node-sass**: After Python and the build tools are installed, try rebuilding `node-sass` using the following command:
 
-Replace `/path/to/executable/python` with the actual path to your Python executable.
+   ```
+   npm rebuild node-sass
+   ```
 
-If you're using a version of node-gyp that does not support the version of Node.js you're using, you might need to update node-gyp or downgrade Node.js.
+After following these steps, your build should work as expected.

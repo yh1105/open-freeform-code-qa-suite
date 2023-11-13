@@ -1,16 +1,33 @@
-Tailwind CSS is a utility-first CSS framework, it doesn't provide a direct way to target child elements like you would do in traditional CSS with `div.section > div`. 
+Tailwind CSS is a utility-first CSS framework that doesn't provide a direct way to target child elements like you would do in traditional CSS. It doesn't support selectors like `>` or `+`.
 
-Tailwind CSS is more about applying styles directly to the elements you want to style, rather than defining styles in separate CSS selectors. So you would add your Tailwind CSS classes directly to the child `div` elements you want to style.
+However, you can use Tailwind CSS with traditional CSS. If you need to style direct children of a specific div, you can still use traditional CSS in your stylesheets.
 
 For example:
 
-```html
-<div class="section">
-  <div class="bg-blue-500 text-white">...</div>
-  <div class="bg-red-500 text-white">...</div>
-</div>
+```css
+div.section > div {
+  @apply bg-red-500; /* Tailwind utility classes */
+}
 ```
 
-In this example, `bg-blue-500` and `text-white` are Tailwind CSS utility classes applied directly to the child `div` elements.
+In this example, `@apply` directive is used to apply Tailwind utility classes within a CSS rule-set.
 
-If you need to apply styles to direct children elements based on their parent, you might need to use traditional CSS or preprocessors like Sass, Less alongside Tailwind.
+Remember to configure your `tailwind.config.js` to enable this feature:
+
+```js
+module.exports = {
+  purge: [],
+  darkMode: false,
+  theme: {
+    extend: {},
+  },
+  variants: {
+    extend: {},
+  },
+  plugins: [
+    require('@tailwindcss/forms'),
+  ],
+}
+```
+
+This is a workaround as Tailwind CSS is not designed to handle child or sibling selectors directly. It's more about applying utility classes directly to the HTML elements.

@@ -1,26 +1,15 @@
-From the code you've shared, it seems like you're doing everything correctly. However, there are a few things you can check to troubleshoot this issue:
+Your code seems correct and should work as expected. However, there are a few things you might want to check:
 
-1. **Network Connection**: Ensure that your device/emulator has a proper network connection. Sometimes, network issues can cause the loading state to hang indefinitely.
+1. **Network Connection**: Ensure that your device/emulator has a proper network connection. Sometimes, the loading state might hang due to network issues.
 
-2. **Server Response**: Check if the server at 'https://48p1r2roz4.sse.codesandbox.io' is responding correctly. You can use tools like Postman or even your browser to send a request and see if you get a response.
+2. **Server Status**: Check if the server at 'https://48p1r2roz4.sse.codesandbox.io' is up and running. You can do this by visiting the URL in your web browser.
 
-3. **Error Handling**: You might be getting an error that you're not handling. Try logging the error to see if there's something you're missing:
+3. **GraphQL Query**: Make sure that your GraphQL query is correct. You can test your query using a GraphQL client like GraphQL Playground or Apollo Studio.
 
-    ```javascript
-    if (error) {
-        console.error(error);
-        return <Text>Error :(</Text>;
-    }
-    ```
+4. **Apollo Client Version**: There might be compatibility issues with the version of Apollo Client you're using. Try downgrading to an older version to see if that resolves the issue.
 
-4. **Apollo Client Configuration**: Ensure that your Apollo Client is configured correctly. The configuration you've shared seems fine, but it's worth double-checking.
+5. **React Native Debugger**: If you're using React Native Debugger, make sure to enable network inspect. This will allow you to see the network requests and responses, which can help you debug the issue.
 
-5. **React Native Version**: You're using React Native version 0.68.1, which doesn't exist. The latest version is 0.67.2. Please check and correct your React Native version.
+6. **Error Handling**: You might want to log the error to get more details about what's going wrong. You can do this by adding `console.log(error)` in your error handling code.
 
-6. **Apollo Client Version**: You're using Apollo Client version 3.5.10. Try downgrading to a lower version (like 3.3.21) to see if the issue persists.
-
-7. **GraphQL Server**: Ensure that the GraphQL server is correctly set up to handle the query you're sending. The server might not be able to handle the query, causing the request to hang.
-
-8. **Async/Await**: Try using async/await with useQuery to see if it helps with the issue.
-
-If none of these suggestions work, please provide more information about your setup and the issue you're facing.
+If none of these suggestions work, please provide more details about the issue, such as any error messages you're seeing and the results of your debugging efforts.

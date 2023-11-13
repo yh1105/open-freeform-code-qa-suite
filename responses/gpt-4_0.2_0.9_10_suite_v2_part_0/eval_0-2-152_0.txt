@@ -1,29 +1,31 @@
-To show the toast, you need to call the `toast` method with the `show` argument on the toast element. Here's how you can do it:
+To show the toast, you need to call the `toast` method with the `show` argument on the toast element. Here is how you can do it:
 
 ```javascript
 $('.toast').toast('show');
 ```
 
-This will show the toast when the page loads. If you want to show the toast on a specific event, like a button click, you can put this code inside an event handler. For example:
+This line of code will show all the toasts on the page. If you want to show a specific toast, you should give it an id and select it by this id:
 
-```javascript
-$('#myButton').click(function() {
-    $('.toast').toast('show');
-});
+```html
+<div id="myToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+  <!-- ... -->
+</div>
 ```
 
-This will show the toast when the element with the id `myButton` is clicked.
+```javascript
+$('#myToast').toast('show');
+```
 
-Also, make sure you have included the Bootstrap JS file in your HTML file. The toast component is part of Bootstrap's JavaScript plugins. You can include it with a script tag like this:
+Also, make sure that you have included the Bootstrap JS file in your HTML file, as the toast functionality is provided by Bootstrap's JavaScript, not by CSS. The script tag for including Bootstrap JS should look something like this:
 
 ```html
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 ```
 
-And don't forget to include jQuery before Bootstrap, as Bootstrap's JavaScript plugins depend on it:
+And don't forget to include jQuery before Bootstrap, because Bootstrap depends on it:
 
 ```html
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 ```
 
-These script tags should be placed near the end of your `body` tag to ensure the page loads quickly.
+The order of scripts is important: jQuery first, then Bootstrap.

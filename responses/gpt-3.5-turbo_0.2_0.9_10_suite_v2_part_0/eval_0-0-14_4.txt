@@ -1,36 +1,19 @@
-To get the value of the switch in the `onCreate` function, you need to add the `name` attribute to the `Switch` component and set it to `"chargable"` (or any other name you prefer). Then, you can access the value of the switch using `values.chargable` in the `onCreate` function. Here's the revised code:
+To get the value of the switch in the `onCreate` function, you can modify the `Form.Item` for the switch as follows:
 
 ```html
-<Form form={form} layout="vertical">
-  <Form.Item
-    label="Description"
-    name="description"
-    rules={[{ required: true, message: 'Enter a description' }]}
-  >
-    <Input placeholder="Enter Description" />
-  </Form.Item>
+<Form.Item name="chargable" valuePropName="checked">
+  <Switch checkedChildren="Yes" unCheckedChildren="No" />
+  <span>Chargable</span>
+</Form.Item>
+```
 
-  <Form.Item name="chargable" noStyle valuePropName="checked">
-    <Switch name="chargable" checkedChildren="Yes" unCheckedChildren="No" />
-    <span>Chargable</span>
-  </Form.Item>
+Then, in the `onCreate` function, you can access the value of the switch using `values.chargable`. Here's the modified `onCreate` function:
 
-  <Button
-    onClick={() => {
-      form
-        .validateFields()
-        .then((values) => {
-          form.resetFields()
-          onCreate(values)
-        })
-        .catch((info) => {
-          console.log('Validate Failed:', info)
-        })
-    }}
-  >
-    Save
-  </Button>
-</Form>
+```javascript
+const onCreate = (values) => {
+  console.log('Received values of form: ', values);
+  console.log('Chargable: ', values.chargable);
+};
 ``` 
 
-In the `onCreate` function, you can access the value of the switch using `values.chargable`.
+Note that we changed the `name` prop to `chargable` and removed the `noStyle` prop. We also updated the `valuePropName` prop to `checked` to match the prop used by the `Switch` component.

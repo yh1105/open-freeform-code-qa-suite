@@ -1,4 +1,4 @@
-To get the value of the ant design switch, you need to add `onChange` event to the `Switch` component and update the value of the `switch` field in the form. Here's the revised code:
+To get the value of the switch in the `onCreate` function, you need to add the `name` attribute to the `Switch` component and set it to `switch`. Here's the revised code:
 
 ```html
 <Form form={form} layout="vertical">
@@ -11,11 +11,7 @@ To get the value of the ant design switch, you need to add `onChange` event to t
   </Form.Item>
 
   <Form.Item name="switch" noStyle valuePropName="checked">
-    <Switch
-      checkedChildren="Yes"
-      unCheckedChildren="No"
-      onChange={(checked) => form.setFieldsValue({ switch: checked })}
-    />
+    <Switch name="switch" checkedChildren="Yes" unCheckedChildren="No" />
     <span>Chargable</span>
   </Form.Item>
 
@@ -37,4 +33,4 @@ To get the value of the ant design switch, you need to add `onChange` event to t
 </Form>
 ```
 
-With this change, the value of the `switch` field in the form will be updated whenever the user toggles the switch, and the updated value will be passed to the `onCreate` function when the user clicks the "Save" button.
+Now, the value of the switch will be included in the `values` object passed to the `onCreate` function. You can access it using `values.switch`.

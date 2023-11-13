@@ -1,26 +1,33 @@
-It seems like you want to align the "Stop Game" button with the "Begin Game" button. Here are a few suggestions:
+From your HTML code, it seems like your "Stop Game" button is inside the `#GameRunning` div, which might be positioned behind the game frame. Here are a few suggestions to fix this issue:
 
-1. **Use CSS Flexbox:** You can use CSS Flexbox to align the buttons. Wrap the buttons in a container and apply `display: flex;` to it. This will align the buttons in a row by default. You can control the spacing between the buttons using `justify-content: space-between;` or `justify-content: space-around;`.
+1. **Change the HTML structure**: You could move the "Stop Game" button outside of the `#GameRunning` div and place it next to the "Begin Game" button. This way, both buttons will be in the same container and should align properly.
 
-2. **Use CSS Grid:** Another option is to use CSS Grid. Similar to Flexbox, wrap the buttons in a container and apply `display: grid;` to it. You can then use `grid-template-columns: repeat(2, 1fr);` to create two equal columns for the buttons.
+2. **Use CSS positioning**: If you don't want to change the HTML structure, you can use CSS to position the "Stop Game" button. You can use the `position: absolute;` property to position the button relative to the nearest positioned ancestor. You'll also need to set `top`, `right`, `bottom`, or `left` properties to position the button correctly.
 
-3. **Use Positioning:** If you want more control over the exact position of the buttons, you can use CSS positioning. For example, you can set `position: absolute;` on the buttons and then use `top`, `right`, `bottom`, and `left` to position them. Note that this will take the buttons out of the normal document flow, which can sometimes cause layout issues.
+Here's an example of how you could use CSS positioning:
 
-Here is an example of how you might modify your HTML to use Flexbox:
+```css
+#GameRunning {
+  position: relative; /* Make sure this is relative if it's not already */
+}
 
-```html
-<div id="buttonContainer" style="display: flex; justify-content: space-between;">
-  <div id="GameStopped">
-    <button id="StartBtn" class="btnStyle" onclick="gameStarted=true;">Begin Game</button>
-    <div class="Status">Click Begin Game to start</div>
-  </div>
-  <div id="GameRunning">
-    <button id="StopBtn" class="btnStyle" onclick="self.close()">Stop Game</button>
-    <div id="Status" class="Status"></div>
-  </div>
-</div>
+#StopBtn {
+  position: absolute;
+  top: 0; /* Adjust as necessary */
+  right: 0; /* Adjust as necessary */
+}
 ```
 
-In this example, the `#buttonContainer` div is a new container that wraps the buttons. It uses Flexbox to align the buttons in a row and space them apart. You would need to add corresponding CSS in your `style.css` file to style the `#buttonContainer` div.
+3. **Use CSS Flexbox or Grid**: If your layout allows it, you can use CSS Flexbox or Grid to align the buttons. These CSS properties provide a more flexible and efficient way to layout, align, and distribute space among items in a container, even when their size is unknown or dynamic.
 
-Remember to adjust the layout according to your needs. You might need to adjust other elements on your page to accommodate these changes.
+Here's an example of how you could use Flexbox:
+
+```css
+#DanceScoreboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* This will center the buttons */
+}
+```
+
+Remember to adjust these examples to fit your specific needs and layout.

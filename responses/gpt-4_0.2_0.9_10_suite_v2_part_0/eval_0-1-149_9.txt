@@ -1,30 +1,29 @@
-Sure, you can achieve this by using the `group-hover` class in Tailwind CSS. Here is how you can do it:
+Sure, you can achieve this by using Tailwind CSS's `group-hover` utility to apply styles on hover. Here's how you can modify your code:
 
 ```html
 <a href="#" class="group">
-    Link
-    <span class="block w-0 h-0.5 bg-sky-600 transition-all duration-500 group-hover:w-full"></span>
+    <span class="text-sky-600 transition duration-300 group-hover:underline">Link</span>
+    <span class="block h-0.5 bg-sky-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></span>
 </a>
 ```
 
-In the above code, the `group-hover:w-full` class is used to animate the width of the span to full width when the link is hovered over. The `transition-all` and `duration-500` classes are used to animate the change in width.
+In this code, the `group-hover:underline` utility applies an underline to the text when the parent with the `group` class is hovered over. The `transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500` utilities are used to animate the underline. The underline starts with a scale of 0 (not visible) and scales to 100 (fully visible) when the link is hovered over.
 
-Please note that `group-hover` functionality might not be enabled by default in your Tailwind CSS configuration. If it's not working, you might need to enable it in your `tailwind.config.js` file:
+Please note that you need to enable the `group-hover` variant for `scale` and `transform` in your Tailwind CSS configuration file (`tailwind.config.js`) if it's not already enabled:
 
-```javascript
+```js
 module.exports = {
   theme: {
     extend: {},
   },
   variants: {
     extend: {
-      width: ['group-hover'],
+      scale: ['group-hover'],
+      transform: ['group-hover'],
     },
   },
   plugins: [],
 }
 ```
 
-In the above configuration, `width: ['group-hover']` is added to the `variants` section to enable the `group-hover` functionality for width.
-
-Also, make sure that the parent element of the element you want to animate has the `group` class.
+Also, make sure you have the `@tailwindcss/forms` plugin installed and included in your Tailwind CSS configuration file.

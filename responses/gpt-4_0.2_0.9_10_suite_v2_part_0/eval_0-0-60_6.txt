@@ -1,31 +1,36 @@
-The error message you're seeing is because Bootstrap requires `popper.js` for tooltips, popovers, and dropdowns. You need to install `popper.js` in your project.
+The error message you're seeing is because Bootstrap requires `Popper.js` for the dropdowns and other interactive components to work.
 
-You can install it using npm or yarn:
-
-**npm:**
+You can install `Popper.js` via npm by running the following command in your terminal:
 
 ```bash
 npm install popper.js --save
 ```
 
-**yarn:**
-
-```bash
-yarn add popper.js
-```
-
-After installing `popper.js`, you need to import it into your project. If you're using ES6 modules, you can import it like this:
+After installing `Popper.js`, you need to import it into your project. If you're using ES6 modules, you can do this with:
 
 ```javascript
 import Popper from 'popper.js';
 ```
 
-If you're not using modules, you can include it in your HTML file:
+Or if you're using CommonJS modules:
 
-```html
-<script src="path/to/popper.js"></script>
+```javascript
+const Popper = require('popper.js');
 ```
 
-Replace `"path/to/popper.js"` with the actual path to your `popper.js` file.
+Now, you should be able to compile your project without the "Module not found: Can't resolve 'popper.js'" error.
 
-After doing this, the error should be resolved.
+If you're using Bootstrap with a bundler like Webpack, you might need to add an alias to your Webpack configuration to ensure that `Popper.js` is correctly resolved:
+
+```javascript
+module.exports = {
+  //...
+  resolve: {
+    alias: {
+      'popper.js': path.resolve(__dirname, 'node_modules/popper.js'),
+    },
+  },
+};
+```
+
+Replace `__dirname` with the path to your `node_modules` directory if it's not in the same directory as your Webpack configuration file.

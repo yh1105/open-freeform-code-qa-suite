@@ -1,15 +1,19 @@
-The `EINTEGRITY` error is a checksum error that occurs when the package's checksum in the `npm` registry doesn't match the calculated checksum on your machine. This could be due to a variety of reasons such as network issues, npm cache corruption, or even issues with the package itself.
+The `EINTEGRITY` error is a checksum error that occurs when the package's `shasum` in the `npm` registry does not match the `shasum` calculated after download. This error can occur due to several reasons such as network issues, npm cache corruption, or issues with the package itself.
 
-Here are some steps you can take to resolve this issue:
+Here are some possible solutions:
 
-1. **Clear the npm cache**: The npm cache could be corrupt. You can clear it using the command `npm cache clean --force`. After running this command, try to install the package again.
+1. **Clear the npm cache**: The npm cache might be corrupt. You can clear it using the command `npm cache clean --force`.
 
-2. **Delete the `node_modules` directory and `package-lock.json` file**: Sometimes, the `node_modules` directory or the `package-lock.json` file could be causing the issue. Delete both and then run `npm install` again. Note that this will also update all your packages to their latest versions as specified in `package.json`.
+2. **Delete the `node_modules` directory and `package-lock.json` file**: Sometimes, the `node_modules` directory or the `package-lock.json` file might be causing the issue. Delete them and then try installing the packages again using `npm install`.
 
-3. **Update npm**: The issue could be with npm itself. Try updating npm to the latest version using the command `npm install -g npm@latest`.
+3. **Use a different network**: If you're on a network with a bad or unstable connection, it might cause the downloaded package to be corrupt. Try switching to a different network and then run `npm install`.
 
-4. **Check your network**: If you're behind a proxy or if your network is unstable, it could cause this issue. Try switching to another network and see if the issue persists.
+4. **Update npm**: The issue might be with npm itself. Try updating npm to the latest version using `npm install -g npm@latest`.
 
-5. **Check the package**: If none of the above solutions work, the issue could be with the package itself. Check the package's issue tracker on GitHub to see if anyone else is facing the same issue. If they are, you might have to wait for the package maintainer to fix the issue.
+5. **Check the package**: If the error is happening for a specific package, there might be an issue with the package itself. Check the package's issue tracker on GitHub to see if others are having the same issue.
 
-Remember to always backup your project before making any changes to it.
+6. **Use `--no-shrinkwrap` option**: This option can be used to ignore `npm-shrinkwrap.json` files when installing. Run `npm install --no-shrinkwrap`.
+
+7. **Use `--no-package-lock` option**: This option can be used to ignore `package-lock.json` files when installing. Run `npm install --no-package-lock`.
+
+Remember to always backup your project before making any changes.

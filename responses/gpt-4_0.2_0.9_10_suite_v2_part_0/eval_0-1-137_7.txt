@@ -1,32 +1,29 @@
-The error message is indicating that the `$theme-colors` map is not a valid CSS value. This is because you are trying to overwrite the `$theme-colors` map after it has been imported from Bootstrap's `_variables.scss` file.
+The error you're getting is because you're importing the Bootstrap variables before you declare your own `$theme-colors` map. The Bootstrap variables file already contains a `$theme-colors` map, and when you import it, it gets processed first. Then, when you declare your own `$theme-colors` map, it's too late because the Bootstrap variables have already been processed.
 
-To solve this issue, you need to define your custom `$theme-colors` map before importing Bootstrap's `_variables.scss` file. Here is how you can do it:
+To fix this, you should declare your `$theme-colors` map before importing the Bootstrap variables and the main Bootstrap file. Here's how you can do it:
 
 ```scss
 $theme-colors: (
-  "primary": #your-color,
-  // Add other colors if needed
+  "primary": #your-color-here
 );
 
 @import "../../node_modules/bootstrap/scss/bootstrap";
 ```
 
-In this way, your custom `$theme-colors` map will be used instead of the default one when compiling the SCSS files.
+In this code, you're declaring your `$theme-colors` map first, and then importing the Bootstrap files. This way, when the Bootstrap files get processed, they'll use your `$theme-colors` map instead of the default one.
 
-Also, make sure that the color value you are using is a valid CSS color. For example, you can use hexadecimal color codes like `#ff0000` for red, or named colors like `red`.
+Also, please note that you don't need to import the `variables` file separately because it's already included in the main `bootstrap` file.
 
-If you want to keep the other default colors and only change some of them, you can do it like this:
+If you want to change multiple colors, you can do it like this:
 
 ```scss
-@import "../../node_modules/bootstrap/scss/functions";
-@import "../../node_modules/bootstrap/scss/variables";
-
-$theme-colors: map-merge($theme-colors, (
-  "primary": #your-color,
-  // Add other colors if needed
-));
+$theme-colors: (
+  "primary": #your-primary-color,
+  "secondary": #your-secondary-color,
+  // add more colors if you want
+);
 
 @import "../../node_modules/bootstrap/scss/bootstrap";
 ```
 
-This will merge your custom colors with the default ones, overwriting only the ones you specified.
+Just replace `#your-primary-color`, `#your-secondary-color`, etc. with the actual color values you want to use.

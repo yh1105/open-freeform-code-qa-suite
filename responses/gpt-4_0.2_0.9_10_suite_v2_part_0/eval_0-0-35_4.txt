@@ -1,17 +1,15 @@
-You should be using `REDIS_TLS_URL` if you are connecting to Heroku Redis over TLS. Here is a simple example of how you can do this using the `node_redis` library:
+You should use `REDIS_TLS_URL` if you want to connect to Heroku Redis using TLS. Here's a simple example of how you can do this using `node_redis`:
 
 ```javascript
 const redis = require('redis');
 const url = require('url');
 
-let redisURL = url.parse(process.env.REDIS_TLS_URL);
-let client = redis.createClient({
-    port: redisURL.port,
-    host: redisURL.hostname,
-    password: redisURL.auth.split(":")[1],
+const redisURL = url.parse(process.env.REDIS_TLS_URL);
+const client = redis.createClient({
+    url: redisURL,
     tls: {
-        rejectUnauthorized: false
-    }
+        rejectUnauthorized: false,
+    },
 });
 
 client.on('connect', function() {
@@ -23,10 +21,8 @@ client.on('error', function (err) {
 });
 ```
 
-This code will create a new Redis client and connect to the Redis server specified in the `REDIS_TLS_URL` environment variable. The `tls` option is set to `{ rejectUnauthorized: false }` to allow connections to servers with self-signed certificates.
+In this example, we're using the `url.parse()` function to parse the `REDIS_TLS_URL` environment variable, which should contain the URL of your Heroku Redis instance. We then pass this URL to `redis.createClient()`, along with a `tls` object that sets `rejectUnauthorized` to `false`. This is necessary because Heroku's Redis instances use self-signed certificates.
 
-Please note that `rejectUnauthorized: false` should only be used for development. In production, you should use a valid certificate and set `rejectUnauthorized: true`.
+Please note that setting `rejectUnauthorized` to `false` can leave you vulnerable to man-in-the-middle attacks, so it's not recommended for production environments. For production, you should use a custom CA or a CA provided by a trusted certificate authority.
 
-Also, remember to replace `process.env.REDIS_TLS_URL` with your actual Redis TLS URL.
-
-If you're using Heroku, you can set this in your app's settings under the "Config Vars" section.
+The `client.on('connect')` and `client.on('error')` event handlers are used to log when the client successfully connects to the Redis server and when an error occurs, respectively.

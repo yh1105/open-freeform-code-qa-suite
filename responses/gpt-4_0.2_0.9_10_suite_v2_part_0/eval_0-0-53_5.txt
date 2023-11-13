@@ -1,6 +1,6 @@
-The issue here is that you're trying to use traditional JavaScript event handling inside a React component. In React, you should use the built-in event handling system. 
+The issue here is that you're mixing JavaScript and React event handling. In React, you should use the `onClick` prop to handle click events, not the `onclick` attribute you'd use in plain JavaScript. Also, you should not include a `<script>` tag inside your JSX code.
 
-Here's how you can modify your code to display the alert when the button is clicked:
+Here's the corrected code:
 
 ```javascript
 import React, { Component } from 'react'
@@ -57,4 +57,4 @@ class Main extends React.Component {
 export default Main;
 ```
 
-In this code, I've removed the `onclick` attribute and the `script` tag from the button. Instead, I've added the `alert` call to the `handleUploadImage` method, which is called when the form is submitted. This way, the alert will be displayed when the user clicks the "Upload" button.
+In this code, the `alert` function is called within the `handleUploadImage` method, which is triggered when the form is submitted. The `onClick` prop is not needed because the `onSubmit` prop of the form is handling the event.

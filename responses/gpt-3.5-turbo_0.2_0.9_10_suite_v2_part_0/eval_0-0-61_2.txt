@@ -1,11 +1,12 @@
 To change the background color of the root element dynamically with React, you can use the `ThemeProvider` component provided by Material-UI. 
 
-Here's an example of how you can use it to switch between light and dark themes:
+Here's an example of how you can use it to switch between a light and dark theme:
 
 ```jsx
 import React, { useState } from 'react';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
-import { CssBaseline } from '@material-ui/core';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Switch from '@material-ui/core/Switch';
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
@@ -16,7 +17,7 @@ function App() {
     },
   });
 
-  const handleThemeChange = () => {
+  const handleDarkModeChange = () => {
     setDarkMode(!darkMode);
   };
 
@@ -24,8 +25,9 @@ function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <div style={{ backgroundColor: theme.palette.background.default }}>
+        <Switch checked={darkMode} onChange={handleDarkModeChange} />
         <h1>Hello World</h1>
-        <button onClick={handleThemeChange}>Toggle Theme</button>
+        <p>This is a Material-UI app with a dynamic theme</p>
       </div>
     </ThemeProvider>
   );
@@ -34,8 +36,10 @@ function App() {
 export default App;
 ```
 
-In this example, we use the `createMuiTheme` function to create a theme object with a `palette` property that specifies the type of the theme (either `'light'` or `'dark'`). We then use the `ThemeProvider` component to wrap our app and pass the theme object as a prop. 
+In this example, we use the `createMuiTheme` function to create a theme object with a `palette` property that changes the type of the theme between `'dark'` and `'light'` based on the `darkMode` state. 
 
-The `CssBaseline` component is used to apply some basic styles to the page, including setting the background color of the root element to the default background color of the theme.
+We then use the `ThemeProvider` component to wrap our app and pass the theme object as a prop. The `CssBaseline` component is also included to apply global styles to the app.
 
-Finally, we use the `backgroundColor` style property to set the background color of our content div to the default background color of the theme. We also add a button to toggle the theme by updating the `darkMode` state variable.
+Finally, we use the `backgroundColor` property on the root `div` element to set the background color dynamically based on the `theme.palette.background.default` value.
+
+The `Switch` component is used to toggle the `darkMode` state and switch between the light and dark themes.

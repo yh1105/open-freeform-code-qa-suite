@@ -1,6 +1,6 @@
 First way:
 
-In the first way, you can use the `tabBarVisible` option to hide the tab bar. Here is how you can do it:
+In the first way, you can use the `tabBarVisible` option to hide the tab bar. This option should be set to `false` to hide the tab bar.
 
 ```javascript
 export default function App() {
@@ -17,12 +17,18 @@ export default function App() {
 
 Second way:
 
-In the second way, you can use the `setOptions` method of the `navigation` prop to hide the tab bar. Here is how you can do it:
+In the second way, you can use the `useEffect` hook to set the `tabBarVisible` option to `false` when the `SettingsStackScreen` is focused.
 
 ```javascript
+import { useEffect } from 'react';
+
 function SettingsStackScreen({ navigation }) {
-    React.useEffect(() => {
-        navigation.setOptions({ tabBarVisible: false });
+    useEffect(() => {
+        const unsubscribe = navigation.addListener('focus', () => {
+            navigation.setOptions({ tabBarVisible: false });
+        });
+
+        return unsubscribe;
     }, [navigation]);
 
     return (
@@ -33,4 +39,4 @@ function SettingsStackScreen({ navigation }) {
 }
 ```
 
-In this code, `React.useEffect` is a hook that runs after render. The `setOptions` method is used to update the options for the screen. The `tabBarVisible: false` option hides the tab bar. The `[navigation]` dependency array ensures that the effect runs whenever the `navigation` prop changes.
+In this code, the `useEffect` hook is used to add a listener to the `focus` event of the navigation. When the `SettingsStackScreen` is focused, the `tabBarVisible` option is set to `false`, hiding the tab bar. The `unsubscribe` function returned by `navigation.addListener` is used to clean up the listener when the component is unmounted.

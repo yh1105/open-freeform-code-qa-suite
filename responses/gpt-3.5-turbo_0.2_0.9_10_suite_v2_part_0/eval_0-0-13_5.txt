@@ -15,7 +15,7 @@ const changeHandler = e => {
       ...prevState,
       [name]: value
    }));
-}
+};
 
 return (
    <input type="text"
@@ -30,4 +30,6 @@ return (
 )
 ```
 
-In the `changeHandler` function, we destructure the `name` and `value` properties from the event target, which is the input element that triggered the change. Then we use the spread operator to create a copy of the previous state, and update the property with the new value using the computed property syntax (`[name]: value`). Finally, we pass the updated state object to the `setAllValues` function to update the state.
+In the `changeHandler` function, we destructure the `name` and `value` properties from the event target (the input field). Then, we use the spread operator to create a copy of the previous state of `allValues`, and update the property with the corresponding `name` using the `value` from the event target. Finally, we pass the updated `allValues` object to the `setAllValues` function to update the state.
+
+Note that we also added the `value` property to the input field, so that it reflects the current value of the corresponding property in the `allValues` object.

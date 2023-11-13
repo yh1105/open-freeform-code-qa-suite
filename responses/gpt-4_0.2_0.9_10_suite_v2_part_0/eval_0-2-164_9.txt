@@ -1,10 +1,10 @@
-The `.attrs()` function in styled-components is a chainable method that attaches some props to a styled component. It's a way of passing props to your styled components, which can then be used to alter the component's styles or attributes.
+The `.attrs()` function in styled-components is a chainable method that attaches additional props to a component. It's useful when you want to add static or dynamic props to your styled components.
 
 Here's a simple example:
 
 ```jsx
 const Input = styled.input.attrs(props => ({
-  type: props.type || 'text',
+  type: 'text',
   size: props.small ? '5px' : '10px',
 }))`
   color: palevioletred;
@@ -15,30 +15,16 @@ const Input = styled.input.attrs(props => ({
   padding: ${props => props.size};
 `;
 
-// Use the Input
-<Input placeholder="A small text input" small />
-<Input placeholder="A bigger text input" />
+// Use it like this:
+<Input small />
 ```
 
-In this example, the `Input` component has two attributes: `type` and `size`. The `type` attribute defaults to 'text' if no `type` prop is passed, and the `size` attribute is determined by whether the `small` prop is true or false.
+In this example, the `Input` component will always have a `type` of 'text'. The `size` prop is dynamic and depends on whether the `small` prop is passed to the component. The `size` prop is then used in the component's styles.
 
-The `attrs()` function allows you to define these attributes and their default values in one place, rather than having to do so in every instance where the component is used. This can make your code cleaner and easier to maintain.
-
-Without the `attrs()` function, you would have to pass these props directly to the component every time you use it:
+Without `.attrs()`, you would have to pass these props every time you use the component, like so:
 
 ```jsx
-const Input = styled.input`
-  color: palevioletred;
-  font-size: 1em;
-  border: 2px solid palevioletred;
-  border-radius: 3px;
-  margin: 0.5em;
-  padding: ${props => props.small ? '5px' : '10px'};
-`;
-
-// Use the Input
-<Input type="text" placeholder="A small text input" small />
-<Input type="text" placeholder="A bigger text input" />
+<Input type="text" size="5px" small />
 ```
 
-As you can see, the `attrs()` function can make your code more DRY (Don't Repeat Yourself) and easier to read.
+So, `.attrs()` can help to reduce redundancy and make your code cleaner.

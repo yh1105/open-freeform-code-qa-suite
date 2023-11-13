@@ -1,21 +1,24 @@
-The error message you're seeing is due to a conflict between the Node.js and npm installations on your Windows system and the ones in your WSL2 environment. 
+The error message you're seeing is due to a conflict between the Node.js and npm versions installed on your Windows system and those installed in your WSL2 environment. 
 
-When you run `npm -v`, the shell is trying to execute the npm script located in your Windows system (`/mnt/c/Program Files/nodejs/npm`), which is not compatible with the Linux environment provided by WSL2.
+When you run `node -v` or `npm -v`, the system is trying to execute the Windows version of these programs, which won't work because of the differences in how Windows and Linux handle executable files.
 
-To resolve this issue, you need to adjust your `PATH` environment variable in the WSL2 environment to prioritize the Linux versions of Node.js and npm over the Windows ones. 
+To solve this issue, you need to remove the Windows PATH from the WSL2 environment and add the correct PATH for the Linux versions of Node.js and npm.
 
-You can do this by adding the following line to your `~/.bashrc` or `~/.zshrc` file (depending on which shell you're using):
+Here are the steps to do this:
 
-```bash
-export PATH=/usr/bin:$PATH
-```
+1. Open your `.bashrc` file in a text editor. You can do this by running the command `nano ~/.bashrc`.
 
-This line will ensure that the directories containing the Linux versions of Node.js and npm are searched before the ones containing the Windows versions.
+2. Add the following lines at the end of the file:
 
-After adding this line, you need to reload your shell configuration file with the following command:
+    ```bash
+    export PATH="$HOME/.npm-global/bin:$PATH"
+    export PATH="/usr/bin:$PATH"
+    ```
 
-```bash
-source ~/.bashrc  # or source ~/.zshrc
-```
+    The first line adds the global npm directory to your PATH, which is where global npm packages are installed. The second line ensures that the system will look in `/usr/bin` for executables, which is where the Linux version of Node.js and npm are installed.
 
-Now, when you run `node -v` and `npm -v`, you should see the versions installed in your WSL2 environment.
+3. Save the file and exit the text editor.
+
+4. Run the command `source ~/.bashrc` to apply the changes.
+
+5. Now, when you run `node -v` and `npm -v`, you should see the versions of Node.js and npm that are installed in your WSL2 environment.

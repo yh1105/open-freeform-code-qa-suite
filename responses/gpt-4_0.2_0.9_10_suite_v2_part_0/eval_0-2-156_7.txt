@@ -1,32 +1,27 @@
-Based on your HTML structure, it seems like your "Stop Game" button is inside the `#GameRunning` div, which might be positioned behind the game frame. Here are a few suggestions to fix this issue:
+From your HTML code, it seems that the "Stop Game" button is inside the `#GameRunning` div, which is probably positioned behind the game frame. To move the "Stop Game" button to the top, you can use CSS positioning properties such as `position: absolute;` or `position: fixed;` and then use `top`, `right`, `bottom`, and `left` properties to position it exactly where you want.
 
-1. **CSS Positioning**: You can use CSS positioning to move the "Stop Game" button to the desired location. If you want to align it with the "Begin Game" button, you can use absolute positioning. Here's an example:
+Here is an example of how you can modify your CSS:
 
 ```css
 #GameRunning {
     position: absolute;
-    top: 0; /* adjust as needed */
-    left: 0; /* adjust as needed */
+    top: 10px; /* Adjust this value to position the button vertically */
+    right: 10px; /* Adjust this value to position the button horizontally */
 }
 ```
 
-2. **HTML Structure**: You could also adjust your HTML structure to place the "Stop Game" button in a more appropriate location. For example, you could place it next to the "Begin Game" button inside the `#GameStopped` div. Here's an example:
+This will position the "Stop Game" button at the top right of the page. You can adjust the `top` and `right` values to position the button exactly where you want.
 
-```html
-<div id="GameStopped">
-    <button id="StartBtn" class="btnStyle" onclick="gameStarted=true;">Begin Game</button>
-    <button id="StopBtn" class="btnStyle" onclick="self.close()">Stop Game</button>
-    <div class="Status">Click Begin Game to start</div>
-</div>
-```
+However, please note that using `position: absolute;` will position the element relative to the nearest positioned ancestor. If an absolute positioned element has no positioned ancestors, it uses the document body, and moves along with page scrolling.
 
-3. **Flexbox or Grid**: If you want more control over the layout, you could use CSS Flexbox or Grid. These allow you to create complex layouts with less code. Here's a Flexbox example:
+If you want the "Stop Game" button to stay at the same place even when the page is scrolled, you can use `position: fixed;` instead of `position: absolute;`.
 
 ```css
-#GameStopped {
-    display: flex;
-    justify-content: space-between; /* or 'space-around', 'space-evenly', etc. */
+#GameRunning {
+    position: fixed;
+    top: 10px; /* Adjust this value to position the button vertically */
+    right: 10px; /* Adjust this value to position the button horizontally */
 }
 ```
 
-Remember to adjust the CSS and HTML according to your specific needs.
+This will make the "Stop Game" button stay at the same place even when the page is scrolled.

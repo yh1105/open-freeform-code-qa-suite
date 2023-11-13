@@ -1,33 +1,13 @@
-The issue seems to be with the format of the `theme-colors` map. In Bootstrap 5, the `theme-colors` map should be defined as follows:
+The issue is that you are missing a comma after the primary color value in your `$theme-colors` map. Here's the corrected code:
 
 ```scss
+@import "../../node_modules/bootstrap/scss/variables";
+
 $theme-colors: (
-  "primary":    $primary,
-  "secondary":  $secondary,
-  "success":    $success,
-  "info":       $info,
-  "warning":    $warning,
-  "danger":     $danger,
-  "light":      $light,
-  "dark":       $dark
-) !default;
-```
-
-Where `$primary`, `$secondary`, `$success`, `$info`, `$warning`, `$danger`, `$light`, and `$dark` are the default color variables defined in Bootstrap's `_variables.scss` file.
-
-To override the default colors, you can redefine these variables before importing Bootstrap:
-
-```scss
-$primary: #your-color-here;
-$secondary: #your-color-here;
-$success: #your-color-here;
-$info: #your-color-here;
-$warning: #your-color-here;
-$danger: #your-color-here;
-$light: #your-color-here;
-$dark: #your-color-here;
+  "primary": #your-color-here,
+);
 
 @import "../../node_modules/bootstrap/scss/bootstrap";
 ```
 
-Make sure to define the color variables before importing Bootstrap, otherwise, the default values will be used.
+Make sure to replace `#your-color-here` with your desired primary color value. After making this change, try compiling your SCSS file again and the error should be resolved.

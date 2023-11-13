@@ -1,4 +1,4 @@
-The error message you are seeing indicates that there is an issue with the line endings in the `npm` executable file. This can happen when the file was created on a Windows system and then copied over to a Linux system.
+The error message you are seeing suggests that there is an issue with the line endings in the `npm` executable file. This is a common issue when using files created in Windows on a Linux system.
 
 To fix this issue, you can try the following steps:
 
@@ -12,4 +12,4 @@ If this does not work, you can try reinstalling `npm` using the following comman
 sudo apt-get install -y npm
 ```
 
-This should install the latest version of `npm` and ensure that the line endings are correct.
+This should install the latest version of `npm` and set it up correctly.

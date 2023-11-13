@@ -1,4 +1,4 @@
-The code you provided looks correct. However, it's possible that the `getCurrentPosition` method is failing silently. To handle errors, you can add a second function as the second argument of `getCurrentPosition` method. Here's the revised code:
+The code you provided looks correct. However, if the location is not available, the `getCurrentPosition()` function will not be called, and therefore the `console.log("Location accessed")` statement will not be executed. Instead, you can add an error callback function to handle the case where the location is not available. Here's the revised code:
 
 ```javascript
 if (navigator.geolocation) {
@@ -15,4 +15,4 @@ if (navigator.geolocation) {
 }
 ```
 
-With this revised code, if there's an error getting the location, the `error` function will be called and "User not allowed" will be logged to the console.
+In this revised code, if the location is not available, the error callback function will be called and the message "User not allowed" will be logged to the console.

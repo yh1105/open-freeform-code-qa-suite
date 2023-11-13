@@ -1,20 +1,27 @@
-The issue seems to be with the format of the `$theme-colors` variable. In Bootstrap 5, the `$theme-colors` variable should be defined as a map of color names to color values in the format of a string. The error message suggests that the value you provided is not a valid CSS value.
-
-To fix this issue, you can define the `$theme-colors` variable as follows:
+The issue is with the syntax of your `$theme-colors` map. You need to use a colon `:` instead of an equal sign `=` to separate the key and value pairs. Here's the corrected code:
 
 ```scss
+@import "../../node_modules/bootstrap/scss/variables";
+
 $theme-colors: (
-  "primary": #0d6efd,
-  "secondary": #6c757d,
-  "success": #198754,
-  "info": #0dcaf0,
-  "warning": #ffc107,
-  "danger": #dc3545,
-  "light": #f8f9fa,
-  "dark": #212529
+  "primary": #your-color-here,
 );
 
 @import "../../node_modules/bootstrap/scss/bootstrap";
 ```
 
-Make sure to replace the color values with your desired colors. This should fix the invalid CSS value error and allow you to customize Bootstrap's default theme colors using SASS.
+Replace `#your-color-here` with the color you want to use for the primary theme color.
+
+Also, make sure you have installed the required dependencies for SASS to work properly. You can install them using the following command:
+
+```
+npm install sass sass-loader --save-dev
+```
+
+After that, you can compile your SCSS file to CSS using the following command:
+
+```
+sass style.scss custom.css
+```
+
+This will compile your `style.scss` file to `custom.css` file.

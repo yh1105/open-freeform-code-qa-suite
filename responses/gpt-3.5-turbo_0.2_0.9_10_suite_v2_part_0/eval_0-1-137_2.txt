@@ -1,18 +1,13 @@
-The issue is with the way you are defining your `$theme-colors` map. You need to define the colors as valid CSS values, which means enclosing them in quotes and adding a semicolon at the end of each value. Here's an example:
+The issue is that you are missing a comma after the value of the primary color in the `$theme-colors` map. Here's the corrected code:
 
 ```scss
+@import "../../node_modules/bootstrap/scss/variables";
+
 $theme-colors: (
-  "primary": "#0d6efd",
-  "secondary": "#6c757d",
-  "success": "#198754",
-  "info": "#0dcaf0",
-  "warning": "#ffc107",
-  "danger": "#dc3545",
-  "light": "#f8f9fa",
-  "dark": "#212529"
+  "primary": #0d6efd, // add a comma here
 );
 
 @import "../../node_modules/bootstrap/scss/bootstrap";
 ```
 
-Note that each color value is enclosed in quotes and ends with a semicolon. This should fix the invalid CSS value error you were getting.
+Make sure to add a comma after each key-value pair in the `$theme-colors` map. This should fix the invalid CSS value error.

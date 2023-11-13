@@ -1,6 +1,6 @@
-Font Awesome 5 has made some changes in the way it is used compared to Font Awesome 4. The `font-family` is now separated into three different categories: `Font Awesome 5 Free`, `Font Awesome 5 Brands`, and `Font Awesome 5 Pro`. The `content` values have also been changed for some icons.
+Font Awesome 5 has made some changes in its structure. The `font-family` is now divided into different styles like `Font Awesome 5 Free`, `Font Awesome 5 Brands`, and `Font Awesome 5 Pro`. Also, the `content` value has been changed for some icons.
 
-For your specific case, you can try the following:
+Here is how you can modify your CSS to work with Font Awesome 5:
 
 ```css
 #mainNav .navbar-collapse .navbar-sidenav .nav-link-collapse:after {
@@ -11,4 +11,6 @@ For your specific case, you can try the following:
 }
 ```
 
-Here, I've changed the `font-family` to `"Font Awesome 5 Free"` and the `content` value to `"\f105"` which corresponds to the right arrow in Font Awesome 5. Also, I've added `font-weight: 900;` because Font Awesome 5 uses different font weights to differentiate between solid (`font-weight: 900;`), regular (`font-weight: 400;`), and light (`font-weight: 300;`) icons.
+In the above code, I have used `Font Awesome 5 Free` as the `font-family` and `font-weight` is set to `900` which is required for solid icons. The `content` value `"\f105"` is for the right arrow icon in Font Awesome 5.
+
+Please replace the `font-family` and `content` with the appropriate values based on the icon you want to use. You can find these details on the Font Awesome website.

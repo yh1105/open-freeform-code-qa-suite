@@ -1,29 +1,47 @@
 To identify if a div is visible on the viewport, you can use the Intersection Observer API. Here's an example of how you can use it:
 
 ```javascript
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      console.log(entry.target.id + ' is visible');
+import React, { useRef, useEffect, useState } from "react";
+
+const Component = ({ data }) => {
+  const [visibleIds, setVisibleIds] = useState([]);
+  const parentRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .map((entry) => entry.target.id);
+        setVisibleIds(visible);
+      },
+      { threshold: 0.5 }
+    );
+
+    const children = parentRef.current.children;
+    for (let i = 0; i < children.length; i++) {
+      observer.observe(children[i]);
     }
-  });
-});
 
-data.forEach(item => {
-  const div = document.createElement('div');
-  div.id = item.id;
-  div.innerText = item.title;
-  document.querySelector('#parent').appendChild(div);
-  observer.observe(div);
-});
+    return () => observer.disconnect();
+  }, [data]);
+
+  return (
+    <div id="parent" ref={parentRef}>
+      {data.map((item) => (
+        <div key={item.id} id={item.id}>
+          {item.title}
+        </div>
+      ))}
+    </div>
+  );
+};
+
+export default Component;
 ```
 
-This code creates an `IntersectionObserver` instance and observes each div that you create. When a div becomes visible on the viewport, the `isIntersecting` property of the `entry` object is `true`, and you can log a message to the console.
+In this example, we're using the `IntersectionObserver` API to observe each child element of the `#parent` div. When an element intersects with the viewport by at least 50%, we add its `id` to the `visibleIds` state. You can adjust the threshold value to your liking.
 
-You can install the Intersection Observer API using npm by running `npm install intersection-observer`. Then, you can import it in your code like this:
+Note that we're using the `useRef` hook to get a reference to the `#parent` div, and we're using the `useEffect` hook to set up the `IntersectionObserver` and clean it up when the component unmounts.
 
-```javascript
-import 'intersection-observer';
-```
-
-This will make the `IntersectionObserver` constructor available globally.
+There are also some npm packages available that can help you with this, such as `react-intersection-observer` and `react-waypoint`. These packages provide a higher-level API for using the `IntersectionObserver` API. You can check their documentation to see if they fit your needs.

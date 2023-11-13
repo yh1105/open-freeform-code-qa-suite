@@ -6,14 +6,17 @@ import { useRouter } from "next/navigation";
 export default function Component(){
     const router = useRouter();
 
-    // function to handle creating new data
+    // function to handle creating new data and reloading the page
     const handleCreateData = () => {
-        // logic to create new data
+        // code to create new data
         router.reload();
     }
 
-    // render dialog and other components
+    // render your component with a button or other element to trigger handleCreateData
+    return (
+        <div>
+            <button onClick={handleCreateData}>Create Data</button>
+        </div>
+    );
 }
 ```
-
-When `handleCreateData` is called, it will create the new data and then trigger a client-side reload using `router.reload()`. This will reload the current page and call `getInitialProps` on the client-side.

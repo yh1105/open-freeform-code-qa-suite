@@ -1,7 +1,39 @@
-It sounds like you might be referring to Emmet, a tool that allows you to write HTML and CSS code faster and more efficiently. Emmet uses abbreviations to generate code snippets. For example, typing `.classname` and then pressing the `Tab` key will generate `<div class="classname"></div>`.
+It sounds like you might be trying to use a CSS preprocessor like Sass or Less. These preprocessors allow you to write CSS in a more efficient way by using variables, mixins, and other features. One of the features they offer is the ability to use shorthand notation to create CSS rules.
 
-To use Emmet, you need to make sure it's enabled in your code editor. Most popular code editors like Visual Studio Code, Sublime Text, and Atom have Emmet built-in or available as an extension.
+For example, instead of writing out:
 
-Once Emmet is enabled, you can start using its abbreviations to generate code snippets. Make sure you're typing the abbreviation in the correct syntax, which is usually a combination of a tag name and a class or ID name. For example, to generate a div with a class of "container", you would type `div.container` and then press the `Tab` key.
+```
+div {
+  background-color: red;
+  color: white;
+  font-size: 16px;
+}
+```
 
-If you're still having trouble getting Emmet to work, check the documentation for your code editor or search for tutorials on how to use Emmet with your specific editor.
+You could write:
+
+```
+div {
+  background-color: red;
+  color: white;
+  font-size: 16px;
+}
+
+.classname {
+  @extend div;
+}
+```
+
+This would create a CSS rule for `.classname` that inherits all the properties of `div`. When you use `.classname` in your HTML, it will automatically have the same styles as `div`.
+
+If you're not using a preprocessor and you're just trying to use shorthand notation in regular CSS, make sure you're using the correct syntax. For example, to create a class with the same styles as `div`, you would write:
+
+```
+.classname {
+  background-color: red;
+  color: white;
+  font-size: 16px;
+}
+```
+
+Then you can use `<div class="classname">` in your HTML to apply those styles to the div.

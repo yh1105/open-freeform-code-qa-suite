@@ -1,19 +1,21 @@
-The error message indicates that Python is not installed on your system or it is not added to the PATH environment variable. 
+The error message indicates that Python is not installed on your system. You need to install Python 2.7.x version on your Windows machine and add it to your system's PATH environment variable.
 
-To fix this issue, you need to install Python and add it to the PATH environment variable. Here are the steps to follow:
+Here are the steps to follow:
 
-1. Download and install Python from the official website: https://www.python.org/downloads/
-
-2. During the installation process, make sure to select the option to add Python to the PATH environment variable.
-
-3. After the installation is complete, open a new command prompt and type `python` to verify that Python is installed and added to the PATH.
-
-4. If Python is installed and added to the PATH, try running the build again.
-
-If the issue persists, you may need to update node-gyp to the latest version by running the following command:
+1. Download Python 2.7.x version from the official website: https://www.python.org/downloads/windows/
+2. Install Python by running the downloaded installer and follow the installation wizard.
+3. During the installation, make sure to select the option "Add Python to PATH".
+4. After the installation is complete, open a new command prompt and run the following command to verify that Python is installed and added to the PATH:
 
 ```
-npm install -g node-gyp
+python --version
 ```
 
-Then try running the build again.
+5. If the command returns the version number of Python, then it is installed correctly. If not, you may need to add Python to the PATH manually.
+6. To add Python to the PATH manually, follow these steps:
+   - Open the Control Panel and go to System and Security > System > Advanced system settings.
+   - Click on the Environment Variables button.
+   - Under System Variables, scroll down and find the PATH variable, then click on Edit.
+   - Add the path to the Python installation directory (e.g. C:\Python27) to the end of the variable value, separated by a semicolon (;).
+   - Click OK to save the changes.
+7. After adding Python to the PATH, try running the build again. It should now be able to find the Python executable and complete the build successfully.

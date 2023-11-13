@@ -1,4 +1,4 @@
-Yes, you can define an interface for the object type and use it to specify the type of the array parameter. Here's an example:
+To define an array of objects with a specific structure, you can use an interface. Here's an example of how you can define an interface for the objects in the array:
 
 ```typescript
 interface Product {
@@ -6,10 +6,14 @@ interface Product {
   price: number;
   description: string;
 }
+```
 
-const bagTotal = (products: Product[]) => {
-  // function does stuff
+Then, you can use this interface to define the type of the `products` parameter in your function:
+
+```typescript
+bagTotal = (products: Product[]) => {
+ // function does stuff
 }
 ```
 
-This defines an interface called `Product` that specifies the properties and their types for the objects in the array. Then, the `bagTotal` function takes an array of `Product` objects as a parameter.
+This will ensure that the `products` parameter is an array of objects that have the `name`, `price`, and `description` properties with the correct types.

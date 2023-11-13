@@ -1,17 +1,23 @@
-The error is coming from the `v-for` directive in your Vue template. Vue uses the `key` attribute to track each node's identity, and thus it can reuse and reorder existing elements. You should always use `key` with `v-for`.
+The error message is indicating that Vue.js is expecting a primitive value (string or number) as a key for the `v-for` directive, but it's getting a non-primitive value (in this case, an object) instead.
 
-However, the `key` should be a unique identifier. In your case, you're using the whole `comment` object as the key, which is a non-primitive value (an object). Vue recommends using string or number values instead.
+In your code, you're using `comment` as the key in your `v-for` loop:
 
-If your `comment` objects have a unique identifier, like an `id`, you should use that as the key:
+```html
+<div v-for="comment in comments" :key="comment">
+```
+
+`comment` is an object, which is a non-primitive value. Vue.js uses the `key` to track each node's identity, so it can reuse and reorder existing elements. You should use a unique primitive value (like an id or index) as the key.
+
+If each `comment` has a unique id, you can use that as the key:
 
 ```html
 <div v-for="comment in comments" :key="comment.id">
 ```
 
-If they don't have a unique identifier, you can use the index of the loop:
+If there's no unique id, you can use the index of the loop:
 
 ```html
 <div v-for="(comment, index) in comments" :key="index">
 ```
 
-Remember that using the index as a key only works well if your list does not change (no items are added or removed). If the list can change, it's better to use unique identifiers.
+Just remember that using the index as a key only works well if your list doesn't change. If you're adding, removing, or reordering items in the list, it's better to use a unique id.

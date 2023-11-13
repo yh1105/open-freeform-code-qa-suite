@@ -1,34 +1,13 @@
-As of now, Angular CLI does not have a built-in command to remove a package installed using `ng add`. However, you can manually remove the package by following these steps:
-
-1. Remove the package from `package.json` file by running `npm uninstall <package-name> --save`.
-
-2. Remove the package from `angular.json` file by opening the file and removing the configuration related to the package. For example, if you installed `@angular/material`, you will find a section in `angular.json` file that looks like this:
+To remove a package installed using `ng add`, you can use the following command:
 
 ```
-"styles": [
-    "src/styles.css"
-],
-"scripts": [],
-"assets": [],
-"projects": {
-    "your-project-name": {
-        "architect": {
-            "build": {
-                "options": {
-                    "styles": [
-                        "node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-                        "src/styles.css"
-                    ],
-                    "scripts": []
-                }
-            }
-        }
-    }
-}
+ng remove <package-name>
 ```
 
-You need to remove the `"node_modules/@angular/material/prebuilt-themes/indigo-pink.css"` line from the `"styles"` array.
+For example, if you want to remove the `@angular/material` package, you can use the following command:
 
-3. Remove the package from your project by running `rm -rf node_modules/<package-name>`.
+```
+ng remove @angular/material
+```
 
-After completing these steps, the package should be completely removed from your project.
+This will remove the package and also remove any configuration changes made by the `ng add` command.

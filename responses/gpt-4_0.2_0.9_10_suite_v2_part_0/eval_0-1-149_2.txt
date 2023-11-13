@@ -1,17 +1,15 @@
-Sure, you can achieve this by using the `group-hover` class in Tailwind CSS. This class applies styles to an element when its parent is being hovered over. 
-
-Here is an example of how you can modify your code to create an animation when hovering over the link:
+Sure, you can achieve this by using Tailwind CSS's group-hover variant. Here's how you can modify your code:
 
 ```html
-<a href="#" class="group">
-    <span class="text-sky-600 transition-all duration-300">Link</span>
+<a href="#" class="group inline-block text-sky-600 transition duration-300">
+    Link
     <span class="block w-0 h-0.5 bg-sky-600 transition-all duration-500 group-hover:w-full"></span>
 </a>
 ```
 
-In this example, the width of the span is initially set to 0 (`w-0`) and then changes to full width (`w-full`) when the link is hovered over. The `transition-all` and `duration-500` classes are used to animate this change in width.
+In this code, I've added the `inline-block` class to the anchor tag to make the width transition work properly. I've also changed the `max-w-0` class to `w-0` in the span tag to start the width from 0. The `transition-all` class is added to apply the transition to all properties. Finally, the `group-hover:w-full` class is added to make the width 100% when the anchor tag is hovered over.
 
-Please note that the `group-hover` variant is not enabled for all utilities by default in Tailwind CSS. If it's not working, you may need to enable it in your Tailwind CSS configuration file (`tailwind.config.js`). Here is how you can do it:
+Please note that the `group-hover` variant is not enabled by default in Tailwind CSS. You need to enable it in your Tailwind CSS configuration file (`tailwind.config.js`) like this:
 
 ```javascript
 module.exports = {
@@ -24,4 +22,4 @@ module.exports = {
 }
 ```
 
-This configuration will enable the `group-hover` variant for the `width` utility.
+This will enable the `group-hover` variant for the `width` utility. If you want to enable it for all utilities, you can replace `width` with `all`.

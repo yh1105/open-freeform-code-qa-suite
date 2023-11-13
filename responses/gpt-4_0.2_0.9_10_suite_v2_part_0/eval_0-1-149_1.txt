@@ -1,24 +1,30 @@
-Sure, I can help you with that. Here's how you can achieve a hover animation effect using Tailwind CSS:
+Sure, you can achieve this by using the `group-hover` utility provided by Tailwind CSS. This utility applies styles to a child element when hovering over a parent element. 
+
+Here's how you can modify your code:
 
 ```html
-<a href="#" class="group relative text-sky-600 transition duration-300">
-    Link
-    <span class="absolute left-0 w-0 h-0.5 bg-sky-600 transition-all duration-500 group-hover:w-full"></span>
+<a href="#" class="group">
+    <span class="text-sky-600 transition duration-300 group-hover:text-sky-900">Link</span>
+    <span class="block w-0 h-0.5 bg-sky-600 transition-all duration-500 group-hover:w-full"></span>
 </a>
 ```
 
-In the above code, I've made the following changes:
+In the above code, the width of the span element is initially set to 0. When you hover over the link, the `group-hover:w-full` utility is applied, which changes the width to 100%. The `transition-all` utility is used to animate this change.
 
-1. I've added the `relative` class to the anchor tag. This is to position the span element relative to the anchor tag.
+Please note that you need to enable `group-hover` variant for `width` in your Tailwind CSS configuration file (`tailwind.config.js`) if it's not enabled by default:
 
-2. I've added the `absolute` class to the span element. This is to position the span element absolutely within the anchor tag.
+```js
+module.exports = {
+  theme: {
+    extend: {},
+  },
+  variants: {
+    extend: {
+      width: ['group-hover'],
+    },
+  },
+  plugins: [],
+}
+```
 
-3. I've added the `left-0` class to the span element. This is to position the span element at the left edge of the anchor tag.
-
-4. I've added the `w-0` class to the span element. This is to initially set the width of the span element to 0.
-
-5. I've added the `transition-all` class to the span element. This is to apply a transition effect to all properties of the span element.
-
-6. I've added the `group-hover:w-full` class to the span element. This is to set the width of the span element to full when the anchor tag is hovered over.
-
-With these changes, the span element will animate from a width of 0 to full width when the anchor tag is hovered over, creating a hover animation effect.
+Remember to rebuild your CSS after modifying the configuration file.

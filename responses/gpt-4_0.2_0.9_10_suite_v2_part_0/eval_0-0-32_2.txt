@@ -1,14 +1,14 @@
-You can use the `react-intersection-observer` npm package to achieve this. This package provides a set of React components and hooks to connect your project with the Intersection Observer API.
+You can use the `react-intersection-observer` npm module to detect whether an element is in the viewport or not. 
 
-First, install the package using npm:
+First, install the module using npm:
 
 ```bash
 npm install react-intersection-observer
 ```
 
-Then, you can use the `useInView` hook from `react-intersection-observer` to track the visibility of each div. Here is an example of how you can use it:
+Then, you can use the `useInView` hook from `react-intersection-observer` to track the visibility of each div. Here is an example:
 
-```javascript
+```jsx
 import React from 'react';
 import { useInView } from 'react-intersection-observer';
 
@@ -17,13 +17,13 @@ const MyComponent = ({ data }) => {
     <div id="parent">
       {data.map(item => {
         const { ref, inView } = useInView({
-          triggerOnce: false, // Change to true if you want to track only the first visibility change
+          triggerOnce: false, // Change this to true if you want the event to trigger only once
         });
 
         return (
           <div id={item.id} ref={ref}>
             {inView ? 'In viewport' : 'Not in viewport'}
-            {data.title}
+            {item.title}
           </div>
         );
       })}
@@ -34,6 +34,20 @@ const MyComponent = ({ data }) => {
 export default MyComponent;
 ```
 
-In this example, `useInView` returns an object containing `ref` and `inView`. You attach `ref` to the div you want to observe, and `inView` will be a boolean indicating whether the div is in the viewport or not.
+In this example, `useInView` returns a `ref` that you can attach to the div. It also returns `inView`, a boolean that tells you whether the div is in the viewport or not.
 
-Please note that the Intersection Observer API is not supported in all browsers (notably, it's not supported in Internet Explorer). If you need to support these browsers, you may need to use a polyfill.
+Please note that you need to wrap your component with `Observer` from `react-intersection-observer` if you want to use `useInView` hook. 
+
+Also, remember to polyfill `IntersectionObserver` if your target browsers do not support it. You can use `intersection-observer` npm package for this. 
+
+```bash
+npm install intersection-observer
+```
+
+Then, import it in your main application file:
+
+```javascript
+import 'intersection-observer';
+```
+
+This will ensure that `IntersectionObserver` is available in all browsers.

@@ -1,8 +1,10 @@
-The ESLint error you're seeing is because the anonymous function you're using in the `render` property doesn't have a `displayName`. This is a rule in ESLint to help make your code more readable and maintainable.
+The ESLint error you're seeing is because you're using an anonymous function as a component. ESLint expects all components to have a `displayName` for debugging purposes. 
 
-You can fix this by either disabling the rule for that line, or by giving the function a name. Here are both solutions:
+In your case, you can solve this by either disabling the rule for that line or by creating a named function and using that instead.
 
-**1. Disabling the rule for that line:**
+Here's how you can do it:
+
+**Option 1: Disable the rule for that line**
 
 ```jsx
 const columns_payment_summary_table = [ 
@@ -18,19 +20,19 @@ const columns_payment_summary_table = [
   ]
 ```
 
-**2. Giving the function a name:**
+**Option 2: Create a named function**
 
 ```jsx
+const renderGroup = text => <span>{getCountForCountry(text)}</span>;
+
 const columns_payment_summary_table = [ 
     {
       title: FooConstants.LABEL_QUANTITY_SELECTED,
       dataIndex: 'group',
       key: 'group',
-      render: function renderGroup(text) {
-        return <span>{getCountForCountry(text)}</span>
-      },
+      render: renderGroup,
     }
   ]
 ```
 
-In the second solution, the function `renderGroup` now has a `displayName` of "renderGroup", which satisfies the ESLint rule.
+In the second option, `renderGroup` is a named function, so ESLint won't complain about it.

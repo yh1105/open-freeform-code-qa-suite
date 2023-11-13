@@ -1,57 +1,17 @@
-Sure, you can use a recursive function to traverse the tree until you find the object with the given `id`. Here is an example of how you can do it:
+Sure, here is a recursive function that will search through the nested JSON object tree and return the object with the specified `id`.
 
 ```javascript
-function findObject(obj, id) {
-    if (obj.id === id) {
-        return obj;
-    } else if (obj.child) {
-        var result = null;
-        for (var i = 0; result == null && i < obj.child.length; i++) {
-            result = findObject(obj.child[i], id);
-        }
-        return result;
+function findObject(id, root_node) {
+    if (root_node.id === id) {
+        return root_node;
     }
-    return null;
-}
-```
-
-This function starts by checking if the current object's `id` is the one we're looking for. If it is, it returns the object. If it's not, it checks if the object has a `child` property. If it does, it loops through each child and calls `findObject` on it. If one of these calls returns a non-null result, it stops the loop and returns the result. If none of the children have the `id` we're looking for, it returns `null`.
-
-You can use this function like this:
-
-```javascript
-var tree = {
-    "id": "A",
-    "name": "Item A",
-    "child": [
-        {
-            "id": "B",
-            "name": "Item B",
-            "child": [
-                {
-                    "id": "C",
-                    "name": "Item C",
-                    "child": []
-                }
-            ]
-        },
-        {
-            "id": "D",
-            "name": "Item D",
-            "child": []
+    for (let i = 0; i < root_node.child.length; i++) {
+        let found = findObject(id, root_node.child[i]);
+        if (found) {
+            return found;
         }
-    ]
-};
-
-console.log(findObject(tree, "C"));
-```
-
-This will output:
-
-```javascript
-{
-  "id": "C",
-  "name": "Item C",
-  "child": []
+    }
 }
 ```
+
+This function works by first checking if the `id` of the `root_node` matches the `id` we are looking for. If it does, it returns the `root_node`. If it doesn't, it loops through each of the `child` nodes of the `root_node` and recursively calls `findObject` on them. If the `id` is found in one of the `child` nodes, it returns that node. If the `id` is not found in any of the `child` nodes, the function will return `undefined`.

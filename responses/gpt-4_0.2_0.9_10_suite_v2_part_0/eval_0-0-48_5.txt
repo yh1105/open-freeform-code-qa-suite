@@ -1,4 +1,4 @@
-Sure, you can use intersection types (`&`) to combine the two types. Here is the corrected TypeScript code:
+Sure, you can't directly combine two mapped types like that. Instead, you should create two separate types and then use the `&` operator to combine them into a single type. Here's how you can do it:
 
 ```typescript
 type FruitsAndColors = {
@@ -8,4 +8,4 @@ type FruitsAndColors = {
 }
 ```
 
-This will create a type `FruitsAndColors` where each fruit has a numeric property and each color has a boolean property.
+This will create a type `FruitsAndColors` where each fruit has a numeric value and each color has a boolean value.

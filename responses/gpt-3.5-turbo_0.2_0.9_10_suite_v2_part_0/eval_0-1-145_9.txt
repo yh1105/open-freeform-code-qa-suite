@@ -2,10 +2,10 @@ The `truncate` class in TailwindCSS only works if the element has a fixed width.
 
 ```html
 <div class="ml-1 inline-block">
-  <span>Label: </span>
-  <span class="font-semibold truncate w-40">
-    long texttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt
-  </span>
+   <span>Label: </span>
+   <span class="font-semibold truncate w-40">
+     long texttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt
+   </span>
 </div>
 ```
 

@@ -1,4 +1,4 @@
-You can remove the `onclick` attribute from the `button` element and add an `onClick` event handler to the `handleUploadImage` function. Inside the `handleUploadImage` function, you can add the `alert` message before making the API call. Here's the revised code:
+You can remove the `onclick` attribute from the `button` element and instead add an `onClick` event handler to the button element in the `render` method. Here's the revised code:
 
 ```javascript
 import React, { Component } from 'react'
@@ -13,12 +13,11 @@ class Main extends React.Component {
     };
 
     this.handleUploadImage = this.handleUploadImage.bind(this);
+    this.handleUploadButtonClick = this.handleUploadButtonClick.bind(this);
   }
 
   handleUploadImage(ev) {
     ev.preventDefault();
-
-    alert("Your file is being uploaded!");
 
     const data = new FormData();
     data.append('file', this.uploadInput.files[0]);
@@ -34,6 +33,10 @@ class Main extends React.Component {
     });
   }
 
+  handleUploadButtonClick() {
+    alert("Your file is being uploaded!");
+  }
+
   render() {
     return (
       <form onSubmit={this.handleUploadImage}>
@@ -45,7 +48,7 @@ class Main extends React.Component {
         </div>
         <br />
         <div>
-          <button>Upload</button>
+          <button onClick={this.handleUploadButtonClick}>Upload</button>
         </div>
         <img src={this.state.imageURL} alt="img" />
       </form>
@@ -54,4 +57,6 @@ class Main extends React.Component {
 }
 
 export default Main;
-```
+``` 
+
+This way, the `handleUploadButtonClick` function will be called when the button is clicked, and it will display the alert message.

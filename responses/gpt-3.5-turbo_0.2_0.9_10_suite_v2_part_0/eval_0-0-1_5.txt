@@ -1,13 +1,13 @@
-When deploying a NextJS app to Vercel, it is important to ensure that the app is properly configured for deployment. Here are some steps you can take to troubleshoot the issue:
+If you are receiving a 404 error when deploying your NextJS app to Vercel, it is likely that the issue is related to the routing configuration. Here are some steps you can take to troubleshoot the issue:
 
-1. Check the Vercel logs: Vercel provides detailed logs for each deployment. Check the logs to see if there are any errors or warnings that could be causing the issue.
+1. Check your `package.json` file to ensure that the `start` script is set to `next start`. This is the command that Vercel will use to start your app.
 
-2. Check the file structure: Make sure that the file structure of your app is correct. Vercel expects the pages to be in the `pages` directory and the API routes to be in the `api` directory. If your app has a different file structure, you may need to configure Vercel to use a custom build command.
+2. Make sure that your `pages` directory is located in the root of your project. This is the default location for NextJS apps, and Vercel expects to find your pages there.
 
-3. Check the dynamic route: If you have a dynamic route in your app, make sure that it is properly configured. Dynamic routes in NextJS require a specific file naming convention. For example, a dynamic route with the path `/posts/[id]` would require a file named `pages/posts/[id].js`.
+3. Check your dynamic route to ensure that it is properly configured. Dynamic routes in NextJS are defined using square brackets, like this: `[id].js`. Make sure that your dynamic route is defined correctly and that the file name matches the name of the parameter in the square brackets.
 
-4. Check the build command: Make sure that the build command in your `package.json` file is correct. The build command for a NextJS app should be `next build`.
+4. If you are using custom server-side code, make sure that it is properly configured for deployment on Vercel. Vercel has specific requirements for server-side code, so you may need to make some adjustments to your code to ensure that it works correctly.
 
-5. Check the Vercel configuration: Make sure that your Vercel configuration is correct. You can configure your app's settings in the Vercel dashboard.
+5. Check the Vercel logs to see if there are any error messages that can help you identify the issue. You can access the logs by clicking on the "Logs" button in the Vercel dashboard.
 
-If none of these steps solve the issue, you may need to provide more information about your app's configuration and file structure.
+If none of these steps resolve the issue, you may need to provide more information about your app and the specific error message you are receiving in order to troubleshoot further.

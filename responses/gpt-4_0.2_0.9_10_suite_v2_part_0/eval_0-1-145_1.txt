@@ -1,16 +1,30 @@
-The `truncate` class in Tailwind CSS only works for single line text. It sets `overflow: hidden`, `text-overflow: ellipsis`, and `white-space: nowrap` on an element. So, if you want to truncate text that spans multiple lines, you'll need to use a different approach because CSS doesn't natively support multiline text truncation.
+The `truncate` class in Tailwind CSS only works for single line text. It sets `overflow: hidden`, `text-overflow: ellipsis` and `white-space: nowrap`. 
 
-However, you can limit the height of the container to simulate multiline text truncation. Here's an example:
+If you want to truncate text that spans multiple lines, you will need to use some additional CSS. Unfortunately, Tailwind CSS does not support multiline text truncation out of the box.
+
+Here is a CSS solution that you can use:
+
+```css
+.truncate-2-lines {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;  
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+```
+
+Then you can use this class in your HTML:
 
 ```html
 <div className="ml-1 inline-block">
    <span>Label: </span>
-   <span className="font-semibold overflow-hidden" style={{display: '-webkit-box', WebkitBoxOrient: 'vertical', WebkitLineClamp: '2'}}>
-     long texttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt
+   <span className="font-semibold truncate-2-lines">
+     long texttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt
    </span>
 </div>
 ```
 
-In this example, `WebkitLineClamp: '2'` means that the text will be truncated after 2 lines. Note that this is not a perfect solution because it only works in webkit-based browsers (like Chrome and Safari) and it might not work as expected in all situations. 
+This will truncate the text after 2 lines. You can adjust the number of lines by changing the `-webkit-line-clamp` property.
 
-If you need a more robust solution, you might need to use JavaScript to calculate the height of the text and add an ellipsis where necessary.
+Please note that this solution uses `-webkit-` prefixed properties, which means it will not work in non-WebKit browsers like Firefox. For a cross-browser solution, you might need to use JavaScript or a library that provides multiline truncation.

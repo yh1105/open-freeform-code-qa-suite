@@ -1,9 +1,9 @@
-The error message `Error: Invalid login: 535-5.7.8 Username and Password not accepted` indicates that the username and password you provided are not accepted by Gmail. There are a few things you can try to fix this:
+The error message you are receiving indicates that the login credentials you are using are incorrect. Here are a few things you can try to fix the issue:
 
-1. Make sure that you have enabled "Less secure app access" in your Gmail account settings. You can do this by going to your Google Account settings, then clicking on "Security" and scrolling down to "Less secure app access". Turn this option on.
+1. Double-check that the email and password you are using are correct and that you have access to the account.
 
-2. If you have two-factor authentication enabled for your Google account, you will need to generate an app password to use instead of your regular password. You can generate an app password by going to your Google Account settings, then clicking on "Security" and scrolling down to "App passwords". Generate a new app password and use that instead of your regular password in your code.
+2. Ensure that you have enabled "less secure apps" in your Google account settings. To do this, go to your Google account settings, click on "Security", and then toggle on "Less secure app access".
 
-3. If neither of the above solutions work, you may need to enable "DisplayUnlockCaptcha" in your Google account settings. This will allow you to log in to your account from a new device or app. To do this, go to your Google Account settings, then click on "Security" and scroll down to "Third-party apps with account access". Click on "Manage third-party access" and then click on "Continue" under "DisplayUnlockCaptcha". 
+3. If you have two-factor authentication enabled on your Google account, you will need to generate an app-specific password to use instead of your regular password. To do this, go to your Google account settings, click on "Security", and then scroll down to "App passwords". Generate a new app password and use that instead of your regular password in your code.
 
-After trying these solutions, run your code again and see if the error persists.
+4. If none of the above solutions work, you can try using OAuth2 authentication instead of a password. This involves creating a Google Cloud Platform project and generating credentials that can be used to authenticate your application. You can find more information on how to do this in the Nodemailer documentation.

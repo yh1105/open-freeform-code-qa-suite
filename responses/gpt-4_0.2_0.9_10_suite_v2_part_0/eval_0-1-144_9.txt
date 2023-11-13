@@ -1,19 +1,31 @@
-You can change the color of the accordion arrow by targeting the `::after` pseudo-element of the `.accordion-button` class. The arrow is created using this pseudo-element, so changing its color will change the arrow color.
-
-Here is the CSS code:
+You can change the color of the accordion arrow by targeting the `::after` pseudo-element of the `.accordion-button` class. This pseudo-element is responsible for the arrow. Here is how you can do it:
 
 ```css
-.accordion-button:not(.collapsed)::after {
-    /* This is the arrow when the accordion is expanded */
-    color: green;
-}
-
-.accordion-button.collapsed::after {
-    /* This is the arrow when the accordion is collapsed */
+.accordion-button::after {
+    /* You may want to include vendor prefixes for older browsers */
     color: green;
 }
 ```
 
-This will change the color of the arrow to green both when the accordion is expanded and when it is collapsed. If you want different colors for each state, simply change the color in the appropriate rule.
+However, Bootstrap 5 uses a background-image for the accordion arrows, not a color. So, you need to replace the background image with a new one that has the color you want. Unfortunately, this is not as simple as just changing a color.
 
-Add this CSS code to your CSS file or inside a `<style>` tag in your HTML file.
+A workaround is to use a Unicode character for the arrow and rotate it when the accordion is open:
+
+```css
+.accordion-button::after {
+    content: '\25B6';  /* Unicode right arrow */
+    color: green;
+    font-size: 0.6em;
+    position: relative;
+    top: -2px;
+    /* Reset the default rotation */
+    transform: rotate(0deg);
+}
+
+.accordion-button:not(.collapsed)::after {
+    /* Unicode down arrow */
+    content: '\25BC';
+}
+```
+
+This will replace the default arrow with a green right arrow, which turns into a down arrow when the accordion is open.

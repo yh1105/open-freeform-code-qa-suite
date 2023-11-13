@@ -1,4 +1,4 @@
-For the first way, you can pass the `options` prop to the `Tab.Screen` component for the "Settings" screen and set the `tabBarVisible` option to `false` to hide the tab bar when the screen is active. Here's the updated code:
+For the first way, you can pass an `options` prop to the `Tab.Screen` component for the "Settings" screen. Here's an example:
 
 ```javascript
 export default function App() {
@@ -6,24 +6,30 @@ export default function App() {
     <NavigationContainer>
       <Tab.Navigator>
         <Tab.Screen name="Home" component={ProfileStackScreen} />
-        <Tab.Screen name="Settings" component={SettingsStackScreen} options={{ tabBarVisible: false }} />
+        <Tab.Screen
+          name="Settings"
+          component={SettingsStackScreen}
+          options={{ tabBarVisible: false }}
+        />
       </Tab.Navigator>
     </NavigationContainer>
   );
 }
 ```
 
-For the second way, you can set the `headerShown` option to `false` in the `navigationOptions` object for the `SettingsStack.Screen` component. Here's the updated code:
+For the second way, you can use the `navigation.setOptions` method to set the `tabBarVisible` option to `false` in the `SettingsStackScreen` component. Here's an example:
 
 ```javascript
 function SettingsStackScreen({ navigation }) {
-    navigation.setOptions({ headerShown: false });
+    React.useLayoutEffect(() => {
+        navigation.setOptions({ tabBarVisible: false });
+    }, [navigation]);
     return (
         <SettingsStack.Navigator>
             <SettingsStack.Screen name="Settings" component={SettingsScreen} />
         </SettingsStack.Navigator>
     )
 }
-``` 
+```
 
-Both ways should achieve the same result of hiding the tab bar when the "Settings" screen is active.
+Note that in the second way, we're using the `useLayoutEffect` hook to set the options as soon as the component is mounted. We're also passing `navigation` as a dependency to the hook to ensure that the options are updated whenever the navigation object changes.

@@ -1,8 +1,10 @@
-The error you're seeing is because `req.logout()` is not a function in Express.js by default. It's added by Passport.js when you use it as middleware. 
+The error message you're seeing is because `req.logout()` is not a function in Express.js by default. It's added by Passport.js when you use it as middleware. 
 
-However, the error you're seeing is unusual because `req.logout()` does not require a callback function. It's a function that you call to log the user out, and it doesn't take any arguments.
+In your case, you are using Passport.js correctly and `req.logout()` should be available. The error you're seeing might be due to the request not being authenticated when the `/logout` route is hit. 
 
-Here's the correct way to use it:
+However, Passport.js is designed to fail silently if `req.logout()` is called when no user is authenticated. This means that the error might be coming from somewhere else in your code.
+
+That said, your logout route seems to be correct. Here is the correct way to implement a logout route with Passport.js:
 
 ```javascript
 app.get('/logout', function(req, res){
@@ -11,17 +13,6 @@ app.get('/logout', function(req, res){
 });
 ```
 
-Your code seems to be correct. The error might be caused by something else in your code. Make sure that you've correctly set up Passport.js and that you're correctly initializing it as middleware.
+This is exactly what you have in your code. 
 
-Also, ensure that the logout route is protected and only authenticated users can access it. If an unauthenticated user tries to access the logout route, `req.logout()` will throw an error because there's no user to log out. You can add a check to see if the user is authenticated before calling `req.logout()`:
-
-```javascript
-app.get('/logout', function(req, res){
-  if(req.isAuthenticated()){
-    req.logout();
-  }
-  res.redirect('/');
-});
-```
-
-This will prevent errors when unauthenticated users try to access the logout route.
+If you're still seeing the error, I would recommend checking other parts of your code to make sure you're not calling `req.logout()` somewhere else without an authenticated user.

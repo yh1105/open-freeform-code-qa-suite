@@ -1,13 +1,35 @@
-Yes, you can accomplish this by using `React.createRef()` to create a reference to the form, and then using this reference to programmatically submit the form when the 'In Root' button is clicked. Here is how you can do it:
+Yes, you can achieve this by using `React.createRef()`. You can create a reference to the form in the `CustomForm` component and then pass this reference to the `App` component. In the `App` component, you can use this reference to submit the form when the 'In Root' button is clicked.
+
+Here is how you can do it:
 
 ```javascript
-import React, { Component, createRef } from "react";
+import React, { Component } from "react";
 import ReactDOM from "react-dom";
 
 class CustomForm extends Component {
-  formRef = createRef();
+  formRef = React.createRef();
 
-  submitForm = () => {
+  componentDidMount() {
+    this.props.passRefUpward(this.formRef);
+  }
+
+  render() {
+    return (
+      <form id='my-form' ref={this.formRef} onSubmit={e => {e.preventDefault(); alert('Form submitted!')}}>
+        <button type='submit'>Inside Custom</button>
+      </form>
+    );
+  }
+}
+
+class App extends Component {
+  formRef = null;
+
+  handleRef = (ref) => {
+    this.formRef = ref;
+  }
+
+  handleSubmit = () => {
     if (this.formRef.current) {
       this.formRef.current.dispatchEvent(new Event('submit', { cancelable: true }));
     }
@@ -15,32 +37,22 @@ class CustomForm extends Component {
 
   render() {
     return (
-      <form id='my-form' onSubmit={(e) => {e.preventDefault(); alert('Form submitted!')}} ref={this.formRef}>
-        <button type='submit'>Inside Custom</button>
-      </form>
+      <div>
+        <CustomForm passRefUpward={this.handleRef} />
+        <button onClick={this.handleSubmit}>In Root</button>
+      </div>
     );
   }
-}
-
-function App() {
-  const customFormRef = React.createRef();
-
-  const submitForm = () => {
-    if (customFormRef.current) {
-      customFormRef.current.submitForm();
-    }
-  }
-
-  return (
-    <div>
-      <CustomForm ref={customFormRef} />
-      <button onClick={submitForm}>In Root</button>
-    </div>
-  );
 }
 
 const rootElement = document.getElementById("root");
 ReactDOM.render(<App />, rootElement);
 ```
 
-In the above code, `formRef` is a reference to the form in `CustomForm` component, and `customFormRef` is a reference to the `CustomForm` component in `App` component. When the 'In Root' button is clicked, `submitForm` method of `CustomForm` component is called, which in turn dispatches a 'submit' event on the form, causing it to submit.
+In this code:
+
+- `React.createRef()` is used to create a reference to the form in the `CustomForm` component.
+- `componentDidMount()` lifecycle method is used to pass the form reference to the `App` component after the `CustomForm` component has been mounted.
+- `handleRef()` method in the `App` component is used to receive the form reference from the `CustomForm` component.
+- `handleSubmit()` method in the `App` component is used to submit the form when the 'In Root' button is clicked. It dispatches a 'submit' event on the form using the form reference.
+- `onClick` event handler is added to the 'In Root' button to call the `handleSubmit()` method when the button is clicked.

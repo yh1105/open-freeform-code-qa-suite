@@ -1,13 +1,11 @@
-Yes, it is possible to detect if the user's system is in Dark Mode in Safari/Chrome/Firefox by checking the value of the `prefers-color-scheme` media query. 
-
-Here's an example code snippet that you can use to detect if the user is in Dark Mode:
+Yes, it is possible to detect if the user's system is in Dark Mode on macOS using CSS media queries. Here's an example:
 
 ```css
 @media (prefers-color-scheme: dark) {
-  /* styles for dark mode */
+  /* Styles for Dark Mode */
 }
 ```
 
-You can use this media query to apply different styles to your website based on the user's system preference. 
+This media query checks if the user's system is in Dark Mode and applies the styles inside the curly braces if it is. You can use this media query to change the design of your site to be more Dark Mode friendly.
 
-Note that this feature is supported in Safari 12.1+, Chrome 76+, and Firefox 67+.
+Note that this media query is supported in Safari 12.1+, Firefox 67+, and Chrome 76+.

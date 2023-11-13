@@ -1,6 +1,6 @@
 First way:
 
-In the first way, you can use the `tabBarVisible` option to hide the tab bar. You can set it to `false` for the "Settings" screen.
+In the first way, you can use the `tabBarVisible` option to hide the tab bar when the `Settings` screen is active. Here's how you can do it:
 
 ```javascript
 export default function App() {
@@ -8,7 +8,11 @@ export default function App() {
     <NavigationContainer>
       <Tab.Navigator>
         <Tab.Screen name="Home" component={ProfileStackScreen} />
-        <Tab.Screen options={{ tabBarVisible: false }} name="Settings" component={SettingsStackScreen} />
+        <Tab.Screen 
+          name="Settings" 
+          component={SettingsStackScreen} 
+          options={{ tabBarVisible: false }}
+        />
       </Tab.Navigator>
     </NavigationContainer>
   );
@@ -17,7 +21,7 @@ export default function App() {
 
 Second way:
 
-In the second way, you can use the `useEffect` hook to set the `tabBarVisible` option to `false` when the "Settings" screen is focused.
+In the second way, you can use the `useEffect` hook to hide the tab bar when the `Settings` screen is focused. Here's how you can do it:
 
 ```javascript
 import { useEffect } from 'react';
@@ -39,4 +43,4 @@ function SettingsStackScreen({ navigation }) {
 }
 ```
 
-In this code, `useEffect` is used to add an event listener that hides the tab bar when the "Settings" screen is focused. The `unsubscribe` function is returned to clean up the event listener when the component is unmounted.
+In this code, `useEffect` is used to add an event listener to the `focus` event of the `navigation` object. When the `Settings` screen is focused, the tab bar is hidden by setting the `tabBarVisible` option to `false`. The `unsubscribe` function is returned from `useEffect` to clean up the event listener when the component is unmounted.

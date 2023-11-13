@@ -1,7 +1,9 @@
-The error message you are getting suggests that the username and password you are using to authenticate with Gmail are not correct. Here are a few things you can try to fix this issue:
+The error message you are receiving suggests that the username and password you are using to authenticate with Gmail are incorrect. Here are a few things you can try to fix the issue:
 
-1. Double-check that you are using the correct email address and password for the Gmail account you want to use to send emails.
-2. Make sure that you have enabled "Less secure app access" for the Gmail account you are using. You can do this by going to your Google Account settings and navigating to the "Security" tab. From there, you should see an option to enable "Less secure app access". Turn this on and try running your code again.
-3. If you have two-factor authentication enabled for your Gmail account, you will need to generate an app password to use instead of your regular password. You can do this by going to your Google Account settings and navigating to the "Security" tab. From there, you should see an option to generate an app password. Use this password instead of your regular password in your code.
+1. Double-check that the username and password you are using are correct. Make sure there are no typos or mistakes.
 
-If none of these solutions work, you may need to check your Gmail account settings for any other security measures that could be blocking your login attempts.
+2. If you have two-factor authentication enabled on your Gmail account, you will need to generate an app password to use instead of your regular password. You can generate an app password by going to your Google Account settings and selecting "Security" > "App passwords".
+
+3. If you are still having trouble, you may need to enable "less secure apps" on your Gmail account. This is not recommended for security reasons, but it may be necessary in some cases. You can enable less secure apps by going to your Google Account settings and selecting "Security" > "Less secure app access".
+
+Once you have tried these steps, try running your code again and see if the issue is resolved.

@@ -1,24 +1,23 @@
-The error message you're seeing is because ESLint is trying to find your `tsconfig.json` file in the same directory as your `.eslintrc.js` file, but it's not there.
+The error you're seeing is because ESLint is trying to find the `tsconfig.json` file in the same directory as the `.eslintrc.js` file. If your `tsconfig.json` file is not in the same directory, you'll need to provide the correct path to it in your `.eslintrc.js` file.
 
-You can fix this by providing the correct path to your `tsconfig.json` file in your `.eslintrc.js` file. 
-
-Here's how you can do it:
-
-1. Find out the relative path from your `.eslintrc.js` file to your `tsconfig.json` file. For example, if your `tsconfig.json` file is in the root directory and your `.eslintrc.js` file is in a subdirectory called `config`, the relative path would be `../tsconfig.json`.
-
-2. Replace the value of the `project` property in the `parserOptions` object in your `.eslintrc.js` file with the relative path you found in step 1.
-
-Here's what your updated `.eslintrc.js` file might look like:
+In your `.eslintrc.js` file, you have the following line:
 
 ```javascript
-module.exports = {
-  // ...
-  parserOptions: {
-    project: "../tsconfig.json", // replace this with the actual relative path
-    sourceType: "module",
-  },
-  // ...
-};
+project: "tsconfig.json",
 ```
 
-Save the changes and restart your editor. The error should be gone now. If it's still there, double-check the relative path and make sure it's correct.
+This tells ESLint to look for `tsconfig.json` in the same directory as `.eslintrc.js`. If `tsconfig.json` is not in the same directory, you'll need to provide the correct path.
+
+For example, if your `tsconfig.json` file is in the root directory of your project, and your `.eslintrc.js` file is in a subdirectory, you would change the line to:
+
+```javascript
+project: "../tsconfig.json",
+```
+
+Or, if both files are in the root directory, but you're running ESLint from a subdirectory, you would use:
+
+```javascript
+project: "./tsconfig.json",
+```
+
+Adjust the path as necessary based on your project's directory structure. After you make this change, save the `.eslintrc.js` file and restart VS Code. The error should be resolved.

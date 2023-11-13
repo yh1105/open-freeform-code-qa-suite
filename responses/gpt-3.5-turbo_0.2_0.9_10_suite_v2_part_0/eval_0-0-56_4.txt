@@ -1,6 +1,20 @@
-It seems like the issue is with the way you are exposing the ports in your Docker container. When you run the command `docker-compose run --publish 8080:8080 --rm app bash`, you are publishing the container's port 8080 to your host machine's port 8080. However, in your `vite.config.ts` file, you have set the server port to 8080, which means that the Vite server is listening on the container's port 8080.
+It seems like the issue is with the way you are running the Vite server inside the Docker container. By default, Vite binds to `localhost` which means it can only be accessed from within the container itself. To make it accessible from outside the container, you need to bind it to `0.0.0.0` which will make it accessible from any IP address.
 
-To fix this issue, you can either change the server port in your `vite.config.ts` file to 8081 (or any other available port), or you can change the port mapping in your `docker-compose.yml` file to map the container's port 8080 to a different port on your host machine, like this:
+To do this, you can modify the `server` configuration in your `vite.config.ts` file to include the `host` property:
+
+```typescript
+export default defineConfig({
+    // ...
+    server: {
+        port: 8080,
+        host: '0.0.0.0'
+    }
+})
+```
+
+This will make the Vite server accessible from outside the container.
+
+Additionally, you may need to modify the `docker-compose.yml` file to include the `host` property in the `ports` section:
 
 ```yaml
 version: '3.7'
@@ -11,7 +25,9 @@ services:
     build: .
     container_name: myapp
     ports:
-      - "8081:8080" # map container's port 8080 to host machine's port 8081
+      - "0.0.0.0:8080:8080"
 ```
 
-Then, when you run the command `docker-compose run --publish 8081:8080 --rm app bash`, the Vite server should be accessible at `localhost:8081` on your host machine.
+This will ensure that the container's port is bound to `0.0.0.0` as well.
+
+After making these changes, you should be able to access the Vite server from your host machine using `localhost:8080`.

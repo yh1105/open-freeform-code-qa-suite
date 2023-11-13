@@ -1,12 +1,12 @@
-Sure, you can use async/await with toPromise() to wait for the response. Here is your revised code:
+Sure, you can move the `console.log(this.newIds);` inside the subscribe block to ensure it waits for the response. Here is the revised code:
 
 ```javascript
-async getData() {
-  this.newIds = await this.repository.getById(Ids).toPromise();
+this.repository.getById(Ids).subscribe((response) => {
+  console.log(response);
+  this.newIds = response.map((id) => {
+    return id;
+  });
   console.log(this.newIds);
-}
-
-this.getData();
+});
 ```
-
-Please note that the function `getData()` is now an asynchronous function.
+This way, `console.log(this.newIds);` will only run after the response has been received and processed.

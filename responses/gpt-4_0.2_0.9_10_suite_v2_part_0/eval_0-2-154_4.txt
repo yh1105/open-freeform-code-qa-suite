@@ -1,27 +1,26 @@
-Sure, here is a generator function that will yield the desired result:
+Sure, here is a generator function that uses recursion to handle nested tags:
 
 ```javascript
-function* iterLeafNodes(strhtml, format=[]) {
+function* iterLeafNodes(strHTML, format = []) {
   const parser = new DOMParser();
-  const doc = parser.parseFromString(strhtml, "text/html");
+  const doc = parser.parseFromString(strHTML, "text/html");
   const body = doc.body;
 
-  function* iterNodes(node, format=[]) {
+  function* traverse(node, format = []) {
     if (node.nodeType === Node.TEXT_NODE) {
-      if (node.textContent.trim() !== '') {
-        yield { text: node.textContent, format };
-      }
+      yield { text: node.nodeValue, format };
     } else if (node.nodeType === Node.ELEMENT_NODE) {
+      format = [...format, node.nodeName.toLowerCase()];
       for (const child of node.childNodes) {
-        yield* iterNodes(child, [...format, node.tagName.toLowerCase()]);
+        yield* traverse(child, format);
       }
     }
   }
 
   for (const child of body.childNodes) {
-    yield* iterNodes(child);
+    yield* traverse(child, format);
   }
 }
 ```
 
-This function uses a recursive approach to traverse the DOM tree. It starts from the root node (body in this case), and for each child node, it checks if it's a text node or an element node. If it's a text node, it yields an object with the text content and the current format. If it's an element node, it recursively calls `iterNodes` on the child nodes, appending the tag name of the current node to the format array.
+This function will traverse through each node in the HTML string. If it encounters a text node, it yields an object with the text and its format. If it encounters an element node, it adds the tag name to the format array and recursively traverses its child nodes.

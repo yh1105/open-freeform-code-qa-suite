@@ -6,9 +6,8 @@ mounted() {
     extensions: [
       StarterKit,
       Keymap({
-        "Enter": ({ state, dispatch }) => {
+        "Enter": () => {
           console.log("good");
-          // prevent the default "Enter" behavior
           return true;
         }
       })
@@ -19,4 +18,4 @@ mounted() {
 }
 ```
 
-Please note that you need to import `Keymap` from `prosemirror-commands` to use it.
+In this code, `Keymap` is an extension that allows you to bind keyboard shortcuts to commands. The `"Enter"` key is being mapped to a function that logs "good" to the console. The function returns `true` to indicate that the default behavior of the "Enter" key should be prevented.

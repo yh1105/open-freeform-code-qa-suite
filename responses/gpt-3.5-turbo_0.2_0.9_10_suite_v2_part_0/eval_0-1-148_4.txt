@@ -5,13 +5,13 @@ Yes, you can use the `first` and `last` pseudo-class variants in Tailwind to ach
   <li
     v-for="(item, index) in items"
     :key="`item-${index}`"
-    class="border-solid border-b border-black {{ index === items.length - 1 ? '' : 'pb-2' }}"
+    class="border-solid border-b border-black {{ index === items.length - 1 ? '' : 'pb-4' }}"
   >
     Item
   </li>
 </ul>
 ```
 
-In the `class` attribute of the `<li>` element, we're using the `pb-2` class to add a bottom padding to all items except the last one. We're using a ternary operator to conditionally apply this class based on the index of the current item. If the current item is the last one (`index === items.length - 1`), we don't apply the `pb-2` class.
+In the `class` attribute of the `<li>` element, we're using the `pb-4` class to add a bottom padding of 1rem (which is the default value of `$spacing.4` in Tailwind) to all the `<li>` elements except the last one. We're using the ternary operator to conditionally apply this class based on whether the current `<li>` element is the last one or not.
 
-Note that we're also using string interpolation to generate a unique `key` for each item in the `v-for` loop.
+Note that we're also removing the `border-bottom` from the last `<li>` element by not applying any padding to it.

@@ -1,26 +1,30 @@
-Sure, here is the implementation of the function:
+Sure, here is a generator function that should do the trick:
 
 ```javascript
 function* iterLeafNodes(strHTML, format=[]) {
   const parser = new DOMParser();
   const doc = parser.parseFromString(strHTML, 'text/html');
-  const walk = function*(node, format) {
+  const body = doc.body;
+
+  function* walk(node, format=[]) {
     if (node.nodeType === Node.TEXT_NODE) {
-      yield { text: node.textContent, format };
-    } else if (node.nodeType === Node.ELEMENT_NODE) {
-      format = [...format];
-      if (node.tagName !== 'P') {
-        format.push(node.tagName.toLowerCase());
+      if (node.textContent.trim() !== '') {
+        yield {
+          text: node.textContent,
+          format: format
+        };
       }
-      for (const child of node.childNodes) {
-        yield* walk(child, format);
+    } else if (node.nodeType === Node.ELEMENT_NODE) {
+      for (let child of node.childNodes) {
+        yield* walk(child, format.concat(node.tagName.toLowerCase()));
       }
     }
-  };
-  for (const child of doc.body.childNodes) {
-    yield* walk(child, format);
+  }
+
+  for (let child of body.childNodes) {
+    yield* walk(child);
   }
 }
 ```
 
-This function uses a generator function to iterate over the leaf nodes of the parsed HTML. It uses a recursive approach to handle nested tags. The `format` parameter is an array that keeps track of the current formatting tags. When it encounters a text node, it yields an object with the text content and the current format. When it encounters an element node, it adds the tag name to the format (unless it's a 'P' tag) and then recursively walks the child nodes.
+This function uses a recursive approach to walk through the DOM tree, yielding each text node along with its format. The format is determined by the tag names of the parent nodes, which are collected in an array.

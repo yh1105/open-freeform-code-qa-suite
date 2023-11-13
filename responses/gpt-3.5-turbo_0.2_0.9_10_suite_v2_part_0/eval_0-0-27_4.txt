@@ -1,14 +1,56 @@
-It seems like the issue is with the `uri` you are using for the Apollo client. The `uri` you are using (`https://48p1r2roz4.sse.codesandbox.io`) is a sample GraphQL server provided by Apollo, and it may not be currently available or may not have the data you are trying to fetch.
+It seems like you are trying to fetch data from a GraphQL API endpoint that is not working properly. The `uri` you are using in your `ApolloClient` configuration is not responding with the expected data.
 
-You need to replace the `uri` with the actual GraphQL server endpoint that you want to fetch data from. You can check with your backend developer or check the documentation of the GraphQL server to get the correct `uri`.
+You can try changing the `uri` to a different GraphQL API endpoint that is working properly. For example, you can use the following `uri`:
 
-Once you have the correct `uri`, replace it in the `ApolloClient` configuration like this:
+```
+https://graphql-pokemon2.vercel.app/
+```
+
+This is a public GraphQL API endpoint that returns data about Pokemon. You can update your `ApolloClient` configuration as follows:
 
 ```javascript
 const apolloClient = new ApolloClient({
-    uri: 'https://your-graphql-server.com/graphql', // replace with your actual uri
+    uri: 'https://graphql-pokemon2.vercel.app/',
     cache: new InMemoryCache(),
 });
 ```
 
-After making this change, your code should be able to fetch data from the GraphQL server.
+Then, you can update your `EXCHANGE_RATES` query to a query that works with this API endpoint. For example, you can use the following query to get information about a specific Pokemon:
+
+```javascript
+const POKEMON_QUERY = gql`
+    query GetPokemon($name: String!) {
+        pokemon(name: $name) {
+            id
+            name
+            image
+            types
+        }
+    }
+`;
+
+const TestScreen = () => {
+    const { loading, error, data } = useQuery(POKEMON_QUERY, {
+        variables: { name: 'pikachu' },
+    });
+
+    console.log(loading, error, data);
+
+    if (loading) return <Text>Loading...</Text>;
+    if (error) return <Text>Error :(</Text>;
+
+    const { id, name, image, types } = data.pokemon;
+
+    return (
+        <View>
+            <Text>{name}</Text>
+            <Image source={{ uri: image }} style={{ width: 100, height: 100 }} />
+            <Text>Types: {types.join(', ')}</Text>
+        </View>
+    );
+};
+```
+
+This query fetches data about a Pokemon with the name "pikachu". You can update the `variables` object to fetch data about a different Pokemon.
+
+I hope this helps!

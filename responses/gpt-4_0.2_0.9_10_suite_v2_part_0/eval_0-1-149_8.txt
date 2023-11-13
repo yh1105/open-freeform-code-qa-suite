@@ -1,28 +1,12 @@
-Sure, I can help you with that. You can use the `group-hover` variant in Tailwind CSS to apply styles on hover. Here's how you can modify your code to animate the underline on hover:
+Sure, I can help you with that. You can use the `group-hover` utility to apply styles on hover. Here's an example of how you can animate the underline on hover:
 
 ```html
-<a href="#" class="group">
-    <span class="text-sky-600 transition duration-300">Link</span>
-    <span class="block h-0.5 bg-sky-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
+<a href="#" class="group inline-block text-sky-600 transition duration-300">
+    Link
+    <span class="block w-0 h-0.5 bg-sky-600 transition-all duration-500 group-hover:w-full"></span>
 </a>
 ```
 
-In this code, the `scale-x-0` class is used to initially hide the underline, and the `group-hover:scale-x-100` class is used to show the underline when the link is hovered over. The `transition-transform` class is used to animate the transformation.
+In this code, the `w-0` class sets the initial width of the underline to 0, and the `group-hover:w-full` class sets the width to full when the link is hovered. The `transition-all` and `duration-500` classes are used to animate the width change.
 
-Please note that you need to enable the `group-hover` variant for the `scale` utility in your Tailwind CSS configuration for this to work. Here's how you can do that:
-
-```js
-module.exports = {
-  theme: {
-    extend: {},
-  },
-  variants: {
-    extend: {
-      scale: ['group-hover'],
-    },
-  },
-  plugins: [],
-}
-```
-
-This configuration enables the `group-hover` variant for the `scale` utility, which allows you to use `group-hover:scale-x-100` in your HTML.
+Please note that `group-hover` requires the parent to have the `group` class, and the `inline-block` class is used to prevent the link from taking up the full width.

@@ -1,25 +1,29 @@
-The problem you're facing is due to the conflict between the Node.js installed in your Windows system and the Node.js installed in your WSL2 Ubuntu 20.04. When you run `npm -v`, it's trying to execute the npm installed in your Windows system, which is not compatible with the WSL2 environment.
+The issue you're facing is due to the fact that your system is trying to use the Windows version of `npm` instead of the one installed in your WSL2 Ubuntu environment. This is because the Windows path is included in your WSL2 path.
 
-To solve this problem, you need to remove the Windows PATH from the WSL2 environment. You can do this by editing the `.bashrc` file in your home directory.
+To solve this issue, you can remove the Windows path from your WSL2 path. You can do this by editing your `.bashrc` or `.bash_profile` file. Open the file with a text editor like `nano`:
 
-Here are the steps:
+```bash
+nano ~/.bashrc
+```
 
-1. Open the `.bashrc` file in a text editor. You can use `nano`:
+Then, add the following line to the end of the file:
 
-    ```bash
-    nano ~/.bashrc
-    ```
+```bash
+export PATH=$(echo "$PATH" | sed -e 's/:\/mnt.*//g')
+```
 
-2. Add the following line at the end of the file:
+This command will remove the Windows path from your WSL2 path.
 
-    ```bash
-    export PATH="$HOME/.local/bin:$HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin"
-    ```
+After adding this line, save the file and exit the text editor. Then, run the following command to apply the changes:
 
-    This line sets the PATH environment variable to only include directories in your WSL2 environment, excluding the Windows PATH.
+```bash
+source ~/.bashrc
+```
 
-3. Save the file and exit the text editor. If you're using `nano`, you can do this by pressing `Ctrl + X`, then `Y` to confirm, and then `Enter`.
+Now, when you run `npm -v`, it should use the `npm` installed in your WSL2 environment. If you still face the same issue, you might need to reinstall `npm` in your WSL2 environment using the following command:
 
-4. Close the terminal and open a new one to apply the changes.
+```bash
+sudo apt-get install -y npm
+```
 
-Now, when you run `npm -v`, it should execute the npm installed in your WSL2 environment.
+After the installation, check the version of `npm` again using `npm -v`. It should now display the correct version.

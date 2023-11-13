@@ -1,7 +1,0 @@
-You need to use the `toast()` method to show the toast. Here is an example of how you can show the toast using jQuery:
-
-```javascript
-$('.toast').toast('show');
-```
-
-You can add this code to an event handler or call it directly after the toast HTML is added to the DOM.

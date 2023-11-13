@@ -1,15 +1,15 @@
-Sure! Here's the revised route pattern that should work for your requirements:
+Sure, here's the revised route pattern that should fulfill your requirement:
 
 ```
 /route/:param1/config/:OptionalParam2?/:OptionalParam3?
 ```
 
-With this pattern, the first parameter `:param1` is required, followed by the static string `/config/`. The second and third parameters `:OptionalParam2` and `:OptionalParam3` are both optional and can be included in any order. 
-
-So, the following URLs will be matched by this pattern:
+This pattern will match all three examples you provided:
 
 - `/route/aa/config`
 - `/route/aa/config/bb`
 - `/route/aa/config/bb/cc`
 
-I hope this helps!
+The `:param1` parameter is required, while `:OptionalParam2` and `:OptionalParam3` are both optional. The question mark at the end of each optional parameter indicates that it may or may not be present in the URL.
+
+I hope this helps! Let me know if you have any further questions.

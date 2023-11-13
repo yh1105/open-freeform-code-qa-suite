@@ -1,55 +1,23 @@
-Sure! Here's a recursive function that can find the object with the given `id` value:
+Sure! Here's the implementation of the `findObject` function:
 
 ```javascript
-function findObject(id, obj) {
-  if (obj.id === id) {
-    return obj;
+function findObject(id, root_node) {
+  if (root_node.id === id) {
+    return root_node;
   }
-  for (let i = 0; i < obj.child.length; i++) {
-    const foundObj = findObject(id, obj.child[i]);
-    if (foundObj) {
-      return foundObj;
+  for (let i = 0; i < root_node.child.length; i++) {
+    const result = findObject(id, root_node.child[i]);
+    if (result) {
+      return result;
     }
   }
 }
 ```
 
-You can call this function with the `id` value and the root object of the nested object tree:
+This function takes two arguments: `id` and `root_node`. `id` is the value we want to search for, and `root_node` is the root node of the JSON nested object tree.
 
-```javascript
-const nestedObj = {
-  "id": "A",
-  "name": "Item A",
-  "child": [
-    {
-      "id": "B",
-      "name": "Item B",
-      "child": [
-        {
-          "id": "C",
-          "name": "Item C",
-          "child": []
-        }
-      ]
-    },
-    {
-      "id": "D",
-      "name": "Item D",
-      "child": []
-    }
-  ]
-};
+The function first checks if the `id` of the `root_node` matches the `id` we are searching for. If it does, it returns the `root_node`.
 
-const foundObj = findObject("C", nestedObj);
-console.log(foundObj);
-```
+If the `id` of the `root_node` does not match the `id` we are searching for, the function recursively calls itself on each child node of the `root_node`. If a child node contains the `id` we are searching for, the function returns that child node.
 
-This will output:
-
-```javascript
-{
-  "id": "C",
-  "name": "Item C",
-  "child": []
-}
-```
+Note that this implementation assumes that the `child` property of each node is an array. If it's not, the function will throw an error.

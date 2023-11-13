@@ -1,27 +1,23 @@
-The `.attrs()` method in styled-components is a chainable method that allows you to attach additional props to a component. It's a way to automatically set attributes or props on your styled components, which can be based on the props of the component itself.
+The `.attrs()` function in styled-components is a chainable method that allows you to attach additional props to a component. It's useful when you want to pass props to a styled component and use those props to influence the styling.
 
 Here's a simple example:
 
 ```jsx
-const Input = styled.input.attrs(props => ({
-  type: 'text',
-  size: props.small ? 5 : undefined,
+const Button = styled.button.attrs(props => ({
+  type: props.type || 'button',
 }))`
-  color: palevioletred;
   font-size: 1em;
-  border: 2px solid palevioletred;
-  border-radius: 3px;
-  margin: 0.5em;
+  margin: 1em;
   padding: 0.25em 1em;
+  border-radius: 3px;
+  color: ${props => props.color || 'palevioletred'};
+  border: 2px solid ${props => props.color || 'palevioletred'};
 `;
 
-// Use it like this:
-<Input placeholder="A small text input" small />
-<Input placeholder="A bigger text input" />
+// Usage
+<Button color="blue">Submit</Button>
 ```
 
-In this example, the `Input` component will always have a `type` of 'text'. Additionally, it will have a `size` of 5 if the `small` prop is true. 
+In this example, the `attrs` function is used to set a default `type` prop for the button. It also allows you to pass a `color` prop to the component, which is then used to set the color of the text and the border.
 
-The `.attrs()` method is useful when you want to apply props based on certain conditions or want to set default props. It helps to make your code cleaner and more readable.
-
-Without `.attrs()`, you would have to pass these props manually every time you use the component, or use a function to conditionally apply these props, which can make your code more cluttered and harder to read.
+Without `attrs`, you would have to pass these props directly to the component every time you use it, which can be repetitive and error-prone. With `attrs`, you can set default values and keep your component usage cleaner and more concise.

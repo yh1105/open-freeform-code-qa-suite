@@ -1,43 +1,22 @@
-Based on your HTML structure, it seems like your "Stop Game" button is in a different `div` than your "Begin Game" button. This could be the reason why they are not aligning properly.
+It seems like you want to align the 'Stop Game' button with the 'Begin Game' button. Here are some general methods you can use to achieve this:
 
-Here are some general methods to align the buttons:
+1. **Flexbox**: You can use CSS Flexbox to align items in a container. Wrap the buttons in a container and apply `display: flex;` to it. Then use `align-items: center;` to vertically center the buttons. 
 
-1. **HTML Layout Adjustment:** You could move the "Stop Game" button to the same `div` as the "Begin Game" button. This way, they will be in the same container and easier to align. 
+2. **Grid**: CSS Grid is another powerful tool for layout design. You can create a grid container and place the buttons in the grid cells as needed.
+
+3. **Positioning**: You can use CSS positioning properties such as `relative`, `absolute`, `fixed`, etc. to position your elements. For example, you can position the 'Stop Game' button absolutely and then use `top`, `right`, `bottom`, `left` properties to move it around.
+
+4. **Margin and Padding**: Sometimes, all you need is to adjust the margin and padding of elements to get them to align properly. 
+
+Without seeing your CSS, it's hard to give a specific solution. But here's a simple example of how you can use Flexbox to align the buttons:
 
 ```html
-<div id="GameControls">
+<div id="buttonContainer" style="display: flex; justify-content: space-between;">
   <button id="StartBtn" class="btnStyle" onclick="gameStarted=true;">Begin Game</button>
   <button id="StopBtn" class="btnStyle" onclick="self.close()">Stop Game</button>
 </div>
 ```
 
-2. **CSS Styling:** You can use CSS to position your buttons. If you want them to be side by side, you could use `display: inline-block` or `float: left` on your button elements. If you want them to be on top of each other, you could use `display: block`. 
+In this example, `justify-content: space-between;` is used to place the buttons at the ends of the container. You can adjust this to suit your needs. 
 
-```css
-.btnStyle {
-  display: inline-block;
-}
-```
-or
-```css
-.btnStyle {
-  float: left;
-}
-```
-or
-```css
-.btnStyle {
-  display: block;
-}
-```
-
-3. **Flexbox:** Another modern approach is to use CSS Flexbox. This allows you to easily align and distribute space among items in a container, even when their sizes are unknown or dynamic.
-
-```css
-#GameControls {
-  display: flex;
-  justify-content: space-between; /* or 'space-around' or 'center' etc. */
-}
-```
-
-Remember to adjust your HTML structure and CSS styling according to your design requirements.
+Remember to remove the old button placements in your HTML code.

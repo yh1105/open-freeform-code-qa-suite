@@ -1,8 +1,8 @@
-Sure! Here's the revised code:
+Sure, here's how you can upgrade to `connect-mongo` v4:
 
 ```javascript
 const session = require('express-session');
-const MongoStore = require('connect-mongo')(session);
+const MongoStore = require('connect-mongo').default;
 
 ...
 
@@ -14,4 +14,4 @@ app.use(session({
 }));
 ```
 
-In `connect-mongo` v4, the `MongoStore` constructor has been replaced with a `create` method that returns a store instance. The `mongoUrl` option is used to specify the MongoDB connection URL.
+Note that in `connect-mongo` v4, you need to use `MongoStore.create()` instead of `new MongoStore()`. Also, you need to pass the MongoDB connection string as `mongoUrl` instead of `mongooseConnection`.

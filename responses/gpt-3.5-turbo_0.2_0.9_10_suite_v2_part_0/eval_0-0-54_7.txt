@@ -1,6 +1,4 @@
-To get the values of the first name and last name input fields on button click, you can create a new state variable to store the values of both fields and update it on each input change. Then, you can pass a function to the onClick event of the button that logs the values of the state variable.
-
-Here's an example of how you can modify your code to achieve this:
+Sure! You can create a function that handles the button click and gets the values of the input fields using the `useState` hook. Here's an example:
 
 ```javascript
 import React, { useState } from 'react';
@@ -8,33 +6,32 @@ import React, { useState } from 'react';
 export default function InputField({ name, label }) {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
-  const [formValues, setFormValues] = useState({ firstName: '', lastName: '' });
 
-  const handleFirstNameChange = (e) => {
-    setFirstName(e.target.value);
-    setFormValues({ ...formValues, firstName: e.target.value });
-  };
-
-  const handleLastNameChange = (e) => {
-    setLastName(e.target.value);
-    setFormValues({ ...formValues, lastName: e.target.value });
-  };
-
-  const handleButtonClick = () => {
-    console.log(formValues.firstName, formValues.lastName);
+  const handleClick = () => {
+    console.log(`First name: ${firstName}, Last name: ${lastName}`);
   };
 
   return (
     <div>
       <label>{label}</label>
-      <input type="text" value={firstName} name={`${name}-firstName`} onChange={handleFirstNameChange} />
-      <input type="text" value={lastName} name={`${name}-lastName`} onChange={handleLastNameChange} />
-      <button onClick={handleButtonClick}>Submit</button>
+      <input
+        type="text"
+        value={firstName}
+        name={`${name}-firstName`}
+        onChange={(e) => setFirstName(e.target.value)}
+      />
+      <input
+        type="text"
+        value={lastName}
+        name={`${name}-lastName`}
+        onChange={(e) => setLastName(e.target.value)}
+      />
+      <button onClick={handleClick}>Submit</button>
     </div>
   );
 }
 ```
 
-In this example, we create two new state variables for the first name and last name inputs, and a third state variable `formValues` to store the values of both fields. We also create two new functions `handleFirstNameChange` and `handleLastNameChange` to update the corresponding state variables and the `formValues` state variable on each input change.
+In this example, we have two `useState` hooks to store the values of the first name and last name input fields. We also have a `handleClick` function that logs the values of the input fields to the console. Finally, we have a button that triggers the `handleClick` function when clicked.
 
-Finally, we create a new function `handleButtonClick` that logs the values of the `formValues` state variable when the button is clicked. We pass this function to the onClick event of the button.
+Note that we added a `name` attribute to each input field with a unique identifier for each field. This is useful if you have multiple instances of this component on the same page and want to differentiate between the input fields.

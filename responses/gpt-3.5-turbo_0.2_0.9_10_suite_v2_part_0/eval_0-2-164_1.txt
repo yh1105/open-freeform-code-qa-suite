@@ -1,26 +1,31 @@
-The `attrs()` function in styled components allows you to set default props for a component. This can be useful when you have a component that requires certain props to be passed in every time it is used, but you want to set some default values for those props.
+The `.attrs()` function in styled components allows you to set default props for a styled component. This means that you can define default values for props that may not be passed in when the component is used.
 
 Here's a simple example:
 
 ```
 import styled from 'styled-components';
 
-const Button = styled.button.attrs({
-  type: 'button',
-  disabled: false
-})`
+const Button = styled.button.attrs(props => ({
+  type: props.type || 'button',
+  disabled: props.disabled || false
+}))`
   background-color: ${props => props.disabled ? 'gray' : 'blue'};
   color: white;
   padding: 10px;
 `;
 
+// Usage:
 <Button>Click me!</Button>
 ```
 
-In this example, we're creating a `Button` component using styled components. We're using the `attrs()` function to set default props for the component. We're setting the `type` prop to `'button'` and the `disabled` prop to `false`.
+In this example, the `.attrs()` function is used to set default values for the `type` and `disabled` props. If these props are not passed in when the `Button` component is used, the default values will be used instead.
 
-In the styled component definition, we're using the `props` object to determine the background color of the button. If the `disabled` prop is `true`, we're setting the background color to gray. Otherwise, we're setting it to blue.
+So, if you use `<Button>` without passing any props, it will be rendered as:
 
-When we use the `Button` component without passing any props, it will use the default props we set using `attrs()`. If we want to override any of those default props, we can pass them in as props when we use the component.
+```
+<button type="button" disabled="false" class="sc-bdVaJa jgQYJL">Click me!</button>
+```
 
-I hope this helps! Let me know if you have any further questions.
+Note that the `type` prop is set to `'button'` and the `disabled` prop is set to `false`.
+
+Without the `.attrs()` function, you would have to manually set default values for these props in the component definition. The `.attrs()` function makes it easier to set default values for props and keep your code more concise.

@@ -1,4 +1,4 @@
-You can remove the `onclick` attribute from the `button` element and add an `onClick` event handler to the button in the `render` method. Here's the revised code:
+To fix the issue, you need to remove the `onclick` attribute from the `button` element and add an `onClick` event handler to the `handleUploadImage` function. Here's the revised code:
 
 ```javascript
 import React, { Component } from 'react'
@@ -13,7 +13,6 @@ class Main extends React.Component {
     };
 
     this.handleUploadImage = this.handleUploadImage.bind(this);
-    this.handleUploadButtonClick = this.handleUploadButtonClick.bind(this);
   }
 
   handleUploadImage(ev) {
@@ -31,9 +30,7 @@ class Main extends React.Component {
         this.setState({ imageURL: `http://localhost:8000/${body.file}` });
       });
     });
-  }
 
-  handleUploadButtonClick() {
     alert("Your file is being uploaded!");
   }
 
@@ -48,7 +45,7 @@ class Main extends React.Component {
         </div>
         <br />
         <div>
-          <button onClick={this.handleUploadButtonClick}>Upload</button>
+          <button>Upload</button>
         </div>
         <img src={this.state.imageURL} alt="img" />
       </form>
@@ -57,6 +54,6 @@ class Main extends React.Component {
 }
 
 export default Main;
-``` 
+```
 
-This should fix the issue and the alert message will be displayed when the user clicks the "Upload" button.
+In the revised code, the `onClick` event handler is added to the `handleUploadImage` function, and the `alert` function is called inside the function. The `onclick` attribute is removed from the `button` element.

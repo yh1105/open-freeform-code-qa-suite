@@ -33,6 +33,4 @@ Here's the revised code:
     Save
   </Button>
 </Form>
-``` 
-
-In the `onCreate` function, you can access the value of the switch using `values.chargable`.
+```

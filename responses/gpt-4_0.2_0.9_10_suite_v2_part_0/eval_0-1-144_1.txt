@@ -1,22 +1,19 @@
-You can change the color of the accordion arrow by targeting the `::after` pseudo-element of the `.accordion-button` class. This pseudo-element is responsible for the arrow. Here is the CSS code:
+You can change the color of the accordion arrow by targeting the `::after` pseudo-element of the `.accordion-button` class. This is the element that Bootstrap uses to create the arrow. 
+
+Here is the CSS code:
 
 ```css
-.accordion-button::after {
-    /* You may want to include vendor prefixes for older browsers */
+.accordion-button:not(.collapsed)::after {
+    /* This is the arrow when the accordion is expanded */
+    color: green;
+}
+
+.accordion-button.collapsed::after {
+    /* This is the arrow when the accordion is collapsed */
     color: green;
 }
 ```
 
-However, Bootstrap 5 uses a background-image for the accordion arrow, not a font icon. So, you can't simply change the color. You need to override the background-image with your own image or SVG. Here is an example:
+This CSS code will change the color of the arrow to green both when the accordion is expanded and when it is collapsed. 
 
-```css
-.accordion-button:not(.collapsed)::after {
-    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6 .707.707a.5.5 0 0 1-.708 0L1.646 5.354a.5.5 0 0 1 0-.708z" fill="green"/></svg>');
-}
-
-.accordion-button::after {
-    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6 .707.707a.5.5 0 0 1-.708 0L1.646 5.354a.5.5 0 0 1 0-.708z" fill="green"/></svg>');
-}
-```
-
-This code replaces the default arrow with a green one. You can replace "green" with any color you want.
+Remember to include this CSS after the Bootstrap CSS in your HTML file, so it will override the default Bootstrap styles.

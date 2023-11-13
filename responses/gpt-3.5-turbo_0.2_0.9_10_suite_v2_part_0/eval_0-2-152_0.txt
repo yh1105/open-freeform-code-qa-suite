@@ -1,7 +1,15 @@
-You need to use the `.toast('show')` method to show the toast. Here's how you can modify your JavaScript code:
+You need to use the `toast()` method to show the toast. Here's an example:
 
 ```javascript
 $('.toast').toast('show');
 ```
 
-This will trigger the toast to show up on the page. Make sure you have included the necessary Bootstrap and jQuery files in your HTML code.
+This will show the toast with the default settings. If you want to customize the toast, you can pass options to the `toast()` method. For example:
+
+```javascript
+$('.toast').toast({
+  delay: 2000 // show the toast for 2 seconds
+}).toast('show');
+```
+
+This will show the toast for 2 seconds before hiding it. You can find more information about customizing the toast in the Bootstrap documentation.

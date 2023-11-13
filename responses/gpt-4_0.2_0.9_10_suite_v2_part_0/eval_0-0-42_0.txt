@@ -1,4 +1,4 @@
-Sure, here's how you can revise your code to upgrade from `connect-mongo` v3 to v4:
+Sure, here is the revised code for `connect-mongo` v4:
 
 ```javascript
 const MongoStore = require('connect-mongo');
@@ -12,3 +12,4 @@ app.use(session({
     store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI })
 }))
 ```
+Please note that in `connect-mongo` v4, the `create` method is used to create a new instance of `MongoStore`. Also, the `mongoUrl` option is used to specify the MongoDB connection string.

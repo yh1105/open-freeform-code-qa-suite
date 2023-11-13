@@ -1,7 +1,7 @@
 Sure, here's the implementation of the `iterLeafNodes` function using recursion:
 
 ```javascript
-function* iterLeafNodes(strhtml, format = []) {
+function* iterLeafNodes(strhtml, format=[]) {
   const parser = new DOMParser();
   const doc = parser.parseFromString(strhtml, "text/html");
   const nodes = doc.body.childNodes;
@@ -20,9 +20,7 @@ function* iterLeafNodes(strhtml, format = []) {
 You can use it like this:
 
 ```javascript
-const strHTML =
-  "<p>Hello World</p><p>I am a text with <strong>bold</strong> word</p><p><strong>I am bold text with nested <em>italic</em> Word.</strong></p>";
-
+const strHTML = "<p>Hello World</p><p>I am a text with <strong>bold</strong> word</p><p><strong>I am bold text with nested <em>italic</em> Word.</strong></p>";
 const result = [...iterLeafNodes(strHTML)];
 console.log(result);
 ```

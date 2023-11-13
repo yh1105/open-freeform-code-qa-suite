@@ -1,8 +1,6 @@
-To create an index in Mongoose, you can use the `@Prop` decorator with the `index` option set to `true` as you have done. However, you also need to ensure that the indexes are actually created in MongoDB.
+To create an index in Mongoose schema using Nest.js, you can use the `@Prop` decorator with the `index` option set to `true` as you have done. However, Mongoose will not automatically build the index for you. You need to manually trigger the index building using the `Model.syncIndexes()` function.
 
-In Mongoose, the `Model.ensureIndexes()` function is used to create indexes at the server. This function must be called after the model is compiled.
-
-In Nest.js, you can use the `onModuleInit` lifecycle hook to ensure indexes are created when the module is initialized. Here is an example:
+Here's how you can do it:
 
 ```javascript
 import { Injectable, OnModuleInit } from '@nestjs/common';
@@ -11,14 +9,16 @@ import { Model } from 'mongoose';
 
 @Injectable()
 export class MyService implements OnModuleInit {
-  constructor(@InjectModel(Schema.name) private readonly model: Model<Schema>) {}
+  constructor(@InjectModel(Schema.name) private readonly myModel: Model<Schema>) {}
 
   async onModuleInit() {
-    await this.model.init();
+    await this.myModel.syncIndexes();
   }
 }
 ```
 
-In this example, `model.init()` is equivalent to calling `Model.ensureIndexes()` in plain Mongoose. This will ensure that the indexes defined in your schema are created in MongoDB when the module is initialized.
+In the above code, `MyService` implements `OnModuleInit` interface. The `onModuleInit` method will be called when the Nest.js module containing this service is fully initialized. Inside this method, we call `syncIndexes` on the Mongoose model. This will ensure that the indexes defined in your schema are created in MongoDB.
 
 Remember to replace `Schema` and `MyService` with your actual schema and service names.
+
+Also, note that creating indexes can be a time-consuming operation if you have a lot of documents in your collection. Therefore, it's recommended to create indexes during off-peak hours or while your application is starting up.

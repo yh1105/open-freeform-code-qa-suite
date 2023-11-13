@@ -1,51 +1,30 @@
-The `.attrs()` function in styled-components is a chainable method that attaches some props to a styled component. It's a way to automatically pass props or variables to your styled components.
+The `.attrs()` function in styled-components is a chainable method that attaches additional props to a component. It's useful when you want to apply static or dynamic props to a styled component.
 
-Let's say you have a styled component and you want to pass some props to it. You could do it like this:
-
-```jsx
-const Button = styled.button`
-  color: ${props => props.primary ? 'blue' : 'red'};
-`;
-
-<Button primary>Click me</Button>
-```
-
-But if you find yourself passing the same props over and over again, you can use `.attrs()` to automatically pass them:
-
-```jsx
-const Button = styled.button.attrs(props => ({
-  primary: props.primary || false,
-}))`
-  color: ${props => props.primary ? 'blue' : 'red'};
-`;
-
-<Button primary>Click me</Button>
-<Button>Don't click me</Button>
-```
-
-In the above example, the `primary` prop is automatically passed to the `Button` component. If you don't provide a `primary` prop when using the `Button`, it will default to `false`.
-
-Another use case for `.attrs()` is when you want to compute some props based on the props passed to the component. For example:
+Here's a simple example:
 
 ```jsx
 const Input = styled.input.attrs(props => ({
-  type: props.type || 'text',
-  size: props.size || '1em',
+  type: 'text',
+  size: props.small ? 5 : 10,
 }))`
   color: palevioletred;
   font-size: 1em;
   border: 2px solid palevioletred;
   border-radius: 3px;
-
-  /* here we use the dynamically computed prop */
-  margin: ${props => props.size};
-  padding: ${props => props.size};
+  margin: 0.5em;
+  padding: 0.25em 0.5em;
 `;
 
-<Input placeholder="A small text input" size="0.5em"/>
-<Input placeholder="A bigger text input" size="2em"/>
+// Usage
+<Input small />
 ```
 
-In this example, the `size` prop is used to compute the `margin` and `padding` of the input. If you don't provide a `size` prop when using the `Input`, it will default to `'1em'`.
+In this example, the `Input` component will always have a `type` of 'text'. The `size` attribute will be 5 if the `small` prop is true, and 10 otherwise. 
 
-So, the `.attrs()` function is a way to make your styled components more reusable and easier to manage.
+Without `.attrs()`, you would have to pass these props every time you use the component:
+
+```jsx
+<Input type="text" size={someCondition ? 5 : 10} />
+```
+
+So, `.attrs()` provides a way to set these props once and have them apply to all instances of the component.

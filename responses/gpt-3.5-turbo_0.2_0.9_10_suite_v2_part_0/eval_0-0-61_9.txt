@@ -23,8 +23,10 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      {/* your app content here */}
-      <button onClick={handleThemeChange}>Toggle dark mode</button>
+      <div style={{ backgroundColor: theme.palette.background.default }}>
+        <h1>Hello World!</h1>
+        <button onClick={handleThemeChange}>Toggle Theme</button>
+      </div>
     </ThemeProvider>
   );
 }
@@ -32,8 +34,10 @@ function App() {
 export default App;
 ```
 
-In this example, we're using the `createMuiTheme` function to create a theme object with a `palette` property that specifies the type of the theme (either `'light'` or `'dark'`). We're also using the `CssBaseline` component to apply some basic styles to the page, such as setting the font family and removing margins.
+In this example, we use the `createMuiTheme` function to create a theme object with a `palette` property that specifies the type of the theme (either `'light'` or `'dark'`). We then use the `ThemeProvider` component to wrap our app and pass the theme object as a prop.
 
-The `ThemeProvider` component wraps your entire app and provides the theme object to all Material-UI components. When the `darkMode` state changes, the theme object is updated with the new palette type, and the changes are applied to all components that use the theme.
+We also use the `CssBaseline` component provided by Material-UI to apply some basic global styles to the app, such as setting the font family and resetting the default margin and padding.
 
-Finally, we're using a button to toggle the `darkMode` state, which will switch between the light and dark themes.
+Finally, we use the `backgroundColor` property on the root `div` element to set the background color dynamically based on the theme.
+
+When the user clicks the "Toggle Theme" button, we update the `darkMode` state variable to switch between the light and dark themes. This causes the `ThemeProvider` to re-render with the updated theme object, which in turn updates the background color of the root `div` element.

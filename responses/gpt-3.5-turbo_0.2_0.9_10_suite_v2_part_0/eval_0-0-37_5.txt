@@ -1,4 +1,4 @@
-Sure! Here's the revised route pattern that should work for your requirements:
+Sure, the revised route pattern to fulfill the requirement is:
 
 ```
 /route/:param1/config/:OptionalParam2?/:OptionalParam3?
@@ -10,4 +10,4 @@ This pattern will match the following URLs:
 - `/route/aa/config/bb`
 - `/route/aa/config/bb/cc`
 
-Note that the second optional parameter is named `OptionalParam3`, which is a typo in your original question. I assumed you meant to name it `OptionalParam2` instead.
+The `:param1` is a required parameter, while `:OptionalParam2` and `:OptionalParam3` are optional parameters. The `?` character after each optional parameter indicates that it is optional.

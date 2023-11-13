@@ -1,18 +1,16 @@
-Sure, you can use the `group-hover` variant in Tailwind to achieve this effect. Here's an example code snippet:
+To create an animation after hovering over the link using Tailwind-CSS, you can use the `group-hover` variant and the `transform` property to scale the `span` element. Here's an example code:
 
 ```html
-<a href="#" class="group inline-block text-sky-600 relative">
-  Link
-  <span class="absolute bottom-0 left-0 w-full h-0.5 bg-sky-600 transition duration-500 transform origin-left scale-x-0 group-hover:scale-x-100"></span>
+<a href="#" class="group text-sky-600 transition duration-300 relative">
+    Link
+    <span class="block absolute w-full h-0.5 bg-sky-600 bottom-0 left-0 transform scale-x-0 transition duration-500 group-hover:scale-x-100"></span>
 </a>
 ```
 
-In this code, we're using the `group` class to apply styles to both the link and the span element inside it. We're also using the `group-hover` variant to apply styles to the span element only when the link is being hovered over.
+In this code, we added the `relative` class to the `a` element to make the `span` element positioned absolutely relative to it. We also added the `scale-x-0` class to the `span` element to hide it initially.
 
-The `relative` class is used on the link element to make the span element position itself relative to the link. The `absolute` class is used on the span element to position it at the bottom of the link.
+Then, we added the `group-hover:scale-x-100` class to the `span` element to scale it horizontally to its full width when the `a` element is hovered over.
 
-The `transform` property is used to scale the span element horizontally from 0 to 100% when the link is being hovered over. The `origin-left` property is used to make the scaling start from the left side of the span element.
-
-The `transition` property is used to animate the scaling effect over a duration of 500ms.
+Finally, we added the `transition duration-500` classes to the `span` element to make the animation smooth and last for 500 milliseconds.
 
 I hope this helps! Let me know if you have any further questions.

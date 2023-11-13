@@ -1,4 +1,4 @@
-To connect to Heroku Redis using TLS on Node.js with node_redis v3, you should use the `REDIS_TLS_URL` environment variable. Here's an example of how to connect to Heroku Redis using TLS with node_redis v3:
+To connect to Heroku Redis using TLS on Node, you should use the `REDIS_TLS_URL` environment variable instead of `REDIS_URL`. Here's an example code snippet using `node_redis` v3:
 
 ```javascript
 const redis = require('redis');
@@ -12,16 +12,15 @@ const client = redis.createClient(redisUrl.port, redisUrl.hostname, {
 });
 
 client.auth(redisUrl.auth.split(":")[1]);
-
 client.on('connect', () => {
   console.log('Connected to Redis');
 });
 
 client.on('error', (err) => {
-  console.error('Error connecting to Redis:', err);
+  console.error('Redis error:', err);
 });
 ```
 
-Note that we're using the `url` module to parse the `REDIS_TLS_URL` environment variable, and passing the `tls` option to the `createClient` method to enable TLS. We're also setting `rejectUnauthorized` to `false` to disable certificate validation. You should only do this if you trust the network you're connecting to, otherwise you should set it to `true` and provide the appropriate CA certificate. Finally, we're authenticating with the Redis server using the password from the `REDIS_TLS_URL` environment variable.
+In this example, we're using the `url` module to parse the `REDIS_TLS_URL` environment variable and extract the hostname, port, and authentication credentials. We're also passing an options object to the `createClient` method to enable TLS and disable certificate validation (`rejectUnauthorized: false`). Finally, we're authenticating the client with the password extracted from the `REDIS_TLS_URL` environment variable.
 
-I hope this helps! Let me know if you have any further questions.
+Note that disabling certificate validation is not recommended in production environments, as it can leave your application vulnerable to man-in-the-middle attacks. Instead, you should obtain the root certificate for your Redis instance and use it to validate the server's certificate.

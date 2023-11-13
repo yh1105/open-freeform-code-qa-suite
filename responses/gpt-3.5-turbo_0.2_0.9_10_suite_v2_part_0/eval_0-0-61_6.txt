@@ -17,7 +17,7 @@ function App() {
     },
   });
 
-  const handleDarkModeChange = () => {
+  const handleThemeChange = () => {
     setDarkMode(!darkMode);
   };
 
@@ -25,8 +25,8 @@ function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <div style={{ backgroundColor: theme.palette.background.default }}>
-        <Switch checked={darkMode} onChange={handleDarkModeChange} />
-        <h1>Hello, world!</h1>
+        <Switch checked={darkMode} onChange={handleThemeChange} />
+        <h1>Hello World!</h1>
         <p>This is a Material-UI app with a dynamic theme.</p>
       </div>
     </ThemeProvider>
@@ -36,8 +36,8 @@ function App() {
 export default App;
 ```
 
-In this example, we're using the `createMuiTheme` function to create a theme object with a `palette` property that changes between light and dark mode based on the `darkMode` state. We're also using the `CssBaseline` component to apply some basic global styles to the app.
+In this example, we use the `createMuiTheme` function to create a theme object with a `palette` property that changes based on the `darkMode` state. We then pass this theme object to the `ThemeProvider` component, which applies it to all Material-UI components in the app.
 
-Then, we're wrapping our app with the `ThemeProvider` component and passing the `theme` object as a prop. Finally, we're using the `backgroundColor` property of the `palette.background` object to set the background color of the root element dynamically.
+We also use the `CssBaseline` component to apply some basic global styles, including setting the background color of the root element to the default background color of the theme.
 
-Note that we're also using the `Switch` component from Material-UI to toggle the `darkMode` state. You can replace this with any other component or logic that suits your needs.
+Finally, we use a `Switch` component to toggle the `darkMode` state, which causes the theme to update and the background color to change dynamically.

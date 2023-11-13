@@ -1,34 +1,29 @@
-Sure, I can help you with that. Here is a simple example of how you can create a hover animation using Tailwind CSS. 
-
-In this example, we will create an underline animation for a link. When you hover over the link, the underline will animate from left to right.
+Sure, I can help you with that. You can use the `group-hover` variant in Tailwind CSS to apply styles on hover. Here's how you can modify your code to create an animation effect:
 
 ```html
-<a href="#" class="group inline-block relative overflow-hidden text-sky-600">
-    Link
-    <span class="absolute h-0.5 bg-sky-600 bottom-0 left-0 transform translate-x-full group-hover:translate-x-0 transition-transform duration-300"></span>
+<a href="#" class="group">
+    <span class="text-sky-600 transition duration-300 group-hover:translate-x-0 transform translate-x-full">Link</span>
+    <span class="block w-full h-0.5 bg-sky-600 transition-all duration-500 transform scale-x-0 group-hover:scale-x-100"></span>
 </a>
 ```
 
-Here is the explanation of the code:
+In the above code, I have used the `group-hover` variant to apply the `translate-x-0` and `scale-x-100` styles when the link is hovered over. The `translate-x-full` and `scale-x-0` styles are applied by default, creating a transition effect when the link is hovered over.
 
-- `group`: This class is used to apply styles to nested elements on hover.
-- `inline-block relative overflow-hidden`: These classes are used to set the link's position and hide the underline that is initially positioned off the screen.
-- `absolute h-0.5 bg-sky-600 bottom-0 left-0`: These classes are used to position the underline at the bottom of the link and set its height and color.
-- `transform translate-x-full group-hover:translate-x-0`: These classes are used to animate the underline. Initially, the underline is positioned off the screen (`translate-x-full`). When you hover over the link, the underline moves to its original position (`translate-x-0`).
-- `transition-transform duration-300`: These classes are used to set the type of transition and its duration.
+Please note that you need to enable the `group-hover` variant for `scale` and `translate` in your Tailwind CSS configuration file (`tailwind.config.js`) if it's not already enabled:
 
-Please note that you need to enable the `group-hover` variant for the `transform` utility in your Tailwind CSS configuration file (`tailwind.config.js`) if it's not enabled by default:
-
-```javascript
+```js
 module.exports = {
-  theme: {},
+  theme: {
+    extend: {},
+  },
   variants: {
     extend: {
-      transform: ['group-hover'],
+      scale: ['group-hover'],
+      translate: ['group-hover'],
     },
   },
   plugins: [],
 }
 ```
 
-Also, make sure to rebuild your CSS after making changes to your Tailwind CSS configuration file.
+This configuration will allow you to use the `group-hover` variant with the `scale` and `translate` utilities.

@@ -1,22 +1,42 @@
-In Mongoose, you can create an index on a field in the schema definition. However, Mongoose will not automatically build indexes defined in your schema. You need to call `Model.init()` to ensure indexes are created.
+In Nest.js, you can use the `@Index()` decorator from the `@nestjs/mongoose` package to create an index on a property in a Mongoose schema. 
 
-In Nest.js, you can use the `onModuleInit` lifecycle hook to call `init()` on your models. Here is an example:
+Here is how you can do it:
 
 ```javascript
-import { Injectable, OnModuleInit } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { Prop, Schema, SchemaFactory, Index } from '@nestjs/mongoose';
+import { Document } from 'mongoose';
 
-@Injectable()
-export class MyService implements OnModuleInit {
-  constructor(@InjectModel('Schema') private readonly myModel: Model<Schema>) {}
+@Schema()
+@Index({ type: 1 }) // Add this line
+export class MySchema extends Document {
 
-  async onModuleInit() {
-    await this.myModel.init();
-  }
+  @Prop()
+  _id: string;
+
+  @Prop({required: true})
+  type: string;
+
+  @Prop()
+  creationDate: string;
+
+  @Prop()
+  name: string;
 }
+
+export const MySchemaModel = SchemaFactory.createForClass(MySchema);
 ```
 
-In this example, `MyService` implements the `OnModuleInit` interface, which means it has an `onModuleInit` method that will be called when the Nest.js module containing `MyService` is initialized. In the `onModuleInit` method, we call `init()` on the Mongoose model, which will ensure that indexes are built.
+In the above code, `@Index({ type: 1 })` creates an index on the `type` field. 
 
-Also, make sure that the MongoDB server is running when you call `init()`, because Mongoose will attempt to build the indexes at that time. If the server is not running, the index build will fail.
+Please note that Mongoose will not automatically build indexes defined in your schema when you start your application. You need to manually trigger the creation of indexes in your application using the `Model.createIndexes()` function.
+
+Here is how you can do it:
+
+```javascript
+const MySchemaModel = mongoose.model('MySchema', MySchema);
+MySchemaModel.createIndexes();
+```
+
+This will ensure that the indexes defined in your schema are created in MongoDB. 
+
+Also, remember that creating indexes can take a while if you have a lot of data in your collection. So, it's recommended to create indexes when your application starts or during a maintenance window.

@@ -1,18 +1,17 @@
-Here's the implementation of the `iterLeafNodes` function that uses recursion to handle nested tags:
+Sure, here's the implementation of the `iterLeafNodes` function using recursion:
 
 ```javascript
 function* iterLeafNodes(strhtml, format = []) {
   const parser = new DOMParser();
   const doc = parser.parseFromString(strhtml, "text/html");
   const nodes = doc.body.childNodes;
-
   for (let i = 0; i < nodes.length; i++) {
     const node = nodes[i];
     if (node.nodeType === Node.TEXT_NODE) {
       yield { text: node.textContent, format };
     } else if (node.nodeType === Node.ELEMENT_NODE) {
       const newFormat = [...format, node.tagName.toLowerCase()];
-      yield* iterLeafNodes(node.innerHTML, newFormat);
+      yield* iterLeafNodes(node.outerHTML, newFormat);
     }
   }
 }
@@ -28,7 +27,7 @@ const result = [...iterLeafNodes(strHTML)];
 console.log(result);
 ```
 
-This will output the following result:
+This will output the expected result:
 
 ```javascript
 [

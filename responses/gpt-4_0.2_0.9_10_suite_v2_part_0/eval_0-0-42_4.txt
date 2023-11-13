@@ -1,7 +1,6 @@
-Sure, here's how you can update your code to use `connect-mongo` v4:
+Sure, here is the revised code for `connect-mongo` v4:
 
 ```javascript
-const session = require('express-session');
 const MongoStore = require('connect-mongo');
 
 ...
@@ -11,7 +10,5 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI })
-}));
+}))
 ```
-
-Please note that in `connect-mongo` v4, you no longer need to pass the session to `require('connect-mongo')`. Instead, you can directly require it and use the `create` method to create a new store. The `mongooseConnection` option has been replaced with `mongoUrl`, where you can directly pass your MongoDB connection string.

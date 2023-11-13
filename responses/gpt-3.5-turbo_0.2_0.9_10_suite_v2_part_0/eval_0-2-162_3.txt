@@ -10,6 +10,6 @@ window.addEventListener('scroll', () => {
   const [r, g, b] = [red/y, green/y, blue/y].map(Math.round)
   section1.style.backgroundColor = `rgb(${r}, ${g}, ${b})`
 })
-``` 
+```
 
-This code listens for the `scroll` event on the window and calculates the new background color based on the current scroll position. It then sets the `backgroundColor` property of the `section1` element to the new color.
+This code listens for the `scroll` event on the window object and calculates the current scroll position. It then uses this position to adjust the background color of the `.section1` element dynamically.

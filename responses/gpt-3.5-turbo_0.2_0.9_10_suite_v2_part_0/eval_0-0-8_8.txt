@@ -1,57 +1,18 @@
-Sure! Here's one way to implement the `findObject` function in JavaScript:
+Sure! Here's the implementation of the `findObject` function:
 
 ```javascript
-function findObject(id, obj) {
-  if (obj.id === id) {
-    return obj;
-  }
-  for (let i = 0; i < obj.child.length; i++) {
-    const foundObj = findObject(id, obj.child[i]);
-    if (foundObj) {
-      return foundObj;
+function findObject(id, root_node) {
+  if (root_node.id === id) {
+    return root_node;
+  } else {
+    for (let i = 0; i < root_node.child.length; i++) {
+      const result = findObject(id, root_node.child[i]);
+      if (result) {
+        return result;
+      }
     }
   }
 }
 ```
 
-This function takes two arguments: `id` is the ID of the object you want to find, and `obj` is the current object being searched. If the current object's ID matches the ID you're looking for, it returns that object. Otherwise, it recursively searches through each child object until it finds the object with the matching ID. If the object is not found, the function returns `undefined`.
-
-To use this function with the example object you provided, you would call it like this:
-
-```javascript
-const obj = {
-    "id": "A",
-    "name": "Item A",
-    "child": [
-        {
-            "id": "B",
-            "name": "Item B",
-            "child": [
-                {
-                    "id": "C",
-                    "name": "Item C",
-                    "child": []
-                }
-            ]
-        },
-        {
-            "id": "D",
-            "name": "Item D",
-            "child": []
-        }
-    ]
-};
-
-const foundObj = findObject("C", obj);
-console.log(foundObj);
-```
-
-This would output the following object:
-
-```javascript
-{
-  "id": "C",
-  "name": "Item C",
-  "child": []
-}
-```
+This function takes two arguments: `id` and `root_node`. It recursively searches for the object with the given `id` in the nested object tree starting from the `root_node`. If the `id` matches the `id` of the current node, it returns the current node. Otherwise, it recursively calls itself on each child node until it finds the node with the given `id`. If the node is not found, it returns `undefined`.

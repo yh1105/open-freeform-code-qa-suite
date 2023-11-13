@@ -1,4 +1,4 @@
-The `.attrs()` function in styled-components is a chainable method that attaches some props to a styled component. It allows you to define static props or dynamically calculate them based on the props passed to the component.
+The `.attrs()` function in styled-components is a chainable method that attaches some props to a styled component. It's useful when you want to apply some default props or derive some props based on the provided props.
 
 Here's a simple example:
 
@@ -12,35 +12,17 @@ const Input = styled.input.attrs(props => ({
   border: 2px solid palevioletred;
   border-radius: 3px;
   margin: 0.5em;
-  padding: ${props => props.size}px;
+  padding: 0.25em 0.5em;
+  ::placeholder {
+    color: palevioletred;
+  }
 `;
 
-// Use it like this:
+// Usage
 <Input placeholder="A small text input" small />
 <Input placeholder="A bigger text input" />
 ```
 
-In this example, the `Input` component will always have a `type` of 'text'. The `size` prop will be dynamically calculated based on whether the `small` prop is passed to the component. 
+In this example, the `Input` component will always have a `type` of 'text'. The `size` prop will be 5 if the `small` prop is true, and 10 otherwise. 
 
-The `attrs()` function is useful when you want to apply some props by default or calculate some props based on the props passed to the component. 
-
-Without `attrs()`, you would have to pass these props every time you use the component or calculate them inside the component, which could make your code more verbose and harder to maintain. 
-
-In the above example, without `attrs()`, you would have to do something like this:
-
-```jsx
-const Input = styled.input`
-  color: palevioletred;
-  font-size: 1em;
-  border: 2px solid palevioletred;
-  border-radius: 3px;
-  margin: 0.5em;
-  padding: ${props => props.small ? 5 : 10}px;
-`;
-
-// Use it like this:
-<Input type="text" placeholder="A small text input" small />
-<Input type="text" placeholder="A bigger text input" />
-```
-
-As you can see, without `attrs()`, you have to pass the `type` prop every time you use the `Input` component and calculate the padding inside the component.
+Without `.attrs()`, you would have to provide these props every time you use the `Input` component. With `.attrs()`, you can set default props or derive props based on other props, which can make your code cleaner and more readable.

@@ -1,6 +1,8 @@
-Yes, there is a known issue with Safari where flex items don't respect the `height: auto` rule. You can fix this by adding `align-self: flex-start` to the image. This will align the image at the start of the cross axis, which is vertical in your case, and prevent it from stretching.
+Yes, there is a known issue with Safari and flexbox where images with `height: auto` can be stretched. This is because Safari does not correctly implement the `height: auto` for images in a flex container.
 
-Here is the updated CSS:
+To fix this issue, you can use `align-self: flex-start` on the image. This will align the image at the start of the cross axis, which is the vertical axis in your case since you are using `flex-direction: column`.
+
+Here's how you can modify your CSS:
 
 ```css
 .container {
@@ -20,4 +22,4 @@ Here is the updated CSS:
 }
 ```
 
-This should solve your problem.
+This should prevent the image from stretching in Safari.

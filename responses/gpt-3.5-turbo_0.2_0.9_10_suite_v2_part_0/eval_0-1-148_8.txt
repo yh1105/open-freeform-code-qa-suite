@@ -12,8 +12,6 @@ Yes, you can use the `first` and `last` pseudo-class variants in Tailwind to ach
 </ul>
 ```
 
-In the `class` attribute of the `li` element, we're using the `pb-4` utility class to add a bottom padding of 1rem (which is the default value of Tailwind's `$spacing` variable) to all `li` elements except the last one. We're using the ternary operator to conditionally apply this class based on the index of the current item.
+In the `class` attribute of the `<li>` element, we're using the `pb-4` utility class to add a bottom padding of 1rem (which is the default value of Tailwind's `$spacing` variable) to all the `<li>` elements except the last one. We're using the ternary operator to conditionally apply this class based on the index of the current item.
 
-Note that we're also removing the `border-b` class from the last `li` element by not applying any classes to it. This is because we don't want a border-bottom on the last element.
-
-I hope this helps!
+Note that we're also removing the `border-b` class from the last `<li>` element by not applying any class to it. This will ensure that there's no border-bottom on the last item.

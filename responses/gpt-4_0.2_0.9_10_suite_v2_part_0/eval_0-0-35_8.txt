@@ -1,6 +1,4 @@
-You can connect to Heroku Redis using TLS on Node.js by using the `REDIS_TLS_URL` environment variable. This URL contains all the necessary information for connecting to your Redis instance over a secure connection.
-
-Here's a simple example of how to do this using the `node_redis` library:
+You should be using `REDIS_TLS_URL` if you want to connect to Heroku Redis using TLS. Here is a working example using `node_redis` v3:
 
 ```javascript
 const redis = require('redis');
@@ -10,7 +8,7 @@ let redisURL = url.parse(process.env.REDIS_TLS_URL);
 let client = redis.createClient({
     port: redisURL.port,
     host: redisURL.hostname,
-    password: redisURL.auth.split(':')[1],
+    password: redisURL.auth.split(":")[1],
     tls: {
         rejectUnauthorized: false
     }
@@ -21,12 +19,14 @@ client.on('connect', function() {
 });
 
 client.on('error', function(err) {
-    console.log('Redis error: ' + err);
+    console.error('Error connecting to Redis', err);
 });
 ```
 
-This script will create a new Redis client and connect to the Redis instance specified by the `REDIS_TLS_URL` environment variable. The `tls` option is set to an object with `rejectUnauthorized` set to `false` to allow connections to the Heroku Redis server, which uses a self-signed certificate.
+In this example, we're using the `url.parse()` function to parse the `REDIS_TLS_URL` environment variable into a URL object. We then pass the `port`, `hostname`, `password`, and `tls` options to the `redis.createClient()` function to create a new Redis client.
 
-Please note that setting `rejectUnauthorized` to `false` can leave your application vulnerable to man-in-the-middle attacks. It's recommended to use this setting only if you trust the network between your application and the Redis server.
+The `tls` option is an object that contains TLS/SSL options. In this case, we're setting `rejectUnauthorized` to `false` to allow connections to Heroku Redis even if the server's certificate is not trusted.
 
-Also, remember to replace `REDIS_TLS_URL` with your actual Redis URL.
+Please note that setting `rejectUnauthorized` to `false` can leave your application vulnerable to man-in-the-middle attacks. In a production environment, you should use a trusted certificate or a custom Certificate Authority.
+
+The `client.on('connect')` and `client.on('error')` event listeners are used to log when the client successfully connects to Redis and when an error occurs, respectively.

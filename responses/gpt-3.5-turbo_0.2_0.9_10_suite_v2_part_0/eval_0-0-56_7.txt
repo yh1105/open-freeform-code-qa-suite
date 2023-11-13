@@ -1,23 +1,20 @@
-It seems like the issue is with the way you are running the Vite server inside the Docker container. By default, Vite binds to `localhost`, which means it can only be accessed from within the container. To make it accessible from outside the container, you need to bind it to `0.0.0.0`.
+It seems like the issue is with the Docker configuration. When you run the command `docker-compose run --publish 8080:8080 --rm app bash`, you are starting a new container and running the `bash` command inside it. However, you are not actually starting the Vite server inside the container.
 
-You can do this by modifying the `server.host` option in your `vite.config.ts` file:
+To fix this, you can modify your `docker-compose.yml` file to start the Vite server when the container is started:
 
-```typescript
-export default defineConfig({
-    // ...
-    server: {
-        port: 8080,
-        host: '0.0.0.0'
-    }
-})
+```yaml
+version: '3.7'
+
+services:
+  app:
+    image: myapp
+    build: .
+    container_name: myapp
+    ports:
+      - "8080:8080"
+    command: npm run vite
 ```
 
-This will bind the Vite server to all available network interfaces, including the one that Docker exposes.
+With this configuration, when you run `docker-compose up`, it will start the container and run the `npm run vite` command inside it. This should allow you to access the Vite server from your host machine.
 
-After making this change, rebuild your Docker image and try running the container again:
-
-```bash
-docker-compose up --build
-```
-
-Then try accessing the Vite server from your host machine using `localhost:8080`. It should work now.
+Note that you can remove the `docker-compose run` command and just use `docker-compose up` to start the container. The `--publish` option is not needed in this case since it is already defined in the `docker-compose.yml` file.

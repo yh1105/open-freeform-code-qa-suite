@@ -1,4 +1,4 @@
-Sure! Here are the completed templates for both ways:
+Sure! Here are the completed Javascript templates for both ways:
 
 Way 1:
 
@@ -14,4 +14,4 @@ cy.get(".ibxudA").find('.WildnessText-kRKTej').invoke('text').then((text) => {
 });
 ``` 
 
-Both ways should work to assert that the text within the `WildnessText-kRKTej` div equals to `Wildness`.
+Both ways should work to assert that the text within the div with class `WildnessText-kRKTej` equals to `Wildness`.

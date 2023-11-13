@@ -12,4 +12,4 @@ const bagTotal = (products: Product[]) => {
 }
 ```
 
-This defines an interface called `Product` with the required properties, and then uses it as the type for the `products` parameter in the `bagTotal` function. Now, TypeScript will enforce that any array passed to `bagTotal` must contain objects with the `name`, `price`, and `description` properties.
+This defines an interface called `Product` with the required properties `name`, `price`, and `description`. Then, the `bagTotal` function takes an array of objects of type `Product` as its parameter.

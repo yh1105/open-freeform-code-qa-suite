@@ -1,28 +1,37 @@
-You can modify the userChrome.css file to reduce the spacing between menu items in Firefox. Here's how you can do it:
+Yes, you can modify the internal CSS of Firefox to adjust the spacing between menu items. Here's how you can do it:
 
-1. Open your Firefox profile folder. You can do this by typing `about:support` in the address bar, then clicking on "Open Folder" next to "Profile Folder".
+1. Open your Firefox profile folder. You can do this by typing `about:support` in the address bar and then clicking on `Open Folder` in the `Profile Folder` row.
 
-2. In the profile folder, create a new folder named `chrome` if it doesn't already exist.
+2. In your profile folder, create a new folder named `chrome` if it doesn't already exist.
 
 3. Inside the `chrome` folder, create a new file named `userChrome.css` if it doesn't already exist.
 
-4. Open `userChrome.css` with a text editor.
+4. Open the `userChrome.css` file with a text editor.
 
-5. Paste the following CSS code into the file:
+5. Paste the following code into the file:
 
 ```css
-/* Reduce padding on menu items */
+/* Reduce Spacing in Menus and Context Menus */
 menupopup > menuitem, menupopup > menu {
+  padding-block: 4px !important;
+}
+
+/* Reduce Spacing in the Main Menus */
+#appmenuPrimaryContent > toolbarbutton {
   padding-block: 4px !important;
 }
 ```
 
-6. Save and close the file.
+6. Save the file and close it.
 
-7. Now, you need to tell Firefox to use your custom CSS. Type `about:config` in the address bar and press Enter. Click "Accept the Risk and Continue".
+7. Now, you need to enable the use of this file in Firefox. Type `about:config` in the address bar and press Enter.
 
-8. Search for `toolkit.legacyUserProfileCustomizations.stylesheets` and set its value to `true` by clicking on the arrow icon.
+8. Click on `Accept the Risk and Continue`.
 
-9. Restart Firefox to see the changes.
+9. In the search bar, type `toolkit.legacyUserProfileCustomizations.stylesheets` and press Enter.
 
-This CSS reduces the padding on menu items, effectively reducing the spacing between them. You can adjust the `4px` value to your liking. Note that this might not work on future versions of Firefox if they decide to change how the UI is built.
+10. If the value of this preference is `false`, click on the toggle button to set it to `true`.
+
+11. Restart Firefox.
+
+The spacing between menu items should now be reduced. If you want to adjust the spacing further, you can change the `4px` values in the CSS code to your liking.

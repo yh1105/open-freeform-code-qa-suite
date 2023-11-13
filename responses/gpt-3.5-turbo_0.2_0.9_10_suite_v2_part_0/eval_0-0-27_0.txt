@@ -1,22 +1,14 @@
-It seems that the issue is related to the network connection. The `uri` you are using in the `ApolloClient` configuration is not working properly. 
+It seems like the issue is with the `uri` you are using in the `ApolloClient` configuration. The `uri` you are using (`https://48p1r2roz4.sse.codesandbox.io`) is a demo server provided by Apollo Client, which may not be working properly.
 
-You can try changing the `uri` to a different endpoint that works, for example, the following:
+You need to replace it with the correct `uri` for your GraphQL server. You can check with your backend developer or use a tool like GraphiQL to find the correct `uri`.
+
+For example, if your GraphQL server is running on `http://localhost:4000/graphql`, you would update the `ApolloClient` configuration as follows:
 
 ```javascript
 const apolloClient = new ApolloClient({
-    uri: 'https://graphql-pokemon2.vercel.app/',
+    uri: 'http://localhost:4000/graphql',
     cache: new InMemoryCache(),
 });
 ```
 
-This endpoint provides a GraphQL API for Pokemon data, and it works with the `EXCHANGE_RATES` query you are using in your code.
-
-If you still have issues with the network connection, you can try adding the `networkError` property to the `useQuery` hook to see if there are any errors related to the network:
-
-```javascript
-const { loading, error, data, networkError } = useQuery(EXCHANGE_RATES);
-
-console.log(loading, error, data, networkError);
-```
-
-This will log any network errors that occur during the query.
+Make sure to replace `http://localhost:4000/graphql` with the correct `uri` for your GraphQL server.

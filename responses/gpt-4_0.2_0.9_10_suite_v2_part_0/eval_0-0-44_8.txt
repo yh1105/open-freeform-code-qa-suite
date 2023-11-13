@@ -1,4 +1,4 @@
-In Nest.js, you can use the `@Index()` decorator from the `@nestjs/mongoose` package to create an index on a property in a Mongoose schema. 
+To create an index in Mongoose schema using Nest.js, you can use the `@Index()` decorator from the `@nestjs/mongoose` package. This decorator can be used at the class level to define compound indexes or at the property level to define simple indexes.
 
 Here is how you can do it:
 
@@ -7,13 +7,14 @@ import { Prop, Schema, SchemaFactory, Index } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 
 @Schema()
-@Index({ type: 1 }) // This is where you define the index
-export class MySchema extends Document {
+@Index({ type: 1 }) // Compound index at class level
+export class MySchemaClass extends Document {
 
   @Prop()
   _id: string;
 
   @Prop({required: true})
+  @Index() // Simple index at property level
   type: string;
 
   @Prop()
@@ -23,33 +24,21 @@ export class MySchema extends Document {
   name: string;
 }
 
-export const MySchemaModel = SchemaFactory.createForClass(MySchema);
+export const MySchema = SchemaFactory.createForClass(MySchemaClass);
 ```
 
-In the above code, `@Index({ type: 1 })` creates an ascending index on the `type` field. If you want to create a descending index, you can use `-1` instead of `1`.
+In the above code, `@Index({ type: 1 })` is a compound index at the class level and `@Index()` is a simple index at the property level.
 
-Also, make sure that you are using the latest version of `@nestjs/mongoose`.
-
-After defining the schema, you need to use it in a module:
+After defining the schema, you need to ensure that the indexes are actually created in MongoDB. This can be done by calling the `ensureIndexes()` function on the model. This is typically done in the service where the model is used:
 
 ```javascript
-@Module({
-  imports: [
-    MongooseModule.forFeatureAsync([
-      {
-        name: MySchema.name,
-        useFactory: () => {
-          const schema = MySchemaModel;
-          schema.index({ type: 1 });
-          return schema;
-        },
-      },
-    ]),
-  ],
-})
-export class MyModule {}
+@Injectable()
+export class MyService {
+  constructor(@InjectModel(MySchemaClass.name) private myModel: Model<MySchemaClassDocument>) {
+    this.myModel.ensureIndexes();
+  }
+  // ...
+}
 ```
 
-In the above code, `MongooseModule.forFeatureAsync()` method is used to create indexes asynchronously. The `useFactory` function returns the schema with the defined index.
-
-Please note that indexes are created in the background by MongoDB and it may take some time for the index to be created if you have a large amount of data in your collection. You can check if the index is created using the `getIndexes()` method in MongoDB shell.
+Please note that `ensureIndexes()` returns a promise, so you might want to handle it accordingly.

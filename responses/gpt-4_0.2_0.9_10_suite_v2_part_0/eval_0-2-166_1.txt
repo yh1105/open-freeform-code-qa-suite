@@ -1,20 +1,30 @@
-Tailwind CSS is a utility-first CSS framework for rapidly building custom designs. It doesn't provide a direct way to target child elements like you would do in CSS with the child combinator (`>`). 
+Tailwind CSS is a utility-first CSS framework for rapidly building custom designs. It doesn't provide a direct way to target child elements like you would do in traditional CSS. Tailwind CSS is more about applying styles directly to the elements you want to style.
 
-Tailwind CSS works by adding utility classes to HTML elements. If you want to style direct children of a `div` with a class of `section`, you would need to add the necessary classes to those child `div` elements directly.
+However, you can use the `@apply` directive in your CSS to apply a set of styles to a specific selector. Here's an example:
 
-For example:
-
-```html
-<div class="section">
-  <div class="bg-red-500"> <!-- Tailwind CSS classes added directly -->
-    <!-- Content -->
-  </div>
-  <div class="text-lg">
-    <!-- Content -->
-  </div>
-</div>
+```css
+div.section > div {
+  @apply bg-red-500 text-white;
+}
 ```
 
-In this example, `bg-red-500` and `text-lg` are Tailwind CSS utility classes that style the direct children of the `div` with the class `section`.
+In this example, direct children `div` elements of `div` with class `section` will have a red background and white text.
 
-If you need to apply styles to elements based on their parent, you might need to use JavaScript or a preprocessor like Sass or Less in addition to Tailwind CSS.
+Remember to enable this feature in your Tailwind CSS configuration file (`tailwind.config.js`) if it's not enabled:
+
+```js
+module.exports = {
+  theme: {
+    extend: {},
+  },
+  variants: {},
+  plugins: [],
+  corePlugins: {
+    preflight: true,
+  },
+}
+```
+
+The `preflight` option includes Normalize.css and additional base styles for a modern, consistent, and flexible browser styling reset. 
+
+Please note that using `@apply` is not the "utility-first" way of doing things in Tailwind and should be used sparingly. The utility-first approach encourages you to use utility classes directly in your HTML.

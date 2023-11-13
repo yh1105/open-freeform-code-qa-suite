@@ -1,4 +1,4 @@
-Sure, you can use the `last:border-b-0` class to remove the border from the last item. Here is your revised code:
+Sure, you can use the `last:border-b-0` class to remove the border from the last element. Here is your revised code:
 
 ```html
   <ul>
@@ -12,9 +12,9 @@ Sure, you can use the `last:border-b-0` class to remove the border from the last
   </ul>
 ```
 
-This code applies the `border-b-0` class to the last `<li>` element, effectively removing the bottom border from the last item in the list. 
+This code will apply a bottom border to all `<li>` elements except the last one. The `last:border-b-0` class removes the bottom border from the last element. 
 
-Please note that by default, variants like `first`, `last`, `odd`, and `even` are not enabled for all utilities in Tailwind CSS. You might need to enable them in your Tailwind CSS configuration file (`tailwind.config.js`) if you haven't done so already. Here is how you can do it:
+Please note that by default, variants like `last` are not enabled in Tailwind CSS. You need to manually enable them in your `tailwind.config.js` file:
 
 ```javascript
 module.exports = {
@@ -22,7 +22,8 @@ module.exports = {
     extend: {
       borderWidth: ['last'],
     }
-  }
+  },
+  plugins: [],
 }
 ```
 

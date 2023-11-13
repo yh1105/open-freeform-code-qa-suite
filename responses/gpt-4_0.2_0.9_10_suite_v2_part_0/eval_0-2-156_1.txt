@@ -1,31 +1,27 @@
-From your HTML code, it seems like the "Stop Game" button is inside the `#GameRunning` div, which is probably why it's appearing behind the game frame. 
+It seems like you want to align the "Stop Game" button with the "Begin Game" button. Here are a few general methods you can use to achieve this:
 
-Here are a few suggestions on how to fix this:
+1. **Flexbox:** You can use CSS Flexbox to align items. Wrap both buttons in a parent div and apply `display: flex;` to it. You can then use `justify-content: space-between;` to space the buttons evenly.
 
-1. **Change the HTML layout**: You can move the "Stop Game" button outside of the `#GameRunning` div and place it next to the "Begin Game" button. This way, both buttons will be on the same level in the HTML structure.
+2. **Grid:** CSS Grid is another powerful tool for aligning items. You can create a grid container and place items in specific grid cells.
+
+3. **Positioning:** You can use CSS positioning properties (`relative`, `absolute`, `fixed`, `sticky`) to position your buttons. Be careful with this method as it can lead to overlapping elements if not used correctly.
+
+Here's an example using Flexbox:
 
 ```html
-<div id="GameStopped">
-  <button id="StartBtn" class="btnStyle" onclick="gameStarted=true;">Begin Game</button>
-  <button id="StopBtn" class="btnStyle" onclick="self.close()">Stop Game</button>
-  <br><br><br>
-  <div class="Status">Click Begin Game to start</div>
-</div>
-<div id="GameRunning">
-  <div id="Status" class="Status"></div>
+<div id="buttonContainer">
+    <div id="GameStopped"><button id="StartBtn" class="btnStyle" onclick="gameStarted=true;">Begin Game</button></div>
+    <div id="GameRunning"><button id="StopBtn" class="btnStyle" onclick="self.close()">Stop Game</button></div>
 </div>
 ```
 
-2. **Use CSS to position the button**: If you don't want to change the HTML structure, you can use CSS to position the "Stop Game" button. You can use the `position: absolute;` property to move the button to the desired location. However, this method can make your layout less flexible and harder to manage, especially on different screen sizes.
+And the corresponding CSS:
 
 ```css
-#StopBtn {
-  position: absolute;
-  top: 10px; /* Adjust this value to move the button up or down */
-  right: 10px; /* Adjust this value to move the button left or right */
+#buttonContainer {
+    display: flex;
+    justify-content: space-between;
 }
 ```
 
-Remember to replace the `10px` values with the actual values that suit your layout.
-
-3. **Use Flexbox or Grid**: If your layout is complex, consider using CSS Flexbox or Grid. These CSS modules make it easier to design flexible responsive layout structure without using float or positioning.
+This will place the "Begin Game" button on the left and the "Stop Game" button on the right. Adjust the CSS as needed to fit your design.

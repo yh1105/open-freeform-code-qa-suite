@@ -1,7 +1,15 @@
-You need to use the `.toast('show')` method to show the toast. Here's how you can modify your JavaScript code:
+You need to use the `toast()` method to show the toast. Here's an example of how you can show the toast using jQuery:
 
 ```javascript
 $('.toast').toast('show');
 ```
 
-This will show the toast message on the screen.
+You can add this code to an event handler or function that triggers the toast to show up. For example, you can add it to a button click event like this:
+
+```javascript
+$('#myButton').click(function() {
+  $('.toast').toast('show');
+});
+```
+
+Make sure you have included the necessary Bootstrap and jQuery files in your HTML file.

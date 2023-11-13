@@ -1,17 +1,17 @@
-Sure, here are the completed Javascript templates for both ways:
+Sure, here are the completed templates:
 
 Way 1:
 
 ```javascript
-cy.get(".ibxudA").find('.WildnessText-kRKTej').should('have.text', 'Wildness')
+cy.get(".ibxudA").find('.WildnessText-kRKTej').should('have.text', 'Wildness');
 ```
 
 Way 2:
 
 ```javascript
 cy.get(".ibxudA").find('.WildnessText-kRKTej').invoke('text').then((text) => {
-    expect(text.trim()).to.equal('Wildness')
+    expect(text.trim()).equal('Wildness');
 });
-```
+``` 
 
-Both ways should work to assert that the text within the div with class `WildnessText-kRKTej` equals to `Wildness`.
+Both ways should work to assert that the text within the div `WildnessText-kRKTej` equals to `Wildness`.

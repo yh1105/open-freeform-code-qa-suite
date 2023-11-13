@@ -1,5 +1,52 @@
-It seems like the issue is with the URI you are using in your `ApolloClient`. The URI `https://48p1r2roz4.sse.codesandbox.io` is a demo server provided by Apollo Client, and it may not be working properly at the moment.
+The issue might be related to the fact that the `useQuery` hook is being called before the ApolloProvider is mounted. To fix this, you can try wrapping your `TestScreen` component with the `ApolloProvider` component instead of wrapping the entire `App` component. Here's how you can modify your code:
 
-You should replace the URI with the endpoint of your GraphQL server. For example, if you are using a local server, you can use `http://localhost:4000/graphql` as the URI. If you are using a remote server, you should use the URL provided by your hosting service.
+```javascript
+import React from 'react';
+import { SafeAreaView, Text, View } from 'react-native';
+import { ApolloClient, ApolloProvider, InMemoryCache, gql, useQuery } from '@apollo/client';
 
-Once you have updated the URI, try running your app again and see if it works.
+const EXCHANGE_RATES = gql`
+  query GetExchangeRates {
+    rates(currency: "USD") {
+      currency
+      rate
+    }
+  }
+`;
+
+const TestScreen = () => {
+  const { loading, error, data } = useQuery(EXCHANGE_RATES);
+
+  console.log(loading, error, data);
+
+  if (loading) return <Text>Loading...</Text>;
+  if (error) return <Text>Error :(</Text>;
+
+  return data.rates.map(({ currency, rate }) => (
+    <View key={currency}>
+      <Text>
+        {currency}: {rate}
+      </Text>
+    </View>
+  ));
+};
+
+const apolloClient = new ApolloClient({
+  uri: 'https://48p1r2roz4.sse.codesandbox.io',
+  cache: new InMemoryCache(),
+});
+
+const App = () => {
+  return (
+    <SafeAreaView>
+      <ApolloProvider client={apolloClient}>
+        <TestScreen />
+      </ApolloProvider>
+    </SafeAreaView>
+  );
+};
+
+export default App;
+```
+
+By doing this, the `ApolloProvider` will be mounted before the `TestScreen` component, allowing the `useQuery` hook to work properly.

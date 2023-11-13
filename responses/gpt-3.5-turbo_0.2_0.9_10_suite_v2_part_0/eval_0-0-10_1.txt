@@ -1,9 +1,9 @@
-Sure, here are the completed Javascript templates for both ways:
+Sure! Here are the completed templates:
 
 Way 1:
 
 ```javascript
-cy.get(".ibxudA").find('.WildnessText-kRKTej').should('have.text', 'Wildness')
+cy.get(".ibxudA").find('.WildnessText-kRKTej').should('have.text', "Wildness")
 ```
 
 Way 2:
@@ -12,6 +12,8 @@ Way 2:
 cy.get(".ibxudA").find('.WildnessText-kRKTej').invoke('text').then((text) => {
     expect(text.trim()).to.equal('Wildness')
 });
-```
+``` 
 
-Both ways should work to assert that the text within the div with class `WildnessText-kRKTej` equals to `Wildness`.
+In Way 1, we use the `should` method to assert that the element with class `WildnessText-kRKTej` has the text "Wildness".
+
+In Way 2, we use the `invoke` method to get the text of the element with class `WildnessText-kRKTej`, and then use the `then` method to perform the assertion using `expect`. We trim the text to remove any leading or trailing whitespace before comparing it to "Wildness".

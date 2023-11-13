@@ -1,4 +1,4 @@
-You can create a button and a function that will be triggered when the button is clicked. In this function, you can access the state value which holds the value of the input field. Here is how you can do it:
+You can create a button and an onClick event handler that will log the current state (which holds the input value) when the button is clicked. Here's how you can do it:
 
 ```javascript
 import React, { useState } from 'react';
@@ -7,7 +7,7 @@ export default function InputField({name,label}) {
   const [state, setState] = useState('')
 
   const handleClick = () => {
-    console.log(state); // This will log the value of the input field
+    console.log(state);
   }
 
   return (
@@ -26,14 +26,14 @@ export default function InputField({name,label}) {
 }
 ```
 
-In this code, `handleClick` is a function that gets triggered when the button is clicked. Inside this function, we are logging the value of the input field which is stored in the `state` variable.
+In this code, `handleClick` is a function that logs the current state when the button is clicked. The button's `onClick` prop is set to this function, so it's called whenever the button is clicked.
 
-If you have multiple fields (like first name and last name), you can use an object as the state:
+If you want to get the values of multiple input fields (like first name and last name), you can use an object as your state:
 
 ```javascript
 import React, { useState } from 'react';
 
-export default function InputField({name,label}) {
+export default function InputField() {
   const [state, setState] = useState({
     firstName: '',
     lastName: ''
@@ -47,17 +47,18 @@ export default function InputField({name,label}) {
   }
 
   const handleClick = () => {
-    console.log(state); // This will log the value of the input fields
+    console.log(state);
   }
 
   return (
     <div>
-     <label>{label}</label>
+     <label>First Name</label>
       <input type="text" 
       value={state.firstName} 
       name="firstName"
       onChange={handleChange} />
 
+     <label>Last Name</label>
       <input type="text" 
       value={state.lastName} 
       name="lastName"
@@ -71,4 +72,4 @@ export default function InputField({name,label}) {
 }
 ```
 
-In this code, `state` is an object that holds the values of the first name and last name fields. The `handleChange` function updates the state when the value of any of the input fields changes. The `handleClick` function logs the state which includes the values of both input fields.
+In this code, `handleChange` is a function that updates the state with the new input values. It uses the input's `name` attribute to determine which part of the state to update. The `handleClick` function logs the entire state, which includes both the first name and last name.

@@ -1,9 +1,9 @@
-The `sourceMap` option in your `tsconfig.json` file is a compiler option that determines whether or not source maps should be generated for your TypeScript files.
+The `sourceMap` option in the `tsconfig.json` file is used to control whether source maps should be generated for your TypeScript files. 
 
-Source maps are files that map the compiled JavaScript code back to the original TypeScript code. They are extremely useful during development for debugging purposes, as they allow you to view and debug your original TypeScript code in the browser's developer tools, even though the browser is actually running the compiled JavaScript code.
+Source maps are files that map the compiled JavaScript code back to the original TypeScript code. They are used by debugging tools (like browser DevTools) to allow you to debug your TypeScript code directly, even though the browser is actually running the compiled JavaScript code.
 
-If you set `"sourceMap": false`, then these source map files will not be generated. This means that if you try to debug your code in the browser, you will only see the compiled JavaScript code, not the original TypeScript code.
+If you set `"sourceMap": false`, TypeScript will not generate source map files. This means that if you try to debug your code, you will have to debug the compiled JavaScript code instead of your original TypeScript code. This can make debugging more difficult, especially if the compiled code looks very different from your original code (which can happen if you're using advanced TypeScript features or certain compiler options).
 
-However, this change will not affect the actual functionality of your Angular app in any way. It will only affect your ability to debug the TypeScript code in the browser.
+However, turning off source maps can make your build faster and reduce the size of the output, which can be beneficial in certain scenarios, such as when you're doing a production build of your application.
 
-If you're not seeing any changes, it's likely because you're not currently debugging your code, or your build process is not set up to include the source maps in the output.
+In short, the change won't be visible in your running application, but it will affect the debugging process.

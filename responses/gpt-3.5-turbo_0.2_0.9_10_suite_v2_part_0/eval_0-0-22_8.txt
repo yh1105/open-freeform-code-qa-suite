@@ -1,4 +1,4 @@
-For the first way, you can pass the `options` prop to the `Tab.Screen` component for the "Settings" screen and set the `tabBarVisible` option to `false`. Here's the updated code:
+For the first way, you can pass the `options` prop to the `Tab.Screen` component for the "Settings" screen and set `tabBarVisible` to `false`:
 
 ```javascript
 export default function App() {
@@ -13,7 +13,7 @@ export default function App() {
 }
 ```
 
-For the second way, you can set the `headerShown` option to `false` in the `navigationOptions` object for the `SettingsStack.Screen` component. Here's the updated code:
+For the second way, you can set the `headerShown` option to `false` in the `SettingsStack.Screen` component:
 
 ```javascript
 function SettingsStackScreen({ navigation }) {

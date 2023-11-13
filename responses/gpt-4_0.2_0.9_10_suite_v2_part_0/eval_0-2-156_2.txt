@@ -1,41 +1,35 @@
-It seems like you want to move the "Stop Game" button to the top of the game frame, similar to the "Begin Game" button. Here are a few suggestions:
+You can use CSS to position your stop button at the top. Here are a few methods:
 
-1. **HTML Layout**: You could rearrange your HTML elements so that the "Stop Game" button is in the same container as the "Begin Game" button. This way, they will be in the same context and you can control their position more easily. 
+1. **Flexbox**: You can use CSS Flexbox to align your buttons. You can make the parent div a flex container and then use `justify-content: space-between;` to put space between your buttons. Here's an example:
 
-2. **CSS Flexbox**: You can use CSS Flexbox to align your buttons. Flexbox is a one-dimensional layout method for laying out items in rows or columns. Items flex to fill additional space and shrink to allow extra items to fit.
-
-Here's an example of how you could modify your HTML and CSS:
-
-HTML:
-```html
-<div id="GameControls">
-  <button id="StartBtn" class="btnStyle" onclick="gameStarted=true;">Begin Game</button>
-  <button id="StopBtn" class="btnStyle" onclick="self.close()">Stop Game</button>
-</div>
-```
-
-CSS:
 ```css
-#GameControls {
+#DanceScoreboard {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
 }
 ```
 
-In this example, the `display: flex;` property makes the `GameControls` div a flex container, and the `justify-content: space-between;` property places the buttons at the far ends of the container.
+2. **Absolute Positioning**: You can use absolute positioning to move your stop button to the top. This will take the button out of the normal flow of the document and position it relative to the nearest positioned ancestor. Here's an example:
 
-3. **CSS Grid**: Alternatively, you can use CSS Grid, which is a two-dimensional layout method for laying out items in rows and columns. It's more flexible than Flexbox when it comes to 2D layouts.
-
-Here's an example of how you could use CSS Grid:
-
-CSS:
 ```css
-#GameControls {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+#StopBtn {
+  position: absolute;
+  top: 0;
 }
 ```
 
-In this example, the `display: grid;` property makes the `GameControls` div a grid container, and the `grid-template-columns: 1fr 1fr;` property creates two equally-sized columns for the buttons.
+3. **Grid Layout**: You can use CSS Grid Layout to position your buttons. This allows you to create a grid structure in your HTML and place your items anywhere on the grid. Here's an example:
 
-Remember to remove the `<br>` tags and any other elements that might be causing unnecessary space between your buttons.
+```css
+#DanceScoreboard {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+}
+
+#GameRunning {
+  grid-row: 1;
+}
+```
+
+Remember to adjust the rest of your layout accordingly, as these changes can affect the positioning of other elements.

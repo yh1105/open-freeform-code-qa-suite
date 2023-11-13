@@ -41,8 +41,8 @@ const rootElement = document.getElementById("root");
 ReactDOM.render(<App />, rootElement);
 ```
 
-In the modified code, we have added a ref to the `CustomForm` component in the `App` component. We have also defined a `handleSubmit` method in the `App` component that calls the `handleSubmit` method of the `CustomForm` component using the ref.
+In the modified code, we have created a ref for the `CustomForm` component in the `App` component using `React.createRef()`. We have also defined a `handleSubmit` method in the `App` component that will be called when the 'In Root' button is clicked.
 
-In the `render` method of the `App` component, we have passed the ref to the `CustomForm` component using the `ref` prop. We have also added an `onClick` handler to the 'In Root' button that calls the `handleSubmit` method of the `App` component.
+In the `handleSubmit` method, we are preventing the default form submission behavior using `event.preventDefault()`, and then calling the `handleSubmit` method of the `CustomForm` component using the ref we created earlier.
 
-Now, when the 'In Root' button is clicked, the `handleSubmit` method of the `App` component is called, which in turn calls the `handleSubmit` method of the `CustomForm` component, submitting the form.
+Finally, we are passing the ref to the `CustomForm` component using the `ref` prop, and modifying the 'In Root' button to call the `handleSubmit` method when clicked using the `onClick` prop.

@@ -1,6 +1,6 @@
 To change the background color of the root element dynamically with React, you can use the `ThemeProvider` component provided by Material-UI. 
 
-Here's an example of how you can use it to switch between light and dark themes:
+Here's an example of how you can use it to switch between a light and dark theme:
 
 ```jsx
 import React, { useState } from 'react';
@@ -17,7 +17,7 @@ function App() {
     },
   });
 
-  const handleThemeChange = () => {
+  const handleDarkModeChange = () => {
     setDarkMode(!darkMode);
   };
 
@@ -25,9 +25,9 @@ function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <div style={{ backgroundColor: theme.palette.background.default }}>
-        <Switch checked={darkMode} onChange={handleThemeChange} />
-        <h1>Hello World</h1>
-        <p>This is a Material-UI themed website</p>
+        <Switch checked={darkMode} onChange={handleDarkModeChange} />
+        <h1>Hello, world!</h1>
+        <p>This is a Material-UI app with a dynamic theme.</p>
       </div>
     </ThemeProvider>
   );
@@ -36,10 +36,8 @@ function App() {
 export default App;
 ```
 
-In this example, we create a `theme` object using the `createMuiTheme` function and pass it to the `ThemeProvider` component. We also use the `CssBaseline` component to apply some basic styles to the page.
+In this example, we use the `createMuiTheme` function to create a theme object with a `palette` property that specifies the type of palette to use (either `'light'` or `'dark'`). We then pass this theme object to the `ThemeProvider` component, which applies it to all child components.
 
-The `Switch` component is used to toggle between light and dark modes. When the `handleThemeChange` function is called, it updates the `darkMode` state, which in turn updates the `type` property of the `palette` object in the `theme`.
+We also use the `CssBaseline` component to apply some basic global styles, such as setting the font family and removing margins and padding from the body element.
 
-Finally, we apply the background color to the root `div` element using the `backgroundColor` property and the `palette.background.default` value from the `theme`.
-
-I hope this helps! Let me know if you have any further questions.
+Finally, we use a `Switch` component to toggle the `darkMode` state, which updates the theme and causes the background color to change. Note that we also set the background color of the root `div` element using the `backgroundColor` style property, which is based on the `palette.background.default` value of the theme.

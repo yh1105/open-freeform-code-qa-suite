@@ -1,26 +1,58 @@
-The `truncate` class in Tailwind CSS only works for single line text. It sets `overflow: hidden`, `white-space: nowrap`, and `text-overflow: ellipsis` on an element. So, it won't work for multiline text.
+The `truncate` class in Tailwind CSS only works for single line text. It sets `overflow: hidden`, `text-overflow: ellipsis`, and `white-space: nowrap` on an element. So, it won't work for multiline text.
 
-If you want to truncate text to a specific number of lines, you will need to use some custom CSS. Here is an example of how you can truncate text to 2 lines:
+If you want to truncate text that spans multiple lines, you'll need to use a different approach because CSS doesn't provide a native solution for multiline text truncation.
 
-```css
-.truncate-2 {
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;  
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-```
-
-Then, you can use this class in your JSX:
+Here is a workaround using line-clamp in Tailwind CSS:
 
 ```html
 <div className="ml-1 inline-block">
    <span>Label: </span>
-   <span className="font-semibold truncate-2">
+   <span className="font-semibold overflow-hidden overflow-ellipsis">
      long texttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt
    </span>
 </div>
 ```
 
-Please note that this solution uses `-webkit-line-clamp` which is not fully supported in all browsers (though it does have good support in most modern browsers). If you need to support a wide range of browsers, you may need to use a JavaScript-based solution to truncate the text.
+In your Tailwind CSS configuration, you need to enable `lineClamp` in the `theme` section:
+
+```javascript
+module.exports = {
+  theme: {
+    extend: {
+      typography: (theme) => ({
+        DEFAULT: {
+          css: {
+            // ...
+          },
+        },
+      }),
+      lineClamp: {
+        1: '1',
+        2: '2',
+        3: '3',
+        // ...
+      },
+    },
+  },
+  variants: {
+    extend: {},
+  },
+  plugins: [
+    require('@tailwindcss/typography'),
+    require('@tailwindcss/line-clamp'),
+  ],
+};
+```
+
+Then you can use `line-clamp-{n}` to limit the number of lines:
+
+```html
+<div className="ml-1 inline-block">
+   <span>Label: </span>
+   <span className="font-semibold line-clamp-1">
+     long texttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt
+   </span>
+</div>
+```
+
+This will limit the text to 1 line and add an ellipsis if it overflows.

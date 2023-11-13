@@ -1,30 +1,28 @@
-To identify if a div is visible on the viewport, you can use the Intersection Observer API. Here's an example of how you can use it in your React code:
+To identify if a div is visible on the viewport, you can use the Intersection Observer API. Here is an example of how you can use it:
 
 ```javascript
 import React, { useRef, useEffect, useState } from "react";
 
-const MyComponent = ({ data }) => {
+const ParentComponent = ({ data }) => {
   const parentRef = useRef(null);
-  const [visibleIds, setVisibleIds] = useState([]);
+  const [visibleDivs, setVisibleDivs] = useState([]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        const ids = entries
+        const visibleIds = entries
           .filter((entry) => entry.isIntersecting)
           .map((entry) => entry.target.id);
-        setVisibleIds(ids);
+        setVisibleDivs(visibleIds);
       },
       { rootMargin: "0px", threshold: 1 }
     );
 
-    const children = parentRef.current.children;
-    for (let i = 0; i < children.length; i++) {
-      observer.observe(children[i]);
-    }
+    const divs = parentRef.current.querySelectorAll("div");
+    divs.forEach((div) => observer.observe(div));
 
     return () => {
-      observer.disconnect();
+      divs.forEach((div) => observer.unobserve(div));
     };
   }, [data]);
 
@@ -38,14 +36,18 @@ const MyComponent = ({ data }) => {
     </div>
   );
 };
+
+export default ParentComponent;
 ```
 
-In this example, we use the `useRef` hook to get a reference to the parent div. We also use the `useState` hook to keep track of the visible ids.
+In this example, we are using the `useRef` hook to get a reference to the parent div. We are also using the `useState` hook to keep track of the visible divs.
 
-In the `useEffect` hook, we create a new `IntersectionObserver` instance and observe all the children of the parent div. We set the `rootMargin` to `0px` and the `threshold` to `1` so that the intersection is detected when the entire child element is visible.
+In the `useEffect` hook, we are creating a new `IntersectionObserver` instance with a callback function that will be called whenever a div intersects with the viewport. We are also setting the `rootMargin` to `0px` and the `threshold` to `1` to ensure that the callback is called when the entire div is visible on the viewport.
 
-When the intersection changes, we filter the entries to get only the ones that are intersecting and map them to their respective ids. We then set the visible ids using the `setVisibleIds` function.
+We are then using the `querySelectorAll` method to get all the divs inside the parent div and calling the `observe` method on each of them to start observing them.
 
-Finally, we render the parent div with the `data` and map over each item to render a child div with the `id` and `title`. We also pass the `parentRef` to the parent div so that we can get a reference to it in the `useEffect` hook.
+Finally, we are returning a cleanup function that calls the `unobserve` method on each div to stop observing them.
 
-With this code, you can get the list of divs inside of `#parent` which are visible on viewport on scroll.
+In the callback function, we are filtering the entries to get only the ones that are intersecting with the viewport and mapping them to get their ids. We are then setting the visible divs state to the array of ids.
+
+Note that this example assumes that the `data` prop is an array of objects with

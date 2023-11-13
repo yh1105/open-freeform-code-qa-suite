@@ -24,10 +24,11 @@ return (
     id="mobile"
     name="mobile"
     placeholder="Enter a valid mobile number"
+    value={allValues.mobile}
     onChange={changeHandler}
   />
   // ...
 );
 ```
 
-In the `changeHandler` function, we destructure the `name` and `value` properties from the `e.target` object, which represents the input element that triggered the change event. We then use the `setAllValues` function to update the `allValues` state object by spreading the previous state and updating the property with the `name` key to the new `value`. This way, we can update any property of the `allValues` object using a single function.
+In the `changeHandler` function, we destructure the `name` and `value` properties from the `event.target` object. Then, we use the spread operator to create a copy of the previous state of `allValues` and update the property with the corresponding `name` using computed property names. Finally, we pass the updated state to `setAllValues` to update the state of the component.

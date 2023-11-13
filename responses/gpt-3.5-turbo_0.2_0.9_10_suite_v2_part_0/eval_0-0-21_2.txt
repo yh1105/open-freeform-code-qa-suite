@@ -1,4 +1,4 @@
-To copy the text from the `v-text-field` component to the clipboard when the button is clicked, you can use the `navigator.clipboard.writeText()` method. Here's the updated code:
+To copy the text from the `v-text-field` component to the clipboard, you can use the Clipboard API. Here's the updated code:
 
 ```html
 <template>
@@ -23,17 +23,16 @@ To copy the text from the `v-text-field` component to the clipboard when the but
     },
     methods: {
       copyText() {
-        navigator.clipboard.writeText(this.text1)
-          .then(() => {
-            console.log('Text copied to clipboard')
-          })
-          .catch(err => {
-            console.error('Error copying text: ', err)
-          })
+        const textField = document.createElement('textarea')
+        textField.innerText = this.text1
+        document.body.appendChild(textField)
+        textField.select()
+        document.execCommand('copy')
+        textField.remove()
       }
     }
   })
 </script>
 ```
 
-In the `copyText` method, we use `navigator.clipboard.writeText()` to write the text from `text1` to the clipboard. We also add a `then()` and `catch()` block to handle success and error cases respectively.
+In the `copyText` method, we create a new `textarea` element, set its `innerText` to the value of `text1`, append it to the document body, select its contents, execute the `copy` command, and then remove the `textarea` element. This will copy the text to the clipboard.

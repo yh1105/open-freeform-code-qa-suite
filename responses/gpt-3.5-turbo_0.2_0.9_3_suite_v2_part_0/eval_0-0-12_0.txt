@@ -1,7 +1,0 @@
-The error message `Error: Invalid login: 535-5.7.8 Username and Password not accepted` indicates that the email and password you are using to authenticate with Gmail are incorrect or not accepted. Here are some steps you can take to fix this issue:
-
-1. Double-check that you are using the correct email and password for the Gmail account you want to send emails from. Make sure that you are not using an app-specific password if you have two-factor authentication enabled.
-
-2. If you are sure that your email and password are correct, you may need to enable "less secure apps" in your Gmail account settings. Go to your Google Account settings, then click on "Security" in the left-hand menu. Scroll down to "Less secure app access" and turn it on. Note that this option is not recommended for security reasons, so you may want to consider using a different email provider or a more secure authentication method.
-
-3. If you are still having issues, you may need to use OAuth2 authentication instead of a password. This involves creating a Google Cloud Platform project and setting up credentials for your application. You can find more information on how to do this in the Nodemailer documentation: https://nodemailer.com/smtp/oauth2/

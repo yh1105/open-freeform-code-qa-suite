@@ -1,16 +1,18 @@
-Font Awesome 5 has made some changes in the way it is used compared to Font Awesome 4. The `font-family` is no longer just "FontAwesome", but it depends on the style you want to use. The styles available are: `fas` (Solid), `far` (Regular), `fal` (Light), `fab` (Brands).
+Font Awesome 5 has made some changes in the way it is used compared to Font Awesome 4. The main change is that the font-family is now specified as either "Font Awesome 5 Free", "Font Awesome 5 Brands", or "Font Awesome 5 Pro" depending on the type of icon you are using.
 
-Also, the unicode for the same icon may have changed from version 4 to 5. You can check the unicode for your icon in the Font Awesome 5 website.
+Also, they have introduced a new CSS property, `font-weight`, which should be set to 900 for solid icons, 400 for regular and light icons.
 
-Assuming you want to use the solid style for the icon, and the unicode for the icon is `f107`, the CSS would be:
+Here is how you can modify your CSS to work with Font Awesome 5:
 
 ```css
 #mainNav .navbar-collapse .navbar-sidenav .nav-link-collapse:after {
   float: right;
   content: "\f107";
-  font-family: "Font Awesome 5 Free"; /* for solid style */
-  font-weight: 900; /* required for correct display with Font Awesome 5 */
+  font-family: "Font Awesome 5 Free"; /* or "Font Awesome 5 Brands" or "Font Awesome 5 Pro" */
+  font-weight: 900; /* 400 for regular and light icons */
 }
 ```
 
-If you want to use another style, replace `"Font Awesome 5 Free"` with `"Font Awesome 5 Brands"` for brands, or `"Font Awesome 5 Pro"` for light and regular (if you have the Pro version). The `font-weight` should be `400` for regular and light styles, and `900` for solid and brands.
+Please replace the `font-family` with the appropriate one based on the type of icon you are using. If you are using a free version, then it should be "Font Awesome 5 Free". If you are using brand icons, then it should be "Font Awesome 5 Brands". If you are using a pro version, then it should be "Font Awesome 5 Pro".
+
+Also, please note that not all Font Awesome 4 icons have a direct equivalent in Font Awesome 5, so you may need to check the Font Awesome 5 icon gallery to find the equivalent icon.

@@ -1,4 +1,4 @@
-Sure, you can use the `keydown` event to listen for the "Enter" key. Here is the revised version of your code:
+Sure, you can use the `keydown` event and check if the key pressed was "Enter". Here is the revised version of your code:
 
 ```javascript
 mounted() {
@@ -19,10 +19,10 @@ mounted() {
 }
 ```
 
-You need to import `Keymap` from `prosemirror-commands` to use it. If you haven't done it yet, add this line at the top of your file:
+Please note that you need to import `Keymap` from `tiptap-extensions`:
 
 ```javascript
-import { Keymap } from 'prosemirror-commands';
+import { Keymap } from 'tiptap-extensions'
 ```
 
 This code will execute `console.log("good")` when the "Enter" key is hit.

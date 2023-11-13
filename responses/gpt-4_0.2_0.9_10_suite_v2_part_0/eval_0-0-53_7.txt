@@ -1,6 +1,6 @@
-The issue with your code is that you're trying to use inline JavaScript in a React component, which is not the correct way to handle events in React. You should use React's event handling system. 
+The issue is that you're trying to use inline JavaScript in your React component, which is not the correct way to handle events in React. Instead, you should use React's event system. 
 
-Here's the corrected version of your code:
+Here's how you can modify your code to display the alert when the user clicks the upload button:
 
 ```javascript
 import React, { Component } from 'react'
@@ -57,4 +57,4 @@ class Main extends React.Component {
 export default Main;
 ```
 
-In this version, the alert is triggered when the form is submitted, which is handled by the `handleUploadImage` function. The `onClick` event handler is removed from the button, and instead the button is of type "submit", which will trigger the form's `onSubmit` event when clicked.
+In this code, I've removed the inline JavaScript and added the alert to the `handleUploadImage` function. I've also changed the `onclick` attribute to `type="submit"` on the button, which will trigger the form's `onSubmit` event when clicked.

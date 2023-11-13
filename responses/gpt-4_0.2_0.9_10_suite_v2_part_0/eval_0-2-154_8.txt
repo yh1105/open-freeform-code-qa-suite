@@ -1,26 +1,27 @@
 Sure, here is a generator function that should do what you're asking for:
 
 ```javascript
-function* iterLeafNodes(strHTML, format=[]) {
+function* iterLeafNodes(strHTML, format = []) {
   const parser = new DOMParser();
-  const doc = parser.parseFromString(strHTML, 'text/html');
-  const walk = function* (node, format) {
+  const doc = parser.parseFromString(strHTML, "text/html");
+  const body = doc.body;
+
+  function* walk(node, format = []) {
     if (node.nodeType === Node.TEXT_NODE) {
-      yield { text: node.nodeValue, format };
-    } else if (node.nodeType === Node.ELEMENT_NODE) {
-      format = [...format];
-      if (node.tagName !== 'P') {
-        format.push(node.tagName.toLowerCase());
+      if (node.textContent.trim() !== '') {
+        yield { text: node.textContent, format };
       }
+    } else if (node.nodeType === Node.ELEMENT_NODE) {
       for (const child of node.childNodes) {
-        yield* walk(child, format);
+        yield* walk(child, [...format, node.tagName.toLowerCase()]);
       }
     }
-  };
-  for (const child of doc.body.childNodes) {
-    yield* walk(child, format);
+  }
+
+  for (const child of body.childNodes) {
+    yield* walk(child);
   }
 }
 ```
 
-This function uses a recursive generator function `walk` to traverse the DOM tree. It checks the type of each node and if it's a text node, it yields an object with the text and the current format. If it's an element node, it adds the tag name to the format (unless it's a 'P' tag) and then recursively walks the child nodes.
+This function uses a recursive approach to walk through the DOM tree. It starts from the root node and goes down to the leaf nodes. When it encounters a text node, it yields an object with the text content and the format. The format is an array of tag names, which is built up by adding the tag name of the current node to the format of the parent node.

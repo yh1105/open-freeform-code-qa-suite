@@ -1,4 +1,4 @@
-TailwindCSS is a utility-first CSS framework, which means it provides pre-defined classes that you can use to style your HTML elements. In order to select the direct children of a div with class "section" using TailwindCSS, you can use the `>` selector in combination with the `class` attribute.
+TailwindCSS is a utility-first CSS framework, which means it provides utility classes that can be used to style HTML elements. To select the direct children of a div with class "section" using TailwindCSS, you can use the `>` selector in combination with the `class` utility.
 
 Here's an example:
 
@@ -6,7 +6,6 @@ Here's an example:
 <div class="section">
   <div class="child">Child 1</div>
   <div class="child">Child 2</div>
-  <div class="child">Child 3</div>
 </div>
 ```
 
@@ -14,23 +13,9 @@ To select the direct children of the div with class "section", you can use the f
 
 ```html
 <div class="section">
-  <div class="child">Child 1</div>
-  <div class="child">Child 2</div>
-  <div class="child">Child 3</div>
-</div>
-
-<!-- Select direct children of div with class "section" -->
-<div class="section">
-  <div class="child">Child 1</div>
-  <div class="child">Child 2</div>
-  <div class="child">Child 3</div>
-</div>
-
-<div class="section">
-  <div class="child">Child 1</div>
-  <div class="child">Child 2</div>
-  <div class="child">Child 3</div>
+  <div class="class:child">Child 1</div>
+  <div class="class:child">Child 2</div>
 </div>
 ```
 
-In this example, the `>` selector is not used explicitly, but the `class` attribute is used to select the direct children of the div with class "section". The `child` class is applied to all the child elements, and the `section` class is applied to the parent element.
+In this example, the `class:child` utility class is used to select the direct children of the div with class "section". The `class:` prefix is used to target a class instead of an HTML element.

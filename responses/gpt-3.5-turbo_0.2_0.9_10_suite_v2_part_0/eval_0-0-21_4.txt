@@ -1,11 +1,29 @@
-To copy the text from the `v-text-field` component to the clipboard when the button is clicked, you can use the `navigator.clipboard.writeText()` method. Here's the updated code:
+To copy the text from the `v-text-field` component to the clipboard, you can use the Clipboard API. Here's the code you can use in the `copyText` method:
+
+```js
+copyText() {
+  const textField = document.querySelector('#text-field')
+  textField.select()
+  document.execCommand('copy')
+}
+```
+
+You also need to add an `id` attribute to the `v-text-field` component to select it using `document.querySelector()`:
+
+```html
+<v-text-field id="text-field" v-model="text1"></v-text-field>
+```
+
+This code selects the `v-text-field` element using `document.querySelector()`, sets the selection range to the entire text inside the element using `textField.select()`, and then executes the `copy` command using `document.execCommand('copy')` to copy the selected text to the clipboard.
+
+Here's the complete code:
 
 ```html
 <template>
   <div id="app">
     <v-app id="inspire">
       <v-container>
-        <v-text-field v-model="text1"></v-text-field>
+        <v-text-field id="text-field" v-model="text1"></v-text-field>
         <v-btn @click="copyText">copy</v-btn>
       </v-container>
     </v-app>
@@ -13,23 +31,21 @@ To copy the text from the `v-text-field` component to the clipboard when the but
 </template>
 
 <script>
-  new Vue({
-    el: "#app",
-    vuetify: new Vuetify(),
-    data() {
-      return {
-        text1: "lorem ipsum 123",
-      };
-    },
-    methods: {
-      copyText() {
-        navigator.clipboard.writeText(this.text1).then(() => {
-          console.log("Text copied to clipboard");
-        });
-      },
-    },
-  });
+new Vue({
+  el: '#app',
+  vuetify: new Vuetify(),
+  data() {
+    return {
+      text1: 'lorem ipsum 123'
+    }
+  },
+  methods: {
+    copyText() {
+      const textField = document.querySelector('#text-field')
+      textField.select()
+      document.execCommand('copy')
+    }
+  }
+})
 </script>
 ```
-
-In the `copyText` method, we use the `navigator.clipboard.writeText()` method to write the value of `text1` to the clipboard. This method returns a promise, so we can use `.then()` to log a message to the console once the text has been successfully copied.

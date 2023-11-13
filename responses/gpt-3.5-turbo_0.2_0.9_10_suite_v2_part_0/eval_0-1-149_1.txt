@@ -1,16 +1,14 @@
-Sure! You can use the `group-hover` variant in Tailwind to achieve this effect. Here's the revised code:
+You can use the `group-hover` variant in Tailwind to apply styles to an element when its parent is being hovered over. Here's an example of how you can achieve the animation effect you want:
 
 ```html
-<a href="#" class="group relative text-sky-600 transition duration-300">
-    Link
-    <span class="absolute bottom-0 left-0 w-full h-0.5 bg-sky-600 group-hover:h-full transition duration-500"></span>
+<a href="#" class="group relative text-sky-600">
+  Link
+  <span class="absolute inset-x-0 bottom-0 h-0.5 bg-sky-600 transform origin-bottom-left scale-x-0 group-hover:scale-x-100 transition duration-500"></span>
 </a>
 ```
 
-In this code, we've added the `relative` class to the link container to make the `absolute` positioned span element relative to it. We've also added the `group` class to enable the `group-hover` variant.
+In this code, we're using the `group` class to apply styles to both the link and its child element. We're also using the `relative` class on the link to make the child element position itself relative to the link.
 
-The `span` element is positioned absolutely at the bottom left corner of the link container. We've set its width to `full` so that it spans the entire width of the container. Initially, its height is set to `0.5` and its background color is set to `sky-600`.
+The child element is an absolutely positioned `span` element that spans the full width of the link and has a height of `0.5rem`. We're using the `transform` property to scale the element horizontally from `0` to `100%` when the link is being hovered over. We're also using the `transition` property to animate the scaling effect over a duration of `500ms`.
 
-When the link is hovered over, we use the `group-hover` variant to set the height of the `span` element to `full` and transition its height over a duration of `500ms`.
-
-This should give you the desired animation effect. Let me know if you have any questions!
+Note that we're not using the `:after` pseudo-element in this code. Instead, we're using a separate `span` element to achieve the animation effect.

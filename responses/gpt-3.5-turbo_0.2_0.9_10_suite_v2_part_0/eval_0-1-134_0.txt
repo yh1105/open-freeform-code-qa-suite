@@ -1,40 +1,7 @@
-It sounds like you might be trying to use a CSS preprocessor like Sass or Less. These preprocessors allow you to write CSS in a more efficient way by using variables, nesting, and other features. 
+It sounds like you might be referring to Emmet, a plugin for text editors that allows you to write HTML and CSS code faster and more efficiently. 
 
-In Sass, for example, you can use the `&` symbol to reference the parent selector. So if you have a class called `.button` and you want to add a hover effect to it, you can write:
+To use Emmet, you can type a shorthand code and then press the "Tab" key to expand it into the full HTML or CSS code. For example, typing `.classname` and then pressing "Tab" should expand into `<div class="classname"></div>`.
 
-```
-.button {
-  background-color: blue;
-  color: white;
+If this isn't working for you, make sure that you have Emmet installed and enabled in your text editor. The specific steps for doing this will depend on which text editor you are using. 
 
-  &:hover {
-    background-color: red;
-  }
-}
-```
-
-This will compile to:
-
-```
-.button {
-  background-color: blue;
-  color: white;
-}
-
-.button:hover {
-  background-color: red;
-}
-```
-
-If you're not using a preprocessor and you're just trying to write regular CSS, you can still use the `.` to target a class. For example:
-
-```
-<div class="my-class"></div>
-
-.my-class {
-  background-color: blue;
-  color: white;
-}
-```
-
-This will style any element with the class `my-class`. Make sure you're using the correct class name and that your CSS is properly linked to your HTML file.
+Also, note that Emmet has some specific syntax rules that you need to follow. For example, to create a div with a class, you need to start with a period (.) followed by the class name. If you're still having trouble, try checking the Emmet documentation for more information on how to use it.

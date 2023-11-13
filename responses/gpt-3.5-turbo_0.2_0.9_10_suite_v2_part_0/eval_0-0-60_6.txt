@@ -1,14 +1,14 @@
-This error occurs because Bootstrap 4 requires the Popper.js library as a dependency. To fix this error, you need to install Popper.js library using npm. 
+This error occurs because Bootstrap 4 requires Popper.js as a dependency. To fix this, you need to install Popper.js as well.
 
-You can install Popper.js by running the following command in your project directory:
+You can install Popper.js using npm by running the following command in your project directory:
 
 ```
 npm install popper.js --save
 ```
 
-After installing Popper.js, you need to import it in your JavaScript file before importing Bootstrap. 
+After installing Popper.js, you need to import it in your JavaScript file before importing Bootstrap:
 
-```
+```javascript
 import Popper from 'popper.js';
 import 'bootstrap';
 ```

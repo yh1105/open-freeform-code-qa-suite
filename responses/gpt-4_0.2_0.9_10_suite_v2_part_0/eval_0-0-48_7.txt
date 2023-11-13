@@ -1,11 +1,11 @@
-Sure, you can't directly combine two mapped types like that. Instead, you can use the `&` operator to create an intersection type. Here is the corrected code:
+Sure, you can define the `FruitsAndColors` type as follows:
 
 ```typescript
 type FruitsAndColors = {
-  [key in fruit]: number;
+  [K in fruit]: number;
 } & {
-  [key in color]: boolean;
+  [K in color]: boolean;
 }
 ```
 
-This will create a type `FruitsAndColors` where each fruit has a numeric value and each color has a boolean value.
+This uses the `&` operator to combine two mapped types into one. The first mapped type assigns a `number` to each `fruit`, and the second mapped type assigns a `boolean` to each `color`.

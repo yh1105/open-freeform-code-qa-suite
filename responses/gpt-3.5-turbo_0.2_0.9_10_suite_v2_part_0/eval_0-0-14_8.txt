@@ -1,6 +1,4 @@
-To get the value of the switch in the `onCreate` function, you need to add the `name` attribute to the `Switch` component and set it to `"chargable"` (or any other name you prefer). Then, you can access the value of the switch using `values.chargable` in the `onCreate` function.
-
-Here's the revised code:
+To get the value of the switch, you need to add `onChange` event to the `Switch` component and update the value of the `switch` field in the form. Here's the revised code:
 
 ```html
 <Form form={form} layout="vertical">
@@ -12,8 +10,12 @@ Here's the revised code:
     <Input placeholder="Enter Description" />
   </Form.Item>
 
-  <Form.Item name="chargable" noStyle valuePropName="checked">
-    <Switch checkedChildren="Yes" unCheckedChildren="No" name="chargable" />
+  <Form.Item name="switch" noStyle valuePropName="checked">
+    <Switch
+      checkedChildren="Yes"
+      unCheckedChildren="No"
+      onChange={(checked) => form.setFieldsValue({ switch: checked })}
+    />
     <span>Chargable</span>
   </Form.Item>
 
@@ -33,6 +35,6 @@ Here's the revised code:
     Save
   </Button>
 </Form>
-``` 
+```
 
-In the `onCreate` function, you can access the value of the switch using `values.chargable`.
+With this change, the value of the `switch` field in the form will be updated whenever the switch is toggled, and it will be included in the `values` object passed to the `onCreate` function.

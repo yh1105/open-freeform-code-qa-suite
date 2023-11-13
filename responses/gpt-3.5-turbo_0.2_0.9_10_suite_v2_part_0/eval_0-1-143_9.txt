@@ -1,19 +1,21 @@
-You can modify the `browser.css` file in Firefox to adjust the spacing between menu items. Here's how:
+You can modify the `browser.css` file in Firefox to adjust the spacing between menu items. Here are the steps to do it:
 
 1. Open Firefox and type `about:config` in the address bar.
 2. Search for `toolkit.legacyUserProfileCustomizations.stylesheets` and set it to `true`.
 3. Open your Firefox profile folder. You can find the location of your profile folder by typing `about:support` in the address bar and looking for the "Profile Folder" entry.
-4. In your profile folder, create a new folder called `chrome` (if it doesn't already exist).
+4. In your profile folder, create a new folder called `chrome` if it doesn't already exist.
 5. Inside the `chrome` folder, create a new file called `userChrome.css`.
-6. Open the `userChrome.css` file in a text editor and add the following code:
+6. Open the `userChrome.css` file in a text editor.
+7. Add the following code to the file:
 
 ```
 /* Reduce spacing between menu items */
-#PanelUI-menu .panel-subview-body > :not(:first-child) {
-  margin-block-start: 0 !important;
+menupopup > menuitem {
+  padding-top: 4px !important;
+  padding-bottom: 4px !important;
 }
 ```
 
-7. Save the `userChrome.css` file and restart Firefox.
+8. Save the file and restart Firefox.
 
-This code targets the menu items in the Firefox menu (also known as the "hamburger menu") and reduces the top margin of all items except the first one, effectively reducing the spacing between them. You can adjust the `margin-block-start` value to your liking if you want more or less spacing.
+This code reduces the top and bottom padding of menu items to 4 pixels. You can adjust the value to your liking. If you want to target a specific menu, you can use its ID in the CSS selector. For example, to target the bookmarks menu, you can use `#BMB_bookmarksPopup > menuitem`.

@@ -1,4 +1,4 @@
-Sure! The code you provided is almost correct, but you need to use the `|` operator instead of `,` to combine the two index signatures. Here's the corrected code:
+Sure! The code you provided is almost correct, but you need to use the `|` operator instead of the `,` operator to combine the two index signatures. Here's the corrected code:
 
 ```typescript
 type FruitsAndColors = {
@@ -8,4 +8,4 @@ type FruitsAndColors = {
 }
 ```
 
-This defines a type `FruitsAndColors` that has either a numeric property for each fruit or a boolean property for each color.
+This creates a union type of two objects, one with a numeric property for each fruit and the other with a boolean property for each color.

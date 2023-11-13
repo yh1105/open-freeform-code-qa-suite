@@ -17,20 +17,13 @@ export default function App() {
 
 Second way:
 
-In the second way, you can use the `useEffect` hook to listen for focus and blur events on the navigation object. When the screen is focused, you can hide the tab bar by setting the `tabBarVisible` option to `false`.
+In the second way, you can use the `setOptions` method of the `navigation` prop to hide the tab bar. This method should be called with an object that has a `tabBarVisible` property set to `false`.
 
 ```javascript
-import { useEffect } from 'react';
-
 function SettingsStackScreen({ navigation }) {
-    useEffect(() => {
-        const unsubscribe = navigation.addListener('focus', () => {
-            navigation.setOptions({ tabBarVisible: false });
-        });
-
-        return unsubscribe;
+    React.useEffect(() => {
+        navigation.setOptions({ tabBarVisible: false });
     }, [navigation]);
-
     return (
         <SettingsStack.Navigator>
             <SettingsStack.Screen name="Settings" component={SettingsScreen} />
@@ -39,4 +32,4 @@ function SettingsStackScreen({ navigation }) {
 }
 ```
 
-Please note that hiding the tab bar might not give the best user experience as it might confuse users. It's usually better to keep the tab bar visible for consistency.
+In this code, `React.useEffect` is used to call `navigation.setOptions` after the component is mounted and whenever the `navigation` prop changes. This ensures that the tab bar is hidden whenever the "Settings" screen is displayed.

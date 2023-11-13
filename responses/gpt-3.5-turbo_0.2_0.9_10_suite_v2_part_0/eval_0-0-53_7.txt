@@ -1,4 +1,4 @@
-To fix the issue, you can remove the `onclick` attribute from the `button` element and instead add an `onClick` event handler to the button in the `render` method. Here's the revised code:
+You should remove the `onclick` attribute from the `button` element and instead add an `onClick` event handler to the button element in the `render` method. Here's the revised code:
 
 ```javascript
 import React, { Component } from 'react'
@@ -59,4 +59,4 @@ class Main extends React.Component {
 export default Main;
 ``` 
 
-In the revised code, the `handleUploadButtonClick` method is added to handle the click event of the button. The `onClick` attribute of the button is set to this method. When the button is clicked, the `handleUploadButtonClick` method is called, which displays the alert message.
+In the revised code, the `handleUploadButtonClick` function is added to handle the button click event. The `onClick` attribute of the `button` element is set to this function. The `onclick` attribute and the script tag are removed from the `button` element.

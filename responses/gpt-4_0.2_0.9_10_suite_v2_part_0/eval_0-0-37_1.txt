@@ -1,25 +1,11 @@
-Sure, you can achieve this by defining multiple routes in your controller. Here is how you can do it:
+Sure, you can use the following pattern to create a route with 2 optional parameters in NestJS:
 
 ```typescript
-import { Controller, Get, Param } from '@nestjs/common';
-
-@Controller('route')
-export class YourController {
-  @Get(':param1/config')
-  getConfig(@Param('param1') param1: string) {
-    // your code here
-  }
-
-  @Get(':param1/config/:OptionalParam2')
-  getConfigWithOptionalParam2(@Param('param1') param1: string, @Param('OptionalParam2') OptionalParam2: string) {
-    // your code here
-  }
-
-  @Get(':param1/config/:OptionalParam2/:OptionalParam3')
-  getConfigWithOptionalParam2AndParam3(@Param('param1') param1: string, @Param('OptionalParam2') OptionalParam2: string, @Param('OptionalParam3') OptionalParam3: string) {
-    // your code here
-  }
-}
+'/route/:param1/config/:OptionalParam2?/:OptionalParam3?'
 ```
 
-In the above code, we have defined three routes to handle the different combinations of parameters. The `@Get` decorator is used to specify the route pattern and the `@Param` decorator is used to extract the parameters from the URL.
+This pattern will match the following routes:
+
+- `route/aa/config`
+- `route/aa/config/bb`
+- `route/aa/config/bb/cc`

@@ -1,4 +1,6 @@
-You are mixing JavaScript and React event handling in your code. In React, you should use the `onClick` event handler instead of `onclick` and you should define the function inside your component, not in a `<script>` tag. Here is the corrected code:
+The issue with your code is that you're trying to use a traditional JavaScript function inside of a React component. In React, you should use event handlers and state to manage user interactions. 
+
+Here's a revised version of your code:
 
 ```javascript
 import React, { Component } from 'react'
@@ -55,4 +57,4 @@ class Main extends React.Component {
 export default Main;
 ```
 
-In this code, I moved the alert message into the `handleUploadImage` function and removed the `onclick` attribute from the button. Now, when the form is submitted, the `handleUploadImage` function will be called, which will show the alert message and then proceed with the file upload.
+In this revised version, the alert is triggered inside the `handleUploadImage` function, which is called when the form is submitted. The `onclick` attribute and the `myFunction` function have been removed, as they are not necessary in this context.

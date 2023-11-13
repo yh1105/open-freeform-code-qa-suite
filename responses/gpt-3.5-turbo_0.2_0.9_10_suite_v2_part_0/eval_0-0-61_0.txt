@@ -27,7 +27,6 @@ function App() {
       <div style={{ backgroundColor: theme.palette.background.default }}>
         <Switch checked={darkMode} onChange={handleThemeChange} />
         <h1>Hello World</h1>
-        <p>This is a Material-UI themed website.</p>
       </div>
     </ThemeProvider>
   );
@@ -36,8 +35,10 @@ function App() {
 export default App;
 ```
 
-In this example, we use the `createMuiTheme` function to create a theme object with a `palette` property that specifies the type of palette we want to use (either `'light'` or `'dark'`). We then pass this theme object to the `ThemeProvider` component, which applies it to all Material-UI components in the app.
+In this example, we're using the `createMuiTheme` function to create a theme object with a `palette` property that specifies the type of palette (either `'light'` or `'dark'`) based on the `darkMode` state. 
 
-We also use the `CssBaseline` component to apply some baseline styles to the app, and we use the `Switch` component to allow the user to toggle between light and dark mode.
+We're also using the `CssBaseline` component to apply some basic styles to the document, such as setting the font family and removing margins.
 
-Finally, we apply the background color of the theme to the root element of the app by setting the `backgroundColor` style property of the `div` element that wraps our content.
+Finally, we're wrapping our app in the `ThemeProvider` component and passing in the `theme` object we created. This will apply the theme to all Material-UI components within the app.
+
+Note that we're also setting the background color of the root element using the `backgroundColor` style property and the `palette.background.default` value from the theme object. This will ensure that the background color changes dynamically when the theme is switched.

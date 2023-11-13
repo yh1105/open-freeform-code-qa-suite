@@ -1,4 +1,4 @@
-Sure, here are the completed templates:
+Sure, here are the completed Javascript templates:
 
 Way 1:
 

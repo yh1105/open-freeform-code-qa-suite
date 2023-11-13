@@ -1,8 +1,8 @@
-The `index` option in the `@Prop()` decorator should work, but the index creation is not immediate. Mongoose will not create the index until the model is compiled and an operation is executed on the model.
+In order to create an index in Mongoose schema using Nest.js, you need to use the `@Prop()` decorator with the `index` option set to `true` as you have done. However, the index creation in MongoDB is an asynchronous operation and it might not be created immediately.
 
-If you want to ensure that the indexes are created, you can use the `Model.ensureIndexes()` function. This function tells Mongoose to push the index creation to MongoDB immediately.
+To ensure that the index is created, you need to call the `ensureIndexes()` function on the model. You can do this in the `onModuleInit()` lifecycle hook in your service or module.
 
-Here is how you can use it:
+Here is an example:
 
 ```javascript
 import { Injectable, OnModuleInit } from '@nestjs/common';
@@ -11,7 +11,9 @@ import { Model } from 'mongoose';
 
 @Injectable()
 export class MyService implements OnModuleInit {
-  constructor(@InjectModel(Schema.name) private readonly myModel: Model<Schema>) {}
+  constructor(
+    @InjectModel(Schema.name) private readonly myModel: Model<Schema>,
+  ) {}
 
   async onModuleInit() {
     await this.myModel.init();
@@ -20,8 +22,6 @@ export class MyService implements OnModuleInit {
 }
 ```
 
-In this example, `MyService` implements `OnModuleInit` lifecycle hook, and `onModuleInit` method will be called when the module has been initialized. In this method, we ensure that the indexes are created.
+In this example, `MyService` is a service that injects the Mongoose model for your schema. The `onModuleInit()` function is a lifecycle hook that is called when the Nest.js module is initialized. In this function, we call `ensureIndexes()` on the model to ensure that the index is created.
 
-Remember to replace `Schema` and `MyService` with your actual schema and service names.
-
-Also, please note that creating indexes can be a heavy operation for MongoDB, especially on large collections, so it's not recommended to run `ensureIndexes` in production. Instead, it's better to handle index creation as part of a database migration strategy.
+Please replace `Schema` and `MyService` with your actual schema and service names.

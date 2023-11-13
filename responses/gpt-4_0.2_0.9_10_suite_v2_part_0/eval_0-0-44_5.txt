@@ -1,8 +1,8 @@
-To create an index in Mongoose schema using Nest.js, you can use the `@Prop()` decorator with the `index` option set to `true` as you did. However, you need to ensure that the index is actually being created in the database. 
+To create an index in Mongoose using Nest.js, you can use the `@Prop` decorator with the `index` option set to `true` as you did in your first example. However, you also need to ensure that the indexes are actually created in MongoDB. 
 
-To do this, you can use the `syncIndexes()` method from Mongoose. This method will compare the indexes defined in your schema with the ones currently in the database, and make any necessary changes to bring them into sync.
+You can do this by calling the `init()` method on the model. This method will ensure that all the indexes defined in your schema are created in MongoDB.
 
-Here is how you can do it:
+Here's how you can do this:
 
 ```javascript
 import { Injectable, OnModuleInit } from '@nestjs/common';
@@ -10,15 +10,19 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
 @Injectable()
-export class YourService implements OnModuleInit {
-  constructor(@InjectModel(Schema.name) private readonly model: Model<Schema>) {}
+export class MyService implements OnModuleInit {
+  constructor(@InjectModel(Schema.name) private readonly myModel: Model<Schema>) {}
 
-  async onModuleInit(): Promise<void> {
-    await this.model.syncIndexes();
+  async onModuleInit() {
+    await this.myModel.init();
   }
 }
 ```
 
-In this example, `YourService` implements the `OnModuleInit` interface, which means it has a method `onModuleInit` that will be called when the Nest.js module containing this service is fully initialized. In this method, we call `syncIndexes` on the Mongoose model, which will ensure that the indexes defined in the schema are actually created in the database.
+In this example, `MyService` is a service that injects the Mongoose model for your schema. It implements the `OnModuleInit` interface, which allows it to run some code when the Nest.js module containing the service is initialized.
 
-Remember to replace `YourService` and `Schema` with your actual service and schema names.
+The `onModuleInit()` method is called when the module is initialized. In this method, we call the `init()` method on the model. This will ensure that all the indexes defined in your schema are created in MongoDB.
+
+Remember to replace `Schema` and `MyService` with the actual names of your schema and service.
+
+Also, please note that creating indexes can be a time-consuming operation, especially on large collections. Therefore, it's usually a good idea to create indexes as part of your application's deployment process, rather than during application startup.

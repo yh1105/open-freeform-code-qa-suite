@@ -1,4 +1,4 @@
-For the first way, you can pass the `options` prop to the `Tab.Screen` component for the "Settings" screen and set `tabBarVisible` to `false`. Here's the updated code:
+For the first way, you can pass an `options` prop to the `Tab.Screen` component for the "Settings" screen and set the `tabBarVisible` option to `false`. Here's the updated code:
 
 ```javascript
 export default function App() {
@@ -13,14 +13,12 @@ export default function App() {
 }
 ```
 
-For the second way, you can use the `useLayoutEffect` hook to set the `tabBarVisible` option to `false` in the `SettingsStackScreen` component. Here's the updated code:
+For the second way, you can set the `headerShown` option to `false` in the `SettingsStackScreen` component. Here's the updated code:
 
 ```javascript
-import { useLayoutEffect } from 'react';
-
 function SettingsStackScreen({ navigation }) {
-    useLayoutEffect(() => {
-        navigation.setOptions({ tabBarVisible: false });
+    React.useLayoutEffect(() => {
+        navigation.setOptions({ headerShown: false });
     }, [navigation]);
     return (
         <SettingsStack.Navigator>
@@ -28,6 +26,6 @@ function SettingsStackScreen({ navigation }) {
         </SettingsStack.Navigator>
     )
 }
-``` 
+```
 
-Note that for the second way, you need to import the `useLayoutEffect` hook from the `react` package.
+Both ways should achieve the same result of hiding the tab bar when navigating to the "Settings" screen.

@@ -1,17 +1,25 @@
-The error log indicates that node-gyp is unable to find Python executable "python" or "python2" in the PATH. 
+The error message indicates that Python is not installed on your system or it is not added to the PATH environment variable. 
 
-To fix this issue, you need to install Python and add it to the PATH environment variable. 
+To fix this issue, you need to install Python and add it to the PATH environment variable. Here are the steps to follow:
 
-Here are the steps to install Python and add it to the PATH:
+1. Download and install Python from the official website: https://www.python.org/downloads/
 
-1. Download the latest version of Python from the official website: https://www.python.org/downloads/
-2. Run the installer and select "Add Python to PATH" option during the installation process.
-3. After installation, open the Command Prompt and type `python` to verify that Python is installed and added to the PATH.
-4. If Python is not added to the PATH, you can add it manually by following these steps:
-   - Open the Control Panel and go to System and Security > System > Advanced system settings.
-   - Click on the "Environment Variables" button.
-   - Under "System Variables", scroll down and find the "Path" variable, then click on "Edit".
-   - Click on "New" and add the path to the Python executable (e.g. C:\Python27) and click "OK".
-   - Restart your Command Prompt and try running the build again.
+2. During the installation process, make sure to select the option to add Python to the PATH environment variable.
 
-Once you have installed Python and added it to the PATH, try running the build again and it should work.
+3. After the installation is complete, open a new command prompt and run the following command to verify that Python is installed and added to the PATH:
+
+```
+python --version
+```
+
+4. If the command above returns the Python version, then you have successfully installed and added Python to the PATH.
+
+5. Finally, try to rebuild the Node.js project again and see if the issue is resolved.
+
+If the issue persists, you may need to update node-gyp to the latest version by running the following command:
+
+```
+npm install -g node-gyp
+```
+
+This will update node-gyp to the latest version and may resolve any compatibility issues with your current version of Node.js.

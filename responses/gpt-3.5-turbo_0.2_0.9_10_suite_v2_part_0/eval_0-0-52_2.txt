@@ -1,11 +1,9 @@
-Currently, there is no `ng rm` command available in Angular CLI to remove a package that was added using `ng add`. However, you can remove the package manually by following these steps:
+To remove a package installed using `ng add`, you can use the `npm uninstall` command. 
 
-1. Remove the package from your `package.json` file by running `npm uninstall <package-name> --save`.
+For example, if you installed the `@angular/material` package using `ng add`, you can remove it using the following command:
 
-2. Remove any configuration files that were added by the package. For example, if you added the `@angular/material` package, you will need to remove the `angular.json` configuration file that was added.
+```
+npm uninstall @angular/material
+```
 
-3. Remove any code that was added by the package. For example, if you added the `@angular/material` package, you will need to remove any references to the package in your code.
-
-4. Run `ng serve` to make sure that your application still works without the package.
-
-Note that removing a package manually can be a complex process, especially if the package added a lot of configuration files or code. It is always a good idea to make a backup of your application before making any changes.
+This will remove the package from your project's `node_modules` directory and also remove it from your project's `package.json` file.

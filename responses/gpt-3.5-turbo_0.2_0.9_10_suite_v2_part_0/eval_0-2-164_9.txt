@@ -1,40 +1,24 @@
-The `.attrs()` function in styled components allows you to set default props for a styled component. This means that you can define default values for props that are not explicitly passed to the component.
+The `.attrs()` function in styled components allows you to set default props for your styled component. This means that you can define default values for props that are not explicitly passed to the component.
 
 Here's a simple example:
 
-```jsx
+```
 import styled from 'styled-components';
 
 const Button = styled.button.attrs({
   type: 'button',
-  disabled: false
+  disabled: props => props.isLoading
 })`
-  background-color: ${props => props.disabled ? 'gray' : 'blue'};
+  background-color: ${props => props.color || 'blue'};
   color: white;
   padding: 10px;
 `;
 
-<Button>Click me!</Button>
+<Button isLoading={true}>Click me</Button>
 ```
 
-In this example, we define a `Button` component using `styled.button`. We then use the `.attrs()` function to set default props for the component. In this case, we set the `type` prop to `'button'` and the `disabled` prop to `false`.
+In this example, we're creating a styled button component with default props set using `.attrs()`. The `type` prop is set to `'button'` by default, and the `disabled` prop is set to `true` if the `isLoading` prop is `true`.
 
-We then define the styles for the component using a template literal. We use the `props` object to conditionally set the background color based on the value of the `disabled` prop.
+When we render the `Button` component with `isLoading={true}`, the `disabled` prop is automatically set to `true` because of the default prop we set using `.attrs()`.
 
-Finally, we render the `Button` component without passing any props. Because we set default props using `.attrs()`, the `Button` component will render with a `type` of `'button'` and `disabled` set to `false`.
-
-You can achieve the same result without using `.attrs()` by passing default props directly to the component:
-
-```jsx
-import styled from 'styled-components';
-
-const Button = styled.button`
-  background-color: ${props => props.disabled ? 'gray' : 'blue'};
-  color: white;
-  padding: 10px;
-`;
-
-<Button type="button" disabled={false}>Click me!</Button>
-```
-
-In this example, we define the `Button` component without using `.attrs()`. Instead, we pass default props directly to the component when we render it. The result is the same as the previous example.
+I hope this helps!

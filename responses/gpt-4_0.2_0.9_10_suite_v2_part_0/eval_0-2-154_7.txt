@@ -1,27 +1,32 @@
-Sure, here is a generator function that will iterate over the leaf nodes of the HTML string and yield the corresponding objects:
+Sure, here is a generator function that should do what you want:
 
 ```javascript
-function* iterLeafNodes(strHTML, format=[]) {
+function* iterLeafNodes(strhtml, format=[]) {
   const parser = new DOMParser();
-  const doc = parser.parseFromString(strHTML, "text/html");
+  const doc = parser.parseFromString(strhtml, "text/html");
   const body = doc.body;
 
-  function* traverse(node, format=[]) {
+  function* walk(node, format) {
     if (node.nodeType === Node.TEXT_NODE) {
       if (node.textContent.trim() !== '') {
-        yield { text: node.textContent, format };
+        yield {
+          text: node.textContent,
+          format: format
+        };
       }
     } else if (node.nodeType === Node.ELEMENT_NODE) {
+      const newFormat = format.slice();
+      newFormat.push(node.tagName.toLowerCase());
       for (const child of node.childNodes) {
-        yield* traverse(child, [...format, node.tagName.toLowerCase()]);
+        yield* walk(child, newFormat);
       }
     }
   }
 
   for (const child of body.childNodes) {
-    yield* traverse(child);
+    yield* walk(child, format);
   }
 }
 ```
 
-This function uses a recursive approach to traverse the DOM tree. It checks the type of each node and if it's a text node, it yields an object with the text content and the current format. If it's an element node, it recursively traverses its child nodes, adding the tag name of the current node to the format array.
+This function uses the `DOMParser` to parse the HTML string into a DOM tree. It then walks the tree using a recursive generator function. When it encounters a text node, it yields an object with the text and the current format. When it encounters an element node, it adds the tag name to the format and recursively walks the child nodes.

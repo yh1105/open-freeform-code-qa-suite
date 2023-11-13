@@ -1,10 +1,10 @@
-One possible solution is to add `align-items: flex-start;` to the `.container` class. This will prevent Safari from stretching the nested flexbox element and allow the `height: auto;` property to work as expected. Here's the updated CSS:
+In Safari, when an image is in a nested flexbox element with a width set and height: auto it may not work as expected. One solution is to add `align-items: flex-start;` to the parent flex container. This will align the items to the start of the cross axis, which will allow the image to maintain its aspect ratio and not be stretched.
 
 ```css
 .container {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: flex-start; /* add this */
 }
 
 .container section:first-child {
@@ -18,4 +18,13 @@ One possible solution is to add `align-items: flex-start;` to the `.container` c
 }
 ```
 
-This should ensure that the images are not stretched and maintain their aspect ratio.
+```html
+<div class="container">
+  <section>
+    <img src="https://via.placeholder.com/250">
+  </section>
+  <section>
+    <img src="https://via.placeholder.com/150">
+  </section>
+</div>
+```

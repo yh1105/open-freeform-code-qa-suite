@@ -10,7 +10,7 @@ const lightTheme = createMuiTheme({
   palette: {
     type: 'light',
     background: {
-      default: '#fff' // light background color
+      default: '#fff' // your light background color here
     }
   }
 });
@@ -19,27 +19,25 @@ const darkTheme = createMuiTheme({
   palette: {
     type: 'dark',
     background: {
-      default: '#000' // dark background color
+      default: '#000' // your dark background color here
     }
   }
 });
 
 function App() {
-  const [theme, setTheme] = React.useState(lightTheme);
+  const [darkMode, setDarkMode] = React.useState(false);
 
-  const toggleTheme = () => {
-    if (theme === lightTheme) {
-      setTheme(darkTheme);
-    } else {
-      setTheme(lightTheme);
-    }
+  const theme = darkMode ? darkTheme : lightTheme;
+
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
   };
 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      {/* rest of your app */}
-      <button onClick={toggleTheme}>Toggle theme</button>
+      {/* Your other components go here */}
+      <button onClick={toggleDarkMode}>Toggle Dark Mode</button>
     </ThemeProvider>
   );
 }
@@ -47,4 +45,4 @@ function App() {
 export default App;
 ```
 
-In this example, `CssBaseline` is used inside the `ThemeProvider` to apply the background color of the current theme to the root element. The `toggleTheme` function is used to switch between the light and dark themes.
+In this example, we're using the `ThemeProvider` to provide the theme to all child components. We're also using the `CssBaseline` component to apply the background color to the root element. The `darkMode` state variable is used to toggle between the light and dark themes.

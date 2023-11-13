@@ -1,47 +1,69 @@
-You can achieve this by creating a parent component that will hold the state for both the first name and the last name. Then, you can pass a function to the `InputField` component that will update the parent component's state. Here's an example:
+In your code, you are already using a state hook to store the value of the input field. If you want to get the value of the input field on a button click, you can simply create a button and add an `onClick` event to it. In the `onClick` event, you can access the state value.
+
+Here is how you can do it:
 
 ```javascript
 import React, { useState } from 'react';
-import { render } from 'react-dom';
 
-function InputField({name, label, value, onChange}) {
+export default function InputField({name,label}) {
+  const [state, setState] = useState('')
+
+  const handleClick = () => {
+    alert(`Value of input field is: ${state}`);
+  }
+
   return (
     <div>
-      <label>{label}</label>
+     <label>{label}</label>
       <input type="text" 
-        value={value} 
-        name={name}
-        onChange={onChange} />
+      value={state} 
+      name={name}
+      onChange={(e) => setState(e.target.value)} />
+
+      <button onClick={handleClick}>Get Value</button>
+
+      {state}
     </div>
   );
 }
+```
 
-function ParentComponent() {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
+In the above code, I have added a `handleClick` function that alerts the value of the input field when the button is clicked. You can replace the alert with whatever you want to do with the value.
 
-  const handleInputChange = (e) => {
-    if (e.target.name === 'firstName') {
-      setFirstName(e.target.value);
-    } else if (e.target.name === 'lastName') {
-      setLastName(e.target.value);
-    }
+If you have multiple fields like first name and last name, you can use an object as the state:
+
+```javascript
+import React, { useState } from 'react';
+
+export default function InputField() {
+  const [state, setState] = useState({firstName: '', lastName: ''})
+
+  const handleChange = (e) => {
+    setState({...state, [e.target.name]: e.target.value});
   }
 
   const handleClick = () => {
-    console.log(`First Name: ${firstName}, Last Name: ${lastName}`);
+    alert(`First Name is: ${state.firstName}, Last Name is: ${state.lastName}`);
   }
 
   return (
     <div>
-      <InputField name="firstName" label="First Name" value={firstName} onChange={handleInputChange} />
-      <InputField name="lastName" label="Last Name" value={lastName} onChange={handleInputChange} />
-      <button onClick={handleClick}>Submit</button>
+     <label>First Name</label>
+      <input type="text" 
+      value={state.firstName} 
+      name="firstName"
+      onChange={handleChange} />
+
+     <label>Last Name</label>
+      <input type="text" 
+      value={state.lastName} 
+      name="lastName"
+      onChange={handleChange} />
+
+      <button onClick={handleClick}>Get Value</button>
     </div>
   );
 }
-
-render(<ParentComponent />, document.getElementById('root'));
 ```
 
-In this example, the `ParentComponent` holds the state for `firstName` and `lastName`. It passes the `handleInputChange` function to the `InputField` component, which updates the state in the `ParentComponent` when the input fields change. The `handleClick` function logs the values of `firstName` and `lastName` when the button is clicked.
+In this code, I have used an object as the state and updated the state using the name of the input field. The `handleClick` function alerts the first name and last name when the button is clicked.

@@ -1,18 +1,13 @@
-Sure, in NestJS, you can't directly define optional parameters in the route URL like you can in some other frameworks. Instead, you can define a route with required parameters and then access other parameters through the query string.
+Sure, you can use the `*` wildcard to catch all the remaining path. Here is the revised route pattern:
 
-However, you can use a wildcard route to catch all the routes and then parse the parameters manually. Here is how you can do it:
-
-```typescript
-@Controller('route')
-export class YourController {
-  @Get(':param1/config/*')
-  async yourMethod(@Param() params: string[], @Req() request: Request) {
-    const optionalParams = request.params[0] ? request.params[0].split('/') : [];
-    // Now optionalParams is an array of your optional parameters
-  }
-}
+```javascript
+/route/:param1/config/:OptionalParam2?/*
 ```
 
-In this code, `:param1/config/*` is a wildcard route that will catch all routes starting with `/route/:param1/config/`. Then, you can split `request.params[0]` by `/` to get an array of your optional parameters.
+This pattern will match all of the following routes:
 
-Please note that this is a workaround and it may not be the best solution in terms of design and performance. It would be better to use query parameters for optional parameters if possible.
+- `route/aa/config`
+- `route/aa/config/bb`
+- `route/aa/config/bb/cc`
+
+Please note that the `*` wildcard will catch everything after `config/` and `OptionalParam2`, so you will need to parse the remaining path manually in your route handler.

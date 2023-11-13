@@ -1,25 +1,28 @@
-Yes, you can detect if the user's system is in dark mode by using the CSS media feature `prefers-color-scheme`. This feature is used to detect if the user has requested the system use a light or dark color theme.
+Yes, you can detect if the user's system is in dark mode by using the `prefers-color-scheme` media feature in CSS. This feature is part of the Media Queries Level 5 specification and is supported in Safari 12.1 and later, Chrome 76 and later, and Firefox 67 and later.
 
-Here is an example of how you can use it:
+Here's a basic example:
 
 ```css
 /* Light mode */
-@media (prefers-color-scheme: light) {
-  body {
-    background-color: white;
-    color: black;
-  }
+:root {
+    --background-color: white;
+    --text-color: black;
 }
 
 /* Dark mode */
 @media (prefers-color-scheme: dark) {
-  body {
-    background-color: black;
-    color: white;
-  }
+    :root {
+        --background-color: black;
+        --text-color: white;
+    }
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
 }
 ```
 
-In this example, the site's design will change based on the user's preferred color scheme. If the user prefers a light color scheme, the background color of the body will be white and the text color will be black. If the user prefers a dark color scheme, the background color of the body will be black and the text color will be white.
+In this example, the default colors are for light mode, and if the user's system is in dark mode, the media query will override the colors. The `:root` pseudo-class is used to define CSS variables for the colors, which are then used in the `body` rule.
 
-Please note that `prefers-color-scheme` is not supported in all browsers. As of October 2021, it is supported in Firefox 67+, Chrome 76+, and Safari 12.1+. For more information about browser support, you can check [Can I use](https://caniuse.com/?search=prefers-color-scheme).
+Please note that the `prefers-color-scheme` media feature only works if the user's system has a dark mode and the user has chosen to use it. If the system or the browser does not support dark mode, or if the user has not chosen to use it, the media query will not have any effect.

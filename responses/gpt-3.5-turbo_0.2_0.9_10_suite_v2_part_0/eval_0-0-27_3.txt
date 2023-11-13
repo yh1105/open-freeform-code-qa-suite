@@ -1,12 +1,13 @@
-It seems like you are trying to fetch data from a GraphQL API endpoint that is not working properly. The `uri` you are using in your `ApolloClient` configuration is not responding, which is causing the `useQuery` hook to hang at the `loading` state.
+It seems that you are trying to fetch data from a GraphQL API that is not available. The `uri` you are using in your `ApolloClient` configuration is `https://48p1r2roz4.sse.codesandbox.io`, which is a demo API provided by Apollo Client. It may not be available at all times.
 
-To fix this issue, you need to use a valid GraphQL API endpoint that responds to your queries. You can try using a different endpoint, such as the one provided by the Apollo Client documentation:
+You should replace the `uri` with the actual GraphQL API endpoint that you want to fetch data from. You can check with the API provider for the correct endpoint.
+
+If you are still having issues after updating the `uri`, you can try adding the `fetchPolicy` option to your `useQuery` hook. For example, you can set it to `network-only` to always fetch data from the network and not use the cache:
 
 ```javascript
-const apolloClient = new ApolloClient({
-    uri: 'https://48p1r2roz4.sse.codesandbox.io/graphql',
-    cache: new InMemoryCache(),
+const { loading, error, data } = useQuery(EXCHANGE_RATES, {
+  fetchPolicy: 'network-only',
 });
 ```
 
-This should allow you to fetch data successfully using the `useQuery` hook.
+This may help if you are having issues with cached data.

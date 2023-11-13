@@ -1,4 +1,4 @@
-Sure, you can use the 'scroll' event and 'style.backgroundColor' property to achieve this. Here is the completed code:
+Sure, you can use the 'scroll' event and change the 'style.backgroundColor' property to dynamically change the background color on scroll. Here is the completed code:
 
 ```javascript
 const [red, green, blue] = [69, 111, 225]
@@ -11,5 +11,4 @@ window.addEventListener('scroll', () => {
   section1.style.backgroundColor = `rgb(${r}, ${g}, ${b})`
 })
 ```
-
-In the above code, the 'scroll' event is fired when the document view or an element has been scrolled. And the 'style.backgroundColor' property sets or returns the background color of an element.
+In this code, the 'scroll' event is used to detect when the user is scrolling. The 'style.backgroundColor' property is used to change the background color of the 'section1' element. The color is calculated based on the scroll position, with the color becoming lighter as the user scrolls down.

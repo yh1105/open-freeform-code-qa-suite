@@ -1,4 +1,4 @@
-Sure, you can create a function that handles the button click and gets the values of the input fields using the `useState` hook. Here's an example:
+Sure, you can create a state for first name and last name and update them on input change. Then, on button click, you can access those state values to perform any action. Here's an example:
 
 ```javascript
 import React, { useState } from 'react';
@@ -7,8 +7,10 @@ export default function InputField({ name, label }) {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
 
-  const handleClick = () => {
-    console.log(`First Name: ${firstName}, Last Name: ${lastName}`);
+  const handleButtonClick = () => {
+    console.log('First Name:', firstName);
+    console.log('Last Name:', lastName);
+    // Perform any action with first name and last name values
   };
 
   return (
@@ -17,23 +19,19 @@ export default function InputField({ name, label }) {
       <input
         type="text"
         value={firstName}
-        name={`${name}-first`}
+        name={`${name}-firstName`}
         onChange={(e) => setFirstName(e.target.value)}
       />
       <input
         type="text"
         value={lastName}
-        name={`${name}-last`}
+        name={`${name}-lastName`}
         onChange={(e) => setLastName(e.target.value)}
       />
-      <button onClick={handleClick}>Submit</button>
+      <button onClick={handleButtonClick}>Submit</button>
     </div>
   );
 }
 ```
 
-In this example, we have created two state variables `firstName` and `lastName` using the `useState` hook. We have also created a function `handleClick` that logs the values of `firstName` and `lastName` to the console.
-
-In the JSX, we have added two input fields for first name and last name, and a button that triggers the `handleClick` function on click.
-
-Note that we have also added a `name` attribute to the input fields, which includes the `name` prop passed to the component. This is useful if you want to access the input field values using a form submit event.
+In this example, we have created two states for first name and last name. We have also added a button with an `onClick` handler that logs the first name and last name values to the console. You can replace the console log with any action you want to perform with the values.

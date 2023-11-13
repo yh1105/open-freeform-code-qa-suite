@@ -1,15 +1,21 @@
-When deploying a NextJS app to Vercel, it is important to make sure that your app is configured correctly. Here are some steps you can take to troubleshoot the issue:
+It's possible that the issue is related to the dynamic route, but it's hard to say without more information. Here are a few things you can try:
 
-1. Make sure that you have set up your Vercel account correctly and linked it to your GitHub repository or other source control system.
+1. Create a `next.config.js` file in the root of your project and add the following code:
 
-2. Check your Vercel deployment logs to see if there are any errors or warnings that might be causing the issue. You can access the logs by clicking on the "Logs" button in the Vercel dashboard.
+```
+module.exports = {
+  target: 'serverless'
+}
+```
 
-3. Make sure that you have included all necessary files in your deployment. This includes any static assets, such as images or CSS files, as well as any server-side code that your app relies on.
+This tells Next.js to use the serverless deployment mode, which can help with some issues related to dynamic routes.
 
-4. Check your NextJS configuration to make sure that it is set up correctly. If you don't have a `next.config.js` file, you may need to create one to configure your app for deployment.
+2. Check your `package.json` file and make sure that the `start` script is set to `next start`. This is the command that Vercel will use to start your app.
 
-5. If you are using dynamic routes in your app, make sure that they are set up correctly. This includes making sure that your API routes are correctly configured and that your app is able to access the necessary data.
+3. Make sure that all of your pages are located in the `pages` directory and have the correct file extension (`.js`, `.jsx`, or `.tsx`). If you have any pages located outside of the `pages` directory, they won't be included in the build and will result in a 404 error.
 
-6. Finally, make sure that your app is running on the correct port. By default, NextJS apps run on port 3000, but Vercel may use a different port. You can check the port number in your Vercel deployment settings.
+4. If you're using any custom server code, make sure that it's compatible with the serverless deployment mode. In general, it's best to avoid custom server code if possible when deploying to Vercel.
 
-If you are still having issues after checking these steps, you may want to reach out to the Vercel support team for further assistance.
+5. Check the Vercel logs to see if there are any error messages that might give you more information about what's going wrong. You can access the logs by clicking on the "Logs" button in the Vercel dashboard.
+
+Hopefully one of these suggestions will help you resolve the issue!

@@ -1,4 +1,4 @@
-You can use `router.reload()` to trigger a client-side reload in Next.js. Here's the updated code:
+You can use `router.reload()` to trigger a client-side reload in Next.js. Here's how you can modify your code:
 
 ```javascript
 import { useRouter } from "next/navigation";
@@ -6,13 +6,14 @@ import { useRouter } from "next/navigation";
 export default function Component(){
     const router = useRouter();
 
-    // Call this function after creating new data
-    const handleDataCreated = () => {
+    const handleCreateData = async () => {
+        // code to create new data
+        await createData();
         router.reload();
     }
 
-    // Rest of your component code
+    // rest of the component code
 }
-``` 
+```
 
-Make sure to call the `handleDataCreated` function after creating new data to trigger the client-side reload.
+In this example, `handleCreateData` is a function that is called when the user creates new data. After the data is created, `router.reload()` is called to trigger a client-side reload.

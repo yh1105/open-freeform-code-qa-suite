@@ -1,17 +1,33 @@
-The error logs indicate that Python is not found in your PATH. `node-gyp` requires Python 2.7 to be installed and available in your PATH. Here are the steps to fix this issue:
+The error message indicates that Python is not found in your PATH. Node-gyp, which is a part of the build process, requires Python to be installed and accessible.
 
-1. Download and install Python 2.7 from the [official Python website](https://www.python.org/downloads/release/python-2718/). Make sure to check the box that says "Add Python 2.7 to PATH" during the installation process.
+Here are the steps to fix this issue:
 
-2. After installation, open a new command prompt and type `python --version`. This should return Python 2.7.x.
+1. Install Python 2.7.x from the [official website](https://www.python.org/downloads/). Node-gyp does not work with Python 3.x, so make sure to install a 2.7.x version.
 
-3. If Python is still not recognized, you may need to manually add it to your PATH. Here's how to do it:
+2. During the installation, check the box that says "Add Python.exe to Path". This will allow the system to find Python from any command prompt.
 
-   - Right-click on 'Computer' and click on 'Properties'.
-   - Click on 'Advanced system settings'.
-   - In the System Properties window, click on the 'Environment Variables' button.
-   - In the Environment Variables window, highlight the 'Path' variable in the 'Systems Variable' section and click on 'Edit'.
-   - Scroll to the end of the 'Variable value' field, add a semicolon (;), and then the path to the python.exe file. It should look something like this: `;C:\Python27\`.
+3. After the installation, open a new command prompt and type `python --version`. This should return the Python version if it was installed correctly.
 
-4. Once Python is properly installed and available in your PATH, try to rebuild your Node.js project.
+4. If Python is installed and accessible, try to rebuild your project.
 
-If you're still encountering issues, you might want to consider using a version manager like `nvm` for Windows, which can help manage multiple active Node.js versions.
+If you have already installed Python and it's still not recognized, you might need to manually add it to your system PATH. Here's how to do it:
+
+1. Open System Properties (Right click Computer in the start menu, or use the keyboard shortcut Win+Pause)
+
+2. Click Advanced system settings in the sidebar.
+
+3. Click Environment Variables....
+
+4. Select PATH in the System variables section
+
+5. Click Edit
+
+6. Add Python's path to the end of the list (the paths are separated by semicolons). For example:
+   ```
+   C:\Program Files\Some Other App;C:\Python27
+   ```
+7. Click OK
+
+8. Open a new command prompt and type `python --version` to verify the installation.
+
+Remember to replace `C:\Python27` with your actual Python installation path.

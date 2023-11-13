@@ -1,4 +1,4 @@
-You should remove the `onclick` attribute from the `button` element and instead add an `onClick` event handler to the button in the `render` method. Here's the revised code:
+You should remove the `onclick` attribute from the `button` element and instead add an `onClick` event handler to the button element in the `render` method. Here's the revised code:
 
 ```javascript
 import React, { Component } from 'react'
@@ -57,4 +57,6 @@ class Main extends React.Component {
 }
 
 export default Main;
-```
+``` 
+
+This should fix the issue and the alert message will be displayed when the user clicks the "Upload" button.

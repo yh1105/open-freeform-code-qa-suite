@@ -1,12 +1,16 @@
-You can try wrapping the `Switch` component and the `span` inside a `div` or any other container. This is because the `Form.Item` component expects a single child component. Here is the revised version of your code:
+Sure, you can use the `onChange` event of the `Switch` component to update the form value. Here is the revised version of your code:
 
-```html
+```jsx
 <Form.Item name="switch" valuePropName="checked">
-  <div>
-    <Switch checkedChildren="Yes" unCheckedChildren="No" />
-    <span>Chargable</span>
-  </div>
+  <Switch 
+    checkedChildren="Yes" 
+    unCheckedChildren="No" 
+    onChange={(checked) => {
+      form.setFieldsValue({ switch: checked });
+    }}
+  />
+  <span>Chargable</span>
 </Form.Item>
 ```
 
-This should work as expected and the `onCreate` function should now be able to access the value from the switch.
+In this code, the `onChange` event is used to update the form value when the switch is toggled. The `setFieldsValue` method is used to manually set the value of one or more fields.

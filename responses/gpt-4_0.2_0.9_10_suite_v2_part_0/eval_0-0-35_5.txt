@@ -1,40 +1,32 @@
-You should be using `REDIS_TLS_URL` if you are connecting to Heroku Redis via TLS. Here is a simple example of how you can connect to Heroku Redis using TLS in Node.js with the `node_redis` package.
+To connect to Heroku Redis using TLS on Node, you should use the `REDISCLOUD_URL` environment variable that Heroku provides. This URL includes the necessary authentication and connection details.
 
-First, install the `node_redis` package if you haven't done so:
-
-```bash
-npm install redis
-```
-
-Then, use the following code to connect to Heroku Redis:
+Here's a basic example of how you can do this using the `redis` package:
 
 ```javascript
 const redis = require('redis');
 const url = require('url');
 
-const redisURL = url.parse(process.env.REDIS_TLS_URL);
-const client = redis.createClient({
+let redisURL = url.parse(process.env.REDISCLOUD_URL);
+let redisClient = redis.createClient(redisURL.port, redisURL.hostname, { no_ready_check: true });
+
+redisClient.auth(redisURL.auth.split(":")[1]);
+```
+
+In this example, the `url.parse()` function is used to break down the `REDISCLOUD_URL` into its component parts. The `redis.createClient()` function then uses these parts to establish a connection to the Redis server.
+
+The `auth()` method is used to authenticate the client with the server using the password from the `REDISCLOUD_URL`.
+
+If you want to use TLS, you can modify the `createClient` call to include the `tls` option:
+
+```javascript
+let redisClient = redis.createClient({
     port: redisURL.port,
     host: redisURL.hostname,
-    no_ready_check: true,
+    password: redisURL.auth.split(":")[1],
     tls: {
-        rejectUnauthorized: false,
-    },
-});
-
-client.auth(redisURL.auth.split(":")[1]);
-
-client.on('connect', function() {
-    console.log('Connected to Redis');
-});
-
-client.on('error', function (err) {
-    console.log('Redis error: ' + err);
+        rejectUnauthorized: false
+    }
 });
 ```
 
-In this example, we are parsing the `REDIS_TLS_URL` environment variable to get the hostname and port. We are also disabling the ready check and setting `rejectUnauthorized` to `false` in the TLS options. This is because Heroku's Redis servers use a self-signed certificate.
-
-Please note that setting `rejectUnauthorized` to `false` may leave you vulnerable to man-in-the-middle attacks. This should be fine for development, but for production, you should use a solution that includes certificate pinning or a custom certificate authority.
-
-Also, don't forget to replace `REDIS_TLS_URL` with your actual Redis URL.
+In this case, the `tls` option is set to an object with `rejectUnauthorized` set to `false`. This means that the client will accept a TLS certificate without validating it. This is generally not recommended for production use, but it can be useful for testing purposes. For production use, you should set `rejectUnauthorized` to `true` and provide a valid certificate.

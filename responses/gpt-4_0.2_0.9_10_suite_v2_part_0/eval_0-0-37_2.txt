@@ -1,19 +1,13 @@
-Sure, you can define optional parameters in NestJS by using a question mark (`?`) after the parameter name. However, optional parameters in the URL path are not supported directly in NestJS or Express.js. 
-
-But you can achieve this by defining multiple routes that point to the same controller method. Here is how you can do it:
+Sure, you can use the `*` wildcard to catch all the remaining path. Here is the revised route pattern:
 
 ```javascript
-@Controller('route')
-export class YourController {
-  @Get(':param1/config')
-  @Get(':param1/config/:OptionalParam2')
-  @Get(':param1/config/:OptionalParam2/:OptionalParam3')
-  handleRequest(@Param() params: any) {
-    // your code here
-  }
-}
+/route/:param1/config/:OptionalParam2?/*
 ```
 
-In this code, `:param1`, `:OptionalParam2`, and `:OptionalParam3` are route parameters. The `@Get` decorators define the routes that the `handleRequest` method will respond to. The `@Param` decorator is used to extract the parameters from the request. 
+This pattern will catch all of the following routes:
 
-This way, the `handleRequest` method will be called for any of the three routes you specified.
+- `route/aa/config`
+- `route/aa/config/bb`
+- `route/aa/config/bb/cc`
+
+In your route handler, you can split the remaining path by `/` to get the optional parameters.

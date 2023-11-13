@@ -1,47 +1,46 @@
-To create an index on a property in Mongoose schema using Nest.js, you can use the `@Schema` decorator to define the schema and then use the `@Index` decorator to define the index on the property.
+To create an index on a property in Mongoose schema using Nest.js, you can use the `@Schema` decorator to define the schema and the `@Index` decorator to define the index on the property.
 
 Here's an example:
 
 ```javascript
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
+import { Index } from '@nestjs/mongoose';
 
 @Schema()
 export class MySchema extends Document {
-  @Prop({ required: true })
-  name: string;
+  @Prop()
+  _id: string;
 
   @Prop({ required: true })
-  @Index({ unique: true })
-  email: string;
-}
-
-export const MySchemaSchema = SchemaFactory.createForClass(MySchema);
-```
-
-In this example, we have defined a schema for `MySchema` with two properties: `name` and `email`. The `email` property has an index defined using the `@Index` decorator with the `unique` option set to `true`.
-
-You can also define compound indexes by passing an array of properties to the `@Index` decorator:
-
-```javascript
-@Schema()
-export class MySchema extends Document {
-  @Prop({ required: true })
-  name: string;
-
-  @Prop({ required: true })
-  @Index({ unique: true })
-  email: string;
-
-  @Prop({ required: true })
-  @Index({ unique: true })
-  username: string;
+  type: string;
 
   @Prop()
-  age: number;
+  creationDate: string;
+
+  @Prop()
+  name: string;
 }
 
-export const MySchemaSchema = SchemaFactory.createForClass(MySchema).index({ email: 1, username: 1 });
+// Define the index on the 'type' property
+MySchema.index({ type: 1 });
+
+// Or use the @Index decorator
+@Schema()
+export class MySchema extends Document {
+  @Prop()
+  _id: string;
+
+  @Prop({ required: true })
+  @Index({ unique: true })
+  type: string;
+
+  @Prop()
+  creationDate: string;
+
+  @Prop()
+  name: string;
+}
 ```
 
-In this example, we have defined a compound index on the `email` and `username` properties using the `index()` method of the schema factory.
+In the second example, the `@Index` decorator is used to define the index on the `type` property with the `unique` option set to `true`. This will create a unique index on the `type` property.

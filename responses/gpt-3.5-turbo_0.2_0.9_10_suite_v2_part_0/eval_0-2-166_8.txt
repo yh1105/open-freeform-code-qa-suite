@@ -1,34 +1,21 @@
-TailwindCSS is a utility-first CSS framework and does not provide a way to select direct children of an element. However, you can achieve this by using the `@layer` directive and defining your own custom CSS rules.
+TailwindCSS is a utility-first CSS framework, which means it provides utility classes that can be used to style elements. To select direct children of a div with class "section" using TailwindCSS, you can use the `>` selector in combination with the `class` and `child` utilities.
 
-Here's an example of how you can achieve this:
+Here's an example:
 
-1. Define a new layer in your `tailwind.config.js` file:
-
-```
-// tailwind.config.js
-module.exports = {
-  // ...
-  corePlugins: {
-    // ...
-    layer: false,
-  },
-  // Define a new layer
-  layers: {
-    sectionChildren: {
-      // Define your custom CSS rules here
-      'div.section > div': ['responsive'],
-    },
-  },
-  // ...
-}
+```html
+<div class="section">
+  <div class="child">Child 1</div>
+  <div class="child">Child 2</div>
+</div>
 ```
 
-2. Import the new layer in your CSS file:
+To select the direct children of the `div` with class `section`, you can use the following TailwindCSS classes:
 
-```
-@layer sectionChildren {
-  /* Define your custom CSS rules here */
-}
+```html
+<div class="section">
+  <div class="class:child">Child 1</div>
+  <div class="class:child">Child 2</div>
+</div>
 ```
 
-Now you can use the `div.section > div` selector in your CSS file and it will be applied to the direct children of the `div` element with the `section` class.
+In this example, the `class:child` utility class is used to select the direct children of the `div` with class `section`. The `class:` prefix is used to target a specific class.

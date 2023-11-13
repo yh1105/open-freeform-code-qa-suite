@@ -1,15 +1,14 @@
-The `ERR! code EINTEGRITY` error occurs when the integrity check of the package fails. This error can be resolved by trying the following measures:
+The `ERR! code EINTEGRITY` error occurs when the integrity check of the package fails. This error can be resolved by following these steps:
 
-1. Clearing the cache: Run `npm cache clean --force` to clear the cache and try running `npm install` again.
+1. Clear the npm cache by running `npm cache clean --force`.
+2. Delete the `node_modules` folder and `package-lock.json` file.
+3. Run `npm install` again.
 
-2. Updating npm: Update npm to the latest version by running `npm install -g npm@latest` and try running `npm install` again.
+If the above steps do not work, you can try the following:
 
-3. Removing `node_modules`: Remove the `node_modules` directory and `package-lock.json` file, then run `npm install` again.
+1. Update npm to the latest version by running `npm install -g npm`.
+2. Try installing the package with the `--no-optional` flag.
+3. If you are using a private registry, make sure it is up to date and accessible.
+4. If you are using a proxy, make sure it is configured correctly.
 
-4. Disabling package-lock.json: Add `"package-lock": false` to your `package.json` file, remove the `node_modules` directory and run `npm install` again.
-
-5. Verifying package integrity: Verify the integrity of the package by running `npm install --verify` and try running `npm install` again.
-
-6. Using yarn: Try using yarn instead of npm by running `yarn install` and see if the issue persists.
-
-If none of the above measures work, you may need to contact the package maintainer or seek further assistance.
+If none of the above steps work, you can try deleting the `node_modules` folder and `package-lock.json` file, and then running `npm install --force`. However, this should be used as a last resort as it can cause issues with dependencies.

@@ -1,39 +1,29 @@
-The `truncate` class in Tailwind CSS only works for single line text. If you want to truncate text that spans multiple lines, you will need to use some custom CSS. 
+The `truncate` class in TailwindCSS only works for single line text. If you want to truncate text that spans multiple lines, you'll need to use some additional CSS. 
 
-Here's an example of how you can achieve this:
+Unfortunately, TailwindCSS does not support multi-line text truncation out of the box. However, you can add custom CSS to achieve this.
+
+Here is an example:
+
+```css
+.truncate-2-lines {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;  
+  overflow: hidden;
+}
+```
+
+Then, you can use this class in your HTML:
 
 ```html
 <div className="ml-1 inline-block">
    <span>Label: </span>
-   <span className="font-semibold line-clamp-1">
+   <span className="font-semibold truncate-2-lines">
      long texttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt
    </span>
 </div>
 ```
 
-In your Tailwind CSS configuration file, you need to enable the `lineClamp` plugin:
+This will truncate the text after two lines. You can adjust the number in `-webkit-line-clamp` to change the number of lines before truncation.
 
-```javascript
-module.exports = {
-  theme: {
-    extend: {
-      typography: (theme) => ({
-        DEFAULT: {
-          css: {
-            // ...
-          },
-        },
-      }),
-    },
-  },
-  variants: {},
-  plugins: [
-    require('@tailwindcss/typography'),
-    require('@tailwindcss/line-clamp'),
-  ],
-}
-```
-
-This will enable the `line-clamp-{n}` utility, where `{n}` is the number of lines after which the text should be truncated. In the above example, `line-clamp-1` will truncate the text after one line.
-
-Please note that the `line-clamp` utility is not fully supported in all browsers. It is not supported in IE and only partially supported in Edge.
+Please note that this solution uses webkit prefixes and may not work in all browsers. It is not supported in IE and some older versions of Firefox.

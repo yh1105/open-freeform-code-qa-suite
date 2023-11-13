@@ -1,27 +1,27 @@
-Yes, you can detect if the user's system is in dark mode using CSS media queries. The `prefers-color-scheme` media feature is used to detect if the user has requested the system use a light or dark color theme.
+Yes, you can detect if the user's system is in dark mode by using the CSS media feature `prefers-color-scheme`. This feature is used to detect if the user has requested the system to use a light or dark color theme.
 
-Here's an example:
+Here is an example of how you can use it:
 
 ```css
-@media (prefers-color-scheme: dark) {
-  /* CSS for dark mode */
-  body {
-    background-color: black;
-    color: white;
-  }
-}
-
+/* Light mode */
 @media (prefers-color-scheme: light) {
-  /* CSS for light mode */
   body {
     background-color: white;
     color: black;
   }
 }
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: black;
+    color: white;
+  }
+}
 ```
 
-In this example, the browser will apply the dark mode styles if the user has set their system to dark mode, and the light mode styles if the user has set their system to light mode.
+In this example, the background color of the body will be white and the text color will be black when the user's system is in light mode. When the user's system is in dark mode, the background color of the body will be black and the text color will be white.
 
-This feature is supported in Safari 12.1 and later, Firefox 67 and later, and Chrome 76 and later. For other browsers, you may need to provide a fallback or use a JavaScript-based solution.
+This feature is supported in Safari 12.1, Firefox 67, and Chrome 76 and later versions.
 
-Please note that this only detects the user's system setting, it does not allow you to switch between light and dark modes within your website. If you want to provide that functionality, you will need to implement it yourself using JavaScript.
+Please note that the `prefers-color-scheme` media feature respects the user's system setting, so it will only work if the user has chosen a specific color scheme in their system settings.

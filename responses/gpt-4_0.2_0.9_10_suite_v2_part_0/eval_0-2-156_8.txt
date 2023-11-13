@@ -1,13 +1,29 @@
-From your HTML code, it seems like the "Stop Game" button is inside the `#GameRunning` div, which might be positioned or styled in a way that places it behind the game frame. 
+The issue you're facing is likely due to the CSS styling of your elements. Without seeing your CSS, it's hard to give a precise solution, but here are some general suggestions:
 
-Here are a few suggestions:
+1. **Use CSS Flexbox or Grid:** These are powerful layout models that allow for complex designs. They can be used to align and distribute space among items in a container, even when their size is unknown or dynamic.
 
-1. **Change the HTML structure**: You can move the "Stop Game" button to be in the same container as the "Begin Game" button. This way, they will be in the same context and should align naturally.
+2. **Positioning:** You can use CSS positioning properties such as `relative`, `absolute`, `fixed`, or `sticky` to control the placement of elements. Be careful with these, as they can cause overlapping if not used properly.
 
-2. **Use CSS positioning**: If you can't or don't want to change the HTML structure, you can use CSS to position the "Stop Game" button. You can use properties like `position`, `top`, `right`, `bottom`, and `left` to move the button to the desired location. 
+3. **Z-index:** If elements are overlapping, you can use the `z-index` property to control the stack order of elements. An element with a higher `z-index` will be displayed in front of an element with a lower `z-index`.
 
-3. **Use CSS Flexbox or Grid**: If the parent container of these buttons is a flex container (i.e., `display: flex`), you can use properties like `align-items`, `justify-content`, or `align-self` to align the buttons. If it's a grid container (i.e., `display: grid`), you can use properties like `grid-column`, `grid-row`, or `align-self`.
+Here's an example of how you might use Flexbox to align your buttons:
 
-4. **Use CSS Z-index**: If the "Stop Game" button is behind the game frame because of stacking context issues, you can use the `z-index` property to bring it to the front. 
+```css
+#DanceScoreboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-Remember to inspect your elements using browser developer tools to understand how your CSS is affecting the layout. This can help you debug and fix issues more effectively.
+#GameStopped, #GameRunning {
+  order: 1;
+}
+
+#dancePoints {
+  order: 2;
+}
+```
+
+In this example, `display: flex;` makes `#DanceScoreboard` a flex container. `flex-direction: column;` stacks the children of `#DanceScoreboard` vertically. `align-items: center;` centers the children horizontally. The `order` property is used to control the order in which the children appear in the flex container.
+
+Remember to adjust these suggestions according to your specific needs and existing CSS.

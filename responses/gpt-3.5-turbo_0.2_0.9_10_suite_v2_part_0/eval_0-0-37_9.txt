@@ -4,12 +4,10 @@ Sure, here's the revised route pattern that should fulfill your requirement:
 /route/:param1/config/:OptionalParam2?/:OptionalParam3?
 ```
 
-This pattern has two optional parameters, `OptionalParam2` and `OptionalParam3`, which are denoted by the question mark `?` at the end of their respective segments. This means that they can be present in the URL, but they don't have to be.
-
-So, the route will match any of the following URLs:
+This pattern will match the following URLs:
 
 - `/route/aa/config`
 - `/route/aa/config/bb`
 - `/route/aa/config/bb/cc`
 
-The `:param1`, `:OptionalParam2`, and `:OptionalParam3` segments are placeholders for actual values that will be passed to your Nestjs controller method. You can access these values using the `@Param()` decorator in your controller method.
+The `:param1` parameter is required, while `:OptionalParam2` and `:OptionalParam3` are optional. You can access the values of these parameters in your Nestjs controller using the `@Param()` decorator.

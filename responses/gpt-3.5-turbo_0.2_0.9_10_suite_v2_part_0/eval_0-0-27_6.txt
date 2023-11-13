@@ -1,14 +1,15 @@
-It seems like the issue is with the `uri` you are using in your `ApolloClient` configuration. The `uri` you are using (`https://48p1r2roz4.sse.codesandbox.io`) is a demo GraphQL server provided by Apollo, and it may not be working properly at the moment.
+It seems like you are trying to fetch data from a GraphQL API using Apollo Client, but the loading state hangs at `true` and you are unable to fetch the data.
 
-You should replace the `uri` with the endpoint of your own GraphQL server or a working demo server. You can find a list of demo servers in the Apollo documentation.
+One possible reason for this issue could be that the GraphQL API you are trying to fetch data from is not accessible from your device or emulator. You can try opening the GraphQL API URL in your browser or using a tool like Postman to check if you are able to access the API.
 
-For example, you can use the following `uri` to fetch data from the SpaceX GraphQL API:
+If the API is accessible, you can try adding the `networkPolicy` option to your `useQuery` hook to ensure that the data is fetched from the network and not from the cache. Here's an example:
 
 ```javascript
-const apolloClient = new ApolloClient({
-    uri: 'https://api.spacex.land/graphql/',
-    cache: new InMemoryCache(),
+const { loading, error, data } = useQuery(EXCHANGE_RATES, {
+  networkPolicy: NetworkPolicy.NetworkOnly,
 });
 ```
 
-Make sure to replace the `uri` with the endpoint of your own GraphQL server or a working demo server.
+If the issue persists, you can try enabling the Apollo Client Devtools to debug the issue. You can install the `react-native-flipper-apollo-devtools` package and follow the instructions in the documentation to enable the devtools.
+
+I hope this helps! Let me know if you have any further questions.

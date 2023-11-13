@@ -1,24 +1,10 @@
-Sure, I can help you with that. You can use the `group-hover` utility to apply styles on hover. Here's how you can modify your code to create an animation when hovering over the link:
+Sure, you can use the `group-hover` utility to apply styles when an element is hovered. Here's how you can modify your code to create an animation when hovering over the link:
 
 ```html
-<a href="#" class="group text-sky-600 transition duration-300">
-    Link
+<a href="#" class="group">
+    <span class="text-sky-600 transition duration-300">Link</span>
     <span class="block w-0 h-0.5 bg-sky-600 transition-all duration-500 group-hover:w-full"></span>
 </a>
 ```
 
-In this code, the width of the span is initially set to 0 (`w-0`) and when you hover over the link (the parent element with the `group` class), the width of the span will transition to full (`group-hover:w-full`). The `transition-all` and `duration-500` classes ensure that this change in width happens smoothly over 500 milliseconds.
-
-Please note that the `group-hover` variant is not enabled by default for all utilities in Tailwind CSS. If it doesn't work, you might need to enable it in your Tailwind CSS configuration file (`tailwind.config.js`) like this:
-
-```javascript
-module.exports = {
-  variants: {
-    extend: {
-      width: ['group-hover'],
-    }
-  }
-}
-```
-
-This will enable the `group-hover` variant for the `width` utility.
+In this code, the width of the second span (which is your underline) is initially set to 0 (`w-0`). When the link is hovered over, the width of the underline is set to full (`group-hover:w-full`), creating an animation effect. The `transition-all` and `duration-500` classes ensure that the width change is animated over 500ms.

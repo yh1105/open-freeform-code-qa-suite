@@ -1,17 +1,17 @@
-The error message indicates that Python is not installed on your system or it is not added to the PATH environment variable. 
+The error message indicates that Python is not installed on your system or it is not added to the PATH environment variable. Here are the steps to fix this:
 
-To fix this issue, you need to install Python and add it to the PATH environment variable. Here are the steps:
+1. Download and install Python 2.7.x from the official website: https://www.python.org/downloads/windows/
+2. During the installation process, make sure to select the option to add Python to the PATH environment variable.
+3. After the installation is complete, open a new command prompt and run the following command to verify that Python is installed and added to the PATH:
 
-1. Download and install Python 2.7.x from the official website: https://www.python.org/downloads/
+```
+python --version
+```
 
-2. During the installation process, make sure to select the option "Add Python to PATH".
+4. If the command above returns the version of Python installed, then you can try to rebuild the node-sass module by running the following command in your project directory:
 
-3. After the installation is complete, open a new command prompt and type `python --version` to verify that Python is installed and added to the PATH.
+```
+npm rebuild node-sass
+```
 
-4. If you still get the same error message, try setting the PYTHON environment variable to the path of the Python executable. For example, if Python is installed in `C:\Python27`, you can set the PYTHON environment variable by running the following command in the command prompt:
-
-   ```
-   set PYTHON=C:\Python27\python.exe
-   ```
-
-5. Try running the build again and see if it succeeds.
+This should rebuild the node-sass module with the correct dependencies and resolve the issue.

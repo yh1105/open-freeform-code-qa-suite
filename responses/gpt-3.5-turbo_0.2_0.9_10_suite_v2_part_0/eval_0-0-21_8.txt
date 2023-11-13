@@ -1,4 +1,4 @@
-To copy the text from the `v-text-field` component to the clipboard, you can use the `navigator.clipboard.writeText()` method. Here's the updated code:
+To copy the text from `v-text-field` to clipboard when the button is clicked, you can use the `navigator.clipboard.writeText()` method. Here's the updated code:
 
 ```html
 <template>
@@ -27,8 +27,8 @@ To copy the text from the `v-text-field` component to the clipboard, you can use
           .then(() => {
             console.log('Text copied to clipboard')
           })
-          .catch((error) => {
-            console.error('Error copying text: ', error)
+          .catch(err => {
+            console.error('Error copying text: ', err)
           })
       }
     }
@@ -36,4 +36,4 @@ To copy the text from the `v-text-field` component to the clipboard, you can use
 </script>
 ```
 
-In the `copyText` method, we call `navigator.clipboard.writeText()` with the text we want to copy as the argument. This returns a Promise that resolves when the text has been successfully copied to the clipboard. We can use `.then()` to log a message to the console indicating that the text has been copied, and `.catch()` to log an error message if the copy operation fails.
+In the `copyText` method, we use `navigator.clipboard.writeText()` to write the text from `text1` to the clipboard. We also add a `then()` and `catch()` block to handle success and error cases respectively.

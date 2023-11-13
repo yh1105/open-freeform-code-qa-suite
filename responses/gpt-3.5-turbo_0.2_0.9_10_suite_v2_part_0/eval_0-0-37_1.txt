@@ -1,24 +1,13 @@
-Sure! Here's the revised route pattern that should work for your requirement:
+Sure, here's the revised route pattern that should fulfill your requirement:
 
 ```
 /route/:param1/config/:OptionalParam2?/:OptionalParam3?
 ```
 
-This pattern includes two optional parameters, `OptionalParam2` and `OptionalParam3`, which are denoted by the `?` symbol at the end of their respective segments. This means that they can be present in the URL, but they don't have to be.
-
-So, the pattern will match the following URLs:
+This pattern will match the following URLs:
 
 - `/route/aa/config`
 - `/route/aa/config/bb`
 - `/route/aa/config/bb/cc`
 
-In your NestJS application, you can define this route pattern in your controller like this:
-
-```typescript
-@Get('route/:param1/config/:OptionalParam2?/:OptionalParam3?')
-async getConfig(@Param('param1') param1: string, @Param('OptionalParam2') OptionalParam2: string, @Param('OptionalParam3') OptionalParam3: string) {
-  // Your code here
-}
-```
-
-This will allow you to access the values of the parameters in your controller method.
+The `:param1` parameter is required, while `:OptionalParam2` and `:OptionalParam3` are optional. You can access the values of these parameters in your NestJS controller using the `@Param()` decorator.

@@ -1,4 +1,6 @@
-To get the value of the Ant Design Switch component in React, you need to add a `name` attribute to the `Switch` component and use it in the `onCreate` function. Here's the revised code:
+To get the value of the switch in the `onCreate` function, you need to add the `name` attribute to the `Switch` component and set its value to `"chargable"` (or any other name you prefer). Then, you can access the value of the switch in the `onCreate` function by using `values.chargable`.
+
+Here's the revised code:
 
 ```html
 <Form form={form} layout="vertical">
@@ -21,7 +23,7 @@ To get the value of the Ant Design Switch component in React, you need to add a 
         .validateFields()
         .then((values) => {
           form.resetFields()
-          onCreate({ ...values, chargable: values.chargable ? 'Yes' : 'No' })
+          onCreate(values)
         })
         .catch((info) => {
           console.log('Validate Failed:', info)
@@ -32,5 +34,3 @@ To get the value of the Ant Design Switch component in React, you need to add a 
   </Button>
 </Form>
 ```
-
-Here, we added a `name="chargable"` attribute to the `Switch` component and used it in the `onCreate` function as `values.chargable`. We also added a ternary operator to convert the boolean value of `values.chargable` to a string value of either "Yes" or "No".

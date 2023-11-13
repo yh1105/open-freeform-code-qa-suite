@@ -1,4 +1,4 @@
-Sure, you can use the `keydown` event and check if the key pressed is "Enter". Here is the revised code:
+Sure, you can use the `keydown` event listener to listen for the "enter" key. Here is your revised code:
 
 ```javascript
 mounted() {
@@ -8,16 +8,21 @@ mounted() {
       Keymap({
         "Enter": ({ state, dispatch }) => {
           console.log("good");
-          // Prevent the default "Enter" behavior
+          // prevent default "Enter" behavior
           return true;
         }
       })
     ],
     content: this.value
   });
-
   this.editor = editor;
 }
 ```
 
-Please note that you need to import `Keymap` from `prosemirror-commands` to use it.
+Please note that you need to import `Keymap` from `tiptap-extensions` at the top of your file:
+
+```javascript
+import { Keymap } from 'tiptap-extensions'
+```
+
+This code will execute `console.log("good")` when the "Enter" key is pressed.

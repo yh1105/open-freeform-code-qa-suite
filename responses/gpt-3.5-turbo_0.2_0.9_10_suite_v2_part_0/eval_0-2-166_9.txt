@@ -1,25 +1,22 @@
-TailwindCSS is a utility-first CSS framework, which means it provides pre-defined classes that you can use to style your HTML elements. In order to select the direct children of a div with class "section", you can use the `>` selector in combination with the `@apply` directive to apply the desired styles.
+TailwindCSS is a utility-first CSS framework, which means it provides pre-defined classes that you can use to style your HTML elements. It does not provide a way to select direct children of a specific class like CSS does.
 
-Here's an example:
+However, you can use the `@layer` directive in TailwindCSS to create your own custom CSS rules. Here's an example of how you can use it to select direct children of a div with class "section":
+
+```css
+@layer components {
+  .section > div {
+    /* your styles here */
+  }
+}
+```
+
+This will create a new CSS rule in the "components" layer that selects direct children of any element with class "section". You can then use this class in your HTML like this:
 
 ```html
 <div class="section">
-  <div class="child">Child 1</div>
-  <div class="child">Child 2</div>
+  <div>Direct child 1</div>
+  <div>Direct child 2</div>
 </div>
 ```
 
-```css
-/* Define the styles for the direct children of .section */
-.section > .child {
-  /* Your styles here */
-}
-
-/* Apply the styles using TailwindCSS */
-<div class="section">
-  <div class="child @apply mt-4">Child 1</div>
-  <div class="child @apply mt-4">Child 2</div>
-</div>
-```
-
-In the example above, we define the styles for the direct children of `.section` using the `>` selector. Then, we apply those styles using the `@apply` directive in combination with the `mt-4` class from TailwindCSS to add a margin-top of 1rem to each child element.
+Note that this approach requires you to use the `@layer` directive and write custom CSS rules, which may not be as convenient as using pre-defined TailwindCSS classes.

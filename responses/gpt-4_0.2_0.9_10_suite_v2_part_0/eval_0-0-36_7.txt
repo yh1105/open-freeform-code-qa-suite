@@ -1,13 +1,12 @@
-In your case, you can use the `router.reload()` function to trigger a client-side reload. Here is how you can do it:
-
 ```javascript
 import { useRouter } from "next/router";
 
 export default function Component(){
     const router = useRouter();
 
-    router.reload();
+    const reloadPage = () => {
+        router.replace(router.asPath);
+    }
 }
 ```
-
-This will reload the current page and `getInitialProps` will be called on the client-side.
+In the above code, `router.replace(router.asPath)` will trigger a client-side reload in Next.js. The `router.asPath` gives the path string, including the query, as shown in the browser. When you replace the current path with the same path, it triggers a client-side reload.

@@ -1,15 +1,18 @@
-Yes, you can achieve this by using refs in React. You can create a ref in the parent component and pass it down to the child component as a prop. Then, you can attach an onClick event handler to the button in the parent component, which will call the submit method of the form using the ref.
-
-Here's an updated version of your code that implements this approach:
+Yes, you can achieve this by using refs in React. Here's how you can modify your code to accomplish this:
 
 ```javascript
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 
 class CustomForm extends Component {
+  handleSubmit = (event) => {
+    event.preventDefault();
+    alert('Form submitted!');
+  }
+
   render() {
     return (
-      <form id='my-form' onSubmit={alert('Form submitted!')}>
+      <form id='my-form' onSubmit={this.handleSubmit}>
         <button type='submit'>Inside Custom</button>
       </form>
     );
@@ -17,19 +20,17 @@ class CustomForm extends Component {
 }
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.formRef = React.createRef();
-  }
+  customFormRef = React.createRef();
 
-  handleSubmit = () => {
-    this.formRef.current.submit();
+  handleSubmit = (event) => {
+    event.preventDefault();
+    this.customFormRef.current.handleSubmit(event);
   }
 
   render() {
     return (
       <div>
-        <CustomForm ref={this.formRef} />
+        <CustomForm ref={this.customFormRef} />
         <button onClick={this.handleSubmit}>In Root</button>
       </div>
     );
@@ -40,4 +41,10 @@ const rootElement = document.getElementById("root");
 ReactDOM.render(<App />, rootElement);
 ```
 
-In this updated code, we create a ref using `React.createRef()` in the constructor of the parent component `App`. We then pass this ref down to the `CustomForm` component as a prop named `ref`. In the `handleSubmit` method of the parent component, we call the `submit` method of the form using the ref. Finally, we attach an `onClick` event handler to the 'In Root' button, which calls the `handleSubmit` method when clicked.
+In the `CustomForm` component, we define a `handleSubmit` method that prevents the default form submission behavior and shows an alert instead.
+
+In the `App` component, we create a `customFormRef` using `React.createRef()`. We also define a `handleSubmit` method that prevents the default button behavior and calls the `handleSubmit` method of the `CustomForm` component using the `customFormRef`.
+
+We pass the `customFormRef` to the `CustomForm` component using the `ref` prop. Finally, we modify the 'In Root' button to call the `handleSubmit` method when clicked.
+
+With these changes, clicking the 'In Root' button will trigger the `handleSubmit` method of the `CustomForm` component, which will show the alert.

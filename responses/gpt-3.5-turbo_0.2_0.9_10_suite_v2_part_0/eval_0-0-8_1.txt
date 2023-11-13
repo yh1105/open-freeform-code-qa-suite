@@ -1,47 +1,22 @@
-Sure! Here's a recursive function that should do the job:
+Sure, here's the implementation of the `findObject` function in JavaScript:
 
 ```javascript
-function findObject(id, obj) {
-  if (obj.id === id) {
-    return obj;
-  }
-  for (let i = 0; i < obj.child.length; i++) {
-    const found = findObject(id, obj.child[i]);
-    if (found) {
-      return found;
+function findObject(id, root_node) {
+  if (root_node.id === id) {
+    return root_node;
+  } else {
+    for (let i = 0; i < root_node.child.length; i++) {
+      const result = findObject(id, root_node.child[i]);
+      if (result) {
+        return result;
+      }
     }
   }
 }
 ```
 
-You can call this function with the `id` you want to find and the root object of the nested tree:
+This function takes two arguments: `id` and `root_node`. `id` is the ID of the object we want to find, and `root_node` is the root node of the nested object tree.
 
-```javascript
-const nestedObj = {
-  "id": "A",
-  "name": "Item A",
-  "child": [
-    {
-      "id": "B",
-      "name": "Item B",
-      "child": [
-        {
-          "id": "C",
-          "name": "Item C",
-          "child": []
-        }
-      ]
-    },
-    {
-      "id": "D",
-      "name": "Item D",
-      "child": []
-    }
-  ]
-};
+The function checks if the `id` of the `root_node` matches the `id` we're looking for. If it does, it returns the `root_node`. If it doesn't, it recursively calls itself on each child node of the `root_node` until it finds the object with the matching `id`.
 
-const foundObj = findObject("C", nestedObj);
-console.log(foundObj); // { "id": "C", "name": "Item C", "child": [] }
-```
-
-This function recursively searches through the nested object tree until it finds an object with the matching `id`. If it finds the object, it returns it. If it doesn't find the object in the current level of the tree, it continues searching through the child objects.
+Note that this implementation assumes that the `child` property of each node is an array. If it's not, you'll need to modify the code accordingly.

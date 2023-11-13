@@ -1,9 +1,15 @@
-It looks like you're missing a comma after the value of the "primary" color in your `$theme-colors` map. Try adding a comma after the color value like this:
+The issue with your code is that you are missing the `#` symbol before the color value in your `$theme-colors` map. The `to-rgb` function in Bootstrap's `_functions.scss` file expects a color value in the format of `#RRGGBB` or `#RGB`, but your map is missing the `#` symbol.
+
+To fix this issue, you need to add the `#` symbol before each color value in your `$theme-colors` map. Here's the revised code:
 
 ```scss
+@import "../../node_modules/bootstrap/scss/variables";
+
 $theme-colors: (
   "primary": #0d6efd,
 );
+
+@import "../../node_modules/bootstrap/scss/bootstrap";
 ```
 
-Also, make sure that you're importing the correct Bootstrap variables file. In your example, you're importing `../../node_modules/bootstrap/scss/variables`, which is the correct path for Bootstrap 5.1.0. However, if you're using an older version of Bootstrap, the path may be different.
+With this code, you should be able to compile your SCSS file without any errors.

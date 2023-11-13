@@ -1,9 +1,13 @@
-The `ERR! code EINTEGRITY` error occurs when the integrity check of the package fails. This means that the package you are trying to install has been modified or corrupted during the download process. Here are some possible measures to resolve the issue:
+This error message indicates that the integrity check of the downloaded package has failed. Here are some possible measures to resolve the issue:
 
-1. Clear the npm cache by running `npm cache clean --force` and try installing the package again.
+1. Clear the npm cache by running `npm cache clean --force` and try running `npm install` again.
+
 2. Delete the `node_modules` folder and `package-lock.json` file, then run `npm install` again.
-3. Update npm to the latest version by running `npm install -g npm@latest` and try installing the package again.
-4. If you are using a proxy, try disabling it and installing the package again.
-5. If none of the above solutions work, try deleting the `~/.npm` folder and try installing the package again.
 
-If the issue persists, you may want to check if the package you are trying to install is compatible with your current version of Node.js and npm.
+3. Upgrade npm to the latest version by running `npm install -g npm@latest` and try running `npm install` again.
+
+4. If you are using a private registry, try adding the `--no-shrinkwrap` flag to the `npm install` command.
+
+5. If none of the above solutions work, try deleting the `node_modules` folder, `package-lock.json` file, and `npm-shrinkwrap.json` file (if it exists), then run `npm install` again.
+
+6. If you are still experiencing issues, try running `npm config set registry http://registry.npmjs.org/` to switch to the default registry and try running `npm install` again.

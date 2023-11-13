@@ -1,4 +1,4 @@
-To mock the `API` class, you need to return a constructor function that creates an object with the mocked methods. Here's the revised code:
+To mock a class with Jest, you can use the `jest.mock` function and return a constructor function that creates an instance of the class. Here's how you can modify your code to mock the `API` class:
 
 ```javascript
 import API from 'utils/API';
@@ -11,9 +11,8 @@ jest.mock('utils/API', () => {
   });
 });
 
+// Now you can create an instance of the mocked API class
 const api = new API();
 ```
 
-This code creates a mock implementation of the `API` class that returns an object with a mocked `someMethod` function. The `jest.fn()` function creates a mock function, and `mockImplementation` sets the implementation of the mock constructor function to return an object with the mocked method. 
-
-Now, `const api = new API()` should not throw a `TypeError`.
+In the mock function, we return a Jest mock function that creates an instance of an object with a `someMethod` function. This should eliminate the `TypeError` you were seeing.

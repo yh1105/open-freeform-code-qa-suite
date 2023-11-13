@@ -1,14 +1,11 @@
-Sure! Here's the implementation of the `iterLeafNodes` function using recursion:
+Sure, here's the implementation of the `iterLeafNodes` function using recursion:
 
 ```javascript
 function* iterLeafNodes(strhtml, format = []) {
   const parser = new DOMParser();
   const doc = parser.parseFromString(strhtml, "text/html");
   const nodes = doc.body.childNodes;
-
-  for (let i = 0; i < nodes.length; i++) {
-    const node = nodes[i];
-
+  for (const node of nodes) {
     if (node.nodeType === Node.TEXT_NODE) {
       yield { text: node.textContent, format };
     } else if (node.nodeType === Node.ELEMENT_NODE) {
@@ -29,7 +26,7 @@ const result = [...iterLeafNodes(strHTML)];
 console.log(result);
 ```
 
-This will output the following result:
+This will output the expected result:
 
 ```javascript
 [

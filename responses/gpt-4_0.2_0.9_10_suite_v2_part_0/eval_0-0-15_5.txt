@@ -1,4 +1,4 @@
-Sure, the error is because you are mocking the API class as an object, not as a class. You should mock it as a class like so:
+Sure, the problem is that you're mocking the `API` class as an object, but then trying to use it as a class. You should mock it as a class instead. Here's how you can do it:
 
 ```javascript
 import API from 'utils/API';
@@ -10,8 +10,4 @@ jest.mock('utils/API', () => {
 });
 ```
 
-Now, you can create a new instance of the API class without any errors:
-
-```javascript
-const api = new API();
-```
+In this way, `API` is mocked as a class with a constructor, and `new API()` will not throw an error.

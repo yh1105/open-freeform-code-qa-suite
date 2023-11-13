@@ -1,8 +1,10 @@
-The ESLint error you're encountering is due to the anonymous function you're using in the `render` property of your column definition. ESLint is unable to infer a display name for this component, hence the error.
+The ESLint error you're seeing is because you're using an anonymous function as a component in your render method. ESLint expects all components to have a `displayName` for debugging purposes. 
 
-To fix this, you can either disable the ESLint rule for that line or provide a name to the function. Here's how you can do both:
+You can solve this issue by either disabling the ESLint rule for that line or by creating a named function. 
 
-**1. Disabling the ESLint rule for that line:**
+Here's how you can do it:
+
+**Option 1: Disabling the ESLint rule for that line**
 
 ```jsx
 const columns_payment_summary_table = [ 
@@ -18,19 +20,20 @@ const columns_payment_summary_table = [
   ]
 ```
 
-**2. Providing a name to the function:**
+**Option 2: Creating a named function**
 
 ```jsx
+const renderGroup = text => <span>{getCountForCountry(text)}</span>;
+renderGroup.displayName = 'renderGroup';
+
 const columns_payment_summary_table = [ 
     {
       title: FooConstants.LABEL_QUANTITY_SELECTED,
       dataIndex: 'group',
       key: 'group',
-      render: function RenderCountForCountry(text) {
-        return <span>{getCountForCountry(text)}</span>
-      },
+      render: renderGroup,
     }
   ]
 ```
 
-In the second example, the function `RenderCountForCountry` now has a display name that ESLint can recognize.
+In the second option, we created a named function `renderGroup` and assigned a `displayName` to it. Then we used this function in the `render` property. This way, ESLint can see the `displayName` and won't throw an error.

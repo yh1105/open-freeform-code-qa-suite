@@ -1,8 +1,8 @@
-Sure, here's the revised code:
+Sure! Here's the revised code for using `connect-mongo` v4:
 
 ```javascript
 const session = require('express-session');
-const MongoStore = require('connect-mongo')(session);
+const MongoStore = require('connect-mongo').default;
 
 ...
 
@@ -14,4 +14,4 @@ app.use(session({
 }));
 ```
 
-Note that in `connect-mongo` v4, the `MongoStore` constructor has been replaced with a static `create` method. Also, instead of passing the `mongooseConnection` option, you can directly pass the `mongoUrl` option to the `create` method.
+Note that in `connect-mongo` v4, you need to use `MongoStore.create()` instead of `new MongoStore()`. Also, you need to pass the MongoDB connection string as `mongoUrl` instead of `mongooseConnection`.

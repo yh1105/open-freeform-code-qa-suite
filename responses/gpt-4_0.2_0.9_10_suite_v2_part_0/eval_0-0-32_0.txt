@@ -1,40 +1,37 @@
-You can use the `react-intersection-observer` npm package to achieve this. This package provides a set of React components that use the Intersection Observer API to tell you when an element enters or leaves the viewport.
+You can use the `react-intersection-observer` npm package to detect whether an element is in the viewport or not. 
 
-First, install the package using npm:
+First, install the package:
 
 ```bash
 npm install react-intersection-observer
 ```
 
-Then, you can use the `InView` component from the package to wrap each of your divs. The `InView` component will call a function whenever the div enters or leaves the viewport.
-
-Here's how you can modify your code to use `react-intersection-observer`:
+Then, you can use the `InView` component from the package to wrap the divs you want to observe. Here's an example:
 
 ```javascript
 import React from 'react';
 import { InView } from 'react-intersection-observer';
 
-const YourComponent = () => {
-    const data = ... // your data
+const ParentComponent = ({ data }) => (
+  <div id="parent">
+    {data.map(item => (
+      <InView key={item.id}>
+        {({ inView, ref }) => (
+          <div id={item.id} ref={ref}>
+            {inView ? 'In viewport' : 'Not in viewport'}
+            {item.title}
+          </div>
+        )}
+      </InView>
+    ))}
+  </div>
+);
 
-    return (
-        <div id="parent">
-            {data.map(item => (
-                <InView as="div" id={item.id} onChange={(inView, entry) => {
-                    if(inView){
-                        console.log(`${item.id} is in viewport`);
-                    }
-                }}>
-                    {item.title}
-                </InView>
-            ))}
-        </div>
-    );
-};
-
-export default YourComponent;
+export default ParentComponent;
 ```
 
-In this code, the `InView` component wraps each div. The `onChange` prop is a function that gets called whenever the div enters or leaves the viewport. The `inView` parameter is a boolean that tells you whether the div is in the viewport or not.
+In this example, `InView` is a component that uses the Intersection Observer API to check if an element is in the viewport. It provides a function as a child that gives you the `inView` state (a boolean indicating whether the element is in the viewport or not) and a `ref` that you should assign to the element you want to observe.
 
-Note: The Intersection Observer API is not supported in all browsers. If you need to support older browsers, you may need to use a polyfill.
+This way, you can easily check which divs are in the viewport and react to changes in their visibility.
+
+Please note that the Intersection Observer API is not supported in all browsers. You can check the current browser support on Can I use. If you need to support a browser that doesn't have native support, you can use a polyfill like `intersection-observer`.

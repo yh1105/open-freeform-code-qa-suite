@@ -1,5 +1,3 @@
-Here's the completed code:
-
 ```javascript
 const [red, green, blue] = [69, 111, 225]
 const section1 = document.querySelector('.section1')
@@ -11,5 +9,3 @@ window.addEventListener('scroll', () => {
   section1.style.backgroundColor = `rgb(${r}, ${g}, ${b})`
 })
 ```
-
-The blanks are filled with 'scroll' and 'style.backgroundColor' respectively. The 'scroll' event is used to detect when the user scrolls on the page. The 'style.backgroundColor' property is used to change the background color of the 'section1' element.

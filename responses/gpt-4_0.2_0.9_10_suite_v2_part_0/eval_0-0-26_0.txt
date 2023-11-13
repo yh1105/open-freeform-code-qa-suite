@@ -1,33 +1,37 @@
-The ESLint error you're seeing is because the anonymous function you're using in the `render` property doesn't have a `displayName`. This is a requirement enforced by the `react/display-name` rule in ESLint.
+The ESLint error you're seeing is because the anonymous function you're using for the `render` property doesn't have a `displayName`. This is a rule in ESLint to help make your code more readable and maintainable.
 
-To fix this, you can assign the function to a variable and then set the `displayName` property on that variable. Here's how you can do it:
+To fix this, you can assign the anonymous function to a variable and then assign a `displayName` to that function. Here's how you can do it:
 
 ```jsx
 const renderGroup = ({ text }) => <span>{getCountForCountry(text)}</span>;
 renderGroup.displayName = 'renderGroup';
 
-const columns_payment_summary_table = [
-  {
-    title: FooConstants.LABEL_QUANTITY_SELECTED,
-    dataIndex: 'group',
-    key: 'group',
-    render: renderGroup,
-  },
+const columns_payment_summary_table = [ 
+    {
+      title: FooConstants.LABEL_QUANTITY_SELECTED,
+      dataIndex: 'group',
+      key: 'group',
+      render: renderGroup,
+    }
 ];
 ```
 
-This way, you're giving the function a `displayName`, which should satisfy the ESLint rule.
+This way, you're giving the function a name and assigning that to the `render` property, which should satisfy the ESLint rule.
 
-Alternatively, if you don't want to give a `displayName` to every render function, you can disable the rule for the entire file by adding this line at the top of your file:
-
-```jsx
-/* eslint-disable react/display-name */
-```
-
-Or, you can disable the rule just for the specific line by adding this comment right before the line:
+However, if you don't want to assign a name to the function, you can disable the ESLint rule for that line:
 
 ```jsx
-// eslint-disable-next-line react/display-name
+const columns_payment_summary_table = [ 
+    {
+      title: FooConstants.LABEL_QUANTITY_SELECTED,
+      dataIndex: 'group',
+      key: 'group',
+      render: text => (
+        // eslint-disable-next-line react/display-name
+        <span>{getCountForCountry(text)}</span>
+      ),
+    }
+];
 ```
 
-However, disabling ESLint rules should be done sparingly, as they're usually there for a good reason. In this case, the `react/display-name` rule helps with debugging by making component names more readable in error messages and React DevTools.
+This will disable the `react/display-name` rule for the next line.

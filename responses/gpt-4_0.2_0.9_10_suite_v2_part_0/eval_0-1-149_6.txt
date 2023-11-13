@@ -1,15 +1,21 @@
-Sure, you can achieve this by using the `group-hover` feature of Tailwind CSS. Here is an example of how you can do it:
+Sure, I can help you with that. You can use Tailwind CSS to create a hover effect. Here's how you can modify your code:
 
 ```html
-<a href="#" class="group">
-    <span class="text-sky-600 transition-all duration-300 group-hover:text-sky-900">Link</span>
-    <span class="block h-0.5 bg-sky-600 transition-all duration-500 group-hover:w-full"></span>
+<a href="#" class="group relative text-sky-600 transition duration-300">
+    Link
+    <span class="absolute left-0 w-full h-0.5 bg-sky-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></span>
 </a>
 ```
 
-In this example, the link text color will change from `sky-600` to `sky-900` when you hover over it. The underline (which is the second span) will expand to full width when you hover over the link. 
+In this code, I've made the following changes:
 
-Please note that you need to enable the `group-hover` variant for the `width` utility in your Tailwind CSS configuration file (`tailwind.config.js`) if it's not already enabled:
+1. Added `relative` to the link to position the span relative to the link.
+2. Added `absolute` and `left-0` to the span to position it at the bottom of the link.
+3. Added `transform scale-x-0` to the span to initially hide it.
+4. Added `group-hover:scale-x-100` to the span to show it when the link is hovered.
+5. Added `transition-transform` to the span to animate the transform property.
+
+Please note that you need to enable `group-hover` and `transition-transform` variants in your Tailwind CSS configuration. If you haven't done this, you can do it by adding the following code to your `tailwind.config.js` file:
 
 ```javascript
 module.exports = {
@@ -18,11 +24,12 @@ module.exports = {
   },
   variants: {
     extend: {
-      width: ['group-hover'],
+      transform: ['group-hover'],
+      scale: ['group-hover'],
     },
   },
   plugins: [],
 }
 ```
 
-Remember to rebuild your CSS after changing the configuration file.
+This will enable the `group-hover` variant for the `transform` and `scale` utilities.

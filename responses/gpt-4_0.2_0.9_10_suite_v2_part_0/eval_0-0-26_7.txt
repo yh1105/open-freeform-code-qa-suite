@@ -1,8 +1,8 @@
-The ESLint error you're seeing is because you're using an anonymous function for the `render` property in your column definition. ESLint is expecting a named function or component here.
+The ESLint error you're seeing is because you're using an anonymous function for the `render` property. ESLint is configured to enforce that all components have a `displayName` for better debugging. 
 
-You can fix this by either disabling the rule for that line or by creating a named function or component. Here's how you can do it:
+You can solve this by either disabling the rule for that line or by creating a named function. Here's how you can do it:
 
-**Option 1: Disable the rule for that line**
+**Option 1: Disabling the rule for that line**
 
 ```jsx
 const columns_payment_summary_table = [ 
@@ -18,10 +18,11 @@ const columns_payment_summary_table = [
   ]
 ```
 
-**Option 2: Create a named function**
+**Option 2: Creating a named function**
 
 ```jsx
 const renderGroup = text => <span>{getCountForCountry(text)}</span>;
+renderGroup.displayName = 'renderGroup';
 
 const columns_payment_summary_table = [ 
     {
@@ -33,19 +34,4 @@ const columns_payment_summary_table = [
   ]
 ```
 
-**Option 3: Create a named component**
-
-```jsx
-const GroupComponent = ({ text }) => <span>{getCountForCountry(text)}</span>;
-
-const columns_payment_summary_table = [ 
-    {
-      title: FooConstants.LABEL_QUANTITY_SELECTED,
-      dataIndex: 'group',
-      key: 'group',
-      render: (text) => <GroupComponent text={text} />,
-    }
-  ]
-```
-
-Any of these options should resolve the ESLint error.
+In the second option, we created a named function `renderGroup` and assigned a `displayName` to it. Then we used this function for the `render` property.

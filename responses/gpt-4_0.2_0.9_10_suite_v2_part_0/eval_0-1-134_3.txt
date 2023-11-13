@@ -1,15 +1,17 @@
-It sounds like you're referring to a feature provided by a tool called Emmet. Emmet is a web-developer’s toolkit that can greatly improve your HTML & CSS workflow: it allows you to type CSS-like expressions that can be dynamically parsed and produce output depending on what you type in the abbreviation.
+It sounds like you're referring to a feature provided by a tool called Emmet. Emmet is a plugin for many popular text editors that greatly improves HTML & CSS workflow. 
 
-For example, if you type `.classname` and press `Tab`, it will automatically expand to `<div class="classname"></div>`.
+With Emmet you can quickly write a lot of code using abbreviations, then expand them in valid HTML tags. For example, if you type `.classname`, and then press `Tab`, it will expand to `<div class="classname"></div>`.
 
-To use Emmet:
+If this isn't working for you, it's possible that you either don't have Emmet installed, or your text editor doesn't support it. Emmet is built-in in many modern code editors like Visual Studio Code, Sublime Text, Atom, Brackets, etc.
 
-1. You need to have a code editor that supports it. Popular code editors like Visual Studio Code, Sublime Text, and Atom have built-in support or plugins for Emmet.
+Here are some steps to troubleshoot:
 
-2. Make sure you're in an HTML or CSS file. Emmet is context-aware and will only work if it knows you're working with HTML or CSS.
+1. **Check if your editor supports Emmet**: Not all text editors support Emmet. Check the list of supported editors on the [Emmet official website](https://emmet.io/).
 
-3. Type the Emmet abbreviation (like `.classname` for a div with a class of "classname") and then press the `Tab` key. This should expand the abbreviation into a full HTML or CSS snippet.
+2. **Check if Emmet is installed and enabled**: If your editor supports Emmet, make sure it's installed and enabled. The process to do this varies depending on the editor. For example, in Visual Studio Code, Emmet support is built-in and enabled by default.
 
-If you're using Visual Studio Code, Emmet should work out of the box. If you're using a different editor, you may need to install a plugin or enable Emmet in your editor's settings. 
+3. **Check your syntax**: Make sure you're using the correct Emmet abbreviations. You can find a cheat sheet on the [Emmet official website](https://docs.emmet.io/cheat-sheet/).
 
-If you're still having trouble, check your editor's documentation or the Emmet website for more information.
+4. **Check your file type**: Emmet usually works automatically in HTML and CSS files. If you're working in a different type of file, you might need to manually set the syntax to HTML or CSS.
+
+If you're still having trouble, please provide more details about your text editor and the exact steps you're taking, and I'll be happy to help further!

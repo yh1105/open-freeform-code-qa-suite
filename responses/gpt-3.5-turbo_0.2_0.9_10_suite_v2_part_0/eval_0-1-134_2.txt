@@ -1,33 +1,5 @@
-It sounds like you might be trying to use a CSS preprocessor like Sass or Less. These preprocessors allow you to write CSS in a more efficient way by using variables, nesting, and other features. 
+It sounds like you might be referring to Emmet, a plugin for text editors that allows you to write HTML and CSS code using shortcuts. 
 
-In Sass, for example, you can write:
+To use Emmet, you can type out the shortcut for the element you want to create, followed by the "tab" key. For example, typing "div.classname" and then hitting "tab" should create a `<div>` element with the class "classname". 
 
-```
-.container {
-  width: 100%;
-  .box {
-    background-color: #ccc;
-    padding: 10px;
-  }
-}
-```
-
-This will compile to:
-
-```
-.container {
-  width: 100%;
-}
-.container .box {
-  background-color: #ccc;
-  padding: 10px;
-}
-```
-
-If you're using a preprocessor, make sure you have it set up correctly and that you're using the correct syntax. If you're not using a preprocessor, you can still use the `.classname` syntax in your HTML, but you'll need to define the class in your CSS like this:
-
-```
-.classname {
-  /* styles here */
-}
-```
+If this isn't working for you, make sure that you have Emmet installed and enabled in your text editor. The specific steps for enabling Emmet will depend on your editor, so you may need to consult the documentation or do a quick Google search to figure out how to enable it.

@@ -1,19 +1,15 @@
-This error occurs because Bootstrap requires the Popper.js library as a dependency. To fix this error, you need to install the Popper.js library using npm. 
+This error occurs because Bootstrap 4 requires the Popper.js library to work properly. To fix this error, you need to install the Popper.js library using npm. 
 
-To install Popper.js, open your terminal and run the following command:
+You can install Popper.js by running the following command in your terminal:
 
 ```
 npm install popper.js --save
 ```
 
-This will install the Popper.js library and save it as a dependency in your project's `package.json` file.
-
-After installing Popper.js, you need to import it in your JavaScript file before importing Bootstrap. Here's an example:
+After installing Popper.js, you need to import it in your JavaScript file before importing Bootstrap. You can do this by adding the following line of code:
 
 ```javascript
 import Popper from 'popper.js';
-import $ from 'jquery';
-import 'bootstrap';
 ```
 
-Make sure to import Popper.js before importing Bootstrap. This should resolve the "Module not found: can't resolve popper.js" error.
+Make sure to import Popper before importing Bootstrap. This should resolve the "Module not found :can't resolve popper.js" error.

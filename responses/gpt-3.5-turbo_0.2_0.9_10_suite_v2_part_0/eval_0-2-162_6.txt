@@ -12,4 +12,4 @@ window.addEventListener('scroll', () => {
 })
 ```
 
-This code listens for the `scroll` event on the window and calculates the scroll position to adjust the background color of the `.section1` element dynamically. The `style.backgroundColor` property is used to set the background color of the element.
+This code listens for the `scroll` event on the window and calculates the background color based on the current scroll position. The `style.backgroundColor` property is then set to the calculated color.

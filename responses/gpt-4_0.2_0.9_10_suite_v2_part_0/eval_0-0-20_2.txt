@@ -1,11 +1,14 @@
-The issue with your code is that you're defining the `TabWrapper` styled component inside your `Tab` component. This means that a new `TabWrapper` is created every time `Tab` is rendered, which is inefficient.
+The issue with your code is that you are defining the `TabWrapper` styled component inside the `Tab` component. This means that a new `TabWrapper` is created every time the `Tab` component is rendered, which is inefficient.
 
-Instead, you should define `TabWrapper` outside of the `Tab` component. You can still use props to dynamically change the styles of the component. Here's how you can refactor your code:
+Instead, you should define `TabWrapper` outside of the `Tab` component. You can still use props in your styled component by passing them in as arguments to the function that you provide to the styled component.
+
+Here's how you can refactor your code:
 
 ```javascript
 import React from 'react'
 import styled from 'styled-components'
 
+// start
 const TabWrapper = styled.li`
   display: flex;
   align-items: center;
@@ -17,12 +20,13 @@ const TabWrapper = styled.li`
   background-color: ${props => (props.isSelected ? `black` : `#C4C4C4`)};
   cursor: ${props => (props.isSelected ? 'default' : `pointer`)};
 `
+// end
 
 const Tab = ({ onClick, isSelected, children }) => {
-  return <TabWrapper isSelected={isSelected} onClick={onClick}>{children}</TabWrapper>
+  return <TabWrapper onClick={onClick} isSelected={isSelected}>{children}</TabWrapper>
 }
 
 export default Tab
 ```
 
-In this refactored code, `TabWrapper` is defined only once, and then reused every time `Tab` is rendered. The `isSelected` prop is passed to `TabWrapper` to dynamically change its styles.
+In this refactored code, `TabWrapper` is only created once, and the `isSelected` prop is passed to it in the `Tab` component. This is more efficient and is considered best practice when using styled-components.

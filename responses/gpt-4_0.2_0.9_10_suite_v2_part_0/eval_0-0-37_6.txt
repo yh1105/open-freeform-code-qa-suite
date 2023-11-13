@@ -1,17 +1,41 @@
-Sure, you can define your route in NestJS like this:
+Sure, in NestJS, you can use the `@Param` decorator to handle route parameters. However, optional parameters in the URL are not directly supported. 
 
-```typescript
-@Controller('route')
-export class YourController {
-  @Get(':param1/config/:OptionalParam2?/:OptionalParam3?')
-  async yourMethod(
-    @Param('param1') param1: string,
-    @Param('OptionalParam2') OptionalParam2?: string,
-    @Param('OptionalParam3') OptionalParam3?: string,
-  ) {
-    // Your code here
-  }
+Instead, you can use query parameters for optional parameters. Here's how you can define your routes:
+
+```javascript
+@Get('route/:param1/config')
+handleConfig(@Param('param1') param1: string, @Query('param2') param2?: string, @Query('param3') param3?: string) {
+  // your code here
 }
 ```
 
-In this code, `:OptionalParam2?` and `:OptionalParam3?` are optional parameters. The `?` at the end of the parameter name makes it optional.
+In this case, your URLs will look like this:
+
+- `route/aa/config`
+- `route/aa/config?param2=bb`
+- `route/aa/config?param2=bb&param3=cc`
+
+If you still want to stick with your URL structure, you might need to define multiple routes:
+
+```javascript
+@Get('route/:param1/config')
+handleConfig(@Param('param1') param1: string) {
+  // your code here
+}
+
+@Get('route/:param1/config/:param2')
+handleConfigWithParam2(@Param('param1') param1: string, @Param('param2') param2: string) {
+  // your code here
+}
+
+@Get('route/:param1/config/:param2/:param3')
+handleConfigWithParam2AndParam3(@Param('param1') param1: string, @Param('param2') param2: string, @Param('param3') param3: string) {
+  // your code here
+}
+```
+
+In this case, your URLs will look like this:
+
+- `route/aa/config`
+- `route/aa/config/bb`
+- `route/aa/config/bb/cc`

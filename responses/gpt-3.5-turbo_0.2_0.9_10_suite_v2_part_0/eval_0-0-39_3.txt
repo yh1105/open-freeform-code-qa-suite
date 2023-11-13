@@ -1,18 +1,15 @@
-Yes, you can achieve this by using refs in React. Here's how you can modify your code to accomplish this:
+Yes, you can achieve this by using refs in React. You can create a ref in the parent component and pass it down to the child component as a prop. Then, you can attach an onClick event handler to the button in the parent component and call the submit method of the form using the ref.
+
+Here's an example of how you can modify your code to achieve this:
 
 ```javascript
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 
 class CustomForm extends Component {
-  handleSubmit = (event) => {
-    event.preventDefault();
-    alert('Form submitted!');
-  }
-
   render() {
     return (
-      <form id='my-form' onSubmit={this.handleSubmit}>
+      <form id='my-form' onSubmit={() => alert('Form submitted!')}>
         <button type='submit'>Inside Custom</button>
       </form>
     );
@@ -20,17 +17,19 @@ class CustomForm extends Component {
 }
 
 class App extends Component {
-  customFormRef = React.createRef();
+  constructor(props) {
+    super(props);
+    this.formRef = React.createRef();
+  }
 
-  handleSubmit = (event) => {
-    event.preventDefault();
-    this.customFormRef.current.handleSubmit(event);
+  handleSubmit = () => {
+    this.formRef.current.submit();
   }
 
   render() {
     return (
       <div>
-        <CustomForm ref={this.customFormRef} />
+        <CustomForm ref={this.formRef} />
         <button onClick={this.handleSubmit}>In Root</button>
       </div>
     );
@@ -41,8 +40,6 @@ const rootElement = document.getElementById("root");
 ReactDOM.render(<App />, rootElement);
 ```
 
-Here, we have created a ref for the `CustomForm` component in the `App` component using `React.createRef()`. We have also defined a `handleSubmit` method in the `App` component that will be called when the 'In Root' button is clicked.
+In this modified code, we create a ref using `React.createRef()` in the parent component's constructor. We pass this ref down to the `CustomForm` component as a prop named `ref`. In the `handleSubmit` method of the parent component, we call the `submit` method of the form using the ref.
 
-In the `handleSubmit` method, we are calling the `handleSubmit` method of the `CustomForm` component using the ref we created earlier.
-
-Finally, we have passed the ref to the `CustomForm` component using the `ref` prop. Now, when the 'In Root' button is clicked, the `handleSubmit` method of the `CustomForm` component will be called and the form will be submitted.
+Now, when you click the 'In Root' button, it will call the `handleSubmit` method of the parent component, which will submit the form using the ref.

@@ -1,33 +1,31 @@
-To get the first name and last name value on button click, you can create two separate state variables for first name and last name and update them on input change. Then, on button click, you can access the values of these state variables.
-
-Here's an example code snippet:
+To get the first name and last name value on button click, you can create two separate state variables for first name and last name and update them on input change. Then, you can create a function that gets called on button click and retrieves the values of the first name and last name state variables. Here's an example:
 
 ```javascript
 import React, { useState } from 'react';
 
-export default function InputField({name, label}) {
+export default function InputField({ name, label }) {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
 
   const handleButtonClick = () => {
     console.log('First Name:', firstName);
     console.log('Last Name:', lastName);
-  }
+  };
 
   return (
     <div>
       <label>{label}</label>
-      <input 
-        type="text" 
-        value={name === 'firstName' ? firstName : lastName} 
-        name={name}
-        onChange={(e) => {
-          if (name === 'firstName') {
-            setFirstName(e.target.value);
-          } else {
-            setLastName(e.target.value);
-          }
-        }} 
+      <input
+        type="text"
+        value={firstName}
+        name={`${name}-first`}
+        onChange={(e) => setFirstName(e.target.value)}
+      />
+      <input
+        type="text"
+        value={lastName}
+        name={`${name}-last`}
+        onChange={(e) => setLastName(e.target.value)}
       />
       <button onClick={handleButtonClick}>Submit</button>
     </div>
@@ -35,4 +33,8 @@ export default function InputField({name, label}) {
 }
 ```
 
-In this example, we have created two state variables `firstName` and `lastName` and updated them on input change using `setFirstName` and `setLastName` functions respectively. On button click, we have logged the values of these state variables in the console. We have also updated the `value` prop of the input field based on the `name` prop passed to the component.
+In this example, we create two state variables `firstName` and `lastName` using the `useState` hook. We also create a function `handleButtonClick` that logs the values of `firstName` and `lastName` to the console.
+
+In the JSX, we add two input fields for first name and last name and update their respective state variables on input change using the `setFirstName` and `setLastName` functions. We also add a button that calls the `handleButtonClick` function on click.
+
+Note that we update the `name` attribute of the input fields to include `-first` and `-last` suffixes to differentiate between them. This can be useful if you have multiple input fields with the same `name` attribute in your form.

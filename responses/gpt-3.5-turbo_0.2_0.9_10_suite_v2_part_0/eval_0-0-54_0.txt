@@ -1,37 +1,39 @@
-Sure, you can create a function that will be called on button click and will get the values of the input fields. Here's an example:
+Sure, you can create a function that will be called on button click and use the `useState` hook to get the values of the input fields. Here's an example:
 
 ```javascript
-import React, { Component, useState } from 'react';
-import { render } from 'react-dom';
+import React, { useState } from 'react';
 
-export default function InputField({name,label}) {
-  const [firstName, setFirstName] = useState('')
-  const [lastName, setLastName] = useState('')
+export default function InputField({ name, label }) {
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
 
   const handleClick = () => {
-    console.log('First Name:', firstName)
-    console.log('Last Name:', lastName)
-  }
+    console.log(`First Name: ${firstName}, Last Name: ${lastName}`);
+  };
 
   return (
     <div>
       <label>{label}</label>
-      <input type="text" 
-        value={firstName} 
-        name="firstName"
-        onChange={(e) => setFirstName(e.target.value)} />
-
-      <input type="text" 
-        value={lastName} 
-        name="lastName"
-        onChange={(e) => setLastName(e.target.value)} />
-
+      <input
+        type="text"
+        value={firstName}
+        name={`${name}-firstName`}
+        onChange={(e) => setFirstName(e.target.value)}
+      />
+      <input
+        type="text"
+        value={lastName}
+        name={`${name}-lastName`}
+        onChange={(e) => setLastName(e.target.value)}
+      />
       <button onClick={handleClick}>Submit</button>
     </div>
   );
 }
 ```
 
-In this example, we create two state variables `firstName` and `lastName` to store the values of the input fields. We also create a function `handleClick` that will be called on button click. Inside this function, we log the values of the input fields to the console.
+In this example, we have created two state variables `firstName` and `lastName` using the `useState` hook. We have also created a function `handleClick` that will be called on button click. Inside this function, we are logging the values of the input fields.
 
-We then add the `onClick` event listener to the button and pass the `handleClick` function as the callback.
+To get the value of the input fields, we are using the `value` attribute of the input fields and updating the state variables using the `setFirstName` and `setLastName` functions respectively.
+
+We have also added a `name` attribute to the input fields to differentiate between them.

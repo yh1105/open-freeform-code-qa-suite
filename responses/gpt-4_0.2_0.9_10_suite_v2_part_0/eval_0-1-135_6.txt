@@ -1,6 +1,8 @@
-The issue you're experiencing is a known bug in Safari's implementation of flexbox. When an image is a flex child, Safari does not correctly maintain the aspect ratio of the image when `height: auto` is used.
+Yes, there is a known issue with Safari and flexbox where images don't respect the `height: auto` rule. This is because Safari has a different interpretation of the flexbox specification compared to other browsers.
 
-One workaround for this issue is to wrap the image in a `div` and apply the flex properties to the `div` instead of the image. Here's how you can do it:
+To fix this, you can add `align-self: flex-start` to the image. This will align the image at the start of the cross axis, which will prevent it from stretching.
+
+Here is the updated CSS:
 
 ```css
 .container {
@@ -13,29 +15,11 @@ One workaround for this issue is to wrap the image in a `div` and apply the flex
   margin-bottom: 25px;
 }
 
-.container .img-wrapper {
-  width: 125px;
-}
-
 .container img {
-  width: 100%;
+  width: 125px;
   height: auto;
+  align-self: flex-start; /* Add this line */
 }
 ```
 
-```html
-<div class="container">
-  <section>
-    <div class="img-wrapper">
-      <img src="https://via.placeholder.com/250">
-    </div>
-  </section>
-  <section>
-    <div class="img-wrapper">
-      <img src="https://via.placeholder.com/150">
-    </div>
-  </section>
-</div>
-```
-
-In this workaround, the `div` with class `img-wrapper` is the flex child instead of the `img`. The `img` is set to fill the width of the `div`, and `height: auto` will work as expected because the `img` is no longer a flex child.
+This should fix the issue in Safari while also working in other browsers.

@@ -1,7 +1,7 @@
-You can use the `router.reload()` function to reload the current page. This will trigger a client-side reload in Next.js. Here is how you can use it:
+You can use the `router.reload()` function to trigger a client-side reload in Next.js. Here is how you can do it:
 
 ```javascript
-import { useRouter } from "next/router";
+import { useRouter } from 'next/router';
 
 export default function Component(){
     const router = useRouter();
@@ -9,3 +9,5 @@ export default function Component(){
     router.reload();
 }
 ```
+
+This will reload the current page and `getInitialProps` will be called on the client-side.

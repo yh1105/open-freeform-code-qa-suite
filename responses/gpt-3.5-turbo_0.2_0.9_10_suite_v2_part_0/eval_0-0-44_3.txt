@@ -1,27 +1,34 @@
-To create an index on a property in a Mongoose schema using Nest.js, you can use the `@Schema` decorator's `indexes` property. Here's an example:
+To create an index on a property in a Mongoose schema using Nest.js, you can use the `@Schema()` decorator to define the schema and the `@Prop()` decorator to define the properties. To create an index on a property, you can add the `@Index()` decorator to the property.
+
+Here's an example:
 
 ```javascript
-@Schema({
-  indexes: [{ fields: { type: 1 }, options: { unique: true } }]
-})
-export class Schema extends Document {
+import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose';
+import { Document } from 'mongoose';
 
-  @Prop()
-  _id: string;
+@Schema()
+export class MySchema extends Document {
+  @Prop({ required: true })
+  name: string;
 
-  @Prop({required: true})
+  @Prop({ required: true, index: true })
   type: string;
 
   @Prop()
-  creationDate: string;
-
-  @Prop()
-  name: string;
+  creationDate: Date;
 }
 
-export const MySchema = SchemaFactory.createForClass(Schema);
+export const MySchema = SchemaFactory.createForClass(MySchema);
 ```
 
-In this example, we're creating an index on the `type` property with the `unique` option set to `true`. The `fields` property is an object that specifies the fields to index and the direction of the index (in this case, ascending order). The `options` property is an object that specifies any additional options for the index (in this case, the `unique` option).
+In this example, an index is created on the `type` property by setting the `index` option to `true` in the `@Prop()` decorator. The `@Index()` decorator is not needed in this case.
 
-Note that you don't need to include the `index` option in the `@Prop` decorator when using the `indexes` property of the `@Schema` decorator.
+Note that you need to make sure that you have the appropriate indexes created in your MongoDB database. You can use the `ensureIndexes()` method to create the indexes if they don't exist:
+
+```javascript
+MySchema.ensureIndexes((err) => {
+  if (err) {
+    console.error(err);
+  }
+});
+```

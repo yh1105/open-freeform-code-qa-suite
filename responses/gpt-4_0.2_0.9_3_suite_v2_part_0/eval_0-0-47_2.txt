@@ -1,9 +1,0 @@
-In TypeScript, you can define an inline type for an array of objects as follows:
-
-```typescript
-bagTotal = (products: {name: string, price: number, description: string}[]) => {
- // function does stuff
-}
-```
-
-The `[]` should be placed after the object type definition, not before. This indicates that `products` is an array of objects, each with properties `name`, `price`, and `description`.

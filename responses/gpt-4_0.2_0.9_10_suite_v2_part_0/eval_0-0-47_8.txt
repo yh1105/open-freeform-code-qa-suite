@@ -1,4 +1,4 @@
-Sure, you can define an inline type for the objects in the array like this:
+Sure, you can define an inline type for the `products` parameter like this:
 
 ```typescript
 bagTotal = (products: {name: string, price: number, description: string}[]) => {

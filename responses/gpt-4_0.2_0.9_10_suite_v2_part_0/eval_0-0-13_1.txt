@@ -7,8 +7,9 @@ const [allValues, setAllValues] = useState({
    confirmPassword: ''
 });
 const changeHandler = e => {
-   setAllValues({...allValues, [e.target.name]: e.target.value})
+    setAllValues({...allValues, [e.target.name]: e.target.value});
 }
+// end filling
 return (
    <input type="text"
        className="form-control"

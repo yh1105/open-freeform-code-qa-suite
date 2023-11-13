@@ -1,4 +1,4 @@
-Yes, you can use the `first` and `last` pseudo-class variants in Tailwind to achieve this. Here's how you can modify your code:
+Yes, you can use the `first` and `last` pseudo-class variants in Tailwind to achieve this effect. Here's how you can modify your code:
 
 ```html
 <ul>
@@ -12,8 +12,6 @@ Yes, you can use the `first` and `last` pseudo-class variants in Tailwind to ach
 </ul>
 ```
 
-In the `class` attribute of the `li` element, we have added the `pb-4` class using the ternary operator. This class adds a `padding-bottom` of 1rem (which is equivalent to 4 in Tailwind's spacing scale) to all the `li` elements except the last one. 
+In the `class` attribute of the `li` element, we're using the `pb-4` class to add a bottom padding to all items except the last one. We're using a ternary operator to conditionally apply this class based on the current index of the item in the `v-for` loop. If the current index is equal to the index of the last item in the `items` array, we don't apply the `pb-4` class.
 
-The `index === items.length - 1 ? '' : 'pb-4'` expression checks if the current `li` element is the last one in the list. If it is, it adds an empty string to the class attribute, which means no padding will be added. Otherwise, it adds the `pb-4` class to add the padding.
-
-I hope this helps!
+Note that we're also using string interpolation to generate a unique `key` for each `li` element based on its index. This is a best practice when using `v-for` in Vue.js.

@@ -5,7 +5,8 @@ Here's an example of how you can use it to switch between light and dark themes:
 ```jsx
 import React, { useState } from 'react';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
-import { CssBaseline, Button } from '@material-ui/core';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Switch from '@material-ui/core/Switch';
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
@@ -23,10 +24,11 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Button onClick={handleThemeChange}>
-        {darkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
-      </Button>
-      {/* Your app content here */}
+      <div style={{ backgroundColor: theme.palette.background.default }}>
+        <Switch checked={darkMode} onChange={handleThemeChange} />
+        <h1>Hello World</h1>
+        <p>This is a Material-UI themed app.</p>
+      </div>
     </ThemeProvider>
   );
 }
@@ -34,8 +36,8 @@ function App() {
 export default App;
 ```
 
-In this example, we're using the `createMuiTheme` function to create a theme object with a `palette` property that switches between light and dark modes based on the `darkMode` state. We're also using the `CssBaseline` component to apply some basic global styles to the app.
+In this example, we use the `createMuiTheme` function to create a theme object that changes the palette type based on the `darkMode` state. We then pass this theme object to the `ThemeProvider` component, which applies it to all Material-UI components within its children.
 
-Then, we're wrapping our app content in the `ThemeProvider` component and passing in the `theme` object. Finally, we're using a `Button` component to toggle the `darkMode` state and update the theme dynamically.
+To change the background color of the root element, we set the `backgroundColor` style property of the outermost `div` to `theme.palette.background.default`.
 
-With this setup, you should be able to switch between light and dark themes and have the root element background color change dynamically.
+Finally, we use the `Switch` component to toggle the `darkMode` state, which triggers a re-render with the updated theme.

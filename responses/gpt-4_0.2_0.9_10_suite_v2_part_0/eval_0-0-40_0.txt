@@ -1,31 +1,23 @@
-The error message you're seeing is due to a conflict between the Windows and Linux versions of Node.js and npm. The WSL2 Ubuntu terminal is trying to run the Windows version of npm, which it can't do because of the different file system and interpreter.
+The issue you're experiencing is likely due to a conflict between the Node.js version installed on your Windows system and the one you've installed in your WSL2 Ubuntu environment. 
 
-To solve this problem, you need to remove the Windows path from the WSL2 Ubuntu terminal. You can do this by editing the `.bashrc` file in your home directory.
+When you run `npm -v`, the system might be trying to execute the npm installed on your Windows system, which won't work because of the different file system and environment variables.
 
-Here are the steps:
+To solve this issue, you need to make sure that the WSL2 environment is using the Node.js and npm installed in Ubuntu, not the ones installed in Windows. 
 
-1. Open the `.bashrc` file in a text editor. You can use nano, vim, or any other text editor you prefer. For example:
+You can do this by adding the following lines to your `.bashrc` or `.zshrc` file (depending on which shell you're using):
 
-    ```bash
-    nano ~/.bashrc
-    ```
+```bash
+export PATH="/usr/bin:$PATH"
+```
 
-2. Add the following lines at the end of the file:
+This line will prioritize the `/usr/bin` directory (where your Ubuntu Node.js and npm binaries are located) over other directories in your PATH.
 
-    ```bash
-    # Remove Windows paths
-    export PATH=$(echo "$PATH" | sed -e 's/:\/mnt.*//g')
-    ```
+After adding this line, you need to source your `.bashrc` or `.zshrc` file to apply the changes:
 
-3. Save the file and exit the text editor. If you're using nano, you can do this by pressing `Ctrl + X`, then `Y`, then `Enter`.
+```bash
+source ~/.bashrc
+# or
+source ~/.zshrc
+```
 
-4. Close the terminal and open a new one to apply the changes.
-
-5. Check the versions of Node.js and npm again:
-
-    ```bash
-    node -v
-    npm -v
-    ```
-
-Now, the terminal should show the correct versions of Node.js and npm that you installed in WSL2 Ubuntu.
+Now, when you run `node -v` and `npm -v`, you should see the versions installed in your Ubuntu environment.

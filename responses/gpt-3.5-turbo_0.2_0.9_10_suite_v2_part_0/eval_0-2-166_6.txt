@@ -13,9 +13,14 @@ To select the direct children of the div with class "section", you can use the f
 
 ```html
 <div class="section">
-  <div class=">child">Child 1</div>
-  <div class=">child">Child 2</div>
+  <div class="child">Child 1</div>
+  <div class="child">Child 2</div>
+</div>
+
+<!-- Select direct children of div with class "section" -->
+<div class="section > *">
+  <!-- This will select both child divs -->
 </div>
 ```
 
-Note that the `>` selector is used as part of the class name, and it should be prefixed with a backslash (`\`) to escape it, since it is a special character in CSS.
+In this example, the `section > *` selector will select all direct children of the div with class "section". The `*` selector is used to select all types of elements. You can replace it with a specific element type, such as `section > div`, to select only div elements that are direct children of the div with class "section".

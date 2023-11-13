@@ -1,30 +1,31 @@
-The error you're seeing is because `req.logout()` is not a function in Express.js by default. It's added by Passport.js when you use it as middleware. 
+The error message you're seeing is suggesting that `req.logout()` requires a callback function. However, according to the Passport.js documentation, `req.logout()` does not actually require a callback function.
 
-However, the error you're seeing is unusual because `req.logout()` does not require a callback function. It's a simple function that just removes `req.user` and clears the login session if any exists.
+The issue might be related to the session management or the order of middleware functions. 
 
-Your logout route seems fine, but the error might be due to some other part of your code. 
-
-Here's your logout route for reference:
+Here's how you can modify your logout route:
 
 ```javascript
 app.get("/logout", (req, res) => {
-    req.logout();
-    res.redirect("/");
+    req.session.destroy((err) => {
+        res.redirect("/"); //Inside a callback… bulletproof!
+    });
 });
 ```
 
-This code should work as expected, provided that Passport.js is correctly set up. 
+In this case, we're destroying the session and then redirecting the user to the home page. This ensures that the session is completely destroyed before the user is redirected. 
 
-Please make sure that you have Passport.js correctly configured and that the user is actually logged in when trying to access the `/logout` route. 
-
-If the problem persists, I would recommend checking the rest of your code for possible issues. It might be helpful to add some logging to your logout route to see if `req.logout` is defined:
+If you still want to use `req.logout()`, you can use it like this:
 
 ```javascript
-app.get("/logout", (req, res) => {
-    console.log('Logout function:', req.logout);
-    req.logout();
-    res.redirect("/");
+app.get('/logout', function(req, res){
+  req.logout();
+  req.session.save(function(err){
+    if(err){
+      return next(err);
+    }
+    res.redirect('/');
+  });
 });
 ```
 
-This will log the `req.logout` function to your console when the `/logout` route is accessed. If `req.logout` is `undefined`, then there's likely an issue with your Passport.js setup.
+In this case, we're saving the session after calling `req.logout()`. This ensures that the logout action is completed before the user is redirected.

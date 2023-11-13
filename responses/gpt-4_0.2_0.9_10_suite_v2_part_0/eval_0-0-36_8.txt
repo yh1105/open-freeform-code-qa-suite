@@ -6,8 +6,8 @@ export default function Component(){
 
     const reloadPage = () => {
         router.replace(router.asPath);
-    }
+    };
 
-    // Call reloadPage() when you need to reload the page
+    // Call reloadPage() wherever you want to trigger a client-side reload
 }
 ```

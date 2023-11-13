@@ -1,8 +1,8 @@
-In Nest.js, when you use the `@Prop()` decorator from the `@nestjs/mongoose` package to define a schema, you can pass an options object to it. One of the options is `index`, which you can set to `true` to create an index for that property.
+The `index` option in the `@Prop()` decorator should work as expected. However, Mongoose will not create the index until the model is compiled and a query is executed. 
 
-However, merely defining the index in the schema is not enough. You also need to ensure that Mongoose actually creates the index in MongoDB. This is done by calling the `Model.syncIndexes()` function.
+If you want to ensure the indexes are created, you can use the `Model.ensureIndexes()` function. This function tells Mongoose to push the index creation to MongoDB immediately, rather than waiting for Mongoose to decide when to push them.
 
-Here's how you can do it:
+Here is how you can do it:
 
 ```javascript
 import { Injectable, OnModuleInit } from '@nestjs/common';
@@ -11,14 +11,16 @@ import { Model } from 'mongoose';
 
 @Injectable()
 export class MyService implements OnModuleInit {
-  constructor(@InjectModel(Schema.name) private readonly model: Model<Schema>) {}
+  constructor(@InjectModel(Schema.name) private readonly myModel: Model<Schema>) {}
 
   async onModuleInit(): Promise<void> {
-    await this.model.syncIndexes();
+    await this.myModel.ensureIndexes(); // This will ensure the indexes are created
   }
 }
 ```
 
-In this example, `MyService` implements the `OnModuleInit` interface, which means it has an `onModuleInit()` method that will be called when the Nest.js module containing this service is initialized. In this method, we call `Model.syncIndexes()`, which will ensure that all indexes defined in the schema are actually created in MongoDB.
+In this example, `MyService` implements `OnModuleInit` lifecycle hook and `onModuleInit` method is called when the module has been initialized. Inside this method, we are ensuring the indexes are created.
 
-Remember to replace `Schema` with your actual schema name.
+Remember, `ensureIndexes()` returns a promise, so you should wait for it to finish before proceeding. This is why `await` is used in the `onModuleInit` method.
+
+Also, note that creating indexes can be a potentially long operation, especially on large collections, so it's not recommended to use `ensureIndexes()` in production, because it may cause performance issues. It's better to manage indexes manually or via some database management tool.

@@ -1,4 +1,4 @@
-Sure, the issue is that you are mocking the `API` class as an object, but then trying to instantiate it as a class. You should mock it as a class instead. Here is the revised version of your code:
+Sure, the problem is that you're mocking the `API` class as an object, not as a class. Here's how you can fix it:
 
 ```javascript
 import API from 'utils/API';
@@ -10,4 +10,4 @@ jest.mock('utils/API', () => {
 });
 ```
 
-In this code, `jest.fn().mockImplementation()` is used to mock the `API` class. When `new API()` is called, it will return an instance of the mocked class, which has a `someMethod` method.
+In this code, `jest.fn().mockImplementation()` creates a mock function that, when called, will return a new object with the `someMethod` function. This way, you can use `new API()` without getting a `TypeError`.

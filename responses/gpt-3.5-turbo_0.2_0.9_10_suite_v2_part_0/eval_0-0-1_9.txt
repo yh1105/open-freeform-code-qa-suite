@@ -1,41 +1,19 @@
-When deploying a NextJS app to Vercel, there are a few things you need to keep in mind:
+If you are receiving a 404 error when deploying your NextJS app to Vercel, it is likely that your app is not being built correctly during the deployment process. Here are some steps you can take to troubleshoot the issue:
 
-1. Make sure you have a `vercel.json` file in the root of your project. This file tells Vercel how to build and deploy your app. Here's an example:
+1. Check your Vercel deployment logs: When you deploy your app to Vercel, you should be able to see the deployment logs in the Vercel dashboard. Check the logs to see if there are any errors or warnings that might indicate what is causing the 404 error.
 
-   ```
-   {
-     "version": 2,
-     "builds": [
-       {
-         "src": "next.config.js",
-         "use": "@vercel/node"
-       },
-       {
-         "src": "public/**",
-         "use": "@vercel/static"
-       }
-     ],
-     "routes": [
-       {
-         "src": "/(.*)",
-         "dest": "/"
-       }
-     ]
-   }
-   ```
+2. Check your `next.config.js` file: Even though you mentioned that you don't have a `next.config.js` file, it is possible that you might need one to properly configure your app for deployment. You can create a `next.config.js` file in the root of your project and add the following code:
 
-   This configuration tells Vercel to use `next.config.js` for the Node.js build and to serve static files from the `public` directory. It also sets up a catch-all route that redirects all requests to the root of your app.
+```
+module.exports = {
+  target: 'serverless'
+}
+```
 
-2. Make sure you have a `next.config.js` file in the root of your project. This file is used to configure NextJS. Here's an example:
+This will tell NextJS to build your app for serverless deployment, which is what Vercel uses.
 
-   ```
-   module.exports = {
-     target: "serverless"
-   };
-   ```
+3. Check your dynamic routes: If you have dynamic routes in your app, make sure that they are properly configured. Dynamic routes in NextJS are defined using square brackets, like this: `[id].js`. Make sure that your dynamic routes are properly defined and that they are being built correctly during the deployment process.
 
-   This configuration tells NextJS to use the serverless target, which is required for deployment to Vercel.
+4. Check your `package.json` file: Make sure that your `package.json` file has the correct scripts for building and deploying your app. The `build` script should be set to `next build` and the `start` script should be set to `next start`.
 
-3. Make sure you're using the correct URL when accessing your app on Vercel. The URL will be in the format `https://your-app-name.vercel.app`.
-
-If you've already done all of the above and you're still experiencing issues, it's possible that there's an issue with your dynamic route. Make sure that you're using the correct file name and that the file is located in the correct directory. You can also try running `yarn run build` locally and inspecting the output to see if there are any errors.
+If none of these steps solve the issue, you can try reaching out to the Vercel support team for further assistance.

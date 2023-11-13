@@ -1,4 +1,4 @@
-Sure! You can add an event listener to the editor instance to listen for the "keydown" event, and check if the pressed key is the "Enter" key. Here's the revised code:
+Sure! You can add an event listener to the editor instance to listen for the "keydown" event and check if the "Enter" key was pressed. Here's the revised code:
 
 ```javascript
 mounted() {
@@ -6,14 +6,14 @@ mounted() {
     extensions: [StarterKit],
     content: this.value
   });
-  editor.on('keydown', (event) => {
+  editor.on('keydown', event => {
     if (event.key === 'Enter') {
       console.log('good');
-      // Add your code to submit the chat and clear the editor here
+      // submit chat and clear editor here
     }
   });
   this.editor = editor;
 }
 ```
 
-This code adds an event listener to the editor instance that listens for the "keydown" event. When the "Enter" key is pressed, it executes the `console.log("good")` statement. You can add your code to submit the chat and clear the editor inside the if statement.
+This code adds an event listener to the editor instance that listens for the "keydown" event. When the "Enter" key is pressed, it executes `console.log("good")`. You can replace the `console.log` statement with your own code to submit the chat and clear the editor.

@@ -1,4 +1,4 @@
-You should remove the `onclick` attribute from the `button` element and add an `onClick` event handler to the button in the `render` method. Here's the revised code:
+You should remove the `onclick` attribute from the `button` element and instead add an `onClick` event handler to the button element in the `render()` method. Here's the revised code:
 
 ```javascript
 import React, { Component } from 'react'

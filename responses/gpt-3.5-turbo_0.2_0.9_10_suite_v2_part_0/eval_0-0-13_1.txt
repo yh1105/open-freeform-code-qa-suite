@@ -12,7 +12,7 @@ const [allValues, setAllValues] = useState({
 const changeHandler = e => {
    const { name, value } = e.target;
    setAllValues(prevState => ({ ...prevState, [name]: value }));
-}
+};
 
 return (
    <input type="text"
@@ -27,6 +27,6 @@ return (
 )
 ```
 
-In the `changeHandler` function, we destructure the `name` and `value` properties from the event target (which is the input element). We then use the spread operator to create a new object with all the previous values from `allValues`, and update the value of the property with the same name as the input element's `name` attribute. Finally, we pass this new object to `setAllValues` to update the state.
+In the `changeHandler` function, we use destructuring to get the `name` and `value` of the input field that triggered the change event. Then, we use the spread operator to create a new object with all the previous values and update the value of the input field that changed. Finally, we pass this new object to the `setAllValues` function to update the state.
 
-By using this approach, you can reduce the amount of code you need to write and make it easier to manage the state of multiple input elements.
+Note that we also added the `value` prop to the input field to make it a controlled component, which means that its value is always synced with the state.

@@ -12,7 +12,7 @@ However, I would like to use `&&` for value assignment, for example
 a = b && func(b)
 ```
 
-where we only want to do `func` on `b` if it is not nullish, oterwise assign the nullish `b`.
+where we only want to do `func` on `b` if it is nullish, otherwise assign the nullish `b`.
 
 But `&&` only checks for falsiness not nullishness.
 

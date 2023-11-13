@@ -20,6 +20,6 @@ Here's an example of how you can use it:
 }
 ```
 
-In this example, the background color of the body will be white and the text color will be black in light mode. In dark mode, the background color will be black and the text color will be white.
+In this example, the background color of the body will be white and the text color will be black when the user's system is in light mode. When the system is in dark mode, the background color will be black and the text color will be white.
 
-This feature is supported in Safari 12.1 and later, Firefox 67 and later, and Chrome 76 and later.
+This feature is supported in Safari 12.1, Firefox 67, and Chrome 76 and later versions. For more information, you can check the [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme).

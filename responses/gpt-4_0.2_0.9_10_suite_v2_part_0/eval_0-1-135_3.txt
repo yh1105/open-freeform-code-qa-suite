@@ -1,17 +1,25 @@
-The issue you're experiencing is a known bug in Safari's implementation of Flexbox. When an image is a child of a flex container, Safari does not correctly maintain the aspect ratio of the image when `height: auto` is used.
+Yes, there is a known issue with Safari and flexbox where `height: auto` doesn't work as expected. This is because Safari has a different interpretation of the flexbox specification compared to other browsers.
 
-To work around this issue, you can use the `object-fit` property on the image. This property defines how an element responds to the height and width of its content box. It's similar to `background-size` for background images.
+To fix this issue, you can use `align-self: flex-start` on the image. This will align the image at the start of the cross axis, which is the vertical axis in your case since you're using `flex-direction: column`.
 
 Here's how you can modify your CSS:
 
 ```css
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.container section:first-child {
+  display: flex;
+  margin-bottom: 25px;
+}
+
 .container img {
   width: 125px;
   height: auto;
-  object-fit: cover; /* Add this line */
+  align-self: flex-start; /* Add this line */
 }
 ```
 
-The `object-fit: cover;` rule will cause the image to be resized to cover the entire width of the container while maintaining its aspect ratio. The image will be clipped if its aspect ratio does not match the aspect ratio of its box.
-
-However, please note that `object-fit` is not supported in IE. If you need to support IE, you might need to use a different workaround, such as wrapping the image in another element and applying the size constraints to that element instead.
+This should make the image display correctly in Safari.

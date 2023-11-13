@@ -1,11 +1,13 @@
-The `EINTEGRITY` error occurs when the integrity check of a package fails. This error can be caused by various reasons such as network issues, corrupted cache, or a mismatch between the expected and actual checksum.
+The `ERR! code EINTEGRITY` error occurs when the integrity check of the downloaded package fails. This error can be resolved by trying the following measures:
 
-Here are some possible measures to resolve the issue:
+1. Clearing the npm cache: Run `npm cache clean --force` to clear the npm cache and then try running `npm install` again.
 
-1. Clear the npm cache by running `npm cache clean --force` and try installing the package again.
-2. Delete the `node_modules` folder and `package-lock.json` file, then run `npm install` again.
-3. Upgrade to the latest version of npm by running `npm install -g npm@latest` and try installing the package again.
-4. If you are using a private registry, check if the registry is up and running and try again.
-5. If none of the above solutions work, try deleting the `node_modules` folder, `package-lock.json` file, and the `npm` folder in your home directory (`~/.npm`), then run `npm install` again.
+2. Updating npm: Run `npm install -g npm@latest` to update npm to the latest version and then try running `npm install` again.
 
-Hopefully, one of these measures will resolve the issue for you.
+3. Disabling package-lock.json: If you are using npm version 5 or above, try disabling the package-lock.json file by running `npm install --no-package-lock` and then try running `npm install` again.
+
+4. Removing the package-lock.json file: If disabling the package-lock.json file does not work, try removing the file by running `rm package-lock.json` and then try running `npm install` again.
+
+5. Checking network connectivity: Check if there is any issue with your network connectivity that is causing the integrity check to fail. Try running `npm install` on a different network or check if there are any network issues on your current network.
+
+6. Reinstalling Node.js: If none of the above measures work, try reinstalling Node.js and then try running `npm install` again.

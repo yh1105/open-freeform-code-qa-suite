@@ -1,25 +1,18 @@
-Sure, I can help with that. You can use the `group-hover` utility to apply styles on hover. Here's how you can modify your code to animate the width of the span on hover:
+You can achieve the desired effect by using Tailwind CSS's utility classes. Here's an example of how you can do it:
 
 ```html
-<a href="#" class="group text-sky-600 transition duration-300">
+<a href="#" class="group relative text-sky-600 transition duration-300">
     Link
-    <span class="block w-0 group-hover:w-full transition-all duration-500 h-0.5 bg-sky-600"></span>
+    <span class="absolute w-0 h-0.5 bg-sky-600 transition-all duration-500 group-hover:w-full block bottom-0 left-0"></span>
 </a>
 ```
 
-In this code, the `w-0` class sets the initial width of the span to 0. The `group-hover:w-full` class applies the `w-full` class when the parent with the `group` class is hovered over, setting the width to 100%. The `transition-all` class applies the transition effect to all properties, and the `duration-500` class sets the duration of the transition to 500ms.
+In this example, I've made the following changes:
 
-Please note that the `group-hover` variant is not enabled for all utilities by default in Tailwind CSS. If it doesn't work, you may need to enable it in your Tailwind CSS configuration file (`tailwind.config.js`) like so:
+- I've added the `relative` class to the anchor tag. This is because the child span is using absolute positioning, so we need to ensure it's positioned relative to the anchor tag.
+- I've added the `absolute` class to the span. This allows us to position it at the bottom of the anchor tag.
+- I've added the `w-0` class to the span. This sets its initial width to 0.
+- I've added the `transition-all` class to the span. This ensures that all properties will transition smoothly.
+- I've added the `group-hover:w-full` class to the span. This sets the width to full when the parent anchor tag is hovered over.
 
-```javascript
-module.exports = {
-  variants: {
-    extend: {
-      width: ['group-hover'],
-    },
-  },
-  // ...
-}
-```
-
-This will enable the `group-hover` variant for the `width` utility.
+This will create a smooth animation where a line grows from the left to the right under the link when it's hovered over.

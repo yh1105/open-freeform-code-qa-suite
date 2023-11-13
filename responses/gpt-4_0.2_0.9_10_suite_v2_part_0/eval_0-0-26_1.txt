@@ -1,26 +1,8 @@
-The ESLint error you're seeing is because the anonymous function you're using for the `render` property doesn't have a `displayName`. This is a requirement for React components to help with debugging and testing.
+The ESLint error you're seeing is because the anonymous function you're using in the `render` property doesn't have a `displayName`. This is a rule in ESLint to help with debugging and readability.
 
-You can solve this by either disabling the rule for that line or by assigning the function to a variable and then setting the `displayName` property on it.
+To fix this, you can either disable the rule for that line or give the function a name. Here are both solutions:
 
-Here's how you can do it:
-
-```jsx
-const renderGroup = ({ text }) => <span>{getCountForCountry(text)}</span>;
-renderGroup.displayName = 'renderGroup';
-
-const columns_payment_summary_table = [ 
-    {
-      title: FooConstants.LABEL_QUANTITY_SELECTED,
-      dataIndex: 'group',
-      key: 'group',
-      render: renderGroup,
-    }
-  ]
-```
-
-In this code, `renderGroup` is a function component with a `displayName`. This should satisfy the ESLint rule.
-
-If you don't want to do this, you can disable the rule for that line:
+**1. Disabling the rule for that line:**
 
 ```jsx
 const columns_payment_summary_table = [ 
@@ -28,12 +10,27 @@ const columns_payment_summary_table = [
       title: FooConstants.LABEL_QUANTITY_SELECTED,
       dataIndex: 'group',
       key: 'group',
-      // eslint-disable-next-line react/display-name
       render: text => (
+        // eslint-disable-next-line react/display-name
         <span>{getCountForCountry(text)}</span>
       ),
     }
   ]
 ```
 
-This will tell ESLint to ignore the `react/display-name` rule for the next line.
+**2. Giving the function a name:**
+
+```jsx
+const columns_payment_summary_table = [ 
+    {
+      title: FooConstants.LABEL_QUANTITY_SELECTED,
+      dataIndex: 'group',
+      key: 'group',
+      render: function renderCountForCountry(text) {
+        return <span>{getCountForCountry(text)}</span>
+      },
+    }
+  ]
+```
+
+In the second solution, `renderCountForCountry` is the `displayName` of the function.

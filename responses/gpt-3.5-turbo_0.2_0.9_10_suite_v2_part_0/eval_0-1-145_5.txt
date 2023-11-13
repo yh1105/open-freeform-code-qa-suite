@@ -1,12 +1,16 @@
-The `truncate` class in TailwindCSS only works on block-level elements. In your code, the `span` element is an inline-level element. To make it work, you can add the `block` class to the `span` element:
+To use the `truncate` class in TailwindCSS, you need to make sure that the parent element has a defined width. 
+
+Try adding a width to the parent element like this:
 
 ```html
-<div className="ml-1 inline-block">
+<div class="ml-1 inline-block w-64">
    <span>Label: </span>
-   <span className="font-semibold block truncate">
+   <span class="font-semibold truncate">
      long texttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt
    </span>
 </div>
 ```
 
-This will make the `span` element a block-level element and the `truncate` class will work as expected.
+In this example, the parent element has a width of 64 pixels (`w-64`), but you can adjust this to fit your needs. 
+
+Also, make sure that you are using `class` instead of `className` in your HTML code.

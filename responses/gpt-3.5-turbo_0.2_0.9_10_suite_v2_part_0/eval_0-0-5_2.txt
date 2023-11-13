@@ -1,6 +1,6 @@
 The error message indicates that Python is not installed on your system or it is not added to the PATH environment variable. 
 
-To fix this issue, you need to install Python and add it to the PATH environment variable. Here are the steps:
+To fix this issue, you need to install Python and add it to the PATH environment variable. Here are the steps to follow:
 
 1. Download and install Python from the official website: https://www.python.org/downloads/
 
@@ -12,14 +12,8 @@ To fix this issue, you need to install Python and add it to the PATH environment
    python --version
    ```
 
-   This command should output the version of Python that you installed.
+   This should print the version number of Python installed on your system.
 
-4. Try to rebuild the node-sass module again by running the following command in your project directory:
+4. Finally, try to rebuild the Node.js project again and see if the issue is resolved.
 
-   ```
-   npm rebuild node-sass
-   ```
-
-   This should rebuild the module with the correct dependencies and fix the issue.
-
-If you still encounter issues, you may need to check if there are any other dependencies that need to be installed or updated.
+If the issue persists, you may need to update your Node.js and node-gyp versions to the latest ones.

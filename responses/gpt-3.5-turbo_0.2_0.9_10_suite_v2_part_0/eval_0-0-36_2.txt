@@ -6,17 +6,12 @@ import { useRouter } from "next/navigation";
 export default function Component(){
     const router = useRouter();
 
-    // function to handle creating new data and reloading the page
+    // function to handle creating new data and trigger reload
     const handleCreateData = () => {
         // code to create new data
         router.reload();
     }
 
-    // render the component with a button to create new data
-    return (
-        <div>
-            <button onClick={handleCreateData}>Create New Data</button>
-        </div>
-    );
+    // render dialog and other components
 }
 ```

@@ -13,4 +13,4 @@ import Popper from 'popper.js';
 import 'bootstrap';
 ```
 
-Make sure to import Popper.js before importing Bootstrap. This should resolve the "Module not found: can't resolve popper.js" error.
+This should resolve the "Module not found: can't resolve popper.js" error.

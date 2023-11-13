@@ -1,4 +1,4 @@
-Sure, here is a generator function that should do what you're asking for:
+Sure, here is a generator function that uses recursion to handle nested tags:
 
 ```javascript
 function* iterLeafNodes(strHTML, format=[]) {
@@ -6,21 +6,24 @@ function* iterLeafNodes(strHTML, format=[]) {
   const doc = parser.parseFromString(strHTML, 'text/html');
   const body = doc.body;
 
-  function* traverse(node, format=[]) {
+  function* iterNodes(node, format=[]) {
     if (node.nodeType === Node.TEXT_NODE) {
-      if (node.textContent.trim() !== '') {
-        yield { text: node.textContent, format };
+      yield { text: node.textContent, format };
+    } else if (node.nodeType === Node.ELEMENT_NODE) {
+      const newFormat = [...format];
+      if (node.tagName !== 'P') {
+        newFormat.push(node.tagName.toLowerCase());
       }
-    } else {
-      const newFormat = node.nodeName === 'P' ? [] : [...format, node.nodeName.toLowerCase()];
       for (const child of node.childNodes) {
-        yield* traverse(child, newFormat);
+        yield* iterNodes(child, newFormat);
       }
     }
   }
 
-  yield* traverse(body);
+  for (const child of body.childNodes) {
+    yield* iterNodes(child);
+  }
 }
 ```
 
-This function uses the DOMParser to parse the HTML string into a DOM tree. It then traverses the tree recursively, yielding an object for each text node it encounters. The format of each text node is determined by the tags of its ancestor nodes.
+This function will iterate over all the leaf nodes of the parsed HTML string and yield objects with the text and format of each node. The format is determined by the tags that enclose the node, and the function handles nested tags by using recursion and maintaining a stack of formats.

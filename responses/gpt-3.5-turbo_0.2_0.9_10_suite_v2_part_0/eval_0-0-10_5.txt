@@ -1,4 +1,4 @@
-Sure! Here are the completed templates:
+Sure, here are the completed templates:
 
 Way 1:
 
@@ -10,10 +10,8 @@ Way 2:
 
 ```javascript
 cy.get(".ibxudA").find('.WildnessText-kRKTej').invoke('text').then((text) => {
-    expect(text.trim()).to.equal('Wildness')
+    expect(text.trim()).equal('Wildness')
 });
-``` 
+```
 
-In Way 1, we use the `should` command to assert that the text of the element with class `WildnessText-kRKTej` is equal to `Wildness`.
-
-In Way 2, we use the `invoke` command to get the text of the element and then use the `then` command to perform the assertion using `expect`. We trim the text to remove any leading or trailing white space before comparing it to `Wildness`.
+Both ways should work to assert the text within the div with class `WildnessText-kRKTej` equals to `Wildness`.

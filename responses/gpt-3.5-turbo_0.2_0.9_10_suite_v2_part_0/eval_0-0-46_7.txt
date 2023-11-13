@@ -1,54 +1,17 @@
-The error message indicates that ESLint is trying to read the `tsconfig.json` file but it cannot find it. This is because the `tsconfig.json` file is located in the root directory of your project, while the `.eslintrc.js` file is located in the `src` directory.
+The error message you are seeing is related to ESLint, which is a popular tool for linting JavaScript and TypeScript code. It seems that ESLint is unable to find your `tsconfig.json` file, which is referenced in your `.eslintrc.js` file.
 
-To fix this issue, you need to update the `parserOptions.project` property in your `.eslintrc.js` file to point to the correct location of the `tsconfig.json` file. Since the `tsconfig.json` file is located in the root directory of your project, you can update the `parserOptions.project` property to `"../tsconfig.json"`.
+To fix this issue, you can try the following steps:
 
-Here's the updated `.eslintrc.js` file:
+1. Make sure that your `tsconfig.json` file is located in the root directory of your project. If it is not, you will need to update the `project` property in your `.eslintrc.js` file to point to the correct location of your `tsconfig.json` file.
 
-```javascript
-module.exports = {
-  env: {
-    browser: true,
-    es6: true,
-    node: true,
-  },
-  extends: [
-    "plugin:import/errors",
-    "plugin:import/warnings",
-    "plugin:import/typescript",
-  ],
-  parser: "@typescript-eslint/parser",
-  parserOptions: {
-    project: "../tsconfig.json",
-    sourceType: "module",
-  },
-  plugins: [
-    "@typescript-eslint",
-    "import",
-  ],
-  rules: {
-    "@typescript-eslint/adjacent-overload-signatures": "error",
-    "@typescript-eslint/no-empty-function": "error",
-    "@typescript-eslint/no-empty-interface": "warn",
-    "@typescript-eslint/no-floating-promises": "error",
-    "@typescript-eslint/no-namespace": "error",
-    "@typescript-eslint/no-unnecessary-type-assertion": "error",
-    "@typescript-eslint/prefer-for-of": "warn",
-    "@typescript-eslint/triple-slash-reference": "error",
-    "@typescript-eslint/unified-signatures": "warn",
-    "comma-dangle": "warn",
-    "constructor-super": "error",
-    eqeqeq: ["warn", "always"],
-    "import/no-deprecated": "warn",
-    "import/no-extraneous-dependencies": "error",
-    "import/no-unassigned-import": "warn",
-    "no-cond-assign": "error",
-    "no-duplicate-case": "error",
-    "no-duplicate-imports": "error",
-    "no-empty": [
-      "error",
-      {
-        allowEmptyCatch: true,
-      },
-    ],
-    "no-invalid-this": "error",
-   
+2. Check that the file path in the error message is correct. If it is not, you will need to update the path in your `.eslintrc.js` file to match the correct location of your `tsconfig.json` file.
+
+3. If the above steps do not work, you can try adding the following line to your `.eslintrc.js` file:
+
+   ```javascript
+   root: true,
+   ```
+
+   This tells ESLint to stop looking for configuration files in parent directories, which may be causing the issue.
+
+After making any changes to your `.eslintrc.js` file, make sure to save the file and restart your editor to see if the error message disappears.

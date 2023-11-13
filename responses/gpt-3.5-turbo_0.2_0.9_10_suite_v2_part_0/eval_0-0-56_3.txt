@@ -1,25 +1,15 @@
-It seems that the issue is with the way you are running the Vite server inside the Docker container. By default, Vite binds to `localhost` which means that it only listens for requests from the same machine. However, when you try to access it from outside the container (e.g. from your host machine), it fails because it can't receive requests from outside the container.
+It seems like the issue is with the way you are starting the Vite server inside the Docker container. When you run `npm run vite` inside the container, it starts the Vite server on the container's localhost, which is not accessible from outside the container.
 
-To fix this issue, you need to tell Vite to bind to `0.0.0.0` instead of `localhost`. This will make Vite listen for requests from any IP address, including requests from outside the container.
+To fix this, you need to start the Vite server with the `--host` option set to `0.0.0.0`, which will make it accessible from outside the container. You can modify the `vite` script in your `package.json` file to include this option:
 
-To do this, you can add the `host` option to your Vite configuration in `vite.config.ts`:
-
-```typescript
-export default defineConfig({
-  // ...
-  server: {
-    port: 8080,
-    host: '0.0.0.0'
-  }
-})
+```json
+"vite": "vite --host 0.0.0.0"
 ```
 
-This should allow you to access the Vite server from outside the Docker container.
-
-Also, make sure that the Docker container is running and listening on the correct port. You can check this by running the following command inside the container:
+Then, when you start the container, you can use the following command to publish the container's port to your host machine:
 
 ```bash
-$ netstat -tlnp
+docker-compose run --publish 8080:8080 --rm app npm run vite
 ```
 
-This should show you a list of all the ports that are currently being listened to by processes inside the container. Make sure that the Vite server is listening on port 8080.
+This should make the Vite server accessible at `localhost:8080` on your host machine.

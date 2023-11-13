@@ -1,20 +1,15 @@
-The error message `Error: Invalid login: 535-5.7.8 Username and Password not accepted` indicates that the username and password you are using to authenticate with the Gmail SMTP server are not correct. 
+The error message `Error: Invalid login: 535-5.7.8 Username and Password not accepted` indicates that the username and password you're using to authenticate with Gmail's SMTP server are incorrect. 
 
-Here are a few things you can do to fix this issue:
+Here are some steps to fix this issue:
 
-1. **Check your username and password**: Make sure that the username (email) and password you are using are correct. The username should be your full email address.
+1. **Check your credentials**: Make sure that the email address and password you're using are correct. 
 
-2. **Enable Less Secure Apps**: Google may block sign-in attempts from some apps or devices that do not use modern security standards. To fix this, you need to enable "Less secure apps" in your Google account. You can do this by going to your Google account settings, then to "Security", and then enable "Less secure apps". Note that this option is not available if 2-Step Verification is enabled on your account.
+2. **Enable Less Secure Apps**: By default, Google may block sign-in attempts from some apps or devices that do not use modern security standards. To fix this, you need to allow less secure apps to access your account. You can do this by going to your Google Account settings, then to the "Security" section, and then turning on "Access for less secure apps". 
 
-3. **Use App Password**: If you have 2-Step Verification enabled on your Google account, you will need to use an App Password instead of your regular password. You can generate an App Password by going to your Google account settings, then to "Security", and then "App Passwords". 
+3. **Enable Display Unlock Captcha**: Sometimes, Google may block a sign-in attempt even if you've entered the correct password. This can happen when you're signing in from a new location or from a different device. To fix this, you can try to unlock your account with Google's Display Unlock Captcha page. 
 
-Replace the 'pass' field in your code with the generated App Password.
+4. **Use App Passwords**: If you have 2-Step Verification enabled on your Google Account, you may need to use an App Password instead of your regular password to sign in. You can generate an App Password by going to your Google Account settings, then to the "Security" section, and then selecting "App Passwords".
 
-```javascript
-auth: {
-  user: 'haideryaqoobengr@gmail.com',
-  pass: 'YOUR_APP_PASSWORD'
-}
-```
+Please replace your password in the code with the newly generated App Password.
 
-Remember, it's not a good practice to hard code your credentials in your source code. Consider using environment variables or some sort of configuration that is not committed with your code.
+Remember, these changes can make your account less secure, so make sure you understand the risks.

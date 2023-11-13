@@ -1,29 +1,19 @@
-The error log shows that `node-gyp` is unable to find Python in your system. `node-gyp` is a cross-platform command-line tool written in Node.js for compiling native addon modules for Node.js, which requires Python, among other things.
+The error log indicates that Python is not found in your PATH. Node-gyp, which is a part of the build process, requires Python to work. Here's how you can fix this:
 
-Here are the steps to fix this issue:
+1. Install Python 2.7.x. Node-gyp does not work with Python 3.x, so it's important to install a 2.7.x version. You can download it from the [official Python website](https://www.python.org/downloads/).
 
-1. **Install Python**: You need to have Python installed on your system. You can download it from the official Python website. For `node-gyp`, you need Python 2.7. Make sure to check the box that says "Add Python to PATH" during the installation.
+2. During the Python installation, make sure to check the box that says "Add Python.exe to Path". This will automatically add Python to your environment variables.
 
-2. **Install Windows Build Tools**: You also need to have Windows build tools installed on your system. You can install them globally by running the following command in the command prompt (run as Administrator):
+3. After installation, you can verify that Python is correctly installed and in your PATH by opening a new command prompt and typing `python --version`. You should see the Python version printed to the console.
 
-    ```bash
-    npm install --global --production windows-build-tools
-    ```
+4. Once Python is installed and configured, try to build your project again.
 
-    This will install Python 2.7 and Visual Studio Build Tools, which are required for `node-gyp`.
+If you already have Python installed, it's possible that it's not correctly set in your PATH. In this case, you can manually add it:
 
-3. **Rebuild node-sass**: After installing Python and Windows build tools, you need to rebuild `node-sass` by running the following command:
+1. Find the location of your Python installation. The default is usually `C:\Python27\`.
 
-    ```bash
-    npm rebuild node-sass
-    ```
+2. Add that directory to your PATH environment variable. You can do this by searching for "Environment Variables" in your start menu, then clicking on "Edit the system environment variables". In the System Properties window that appears, click on "Environment Variables". In the Environment Variables window, scroll down to "Path" under System variables, and click on "Edit". In the Edit Environment Variable window, click on "New", then add the path to your Python installation.
 
-4. **Set Python Environment Variable (Optional)**: If you're still having issues, you might need to manually set the Python environment variable. You can do this by running the following command:
+3. Verify that Python is correctly set in your PATH by opening a new command prompt and typing `python --version`.
 
-    ```bash
-    npm config set python /path/to/executable/python2.7
-    ```
-
-    Replace `/path/to/executable/python2.7` with the actual path to your Python 2.7 executable.
-
-After following these steps, your build should work without any issues.
+4. Try to build your project again.

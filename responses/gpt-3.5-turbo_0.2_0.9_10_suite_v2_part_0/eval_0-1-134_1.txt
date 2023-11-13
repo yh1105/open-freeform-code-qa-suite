@@ -1,5 +1,5 @@
-It sounds like you are trying to use Emmet, a plugin that allows for faster HTML and CSS coding. To use Emmet, you need to make sure it is installed in your code editor. Once it is installed, you can use shorthand syntax to create HTML and CSS code. 
+It sounds like you might be referring to Emmet, a plugin for code editors that allows you to write HTML and CSS code more quickly and efficiently. 
 
-For example, to create a div with a class of "classname", you can type `div.classname` and then press the "Tab" key. This will expand the shorthand into the full HTML code for a div with the class "classname". 
+To use Emmet, you can type a shorthand code and then press the "Tab" key to expand it into the full HTML or CSS code. For example, typing `.classname` and then pressing "Tab" should expand into `<div class="classname"></div>`.
 
-If this is not working for you, make sure that Emmet is installed and enabled in your code editor. You can also check the Emmet documentation for your specific code editor to see if there are any additional steps you need to take to enable Emmet.
+If this isn't working for you, make sure that you have Emmet installed and enabled in your code editor. You can also check the Emmet documentation for more information on how to use it with your specific editor.

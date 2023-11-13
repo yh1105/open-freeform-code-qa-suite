@@ -1,12 +1,13 @@
-Sure, you can use async/await to make your code wait for the response. Here is the revised code:
+Sure, you can use async/await with toPromise() to wait for the Observable to complete. Here is the revised code:
 
 ```javascript
 async getData() {
-  this.newIds = await this.repository.getById(Ids).toPromise();
+  this.newIds = await this.repository.getById(Ids).pipe(map(response => response.map(id => id))).toPromise();
   console.log(this.newIds);
 }
 
+// Call the function
 this.getData();
 ```
 
-Please note that you need to convert the Observable to a Promise using `toPromise()`. Also, the function containing the await keyword must be declared as async.
+Please note that you need to call the `getData()` function to execute the code.

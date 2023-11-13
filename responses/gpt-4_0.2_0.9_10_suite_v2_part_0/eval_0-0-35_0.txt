@@ -1,28 +1,30 @@
-You should use `REDIS_TLS_URL` if you want to connect to Heroku Redis using TLS. Here is an example of how you can do this using `node_redis`:
+You should be using `REDIS_TLS_URL` if you are connecting to Heroku Redis via TLS. Here's a simple example of how you can connect to Heroku Redis using TLS in Node.js with the `node_redis` library:
 
 ```javascript
 const redis = require('redis');
 const url = require('url');
 
-const redisURL = url.parse(process.env.REDIS_TLS_URL);
-const client = redis.createClient({
-    url: redisURL,
+let redisURL = url.parse(process.env.REDIS_TLS_URL);
+let client = redis.createClient({
+    port: redisURL.port,
+    host: redisURL.hostname,
+    password: redisURL.auth.split(':')[1],
     tls: {
-        rejectUnauthorized: false,
-    },
+        rejectUnauthorized: false
+    }
 });
 
-client.on('connect', () => {
+client.on('connect', function() {
     console.log('Connected to Redis');
 });
 
-client.on('error', (err) => {
-    console.error('Redis error', err);
+client.on('error', function (err) {
+    console.log('Something went wrong ' + err);
 });
 ```
 
-In this example, we're using the `url` module to parse the `REDIS_TLS_URL` environment variable. We then pass this to `redis.createClient` along with a `tls` object. The `rejectUnauthorized: false` option is used to bypass certificate validation, which is necessary in some environments.
+In this example, we're parsing the `REDIS_TLS_URL` environment variable to get the hostname, port, and password. We're also setting `rejectUnauthorized` to `false` in the `tls` options, which allows the client to connect even if the SSL certificate cannot be verified.
 
-Please note that `rejectUnauthorized: false` should be used with caution, as it allows for potential man-in-the-middle attacks. It's recommended to use this option only in development environments, and to use a more secure method in production.
+Please note that setting `rejectUnauthorized` to `false` may leave you vulnerable to man-in-the-middle attacks. In a production environment, you should use a valid SSL certificate and set `rejectUnauthorized` to `true`.
 
-Also, remember to replace `REDIS_TLS_URL` with your actual Redis URL. You can find this in your Heroku dashboard, under the "Settings" tab of your Redis addon.
+Also, remember to replace `REDIS_TLS_URL` with your actual Redis URL.

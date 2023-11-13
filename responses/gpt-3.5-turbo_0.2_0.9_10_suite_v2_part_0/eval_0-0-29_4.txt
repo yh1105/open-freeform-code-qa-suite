@@ -5,10 +5,10 @@ const { data: userBio, isFulfilled: userBioFulfilled } = useGetUserBioQuery(user
 
 useEffect(() => {
   if (userFulfilled) {
-    // Run the second query only if the first one is fulfilled
+    // The user query has been fulfilled, so we can safely run the userBio query
     userBioFulfilled || refetch();
   }
 }, [user.id, userFulfilled, userBioFulfilled, refetch]);
 ```
 
-This code uses the `refetch` function returned by the `useGetUserBioQuery` hook to manually trigger the second query if it hasn't been fulfilled yet. The `useEffect` hook runs whenever `user.id` or `userFulfilled` changes, and it checks if the second query has been fulfilled. If it hasn't, it triggers a refetch to run the query again.
+This code uses the `refetch` function returned by the `useGetUserBioQuery` hook to manually trigger the second query if it hasn't been fulfilled yet. The `useEffect` hook runs whenever `user.id` or `userFulfilled` changes, and only triggers the second query if the first query has been fulfilled.

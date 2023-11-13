@@ -1,4 +1,4 @@
-Sure, you can use the `keydown` event to listen for the "enter" key. Here's how you can modify your code:
+Sure, you can use the `keydown` event to listen for the "enter" key. Here is the revised version of your code:
 
 ```javascript
 mounted() {
@@ -6,8 +6,9 @@ mounted() {
     extensions: [
       StarterKit,
       Keymap({
-        "Enter": () => {
+        "Enter": ({ state, dispatch }) => {
           console.log("good");
+          // prevent the default "enter" behavior
           return true;
         }
       })
@@ -18,4 +19,10 @@ mounted() {
 }
 ```
 
-In this code, we're using the `Keymap` extension to map the "Enter" key to a function that logs "good" to the console. The function returns `true` to indicate that the default action should not be taken.
+Please note that you need to import `Keymap` from `tiptap-extensions`:
+
+```javascript
+import { Keymap } from 'tiptap-extensions'
+```
+
+This code will execute `console.log("good")` when the "enter" key is hit.

@@ -1,6 +1,6 @@
 First way:
 
-In the first way, you can use the `tabBarVisible` option to hide the tab bar when the Settings screen is active. Here's how you can do it:
+In the first way, you can use the `tabBarVisible` option to hide the tab bar. This option should be set to `false` to hide the tab bar.
 
 ```javascript
 export default function App() {
@@ -8,11 +8,7 @@ export default function App() {
     <NavigationContainer>
       <Tab.Navigator>
         <Tab.Screen name="Home" component={ProfileStackScreen} />
-        <Tab.Screen 
-          name="Settings" 
-          component={SettingsStackScreen} 
-          options={{ tabBarVisible: false }}
-        />
+        <Tab.Screen options={{ tabBarVisible: false }} name="Settings" component={SettingsStackScreen} />
       </Tab.Navigator>
     </NavigationContainer>
   );
@@ -21,12 +17,18 @@ export default function App() {
 
 Second way:
 
-In the second way, you can use the `navigation` prop to set the options for the Settings screen. Here's how you can do it:
+In the second way, you can use the `useEffect` hook to set the `tabBarVisible` option to `false` when the `SettingsStackScreen` is focused.
 
 ```javascript
+import { useEffect } from 'react';
+
 function SettingsStackScreen({ navigation }) {
-    React.useEffect(() => {
-        navigation.setOptions({ tabBarVisible: false });
+    useEffect(() => {
+        const unsubscribe = navigation.addListener('focus', () => {
+            navigation.setOptions({ tabBarVisible: false });
+        });
+
+        return unsubscribe;
     }, [navigation]);
 
     return (
@@ -37,4 +39,4 @@ function SettingsStackScreen({ navigation }) {
 }
 ```
 
-In this code, we're using the `useEffect` hook to set the `tabBarVisible` option to `false` when the component mounts. This will hide the tab bar when the Settings screen is active.
+In this code, `useEffect` is used to add an event listener to the `focus` event of the navigation. When the `SettingsStackScreen` is focused, the `tabBarVisible` option is set to `false`, hiding the tab bar. The `unsubscribe` function returned by `navigation.addListener` is used to clean up the event listener when the component is unmounted.

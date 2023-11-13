@@ -1,12 +1,20 @@
-The accordion arrow in Bootstrap 5 is actually a background SVG image. You can change its color by overriding the CSS `background-image` property with your own SVG image. Here is an example of how you can do it:
+You can change the accordion arrow color by targeting the `::after` pseudo-element of the `.accordion-button` class. This pseudo-element is responsible for the arrow. Here is an example of how you can do it:
 
 ```css
 .accordion-button::after {
-    /* Auto generated from bootstrap */
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24'%3e%3cpath stroke='%2300ff00' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3e%3c/path%3e%3c/svg%3e");
+    /* Bootstrap 5 uses the ::after pseudo-element to control the "expand/collapse" icon */
+    color: green;
 }
 ```
 
-In this example, `%2300ff00` is the URL-encoded version of `#00ff00`, which is the hex color code for green. You can replace this with any color you want.
+Please note that this will change the color of the arrow for all accordion buttons. If you want to change the color for a specific button, you should add a custom class or id to that button and target it in your CSS.
 
-Please note that this will change the color of the arrow for all accordion buttons. If you want to change the color for a specific button, you should add a unique class to that button and replace `.accordion-button` with that class in the CSS rule.
+Also, keep in mind that the color of the arrow will not change when the accordion is open. If you want to change the color when the accordion is open, you should target the `.accordion-button:not(.collapsed)::after` selector:
+
+```css
+.accordion-button:not(.collapsed)::after {
+    color: green;
+}
+```
+
+This will change the color of the arrow to green when the accordion is open.

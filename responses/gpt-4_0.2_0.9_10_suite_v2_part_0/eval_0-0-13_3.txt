@@ -6,7 +6,8 @@ const [allValues, setAllValues] = useState({
    password: '',
    confirmPassword: ''
 });
-const changeHandler = e => setAllValues({...allValues, [e.target.name]: e.target.value});
+const changeHandler = e => setAllValues({...allValues, [e.target.name]: e.target.value})
+// end filling
 return (
    <input type="text"
        className="form-control"

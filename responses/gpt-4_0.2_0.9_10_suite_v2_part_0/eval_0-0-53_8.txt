@@ -1,9 +1,8 @@
-The issue you're facing is due to the incorrect way of handling the onClick event in React. In React, you should not use the `onclick` attribute like in plain HTML. Instead, you should use the `onClick` property and pass a function to it.
-
-Here is the corrected version of your code:
+Your code is mixing JavaScript and React event handling. In React, you should use `onClick` instead of `onclick` and you should define your function inside your component. Here's how you can modify your code:
 
 ```javascript
 import React, { Component } from 'react'
+import { Alert } from 'react-alert'
 
 class Main extends React.Component {
   constructor(props) {
@@ -57,4 +56,4 @@ class Main extends React.Component {
 export default Main;
 ```
 
-In this corrected version, I moved the alert message into the `handleUploadImage` function and removed the `onclick` attribute and the `script` tag from the `button` element. The `button` type is also changed to `submit` to trigger form submission.
+In this revised version, I've moved the alert into the `handleUploadImage` function and removed the `onclick` attribute and the script tag from the button. The `type="submit"` attribute is added to the button to trigger the form submission.

@@ -1,20 +1,20 @@
-You can modify the CSS of Firefox by creating a userChrome.css file. Here are the steps to reduce the spacing between menu items:
+You can modify the Firefox Proton menu item spacing by adding custom CSS to your userChrome.css file. Here are the steps to follow:
 
 1. Open Firefox and type `about:config` in the address bar.
 2. Search for `toolkit.legacyUserProfileCustomizations.stylesheets` and set it to `true`.
 3. Open your Firefox profile folder. You can find the location by typing `about:support` in the address bar and looking for the "Profile Folder" entry.
-4. If there is no `chrome` folder, create one.
+4. Create a new folder named `chrome` if it doesn't already exist.
 5. Inside the `chrome` folder, create a new file named `userChrome.css`.
 6. Open the `userChrome.css` file with a text editor.
-7. Add the following code to the file:
+7. Add the following CSS code to reduce the spacing between menu items:
 
 ```
-/* Reduce spacing between menu items */
-#PanelUI-menu .subviewbody > :not(:first-child) {
-  margin-block-start: 0px !important;
+/* Reduce menu item spacing */
+#PanelUI-menu .subviewmenu > .subviewmenu-body {
+  padding-block: 0px !important;
 }
 ```
 
-8. Save the file and restart Firefox.
+8. Save the `userChrome.css` file and restart Firefox.
 
-This code targets the menu items in the Firefox menu (also known as the "hamburger menu") and removes the top margin of all items except the first one, effectively reducing the spacing between them. You can adjust the `0px` value to your liking.
+This should reduce the spacing between menu items in Firefox Proton. If you want to further customize the Firefox interface, you can add more CSS rules to the `userChrome.css` file.

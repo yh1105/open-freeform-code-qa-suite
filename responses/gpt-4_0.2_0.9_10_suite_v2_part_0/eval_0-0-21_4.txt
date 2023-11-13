@@ -1,4 +1,4 @@
-Here is the code snippet with the `copyText` method filled:
+Sure, you can use the `navigator.clipboard.writeText` method to copy text to the clipboard. Here is your updated code:
 
 ```html
 <template>
@@ -23,15 +23,11 @@ Here is the code snippet with the `copyText` method filled:
       },
       methods: {
         copyText () {
-          navigator.clipboard.writeText(this.text1).then(function() {
-            console.log('Copying to clipboard was successful!');
-          }, function(err) {
-            console.error('Could not copy text: ', err);
-          });
+          navigator.clipboard.writeText(this.text1)
         }
       }
     })
 </script>
 ```
 
-In the `copyText` method, we are using the `navigator.clipboard.writeText` method to copy the text to the clipboard. This method returns a promise that resolves once the text is successfully written to the clipboard. If the operation fails for any reason, the promise will reject with an error.
+In the `copyText` method, `navigator.clipboard.writeText(this.text1)` is used to copy the value of `text1` to the clipboard.

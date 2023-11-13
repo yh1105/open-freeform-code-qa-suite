@@ -12,6 +12,4 @@ Yes, you can use the `first` and `last` pseudo-class variants in Tailwind to ach
 </ul>
 ```
 
-In the above code, we are using the ternary operator to conditionally add the `pb-2` (padding-bottom) class to all `li` elements except the last one. The `pb-2` class will add a padding-bottom of 0.5rem to the `li` element, which will create the space between the border and the text.
-
-Note that we are also using the string interpolation syntax to dynamically generate the `key` attribute for each `li` element.
+In the `class` attribute of the `<li>` element, we're using the `pb-2` class to add a bottom padding to all the `<li>` elements except the last one. We're also using an inline conditional statement to check if the current item is the last item in the `items` array. If it is, we're not adding the `pb-2` class.

@@ -1,29 +1,30 @@
-The error message you're seeing is because you're trying to overwrite the `$theme-colors` map after it's been used in the Bootstrap's `_variables.scss` file. 
-
-You should define your custom colors before importing the Bootstrap's `_variables.scss` file. Also, you should use `!default` to allow your variables to override the default ones.
+The error you're getting is because you're trying to import the Bootstrap variables before you define your own. The `!default` flag in SASS means that the variable should only be assigned if it hasn't been assigned yet. So, you should define your variables before importing the Bootstrap variables.
 
 Here's how you can do it:
 
 ```scss
+// Define your own colors
 $theme-colors: (
-  "primary": #your-color-here
-) !default;
+  "primary": #your-color,
+  // Add other colors if needed
+);
 
+// Then import the Bootstrap variables and Bootstrap
 @import "../../node_modules/bootstrap/scss/bootstrap";
 ```
 
-Also, make sure you're using a valid color value. It can be a named color, a hexadecimal color, an RGB color, or an HSL color.
+Replace `#your-color` with the color you want to use. If you want to change other colors, just add them to the `$theme-colors` map.
 
-If you want to change multiple colors, you can do it like this:
+Also, make sure you're using Dart Sass as LibSass (which includes Node Sass) is deprecated. Bootstrap v5 recommends Dart Sass. You can install it with npm:
 
-```scss
-$theme-colors: (
-  "primary": #your-primary-color,
-  "secondary": #your-secondary-color,
-  // add more colors if needed
-) !default;
-
-@import "../../node_modules/bootstrap/scss/bootstrap";
+```bash
+npm install -D sass
 ```
 
-Remember to replace `#your-color-here`, `#your-primary-color`, and `#your-secondary-color` with your actual color values.
+And then compile your SCSS file:
+
+```bash
+npx sass your-file.scss output.css
+```
+
+Replace `your-file.scss` with the path to your SCSS file and `output.css` with the path where you want the compiled CSS file to be saved.

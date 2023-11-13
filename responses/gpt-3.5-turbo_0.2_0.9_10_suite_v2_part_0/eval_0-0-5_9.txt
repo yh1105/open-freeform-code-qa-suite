@@ -1,31 +1,26 @@
-The error message indicates that Python is not installed on your system or it is not in your PATH environment variable. 
+The error message indicates that Python is not installed on your system or it is not in the PATH environment variable. 
 
-To fix this issue, you need to install Python and add it to your PATH environment variable. Here are the steps:
+To fix this issue, you need to install Python and add it to the PATH environment variable. Here are the steps to follow:
 
-1. Download and install Python 2.7.x from the official website: https://www.python.org/downloads/windows/
+1. Download and install Python from the official website: https://www.python.org/downloads/
 
-2. During the installation process, make sure to select the option to add Python to your PATH environment variable.
+2. During the installation process, make sure to select the option to add Python to the PATH environment variable. If you missed this step during installation, you can add Python to the PATH manually by following these steps:
 
-3. After the installation is complete, open a new command prompt and run the following command to verify that Python is installed and in your PATH:
+   - Open the Start menu and search for "Environment Variables"
+   - Click on "Edit the system environment variables"
+   - Click on the "Environment Variables" button
+   - Under "System Variables", scroll down and find the "Path" variable, then click "Edit"
+   - Click "New" and add the path to the Python installation directory (e.g. C:\Python27)
+   - Click "OK" to close all windows
 
-   ```
-   python --version
-   ```
+3. Restart your command prompt or IDE to ensure that the PATH changes take effect.
 
-4. If you see the version number of Python, then it is installed correctly. If you see an error message, then you need to add Python to your PATH manually.
+4. Try running the build again. It should now be able to find the Python executable and complete the build successfully.
 
-5. To add Python to your PATH manually, follow these steps:
+If you still encounter issues, you may need to update node-gyp to the latest version by running the following command:
 
-   - Open the Control Panel and go to System and Security > System > Advanced system settings.
-   - Click the Environment Variables button.
-   - Under System Variables, scroll down and find the PATH variable. Click Edit.
-   - Add the path to the Python installation directory (e.g. C:\Python27) to the end of the PATH variable, separated by a semicolon (;).
-   - Click OK to close all windows.
+```
+npm install -g node-gyp
+```
 
-6. Open a new command prompt and run the following command to verify that Python is in your PATH:
-
-   ```
-   python --version
-   ```
-
-7. Now try to rebuild your Node.js project and see if the issue is resolved.
+This will update node-gyp to the latest version and may fix any compatibility issues with your version of Node.js.

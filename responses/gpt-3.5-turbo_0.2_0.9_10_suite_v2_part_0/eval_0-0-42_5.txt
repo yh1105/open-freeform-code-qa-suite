@@ -14,4 +14,4 @@ app.use(session({
 }));
 ```
 
-Note that in `connect-mongo` v4, you need to import `MongoStore` from `connect-mongo` using `.default`. Also, instead of passing the `mongooseConnection` option, you can pass the `mongoUrl` option directly to `MongoStore.create()`.
+Note that in `connect-mongo` v4, you need to use `MongoStore.create()` instead of `new MongoStore()`. Also, you need to pass the MongoDB connection string as `mongoUrl` instead of `mongooseConnection`.

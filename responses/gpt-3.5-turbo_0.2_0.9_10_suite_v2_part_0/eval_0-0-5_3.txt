@@ -1,19 +1,19 @@
-The error log indicates that node-gyp is unable to find the Python executable on your system. Here are the steps you can follow to fix this issue:
+The error message indicates that Python is not installed on your system or it is not added to the PATH environment variable. 
 
-1. Install Python: You need to install Python on your system. You can download the latest version of Python from the official website: https://www.python.org/downloads/. Make sure to add Python to your system's PATH environment variable during the installation process.
+To fix this issue, you can follow these steps:
 
-2. Set the PYTHON environment variable: If Python is already installed on your system, you need to set the PYTHON environment variable to the path of the Python executable. You can do this by following these steps:
+1. Install Python 2.7.x from the official website: https://www.python.org/downloads/release/python-2715/
+2. During the installation process, make sure to select the option to add Python to the PATH environment variable.
+3. After the installation is complete, open a new command prompt and run the following command to verify that Python is installed and added to the PATH: `python --version`
+4. If the command returns the Python version number, then it is installed correctly.
+5. Try running the Node.js build again and it should work without any issues.
 
-   - Open the Control Panel and go to System and Security > System > Advanced system settings.
-   - Click on the Environment Variables button.
-   - Under System Variables, click on the New button.
-   - Enter PYTHON as the variable name and the path to the Python executable as the variable value (e.g. C:\Python27\python.exe).
-   - Click OK to save the changes.
+If you still face issues, you can try running the following command to set the PYTHON environment variable to the path where Python is installed:
 
-3. Rebuild node-sass: Once you have installed Python and set the PYTHON environment variable, you can try rebuilding node-sass by running the following command in your project directory:
+```
+set PYTHON=C:\Python27\python.exe
+```
 
-   ```
-   npm rebuild node-sass
-   ```
+Replace `C:\Python27\python.exe` with the path where Python is installed on your system.
 
-This should rebuild node-sass with the correct dependencies and fix the issue.
+After setting the environment variable, try running the Node.js build again.

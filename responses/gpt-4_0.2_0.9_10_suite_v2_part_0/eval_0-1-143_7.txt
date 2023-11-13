@@ -1,31 +1,31 @@
-Yes, you can modify the internal CSS of Firefox to change the spacing between menu items. Here's how you can do it:
+You can modify the userChrome.css file to reduce the spacing between menu items in Firefox Proton. Here's how you can do it:
 
-1. Open your Firefox profile folder. You can do this by typing `about:support` in the address bar, then click on `Open Folder` in the `Profile Folder` row.
+1. Open your Firefox profile folder. You can do this by typing `about:support` in the address bar and then clicking on `Open Folder` next to `Profile Folder`.
 
-2. In the profile folder, create a new folder named `chrome` if it doesn't exist.
+2. In the profile folder, create a new folder named `chrome` if it doesn't already exist.
 
-3. Inside the `chrome` folder, create a new file named `userChrome.css` if it doesn't exist.
+3. Inside the `chrome` folder, create a new file named `userChrome.css`. If the file already exists, you can just edit it.
 
-4. Open `userChrome.css` with a text editor.
+4. Open `userChrome.css` with a text editor and add the following lines:
 
-5. Paste the following code into the file:
+```css
+/* Reduce Menu and Contextual Menu height */
+:root {
+  --arrowpanel-menuitem-padding: 4px 8px !important;
+}
 
-    ```css
-    :root {
-        --proton-dense-toolbar-vertical-padding: 4px !important;
-        --proton-toolbar-vertical-padding: 4px !important;
-        --proton-menu-vertical-padding: 4px !important;
-    }
-    ```
+menupopup > menuitem, menupopup > menu {
+  padding-block: 4px !important;
+}
 
-6. Save the file and close it.
+/* Reduce height of URL and Search Bar */
+#urlbar-input-container, #searchbar .searchbar-textbox {
+  padding-block: 4px !important;
+}
+```
 
-7. In Firefox, go to `about:config`.
+5. Save the file and restart Firefox.
 
-8. Search for `toolkit.legacyUserProfileCustomizations.stylesheets` and set it to `true`.
+This will reduce the spacing between menu items, as well as the height of the URL and search bar.
 
-9. Restart Firefox.
-
-This CSS code reduces the vertical padding of the toolbar and menu items. You can adjust the `4px` value to your liking. The `!important` keyword is used to override the default style.
-
-Please note that modifying internal files can lead to unexpected behavior, and you do so at your own risk. Always make a backup of your data before making changes.
+Please note that you need to enable the use of `userChrome.css` and `userContent.css` for this to work. You can do this by going to `about:config` in the address bar, search for `toolkit.legacyUserProfileCustomizations.stylesheets` and set it to `true`.

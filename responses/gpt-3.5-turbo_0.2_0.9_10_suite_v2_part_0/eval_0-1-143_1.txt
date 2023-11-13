@@ -2,19 +2,19 @@ You can modify the `browser.css` file in Firefox to adjust the spacing between m
 
 1. Open Firefox and type `about:config` in the address bar.
 2. Search for `toolkit.legacyUserProfileCustomizations.stylesheets` and set it to `true`.
-3. Open your Firefox profile folder. You can find the location by typing `about:support` in the address bar and looking for "Profile Folder" under "Application Basics".
-4. In the profile folder, create a new folder called `chrome` (if it doesn't already exist).
+3. Open your Firefox profile folder. You can find the location of your profile folder by typing `about:support` in the address bar and looking for the "Profile Folder" entry.
+4. In your profile folder, create a new folder called `chrome` if it doesn't already exist.
 5. Inside the `chrome` folder, create a new file called `userChrome.css`.
 6. Open the `userChrome.css` file in a text editor.
 7. Add the following code to the file:
 
 ```
 /* Reduce spacing between menu items */
-#PanelUI-menu .panel-subview-body {
-  padding-block: 0px !important;
+#PanelUI-menu .subviewmenu {
+  padding-block: 0 !important;
 }
 ```
 
 8. Save the file and restart Firefox.
 
-This code targets the menu panel in Firefox and sets the padding between menu items to 0 pixels. You can adjust the value to your liking if you want more or less spacing.
+This code targets the submenus in the Firefox menu (also known as the "hamburger menu") and sets the padding between items to zero. You can adjust the `padding-block` value to your liking if you want more or less spacing.

@@ -1,39 +1,36 @@
-To create an index on a property in Mongoose schema using Nest.js, you can use the `@Schema()` decorator and the `@Index()` decorator from the `@nestjs/mongoose` package.
+To create an index on a property in a Mongoose schema using Nest.js, you can use the `@Schema` decorator to define the schema and the `@Prop` decorator to define the properties. To create an index on a property, you can add the `@Index` decorator to the property.
 
-Here's an example of how to create an index on the `type` property in your schema:
+Here's an example:
 
 ```javascript
-import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
-import { Index } from '@nestjs/mongoose';
 
 @Schema()
 export class MySchema extends Document {
-  @Prop()
-  _id: string;
-
   @Prop({ required: true })
+  name: string;
+
+  @Prop({ required: true, index: true })
   type: string;
 
   @Prop()
-  creationDate: string;
-
-  @Prop()
-  name: string;
+  creationDate: Date;
 }
-
-// Create the index on the `type` property
-MySchema.index({ type: 1 });
 
 export const MySchema = SchemaFactory.createForClass(MySchema);
 ```
 
-In this example, the `@Index()` decorator is used to create an index on the `type` property. The `1` in the argument of the `index()` method indicates that the index should be created in ascending order. You can also use `-1` to create the index in descending order.
+In this example, an index is created on the `type` property by setting the `index` option to `true` in the `@Prop` decorator.
 
-Note that the `@Index()` decorator can be used on both properties and schemas. If you want to create an index on multiple properties, you can pass an object with the property names and their order to the `index()` method. For example:
+You can also create an index on multiple properties by using the `@Index` decorator on the schema class:
 
 ```javascript
-MySchema.index({ type: 1, creationDate: -1 });
+@Schema()
+@Index({ name: 1, type: 1 })
+export class MySchema extends Document {
+  // ...
+}
 ```
 
-This will create an index on the `type` property in ascending order and the `creationDate` property in descending order.
+This creates a compound index on the `name` and `type` properties.

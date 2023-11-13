@@ -1,4 +1,4 @@
-Sure, you can create a function that will be called on button click and inside that function, you can get the values of the input fields using the `useState` hook. Here's an example:
+Sure, you can create a function that will be called on button click and get the values of the input fields using the state variables. Here's an example:
 
 ```javascript
 import React, { useState } from 'react';
@@ -8,8 +8,7 @@ export default function InputField({ name, label }) {
   const [lastName, setLastName] = useState('');
 
   const handleClick = () => {
-    console.log('First Name:', firstName);
-    console.log('Last Name:', lastName);
+    console.log(`First Name: ${firstName}, Last Name: ${lastName}`);
   };
 
   return (
@@ -33,8 +32,6 @@ export default function InputField({ name, label }) {
 }
 ```
 
-In this example, we have created two state variables `firstName` and `lastName` using the `useState` hook. We have also created a function `handleClick` that will be called on button click. Inside this function, we are logging the values of the input fields to the console.
+In this example, we have created two state variables `firstName` and `lastName` to store the values of the input fields. We have also created a function `handleClick` that will be called on button click. Inside this function, we are logging the values of the input fields to the console.
 
-To get the value of the input fields, we have used the `value` prop of the input fields and passed the `onChange` function to update the state variables whenever the input value changes.
-
-Note that we have also added a `name` attribute to the input fields to differentiate between them.
+Note that we have also updated the `name` attribute of the input fields to include the field name (`firstName` or `lastName`) to make it easier to identify the fields when submitting the form.

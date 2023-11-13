@@ -1,14 +1,16 @@
-To create an animation after hovering over the link using Tailwind-CSS, you can use the `group-hover` variant to target the `span` element and change its `max-width` property. Here's the revised code:
+Yes, you can use the `group-hover` variant in Tailwind CSS to achieve this effect. Here's an example code snippet:
 
 ```html
-<a href="#" class="group text-sky-600 transition duration-300 relative">
-    Link
-    <span class="absolute bottom-0 left-0 w-full h-0.5 bg-sky-600 group-hover:max-w-full transition-all duration-500"></span>
+<a href="#" class="group text-sky-600 relative inline-block">
+  Link
+  <span class="absolute bottom-0 left-0 w-full h-0.5 bg-sky-600 transition-all group-hover:h-full"></span>
 </a>
 ```
 
-In this code, we added the `relative` class to the `a` element to make the `span` element positioned absolutely relative to it. We also added the `bottom-0` and `left-0` classes to position the `span` element at the bottom of the link.
+In this code, we are using the `group` class to group the link and the span element together. We also added the `relative` class to the link element to make the span element position itself relative to the link element.
 
-Then, we added the `group-hover:max-w-full` class to the `span` element to change its `max-width` property to `100%` when the link is hovered over. We also added the `transition-all` class to make the animation smooth.
+The span element is positioned absolutely at the bottom left corner of the link element. We set its initial height to 0.5rem and its background color to `bg-sky-600`.
 
-Note that we also removed the `block` class from the `span` element and replaced it with the `absolute` class to make it positioned absolutely.
+To create the animation effect, we use the `transition-all` class to specify that all CSS properties should be transitioned. We also use the `group-hover` variant to specify that the span element should have a height of `h-full` (i.e., the full height of the link element) when the link element is hovered over.
+
+This should create the desired animation effect when the link element is hovered over.

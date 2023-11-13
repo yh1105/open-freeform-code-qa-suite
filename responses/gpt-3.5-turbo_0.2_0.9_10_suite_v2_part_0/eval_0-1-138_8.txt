@@ -1,23 +1,20 @@
-Yes, it is possible to detect if the user's system is in Dark Mode on macOS using CSS media queries. Here's an example:
+Yes, you can detect if the user's system is in Dark Mode by checking the `prefers-color-scheme` media query in CSS. Here's an example:
 
 ```css
 @media (prefers-color-scheme: dark) {
-  /* Styles for dark mode */
+  /* styles for dark mode */
 }
 ```
 
-This media query checks if the user's system is in Dark Mode and applies the styles inside the curly braces accordingly. You can use this media query to change the design of your site to be more friendly for Dark Mode users.
+This media query will only apply the styles inside the curly braces if the user's system is in Dark Mode. You can use this to change your site's design to be dark-mode friendly.
 
-Note that this media query is supported in Safari 12.1+ and Firefox 67+. Chrome does not currently support this media query, but you can use JavaScript to detect the user's system preference and apply styles accordingly. Here's an example:
+Note that this feature is supported in Safari 12.1+ and Firefox 67+. Chrome does not currently support this media query, but you can use a JavaScript solution to detect Dark Mode in Chrome. Here's an example:
 
 ```javascript
-if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-  // User is in Dark Mode
-  // Apply dark mode styles
-} else {
-  // User is not in Dark Mode
-  // Apply light mode styles
+const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+if (isDarkMode) {
+  // styles for dark mode
 }
-```
+``` 
 
-This JavaScript code checks if the user's system is in Dark Mode using the `matchMedia` method and applies the appropriate styles based on the result.
+This JavaScript code will check if the user's system is in Dark Mode and apply the styles inside the curly braces if it is.

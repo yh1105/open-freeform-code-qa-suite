@@ -1,4 +1,4 @@
-For the first way, you can pass the `options` prop to the `Tab.Screen` component for the "Settings" screen and set `tabBarVisible` to `false`. Here's the updated code:
+For the first way, you can pass the `options` prop to the `Tab.Screen` component for the "Settings" tab and set the `tabBarVisible` option to `false`. Here's the updated code:
 
 ```javascript
 export default function App() {
@@ -26,6 +26,6 @@ function SettingsStackScreen({ navigation }) {
         </SettingsStack.Navigator>
     )
 }
-``` 
+```
 
-Note that for the second way, you need to use the `useLayoutEffect` hook to set the `headerShown` option, and you need to pass the `navigation` prop to the component.
+Note that in the second way, we're using the `useLayoutEffect` hook to set the options for the navigation header. This is because we need to set the options before the component is rendered, and `useLayoutEffect` runs synchronously after all DOM mutations.

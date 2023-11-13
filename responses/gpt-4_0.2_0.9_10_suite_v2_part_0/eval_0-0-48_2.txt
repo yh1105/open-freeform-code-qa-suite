@@ -8,4 +8,4 @@ type FruitsAndColors = {
 }
 ```
 
-This will create a type `FruitsAndColors` that has a numeric property for each fruit and a boolean property for each color.
+This will create a type that has a numeric property for each fruit and a boolean property for each color.

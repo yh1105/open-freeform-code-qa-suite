@@ -1,26 +1,21 @@
-The error message you're seeing is because you're trying to overwrite the `$theme-colors` map after it has been used in the Bootstrap's `_variables.scss` file. 
+The error you're getting is because you're trying to overwrite the `$theme-colors` map after it has been used in the `variables.scss` file. You should define your custom colors before importing the `variables.scss` file.
 
-To change the Bootstrap's default theme colors, you should define your `$theme-colors` map before importing the Bootstrap's `_variables.scss` file. 
-
-Here is how you can do it:
+Also, you should use the `map-merge` function to merge your custom colors with the default colors. Here's how you can do it:
 
 ```scss
-$theme-colors: (
-  "primary": #your-color,
-  "secondary": #your-color,
-  "success": #your-color,
-  "info": #your-color,
-  "warning": #your-color,
-  "danger": #your-color,
-  "light": #your-color,
-  "dark": #your-color
-);
+@import "../../node_modules/bootstrap/scss/functions";
+@import "../../node_modules/bootstrap/scss/variables";
+
+$theme-colors: map-merge($theme-colors, (
+  "primary": #your-color-here,
+  // add more colors if needed
+));
 
 @import "../../node_modules/bootstrap/scss/bootstrap";
 ```
 
-Please replace `#your-color` with the actual color values you want to use.
+Replace `#your-color-here` with the color you want to use. If you want to change more colors, just add more key-value pairs to the map.
 
-Also, note that you should not import the `_variables.scss` file directly. Instead, you should import the main `bootstrap.scss` file which will in turn import all the necessary files including `_variables.scss`. 
+Please note that you need to import `functions.scss` before `variables.scss` because `map-merge` function is defined in `functions.scss`.
 
-This is because the `_variables.scss` file is not meant to be used standalone. It has dependencies on other Bootstrap SCSS files and importing it directly can lead to issues.
+Also, make sure you have the correct path to the `bootstrap` directory in your `node_modules`. The path should be relative to the file where you're importing it.

@@ -1,4 +1,4 @@
-For the first way, you can pass the `options` prop to the `Tab.Screen` component for the "Settings" screen and set the `tabBarVisible` option to `false` to hide the tab bar when the screen is focused. Here's the updated code:
+For the first way, you can pass the `options` prop to the `Tab.Screen` component for the "Settings" screen and set the `tabBarVisible` option to `false`:
 
 ```javascript
 export default function App() {
@@ -13,7 +13,7 @@ export default function App() {
 }
 ```
 
-For the second way, you can set the `headerShown` option to `false` in the `navigationOptions` object to hide the header when the screen is focused. Here's the updated code:
+For the second way, you can set the `headerShown` option to `false` in the `SettingsStackScreen` component:
 
 ```javascript
 function SettingsStackScreen({ navigation }) {
@@ -26,4 +26,6 @@ function SettingsStackScreen({ navigation }) {
         </SettingsStack.Navigator>
     )
 }
-```
+``` 
+
+Note that for the second way, you need to use the `useLayoutEffect` hook to set the options, and you need to pass the `navigation` prop to the component.

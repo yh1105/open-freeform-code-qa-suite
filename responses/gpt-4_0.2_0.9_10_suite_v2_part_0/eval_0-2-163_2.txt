@@ -1,4 +1,4 @@
-Here is the JavaScript code with the blanks filled in:
+You can use the `querySelectorAll` method to select all the required fields in the form. Here is the filled code:
 
 ```javascript
 document.getElementById('check').onclick = function() {
@@ -21,4 +21,4 @@ document.getElementById('check').onclick = function() {
 };
 ```
 
-This code will check all required fields in the form when the button with id `check` is clicked. If any required field is not filled, it will show an alert saying 'Fill all the fields'.
+In this code, `querySelectorAll('[required]')` is used to select all the required fields in the form. Then, for each required field, it checks if it's a radio button. If it is, it checks if any of the radio buttons with the same name are checked. If none are checked, it sets `allAreFilled` to false. If the field is not a radio button, it checks if the field has a value. If it doesn't, it sets `allAreFilled` to false. If `allAreFilled` is false after checking all the fields, it alerts the user to fill all the fields.

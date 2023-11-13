@@ -1,4 +1,4 @@
-You can change the color of the accordion arrow by targeting the `.accordion-button:not(.collapsed)::after` pseudo-element and setting its `border-color` property to green. Here's an example CSS code:
+You can change the color of the accordion arrow by targeting the `.accordion-button:not(.collapsed)::after` pseudo-element and setting its `border-color` property to green. Here's the CSS code you can use:
 
 ```css
 .accordion-button:not(.collapsed)::after {
@@ -6,4 +6,4 @@ You can change the color of the accordion arrow by targeting the `.accordion-but
 }
 ```
 
-You can add this CSS code to your stylesheet or add it inline to your HTML file using the `style` attribute.
+You can add this code to your CSS file or add it to the `style` tag in your HTML file.

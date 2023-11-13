@@ -1,7 +1,9 @@
-You are using Tailwind CSS classes. To draw a line only at the top, you should use the `border-t` class for the top border and specify the color with `border-blue-900`. Here is how you can do it:
+You can use the Tailwind CSS utility classes to apply a border to the top only. The `border-t` class applies a border to the top edge of an element. The `border-blue-900` class applies a blue color to the border. 
+
+Here is how you can modify your code:
 
 ```html
 <div class="border-t border-blue-900">foo</div>
 ```
 
-This will give you a top border with the color blue-900. The `border-t` class only applies the border to the top edge.
+This will apply a border only to the top edge of the div.

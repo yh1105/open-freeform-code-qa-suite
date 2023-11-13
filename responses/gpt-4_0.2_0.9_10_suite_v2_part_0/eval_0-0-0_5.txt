@@ -1,14 +1,14 @@
-Sure, you can use `Object.keys()` and `Array.map()` to achieve this. Here is the function you need:
+Sure, here is a function that does exactly what you asked for:
 
 ```javascript
 function keys_and_prices(raw_obj) {
-    var keys = Object.keys(raw_obj);
-    var prices = keys.map(key => raw_obj[key].price);
+    let keys = Object.keys(raw_obj);
+    let prices = keys.map(key => raw_obj[key].price);
     return [keys, prices];
 }
 ```
 
-This function first gets all the keys from the input object and then maps each key to its corresponding price. The result is an array of two arrays: one for the keys and one for the prices.
+This function first gets all the keys from the object using `Object.keys()`. Then it maps over these keys and for each key, it gets the corresponding price from the object. Finally, it returns an array containing the keys and prices arrays.
 
 Here is how you can use it:
 
@@ -19,4 +19,4 @@ console.log(ret[0]) // ["milk", "bread", "potato"]
 console.log(ret[1]) // [20, 15, 10]
 ```
 
-Please note that the order of keys and prices in the output arrays depends on the order of properties in the original object, which is not guaranteed to be consistent across different JavaScript engines. If you need a specific order, you might need to sort the keys array before mapping it to prices.
+Please note that the `==` operator in JavaScript does not work for array comparison. You might want to use a deep equality check function, such as `_.isEqual` from lodash, or write your own function for array comparison.

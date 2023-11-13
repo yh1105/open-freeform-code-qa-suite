@@ -1,20 +1,29 @@
-The error you're seeing is because `req.logout()` is being called without a callback function. However, in your case, you don't actually need a callback function because you're not doing anything after logging out the user other than redirecting them to the home page.
+The error message you're seeing suggests that `req.logout()` is expecting a callback function. However, in Passport.js, `req.logout()` doesn't actually require a callback function. The error might be coming from somewhere else in your code.
 
-The `req.logout()` function is provided by Passport.js and is used to log out a user. It will remove the `req.user` property and clear the login session (if any).
-
-Here's the revised code:
+The logout route you have defined seems correct:
 
 ```javascript
 app.get("/logout", (req, res) => {
     req.logout();
-    req.session.destroy(function (err) {
+    res.redirect("/");
+});
+```
+
+This should log the user out and then redirect them to the home page. If you're still seeing the error, it might be worth checking other parts of your code where you're calling `req.logout()` or similar methods.
+
+If you're still having trouble, you might want to add some error handling to your logout route to help debug the issue. Here's how you might do that:
+
+```javascript
+app.get("/logout", (req, res, next) => {
+    req.session.destroy((err) => {
         if (err) {
-            console.log('Error : Failed to destroy the session during logout.', err);
+            return next(err);
         }
-        req.user = null;
+
+        req.logout();
         res.redirect("/");
     });
 });
 ```
 
-In the revised code, I've added `req.session.destroy()` to ensure the session is destroyed when the user logs out. This is a good practice to follow when logging out users to prevent any potential session-related issues. The `req.user = null;` line is added to ensure that the user information is removed from the request object.
+This code will destroy the session and then log the user out. If there's an error when trying to destroy the session, it will be passed to your error handling middleware (which you'll need to set up separately).

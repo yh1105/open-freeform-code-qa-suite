@@ -1,24 +1,25 @@
-The error log indicates that Python is not found in your system. Node-gyp, which is a cross-platform command-line tool written in Node.js for compiling native addon modules for Node.js, requires Python to work.
+The error log shows that the build process is unable to find Python in your system. Node-gyp, which is a part of the build process, requires Python to work. 
 
 Here are the steps to fix this issue:
 
-1. Install Python 2.7.x. You can download it from the [official Python website](https://www.python.org/downloads/). Node-gyp does not work with Python 3.x, so make sure to install a 2.7.x version.
+1. **Install Python**: If Python is not installed on your system, you need to install it. You can download Python from the [official Python website](https://www.python.org/downloads/). Node-gyp requires Python 2.7, so make sure to install that version. Python 3.x is not supported.
 
-2. After installing Python, you need to set the environment variable `PYTHON` to point to the Python executable. You can do this by following these steps:
+2. **Set the PATH**: After installing Python, you need to add it to your system's PATH environment variable. This allows the system to find Python when needed. Here's how you can do it:
 
-    - Right-click on 'Computer' and click on 'Properties'.
-    - Click on 'Advanced system settings'.
-    - In the System Properties window, click on the 'Environment Variables' button.
-    - Click on the 'New' button under the 'System variables' section.
-    - In the 'New System Variable' window, enter `PYTHON` in the 'Variable name' field and the path to the Python executable in the 'Variable value' field. The path would typically be `C:\Python27\python.exe` if you installed Python in the default location.
-    - Click 'OK' in all windows to apply the changes.
+    - Open the Start Menu and search for "Environment Variables".
+    - Click on "Edit the system environment variables".
+    - In the System Properties window that opens, click on "Environment Variables".
+    - In the Environment Variables window, under "System variables", find the variable named "Path" and click on "Edit".
+    - In the Edit Environment Variable window, click on "New" and add the path to the Python installation directory. This is usually `C:\Python27\`.
 
-3. After setting the environment variable, you should be able to build your Node.js application without any issues.
+3. **Install Windows Build Tools**: Node-gyp also requires some additional tools to work on Windows. You can install these using npm (Node Package Manager) by running the following command in the command prompt:
 
-If you still encounter issues, you can try installing the [windows-build-tools](https://www.npmjs.com/package/windows-build-tools) package using npm. This package installs Python 2.7, Visual Studio Build Tools, and other necessary tools and configurations. You can install it globally by running the following command in the command prompt:
+    ```bash
+    npm install --global --production windows-build-tools
+    ```
 
-```bash
-npm install --global windows-build-tools
-```
+    This command installs both Python 2.7 (if it's not already installed) and the Visual Studio Build Tools.
 
-This command needs to be run in a command prompt with administrator privileges. After running this command, try building your Node.js application again.
+4. **Rebuild the project**: After following the above steps, try to rebuild your project. The build process should now be able to find Python and complete successfully.
+
+Remember to run your command prompt or terminal as an administrator when executing these commands.

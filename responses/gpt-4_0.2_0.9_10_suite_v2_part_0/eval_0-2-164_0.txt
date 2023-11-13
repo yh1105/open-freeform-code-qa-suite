@@ -1,6 +1,4 @@
-The `.attrs()` function in styled-components is a chainable method that attaches some props to a styled component. It allows you to define static props or dynamic ones that are determined by a function.
-
-The main difference between using `.attrs()` and just passing props directly is that `.attrs()` allows you to define props that can be used in your component's styles.
+The `.attrs()` function in styled-components is a chainable method that attaches additional props to a component. It's useful when you want to apply some default props or derive some props based on the props passed to the component.
 
 Here's a simple example:
 
@@ -14,16 +12,17 @@ const Input = styled.input.attrs(props => ({
   border: 2px solid palevioletred;
   border-radius: 3px;
   margin: 0.5em;
-  padding: ${props => props.size}px;
+  padding: 0.25em 0.5em;
+  ::placeholder {
+    color: palevioletred;
+  }
 `;
 
 // Usage
-<Input small />
-<Input />
+<Input placeholder="A small text input" small />
+<Input placeholder="A bigger text input" />
 ```
 
-In this example, the `Input` component has a `size` prop that is determined by whether the `small` prop is `true` or `false`. This `size` prop is then used in the component's styles to determine the padding. 
+In this example, `attrs()` is used to set the `type` attribute to `'text'` and conditionally set the `size` attribute based on the `small` prop. This way, you can control the size of the input by passing a `small` prop to the `Input` component. 
 
-Without `.attrs()`, you would have to pass the `size` prop directly to the component and handle the logic for determining its value outside of the component, which could lead to more verbose and less readable code. 
-
-So, the main advantage of `.attrs()` is that it allows you to handle prop logic inside the component, making your code cleaner and more encapsulated.
+Without `attrs()`, you would have to pass these attributes every time you use the `Input` component, or handle this logic inside the component itself which could make it more complex.

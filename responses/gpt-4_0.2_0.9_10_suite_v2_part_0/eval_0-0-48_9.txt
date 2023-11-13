@@ -1,4 +1,4 @@
-Sure, you can use the `&` operator to combine the two mapped types:
+Sure, the problem with your code is that you are trying to use the same key for two different types. You can't have a key in an object that is both a number and a boolean. Instead, you can create an intersection type to combine the two types. Here's how you can do it:
 
 ```typescript
 type FruitsAndColors = {
@@ -8,4 +8,4 @@ type FruitsAndColors = {
 }
 ```
 
-This will create a type that has a numeric property for each fruit and a boolean property for each color.
+In this code, `[key in fruit]: number;` creates a type where each fruit is a key to a number, and `[key in color]: boolean;` creates a type where each color is a key to a boolean. The `&` operator combines these two types into one.
