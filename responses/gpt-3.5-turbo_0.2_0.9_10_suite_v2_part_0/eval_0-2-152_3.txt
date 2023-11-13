@@ -1,0 +1,7 @@
+The JavaScript code you provided is incomplete. You need to use the `.toast('show')` method to show the toast. Here's the updated JavaScript code:
+
+```javascript
+$('.toast').toast('show');
+```
+
+Make sure you have included the necessary Bootstrap JavaScript files and jQuery library in your HTML file. Also, ensure that the JavaScript code is executed after the DOM has loaded.

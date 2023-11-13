@@ -1,0 +1,27 @@
+The error message is telling you that you're trying to set the body of a request to a JSON content type, but you're actually giving it a `Map` instead of a `String`. 
+
+When you're sending JSON data with `http.post`, you need to encode the `Map` to a JSON `String` using `json.encode()`. 
+
+Here is the corrected code:
+
+```dart
+import 'dart:convert';
+
+Map<String,String> headers = {
+  'Content-Type':'application/json',
+  'authorization':'Basic c3R1ZHlkb3RlOnN0dWR5ZG90ZTEyMw=='
+};
+
+var response = await post(
+  Urls.getToken,
+  headers: headers,
+  body: json.encode({
+    "grant_type":"password",
+    "username":"******",
+    "password":"*****",
+    "scope":"offline_access"
+  }),
+);
+```
+
+Don't forget to import the `dart:convert` package to use `json.encode()`.

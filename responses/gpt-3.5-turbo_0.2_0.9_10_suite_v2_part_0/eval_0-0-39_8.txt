@@ -1,0 +1,48 @@
+Yes, you can achieve this by using refs in React. Here's how you can modify your code to accomplish this:
+
+```javascript
+import React, { Component } from "react";
+import ReactDOM from "react-dom";
+
+class CustomForm extends Component {
+  handleSubmit = (event) => {
+    event.preventDefault();
+    alert('Form submitted!');
+  }
+
+  render() {
+    return (
+      <form id='my-form' onSubmit={this.handleSubmit}>
+        <button type='submit'>Inside Custom</button>
+      </form>
+    );
+  }
+}
+
+class App extends Component {
+  customFormRef = React.createRef();
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+    this.customFormRef.current.handleSubmit(event);
+  }
+
+  render() {
+    return (
+      <div>
+        <CustomForm ref={this.customFormRef} />
+        <button onClick={this.handleSubmit}>In Root</button>
+      </div>
+    );
+  }
+}
+
+const rootElement = document.getElementById("root");
+ReactDOM.render(<App />, rootElement);
+```
+
+In the modified code, we have created a ref for the `CustomForm` component in the `App` component using `React.createRef()`. We have also defined a `handleSubmit` method in the `App` component that will be called when the 'In Root' button is clicked.
+
+In the `handleSubmit` method, we are preventing the default form submission behavior using `event.preventDefault()`, and then calling the `handleSubmit` method of the `CustomForm` component using the ref we created earlier.
+
+Finally, we are passing the ref to the `CustomForm` component using the `ref` prop, and modifying the 'In Root' button to call the `handleSubmit` method when clicked using the `onClick` prop.

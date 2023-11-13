@@ -1,0 +1,9 @@
+It seems like Gradle is not using the correct Java version. You can try adding the following lines to your `build.gradle` file:
+
+```
+compileJava {
+    options.release = 17
+}
+```
+
+This should set the Java version used by Gradle to 17, which should match the version you have set up in your project.

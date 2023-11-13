@@ -1,0 +1,1 @@
+You can use the ArrayList constructor with an initial capacity in Kotlin as well. So, option 1 is a valid and recommended solution for your use case.

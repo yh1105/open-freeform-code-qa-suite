@@ -1,0 +1,11 @@
+It seems like the issue is with the way you are running the Vite server inside the Docker container. By default, Vite only binds to the localhost interface, which means that it can only be accessed from within the container itself.
+
+To fix this, you need to tell Vite to bind to all interfaces, so that it can be accessed from outside the container. You can do this by adding the `--host 0.0.0.0` option to the `vite` command in your `package.json` file:
+
+```json
+"vite": "vite --host 0.0.0.0"
+```
+
+This will tell Vite to bind to all available network interfaces, including the one that Docker is exposing.
+
+Once you've made this change, you should be able to access the Vite server from your host machine using `localhost:8080`.

@@ -1,0 +1,17 @@
+Sure! Here's the updated code:
+
+```javascript
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
+
+...
+
+app.use(session({
+    secret: 'story book',
+    resave: false,
+    saveUninitialized: false,
+    store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI })
+}));
+```
+
+In `connect-mongo` v4, the `MongoStore` constructor has been replaced with a `create` method that returns a new store instance. The `mongoUrl` option is used to specify the MongoDB connection string.

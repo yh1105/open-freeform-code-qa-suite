@@ -1,0 +1,3 @@
+```javascript
+const { data: userBio } = userFulfilled ? useGetUserBioQuery(user.id) : null;
+```

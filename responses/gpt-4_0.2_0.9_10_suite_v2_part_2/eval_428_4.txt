@@ -1,0 +1,21 @@
+For the CSRF token mismatch issue, it could be due to several reasons:
+
+1. **Domain Configuration**: Ensure that your domain is correctly configured. If you are using a www version (www.example.com) and your app is using a non-www version (example.com), or vice versa, it could cause the CSRF token mismatch error. You can try to adjust your `.env` file to match the domain you are using.
+
+2. **Cookie Configuration**: Check your cookie configuration. Make sure your `SESSION_DOMAIN` in your `.env` file is set to your domain. Also, ensure that the `SESSION_SECURE_COOKIE` is set to `false` if you are not using HTTPS.
+
+3. **Middleware**: Ensure that the `VerifyCsrfToken` middleware is applied to your routes. This middleware is included in the `web` middleware group by default.
+
+4. **Cache**: Try clearing your application cache using `php artisan cache:clear` and `php artisan config:clear`.
+
+For the email issue, the error message indicates that there is an issue with the SSL version. Here are a few things you can try:
+
+1. **Change Encryption Method**: Try changing the `MAIL_ENCRYPTION` in your `.env` file from `ssl` to `tls`.
+
+2. **Change Port**: You can also try changing the `MAIL_PORT` in your `.env` file from `587` to `465` or vice versa.
+
+3. **Disable Encryption**: If the above methods don't work, you can try disabling encryption by setting `MAIL_ENCRYPTION` to `null` in your `.env` file.
+
+4. **Contact Host**: If none of these solutions work, it might be a good idea to contact the host (propnex.sg) and ask for the correct SMTP settings.
+
+Remember to run `php artisan config:clear` after making changes to your `.env` file to clear the configuration cache.

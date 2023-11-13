@@ -1,0 +1,48 @@
+You can create a factory method that creates and returns a `ServiceBusSender` instance using the appropriate `ServiceBusClient` instance based on the queue name. Here's an example:
+
+```c#
+public interface IServiceBusSenderFactory
+{
+    ServiceBusSender Create(string queueName);
+}
+
+public class ServiceBusSenderFactory : IServiceBusSenderFactory
+{
+    private readonly IDictionary<string, ServiceBusClient> _serviceBusClients;
+
+    public ServiceBusSenderFactory(IOptions<UserEventConsumerSetting> options)
+    {
+        var serviceBusConfiguration = options.Value;
+        _serviceBusClients = new Dictionary<string, ServiceBusClient>
+        {
+            { "queue1", new ServiceBusClient(serviceBusConfiguration.ServiceBusConnectionString, new ServiceBusClientOptions { TransportType = ServiceBusTransportType.AmqpWebSockets }) },
+            { "queue2", new ServiceBusClient(serviceBusConfiguration.ServiceBusConnectionString, new ServiceBusClientOptions { TransportType = ServiceBusTransportType.AmqpWebSockets }) }
+        };
+    }
+
+    public ServiceBusSender Create(string queueName)
+    {
+        if (!_serviceBusClients.ContainsKey(queueName))
+        {
+            throw new ArgumentException($"Invalid queue name: {queueName}");
+        }
+
+        var serviceBusClient = _serviceBusClients[queueName];
+        return serviceBusClient.CreateSender(queueName);
+    }
+}
+```
+
+Then, you can register the `IServiceBusSenderFactory` in the DI container and inject it into your `CarReservationMessagingService`:
+
+```c#
+_services.AddSingleton<IServiceBusSenderFactory, ServiceBusSenderFactory>();
+
+_services.AddSingleton<CarReservationMessagingService>(implementationFactory =>
+{
+    var serviceBusSenderFactory = implementationFactory.GetRequiredService<IServiceBusSenderFactory>();
+    return new CarReservationMessagingService(serviceBusSenderFactory.Create("queue1"));
+});
+```
+
+In the above example, we're injecting a `ServiceBusSender` instance for the "queue1" queue into the `CarReservationMessagingService`. If you need to use a different queue, you can simply call `serviceBusSenderFactory.Create("queue2")` instead.

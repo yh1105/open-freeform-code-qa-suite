@@ -1,0 +1,27 @@
+It seems like you want to align the "Stop Game" button with the "Begin Game" button. Here are a few general methods you can use to achieve this:
+
+1. **Flexbox:** You can use CSS Flexbox to align items. Wrap both buttons in a parent div and apply `display: flex;` to it. You can then use `justify-content: space-between;` to space the buttons evenly.
+
+2. **Grid:** CSS Grid is another powerful tool for aligning items. You can create a grid container and place items in specific grid cells.
+
+3. **Positioning:** You can use CSS positioning properties (`relative`, `absolute`, `fixed`, `sticky`) to position your buttons. Be careful with this method as it can lead to overlapping elements if not used correctly.
+
+Here's an example using Flexbox:
+
+```html
+<div id="buttonContainer">
+    <div id="GameStopped"><button id="StartBtn" class="btnStyle" onclick="gameStarted=true;">Begin Game</button></div>
+    <div id="GameRunning"><button id="StopBtn" class="btnStyle" onclick="self.close()">Stop Game</button></div>
+</div>
+```
+
+And the corresponding CSS:
+
+```css
+#buttonContainer {
+    display: flex;
+    justify-content: space-between;
+}
+```
+
+This will place the "Begin Game" button on the left and the "Stop Game" button on the right. Adjust the CSS as needed to fit your design.

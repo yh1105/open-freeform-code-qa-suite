@@ -1,0 +1,11 @@
+The warning is due to the fact that the `[]` operator on a `Map` returns a nullable value. In this case, the value type of the `Map` is `String`, but the `[]` operator returns a `String?` which can be null. To solve the warning, you can either change the type of the variable `s` to `String?` or use the null-aware operator `!` to assert that the value is not null. Here's an example of using the null-aware operator:
+
+```dart
+void foo(Map<int, String> myMap) {
+  if (myMap.containsKey(1)) {
+    String s = myMap[1]!;
+  }
+}
+```
+
+By using the `!` operator, we are telling the Dart compiler that we are sure that the value returned by `myMap[1]` is not null.

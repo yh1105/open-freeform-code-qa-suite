@@ -1,0 +1,20 @@
+To make sure the second query runs only after the first one is fulfilled, you can use the `useEffect` hook and add `user.id` as a dependency. Here's the updated code for the second query:
+
+```javascript
+const { data: userBio, isFulfilled: userBioFulfilled } = useGetUserBioQuery(user.id);
+
+useEffect(() => {
+  if (userFulfilled) {
+    // The user query has been fulfilled, so we can safely run the userBio query
+    userBioFulfilled || refetch();
+  }
+}, [user.id, userFulfilled, userBioFulfilled, refetch]);
+```
+
+In this code, we're using the `useEffect` hook to run some code after the component has rendered. We're passing an array of dependencies as the second argument to `useEffect`, which tells React to re-run the effect whenever any of the dependencies change.
+
+In this case, we're using `user.id` and `userFulfilled` as dependencies, so the effect will re-run whenever the `user` object changes or the `userFulfilled` flag changes.
+
+Inside the effect, we're checking if the `user` query has been fulfilled (`userFulfilled` is `true`). If it has, we check if the `userBio` query has been fulfilled (`userBioFulfilled` is `true`). If it hasn't, we call the `refetch` function to run the query again.
+
+By doing this, we ensure that the `userBio` query only runs after the `user` query has been fulfilled and we have the `id` parameter we need.

@@ -1,0 +1,13 @@
+The TypeScript compiler doesn't allow you to use multiple mapped types in a single type definition. You can solve this by creating two separate types and then merging them using the `&` operator.
+
+Here is the corrected code:
+
+```typescript
+type FruitsAndColors = {
+  [key in fruit]: number;
+} & {
+  [key in color]: boolean;
+}
+```
+
+This will create a type `FruitsAndColors` where each fruit is a key to a number, and each color is a key to a boolean.

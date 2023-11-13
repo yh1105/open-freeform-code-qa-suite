@@ -1,0 +1,11 @@
+The issue might be that you are using a `@Binding` property in a `PreviewProvider`. Try changing `@State` to `@Binding` in `ContentView_Previews` and pass a `Bool` value to `selected` in the preview. For example:
+
+```
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView(isSelected: .constant(true))
+    }
+}
+``` 
+
+This should update the view when the button is clicked.

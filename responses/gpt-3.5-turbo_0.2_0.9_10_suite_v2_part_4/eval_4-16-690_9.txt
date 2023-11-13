@@ -1,0 +1,23 @@
+Starting with macOS Catalina 10.15, the default shell is now `zsh` instead of `bash`. This means that if you have previously set up your environment variables in `~/.bash_profile`, they will not be automatically sourced by your shell anymore.
+
+To set up your environment variables in `zsh`, you can create or edit the `~/.zshrc` file and add the following line:
+
+```
+export JBOSS_HOME=/Users/{USERNAME}/Desktop/jboss7
+```
+
+Save the file and then execute the following command to apply the changes:
+
+```
+source ~/.zshrc
+```
+
+Now, when you execute `echo $JBOSS_HOME`, you should see the correct value.
+
+Alternatively, you can switch back to using `bash` as your default shell by running the following command:
+
+```
+chsh -s /bin/bash
+```
+
+Afterward, you can set up your environment variables in `~/.bash_profile` as you normally would.

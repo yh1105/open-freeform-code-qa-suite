@@ -1,0 +1,17 @@
+You can change the color of the accordion arrow by targeting the `.accordion-button:not(.collapsed)::after` pseudo-element in CSS. Here's an example:
+
+```css
+.accordion-button:not(.collapsed)::after {
+    color: green;
+}
+```
+
+This will change the color of the arrow to green when the accordion is open. If you also want to change the color of the arrow when the accordion is closed, you can add the following CSS:
+
+```css
+.accordion-button::after {
+    color: green;
+}
+```
+
+This will change the color of the arrow to green in both open and closed states.

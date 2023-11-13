@@ -1,0 +1,59 @@
+Flutter setState to another class?
+
+I have a root class `RootPage` which is a `StatefulWidget` which is always in view. I would like to change the `body` in `RootPage` which is controlled by `RootPage's currentPage Widget` from different classes such as my `FeedPage` class and any other class that I make?
+
+Example code
+
+```
+import 'package:flutter/material.dart';
+
+class RootPage extends StatefulWidget {
+  @override
+  _RootPageState createState() => new _RootPageState();
+}
+class _RootPageState extends State<RootPage> {
+  FeedPage feedPage;
+
+  Widget currentPage;
+
+  @override
+  void initState() {
+    super.initState();
+    feedPage = FeedPage();
+
+    currentPage = feedPage;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return new Scaffold(
+      //Current page to be changed from other classes too?
+      body: currentPage
+    );
+  }
+}
+
+
+
+class FeedPage extends StatefulWidget {
+  @override
+  _feedPageState createState() => new _feedPageState();
+}
+class _feedPageState extends State<FeedPage> {
+
+  @override
+  Widget build(BuildContext context) {
+    return new FlatButton(
+      onPressed: () {
+        setState(() {
+          //change the currentPage in RootPage so it switches FeedPage away and gets a new class that I'll make
+        });
+      },
+      child: new Text('Go to a new page but keep root, just replace this feed part'),
+    );
+  }
+}
+```
+
+
+I'm sure there's an obvious answer but I can't seem to figure out how to do it efficiently so it'll be easy to integrate future classes and keep my Root always in view.

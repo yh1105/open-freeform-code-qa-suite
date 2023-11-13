@@ -1,0 +1,67 @@
+You can create a button and add an `onClick` event to it. When the button is clicked, you can access the state value which holds the current value of the input field. Here is how you can do it:
+
+```javascript
+import React, { useState } from 'react';
+
+export default function InputField({name,label}) {
+  const [state, setState] = useState('')
+
+  const handleClick = () => {
+    alert(`Button clicked with input value: ${state}`);
+  }
+
+  return (
+    <div>
+     <label>{label}</label>
+      <input type="text" 
+      value={state} 
+      name={name}
+      onChange={(e) => setState(e.target.value)} />
+
+      <button onClick={handleClick}>Click me</button>
+
+      {state}
+    </div>
+  );
+}
+```
+
+In the above code, `handleClick` is a function that gets called when the button is clicked. Inside this function, we are showing an alert with the current value of the input field.
+
+If you have multiple input fields (like first name and last name), you can use an object as your state:
+
+```javascript
+import React, { useState } from 'react';
+
+export default function InputField() {
+  const [state, setState] = useState({firstName: '', lastName: ''})
+
+  const handleChange = (e) => {
+    setState({...state, [e.target.name]: e.target.value});
+  }
+
+  const handleClick = () => {
+    alert(`First Name: ${state.firstName}, Last Name: ${state.lastName}`);
+  }
+
+  return (
+    <div>
+     <label>First Name</label>
+      <input type="text" 
+      value={state.firstName} 
+      name="firstName"
+      onChange={handleChange} />
+
+     <label>Last Name</label>
+      <input type="text" 
+      value={state.lastName} 
+      name="lastName"
+      onChange={handleChange} />
+
+      <button onClick={handleClick}>Click me</button>
+    </div>
+  );
+}
+```
+
+In this code, `handleChange` function is updating the state with the current input field values. When the button is clicked, `handleClick` function is showing an alert with the current values of the first name and last name fields.

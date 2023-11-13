@@ -1,0 +1,28 @@
+Sure, you can use the `keydown` event and check if the key pressed was "Enter". Here is the revised version of your code:
+
+```javascript
+mounted() {
+  let editor = new Editor({
+    extensions: [
+      StarterKit,
+      Keymap({
+        "Enter": ({ state, dispatch }) => {
+          console.log("good");
+          // prevent the default "Enter" behavior
+          return true;
+        }
+      })
+    ],
+    content: this.value
+  });
+  this.editor = editor;
+}
+```
+
+Please note that you need to import `Keymap` from `tiptap-extensions`:
+
+```javascript
+import { Keymap } from 'tiptap-extensions'
+```
+
+This code will execute `console.log("good")` when the "Enter" key is hit.

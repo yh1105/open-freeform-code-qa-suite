@@ -1,0 +1,9 @@
+The error message `Error: Invalid login: 535-5.7.8 Username and Password not accepted` indicates that the username and password provided in the code are not being accepted by Gmail. There are a few things you can try to fix this issue:
+
+1. Make sure that you have enabled "Less secure app access" in your Gmail account settings. You can do this by going to your Google Account settings, then clicking on "Security" and scrolling down to "Less secure app access". Make sure that this option is turned on.
+
+2. If you have two-factor authentication enabled for your Google account, you will need to generate an app password to use instead of your regular password. You can generate an app password by going to your Google Account settings, then clicking on "Security" and scrolling down to "App passwords". Generate a new app password for your Node.js application and use that instead of your regular password.
+
+3. If neither of the above solutions work, you may need to enable "DisplayUnlockCaptcha" in your Google account settings. This option allows you to bypass Google's security measures temporarily so that you can log in to your account from a new device or application. To enable this option, go to your Google Account settings, then click on "Security" and scroll down to "Less secure app access". Click on "Unlock Captcha" and follow the instructions to enable this option.
+
+Once you have tried these solutions, try running your Node.js code again and see if the error has been resolved.

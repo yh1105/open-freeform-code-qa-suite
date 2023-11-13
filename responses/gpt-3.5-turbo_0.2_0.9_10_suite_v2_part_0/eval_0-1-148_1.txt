@@ -1,0 +1,15 @@
+Yes, Tailwind has first and last pseudo-class variants. You can use the `last:border-b-0` class to remove the border-bottom from the last `li` element. Here's the revised code:
+
+```html
+<ul>
+  <li
+    v-for="(item, index) in items"
+    :key="`item-${index}`"
+    class="border-solid border-b border-black last:border-b-0"
+  >
+    Item
+  </li>
+</ul>
+```
+
+This will add a border-bottom to all `li` elements except the last one.

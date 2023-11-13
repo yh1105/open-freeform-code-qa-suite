@@ -1,0 +1,27 @@
+To use the `truncate` class in TailwindCSS, you need to make sure that the element has a defined width. You can achieve this by adding a `max-w` class to the parent element or by setting a specific width using the `w` class.
+
+Here's an example of how you can modify your code to make the `truncate` class work:
+
+```html
+<div class="ml-1 inline-block max-w-xs">
+   <span>Label: </span>
+   <span class="font-semibold truncate">
+     long texttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt
+   </span>
+</div>
+```
+
+In this example, we added the `max-w-xs` class to the parent `div` element to limit its width to `20rem` (320px) on small screens. You can adjust the value of `max-w` to fit your design needs.
+
+Alternatively, you can set a specific width using the `w` class like this:
+
+```html
+<div class="ml-1 inline-block w-64">
+   <span>Label: </span>
+   <span class="font-semibold truncate">
+     long texttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt
+   </span>
+</div>
+```
+
+In this example, we set the width of the parent `div` element to `16rem` (256px) using the `w-64` class. Again, you can adjust the value of `w` to fit your design needs.

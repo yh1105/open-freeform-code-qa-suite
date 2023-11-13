@@ -1,0 +1,46 @@
+You can use the `sort_by` function provided by Rust's standard library to sort your vector of structs. Here is how you can do it:
+
+```rust
+my_vector.sort_by(|a, b| {
+    a.row.cmp(&b.row)
+        .then_with(|| a.column.cmp(&b.column))
+});
+```
+
+In this code, `sort_by` function takes a closure which compares two elements of the vector. The `cmp` function is used to compare `row` and `column` fields of `MyStruct`. The `then_with` function is used to compare `column` field if `row` fields are equal.
+
+Here is the complete example:
+
+```rust
+struct MyStruct{
+    row: u8,
+    column: u8
+}
+
+fn main() {
+    let mut my_vector = vec![
+        MyStruct { row: 10, column: 3 },
+        MyStruct { row: 10, column: 2 },
+        MyStruct { row: 10, column: 1 },
+    ];
+
+    my_vector.sort_by(|a, b| {
+        a.row.cmp(&b.row)
+            .then_with(|| a.column.cmp(&b.column))
+    });
+
+    for item in my_vector {
+        println!("row: {}, column: {}", item.row, item.column);
+    }
+}
+```
+
+This will print:
+
+```rust
+row: 10, column: 1
+row: 10, column: 2
+row: 10, column: 3
+```
+
+As you can see, the vector is sorted by `row` and then by `column`.

@@ -1,0 +1,15 @@
+This issue might be due to the SwiftUI preview not being associated with a target. Here's how to fix it:
+
+1. Open your SwiftUI file.
+2. Click on the file inspector (the first icon on the right panel).
+3. Under "Target Membership", make sure your app's target is checked.
+
+If the target is already checked, try the following:
+
+1. Clean your build folder (Product -> Clean Build Folder).
+2. Quit Xcode.
+3. Delete derived data folder (`~/Library/Developer/Xcode/DerivedData`).
+4. Restart your Mac.
+5. Open your project and try again.
+
+If none of the above works, it might be a bug in Xcode 12.3. You can try updating to a newer version of Xcode or downgrading to an older stable version.

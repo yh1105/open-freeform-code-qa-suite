@@ -1,0 +1,37 @@
+It seems like you are facing a version conflict between Hibernate Validator versions. The `@NotEmpty` and `@NotBlank` annotations are part of Hibernate Validator 6.x, but your logs show that Hibernate Validator 5.3.5.Final-redhat-2 is being used, which does not support these annotations.
+
+Spring Boot 2.x should come with Hibernate Validator 6.x by default. However, it seems like JBoss is providing its own version of Hibernate Validator (5.3.5.Final-redhat-2), which is being used instead of the one provided by Spring Boot.
+
+To resolve this issue, you can try the following steps:
+
+1. Exclude the Hibernate Validator provided by JBoss. This can be done by creating a `jboss-deployment-structure.xml` file in your `src/main/webapp/WEB-INF` directory with the following content:
+
+```xml
+<jboss-deployment-structure>
+    <deployment>
+        <exclusions>
+            <module name="org.hibernate.validator" />
+        </exclusions>
+    </deployment>
+</jboss-deployment-structure>
+```
+
+2. Add the Hibernate Validator dependency to your `pom.xml`:
+
+```xml
+<dependency>
+    <groupId>org.hibernate.validator</groupId>
+    <artifactId>hibernate-validator</artifactId>
+    <version>6.0.11.Final</version>
+</dependency>
+```
+
+3. Ensure that your application is using the correct version of Hibernate Validator. You can do this by adding the following code to your application:
+
+```java
+System.out.println(Validation.class.getProtectionDomain().getCodeSource().getLocation());
+```
+
+This will print the location of the `Validation` class, which is part of Hibernate Validator. The printed location should point to the Hibernate Validator jar file in your `.m2` directory, not to a jar file inside JBoss.
+
+Please note that these steps are specific to JBoss. If you are using a different application server, the steps might be different.

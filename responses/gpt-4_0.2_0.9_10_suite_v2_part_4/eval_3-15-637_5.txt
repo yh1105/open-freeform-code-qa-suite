@@ -1,0 +1,26 @@
+The issue you're facing might be due to the compatibility of Selenium Basic with Excel 2019. Selenium Basic has not been updated for a while and it might not work properly with the newer versions of Excel.
+
+Here are a few things you could try:
+
+1. **Check the Selenium Basic Version**: Make sure you are using the latest version of Selenium Basic. You can download it from [here](https://github.com/florentbr/SeleniumBasic/releases).
+
+2. **Check the Selenium WebDriver**: Make sure you are using the correct WebDriver for the browser you are using. You can download the latest WebDriver from [here](https://www.selenium.dev/downloads/).
+
+3. **Check the References**: In VBA, go to Tools > References and make sure that Selenium Type Library is checked.
+
+4. **Try using a different browser**: Instead of Internet Explorer, try using Chrome or Firefox. Internet Explorer is no longer being updated and might not work properly with Selenium.
+
+5. **Check the Excel Version**: If none of the above solutions work, you might want to consider downgrading your Excel to a version that is compatible with Selenium Basic.
+
+Here is an example of how you can use Chrome with Selenium Basic:
+
+```vba
+Dim driver As New WebDriver
+
+driver.Start "chrome", "https://www.google.com"
+driver.Window.Maximize
+```
+
+Remember to replace "chrome" with the browser you are using and "https://www.google.com" with the URL you want to open.
+
+If none of these solutions work, you might want to consider using a different automation tool that is compatible with Excel 2019.

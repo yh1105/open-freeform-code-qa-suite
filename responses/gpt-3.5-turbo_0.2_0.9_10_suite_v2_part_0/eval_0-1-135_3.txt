@@ -1,0 +1,22 @@
+It seems like the issue is related to the fact that the parent flex container has a `flex-direction` of `column`. In this case, the `height` of the flex container is determined by the height of its children, and the `width` of the flex container is determined by the maximum width of its children. 
+
+To fix this issue, you can set a `max-width` on the `img` element instead of a fixed `width`. This will allow the image to scale down to fit the width of its parent flex container while maintaining its aspect ratio. Here's an updated CSS code:
+
+```css
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.container section:first-child {
+  display: flex;
+  margin-bottom: 25px;
+}
+
+.container img {
+  max-width: 100%;
+  height: auto;
+}
+```
+
+With this code, the image should scale down to fit the width of its parent flex container while maintaining its aspect ratio. This should work in Safari and other modern browsers.

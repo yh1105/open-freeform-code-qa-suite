@@ -1,0 +1,75 @@
+You can create a button and an onClick event handler that will log the current state (which holds the input value) when the button is clicked. Here's how you can do it:
+
+```javascript
+import React, { useState } from 'react';
+
+export default function InputField({name,label}) {
+  const [state, setState] = useState('')
+
+  const handleClick = () => {
+    console.log(state);
+  }
+
+  return (
+    <div>
+     <label>{label}</label>
+      <input type="text" 
+      value={state} 
+      name={name}
+      onChange={(e) => setState(e.target.value)} />
+
+      <button onClick={handleClick}>Click me</button>
+
+      {state}
+    </div>
+  );
+}
+```
+
+In this code, `handleClick` is a function that logs the current state when the button is clicked. The button's `onClick` prop is set to this function, so it's called whenever the button is clicked.
+
+If you want to get the values of multiple input fields (like first name and last name), you can use an object as your state:
+
+```javascript
+import React, { useState } from 'react';
+
+export default function InputField() {
+  const [state, setState] = useState({
+    firstName: '',
+    lastName: ''
+  })
+
+  const handleChange = (e) => {
+    setState({
+      ...state,
+      [e.target.name]: e.target.value
+    });
+  }
+
+  const handleClick = () => {
+    console.log(state);
+  }
+
+  return (
+    <div>
+     <label>First Name</label>
+      <input type="text" 
+      value={state.firstName} 
+      name="firstName"
+      onChange={handleChange} />
+
+     <label>Last Name</label>
+      <input type="text" 
+      value={state.lastName} 
+      name="lastName"
+      onChange={handleChange} />
+
+      <button onClick={handleClick}>Click me</button>
+
+      {state.firstName} {state.lastName}
+    </div>
+  );
+}
+```
+
+In this code, `handleChange` is a function that updates the state with the new input values. It uses the input's `name` attribute to determine which part of the state to update. The `handleClick` function logs the entire state, which includes both the first name and last name.

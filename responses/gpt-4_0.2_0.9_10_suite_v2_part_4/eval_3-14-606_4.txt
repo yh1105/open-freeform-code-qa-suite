@@ -1,0 +1,31 @@
+It seems like there's a bit of confusion here. iOS doesn't have a "Developer Mode" that can be enabled like Android. However, if you're trying to install a provisioned testing build, you'll need to have the device's UDID registered with your Apple Developer account and the app properly signed.
+
+Here are the steps to install a provisioned testing build:
+
+1. **Register your device's UDID with your Apple Developer account.**
+
+    - Connect your device to your Mac.
+    - Open Xcode.
+    - Go to Window > Devices and Simulators.
+    - Select your device from the list on the left.
+    - The Identifier listed is your device's UDID.
+    - Log into your Apple Developer account online.
+    - Go to Certificates, Identifiers & Profiles.
+    - Under Devices, click the '+' button to add a new device.
+    - Enter a name for the device and the UDID, then click Continue.
+
+2. **Ensure the app is properly signed.**
+
+    - In Xcode, go to your project's settings.
+    - Select your target, then go to the Signing & Capabilities tab.
+    - Make sure Automatically manage signing is checked.
+    - Select your Apple Developer account from the Team dropdown.
+    - If there are any errors, Xcode should provide instructions to resolve them.
+
+3. **Build and install the app.**
+
+    - With your device still connected to your Mac, select it as the build target in Xcode.
+    - Press Cmd+R to build and run the app.
+    - The app should install and launch on your device.
+
+If you're still having trouble, the issue might be with the provisioning profile used to sign the app. Make sure the profile includes your device's UDID and the correct app ID.

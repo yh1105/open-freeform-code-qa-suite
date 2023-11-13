@@ -1,0 +1,8 @@
+Going off this question, you don't need a function for this but can retrieve this with $Env:Path:
+
+$Env:Path -split ";" -contains $directory
+The -contains operator is case-insensitive which is a bonus. It could be useful placing this in a function to ensure trailing slashes are trimmed, but that's uncommon:
+
+function inPath($directory) {
+    return ($Env:Path -split ';').TrimEnd('\') -contains $directory.TrimEnd('\')
+}

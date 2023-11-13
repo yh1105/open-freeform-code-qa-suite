@@ -1,0 +1,23 @@
+It seems like there's a bit of confusion here. iOS doesn't have a "Developer Mode" like Android does. However, if you're trying to install a provisioned testing build, you might be referring to the process of trusting an enterprise developer certificate.
+
+Here's how you can do that:
+
+1. After you've installed the app, go to your device's **Settings**.
+
+2. Scroll down and select **General**.
+
+3. Scroll down and select **Device Management** or **Profiles & Device Management**.
+
+4. Under the "Enterprise App" heading, you see a profile for the developer.
+
+5. Tap the name of the developer profile under the Enterprise App heading to establish trust for this developer.
+
+6. Then you see a prompt to confirm your choice.
+
+After you trust this profile, you can manually install other apps from the same developer and open them immediately. This developer remains trusted until you use the Delete App button to remove all apps from the developer.
+
+You must be connected to the Internet to verify the app developer's certificate when you establish trust. If you're behind a firewall, make sure it's configured to allow connections to https://ppq.apple.com. If you aren't connected to the Internet when you trust an app, the device displays "Not Verified" instead. To use the app, connect to the Internet and tap the Verify App button.
+
+After you verify an app for the first time, your iPhone, iPad, or iPod touch must reverify the app developer's certificate periodically to maintain trust. If you can't reverify, you may see a message that verification will expire soon. To maintain trust, connect your device to the Internet, then tap the Verify App button or launch the app.
+
+The steps above should resolve the issue you're facing. If not, please provide more details so I can give a more accurate answer.

@@ -1,0 +1,31 @@
+This issue might be due to the Go proxy settings. Go uses a module proxy to download modules, which is by default set to `https://proxy.golang.org`. However, this proxy does not support private modules. 
+
+To solve this issue, you need to configure Go to fetch the private module directly from the source by setting the `GOPRIVATE` environment variable to the path of your module. 
+
+You can do this by running the following command in your terminal:
+
+```bash
+export GOPRIVATE=github.ibm.com/kms/key-protect-client
+```
+
+This tells Go to bypass the proxy for your private module and fetch it directly from the source.
+
+If you have multiple private modules, you can separate them with a comma:
+
+```bash
+export GOPRIVATE=github.ibm.com/kms/key-protect-client,github.ibm.com/another/private/repo
+```
+
+Or you can use a wildcard to include all modules under a certain domain:
+
+```bash
+export GOPRIVATE=github.ibm.com/*
+```
+
+After setting the `GOPRIVATE` environment variable, try running `go build` again. 
+
+If you still encounter the issue, make sure that you have correctly configured your Git credentials on computer B. You can check this by trying to clone the private repository directly from Git. If you can't clone the repository, you need to fix your Git credentials first. 
+
+If you can clone the repository but `go build` still fails, try deleting your Go module cache with `go clean -modcache` and then run `go build` again. 
+
+For more information on Go's module system and how to configure it, you can check out the [official documentation](https://golang.org/ref/mod).

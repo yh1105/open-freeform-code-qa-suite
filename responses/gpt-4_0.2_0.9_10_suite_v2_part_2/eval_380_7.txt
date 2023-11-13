@@ -1,0 +1,46 @@
+In Java, you can use the `getClass()` method to get the class of an object. However, this method is not applicable to primitive types. For primitive types, you can use wrapper classes and then use `getClass()` method.
+
+Here is an example:
+
+```java
+Object c = "str";
+System.out.println(c.getClass().getName()); // java.lang.String
+
+c = 123;
+System.out.println(c.getClass().getName()); // java.lang.Integer
+
+c = new HashMap<>();
+System.out.println(c.getClass().getName()); // java.util.HashMap
+```
+
+This will print the fully qualified class name. If you want just the simple name, you can use `getSimpleName()` method:
+
+```java
+Object c = "str";
+System.out.println(c.getClass().getSimpleName()); // String
+
+c = 123;
+System.out.println(c.getClass().getSimpleName()); // Integer
+
+c = new HashMap<>();
+System.out.println(c.getClass().getSimpleName()); // HashMap
+```
+
+As you mentioned, `instanceof` operator does not work with primitive types. But it works with their wrapper classes. If you want to check if a variable is of a primitive type, you can use the wrapper class:
+
+```java
+Integer a = 12;
+System.out.println(a instanceof Integer); // true
+
+Float f = 12.3f;
+System.out.println(f instanceof Float); // true
+```
+
+In Java 8, you can also use `Optional` class and `isPresent()` method to check if a variable is of a certain type:
+
+```java
+Optional<String> optional = Optional.of("str");
+System.out.println(optional.isPresent()); // true
+```
+
+This will return `true` if the variable is of type `String`, and `false` otherwise.

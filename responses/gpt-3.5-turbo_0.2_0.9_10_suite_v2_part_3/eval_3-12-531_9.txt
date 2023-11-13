@@ -1,0 +1,19 @@
+The warning is caused by the null-safety feature in Dart. The value of `myMap[1]` may be null, so its type is `String?` instead of `String`. To solve the warning, you can either change the type of `s` to `String?` or use a null-aware operator like `!` to assert that the value is not null. Here are two solutions:
+
+Solution 1: Change the type of `s` to `String?`
+```dart
+void foo(Map<int, String> myMap) {
+  if (myMap.containsKey(1)) {
+    String? s = myMap[1];
+  }
+}
+```
+
+Solution 2: Use a null-aware operator `!` to assert that the value is not null
+```dart
+void foo(Map<int, String> myMap) {
+  if (myMap.containsKey(1)) {
+    String s = myMap[1]!;
+  }
+}
+```

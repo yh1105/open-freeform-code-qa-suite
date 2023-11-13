@@ -25,6 +25,13 @@ def grade_response(config: dict, case_dir: str, response: str, full_score: float
     ans = 0.
     tot = 0.
 
+    if 'lang' not in config:
+        print(f'Warning: language not specified in case {config["id"]}')
+    if 'type' not in config:
+        print(f'Warning: question type not specified in case {config["id"]}')
+    elif config['type'] not in ['code debugging', 'code completion', 'knowledge question-answering', 'non-code debugging']:
+        print(f'Warning: unusual question type (config["type"]) in case {config["id"]}')
+
     # four types of evaluation metrics + customized
     if 'keywords' in config['grading']:
         """
@@ -66,6 +73,17 @@ def grade_response(config: dict, case_dir: str, response: str, full_score: float
             else:
                 status['keywords'].append('unmatch')
             now_tot += rule_weight if not neg else 0.
+
+        if post_handler is not None:
+            # post_process the score
+            module_name = post_handler['module']
+            func_name = post_handler['func']
+
+            custom_module = importlib.import_module(module_name)
+            new_ans, new_tot, new_detail = getattr(custom_module, func_name)(now_ans, now_tot, status['keywords'])
+            status['post_handler_detail'] = new_detail
+            now_ans = new_ans
+            now_tot = new_tot
 
         status['keywords_score'] = now_ans
         status['keywords_totscore'] = now_tot
@@ -136,12 +154,20 @@ def grade_response(config: dict, case_dir: str, response: str, full_score: float
 
         if lang == 'python':
             lang = 'python'
-        elif lang in ['c', 'c++', 'cpp']:
+        elif lang in ['c', 'c++', 'cpp', 'c/c++', 'c++/c', 'cpp/c', 'c/cpp']:
             lang = 'cpp'
         elif lang in ['js', 'javascript']:
             lang = 'javascript'
         elif lang == 'r':
             lang = 'r'
+        # elif lang == 'custom-py':
+        #     lang = 'custom-py'
+        elif lang == 'java':
+            lang = 'java'
+        elif lang in ['c#', 'c-sharp', 'csharp', 'cs']:
+            lang = 'c#'
+        elif lang in ['ts', 'typescript']:
+            lang = 'typescript'
         else:
             raise NotImplementedError(f'Does not support this language yet: {lang}.')
 
@@ -183,7 +209,7 @@ def grade_response(config: dict, case_dir: str, response: str, full_score: float
         func_name = customized_config['func']
 
         custom_module = importlib.import_module(module_name)
-        now_ans, now_tot, now_detail = custom_module.__call__(func_name)(response)
+        now_ans, now_tot, now_detail = getattr(custom_module, func_name)(response)
 
         status['custom_score'] = now_ans
         status['custom_totscore'] = now_tot
@@ -197,7 +223,10 @@ def grade_response(config: dict, case_dir: str, response: str, full_score: float
     if 'min_score' in config['grading']:
         ans = max(ans, config['grading']['min_score'])
 
-    print(f'Score: {ans} / {tot} -> {(ans / tot) * full_score:.3f}')
+    if ans < 0.:
+        print(f'Warning: negative score ({ans}) found in case id {config["id"]}')
+
+    # print(f'Score: {ans} / {tot} -> {(ans / tot) * full_score:.3f}')
     return (ans / tot) * full_score, status
 
 
@@ -309,8 +338,8 @@ Total cases with response: {tot_cases_with_response}
     """
     print(summary_txt)
     if args.result_summary_path is None:
-        stem_filename = f'results/{os.path.basename(args.suite_path).rsplit(".", 1)[0]}_{os.path.basename(args.responses_dir)}'
-        print(f'Output to {stem_filename}.txt/yaml')
+        stem_filename = f'results/{os.path.basename(args.suite_path).rsplit(".", 1)[0]}_{os.path.basename(args.responses_dir.strip("/"))}'
+        print(f'Output to {stem_filename}.(txt/yaml)')
         args.result_summary_path = stem_filename + '.txt'
         args.result_detail_path = stem_filename + '.yaml'
         if not os.path.exists(os.path.dirname(args.result_detail_path)):

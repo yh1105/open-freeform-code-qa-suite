@@ -1,0 +1,40 @@
+Yes, you can achieve this by using the `ref` attribute in React. You can create a `ref` to your form in the `CustomForm` component, and then pass a function to submit the form from the `App` component. Here's how you can do it:
+
+```javascript
+import React, { Component } from "react";
+import ReactDOM from "react-dom";
+
+class CustomForm extends Component {
+  formRef = React.createRef(); // Create a ref
+
+  submitForm = () => { // Function to submit the form
+    if (this.formRef.current) {
+      this.formRef.current.dispatchEvent(new Event('submit', { cancelable: true }));
+    }
+  }
+
+  render() {
+    return (
+      <form id='my-form' onSubmit={(e) => {e.preventDefault(); alert('Form submitted!')}} ref={this.formRef}>
+        <button type='submit'>Inside Custom</button>
+      </form>
+    );
+  }
+}
+
+function App() {
+  const customFormRef = React.useRef(); // Create a ref
+
+  return (
+    <div>
+      <CustomForm ref={customFormRef} />
+      <button onClick={() => customFormRef.current.submitForm()}>In Root</button>
+    </div>
+  );
+}
+
+const rootElement = document.getElementById("root");
+ReactDOM.render(<App />, rootElement);
+```
+
+In this code, we've created a `ref` to the form in the `CustomForm` component, and a function `submitForm` to submit the form. We then pass this function to the `App` component using another `ref`. When the 'In Root' button is clicked, it calls this function and submits the form.

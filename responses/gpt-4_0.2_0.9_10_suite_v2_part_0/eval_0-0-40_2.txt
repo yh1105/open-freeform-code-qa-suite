@@ -1,0 +1,35 @@
+The error message you're seeing is due to a conflict between the Windows and WSL versions of Node.js and npm. The Windows version of npm is being called instead of the WSL version, and because the Windows version is a DOS program, it can't be run directly in WSL.
+
+You can solve this problem by adding the following lines to your `.bashrc` or `.zshrc` file:
+
+```bash
+export PATH="/usr/bin:$PATH"
+```
+
+This line will ensure that the WSL versions of Node.js and npm are found first when you type `node` or `npm`.
+
+After adding this line, you need to source your `.bashrc` or `.zshrc` file to apply the changes:
+
+```bash
+source ~/.bashrc
+```
+
+or
+
+```bash
+source ~/.zshrc
+```
+
+Now, when you type `node -v` or `npm -v`, you should see the versions of Node.js and npm that you installed in WSL.
+
+If you still face the issue, you might need to reinstall `npm` using the following command:
+
+```bash
+sudo apt-get install -y npm
+```
+
+And then check the version again:
+
+```bash
+npm -v
+```

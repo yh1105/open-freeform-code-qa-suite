@@ -1,0 +1,17 @@
+The issue you're experiencing could be due to several reasons. Here are some possible causes and solutions:
+
+1. **Cookie Domain Configuration**: Check your `.env` file for the `SESSION_DOMAIN` variable. If it's set, make sure it matches your application's domain. If it's not set, you might want to set it to your application's domain.
+
+2. **Secure Cookies**: If your application is running over HTTP but your `SESSION_SECURE_COOKIE` is set to `true`, your application will not set a cookie. Make sure this value is `false` if you're running over HTTP.
+
+3. **Cookie SameSite Attribute**: If you're running Laravel 7.x or above, there's a new configuration option for the SameSite attribute of cookies. If this attribute is set to `strict`, it might cause issues with your CSRF token. Try setting `SESSION_SAMESITE` to `lax` or `none` in your `.env` file.
+
+4. **Middleware**: Ensure that `\App\Http\Middleware\VerifyCsrfToken::class` is included in your `web` middleware group in `app/Http/Kernel.php`.
+
+5. **Session Files Permissions**: Check the permissions of the `storage/framework/sessions` directory. The web server needs to have read and write permissions to this directory.
+
+6. **Cache Configuration**: Clear your application cache using `php artisan cache:clear` and `php artisan config:clear`.
+
+7. **Server Configuration**: Some server configurations or security modules (like ModSecurity in Apache) can strip out cookies. Check your server's error logs for any indications of this.
+
+Remember to restart your server after making these changes to ensure they take effect.

@@ -1,0 +1,36 @@
+To get the value of the Ant Design Switch component in React, you need to add a `name` attribute to the `Switch` component and then reference that name in the `onCreate` function. Here's the revised code:
+
+```html
+<Form form={form} layout="vertical">
+  <Form.Item
+    label="Description"
+    name="description"
+    rules={[{ required: true, message: 'Enter a description' }]}
+  >
+    <Input placeholder="Enter Description" />
+  </Form.Item>
+
+  <Form.Item name="chargable" noStyle valuePropName="checked">
+    <Switch name="chargable" checkedChildren="Yes" unCheckedChildren="No" />
+    <span>Chargable</span>
+  </Form.Item>
+
+  <Button
+    onClick={() => {
+      form
+        .validateFields()
+        .then((values) => {
+          form.resetFields()
+          onCreate({ ...values, chargable: values.chargable ? 'Yes' : 'No' })
+        })
+        .catch((info) => {
+          console.log('Validate Failed:', info)
+        })
+    }}
+  >
+    Save
+  </Button>
+</Form>
+```
+
+In the `Form.Item` component, we added a `name` attribute of `chargable` to the `Switch` component. Then, in the `onClick` function of the `Button` component, we added `chargable` to the `onCreate` function with a value of `'Yes'` if the switch is checked and `'No'` if it is unchecked. This should pass the value of the switch to the `onCreate` function along with the other form values.

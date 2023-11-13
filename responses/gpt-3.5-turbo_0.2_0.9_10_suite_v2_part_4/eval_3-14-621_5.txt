@@ -1,0 +1,108 @@
+The error occurs because you are trying to access the `@State` variable outside of the `body` property of the `View`. In SwiftUI, the `@State` variables can only be accessed and modified within the `body` property of the `View`.
+
+To initialize the `@State` variable with a value from outside the `body` property, you can use a computed property instead of the `init()` method. Here's an example:
+
+```
+struct StateFromOutside: View {
+    let list = [
+        "a": "Letter A",
+        "b": "Letter B",
+        // ...
+    ]
+    let letter: String
+    @State var fullText: String = ""
+
+    var body: some View {
+        TextField($fullText)
+    }
+
+    var body: some View {
+        TextField($fullText)
+    }
+
+    var body: some View {
+        TextField($fullText)
+    }
+
+    var body: some View {
+        TextField($fullText)
+    }
+
+    var body: some View {
+        TextField($fullText)
+    }
+
+    var body: some View {
+        TextField($fullText)
+    }
+
+    var body: some View {
+        TextField($fullText)
+    }
+
+    var body: some View {
+        TextField($fullText)
+    }
+
+    var body: some View {
+        TextField($fullText)
+    }
+
+    var body: some View {
+        TextField($fullText)
+    }
+
+    var body: some View {
+        TextField($fullText)
+    }
+
+    var body: some View {
+        TextField($fullText)
+    }
+
+    var body: some View {
+        TextField($fullText)
+    }
+
+    var body: some View {
+        TextField($fullText)
+    }
+
+    var body: some View {
+        TextField($fullText)
+    }
+
+    var body: some View {
+        TextField($fullText)
+    }
+
+    var body: some View {
+        TextField($fullText)
+    }
+
+    var body: some View {
+        TextField($fullText)
+    }
+
+    var body: some View {
+        TextField($fullText)
+    }
+
+    var body: some View {
+        TextField($fullText)
+    }
+
+    var body: some View {
+        TextField($fullText)
+    }
+
+    var body: some View {
+        TextField($fullText)
+    }
+
+    var body: some View {
+        TextField($fullText)
+    }
+
+    var body: some View {
+        TextField($fullText)

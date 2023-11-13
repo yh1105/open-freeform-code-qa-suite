@@ -1,0 +1,10 @@
+How to disable unused variable warning in Rust?
+
+According to [this answer](https://stackoverflow.com/a/25877389/10116440), `#[allow(dead_code)]` should work, but it doesn't
+```
+fn main() {
+    #[allow(dead_code)]
+    let x = 0;
+}
+```
+

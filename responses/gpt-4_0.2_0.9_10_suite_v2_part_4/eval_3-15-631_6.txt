@@ -1,0 +1,27 @@
+You can modify your VBA code to remove the spaces by not replacing the special characters with a space (" "), but with an empty string (""). Here's how you can do it:
+
+```vba
+Sub ReplaceSpecial()
+    Dim cel As Range
+    Dim strVal As String
+    Dim i As Long
+    Application.ScreenUpdating = False
+    For Each cel In Selection
+        strVal = cel.Value
+        For i = Len(strVal) To 1 Step -1
+            Select Case Asc(Mid(strVal, i, 1))
+                Case 32, 48 To 57, 65 To 90, 97 To 122
+                    ' Leave ordinary characters alone
+                Case Else
+                    strVal = Left(strVal, i - 1) & Right(strVal, Len(strVal) - i)
+            End Select
+        Next i
+        cel.Value = strVal
+    Next cel
+    Application.ScreenUpdating = True
+End Sub
+```
+
+In this code, instead of replacing the special character with a space, we are removing it by concatenating the part of the string before the special character (`Left(strVal, i - 1)`) and the part of the string after the special character (`Right(strVal, Len(strVal) - i)`).
+
+Also, note that the loop is now going backwards (`For i = Len(strVal) To 1 Step -1`). This is because removing characters from the string changes its length, which can cause problems if you're iterating forwards.

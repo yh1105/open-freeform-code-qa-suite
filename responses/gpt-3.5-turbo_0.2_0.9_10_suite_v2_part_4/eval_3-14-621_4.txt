@@ -1,0 +1,24 @@
+The issue is that you are trying to access the `@State` variable outside of the `body` property of the `View`. Instead, you can use a computed property to initialize the `@State` variable based on the `letter` parameter. Here's an updated version of your code:
+
+```
+struct StateFromOutside: View {
+    let list = [
+        "a": "Letter A",
+        "b": "Letter B",
+        // ...
+    ]
+    let letter: String
+    @State var fullText: String
+
+    init(letter: String) {
+        self.letter = letter
+        self._fullText = State(initialValue: list[letter]!)
+    }
+
+    var body: some View {
+        TextField($fullText)
+    }
+}
+```
+
+In this version, we use a computed property to initialize the `@State` variable based on the `letter` parameter. We also use the `_fullText` property wrapper to access the underlying `State` variable.

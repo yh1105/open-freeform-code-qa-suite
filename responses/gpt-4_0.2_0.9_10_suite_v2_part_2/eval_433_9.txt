@@ -1,0 +1,24 @@
+This issue is happening because Laravel uses CSRF protection for all POST, PUT, PATCH, and DELETE routes. When you log out from one tab, the session is destroyed and the CSRF token becomes invalid. So, when you try to log out from the other tab, Laravel can't verify the CSRF token and throws a 419 error.
+
+To handle this, you can modify the `logout` method in your `LoginController` to check if the session is already invalidated before trying to log out. Here's an example of how you can do this:
+
+```php
+public function logout(Request $request)
+{
+    if(Auth::check()) { // Check if the user is logged in
+        Auth::logout(); // Log out the user
+    }
+
+    return redirect('/login'); // Redirect to login page
+}
+```
+
+In this code, `Auth::check()` is used to check if the user is logged in. If the user is logged in, `Auth::logout()` is used to log out the user. If the user is not logged in (i.e., the session is already invalidated), it will simply redirect to the login page without trying to log out.
+
+Remember to include the `Auth` facade at the top of your controller:
+
+```php
+use Illuminate\Support\Facades\Auth;
+```
+
+This way, even if the user tries to log out from a session that is already invalidated, they will not see the 419 error page. Instead, they will be redirected to the login page.

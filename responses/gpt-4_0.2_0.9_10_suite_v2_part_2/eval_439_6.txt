@@ -1,0 +1,11 @@
+You should use the following command to rollback a migration:
+
+```bash
+bin/console --env=dev doctrine:migrations:execute 'Application\Migrations\Version20210909072642' --down --no-interaction -vvv
+```
+
+The error you're getting is because Doctrine is not able to find the migration class. You need to provide the fully qualified class name (including the namespace) of the migration class. 
+
+In your case, the namespace is `Application\Migrations` and the class name is `Version20210909072642`. So, the fully qualified class name is `Application\Migrations\Version20210909072642`.
+
+Also, make sure that the migration class `Version20210909072642` exists in the directory `app/DoctrineMigrations`. The directory path is relative to the root directory of your project.

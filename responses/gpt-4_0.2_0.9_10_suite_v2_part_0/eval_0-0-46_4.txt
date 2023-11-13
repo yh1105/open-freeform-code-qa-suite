@@ -1,0 +1,25 @@
+The error you're seeing is because ESLint is trying to find the `tsconfig.json` file in the root directory of your project, but it's not there. 
+
+You can fix this by providing the correct path to your `tsconfig.json` file in your `.eslintrc.js` file. 
+
+In your `.eslintrc.js` file, change the `project` property in `parserOptions` to the relative path from `.eslintrc.js` to `tsconfig.json`.
+
+```javascript
+parserOptions: {
+  project: "./path/to/tsconfig.json",
+  sourceType: "module",
+},
+```
+
+Replace `./path/to/` with the actual path to your `tsconfig.json` file. 
+
+For example, if your `.eslintrc.js` and `tsconfig.json` are in the same directory, you can just use:
+
+```javascript
+parserOptions: {
+  project: "./tsconfig.json",
+  sourceType: "module",
+},
+```
+
+After making this change, you may need to restart your IDE or the ESLint server for the changes to take effect.

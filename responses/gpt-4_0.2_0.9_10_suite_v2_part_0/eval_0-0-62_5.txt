@@ -1,0 +1,49 @@
+The error message is telling you that Vue.js recommends using primitive values (strings or numbers) as keys for elements in a `v-for` loop. In your case, you're using the entire `comment` object as a key, which is a non-primitive value.
+
+To fix this, you should use a unique primitive value from each `comment` object as the key. If each comment has a unique `id`, you could use that:
+
+```html
+<template>
+    <div class="container">
+        <h2>{{ story.title }}</h2>
+        <p>Score: {{ story.score }}</p>
+        <p>{{ story.url }}</p>
+        <div v-for="comment in comments" :key="comment.id">
+          <div class="comment-wrap">
+                <div class="comment-block">
+                    <p class="comment-text">{{ comment.text }}</p>
+                    <div class="bottom-comment">
+                        <div class="comment-author">{{ comment.by }}</div>
+                        <div class="comment-date">{{ comment.time }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+```
+
+If the `comment` object doesn't have a unique `id`, you might need to create one yourself. For example, you could use the index of each comment in the `comments` array:
+
+```html
+<template>
+    <div class="container">
+        <h2>{{ story.title }}</h2>
+        <p>Score: {{ story.score }}</p>
+        <p>{{ story.url }}</p>
+        <div v-for="(comment, index) in comments" :key="index">
+          <div class="comment-wrap">
+                <div class="comment-block">
+                    <p class="comment-text">{{ comment.text }}</p>
+                    <div class="bottom-comment">
+                        <div class="comment-author">{{ comment.by }}</div>
+                        <div class="comment-date">{{ comment.time }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+```
+
+This should resolve the warning you're seeing.

@@ -1,0 +1,24 @@
+The error message "bad CPU type in executable" is due to the fact that MacOS Catalina only supports 64-bit applications, and the application you're trying to run is a 32-bit application. 
+
+Unfortunately, as of now, there is no 64-bit version of pdftk available. However, there are a few workarounds you can try:
+
+1. **Use Docker**: If you have Docker installed, you can use a Docker image that has pdftk installed. Here is an example of how to use it:
+
+    ```bash
+    docker run --rm -v $(pwd):/workdir -it mnuessler/pdftk pdftk --help
+    ```
+
+    This command will download and run a Docker container with pdftk installed, and mount your current directory to `/workdir` in the container. You can replace `pdftk --help` with any pdftk command you want to run.
+
+2. **Use a pdftk alternative**: There are many alternatives to pdftk, such as qpdf and pdfjam. You can install them using Homebrew:
+
+    ```bash
+    brew install qpdf
+    brew install pdfjam
+    ```
+
+3. **Use a virtual machine or dual boot**: You can install an older version of MacOS or a different OS that supports 32-bit applications in a virtual machine or as a dual boot option, and run pdftk there.
+
+4. **Use a cloud service**: There are many cloud services that can manipulate PDF files, such as Adobe's online services. This might be an option if you're okay with uploading your files to a third party.
+
+Remember to always be cautious when downloading software from the internet, and only download from trusted sources.

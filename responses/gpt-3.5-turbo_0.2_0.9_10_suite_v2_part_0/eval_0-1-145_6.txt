@@ -1,0 +1,12 @@
+In TailwindCSS, the `truncate` class only works if the parent element has a fixed width. You can add the `w-XX` class to the parent element to give it a fixed width. For example:
+
+```html
+<div class="ml-1 inline-block w-64">
+   <span>Label: </span>
+   <span class="font-semibold truncate">
+     long texttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt
+   </span>
+</div>
+```
+
+In this example, the parent element has a width of `64` which means that the text will be truncated if it overflows beyond that width. You can adjust the width to fit your needs.

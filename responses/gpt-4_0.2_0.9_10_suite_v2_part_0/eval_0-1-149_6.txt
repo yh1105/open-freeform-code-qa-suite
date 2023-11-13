@@ -1,0 +1,35 @@
+Sure, I can help you with that. You can use Tailwind CSS to create a hover effect. Here's how you can modify your code:
+
+```html
+<a href="#" class="group relative text-sky-600 transition duration-300">
+    Link
+    <span class="absolute left-0 w-full h-0.5 bg-sky-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></span>
+</a>
+```
+
+In this code, I've made the following changes:
+
+1. Added `relative` to the link to position the span relative to the link.
+2. Added `absolute` and `left-0` to the span to position it at the bottom of the link.
+3. Added `transform scale-x-0` to the span to initially hide it.
+4. Added `group-hover:scale-x-100` to the span to show it when the link is hovered.
+5. Added `transition-transform` to the span to animate the transform property.
+
+Please note that you need to enable `group-hover` and `transition-transform` variants in your Tailwind CSS configuration. If you haven't done this, you can do it by adding the following code to your `tailwind.config.js` file:
+
+```javascript
+module.exports = {
+  theme: {
+    extend: {},
+  },
+  variants: {
+    extend: {
+      transform: ['group-hover'],
+      scale: ['group-hover'],
+    },
+  },
+  plugins: [],
+}
+```
+
+This will enable the `group-hover` variant for the `transform` and `scale` utilities.

@@ -1,0 +1,23 @@
+The err113 error from golangci-lint is suggesting that you should not define dynamic errors using `errors.New()` and instead use wrapped static errors. 
+
+To fix this, you can create a static error variable and use it for all error returns. Here's an example:
+
+```
+var (
+    ErrRepo = errors.New("repo error")
+)
+
+func foo() error {
+    // ...
+    _, err := repo.Save(&fooBarBar)
+    if err != nil {
+        return fmt.Errorf("save failed: %w", ErrRepo)
+    }
+    // ...
+    return nil
+}
+```
+
+In this example, we define a static error variable `ErrRepo` and use it for all error returns. When returning an error, we wrap it with `fmt.Errorf()` and include the static error variable using `%w`. This creates a wrapped error that includes the static error variable and the original error message.
+
+You can apply the same approach to the code that is causing the err113 errors.

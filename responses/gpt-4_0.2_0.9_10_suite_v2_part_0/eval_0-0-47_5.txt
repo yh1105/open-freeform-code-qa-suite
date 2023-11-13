@@ -1,0 +1,9 @@
+In TypeScript, you can define an array of a certain type using the `Array<Type>` syntax or the `Type[]` syntax. In your case, you want an array of objects with certain properties. You can define this inline in your function parameter like so:
+
+```typescript
+bagTotal = (products: {name: string, price: number, description: string}[]) => {
+ // function does stuff
+}
+```
+
+This tells TypeScript that `products` is an array of objects, where each object has a `name` property of type `string`, a `price` property of type `number`, and a `description` property of type `string`.

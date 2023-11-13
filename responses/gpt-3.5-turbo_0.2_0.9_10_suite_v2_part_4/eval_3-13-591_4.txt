@@ -1,0 +1,32 @@
+The reason why you are seeing the logs in that order is because the `onItemSelected` function is called asynchronously when the user selects an item from the spinner. This means that the function `setupListWithAdapter` will continue to execute after setting up the spinner and registering the `onItemSelectedListener`, and will immediately return the initial value of `itemSelected`, which is an empty string.
+
+To fix this, you can use a callback function to return the selected item after it has been selected by the user. Here's an example of how you can modify your code to use a callback:
+
+```
+fun Spinner.setupListWithAdapter(list: MutableList<String>, callback: (String) -> Unit) {
+    val adapter = ArrayAdapter(context, android.R.layout.simple_spinner_item, list)
+    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+    this.adapter = adapter
+    this.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+            val itemSelected = list[p2]
+            Log.e("categoryLog","1 : " + itemSelected)
+            callback(itemSelected)
+        }
+        override fun onNothingSelected(p0: AdapterView<*>?) {
+        }
+    }
+}
+```
+
+In this modified function, instead of returning a value, we are passing a callback function as a parameter. This callback function takes a single parameter of type `String`, which will be the selected item from the spinner. Inside the `onItemSelected` function, we call the callback function with the selected item as the argument.
+
+To use this modified function, you can pass a lambda function as the second parameter, like this:
+
+```
+spinner.setupListWithAdapter(list) { selectedItem ->
+    // Do something with the selected item
+}
+```
+
+In this example, `list` is the list of items to be displayed in the spinner, and the lambda function takes a single parameter `selectedItem`, which will be the selected item from the spinner. You can replace the comment with the code that you want to execute with the selected item.

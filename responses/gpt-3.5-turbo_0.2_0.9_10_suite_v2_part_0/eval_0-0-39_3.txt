@@ -1,0 +1,45 @@
+Yes, you can achieve this by using refs in React. You can create a ref in the parent component and pass it down to the child component as a prop. Then, you can attach an onClick event handler to the button in the parent component and call the submit method of the form using the ref.
+
+Here's an example of how you can modify your code to achieve this:
+
+```javascript
+import React, { Component } from "react";
+import ReactDOM from "react-dom";
+
+class CustomForm extends Component {
+  render() {
+    return (
+      <form id='my-form' onSubmit={() => alert('Form submitted!')}>
+        <button type='submit'>Inside Custom</button>
+      </form>
+    );
+  }
+}
+
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.formRef = React.createRef();
+  }
+
+  handleSubmit = () => {
+    this.formRef.current.submit();
+  }
+
+  render() {
+    return (
+      <div>
+        <CustomForm ref={this.formRef} />
+        <button onClick={this.handleSubmit}>In Root</button>
+      </div>
+    );
+  }
+}
+
+const rootElement = document.getElementById("root");
+ReactDOM.render(<App />, rootElement);
+```
+
+In this modified code, we create a ref using `React.createRef()` in the parent component's constructor. We pass this ref down to the `CustomForm` component as a prop named `ref`. In the `handleSubmit` method of the parent component, we call the `submit` method of the form using the ref.
+
+Now, when you click the 'In Root' button, it will call the `handleSubmit` method of the parent component, which will submit the form using the ref.

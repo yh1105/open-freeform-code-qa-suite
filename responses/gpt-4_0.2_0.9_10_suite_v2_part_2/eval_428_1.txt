@@ -1,0 +1,11 @@
+The error message you're seeing is related to the SSL version or encryption method used by the mail server. The error `error:1408F10B:SSL routines:ssl3_get_record:wrong version number` indicates that the SSL version used by your Laravel application does not match the one used by the mail server.
+
+Here are a few things you can try to resolve this issue:
+
+1. **Change the MAIL_ENCRYPTION setting:** In your `.env` file, you have `MAIL_ENCRYPTION=ssl`. Try changing this to `MAIL_ENCRYPTION=tls` and see if that resolves the issue. Some servers use TLS instead of SSL.
+
+2. **Change the MAIL_PORT setting:** You're currently using port 587, which is typically used for TLS. If the server is using SSL, it might be using port 465 instead. Try changing `MAIL_PORT=587` to `MAIL_PORT=465` in your `.env` file.
+
+3. **Check with the mail server provider:** If the above steps don't work, you may need to check with the provider of the mail server (in this case, propnex.sg) to see what SSL version or encryption method they're using. They may also be able to provide you with the correct port number to use.
+
+Remember to clear the config cache (`php artisan config:cache`) after making changes to your `.env` file to ensure that Laravel picks up the new settings.

@@ -1,0 +1,40 @@
+You can use the `react-intersection-observer` package from npm to achieve this. This package provides a React component that notifies you when it enters or leaves the viewport.
+
+First, install the package using npm:
+
+```bash
+npm install react-intersection-observer
+```
+
+Then, you can use the `InView` component from the package to wrap each of your divs. The `InView` component will call its `onChange` prop whenever the visibility of the component changes.
+
+Here's how you can modify your code to use the `InView` component:
+
+```javascript
+import React from 'react';
+import { InView } from 'react-intersection-observer';
+
+function MyComponent({ data }) {
+    const handleViewChange = (inView, entry) => {
+        if (inView) {
+            console.log(`Div with id ${entry.target.id} is visible`);
+        }
+    };
+
+    return (
+        <div id="parent">
+            {data.map(item => (
+                <InView as="div" id={item.id} onChange={handleViewChange}>
+                    {item.title}
+                </InView>
+            ))}
+        </div>
+    );
+}
+
+export default MyComponent;
+```
+
+In this code, `handleViewChange` is a function that will be called whenever a div enters or leaves the viewport. The `inView` parameter will be `true` if the div is in the viewport, and `false` otherwise. The `entry` parameter is the IntersectionObserverEntry object for the div, which contains information about the intersection state of the div.
+
+Please note that the Intersection Observer API is not supported in all browsers. You can check the current browser compatibility on [Can I use](https://caniuse.com/intersectionobserver).

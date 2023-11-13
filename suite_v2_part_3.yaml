@@ -1,0 +1,120 @@
+attempt_reduce_mode: max
+cases:
+- cases/eval_2-9-470.yaml
+- cases/eval_2-9-471.yaml
+# - cases/eval_2-9-472.yaml
+- cases/eval_2-9-473.yaml
+- cases/eval_2-9-474.yaml
+- cases/eval_2-9-475.yaml
+- cases/eval_2-9-476.yaml
+# - cases/eval_2-9-477.yaml
+- cases/eval_2-9-478.yaml
+# - cases/eval_2-9-479.yaml
+# - cases/eval_2-9-480.yaml
+- cases/eval_2-9-481.yaml
+- cases/eval_2-9-482.yaml
+# - cases/eval_2-9-483.yaml
+# - cases/eval_2-9-484.yaml
+# - cases/eval_2-9-485.yaml
+# - cases/eval_2-9-486.yaml
+# - cases/eval_2-9-487.yaml
+# - cases/eval_2-9-488.yaml
+- cases/eval_2-9-489.yaml
+- cases/eval_2-10-490.yaml
+- cases/eval_2-10-491.yaml
+- cases/eval_2-10-492.yaml
+# - cases/eval_2-10-493.yaml
+- cases/eval_2-10-494.yaml
+# - cases/eval_2-10-495.yaml
+- cases/eval_2-10-496.yaml
+- cases/eval_2-10-497.yaml
+- cases/eval_2-10-498.yaml
+- cases/eval_2-10-499.yaml
+# - cases/eval_2-10-500.yaml
+# - cases/eval_2-10-501.yaml
+# - cases/eval_2-10-502.yaml
+# - cases/eval_2-10-503.yaml
+- cases/eval_2-10-504.yaml
+# - cases/eval_2-10-505.yaml
+- cases/eval_2-10-506.yaml
+# - cases/eval_2-10-507.yaml
+# - cases/eval_2-10-508.yaml
+# - cases/eval_2-10-509.yaml
+- cases/eval_2-11-510.yaml
+#[TODO]- cases/eval_2-11-511.yaml
+# - cases/eval_2-11-512.yaml
+# - cases/eval_2-11-513.yaml
+#[TODO]- cases/eval_2-11-514.yaml
+#[TODO]- cases/eval_2-11-515.yaml
+# - cases/eval_2-11-516.yaml
+- cases/eval_2-11-517.yaml
+- cases/eval_2-11-518.yaml
+# - cases/eval_2-11-519.yaml
+- cases/eval_2-11-520.yaml
+- cases/eval_2-11-521.yaml
+- cases/eval_2-11-522.yaml
+# - cases/eval_2-11-523.yaml
+# - cases/eval_2-11-524.yaml
+# - cases/eval_2-11-525.yaml
+# - cases/eval_2-11-526.yaml
+# - cases/eval_2-11-527.yaml
+- cases/eval_2-11-528.yaml
+# - cases/eval_2-11-529.yaml
+# - cases/eval_3-12-530.yaml
+- cases/eval_3-12-531.yaml
+- cases/eval_3-12-532.yaml
+- cases/eval_3-12-533.yaml
+- cases/eval_3-12-534.yaml
+- cases/eval_3-12-535.yaml
+- cases/eval_3-12-536.yaml
+# - cases/eval_3-12-537.yaml
+- cases/eval_3-12-538.yaml
+# - cases/eval_3-12-539.yaml
+- cases/eval_3-12-540.yaml
+# - cases/eval_3-12-541.yaml
+- cases/eval_3-12-542.yaml
+# - cases/eval_3-12-543.yaml
+- cases/eval_3-12-544.yaml
+- cases/eval_3-12-545.yaml
+# - cases/eval_3-12-546.yaml
+# - cases/eval_3-12-547.yaml
+- cases/eval_3-12-548.yaml
+- cases/eval_3-12-549.yaml
+# - cases/eval_3-12-550.yaml
+- cases/eval_3-12-551.yaml
+# - cases/eval_3-12-552.yaml
+- cases/eval_3-12-553.yaml
+# - cases/eval_3-12-554.yaml
+# - cases/eval_3-12-555.yaml
+- cases/eval_3-12-556.yaml
+# - cases/eval_3-12-557.yaml
+# - cases/eval_3-12-558.yaml
+# - cases/eval_3-12-559.yaml
+- cases/eval_3-12-560.yaml
+- cases/eval_3-12-561.yaml
+- cases/eval_3-12-562.yaml
+# - cases/eval_3-12-563.yaml
+# - cases/eval_3-12-564.yaml
+# - cases/eval_3-12-565.yaml
+# - cases/eval_3-12-566.yaml
+# - cases/eval_3-12-567.yaml
+# - cases/eval_3-12-568.yaml
+# - cases/eval_3-12-569.yaml
+# - cases/eval_3-12-570.yaml
+# - cases/eval_3-12-571.yaml
+# - cases/eval_3-12-572.yaml
+# - cases/eval_3-12-573.yaml
+# - cases/eval_3-12-574.yaml
+# - cases/eval_3-12-575.yaml
+# - cases/eval_3-12-576.yaml
+# - cases/eval_3-12-577.yaml
+# - cases/eval_3-12-578.yaml
+# - cases/eval_3-12-579.yaml
+# - cases/eval_3-12-580.yaml
+# - cases/eval_3-12-581.yaml
+# - cases/eval_3-12-582.yaml
+# - cases/eval_3-12-583.yaml
+# - cases/eval_3-12-584.yaml
+# - cases/eval_3-12-585.yaml
+full_score_per_question: 1.0
+version: suite_v2_part_3.yaml

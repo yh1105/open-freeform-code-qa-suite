@@ -1,0 +1,11 @@
+You can optimize your task by using `awk` which is more efficient for text processing. Here is an optimized version of your script:
+
+```bash
+awk -F'=' '
+    /^name/ { if (name && value) print name "=" value; name=$2; value="" }
+    /^value/ { value=$2 }
+    END { if (name && value) print name "=" value }
+' input.txt > output.txt
+```
+
+This script works by splitting each line into fields separated by `=`. If the line starts with `name`, it checks if both `name` and `value` are set, and if so, it prints them out. Then it sets `name` to the second field of the line and resets `value`. If the line starts with `value`, it sets `value` to the second field of the line. At the end of the file, it checks if both `name` and `value` are set, and if so, it prints them out. This ensures that the last pair is printed if it exists.

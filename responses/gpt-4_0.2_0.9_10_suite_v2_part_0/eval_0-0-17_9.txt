@@ -1,0 +1,21 @@
+Sure, you can use the `keydown` event to listen for the "enter" key. Here is your revised code:
+
+```javascript
+mounted() {
+  let editor = new Editor({
+    extensions: [
+      StarterKit,
+      Keymap({
+        "Enter": () => {
+          console.log("good");
+          return true;
+        }
+      })
+    ],
+    content: this.value
+  });
+  this.editor = editor;
+}
+```
+
+In this code, `Keymap` is an extension that allows you to bind keyboard shortcuts to commands. The `"Enter"` key is being mapped to a function that logs "good" to the console. The function returns `true` to indicate that the default behavior of the "Enter" key should be prevented.

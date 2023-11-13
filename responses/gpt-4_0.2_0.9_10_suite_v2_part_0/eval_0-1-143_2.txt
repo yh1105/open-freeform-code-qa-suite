@@ -1,0 +1,29 @@
+You can modify the userChrome.css file to change the appearance of Firefox's user interface, including the spacing of menu items. Here's how you can do it:
+
+1. Open your Firefox profile folder. You can do this by typing `about:support` in the address bar, then clicking on "Open Folder" next to "Profile Folder".
+
+2. In the profile folder, create a new folder named `chrome` if it doesn't already exist.
+
+3. Inside the `chrome` folder, create a new file named `userChrome.css` if it doesn't already exist.
+
+4. Open `userChrome.css` with a text editor.
+
+5. Add the following code to the file:
+
+    ```css
+    :root {
+        --proton-menupopup-item-padding: 4px !important;
+    }
+    ```
+
+6. Save and close the file.
+
+7. In Firefox, go to `about:config` in the address bar.
+
+8. Search for `toolkit.legacyUserProfileCustomizations.stylesheets` and set its value to `true`. This allows Firefox to load `userChrome.css`.
+
+9. Restart Firefox.
+
+The `--proton-menupopup-item-padding` variable controls the padding of menu items. You can adjust the `4px` value to your liking.
+
+Please note that modifying `userChrome.css` is not officially supported by Mozilla and can lead to unexpected results. Always make a backup of your profile folder before making changes.

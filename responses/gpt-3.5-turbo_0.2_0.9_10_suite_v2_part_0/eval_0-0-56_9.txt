@@ -1,0 +1,18 @@
+It seems that the issue is related to the way you are running the container and exposing the port. When you run the container with the command `docker-compose run --publish 8080:8080 --rm app bash`, you are only exposing the port 8080 to the host machine, but not to the outside world. This means that you can access the port from within the host machine or from within the container, but not from another machine.
+
+To fix this issue, you need to change the `docker-compose.yml` file to expose the port to the outside world. You can do this by changing the `ports` section to:
+
+```yaml
+ports:
+  - "0.0.0.0:8080:8080"
+```
+
+This will expose the port 8080 to all network interfaces on the host machine, allowing you to access it from another machine.
+
+After making this change, you can run the container with the command `docker-compose up --build` and then try accessing the port from another machine using the IP address of the host machine and the port number, like this:
+
+```bash
+$ curl http://<host-ip>:8080
+```
+
+Replace `<host-ip>` with the IP address of your host machine.

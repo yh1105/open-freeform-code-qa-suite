@@ -1,0 +1,18 @@
+How to make super constructor required in dart
+
+I would like the IDE to inform me that I need to construct super constructor in inherited widget's constructor. Say for example if I have abstract class like below
+```
+abstract class BaseClass {
+  final String name;
+
+  BaseClass({
+    @required String name,
+  }) : this.name = name;
+}
+```
+
+I want the child class to know that I need to implement the super constructor. The below code throws at runtime but how do I make sure that it throws in build time or IDE lets me know before build?
+```
+class ChildClass extends BaseClass{}
+```
+

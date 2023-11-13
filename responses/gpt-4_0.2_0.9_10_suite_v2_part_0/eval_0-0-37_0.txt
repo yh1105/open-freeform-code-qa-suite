@@ -1,0 +1,13 @@
+Sure, you can achieve this by using a wildcard and then parse the parameters manually. Here is the route pattern:
+
+```javascript
+/route/:param1/config/:optionalParams*
+```
+
+This pattern will match all of the following routes:
+
+- `route/aa/config`
+- `route/aa/config/bb`
+- `route/aa/config/bb/cc`
+
+In your route handler, you can then split the `optionalParams` by `/` to get the individual parameters.

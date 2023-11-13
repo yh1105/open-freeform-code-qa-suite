@@ -1,0 +1,23 @@
+The `.attrs()` function in styled-components is a chainable method that allows you to attach additional props to a component. It's useful when you want to pass props to a styled component and use those props to influence the styling.
+
+Here's a simple example:
+
+```jsx
+const Button = styled.button.attrs(props => ({
+  type: props.type || 'button',
+}))`
+  font-size: 1em;
+  margin: 1em;
+  padding: 0.25em 1em;
+  border-radius: 3px;
+  color: ${props => props.color || 'palevioletred'};
+  border: 2px solid ${props => props.color || 'palevioletred'};
+`;
+
+// Usage
+<Button color="blue">Submit</Button>
+```
+
+In this example, the `attrs` function is used to set a default `type` prop for the button. It also allows you to pass a `color` prop to the component, which is then used to set the color of the text and the border.
+
+Without `attrs`, you would have to pass these props directly to the component every time you use it, which can be repetitive and error-prone. With `attrs`, you can set default values and keep your component usage cleaner and more concise.

@@ -1,0 +1,13 @@
+This issue can be caused by several reasons. Here are some steps you can try:
+
+1. **Clean the build folder**: In Xcode, select `Product` > `Clean Build Folder`.
+
+2. **Delete derived data**: Go to `Xcode` > `Preferences` > `Locations` > `Derived Data`, then delete the derived data folder.
+
+3. **Check your target membership**: Make sure that your `ContentView.swift` file is a member of the target. You can check this by selecting the file in the Project Navigator and checking the `Target Membership` section in the File Inspector.
+
+4. **Check your scheme**: Make sure that your scheme is set to the correct target. You can check this by going to `Product` > `Scheme` > `Edit Scheme` and checking the `Run` > `Info` > `Executable` is set to your app.
+
+5. **Restart Xcode**: Sometimes, simply restarting Xcode can solve the issue.
+
+If none of these steps work, you might need to create a new project and move your files there.

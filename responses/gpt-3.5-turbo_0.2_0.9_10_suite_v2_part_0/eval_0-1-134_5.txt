@@ -1,0 +1,39 @@
+It sounds like you might be trying to use a CSS preprocessor like Sass or Less. These preprocessors allow you to write CSS in a more efficient way by using variables, mixins, and other features. One of the features they offer is the ability to use shorthand notation to create CSS rules.
+
+For example, instead of writing out:
+
+```
+div {
+  background-color: red;
+  color: white;
+  font-size: 16px;
+}
+```
+
+You could write:
+
+```
+div {
+  background-color: red;
+  color: white;
+  font-size: 16px;
+}
+
+.classname {
+  @extend div;
+}
+```
+
+This would create a CSS rule for `.classname` that inherits all the properties of `div`. When you use `.classname` in your HTML, it will automatically have the same styles as `div`.
+
+If you're not using a preprocessor and you're just trying to use shorthand notation in regular CSS, make sure you're using the correct syntax. For example, to create a class with the same styles as `div`, you would write:
+
+```
+.classname {
+  background-color: red;
+  color: white;
+  font-size: 16px;
+}
+```
+
+Then you can use `<div class="classname">` in your HTML to apply those styles to the div.

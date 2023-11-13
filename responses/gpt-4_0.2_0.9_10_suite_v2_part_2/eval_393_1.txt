@@ -1,0 +1,7 @@
+No, it's not a bad practice to have separate pipelines for different requests if they require different logic. The whole point of using generics and pipelines is to provide flexibility and reusability. 
+
+In your case, `PipelineBehavior<RequestOne, ResponseOne>` and `PipelineBehavior<RequestTwo, ResponseTwo>` are two different pipelines, each tailored to handle a specific type of request and response. This is perfectly fine and is actually a good practice because it adheres to the Single Responsibility Principle (SRP) - each pipeline has one job, which is to process a specific type of request and produce a specific type of response.
+
+This approach also makes your code easier to maintain and understand, because the logic for handling each type of request is isolated in its own pipeline. If you need to modify the logic for `RequestOne`, you only need to touch `PipelineBehavior<RequestOne, ResponseOne>`, and you can be confident that you're not affecting the handling of `RequestTwo`.
+
+So, in conclusion, having separate pipelines for different requests is not a bad practice. It's a good way to keep your code clean, organized, and easy to maintain.

@@ -1,0 +1,9 @@
+The error message you are receiving indicates that the login credentials you are using are incorrect. Here are a few things you can try to fix the issue:
+
+1. Double-check that the email and password you are using are correct and that you have access to the account.
+
+2. Ensure that you have enabled "less secure apps" in your Google account settings. To do this, go to your Google account settings, click on "Security", and then toggle on "Less secure app access".
+
+3. If you have two-factor authentication enabled on your Google account, you will need to generate an app-specific password to use instead of your regular password. To do this, go to your Google account settings, click on "Security", and then scroll down to "App passwords". Generate a new app password and use that instead of your regular password in your code.
+
+4. If none of the above solutions work, you can try using OAuth2 authentication instead of a password. This involves creating a Google Cloud Platform project and generating credentials that can be used to authenticate your application. You can find more information on how to do this in the Nodemailer documentation.

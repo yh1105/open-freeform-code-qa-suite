@@ -1,0 +1,16 @@
+You can use the `group-hover` variant in Tailwind to apply styles to an element when its parent is being hovered over. Here's an example of how you can achieve the animation effect you're looking for:
+
+```html
+<a href="#" class="group text-sky-600 relative">
+  Link
+  <span class="absolute bottom-0 left-0 w-full h-0.5 bg-sky-600 transition duration-500 group-hover:h-full"></span>
+</a>
+```
+
+In this code, we've added the `relative` class to the link container, and the `absolute` class to the span element that will be animated. We've also set the `bottom-0` and `left-0` properties to make sure the span element is positioned at the bottom of the link container.
+
+To trigger the animation, we've added the `group-hover:h-full` class to the span element. This will make the element expand to its full height when the link container is being hovered over.
+
+Finally, we've removed the `max-w-0` and `h-0.5` classes from the span element, since they're no longer needed.
+
+I hope this helps! Let me know if you have any questions.

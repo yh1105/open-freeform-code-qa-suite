@@ -1,0 +1,7 @@
+The Rule of 5 is not outdated and is still relevant today. While it is true that in many cases, the default constructors and destructors provided by the compiler may be sufficient, there are still many scenarios where user-defined constructors and destructors are necessary.
+
+For example, if a class manages a resource such as memory or a file handle, it will need a user-defined destructor to properly release that resource. Similarly, if a class has non-trivial member variables, a user-defined copy constructor, copy assignment operator, move constructor, or move assignment operator may be necessary to ensure that the object is properly copied or moved.
+
+While it is true that smart pointers can often be used to manage resources, there are still cases where a user-defined destructor may be necessary. For example, if a class manages a resource that cannot be easily encapsulated by a smart pointer, such as a network connection or a custom data structure, a user-defined destructor may be necessary to properly release that resource.
+
+In summary, while the default constructors and destructors provided by the compiler may be sufficient in many cases, there are still scenarios where user-defined constructors and destructors are necessary. The Rule of 5 provides a useful guideline for ensuring that all necessary constructors and destructors are properly defined.

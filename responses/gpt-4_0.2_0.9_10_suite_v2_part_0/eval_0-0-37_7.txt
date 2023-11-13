@@ -1,0 +1,13 @@
+Sure, you can use the following pattern to fulfill your requirement:
+
+```javascript
+/route/:param1/config/:OptionalParam2?/:OptionalParam3?
+```
+
+This pattern will match:
+
+- `route/aa/config`
+- `route/aa/config/bb`
+- `route/aa/config/bb/cc`
+
+Please note that the `?` symbol denotes an optional parameter in the route.

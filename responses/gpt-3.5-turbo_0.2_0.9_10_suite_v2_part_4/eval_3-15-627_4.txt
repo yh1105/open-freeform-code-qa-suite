@@ -1,0 +1,1 @@
+You can create a calendar input in VBA Excel without using any external controls or ocxs. One way to do this is by creating a userform with a calendar control using the Microsoft Date and Time Picker Control. Another way is to use a combination of VBA code and Excel cells to create a calendar input.

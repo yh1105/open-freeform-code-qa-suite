@@ -1,0 +1,36 @@
+Yes, you can modify the user interface of Firefox by adding custom CSS rules. Here's how you can reduce the spacing between menu items:
+
+1. Open your Firefox profile folder. You can do this by typing `about:support` in the address bar and then clicking on "Open Folder" next to "Profile Folder".
+
+2. In your profile folder, create a new folder named `chrome` if it doesn't exist already.
+
+3. Inside the `chrome` folder, create a new file named `userChrome.css` if it doesn't exist already.
+
+4. Open `userChrome.css` in a text editor and add the following CSS rules:
+
+    ```css
+    :root {
+        --proton-toolbar-vertical-padding: 4px !important;
+        --proton-toolbar-horizontal-padding: 4px !important;
+        --proton-menu-vertical-padding: 4px !important;
+        --proton-menu-horizontal-padding: 4px !important;
+    }
+    ```
+
+    The `4px` values are just examples, you can adjust them to your liking.
+
+5. Save the `userChrome.css` file and restart Firefox.
+
+Please note that by default, Firefox 69 and later versions don't load `userChrome.css` or `userContent.css`. You need to change this setting:
+
+1. Type `about:config` in the address bar and press Enter.
+
+2. Click on "Accept the Risk and Continue".
+
+3. In the search box, type `toolkit.legacyUserProfileCustomizations.stylesheets`.
+
+4. Set the value of `toolkit.legacyUserProfileCustomizations.stylesheets` to `true`.
+
+5. Restart Firefox.
+
+Now, Firefox should load your custom CSS rules and the spacing between menu items should be reduced.

@@ -1,0 +1,42 @@
+The error you're seeing is because you're trying to use the `std::filesystem` namespace, but you've included `<experimental/filesystem>`. The `std::filesystem` namespace is part of the C++17 standard, but `<experimental/filesystem>` is a precursor to that and uses the `std::experimental::filesystem` namespace instead.
+
+To fix this, you have two options:
+
+1. **Use the `std::experimental::filesystem` namespace**: You can change your code to use the `std::experimental::filesystem` namespace instead of `std::filesystem`. Here's how you can do that:
+
+```c++
+#include <experimental/filesystem>
+namespace fs = std::experimental::filesystem;
+
+int main(int argc, char** argv)
+{
+    std::string imageDirectory = "./image";;
+    std::vector<std::string> imagePath;
+    for (const auto& entry: fs::directory_iterator(imageDirectory))
+    {
+        imagePath.push_back(entry.path());
+        std::cout << entry.path() << std::endl;
+    }
+    return 0;
+}
+```
+
+2. **Switch to `<filesystem>`**: If your compiler supports C++17 or later, you can switch to using `<filesystem>` instead of `<experimental/filesystem>`. Here's how you can do that:
+
+```c++
+#include <filesystem>
+
+int main(int argc, char** argv)
+{
+    std::string imageDirectory = "./image";;
+    std::vector<std::string> imagePath;
+    for (const auto& entry: std::filesystem::directory_iterator(imageDirectory))
+    {
+        imagePath.push_back(entry.path());
+        std::cout << entry.path() << std::endl;
+    }
+    return 0;
+}
+```
+
+Remember to compile with `-std=c++17` or `-std=c++2a` if you choose the second option.

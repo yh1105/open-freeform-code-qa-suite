@@ -1,0 +1,17 @@
+The `~/.bashrc` file is not sourced when a Docker container is run because Docker containers do not start interactive or login shells by default, which are the types of shells that would source `~/.bashrc`.
+
+To ensure that the `nvm` environment is properly set up, you can source the `nvm.sh` script directly in your `launch.sh` script. Here's how you can modify your `launch.sh`:
+
+```bash
+#!/bin/bash
+
+# Source nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+
+cd /workspace/demo
+npm install
+node index.js
+```
+
+This way, the `nvm` environment is set up each time your `launch.sh` script is run, ensuring that `node` and `npm` are available.

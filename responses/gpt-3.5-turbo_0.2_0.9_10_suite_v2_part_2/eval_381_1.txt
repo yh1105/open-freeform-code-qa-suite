@@ -1,0 +1,20 @@
+There are a few things you can check to troubleshoot this issue:
+
+1. Make sure that the `@EnableSwagger2` annotation is present in your Spring Boot application class. This annotation enables Swagger support in your application.
+
+2. Check that the `@ComponentScan` annotation is present in your Spring Boot application class. This annotation scans the package and its sub-packages where the application class is located for Spring components.
+
+3. Verify that the `springdoc.swagger-ui.path` property is set to `/swagger-ui.html` in your `application.properties` file. This is the default path for the Swagger UI.
+
+4. Check that the `@RestController` annotation is present in your controller class. This annotation is required for Swagger to generate the API documentation.
+
+5. Verify that the OpenAPI specification is available at the `/v3/api-docs` endpoint. You can check this by navigating to `http://localhost:8080/v3/api-docs` in your browser.
+
+If none of these steps resolve the issue, you can try adding the following configuration to your `application.properties` file:
+
+```
+springdoc.swagger-ui.enabled=true
+springdoc.swagger-ui.path=/swagger-ui.html
+```
+
+This will enable the Swagger UI and set the path to `/swagger-ui.html`.

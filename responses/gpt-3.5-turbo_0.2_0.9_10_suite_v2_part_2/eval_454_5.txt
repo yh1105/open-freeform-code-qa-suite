@@ -1,0 +1,23 @@
+The err113 lint rule is suggesting that you should not define dynamic errors directly using `errors.New()` in your code. Instead, you should use wrapped static errors.
+
+Wrapped static errors are errors that are defined once and then reused throughout your codebase. They are typically defined as package-level variables and can be wrapped with additional context as needed.
+
+Here's an example of how you can define a wrapped static error:
+
+```go
+package mypackage
+
+import "errors"
+
+var ErrRepo = errors.New("repo error")
+```
+
+Then, in your code, you can use the wrapped error like this:
+
+```go
+return nil, fmt.Errorf("failed to save: %w", mypackage.ErrRepo)
+```
+
+This will wrap the `ErrRepo` error with additional context and return it as a new error.
+
+So, to fix the lint errors, you should define wrapped static errors for the dynamic errors that you are currently defining using `errors.New()`.

@@ -1,0 +1,11 @@
+By default, Laravel's `dd()` function limits the output to 1024 characters. However, you can increase this limit by setting the `XDEBUG_MAX_DATA` environment variable to a higher value.
+
+To do this, you can add the following line to your `.env` file:
+
+```
+XDEBUG_MAX_DATA=4096
+```
+
+This will increase the limit to 4096 characters. You can adjust the value to suit your needs.
+
+Alternatively, you can use the `dump()` function instead of `dd()`. The `dump()` function will output the entire variable, without any limitations. However, it will not stop the execution of your code like `dd()` does.

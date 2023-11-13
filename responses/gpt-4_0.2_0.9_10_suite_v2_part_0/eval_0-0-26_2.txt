@@ -1,0 +1,39 @@
+The ESLint error you're seeing is because you're using an anonymous function as a component in your render method. ESLint expects all components to have a `displayName` for debugging purposes. 
+
+You can solve this issue by either disabling the ESLint rule for that line or by creating a named function. 
+
+Here's how you can do it:
+
+**Option 1: Disabling the ESLint rule for that line**
+
+```jsx
+const columns_payment_summary_table = [ 
+    {
+      title: FooConstants.LABEL_QUANTITY_SELECTED,
+      dataIndex: 'group',
+      key: 'group',
+      render: text => (
+        // eslint-disable-next-line react/display-name
+        <span>{getCountForCountry(text)}</span>
+      ),
+    }
+  ]
+```
+
+**Option 2: Creating a named function**
+
+```jsx
+const renderGroup = text => <span>{getCountForCountry(text)}</span>;
+renderGroup.displayName = 'renderGroup';
+
+const columns_payment_summary_table = [ 
+    {
+      title: FooConstants.LABEL_QUANTITY_SELECTED,
+      dataIndex: 'group',
+      key: 'group',
+      render: renderGroup,
+    }
+  ]
+```
+
+In the second option, we created a named function `renderGroup` and assigned a `displayName` to it. Then we used this function in the `render` property. This way, ESLint can see the `displayName` and won't throw an error.

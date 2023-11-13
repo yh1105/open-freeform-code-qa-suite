@@ -1,0 +1,34 @@
+Yes, Go modules support this kind of workflow. Here's a simple Dockerfile that takes advantage of Docker's layer caching for Go module dependencies:
+
+```Dockerfile
+# Start from the latest golang base image
+FROM golang:1.11
+
+# Add Maintainer Info
+LABEL maintainer="Your Name <youremail@domain.com>"
+
+# Set the Current Working Directory inside the container
+WORKDIR /app
+
+# Copy go mod and sum files
+COPY go.mod go.sum ./
+
+# Download all dependencies. Dependencies will be cached if the go.mod and go.sum files are not changed
+RUN go mod download
+
+# Copy the source from the current directory to the Working Directory inside the container
+COPY . .
+
+# Build the Go app
+RUN go build -o main .
+
+# Expose port 8080 to the outside world
+EXPOSE 8080
+
+# Command to run the executable
+CMD ["./main"]
+```
+
+This Dockerfile will first copy the `go.mod` and `go.sum` files, and then run `go mod download`, which will download all the dependencies specified in those files. This will be cached as a separate Docker layer, and will only be re-run if the `go.mod` or `go.sum` files change.
+
+Then it copies the rest of the source code and builds the binary. This means that if you only change the source code, Docker will use the cached layer for the dependencies, and only the build step will be re-run.

@@ -1,0 +1,14 @@
+The reason it didn't work is that this needs to be done inside a function or a method, not at the top level.
+
+Another solution is to declare your map in Flutter with the keyword "final". Here's an example:
+
+```dart
+final Map<String, int> someMap = {
+  "a": 1,
+  "b": 2,
+};
+
+someMap["c"] = 3;
+``` 
+
+Note that using "final" makes the map immutable, so you won't be able to add or remove pairs after initialization. If you need to modify the map later, you can use "var" or "Map<String, int>".

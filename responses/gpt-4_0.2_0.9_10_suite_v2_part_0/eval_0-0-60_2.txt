@@ -1,0 +1,34 @@
+The error message you're seeing is because Bootstrap 4 requires `popper.js` for popover and tooltip components. If you're not using these components, you can import Bootstrap without `popper.js`. But if you're using them, you need to install `popper.js`.
+
+Here are the steps to fix this issue:
+
+1. Install `popper.js` via npm:
+
+```bash
+npm install popper.js --save
+```
+
+2. After installing `popper.js`, you need to import it in your file before importing Bootstrap:
+
+```javascript
+import Popper from 'popper.js';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.min.js';
+```
+
+3. If you're using Webpack, you can add the following to your Webpack configuration file:
+
+```javascript
+plugins: [
+  new webpack.ProvidePlugin({
+    $: 'jquery',
+    jQuery: 'jquery',
+    'window.jQuery': 'jquery',
+    Popper: ['popper.js', 'default'],
+  }),
+]
+```
+
+This will make `Popper` available to all your modules without having to import it explicitly.
+
+Remember to restart your development server after making these changes.

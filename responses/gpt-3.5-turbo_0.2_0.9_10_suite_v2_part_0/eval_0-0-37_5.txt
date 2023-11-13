@@ -1,0 +1,13 @@
+Sure, the revised route pattern to fulfill the requirement is:
+
+```
+/route/:param1/config/:OptionalParam2?/:OptionalParam3?
+```
+
+This pattern will match the following URLs:
+
+- `/route/aa/config`
+- `/route/aa/config/bb`
+- `/route/aa/config/bb/cc`
+
+The `:param1` is a required parameter, while `:OptionalParam2` and `:OptionalParam3` are optional parameters. The `?` character after each optional parameter indicates that it is optional.

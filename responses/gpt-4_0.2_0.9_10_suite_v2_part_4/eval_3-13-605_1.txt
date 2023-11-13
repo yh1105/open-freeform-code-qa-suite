@@ -1,0 +1,53 @@
+The error message you're seeing is due to a mismatch between the Kotlin version used to compile the Stripe library and the Kotlin version in your project. 
+
+To resolve this issue, you need to update the Kotlin version in your project to match the one used by the Stripe library. Here are the steps to do that:
+
+1. Open your project's root `build.gradle` file.
+2. In the `buildscript` block, find the `ext.kotlin_version` line and change the version to '1.5.1' (or the latest version if it's higher). It should look something like this:
+
+```gradle
+buildscript {
+    ext.kotlin_version = '1.5.1'
+    ...
+}
+```
+
+3. Also, make sure that the Kotlin Gradle plugin version matches the Kotlin version. In the `dependencies` block of the `buildscript`, it should look like this:
+
+```gradle
+dependencies {
+    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    ...
+}
+```
+
+4. Sync your project with the Gradle files.
+
+As for adding the email and cardholder name in Stripe, the `CardMultilineWidget` does not support these fields. You'll have to create separate input fields for the email and cardholder name in your app's UI and handle them separately. 
+
+You can use `EditText` views for these fields and then collect the data from these fields when the user submits the form. Here's a basic example:
+
+```xml
+<EditText
+    android:id="@+id/emailEditText"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:inputType="textEmailAddress"
+    android:hint="Email"/>
+
+<EditText
+    android:id="@+id/cardholderNameEditText"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:inputType="textPersonName"
+    android:hint="Cardholder Name"/>
+```
+
+In your activity or fragment, you can get the text from these fields like this:
+
+```kotlin
+val email = findViewById<EditText>(R.id.emailEditText).text.toString()
+val cardholderName = findViewById<EditText>(R.id.cardholderNameEditText).text.toString()
+```
+
+Remember to validate these fields before proceeding with the payment process.

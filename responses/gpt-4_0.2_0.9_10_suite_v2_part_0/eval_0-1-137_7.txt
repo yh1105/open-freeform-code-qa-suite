@@ -1,0 +1,29 @@
+The error you're getting is because you're importing the Bootstrap variables before you declare your own `$theme-colors` map. The Bootstrap variables file already contains a `$theme-colors` map, and when you import it, it gets processed first. Then, when you declare your own `$theme-colors` map, it's too late because the Bootstrap variables have already been processed.
+
+To fix this, you should declare your `$theme-colors` map before importing the Bootstrap variables and the main Bootstrap file. Here's how you can do it:
+
+```scss
+$theme-colors: (
+  "primary": #your-color-here
+);
+
+@import "../../node_modules/bootstrap/scss/bootstrap";
+```
+
+In this code, you're declaring your `$theme-colors` map first, and then importing the Bootstrap files. This way, when the Bootstrap files get processed, they'll use your `$theme-colors` map instead of the default one.
+
+Also, please note that you don't need to import the `variables` file separately because it's already included in the main `bootstrap` file.
+
+If you want to change multiple colors, you can do it like this:
+
+```scss
+$theme-colors: (
+  "primary": #your-primary-color,
+  "secondary": #your-secondary-color,
+  // add more colors if you want
+);
+
+@import "../../node_modules/bootstrap/scss/bootstrap";
+```
+
+Just replace `#your-primary-color`, `#your-secondary-color`, etc. with the actual color values you want to use.

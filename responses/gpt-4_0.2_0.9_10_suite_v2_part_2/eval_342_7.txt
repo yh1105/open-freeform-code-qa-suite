@@ -1,0 +1,9 @@
+The issue you're experiencing is likely due to the fact that Spring Boot by default configures `Jackson` to handle JSON marshalling and unmarshalling. However, for XML, you need to include an additional dependency in your `build.gradle` file:
+
+```gradle
+implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml'
+```
+
+This dependency will enable Jackson to handle XML responses. After adding this, you should be able to get XML responses from your API.
+
+Also, make sure your `Pet`, `Category`, and `Tag` classes are annotated with `@XmlRootElement` and `@XmlElement` to allow Jackson to correctly serialize and deserialize these objects to and from XML.

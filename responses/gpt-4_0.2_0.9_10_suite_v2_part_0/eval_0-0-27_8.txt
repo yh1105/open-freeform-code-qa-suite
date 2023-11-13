@@ -1,0 +1,36 @@
+From the code you've shared, it seems like you're doing everything correctly. However, there are a few things you could check to debug this issue:
+
+1. **Network Connection**: Ensure that your device/emulator has a proper network connection. Sometimes, network issues can cause the query to hang indefinitely.
+
+2. **Server Status**: Check if the server at 'https://48p1r2roz4.sse.codesandbox.io' is up and running. You can do this by visiting the URL in your browser.
+
+3. **GraphQL Query**: Test your GraphQL query in a GraphQL playground to ensure it's working as expected. The server you're using seems to have a GraphQL playground available at 'https://48p1r2roz4.sse.codesandbox.io/graphql'. 
+
+4. **Apollo Client Version**: There might be compatibility issues with the version of Apollo Client you're using. Try downgrading to a lower version (e.g., "@apollo/client": "^3.3.21") and see if the problem persists.
+
+5. **React Native Debugger**: If you're using React Native Debugger, make sure to enable network inspect. This will allow you to see the network requests and responses, which can help you identify any issues.
+
+6. **Error Handling**: It's possible that an error is occurring but not being logged. Try logging the error in a `catch` block:
+
+```javascript
+const TestScreen = () => {
+    const { loading, error, data } = useQuery(EXCHANGE_RATES).catch((error) => console.log(error));
+
+    console.log(loading, error, data);
+
+    if (loading) return <Text>Loading...</Text>;
+    if (error) return <Text>Error :(</Text>;
+
+    return data.rates.map(({ currency, rate }) => (
+        <View key={currency}>
+            <Text>
+                {currency}: {rate}
+            </Text>
+        </View>
+    ));
+};
+```
+
+7. **Apollo Client Configuration**: Ensure that your Apollo Client is correctly configured. If you're behind a proxy, you might need to add additional configuration.
+
+If none of these suggestions work, please provide more information about your environment, such as the network conditions, any error messages you're seeing, and the versions of React Native and Apollo Client you're using. This will help in diagnosing the problem.

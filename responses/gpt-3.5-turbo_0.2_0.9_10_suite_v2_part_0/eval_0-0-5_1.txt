@@ -1,0 +1,25 @@
+The error message indicates that Python is not installed on your system or it is not added to the PATH environment variable. 
+
+To fix this issue, you need to install Python and add it to the PATH environment variable. Here are the steps to follow:
+
+1. Download and install Python from the official website: https://www.python.org/downloads/
+
+2. During the installation process, make sure to select the option to add Python to the PATH environment variable.
+
+3. After the installation is complete, open a new command prompt and run the following command to verify that Python is installed and added to the PATH:
+
+```
+python --version
+```
+
+4. If the command above returns the Python version, then you have successfully installed and added Python to the PATH.
+
+5. Finally, try to rebuild the Node.js project again and see if the issue is resolved.
+
+If the issue persists, you may need to update node-gyp to the latest version by running the following command:
+
+```
+npm install -g node-gyp
+```
+
+This will update node-gyp to the latest version and may resolve any compatibility issues with your current version of Node.js.

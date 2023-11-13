@@ -13,12 +13,57 @@ From https://github.com/bigcode-project/bigcode-evaluation-harness/blob/main/lm_
 
 import os
 os.environ["HF_ALLOW_CODE_EVAL"] = "1"
-os.environ['PATH'] = '/usr/local/lib/nodejs/node/bin:' + os.environ['PATH']
-os.environ['NODE_PATH'] = '/usr/local/lib/node_modules'
+# Note: the following allows running only on linux yet
+# os.environ['PATH'] = '/usr/local/lib/nodejs/node/bin:' + os.environ['PATH']
+# os.environ['NODE_PATH'] = '/usr/local/lib/node_modules'
 import contextlib
 import signal
 import json
+import tempfile
+import subprocess
 from evaluate import load
+
+@contextlib.contextmanager
+def chdir(root):
+    if root == ".":
+        yield
+        return
+    cwd = os.getcwd()
+    os.chdir(root)
+    try:
+        yield
+    except BaseException as exc:
+        raise exc
+    finally:
+        os.chdir(cwd)
+
+
+@contextlib.contextmanager
+def create_tempdir():
+    with tempfile.TemporaryDirectory() as dirname:
+        with chdir(dirname):
+            yield dirname
+
+@contextlib.contextmanager
+def chdir(root):
+    if root == ".":
+        yield
+        return
+    cwd = os.getcwd()
+    os.chdir(root)
+    try:
+        yield
+    except BaseException as exc:
+        raise exc
+    finally:
+        os.chdir(cwd)
+
+
+@contextlib.contextmanager
+def create_tempdir():
+    with tempfile.TemporaryDirectory() as dirname:
+        with chdir(dirname):
+            yield dirname
 
 
 class TimeoutException(Exception):
@@ -75,12 +120,120 @@ def python_unsafe_executor(references, predictions, timeout):
 
     logs = [[(0, dict(
         task_id=0,
-        passed=result[0] == "passed",
-        result=result[0],
+        passed=result[0].startswith("passed"),
+        result=result,
         completion_id=0,
     ))]]
 
     return {'pass@1': float(int(result[0] == "passed"))}, logs
+
+def java_unsafe_executor(references, predictions, timeout):
+
+    check_program = predictions[0][0] + '\n' + references[0]
+
+    result = []
+
+    with create_tempdir():
+        open(f"Main.java", 'w').write(check_program)
+        # Run program.
+        try:
+            exec_result = subprocess.run(["javac Main.java; java Main"], timeout=timeout, capture_output=True, shell=True)
+            # print(exec_result.returncode)
+            if exec_result.stderr.decode():
+                err = exec_result.stderr.decode()
+                result.append(f"stderr: {err}")
+            elif exec_result.stdout.decode():
+                err = exec_result.stdout.decode()
+                result.append(f"stdout: {err}")
+            else:
+                result.append('')
+            if exec_result.returncode != 0:
+                result[-1] = f"failed: returncode: {exec_result.returncode} " + result[-1] 
+            else:
+                result[-1] = "passed " + result[-1]
+        except subprocess.TimeoutExpired as e:
+            result[-1] = "time out " + result[-1]  
+    
+    logs = [[(0, dict(
+        task_id=0,
+        passed=result[0].startswith("passed"),
+        result=result,
+        completion_id=0,
+    ))]]
+
+    return {'pass@1': float(int(result[0].startswith("passed")))}, logs
+
+def cs_unsafe_executor(references, predictions, timeout):
+
+    check_program = predictions[0][0] + '\n' + references[0]
+
+    result = []
+
+    with create_tempdir():
+        open(f"main.cs", 'w').write(check_program)
+        # Run program.
+        try:
+            exec_result = subprocess.run(["mcs -out:main.exe main.cs; mono main.exe"], timeout=timeout, capture_output=True, shell=True)
+            # print(exec_result.returncode)
+            if exec_result.stderr.decode():
+                err = exec_result.stderr.decode()
+                result.append(f"stderr: {err}")
+            elif exec_result.stdout.decode():
+                err = exec_result.stdout.decode()
+                result.append(f"stdout: {err}")
+            else:
+                result.append('')
+            if exec_result.returncode != 0:
+                result[-1] = f"failed: returncode: {exec_result.returncode} " + result[-1] 
+            else:
+                result[-1] = "passed " + result[-1]
+        except subprocess.TimeoutExpired as e:
+            result[-1] = "time out " + result[-1]  
+    
+    logs = [[(0, dict(
+        task_id=0,
+        passed=result[0].startswith("passed"),
+        result=result,
+        completion_id=0,
+    ))]]
+
+    return {'pass@1': float(int(result[0].startswith("passed")))}, logs
+
+def cpp_unsafe_executor(references, predictions, timeout):
+
+    check_program = predictions[0][0] + '\n' + references[0]
+
+    result = []
+
+    with create_tempdir():
+        open(f"main.cpp", 'w').write(check_program)
+        # Run program.
+        try:
+            exec_result = subprocess.run(["g++ main.cpp -o main; ./main"], timeout=timeout, capture_output=True, shell=True)
+            # print(exec_result.returncode)
+            if exec_result.stderr.decode():
+                err = exec_result.stderr.decode()
+                result.append(f"stderr: {err}")
+            elif exec_result.stdout.decode():
+                err = exec_result.stdout.decode()
+                result.append(f"stdout: {err}")
+            else:
+                result.append('')
+            if exec_result.returncode != 0:
+                result[-1] = f"failed: returncode: {exec_result.returncode} " + result[-1] 
+            else:
+                result[-1] = "passed " + result[-1]
+        except subprocess.TimeoutExpired as e:
+            result[-1] = "time out " + result[-1]  
+    
+    logs = [[(0, dict(
+        task_id=0,
+        passed=result[0].startswith("passed"),
+        result=result,
+        completion_id=0,
+    ))]]
+
+    return {'pass@1': float(int(result[0].startswith("passed")))}, logs
 
 def sql_unsafe_executor(references, predictions, timeout):
     import sqlite3
@@ -100,33 +253,113 @@ def sql_unsafe_executor(references, predictions, timeout):
 
     logs = [[(0, dict(
         task_id=0,
-        passed=result[0] == "passed",
-        result=result[0],
+        passed=result[0].startswith("passed"),
+        result=result,
         completion_id=0,
     ))]]
 
     return {'pass@1': float(int(result[0] == "passed"))}, logs
 
 
-# language supported by humanevalpack
-LANGUAGES = ["python", "cpp", "javascript", "java", "go", "rust"]
+def js_unsafe_executor(references, predictions, timeout):
+
+    check_program = predictions[0][0] + '\n' + references[0]
+
+    result = []
+
+    with create_tempdir():
+        open(f"test.js", 'w').write(check_program)
+        # Run program.
+        try:
+            exec_result = subprocess.run(["node", "test.js"], timeout=timeout, capture_output=True)
+            # print(exec_result.returncode)
+            if exec_result.stderr.decode():
+                err = exec_result.stderr.decode()
+                result.append(f"stderr: {err}")
+            elif exec_result.stdout.decode():
+                err = exec_result.stdout.decode()
+                result.append(f"stdout: {err}")
+            else:
+                result.append('')
+            if exec_result.returncode != 0:
+                result[-1] = f"failed: returncode: {exec_result.returncode} " + result[-1] 
+            else:
+                result[-1] = "passed " + result[-1]
+        except subprocess.TimeoutExpired as e:
+            result[-1] = "time out " + result[-1]  
+    
+    logs = [[(0, dict(
+        task_id=0,
+        passed=result[0].startswith("passed"),
+        result=result,
+        completion_id=0,
+    ))]]
+
+    return {'pass@1': float(int(result[0].startswith("passed")))}, logs
+
+
+def ts_unsafe_executor(references, predictions, timeout):
+
+    check_program = predictions[0][0] + '\n' + references[0]
+
+    result = []
+
+    with create_tempdir():
+        open(f"test.ts", 'w').write(check_program)
+        # Compile to js then run program.
+        try:
+            exec_result = subprocess.run(["npx tsc test.ts --outfile test.js; node test.js"], timeout=timeout, capture_output=True, shell=True)
+            # with open('test.js', 'r') as f:
+            #     print(f.read())
+            # print(exec_result.returncode)
+            if exec_result.stderr.decode():
+                err = exec_result.stderr.decode()
+                result.append(f"stderr: {err}")
+            elif exec_result.stdout.decode():
+                err = exec_result.stdout.decode()
+                result.append(f"stdout: {err}")
+            else:
+                result.append('')
+            if exec_result.returncode != 0:
+                result[-1] = f"failed: returncode: {exec_result.returncode} " + result[-1] 
+            else:
+                result[-1] = "passed " + result[-1]
+        except subprocess.TimeoutExpired as e:
+            result[-1] = "time out " + result[-1]  
+    
+    logs = [[(0, dict(
+        task_id=0,
+        passed=result[0].startswith("passed"),
+        result=result,
+        completion_id=0,
+    ))]]
+
+    return {'pass@1': float(int(result[0].startswith("passed")))}, logs
+
+
+# language supported by us
+LANGUAGES = ["python", "cpp", "javascript", "typescript", "java", "go", "rust", "c#"]
 
 LANGUAGE_TO_NAME = {
     "python": "Python",
     "cpp": "C++",
     "javascript": "JavaScript",
+    "typescript": "TypeScript",
     "java": "Java",
     "go": "Go",
     "rust": "Rust",
+    "c#": "C#"
 }
 
 LANGUAGE_TO_EXTENSION = {
     "python": "py",
     "cpp": "cpp",
     "javascript": "js",
+    "typescript": "ts",
     "java": "java",
     "go": "go",
     "rust": "rs",
+    "c#": "cs"
 }
 
 # Taken from https://huggingface.co/datasets/nuprl/MultiPL-E/ & https://github.com/THUDM/CodeGeeX
@@ -143,17 +376,20 @@ LANGUAGE_TO_STOP_WORDS = {
     "java": [],
     "rust": [],
     "sql": [],
+    "c#": []
 }
 
 LANGUAGE_TO_TIMEOUT = {
     "python": 10,
     "cpp": 60,
     "javascript": 10,
+    "typescript": 20,
     "java": 10,
     "go": 20,
     "rust": 300,  # Necessary for first-time compilation of cargo
     "sql": 10,
-    'r': 10
+    'r': 10,
+    "c#": 20
 }
 
 # Java sometimes fails with more workers; For JS it's twice as fast with 4 workers
@@ -161,11 +397,13 @@ LANGUAGE_TO_NUM_WORKERS = {
     "python": 4,
     "cpp": 4,
     "javascript": 4,
+    "typescript": 4,
     "java": 1,
     "go": 4,
     "rust": 1,
     "sql": 1,
-    "r": 4
+    "r": 4,
+    "c#": 4
 }
 
 # https://github.com/THUDM/CodeGeeX/blob/23ee51505a2bcd34d59d2e271b22e5bd91475462/codegeex/benchmark/utils.py#L6
@@ -226,7 +464,8 @@ IMPORT_HELPER = {
     'r': [
         'rm(list=ls())',
         'library(assert)',
-    ]
+    ],
+    "c#": []
 }
 
 
@@ -270,7 +509,7 @@ def remove_last_block(code, lang):
     return code
 
 
-def preprocess(generations: list[str], lang: str) -> list[str]:
+def preprocess(generations: List[str], lang: str, only_longest: bool) -> List[str]:
     """
         Extract code blocks from the generations
     :param generations:
@@ -281,16 +520,25 @@ def preprocess(generations: list[str], lang: str) -> list[str]:
     ### first, if ``` exists, using the longest ``` blocks
     for gen in generations:
         if gen.count('```') >= 2:
+            # TODO: just directly concatenate all code blocks
             lines = gen.split('\n')
             code_idendifier_lines = [no for no, text in enumerate(lines) if text.startswith("```")]
-            longest_lines = 0
-            longest_lines_idx = 0
-            for i in range(0, len(code_idendifier_lines), 2):
-                if code_idendifier_lines[i+1] - code_idendifier_lines[i] > longest_lines:
-                    longest_lines = code_idendifier_lines[i+1] - code_idendifier_lines[i]
-                    longest_lines_idx = i
-            gen = '\n'.join(lines[code_idendifier_lines[longest_lines_idx] + 1:
-                                  code_idendifier_lines[longest_lines_idx + 1]])
+            if only_longest:
+                longest_lines = 0
+                longest_lines_idx = 0
+                for i in range(0, len(code_idendifier_lines)-1, 2):
+                    if code_idendifier_lines[i+1] - code_idendifier_lines[i] > longest_lines:
+                        longest_lines = code_idendifier_lines[i+1] - code_idendifier_lines[i]
+                        longest_lines_idx = i
+                gen = '\n'.join(lines[code_idendifier_lines[longest_lines_idx] + 1:
+                                      code_idendifier_lines[longest_lines_idx + 1]])
+            else:
+                gens = []
+                for i in range(0, len(code_idendifier_lines)-1, 2):
+                    now_gen = '\n'.join(lines[code_idendifier_lines[i] + 1:
+                                              code_idendifier_lines[i + 1]])
+                    gens.append(now_gen)
+                gen = '\n\n'.join(gens)
         else:
             # function-signature form
             gen = remove_last_block(gen, lang)
@@ -308,8 +556,8 @@ def get_exec_results(prefix_from_file: str, generations: list[str], references: 
     :param references: str
          str containing the test case
     """
-    generations = [prefix_from_file + gen for gen in generations]
-    code_metric = load("Muennighoff/code_eval_octopack")
+    generations = [prefix_from_file + '\n' + gen for gen in generations]
+    code_metric = load("code_eval_octopack")
 
     timeout = LANGUAGE_TO_TIMEOUT[lang] if timeout is None else timeout
     num_workers = LANGUAGE_TO_NUM_WORKERS[lang]
@@ -325,18 +573,18 @@ def get_exec_results(prefix_from_file: str, generations: list[str], references: 
         cpp_imports = "\n".join(IMPORT_HELPER["cpp"])
         # Remove main in case present
         generations = [
-            (cpp_imports + "\n" + g.split("int main")[0]).strip() for g in generations
-        ]
-    elif lang == "java":
-        generations = [
-            g.replace("public class Main {\n    }", "").strip() for g in generations
+            # (cpp_imports + "\n" + g.split("int main")[0]).strip() for g in generations
+            (cpp_imports + "\n" + g).strip() for g in generations
         ]
     elif lang == 'r':
         r_imports = '\n'.join(IMPORT_HELPER['r'])
         generations = [
             (r_imports + "\n" + g).strip() for g in generations
         ]
-
+    # elif lang == "java":
+    #     generations = [
+    #         g.replace("public class Main {\n    }", "").strip() for g in generations
+    #     ]
     # elif language == "go":
     #     ds = self.get_dataset().select(range(len(generations)))
     #     for gen, ref, doc in zip(generations, references, ds):
@@ -415,6 +663,36 @@ def get_exec_results(prefix_from_file: str, generations: list[str], references: 
             references=references,
             predictions=generations,
             timeout=timeout
+        )
+    elif lang == 'java':
+        results, logs = java_unsafe_executor(
+            references=references,
+            predictions=generations,
+            timeout=timeout,
+        )
+    elif lang in ['javascript', 'js']:
+        results, logs = js_unsafe_executor(
+            references=references,
+            predictions=generations,
+            timeout=timeout,
+        )
+    elif lang == 'typescript':
+        results, logs = ts_unsafe_executor(
+            references=references,
+            predictions=generations,
+            timeout=timeout,
+        )
+    elif lang == 'cpp':
+        results, logs = cpp_unsafe_executor(
+            references=references,
+            predictions=generations,
+            timeout=timeout,
+        )
+    elif lang == 'c#':
+        results, logs = cs_unsafe_executor(
+            references=references,
+            predictions=generations,
+            timeout=timeout,
         )
     else:
         results, logs = code_metric.compute(

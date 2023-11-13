@@ -1,0 +1,30 @@
+Tailwind CSS is a utility-first CSS framework for rapidly building custom designs. It doesn't provide a direct way to target child elements like you would do in traditional CSS. Tailwind CSS is more about applying styles directly to the elements you want to style.
+
+However, you can use the `@apply` directive in your CSS to apply a set of styles to a specific selector. Here's an example:
+
+```css
+div.section > div {
+  @apply bg-red-500 text-white;
+}
+```
+
+In this example, direct children `div` elements of `div` with class `section` will have a red background and white text.
+
+Remember to enable this feature in your Tailwind CSS configuration file (`tailwind.config.js`) if it's not enabled:
+
+```js
+module.exports = {
+  theme: {
+    extend: {},
+  },
+  variants: {},
+  plugins: [],
+  corePlugins: {
+    preflight: true,
+  },
+}
+```
+
+The `preflight` option includes Normalize.css and additional base styles for a modern, consistent, and flexible browser styling reset. 
+
+Please note that using `@apply` is not the "utility-first" way of doing things in Tailwind and should be used sparingly. The utility-first approach encourages you to use utility classes directly in your HTML.

@@ -1,0 +1,30 @@
+The error message "Module not found: Can't resolve 'popper.js'" usually means that the `popper.js` library, which is a dependency for Bootstrap, is not installed in your project.
+
+You can install it using npm (Node Package Manager) or yarn. Here's how you can do it:
+
+**Using npm:**
+
+```bash
+npm install popper.js --save
+```
+
+**Using yarn:**
+
+```bash
+yarn add popper.js
+```
+
+After installing `popper.js`, you should import it in your file before importing Bootstrap.
+
+```javascript
+import Popper from 'popper.js';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
+```
+
+If you're using Bootstrap 4, you can import the bundle file which includes `popper.js`.
+
+```javascript
+import 'bootstrap/dist/js/bootstrap.bundle';
+```
+
+This should resolve the error. If the error persists, make sure that the path to the `popper.js` module is correct and that the module is properly installed in your `node_modules` directory.

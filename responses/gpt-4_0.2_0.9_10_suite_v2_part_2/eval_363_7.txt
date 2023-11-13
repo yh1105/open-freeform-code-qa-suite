@@ -1,0 +1,22 @@
+The error message you're seeing is due to a change in Spring Cloud 2020.0.2. In this version, if you have `spring-cloud-starter-config` on your classpath, Spring Cloud expects you to configure a Config Server by setting the `spring.config.import` property.
+
+However, as you mentioned, your project is not a ConfigServer and does not use ConfigServer. In this case, you should remove the `spring-cloud-starter-config` dependency from your `build.gradle` file.
+
+Change this:
+
+```groovy
+// Implementation: Spring cloud
+implementation('org.springframework.cloud:spring-cloud-starter-config')
+implementation('org.springframework.cloud:spring-cloud-starter-stream-rabbit')
+implementation('org.springframework.cloud:spring-cloud-starter-stream-kafka')
+```
+
+To this:
+
+```groovy
+// Implementation: Spring cloud
+implementation('org.springframework.cloud:spring-cloud-starter-stream-rabbit')
+implementation('org.springframework.cloud:spring-cloud-starter-stream-kafka')
+```
+
+This should resolve the error you're seeing. If you still need to use the Config Server in the future, you can add the `spring-cloud-starter-config` dependency back and set the `spring.config.import` property to point to your Config Server.

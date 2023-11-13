@@ -1,0 +1,23 @@
+Yes, you can use the `go mod download` command to download all the dependencies specified in your `go.mod` file without building your code. This can be useful in a Dockerfile to take advantage of Docker's layer caching.
+
+Here's an example Dockerfile:
+
+```
+FROM golang:1.11-alpine
+
+WORKDIR /app
+
+COPY go.mod go.sum ./
+
+RUN go mod download
+
+COPY . .
+
+RUN go build -o myapp
+
+CMD ["./myapp"]
+```
+
+In this example, we first copy the `go.mod` and `go.sum` files to the container and run `go mod download` to download the dependencies. Then we copy the rest of the code and build the binary. This way, if we make changes to the code, Docker will only need to rebuild the last layer (the `RUN go build` step) and not download the dependencies again.
+
+Note that `go mod download` only downloads the dependencies, it does not install them. To install the dependencies, you can use `go mod tidy` or `go build` with the `-mod=readonly` flag.

@@ -1,0 +1,62 @@
+Flutter location permission issues in android manifest file
+
+my Flutter code :
+```
+onPressed: () async {
+                  Geolocator
+                      .getCurrentPosition(desiredAccuracy: LocationAccuracy.best, forceAndroidLocationManager: true)
+                      .then((Position position) {
+                    setState(() {
+                      _currentPosition = position;
+                      print ( "LAT: ${_currentPosition.latitude}, LNG: ${_currentPosition.longitude}");
+                    });
+                  }).catchError((e) {
+                    print(e);
+                  });
+                },
+```
+
+it show the following :
+```
+`No location permissions are defined in the manifest. Make sure at least CCESS_FINE_LOCATION` or ACCESS_COARSE_LOCATION are defined in the manifest.
+```
+
+even thought I have added the permission in the manifest
+```
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.agent">
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+   <application
+        android:label="agent"
+        android:icon="@mipmap/ic_launcher">
+        <activity
+            android:name=".MainActivity"
+            android:launchMode="singleTop"
+            android:theme="@style/LaunchTheme"
+            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+            android:hardwareAccelerated="true"
+            android:windowSoftInputMode="adjustResize">
+            <meta-data
+              android:name="io.flutter.embedding.android.NormalTheme"
+              android:resource="@style/NormalTheme"
+              />
+            <meta-data
+              android:name="io.flutter.embedding.android.SplashScreenDrawable"
+              android:resource="@drawable/launch_background"
+              />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <meta-data
+            android:name="flutterEmbedding"
+            android:value="2" />
+    </application>
+</manifest>
+```
+
+and I have the following errors that I cannot fix :
+[](https://i.stack.imgur.com/t318V.png)
+Attribute android:icon is not allowed here
+Unresolved class 'MainActivity'

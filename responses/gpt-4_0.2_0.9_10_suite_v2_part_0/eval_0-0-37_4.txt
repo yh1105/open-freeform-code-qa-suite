@@ -1,0 +1,13 @@
+Sure, you can use the `*` wildcard to catch all the remaining path. Here is the revised route pattern:
+
+```javascript
+/route/:param1/config/:OptionalParam2?/*
+```
+
+This pattern will match all of the following:
+
+- `route/aa/config`
+- `route/aa/config/bb`
+- `route/aa/config/bb/cc`
+
+In your route handler, you can split the remaining path by `/` to get the optional parameters.

@@ -1,0 +1,21 @@
+It seems like you are trying to fetch data from a GraphQL API endpoint that is not available. The `uri` provided in your `ApolloClient` configuration is for a demo endpoint that may not be available all the time.
+
+You can try changing the `uri` to a different GraphQL API endpoint that is available and has the schema that matches your query.
+
+For example, you can try using the following `uri`:
+
+```
+uri: 'https://countries.trevorblades.com/graphql'
+```
+
+This endpoint has a public GraphQL API with a simple schema that you can use to test your query.
+
+If you still face issues, you can try adding the `networkError` property to your `useQuery` hook to see if there are any network errors:
+
+```javascript
+const { loading, error, data, networkError } = useQuery(EXCHANGE_RATES);
+
+console.log(loading, error, data, networkError);
+```
+
+This will log any network errors that occur during the query.

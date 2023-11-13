@@ -1,0 +1,29 @@
+Sure, I can help you with that. You can use the `group-hover` variant in Tailwind CSS to apply styles on hover. Here's how you can modify your code to create an animation effect:
+
+```html
+<a href="#" class="group">
+    <span class="text-sky-600 transition duration-300 group-hover:translate-x-0 transform translate-x-full">Link</span>
+    <span class="block w-full h-0.5 bg-sky-600 transition-all duration-500 transform scale-x-0 group-hover:scale-x-100"></span>
+</a>
+```
+
+In the above code, I have used the `group-hover` variant to apply the `translate-x-0` and `scale-x-100` styles when the link is hovered over. The `translate-x-full` and `scale-x-0` styles are applied by default, creating a transition effect when the link is hovered over.
+
+Please note that you need to enable the `group-hover` variant for `scale` and `translate` in your Tailwind CSS configuration file (`tailwind.config.js`) if it's not already enabled:
+
+```js
+module.exports = {
+  theme: {
+    extend: {},
+  },
+  variants: {
+    extend: {
+      scale: ['group-hover'],
+      translate: ['group-hover'],
+    },
+  },
+  plugins: [],
+}
+```
+
+This configuration will allow you to use the `group-hover` variant with the `scale` and `translate` utilities.

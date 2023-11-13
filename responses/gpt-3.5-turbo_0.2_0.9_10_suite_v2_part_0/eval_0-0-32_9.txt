@@ -1,0 +1,27 @@
+To identify if a div is visible on the viewport, you can use the `Intersection Observer API`. This API allows you to observe changes in the intersection of a target element with an ancestor element or with a top-level document's viewport.
+
+Here's an example of how you can use the `Intersection Observer API` to detect if a div is visible on the viewport:
+
+```javascript
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      console.log(`${entry.target.id} is visible on the viewport`);
+    }
+  });
+});
+
+data.forEach(item => {
+  const div = document.createElement('div');
+  div.id = item.id;
+  div.textContent = item.title;
+  document.querySelector('#parent').appendChild(div);
+  observer.observe(div);
+});
+```
+
+In this example, we create a new `IntersectionObserver` and pass a callback function that will be called whenever the intersection of the observed element changes. We then loop through the `data` array and create a new div for each item. We add the div to the `#parent` element and observe it using the `IntersectionObserver`.
+
+When the observed element intersects with the viewport, the `isIntersecting` property of the `entry` object will be `true`. We can then log a message to the console indicating that the element is visible on the viewport.
+
+There are also some npm packages available that can help you with this, such as `react-intersection-observer` and `react-waypoint`. These packages provide React components that use the `Intersection Observer API` under the hood. You can check their documentation to see if they fit your needs.

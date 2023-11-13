@@ -1,0 +1,7 @@
+To draw a line only at the top, you should use the `border-t` class, which applies the border to the top edge only. Also, you should remove the `border` class which applies the border to all edges. Here's how you can do it:
+
+```html
+<div class="border-t border-blue-900">foo</div>
+```
+
+This will apply a border to the top edge only and it will be colored blue-900.

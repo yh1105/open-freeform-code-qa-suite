@@ -1,0 +1,13 @@
+It sounds like you're referring to a feature provided by a tool called Emmet. Emmet is a plugin for many popular text editors that greatly improves HTML & CSS workflow. 
+
+For example, if you type `.classname` and press `Tab`, it will automatically expand to `<div class="classname"></div>`. 
+
+If this isn't working for you, it's possible that your text editor doesn't have Emmet installed or enabled. Here's how you can enable it in some popular text editors:
+
+- **Visual Studio Code**: Emmet is built-in and enabled by default. If it's not working, you can check your settings (File > Preferences > Settings) and make sure that `emmet.triggerExpansionOnTab` is set to `true`.
+
+- **Sublime Text**: You need to install Emmet. You can do this via Package Control (Preferences > Package Control > Install Package > Emmet).
+
+- **Atom**: You need to install Emmet. You can do this via Atom's package manager (Edit > Preferences > Install > search for "Emmet").
+
+Remember to restart your text editor after installing or enabling Emmet. If it's still not working, there might be a conflict with another plugin or a problem with your installation.

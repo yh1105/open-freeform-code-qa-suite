@@ -1,0 +1,10 @@
+Sure! The error message indicates that `req.logout()` requires a callback function. You can simply add an empty callback function to the `req.logout()` method to resolve the issue. Here's the revised code:
+
+```javascript
+app.get("/logout", (req, res) => {
+    req.logout(() => {});
+    res.redirect("/");
+});
+```
+
+Adding an empty callback function `() => {}` satisfies the requirement for a callback function and should resolve the error message.

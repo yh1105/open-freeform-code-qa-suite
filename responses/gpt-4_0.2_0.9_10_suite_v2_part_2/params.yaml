@@ -1,0 +1,275 @@
+answer_paths:
+  cases/eval_407.yaml:
+  - eval_407_0.txt
+  - eval_407_1.txt
+  - eval_407_2.txt
+  - eval_407_3.txt
+  - eval_407_4.txt
+  - eval_407_5.txt
+  - eval_407_6.txt
+  - eval_407_7.txt
+  - eval_407_8.txt
+  - eval_407_9.txt
+  cases/eval_408.yaml:
+  - eval_408_0.txt
+  - eval_408_1.txt
+  - eval_408_2.txt
+  - eval_408_3.txt
+  - eval_408_4.txt
+  - eval_408_5.txt
+  - eval_408_6.txt
+  - eval_408_7.txt
+  - eval_408_8.txt
+  - eval_408_9.txt
+  cases/eval_425.yaml:
+  - eval_425_0.txt
+  - eval_425_1.txt
+  - eval_425_2.txt
+  - eval_425_3.txt
+  - eval_425_4.txt
+  - eval_425_5.txt
+  - eval_425_6.txt
+  - eval_425_7.txt
+  - eval_425_8.txt
+  - eval_425_9.txt
+  cases/eval_426.yaml:
+  - eval_426_0.txt
+  - eval_426_1.txt
+  - eval_426_2.txt
+  - eval_426_3.txt
+  - eval_426_4.txt
+  - eval_426_5.txt
+  - eval_426_6.txt
+  - eval_426_7.txt
+  - eval_426_8.txt
+  - eval_426_9.txt
+  cases/eval_427.yaml:
+  - eval_427_0.txt
+  - eval_427_1.txt
+  - eval_427_2.txt
+  - eval_427_3.txt
+  - eval_427_4.txt
+  - eval_427_5.txt
+  - eval_427_6.txt
+  - eval_427_7.txt
+  - eval_427_8.txt
+  - eval_427_9.txt
+  cases/eval_428.yaml:
+  - eval_428_0.txt
+  - eval_428_1.txt
+  - eval_428_2.txt
+  - eval_428_3.txt
+  - eval_428_4.txt
+  - eval_428_5.txt
+  - eval_428_6.txt
+  - eval_428_7.txt
+  - eval_428_8.txt
+  - eval_428_9.txt
+  cases/eval_432.yaml:
+  - eval_432_0.txt
+  - eval_432_1.txt
+  - eval_432_2.txt
+  - eval_432_3.txt
+  - eval_432_4.txt
+  - eval_432_5.txt
+  - eval_432_6.txt
+  - eval_432_7.txt
+  - eval_432_8.txt
+  - eval_432_9.txt
+  cases/eval_433.yaml:
+  - eval_433_0.txt
+  - eval_433_1.txt
+  - eval_433_2.txt
+  - eval_433_3.txt
+  - eval_433_4.txt
+  - eval_433_5.txt
+  - eval_433_6.txt
+  - eval_433_7.txt
+  - eval_433_8.txt
+  - eval_433_9.txt
+  cases/eval_435.yaml:
+  - eval_435_0.txt
+  - eval_435_1.txt
+  - eval_435_2.txt
+  - eval_435_3.txt
+  - eval_435_4.txt
+  - eval_435_5.txt
+  - eval_435_6.txt
+  - eval_435_7.txt
+  - eval_435_8.txt
+  - eval_435_9.txt
+  cases/eval_437.yaml:
+  - eval_437_0.txt
+  - eval_437_1.txt
+  - eval_437_2.txt
+  - eval_437_3.txt
+  - eval_437_4.txt
+  - eval_437_5.txt
+  - eval_437_6.txt
+  - eval_437_7.txt
+  - eval_437_8.txt
+  - eval_437_9.txt
+  cases/eval_439.yaml:
+  - eval_439_0.txt
+  - eval_439_1.txt
+  - eval_439_2.txt
+  - eval_439_3.txt
+  - eval_439_4.txt
+  - eval_439_5.txt
+  - eval_439_6.txt
+  - eval_439_7.txt
+  - eval_439_8.txt
+  - eval_439_9.txt
+  cases/eval_440.yaml:
+  - eval_440_0.txt
+  - eval_440_1.txt
+  - eval_440_2.txt
+  - eval_440_3.txt
+  - eval_440_4.txt
+  - eval_440_5.txt
+  - eval_440_6.txt
+  - eval_440_7.txt
+  - eval_440_8.txt
+  - eval_440_9.txt
+  cases/eval_451.yaml:
+  - eval_451_0.txt
+  - eval_451_1.txt
+  - eval_451_2.txt
+  - eval_451_3.txt
+  - eval_451_4.txt
+  - eval_451_5.txt
+  - eval_451_6.txt
+  - eval_451_7.txt
+  - eval_451_8.txt
+  - eval_451_9.txt
+  cases/eval_452.yaml:
+  - eval_452_0.txt
+  - eval_452_1.txt
+  - eval_452_2.txt
+  - eval_452_3.txt
+  - eval_452_4.txt
+  - eval_452_5.txt
+  - eval_452_6.txt
+  - eval_452_7.txt
+  - eval_452_8.txt
+  - eval_452_9.txt
+  cases/eval_454.yaml:
+  - eval_454_0.txt
+  - eval_454_1.txt
+  - eval_454_2.txt
+  - eval_454_3.txt
+  - eval_454_4.txt
+  - eval_454_5.txt
+  - eval_454_6.txt
+  - eval_454_7.txt
+  - eval_454_8.txt
+  - eval_454_9.txt
+  cases/eval_460.yaml:
+  - eval_460_0.txt
+  - eval_460_1.txt
+  - eval_460_2.txt
+  - eval_460_3.txt
+  - eval_460_4.txt
+  - eval_460_5.txt
+  - eval_460_6.txt
+  - eval_460_7.txt
+  - eval_460_8.txt
+  - eval_460_9.txt
+  cases/eval_464.yaml:
+  - eval_464_0.txt
+  - eval_464_1.txt
+  - eval_464_2.txt
+  - eval_464_3.txt
+  - eval_464_4.txt
+  - eval_464_5.txt
+  - eval_464_6.txt
+  - eval_464_7.txt
+  - eval_464_8.txt
+  - eval_464_9.txt
+  cases/eval_465.yaml:
+  - eval_465_0.txt
+  - eval_465_1.txt
+  - eval_465_2.txt
+  - eval_465_3.txt
+  - eval_465_4.txt
+  - eval_465_5.txt
+  - eval_465_6.txt
+  - eval_465_7.txt
+  - eval_465_8.txt
+  - eval_465_9.txt
+  cases/eval_466.yaml:
+  - eval_466_0.txt
+  - eval_466_1.txt
+  - eval_466_2.txt
+  - eval_466_3.txt
+  - eval_466_4.txt
+  - eval_466_5.txt
+  - eval_466_6.txt
+  - eval_466_7.txt
+  - eval_466_8.txt
+  - eval_466_9.txt
+  cases/eval_467.yaml:
+  - eval_467_0.txt
+  - eval_467_1.txt
+  - eval_467_2.txt
+  - eval_467_3.txt
+  - eval_467_4.txt
+  - eval_467_5.txt
+  - eval_467_6.txt
+  - eval_467_7.txt
+  - eval_467_8.txt
+  - eval_467_9.txt
+  cases/eval_469.yaml:
+  - eval_469_0.txt
+  - eval_469_1.txt
+  - eval_469_2.txt
+  - eval_469_3.txt
+  - eval_469_4.txt
+  - eval_469_5.txt
+  - eval_469_6.txt
+  - eval_469_7.txt
+  - eval_469_8.txt
+  - eval_469_9.txt
+  cases/eval_470.yaml:
+  - eval_470_0.txt
+  - eval_470_1.txt
+  - eval_470_2.txt
+  - eval_470_3.txt
+  - eval_470_4.txt
+  - eval_470_5.txt
+  - eval_470_6.txt
+  - eval_470_7.txt
+  - eval_470_8.txt
+  - eval_470_9.txt
+  cases/eval_334.yaml:
+  - eval_334_0.txt
+  - eval_334_1.txt
+  - eval_334_2.txt
+  - eval_334_3.txt
+  - eval_334_4.txt
+  - eval_334_5.txt
+  - eval_334_6.txt
+  - eval_334_7.txt
+  - eval_334_8.txt
+  - eval_334_9.txt
+  cases/eval_337.yaml:
+  - eval_337_0.txt
+  - eval_337_1.txt
+  - eval_337_2.txt
+  - eval_337_3.txt
+  - eval_337_4.txt
+  - eval_337_5.txt
+  - eval_337_6.txt
+  - eval_337_7.txt
+  - eval_337_8.txt
+  - eval_337_9.txt
+max_tokens: null
+model_name: gpt-4
+qa_system_prompt: You are a professional assistant for programmers. By default, questions
+  and answers are in Markdown format. You are chatting with programmers, so please
+  answer as briefly as possible.
+sample_n: 10
+system_prompt: You are a professional assistant for programmers. By default, questions
+  and answers are in Markdown format.
+temp: 0.2
+top_p: 0.9

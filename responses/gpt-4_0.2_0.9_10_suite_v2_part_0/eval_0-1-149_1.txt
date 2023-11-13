@@ -1,0 +1,30 @@
+Sure, you can achieve this by using the `group-hover` utility provided by Tailwind CSS. This utility applies styles to a child element when hovering over a parent element. 
+
+Here's how you can modify your code:
+
+```html
+<a href="#" class="group">
+    <span class="text-sky-600 transition duration-300 group-hover:text-sky-900">Link</span>
+    <span class="block w-0 h-0.5 bg-sky-600 transition-all duration-500 group-hover:w-full"></span>
+</a>
+```
+
+In the above code, the width of the span element is initially set to 0. When you hover over the link, the `group-hover:w-full` utility is applied, which changes the width to 100%. The `transition-all` utility is used to animate this change.
+
+Please note that you need to enable `group-hover` variant for `width` in your Tailwind CSS configuration file (`tailwind.config.js`) if it's not enabled by default:
+
+```js
+module.exports = {
+  theme: {
+    extend: {},
+  },
+  variants: {
+    extend: {
+      width: ['group-hover'],
+    },
+  },
+  plugins: [],
+}
+```
+
+Remember to rebuild your CSS after modifying the configuration file.

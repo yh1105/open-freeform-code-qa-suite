@@ -1,0 +1,20 @@
+The error message you're seeing is due to a conflict between the Windows and Linux versions of Node.js and npm. When you installed Node.js on your WSL2 Ubuntu, it also installed npm. However, when you're trying to run npm, it's trying to use the Windows version, which won't work in the Linux environment.
+
+To solve this issue, you need to update your `PATH` environment variable to prioritize the Linux version of npm over the Windows version. You can do this by adding the following line to your `.bashrc` or `.zshrc` file:
+
+```bash
+export PATH="/usr/bin:$PATH"
+```
+
+wsl.conf
+[interop] appendWindowsPath = false
+
+This line will ensure that the shell looks for executables in `/usr/bin` (where the Linux version of npm is located) before it looks in other directories.
+
+After adding this line, you need to reload your shell configuration. You can do this by closing and reopening your terminal, or by running the following command:
+
+```bash
+source ~/.bashrc  # or source ~/.zshrc if you're using zsh
+```
+
+Now, when you run `npm -v`, it should display the version of the Linux npm, and you should be able to use npm without any issues.

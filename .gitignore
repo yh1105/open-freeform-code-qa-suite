@@ -8,4 +8,11 @@ results/
 tmp.csv
 responses/freeform_qa*
 responses/old*
+responses/*mogao*
+responses/debug*
 batched_responses/
+.*
+package-lock.json
+package.json
+node_modules/
+bin/

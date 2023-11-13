@@ -1,0 +1,37 @@
+The `~/.bashrc` file is not sourced when you run a non-interactive shell, which is the case when you run a Docker container. 
+
+In your Dockerfile, you are using `/bin/sh` to run your `launch.sh` script. This will not source `~/.bashrc`. 
+
+To solve this issue, you can source `~/.bashrc` manually in your `launch.sh` script:
+
+```bash
+#!/bin/bash
+
+source ~/.bashrc
+
+cd /workspace/demo
+npm install
+node index.js
+```
+
+Or, you can change the shebang in your `launch.sh` script to use `bash` in login mode, which will source `~/.bashrc`:
+
+```bash
+#!/bin/bash -l
+
+cd /workspace/demo
+npm install
+node index.js
+```
+
+Remember to make your `launch.sh` script executable by adding the following line in your Dockerfile:
+
+```dockerfile
+RUN chmod +x /workspace/launch.sh
+```
+
+And then change your CMD to:
+
+```dockerfile
+CMD ["/workspace/launch.sh"]
+```

@@ -1,0 +1,19 @@
+Yes, Tailwind CSS has a `first` and `last` pseudo-class variant that you can use to target the first and last elements in a list. To add a border-bottom to all `li` elements except the last one, you can use the `not` selector in combination with the `last` variant.
+
+Here's the revised code:
+
+```html
+<ul>
+  <li
+    v-for="(item, index) in items"
+    :key="`item-${index}`"
+    class="border-solid border-b border-black {{ index === items.length - 1 ? '' : 'pb-2' }}"
+  >
+    Item
+  </li>
+</ul>
+```
+
+In the `class` attribute, we added the `pb-2` class to all `li` elements except the last one. The `pb-2` class adds a padding-bottom of 0.5rem to create space between the border and the content. We also used a ternary operator to conditionally apply the `pb-2` class based on the index of the current item.
+
+Note that we removed the `class="border-solid border-b border-black"` from the `li` element and moved it to the Tailwind configuration file. This is because it's better to define your styles in one place and reuse them throughout your project.

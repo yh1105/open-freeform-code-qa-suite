@@ -1,0 +1,17 @@
+By default, Laravel's `dd()` function has a depth limit of 3 levels. However, you can increase this limit by passing an optional second argument to the `dd()` function.
+
+For example, if you want to increase the depth limit to 5 levels, you can use the following code:
+
+```php
+dd($data, 5);
+```
+
+This will display the `$data` variable with a depth limit of 5 levels.
+
+Alternatively, you can use the `dump()` function instead of `dd()`. The `dump()` function does not have a depth limit and will display all levels of nested data.
+
+```php
+dump($data);
+```
+
+I hope this helps!

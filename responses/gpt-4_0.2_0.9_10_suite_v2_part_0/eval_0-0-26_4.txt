@@ -1,0 +1,31 @@
+The ESLint error `react/display-name` is thrown because the anonymous function you're using in the `render` property doesn't have a `displayName`. This is a requirement for all React components, as it aids in debugging.
+
+To fix this error, you can assign the anonymous function to a variable and then assign a `displayName` to that function. Here's how you can do it:
+
+```jsx
+const renderGroup = ({ text }) => <span>{getCountForCountry(text)}</span>;
+renderGroup.displayName = 'renderGroup';
+
+const columns_payment_summary_table = [ 
+    {
+      title: FooConstants.LABEL_QUANTITY_SELECTED,
+      dataIndex: 'group',
+      key: 'group',
+      render: renderGroup,
+    }
+];
+```
+
+In this code, `renderGroup` is a functional component with a `displayName` of `'renderGroup'`. This should resolve the ESLint error.
+
+However, if you don't want to assign a `displayName` to every anonymous function, you can disable the `react/display-name` rule in your ESLint configuration file. To do this, add the following to your `.eslintrc` file:
+
+```json
+{
+  "rules": {
+    "react/display-name": "off"
+  }
+}
+```
+
+This will disable the `react/display-name` rule for your entire project. Be aware that this might make debugging harder in the future.

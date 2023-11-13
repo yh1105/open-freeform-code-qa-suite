@@ -1,0 +1,43 @@
+Yes, you can achieve this by using `ref` to create a reference to the form in the `CustomForm` component, and then passing that reference to the parent component as a prop. Here's how you can modify your code to accomplish this:
+
+```javascript
+import React, { Component } from "react";
+import ReactDOM from "react-dom";
+
+class CustomForm extends Component {
+  formRef = React.createRef(); // create a reference to the form
+
+  render() {
+    return (
+      <form ref={this.formRef}>
+        <button type='submit'>Inside Custom</button>
+      </form>
+    );
+  }
+}
+
+function App() {
+  const formRef = React.createRef(); // create a reference to the form in the parent component
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    formRef.current.submit(); // submit the form using the reference
+  };
+
+  return (
+    <div>
+      <CustomForm ref={formRef} />
+      <button onClick={handleSubmit}>In Root</button>
+    </div>
+  );
+}
+
+const rootElement = document.getElementById("root");
+ReactDOM.render(<App />, rootElement);
+```
+
+In the `CustomForm` component, we create a reference to the form using `React.createRef()`, and then attach it to the `form` element using the `ref` attribute.
+
+In the `App` component, we create a reference to the form using `React.createRef()`, and pass it to the `CustomForm` component as a prop. We also define a `handleSubmit` function that prevents the default form submission behavior, and instead submits the form using the reference.
+
+Finally, we render the 'In Root' button with an `onClick` handler that calls the `handleSubmit` function. When this button is clicked, the `handleSubmit` function is called, which in turn submits the form using the reference.

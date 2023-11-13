@@ -1,0 +1,23 @@
+The error you're seeing is because ESLint is trying to find the `tsconfig.json` file in the same directory as the `.eslintrc.js` file. If your `tsconfig.json` file is not in the same directory, you'll need to provide the correct path to it in your `.eslintrc.js` file.
+
+In your `.eslintrc.js` file, you have the following line:
+
+```javascript
+project: "tsconfig.json",
+```
+
+This tells ESLint to look for `tsconfig.json` in the same directory as `.eslintrc.js`. If `tsconfig.json` is not in the same directory, you'll need to provide the correct path.
+
+For example, if your `tsconfig.json` file is in the root directory of your project, and your `.eslintrc.js` file is in a subdirectory, you would change the line to:
+
+```javascript
+project: "../tsconfig.json",
+```
+
+Or, if both files are in the root directory, but you're running ESLint from a subdirectory, you would use:
+
+```javascript
+project: "./tsconfig.json",
+```
+
+Adjust the path as necessary based on your project's directory structure. After you make this change, save the `.eslintrc.js` file and restart VS Code. The error should be resolved.

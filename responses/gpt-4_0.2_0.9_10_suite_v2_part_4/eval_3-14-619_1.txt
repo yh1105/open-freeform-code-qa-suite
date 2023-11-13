@@ -1,0 +1,20 @@
+The code you've provided seems correct. However, the issue might be that you're not observing the changes in the `isSelected` variable in the parent view that uses `ContentView`. 
+
+In SwiftUI, `@Binding` is a way to create a two-way connection between the variable and the view. When the variable changes, the view invalidates its appearance and recomputes the `body`. But if the parent view doesn't observe this variable, it won't redraw the `ContentView`.
+
+Here's an example of how you can use `ContentView`:
+
+```swift
+struct ParentView: View {
+    @State var isSelected: Bool = false
+
+    var body: some View {
+        VStack {
+            ContentView(isSelected: $isSelected)
+            Text(isSelected ? "Selected" : "Not Selected")
+        }
+    }
+}
+```
+
+In this example, `ParentView` will also update when `isSelected` changes because it observes the `@State` variable.

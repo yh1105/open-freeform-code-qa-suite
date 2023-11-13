@@ -1,0 +1,5 @@
+When you set `"sourceMap": false` in the `tsconfig.json` file, the TypeScript compiler will not generate source map files for your Angular application. Source maps are files that map the compiled JavaScript code back to the original TypeScript code. 
+
+If you set `"sourceMap": false`, the generated JavaScript files will not have a corresponding source map file. This means that if you encounter an error in your application, the error stack trace will not include references to the original TypeScript code. Instead, the error stack trace will only show the line numbers and file names of the generated JavaScript code.
+
+In general, it is recommended to keep `"sourceMap": true` during development, as it helps with debugging. However, for production builds, you can set `"sourceMap": false` to reduce the size of your application.

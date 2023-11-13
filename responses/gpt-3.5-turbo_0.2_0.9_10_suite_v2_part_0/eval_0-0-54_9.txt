@@ -1,0 +1,39 @@
+To get the values of the first name and last name input fields on button click, you can create a state for each input field and update them using the `onChange` event. Then, you can create a function that will be called on button click and access the values of the input fields from the state.
+
+Here's an example:
+
+```javascript
+import React, { useState } from 'react';
+
+export default function InputField({ name, label }) {
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+
+  const handleButtonClick = () => {
+    console.log(`First name: ${firstName}, Last name: ${lastName}`);
+  };
+
+  return (
+    <div>
+      <label>{label}</label>
+      <input
+        type="text"
+        value={firstName}
+        name={`${name}-first`}
+        onChange={(e) => setFirstName(e.target.value)}
+      />
+      <input
+        type="text"
+        value={lastName}
+        name={`${name}-last`}
+        onChange={(e) => setLastName(e.target.value)}
+      />
+      <button onClick={handleButtonClick}>Submit</button>
+    </div>
+  );
+}
+```
+
+In this example, we create two states for the first name and last name input fields using the `useState` hook. We also create a function `handleButtonClick` that will be called on button click. Inside this function, we access the values of the input fields from the state and log them to the console.
+
+Note that we also update the `name` attribute of each input field to include `-first` and `-last` to differentiate them. This is useful if you have multiple instances of this component on the same page.

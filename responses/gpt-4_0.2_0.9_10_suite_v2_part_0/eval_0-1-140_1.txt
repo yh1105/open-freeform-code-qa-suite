@@ -1,0 +1,18 @@
+Font Awesome 5 has changed a bit how it works compared to Font Awesome 4. Now, the icons are divided into different styles: `fas` (solid), `far` (regular), `fal` (light), `fab` (brands).
+
+So, you need to specify which style you are using. If you are using the free version, you will probably use the `fas` (solid) or `fab` (brands) styles.
+
+Also, the `font-family` has changed from `"FontAwesome"` to `"Font Awesome 5 Free"` for solid and regular icons, and `"Font Awesome 5 Brands"` for brand icons.
+
+Here is how you can change your code:
+
+```css
+#mainNav .navbar-collapse .navbar-sidenav .nav-link-collapse:after {
+  float: right;
+  content: "\f107";
+  font-family: "Font Awesome 5 Free"; /* Change this to "Font Awesome 5 Brands" if you are using a brand icon */
+  font-weight: 900; /* Add this for solid icons. Remove it for regular and light icons */
+}
+```
+
+Please note that the unicode `\f107` corresponds to the `fa-angle-down` icon in Font Awesome 4. In Font Awesome 5, it is still the same. If you want to use another icon, you should check the corresponding unicode in the Font Awesome 5 cheatsheet.

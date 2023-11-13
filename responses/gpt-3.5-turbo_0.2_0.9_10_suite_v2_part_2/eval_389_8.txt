@@ -1,0 +1,9 @@
+The `[Keyless]` attribute was introduced in Entity Framework Core 5.0. If you are using a version of Entity Framework Core prior to 5.0, you will not have access to this attribute.
+
+To use `[Keyless]`, you need to make sure you are using Entity Framework Core 5.0 or later. You can check your version by looking at the package reference in your project file or by running the following command in the Package Manager Console:
+
+```
+PM> Get-Package Microsoft.EntityFrameworkCore
+```
+
+If you are using a version prior to 5.0, you can either upgrade to the latest version or use a workaround such as creating a view in your database and mapping it to a regular entity in your code.

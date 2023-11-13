@@ -1,0 +1,11 @@
+Sure, you can use the following pattern to create a route with 2 optional parameters in NestJS:
+
+```typescript
+'/route/:param1/config/:OptionalParam2?/:OptionalParam3?'
+```
+
+This pattern will match the following routes:
+
+- `route/aa/config`
+- `route/aa/config/bb`
+- `route/aa/config/bb/cc`

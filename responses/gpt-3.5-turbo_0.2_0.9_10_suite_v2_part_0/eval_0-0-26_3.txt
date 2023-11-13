@@ -1,0 +1,18 @@
+Yes, you can add a `displayName` property to your functional component to shut down the ESLint error. Here's how you can do it:
+
+```jsx
+const columns_payment_summary_table = [ 
+    {
+      title: FooConstants.LABEL_QUANTITY_SELECTED,
+      dataIndex: 'group',
+      key: 'group',
+      render: function CustomRender(text) {
+        return <span>{getCountForCountry(text)}</span>;
+      },
+    }
+  ];
+
+CustomRender.displayName = 'CustomRender';
+```
+
+By adding the `displayName` property to the function, you are giving it a name that will be used by React for debugging purposes. This should shut down the ESLint error.

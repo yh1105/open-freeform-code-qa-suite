@@ -1,0 +1,23 @@
+The error log indicates that `node-gyp` is unable to find Python in your system. `node-gyp` is a cross-platform command-line tool written in Node.js for compiling native addon modules for Node.js, which requires Python, among other dependencies.
+
+Here are the steps to fix this issue:
+
+1. Install Python 2.7, and add it to your PATH, npm config set python python2.7
+2. Install Microsoft Visual Studio C++ 2013 (or later). You can download it from [here](https://visualstudio.microsoft.com/vs/older-downloads/). This is required to compile modules.
+3. Run `npm config set msvs_version 2013` --global (or the version you have installed)
+
+If you have multiple Python versions installed, you can identify which Python version `node-gyp` should use in Windows by setting the `npm` config variable `python`:
+
+```bash
+npm config set python /path/to/executable/python2.7
+```
+
+Then, try to rebuild the package or re-run `npm install`.
+
+If the problem persists, you can try to install `windows-build-tools` which installs Python 2.7 and all the required compile tools. Run this command in PowerShell as Administrator:
+
+```bash
+npm install --global --production windows-build-tools
+```
+
+This will set up everything needed for `node-gyp` to run properly on your system.

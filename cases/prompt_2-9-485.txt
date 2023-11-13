@@ -1,0 +1,30 @@
+How to enable TLS for Redis 6 on Sidekiq?
+
+
+## Problem
+
+
+On my Ruby on Rails app, I keep getting the error below for the [Heroku Redis](https://elements.heroku.com/addons/heroku-redis) Premium 0 add-on:
+> OpenSSL::SSL::SSLError: SSL_connect returned=1 errno=0 state=error: certificate verify failed (self signed certificate in certificate chain)
+Heroku Redis [documentation](https://devcenter.heroku.com/articles/heroku-redis#create-a-new-instance) mentions that I need to enable TLS in my Redis client's configuration in order to connect to a Redis 6 database. To achive this, I have read SSL/TLS Support documentation on [redis-rb](https://github.com/redis/redis-rb#ssltls-support). My understanding from it is; I need to assign `ca_file`, `cert` and `key` for `Redis.new#ssl_params`.  how to set these for Redis or through Sidekiq on Heroku?
+
+## Updates
+
+
+Update 3: Heroku support provided an answer which solved the problem.
+Update 2: Created Heroku support ticket and waiting response.
+Update 1: [Asked](https://github.com/mperham/sidekiq/issues/4786) on Sidekiq's Github issues and was adviced go write Heroku support. Will update this question, when I do get an answer.
+
+---
+
+
+
+### Related Info
+
+
+I have verified the app does work when the add-on is either one of the below:
+- - 
+Versions:
+- - - - - - 
+Some links that helped me to narrow down the issue:
+- [https://bibwild.wordpress.com/2020/11/24/are-you-talking-to-heroku-redis-in-cleartext-or-ssl/](https://bibwild.wordpress.com/2020/11/24/are-you-talking-to-heroku-redis-in-cleartext-or-ssl/)- [https://mislav.net/2013/07/ruby-openssl/](https://mislav.net/2013/07/ruby-openssl/)

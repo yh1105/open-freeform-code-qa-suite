@@ -1,0 +1,47 @@
+To identify if a div is visible on the viewport, you can use the Intersection Observer API. Here's an example of how you can use it:
+
+```javascript
+import React, { useRef, useEffect, useState } from "react";
+
+const Component = ({ data }) => {
+  const [visibleIds, setVisibleIds] = useState([]);
+  const parentRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .map((entry) => entry.target.id);
+        setVisibleIds(visible);
+      },
+      { threshold: 0.5 }
+    );
+
+    const children = parentRef.current.children;
+    for (let i = 0; i < children.length; i++) {
+      observer.observe(children[i]);
+    }
+
+    return () => observer.disconnect();
+  }, [data]);
+
+  return (
+    <div id="parent" ref={parentRef}>
+      {data.map((item) => (
+        <div key={item.id} id={item.id}>
+          {item.title}
+        </div>
+      ))}
+    </div>
+  );
+};
+
+export default Component;
+```
+
+In this example, we're using the `IntersectionObserver` API to observe each child element of the `#parent` div. When an element intersects with the viewport by at least 50%, we add its `id` to the `visibleIds` state. You can adjust the threshold value to your liking.
+
+Note that we're using the `useRef` hook to get a reference to the `#parent` div, and we're using the `useEffect` hook to set up the `IntersectionObserver` and clean it up when the component unmounts.
+
+There are also some npm packages available that can help you with this, such as `react-intersection-observer` and `react-waypoint`. These packages provide a higher-level API for using the `IntersectionObserver` API. You can check their documentation to see if they fit your needs.

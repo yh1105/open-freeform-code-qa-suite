@@ -1,0 +1,22 @@
+The error message `java.lang.ClassNotFoundException: java.lang.Module` suggests that there is a problem with the Java version you are using. 
+
+The `java.lang.Module` class is a part of Java 9 and later versions. If you are using a version of Java that is older than Java 9, you will encounter this error because the `java.lang.Module` class does not exist in those versions.
+
+Here are a few steps you can take to resolve this issue:
+
+1. **Check your Java version:** You can do this by running the command `java -version` in your terminal. This will display the version of Java that is currently being used.
+
+2. **Update your Java version:** If you are using a version of Java that is older than Java 9, you will need to update it. You can download the latest version of Java from the [official Oracle website](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html).
+
+3. **Set your JAVA_HOME environment variable:** After installing the new version of Java, you will need to set your `JAVA_HOME` environment variable to point to the new installation. The method for doing this will depend on your operating system.
+
+4. **Update your build.gradle file:** Make sure that your `build.gradle` file is set to use the correct version of Java. You can do this by adding the following lines to your `build.gradle` file:
+
+```groovy
+compileJava {
+    sourceCompatibility = '11'
+    targetCompatibility = '11'
+}
+```
+
+5. **Rebuild your project:** After making these changes, try rebuilding your project. If everything has been set up correctly, the error should no longer occur.

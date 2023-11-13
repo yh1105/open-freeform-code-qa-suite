@@ -1,0 +1,18 @@
+Your code looks correct. However, if the location is not available, the `else` statement will not be executed. Instead, an error callback function should be provided as the second parameter of the `getCurrentPosition()` method to handle errors. Here's the revised code:
+
+```javascript
+if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+        position => {
+            console.log("Location accessed");
+        },
+        error => {
+            console.log("User not allowed");
+        }
+    );
+} else {
+    console.log("Geolocation is not supported by this browser.");
+}
+```
+
+This code will log "Location accessed" if the location is available, "User not allowed" if the user denies the location access, and "Geolocation is not supported by this browser." if the browser doesn't support geolocation.

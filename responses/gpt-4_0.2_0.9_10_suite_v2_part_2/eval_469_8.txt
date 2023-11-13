@@ -1,0 +1,20 @@
+Here is the function `getASCIIAsString` in Go that takes a uint64 ASCII code and prints the ASCII string of that code:
+
+```go
+package main
+
+import (
+	"fmt"
+)
+
+func getASCIIAsString(asciiCode uint64) {
+	asciiChar := string(asciiCode)
+	fmt.Println(asciiChar)
+}
+
+func main() {
+	getASCIIAsString(65) // Output: A
+}
+```
+
+This function uses the `string` function to convert the ASCII code to a string. The `fmt.Println` function is then used to print the resulting string. In the `main` function, we call `getASCIIAsString` with an ASCII code of 65, which corresponds to the letter 'A'.

@@ -1,0 +1,47 @@
+The error you're encountering is because Bootstrap requires `popper.js` for tooltips, popovers, and dropdowns. You need to install it as a project dependency.
+
+You can install `popper.js` using npm or yarn:
+
+**npm:**
+
+```bash
+npm install popper.js --save
+```
+
+**yarn:**
+
+```bash
+yarn add popper.js
+```
+
+After installing `popper.js`, you need to import it in your file before importing Bootstrap:
+
+```javascript
+import Popper from 'popper.js';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.min.js';
+```
+
+If you're using Bootstrap 5, you should know that they've replaced `popper.js` with `@popperjs/core`. So if you're using Bootstrap 5, you should install `@popperjs/core` instead:
+
+**npm:**
+
+```bash
+npm install @popperjs/core --save
+```
+
+**yarn:**
+
+```bash
+yarn add @popperjs/core
+```
+
+And then import it:
+
+```javascript
+import { createPopper } from '@popperjs/core';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.min.js';
+```
+
+Remember to restart your development server after installing new dependencies.

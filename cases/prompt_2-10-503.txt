@@ -1,0 +1,31 @@
+How do I collect the values of a HashMap into a vector?
+
+I can not find a way to collect the values of a `HashMap` into a `Vec` in the documentation. I have `score_table: HashMap<Id, Score>` and I want to get all the `Score`s into `all_scores: Vec<Score>`.
+
+I was tempted to use the `values` method (`all_scores = score_table.values()`), but it does not work since values is not a `Vec`.
+
+I know that `Values` implements the `ExactSizeIterator` trait, but I do not know how to collect all values of an iterator into a vector without manually writing a for loop and pushing the values in the vector one after one.
+
+I also tried to `use std::iter::FromIterator;` but ended with something like:
+
+```
+all_scores = Vec::from_iter(score_table.values());
+```
+
+
+```
+expected type `std::vec::Vec<Score>`
+   found type `std::vec::Vec<&Score>`
+```
+
+
+Thanks to [Hash map macro refuses to type-check, failing with a misleading (and seemingly buggy) error message?](https://stackoverflow.com/questions/52093493/hash-map-macro-refuses-to-type-check-failing-with-a-misleading-and-seemingly-b), I changed it to:
+
+```
+all_scores = Vec::from_iter(score_table.values().cloned());
+```
+
+
+and it does not produce errors to `cargo check`.
+
+Is this a good way to do it? 

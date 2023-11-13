@@ -1,0 +1,16 @@
+The `truncate` class in Tailwind CSS only works for single line text. If you want to truncate text that spans multiple lines, you will need to use some additional CSS.
+
+Here's how you can do it:
+
+```html
+<div className="ml-1 inline-block">
+   <span>Label: </span>
+   <span className="font-semibold line-clamp-1">
+     long texttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt
+   </span>
+</div>
+```
+
+In the above code, `line-clamp-1` is a utility class provided by Tailwind CSS that will limit the text to 1 line and add an ellipsis (...) if the text overflows.
+
+Please note that `line-clamp` is not fully supported in all browsers, so you should check the compatibility before using it. If you need to support a wide range of browsers, you may need to use a JavaScript solution instead.

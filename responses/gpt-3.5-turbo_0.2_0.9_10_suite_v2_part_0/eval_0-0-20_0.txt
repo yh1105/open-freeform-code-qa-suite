@@ -1,0 +1,40 @@
+Here's a refactored version of your code that follows best practices and is more efficient:
+
+```javascript
+import React from 'react'
+import styled, { css } from 'styled-components'
+
+const TabWrapper = styled.li`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 100px;
+  margin: 1px;
+  font-size: 3em;
+  color: ${props => (props.isSelected ? `white` : `black`)};
+  background-color: ${props => (props.isSelected ? `black` : `#C4C4C4`)};
+  cursor: ${props => (props.isSelected ? 'default' : `pointer`)};
+
+  ${props =>
+    props.isSelected &&
+    css`
+      &:hover {
+        background-color: black;
+      }
+    `}
+`
+
+const Tab = ({ onClick, isSelected, children }) => {
+  return (
+    <TabWrapper isSelected={isSelected} onClick={onClick}>
+      {children}
+    </TabWrapper>
+  )
+}
+
+export default Tab
+```
+
+In this refactored version, we move the `styled.li` component outside of the `Tab` component and define it as a separate `TabWrapper` component. We also pass the `isSelected` prop to the `TabWrapper` component instead of using it as a function argument. This makes the code more efficient because we don't have to re-define the `styled.li` component every time the `Tab` component is rendered.
+
+Additionally, we use the `css` helper function from `styled-components` to define a hover effect on the `TabWrapper` component when it is selected. This is a more efficient way of defining hover effects because it avoids creating unnecessary CSS classes.

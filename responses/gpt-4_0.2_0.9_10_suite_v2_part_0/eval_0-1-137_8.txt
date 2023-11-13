@@ -1,0 +1,21 @@
+The error you're getting is because you're trying to overwrite the `$theme-colors` map after it has been used in the `variables.scss` file. You should define your custom colors before importing the `variables.scss` file.
+
+Also, you should use the `map-merge` function to merge your custom colors with the default colors. Here's how you can do it:
+
+```scss
+@import "../../node_modules/bootstrap/scss/functions";
+@import "../../node_modules/bootstrap/scss/variables";
+
+$theme-colors: map-merge($theme-colors, (
+  "primary": #your-color-here,
+  // add more colors if needed
+));
+
+@import "../../node_modules/bootstrap/scss/bootstrap";
+```
+
+Replace `#your-color-here` with the color you want to use. If you want to change more colors, just add more key-value pairs to the map.
+
+Please note that you need to import `functions.scss` before `variables.scss` because `map-merge` function is defined in `functions.scss`.
+
+Also, make sure you have the correct path to the `bootstrap` directory in your `node_modules`. The path should be relative to the file where you're importing it.

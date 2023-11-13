@@ -1,0 +1,32 @@
+The reason you're seeing log 2 before log 1 is because of the asynchronous nature of the `onItemSelectedListener`. The `onItemSelected` function is only called when an item is selected in the spinner, which is likely to happen after your function `setupListWithAdapter` has already returned `itemSelected`.
+
+In your current implementation, `itemSelected` is returned before the user has had a chance to select anything, so it's still an empty string. Then, once the user selects something, `onItemSelected` is called and `itemSelected` is updated, but this happens too late.
+
+To fix this, you could use a callback function to handle the selected item. Here's an example:
+
+```kotlin
+fun Spinner.setupListWithAdapter(list: MutableList<String>, callback: (String) -> Unit) {
+    val adapter = ArrayAdapter(context, android.R.layout.simple_spinner_item, list)
+    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+    this.adapter = adapter
+    this.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+            val itemSelected = list[p2]
+            Log.e("categoryLog","1 : " + itemSelected)
+            callback(itemSelected)
+        }
+        override fun onNothingSelected(p0: AdapterView<*>?) {
+        }
+    }
+}
+```
+
+Now, instead of trying to return a value from `setupListWithAdapter`, you pass it a function that will be called with the selected item as soon as the user selects something:
+
+```kotlin
+mySpinner.setupListWithAdapter(myList) { selectedItem ->
+    // Do something with selectedItem
+}
+```
+
+This way, you're not trying to return a value from an asynchronous function, which is a common source of confusion. Instead, you're providing a way to handle the value as soon as it's available.

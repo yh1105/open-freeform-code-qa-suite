@@ -1,0 +1,7 @@
+You can't directly inject a generic interface, but you can inject a concrete class that implements the generic interface. For example, if you have a class `DatabaseService<T>` that implements `IDatabaseService<T>`, you can do:
+
+```c#
+services.AddScoped(typeof(IDatabaseService<>), typeof(DatabaseService<>));
+```
+
+This way, whenever you inject `IDatabaseService<T>` in your controllers, the DI container will provide an instance of `DatabaseService<T>`.

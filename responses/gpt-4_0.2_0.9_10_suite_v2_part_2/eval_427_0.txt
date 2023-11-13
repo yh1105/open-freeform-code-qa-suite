@@ -1,0 +1,15 @@
+The issue you're experiencing could be due to several reasons, including:
+
+1. **Domain Configuration**: Ensure that your `SESSION_DOMAIN` in your `.env` file is set to your domain. If your application is on `www.example.com`, then `SESSION_DOMAIN` should be `.example.com`. The leading dot is important as it allows subdomains to share the session.
+
+2. **Cookie Configuration**: Check your `config/session.php` file and ensure that the `'secure'` option is set to `true` if you're using HTTPS, or `false` if you're using HTTP.
+
+3. **Middleware**: Ensure that the `VerifyCsrfToken` middleware is included in the `web` middleware group in your `app/Http/Kernel.php` file.
+
+4. **Cache**: Clear your application cache using `php artisan config:cache` and `php artisan cache:clear` commands.
+
+5. **Session Files Permissions**: Check the permissions of the `storage/framework/sessions` directory. Laravel needs to be able to read and write to this directory. The permissions should be set to `755` or `775`.
+
+6. **SameSite Cookie Attribute**: If you're using Chrome 80 or later, it enforces a new secure-by-default cookie classification system, treating cookies that have no declared `SameSite` value as `SameSite=Lax` cookies. Only cookies set as `SameSite=None; Secure` will be available in third-party contexts, provided they are being accessed from secure connections. So, you need to set `'same_site' => 'none',` in `config/session.php`.
+
+Remember to clear your browser cookies after making these changes. If none of these solutions work, you may need to contact your hosting provider to ensure there are no server configurations that could be causing this issue.

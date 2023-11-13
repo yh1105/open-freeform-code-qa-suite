@@ -1,0 +1,19 @@
+The error log indicates that Python is not found in your system's PATH. Node-gyp, which is a part of the node-sass package, requires Python to be installed and accessible in the system's PATH.
+
+Here are the steps to fix this issue:
+
+1. **Install Python**: If Python is not installed on your system, you need to install it. You can download it from the [official Python website](https://www.python.org/downloads/). Node-gyp requires Python 2.7, so make sure to install that version.
+
+2. **Add Python to the PATH**: After installing Python, you need to add it to your system's PATH. Here's how you can do it:
+
+   - Open the System Properties (Right click Computer in the start menu, or use the keyboard shortcut Win+Pause)
+   - Click Advanced system settings in the sidebar.
+   - Click Environment Variables...
+   - Select PATH in the System variables section
+   - Click Edit
+   - Add Python's path to the end of the list (the paths are separated by semicolons). For example, if you installed Python to `C:\Python27\`, then you would add `C:\Python27\;` to the end of the PATH.
+   - Click OK
+
+3. **Rebuild the node-sass package**: After Python is installed and added to the PATH, you need to rebuild the node-sass package. You can do this by running `npm rebuild node-sass` in your project directory.
+
+After following these steps, the build should succeed. If it still fails, please let me know so I can help you troubleshoot further.

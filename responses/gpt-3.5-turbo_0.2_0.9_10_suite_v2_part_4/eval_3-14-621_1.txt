@@ -1,0 +1,30 @@
+The issue is that you are trying to access the `@State` variable outside of the `body` property of the `View`. Instead of initializing the `fullText` variable in the `init()` method, you can use a computed property to achieve the same result. Here's an updated version of your code:
+
+```
+struct StateFromOutside: View {
+    let list = [
+        "a": "Letter A",
+        "b": "Letter B",
+        // ...
+    ]
+    let letter: String
+    @State private var fullText: String = ""
+
+    private var initialText: String {
+        list[letter] ?? ""
+    }
+
+    init(letter: String) {
+        self.letter = letter
+    }
+
+    var body: some View {
+        TextField("Enter text", text: $fullText)
+            .onAppear {
+                self.fullText = self.initialText
+            }
+    }
+}
+```
+
+In this version, we've added a computed property called `initialText` that returns the value from the dictionary based on the `letter` parameter. We've also added an `onAppear` modifier to the `TextField` that sets the value of `fullText` to `initialText` when the view appears. This ensures that the `@State` variable is only accessed within the `body` property of the `View`.

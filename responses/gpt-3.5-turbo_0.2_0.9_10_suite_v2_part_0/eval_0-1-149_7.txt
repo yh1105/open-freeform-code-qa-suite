@@ -1,0 +1,16 @@
+To create an animation after hovering over the link using Tailwind CSS, you can use the `group-hover` variant and the `transform` and `transition` utilities. Here's an example code:
+
+```html
+<a href="#" class="group text-sky-600">
+    Link
+    <span class="block w-0 h-0.5 bg-sky-600 transition-transform duration-500 group-hover:w-full transform origin-left"></span>
+</a>
+```
+
+In this code, we added the `group` class to the link to enable the `group-hover` variant. We also removed the `transition` class from the link and added it to the span element instead.
+
+The `w-0` class sets the width of the span element to zero, and the `h-0.5` class sets the height to 0.5 rem. The `transition-transform` class sets the transition property to `transform`, and the `duration-500` class sets the duration of the transition to 500ms.
+
+When the link is hovered over, the `group-hover:w-full` class sets the width of the span element to full width, and the `transform` and `origin-left` classes animate the span element from left to right.
+
+I hope this helps! Let me know if you have any further questions.

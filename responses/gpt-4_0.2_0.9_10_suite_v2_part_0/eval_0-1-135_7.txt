@@ -1,0 +1,25 @@
+The issue you're experiencing is a known bug in Safari where flex children don't respect `height: auto` in the way you might expect. 
+
+To fix this, you can add `align-self: flex-start` to the image. This will align the image at the start of the cross axis, which is vertical in your case because you're using `flex-direction: column`.
+
+Here's the updated CSS:
+
+```css
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.container section:first-child {
+  display: flex;
+  margin-bottom: 25px;
+}
+
+.container img {
+  width: 125px;
+  height: auto;
+  align-self: flex-start; /* Add this line */
+}
+```
+
+This should ensure that your images aren't stretched and maintain their aspect ratio.

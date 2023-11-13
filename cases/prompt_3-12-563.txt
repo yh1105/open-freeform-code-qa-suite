@@ -1,0 +1,108 @@
+How to Auto New Line if a text overflows flutter
+
+Hello right now I am making Quran App.. I am fetching data from json file.I would like to ask how do I create a new line if it overflows like in the picture? I tried many things but none seemed to work.. is there a way to create a new line manually with a string variable? Please share your solution.. thanks in advance :)
+
+```
+import 'dart:convert';
+
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter/material.dart';
+import 'package:google_fonts_arabic/fonts.dart';
+import 'package:waktusolatimprovised/menu.dart';
+
+class QuranPage extends StatefulWidget {
+  final surahDipilih;
+
+  const QuranPage({Key key, this.surahDipilih}) : super(key: key);
+  @override
+  QuranPageState createState() => QuranPageState();
+}
+
+class QuranPageState extends State<QuranPage> {
+  List data;
+
+  var text;
+  var translate;
+
+  @override
+  Widget build(BuildContext context) {
+    Future<dynamic> loadJson() async {
+      String quranText =
+          await DefaultAssetBundle.of(context).loadString("images/quran.json");
+      String quranTranslate = await DefaultAssetBundle.of(context)
+          .loadString("images/quranterjemahan.json");
+      return {text = quranText, translate = quranTranslate};
+    }
+
+    return Scaffold(
+        appBar: AppBar(
+          title: Text("Load local JSON file"),
+        ),
+        drawer: Durawa(),
+        body: Container(
+          child: Center(
+            // Use future builder and DefaultAssetBundle to load the local JSON file
+            child: FutureBuilder(
+                future: loadJson(),
+                builder: (context, snapshot) {
+                  if (text == null && translate == null) {
+                    return CircularProgressIndicator();
+                  }
+                  var quranText = json.decode(text);
+                  var quranTranslation = json.decode(translate);
+                  // Decode the JSONR
+
+                  double c_width = MediaQuery.of(context).size.width * 0.8;
+
+                  return ListView.builder(
+                    // Build the ListView
+                    itemBuilder: (BuildContext context, int index) {
+                      List text = [
+                        quranText['sura'][widget.surahDipilih]['aya'][index]
+                            ['_text'],
+                        quranTranslation[widget.surahDipilih]['aya'][index]
+                            ['@text']
+                      ];
+
+                      return Container(
+                        child: Row(
+                          children: <Widget>[
+                            Flexible(
+                              child: Column(
+                                children: <Widget>[
+                                  Container(
+                                      child: AutoSizeText(
+                                    "${text[0]}",
+                                    style: TextStyle(
+                                        fontFamily: 'quran', fontSize: 30),
+                                    textAlign: TextAlign.end,
+                                  )),
+                                  Text('Malay Translation'),
+                                  Container(
+                                    child: Card(
+                                        child: Text(
+                                      "${text[1]}",
+                                      style: TextStyle(
+                                          fontSize: 20.0,
+                                          fontWeight: FontWeight.w300),
+                                      textAlign: TextAlign.right,
+                                    )),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                    itemCount: 7,
+                  );
+                }),
+          ),
+        ));
+  }
+}
+```
+
+
+[](https://i.stack.imgur.com/mJNQy.jpg)

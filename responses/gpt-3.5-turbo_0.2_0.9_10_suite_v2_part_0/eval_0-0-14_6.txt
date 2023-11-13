@@ -1,0 +1,42 @@
+To get the value of the Ant Design Switch component in React, you need to add an `onChange` event handler to the `Switch` component and update the value of the `switch` field in the form.
+
+Here's the revised code:
+
+```html
+<Form form={form} layout="vertical">
+  <Form.Item
+    label="Description"
+    name="description"
+    rules={[{ required: true, message: 'Enter a description' }]}
+  >
+    <Input placeholder="Enter Description" />
+  </Form.Item>
+
+  <Form.Item name="switch" noStyle valuePropName="checked">
+    <Switch
+      checkedChildren="Yes"
+      unCheckedChildren="No"
+      onChange={(checked) => form.setFieldsValue({ switch: checked })}
+    />
+    <span>Chargable</span>
+  </Form.Item>
+
+  <Button
+    onClick={() => {
+      form
+        .validateFields()
+        .then((values) => {
+          form.resetFields()
+          onCreate(values)
+        })
+        .catch((info) => {
+          console.log('Validate Failed:', info)
+        })
+    }}
+  >
+    Save
+  </Button>
+</Form>
+```
+
+In the `onChange` event handler of the `Switch` component, we update the value of the `switch` field in the form using the `setFieldsValue` method. This will ensure that the value of the `switch` field is included in the `values` object passed to the `onCreate` function.

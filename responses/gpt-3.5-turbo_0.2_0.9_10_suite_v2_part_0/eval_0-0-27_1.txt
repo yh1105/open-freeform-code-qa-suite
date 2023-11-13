@@ -1,0 +1,7 @@
+It seems like the issue is with the URI you are using for the Apollo client. The URI `'https://48p1r2roz4.sse.codesandbox.io'` is a demo server provided by Apollo, and it may not be working properly.
+
+You should replace the URI with the actual URI of your GraphQL server. Make sure that the server is running and accessible from your React Native app.
+
+Also, make sure that you have the necessary permissions to access the server from your app. If you are running the server locally, you may need to configure your network settings to allow the app to access the server.
+
+Once you have updated the URI, try running the app again and see if it works.

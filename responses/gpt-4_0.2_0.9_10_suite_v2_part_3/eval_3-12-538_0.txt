@@ -1,0 +1,2 @@
+The reason it didn't work is that this needs to be done inside a function, not at the top level.
+Another solution is to declare your map in Flutter with the keyword "final".

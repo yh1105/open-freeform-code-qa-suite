@@ -1,0 +1,19 @@
+To get the value of the switch in the `onCreate` function, you can modify the `Form.Item` for the switch as follows:
+
+```html
+<Form.Item name="chargable" valuePropName="checked">
+  <Switch checkedChildren="Yes" unCheckedChildren="No" />
+  <span>Chargable</span>
+</Form.Item>
+```
+
+Then, in the `onCreate` function, you can access the value of the switch using `values.chargable`. Here's the modified `onCreate` function:
+
+```javascript
+const onCreate = (values) => {
+  console.log('Received values of form: ', values);
+  console.log('Chargable: ', values.chargable);
+};
+``` 
+
+Note that we changed the `name` prop to `chargable` and removed the `noStyle` prop. We also updated the `valuePropName` prop to `checked` to match the prop used by the `Switch` component.

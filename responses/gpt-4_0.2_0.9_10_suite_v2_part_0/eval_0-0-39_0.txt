@@ -1,0 +1,57 @@
+Yes, you can achieve this by using the `ref` attribute in React. This attribute allows you to get a reference to a DOM element or an instance of a component in React.
+
+Here is how you can modify your code:
+
+```javascript
+import React, { Component, createRef } from "react";
+import ReactDOM from "react-dom";
+
+class CustomForm extends Component {
+  myFormRef = createRef();
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+    alert('Form submitted!');
+  }
+
+  render() {
+    return (
+      <form id='my-form' onSubmit={this.handleSubmit} ref={this.myFormRef}>
+        <button type='submit'>Inside Custom</button>
+      </form>
+    );
+  }
+}
+
+class App extends Component {
+  myForm = createRef();
+
+  handleOutsideSubmit = () => {
+    if (this.myForm.current) {
+      this.myForm.current.handleSubmit();
+    }
+  }
+
+  render() {
+    return (
+      <div>
+        <CustomForm ref={this.myForm} />
+        <button onClick={this.handleOutsideSubmit}>In Root</button>
+      </div>
+    );
+  }
+}
+
+const rootElement = document.getElementById("root");
+ReactDOM.render(<App />, rootElement);
+```
+
+In the above code:
+
+- `createRef` is used to create a reference to the form.
+- `handleSubmit` is a method in `CustomForm` that handles the form submission.
+- `ref={this.myFormRef}` is added to the form in `CustomForm` to attach the reference to the form.
+- `myForm` is a reference in `App` to the `CustomForm` instance.
+- `handleOutsideSubmit` is a method in `App` that triggers the form submission.
+- `ref={this.myForm}` is added to `CustomForm` in `App` to attach the reference to the `CustomForm` instance.
+- `onClick={this.handleOutsideSubmit}` is added to the button in `App` to trigger the form submission when the button is clicked.

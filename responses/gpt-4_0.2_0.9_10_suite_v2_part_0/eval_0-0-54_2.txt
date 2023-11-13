@@ -1,0 +1,69 @@
+In your code, you are already using a state hook to store the value of the input field. If you want to get the value of the input field on a button click, you can simply create a button and add an `onClick` event to it. In the `onClick` event, you can access the state value.
+
+Here is how you can do it:
+
+```javascript
+import React, { useState } from 'react';
+
+export default function InputField({name,label}) {
+  const [state, setState] = useState('')
+
+  const handleClick = () => {
+    alert(`Value of input field is: ${state}`);
+  }
+
+  return (
+    <div>
+     <label>{label}</label>
+      <input type="text" 
+      value={state} 
+      name={name}
+      onChange={(e) => setState(e.target.value)} />
+
+      <button onClick={handleClick}>Get Value</button>
+
+      {state}
+    </div>
+  );
+}
+```
+
+In the above code, I have added a `handleClick` function that alerts the value of the input field when the button is clicked. You can replace the alert with whatever you want to do with the value.
+
+If you have multiple fields like first name and last name, you can use an object as the state:
+
+```javascript
+import React, { useState } from 'react';
+
+export default function InputField() {
+  const [state, setState] = useState({firstName: '', lastName: ''})
+
+  const handleChange = (e) => {
+    setState({...state, [e.target.name]: e.target.value});
+  }
+
+  const handleClick = () => {
+    alert(`First Name is: ${state.firstName}, Last Name is: ${state.lastName}`);
+  }
+
+  return (
+    <div>
+     <label>First Name</label>
+      <input type="text" 
+      value={state.firstName} 
+      name="firstName"
+      onChange={handleChange} />
+
+     <label>Last Name</label>
+      <input type="text" 
+      value={state.lastName} 
+      name="lastName"
+      onChange={handleChange} />
+
+      <button onClick={handleClick}>Get Value</button>
+    </div>
+  );
+}
+```
+
+In this code, I have used an object as the state and updated the state using the name of the input field. The `handleClick` function alerts the first name and last name when the button is clicked.

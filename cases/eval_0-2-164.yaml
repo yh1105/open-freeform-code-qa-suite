@@ -1,0 +1,45 @@
+# Corresponding to post https://stackoverflow.com/questions/56378786
+id: 0-2-164
+# for case self identificaton
+
+prompt_path: prompt_0-2-164.txt
+# relative path to the prompt text
+
+# type: code debugging
+# type: code completion
+type: knowledge question-answering
+# question type, for later statistics
+
+lang: html
+# question language or area, for later statistics
+
+# full_score: 1.0
+# [optional] the full score of this case in the final suite report
+
+# null_score: 0.0
+# [optional]the score of providing no response
+
+grading:
+  
+  # max_score: float
+  # the maximum score within the test case for clipping purpose, if not specified, no maximum clipping
+  
+  # min_score: float
+  # the minimum score within the test case for clipping purpose, if not specified, no minimum clipping
+  
+  similarity: # refrain from use if other metric works
+    - metric: rougeL # select from rouge1 / rouge2 / rougeL / rougeLsum
+      references:
+        - path: "answer_0-2-164_0.txt"
+        - path: "answer_0-2-164_1.txt"
+        - path: "answer_0-2-164_2.txt"
+        # - answer_str
+        # or
+        # - path: answer_path
+      # max_score: float
+      # [optional] decide how to scale ROUGE score to our score, default 0.53 for rouge1 and 0.51 for others
+      # min_score: float
+      # [optional] decide how to scale ROUGE score to our score, default: 0.30
+      # weight: 1.0
+      # [optional] default is 1.0
+  

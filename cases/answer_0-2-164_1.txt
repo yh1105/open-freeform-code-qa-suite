@@ -1,0 +1,1 @@
+The goal of .attrs is so it can be passed down from your props. So you can use props inside your styled, and you can create placeholders, or change colors depending of the props etc.

@@ -1,0 +1,23 @@
+The error message `Error: Invalid login: 535-5.7.8 Username and Password not accepted` indicates that the username and password you are using to authenticate with Gmail's SMTP server are not correct. This could be due to a few reasons:
+
+1. **Incorrect Credentials**: The username or password you've entered is incorrect. Double-check your credentials to make sure they are correct.
+
+2. **Less Secure Apps**: Google may block sign-in attempts from some apps or devices that do not use modern security standards. You need to allow less secure apps to access your account. You can do this by going to your Google Account settings, then to the "Security" tab, and then turning on "Less Secure App Access". However, this is not recommended because it makes your account more vulnerable.
+
+3. **Two-Step Verification**: If you have 2-Step Verification enabled for your Google Account, you need to generate an app password. An App Password is a 16-digit passcode that gives less secure apps or devices permission to access your Google Account. You can generate the app password [here](https://myaccount.google.com/apppasswords).
+
+Replace the `pass: '**********'` in your code with the generated app password.
+
+```javascript
+var transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'haideryaqoobengr@gmail.com',
+    pass: 'your_generated_app_password'
+  }
+});
+```
+
+4. **Display Unlock Captcha**: Sometimes Google may require you to prove you're not a robot. You can do this by visiting [this link](https://accounts.google.com/DisplayUnlockCaptcha) and following the instructions.
+
+Remember to keep your credentials secure and avoid sharing them.

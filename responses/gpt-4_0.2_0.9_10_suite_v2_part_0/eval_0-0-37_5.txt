@@ -1,0 +1,13 @@
+Sure, you can use the following pattern to define optional parameters in NestJS:
+
+```javascript
+/route/:param1/config/:OptionalParam2?/:OptionalParam3?
+```
+
+This pattern will match the following routes:
+
+- `route/aa/config`
+- `route/aa/config/bb`
+- `route/aa/config/bb/cc`
+
+In the pattern, `:param1`, `:OptionalParam2` and `:OptionalParam3` are placeholders for parameters. The `?` after `:OptionalParam2` and `:OptionalParam3` makes these parameters optional.

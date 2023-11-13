@@ -1,0 +1,5 @@
+It seems that the issue is related to the `uri` you are using in your `ApolloClient`. The `uri` you are using is a demo endpoint provided by Apollo, which may not be working properly at the moment.
+
+You should replace the `uri` with your own GraphQL endpoint. You can use a service like Apollo Studio or create your own GraphQL server using a tool like Apollo Server or any other GraphQL server implementation.
+
+Once you have your own GraphQL endpoint, replace the `uri` in your `ApolloClient` with your own endpoint and try again.

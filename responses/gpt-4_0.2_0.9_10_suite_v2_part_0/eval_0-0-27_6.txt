@@ -1,0 +1,23 @@
+The issue you're facing might be due to several reasons. Here are a few things you can check:
+
+1. **Network Connection**: Ensure that your device/emulator has a proper internet connection. 
+
+2. **Server Status**: The server you're trying to fetch data from might be down or not responding. You can check the server status by visiting the URL directly in your web browser.
+
+3. **CORS Policy**: If you're running your app on a local server, you might face issues due to CORS policy. The server you're fetching data from needs to allow requests from your origin. 
+
+4. **Apollo Client Version**: There might be compatibility issues with the version of Apollo Client you're using. Try downgrading or upgrading the version.
+
+5. **Query Syntax**: Ensure that your GraphQL query is correct. You can test your query in a GraphQL playground.
+
+6. **React Native Debugger**: If you're using React Native Debugger, there might be an issue with it and Apollo Client. Try disabling it and see if the issue persists.
+
+If none of the above solutions work, you can try to debug the issue by catching and logging the error in your `useQuery` hook:
+
+```javascript
+const { loading, error, data } = useQuery(EXCHANGE_RATES, {
+    onError: (err) => console.log(err),
+});
+```
+
+This will give you more detailed information about what's going wrong.

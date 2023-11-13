@@ -1,0 +1,11 @@
+This error message usually occurs when the preview target is not properly configured. Try the following steps to fix the issue:
+
+1. Make sure that the preview target is selected in the scheme editor. Go to Product > Scheme > Edit Scheme, and select the preview target under the "Run" section.
+
+2. Clean the build folder by going to Product > Clean Build Folder.
+
+3. Try restarting Xcode.
+
+4. If none of the above steps work, try creating a new preview target and see if that works.
+
+Hope this helps!

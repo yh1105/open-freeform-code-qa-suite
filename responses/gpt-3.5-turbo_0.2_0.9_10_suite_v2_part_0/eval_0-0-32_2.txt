@@ -1,0 +1,41 @@
+To identify if a div is visible on the viewport, you can use the Intersection Observer API. Here's how you can use it in your case:
+
+1. Install the `react-intersection-observer` package from npm:
+
+```
+npm install react-intersection-observer
+```
+
+2. Import the `IntersectionObserver` component from the package:
+
+```javascript
+import { IntersectionObserver } from 'react-intersection-observer';
+```
+
+3. Wrap your `div` elements with the `IntersectionObserver` component and pass a callback function to it:
+
+```javascript
+<div id="parent">
+  {data.map(item => (
+    <IntersectionObserver onChange={isVisible => handleIntersection(item.id, isVisible)}>
+      <div id={item.id}>{item.title}</div>
+    </IntersectionObserver>
+  ))}
+</div>
+```
+
+4. Define the `handleIntersection` function to receive the `id` of the element and a boolean value indicating if it's visible on the viewport:
+
+```javascript
+const handleIntersection = (id, isVisible) => {
+  if (isVisible) {
+    console.log(`Element with id ${id} is visible`);
+  } else {
+    console.log(`Element with id ${id} is not visible`);
+  }
+};
+```
+
+This will log a message to the console every time an element becomes visible or invisible on the viewport. You can modify the `handleIntersection` function to do whatever you need with the visible elements.
+
+Note that the `IntersectionObserver` component only works on modern browsers, so you may need to add a polyfill for older browsers.

@@ -1,0 +1,38 @@
+Flutter Pub: Expected a key while parsing a block mapping. path:
+
+I'm using JSON file and register in `Pubspec.ymal` but showing error and also when I use an image and register it, the same error also occurs. Maybe there is a formatting mistake in it, but don't know what the problem is.this is the [doc](https://www.dartlang.org/tools/pub/pubspec) I followed.
+
+> .
+  
+      
+
+This is my `pubspec.yaml` file
+
+```
+name: jsondata description: A new Flutter application.
+
+  dependencies:  
+
+  flutter:
+
+  sdk: flutter
+
+  cupertino_icons: ^0.1.0
+
+  dev_dependencies:   
+
+ flutter_test:
+
+      sdk: flutter
+
+    flutter:
+
+    uses-material-design: true
+
+      assets:
+
+       - loadjson/person.json
+```
+
+
+[](https://i.stack.imgur.com/a85Kp.png)

@@ -1,0 +1,13 @@
+The error message you're seeing is related to the SSL version being used to establish a connection with the SMTP server. The error `ssl3_get_record:wrong version number` suggests that the client and server are unable to agree on a common SSL version to use for the connection.
+
+Here are a few things you can try to resolve this issue:
+
+1. **Change the MAIL_ENCRYPTION setting:** In your `.env` file, you have `MAIL_ENCRYPTION=ssl`. Try changing this to `MAIL_ENCRYPTION=tls`. TLS is the successor to SSL and is more secure. Many servers now require TLS for secure connections.
+
+2. **Check the port number:** The standard port for SSL connections is 465, and for TLS it's 587. If you're using SSL, try changing `MAIL_PORT=587` to `MAIL_PORT=465` in your `.env` file.
+
+3. **Contact the email service provider:** If the above solutions don't work, it's possible that there's a configuration issue on the server side. You may need to contact the email service provider (in this case, propnex.sg) for assistance.
+
+Remember to clear the config cache after making changes to your `.env` file. You can do this by running `php artisan config:cache` in your Laravel project directory.
+
+Also, ensure that your server has the necessary OpenSSL libraries installed and that PHP's `openssl` extension is enabled. You can check this by creating a PHP file with `phpinfo();` and looking for the 'openssl' section.

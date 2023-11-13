@@ -1,0 +1,34 @@
+The error message indicates that the Kotlin version used to compile the module is not compatible with the expected version. To resolve this issue, you can try the following steps:
+
+1. Update the Kotlin version in your project to match the version used by the Stripe library. You can check the Kotlin version used by the Stripe library in the documentation or in the build.gradle file of the Stripe library.
+
+2. Clean and rebuild your project to ensure that the changes take effect.
+
+Regarding adding the email and cardholder name in Stripe, you can use the `com.stripe.android.model.Card` class to create a card object with the required information and then use the `com.stripe.android.Stripe` class to create a token for the card. Here's an example code snippet:
+
+```kotlin
+val card = Card.create(
+    cardNumber,
+    expMonth,
+    expYear,
+    cvc,
+    email,
+    name
+)
+
+val stripe = Stripe(context, "your_stripe_publishable_key")
+stripe.createToken(
+    card,
+    object : TokenCallback {
+        override fun onSuccess(token: Token) {
+            // Handle successful token creation
+        }
+
+        override fun onError(error: Exception) {
+            // Handle token creation error
+        }
+    }
+)
+```
+
+Note that you need to replace "your_stripe_publishable_key" with your actual Stripe publishable key.

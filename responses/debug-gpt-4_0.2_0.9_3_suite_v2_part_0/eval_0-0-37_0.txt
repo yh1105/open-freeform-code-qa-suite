@@ -1,0 +1,3 @@
+```
+/route/:param1/config/:OptionalParam2?/:OptionalParam3?
+```

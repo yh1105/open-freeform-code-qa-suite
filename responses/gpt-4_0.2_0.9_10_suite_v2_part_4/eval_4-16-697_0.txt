@@ -1,0 +1,32 @@
+The `~/.bashrc` file is not sourced when a Docker container is run because Docker does not start a login shell, but rather a non-interactive shell. The `~/.bashrc` file is typically sourced by interactive, non-login shells. 
+
+To solve this issue, you can source the `~/.bashrc` file directly in your `launch.sh` script:
+
+```bash
+#!/bin/bash
+
+source $HOME/.bashrc
+
+cd /workspace/demo
+npm install
+node index.js
+```
+
+Or, you can modify the Dockerfile to source `~/.bashrc` when the Docker image is built:
+
+```Dockerfile
+RUN /bin/bash -c "source $HOME/.bashrc"
+```
+
+However, the best practice is to avoid relying on `~/.bashrc` in Docker containers. Instead, you should ensure that all necessary environment variables and paths are set in the Dockerfile or the script that is run in the container. 
+
+In your case, you can add these lines to your Dockerfile:
+
+```Dockerfile
+ENV NVM_DIR /root/.nvm
+ENV NODE_VERSION 7.9.0
+RUN . $NVM_DIR/nvm.sh && nvm install $NODE_VERSION && nvm alias default $NODE_VERSION
+ENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
+```
+
+This will make `node` and `npm` available in the `PATH` for all subsequent `RUN`, `CMD`, and `ENTRYPOINT` instructions, without needing to source `~/.bashrc`.

@@ -1,0 +1,15 @@
+The accordion arrow in Bootstrap 5 is actually a background SVG image. You can change its color by overriding the CSS `background-image` property with a new SVG image. 
+
+Here is an example of how you can do this:
+
+```css
+.accordion-button::after {
+    /* Auto generated from bootstrap */
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill-rule='evenodd' d='M4.646 7.646a.5.5 0 0 1 .708 0L8 10.293l2.646-2.647a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 0 1 0-.708z' fill='%2300ff00'/%3e%3cpath fill-rule='evenodd' d='M8 1a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 1z' fill='%2300ff00'/%3e%3c/svg%3e");
+    /* You can change the color by replacing '%2300ff00' with your color code */
+}
+```
+
+In this example, the color of the arrow is set to green (`%2300ff00`). You can replace this with any color you want by changing the color code.
+
+Please note that the SVG image is URL-encoded. The color is set in the `fill` attribute of the `path` elements. The color code must be URL-encoded, so for example `#00ff00` (green) becomes `%2300ff00`.

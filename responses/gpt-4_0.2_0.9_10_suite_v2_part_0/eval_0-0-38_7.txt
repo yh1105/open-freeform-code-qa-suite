@@ -1,0 +1,12 @@
+Sure, you should move the `console.log(this.newIds);` inside the subscribe method to ensure it runs after the response is received. Here is the revised code:
+
+```javascript
+this.repository.getById(Ids).subscribe((response) => {
+  console.log(response);
+  this.newIds = response.map((id) => {
+    return id;
+  });
+  console.log(this.newIds);
+});
+```
+This way, `console.log(this.newIds);` will wait until the response is received and `this.newIds` is updated.

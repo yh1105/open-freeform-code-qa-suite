@@ -1,0 +1,54 @@
+To identify if a div is visible on viewport on scroll, you can use the `Intersection Observer API`. This API allows you to observe changes in the intersection of a target element with an ancestor element or with a top-level document's viewport.
+
+Here is an example of how you can use the `Intersection Observer API` to get the list of divs inside of `#parent` which are visible on viewport on scroll:
+
+```javascript
+import React, { useEffect, useRef, useState } from "react";
+
+const ParentComponent = ({ data }) => {
+  const [visibleDivs, setVisibleDivs] = useState([]);
+  const parentRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visibleIds = entries
+          .filter((entry) => entry.isIntersecting)
+          .map((entry) => entry.target.id);
+        setVisibleDivs(visibleIds);
+      },
+      { root: null, rootMargin: "0px", threshold: 0.5 }
+    );
+
+    const divs = parentRef.current.querySelectorAll("div[id]");
+
+    divs.forEach((div) => {
+      observer.observe(div);
+    });
+
+    return () => {
+      divs.forEach((div) => {
+        observer.unobserve(div);
+      });
+    };
+  }, [data]);
+
+  return (
+    <div id="parent" ref={parentRef}>
+      {data.map((item) => (
+        <div key={item.id} id={item.id}>
+          {item.title}
+        </div>
+      ))}
+    </div>
+  );
+};
+
+export default ParentComponent;
+```
+
+In this example, we are using the `Intersection Observer API` to observe changes in the intersection of each div with the viewport. When a div is intersecting with the viewport, we add its id to the `visibleDivs` state. We are also using the `useRef` hook to get a reference to the `#parent` div, and the `useEffect` hook to create and clean up the `IntersectionObserver` object.
+
+Note that we are using the `data` prop as a dependency for the `useEffect` hook. This means that the `IntersectionObserver` object will be recreated whenever the `data` prop changes.
+
+There are also some npm modules that you can use to achieve this functionality, such as `react-intersection-observer` and `react-waypoint`. These modules provide a higher

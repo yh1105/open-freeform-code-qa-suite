@@ -1,0 +1,27 @@
+The issue you're facing is due to the conflict between the Node.js installed in your Windows system and the Node.js installed in your WSL2 Ubuntu system. When you're trying to run `npm -v`, it's trying to execute the npm installed in your Windows system, which is not compatible with the Linux environment.
+
+To resolve this issue, you need to remove the Windows PATHs from the WSL environment. You can do this by editing the `.bashrc` or `.bash_profile` file in your home directory.
+
+Open the `.bashrc` file using a text editor. You can use `nano`:
+
+```bash
+nano ~/.bashrc
+```
+
+At the end of the file, add the following line:
+
+```bash
+export PATH="$HOME/.local/bin:$HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin"
+```
+
+This line sets the PATH variable to only include directories that are relevant to the WSL environment, excluding the Windows PATHs.
+
+Save the file and exit the text editor. For `nano`, you can do this by pressing `Ctrl + X`, then `Y` to confirm saving the changes, and then `Enter`.
+
+Finally, apply the changes by sourcing the `.bashrc` file:
+
+```bash
+source ~/.bashrc
+```
+
+Now, when you run `npm -v`, it should correctly execute the npm installed in your WSL2 Ubuntu system.

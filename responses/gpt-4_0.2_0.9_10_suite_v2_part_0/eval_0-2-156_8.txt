@@ -1,0 +1,29 @@
+The issue you're facing is likely due to the CSS styling of your elements. Without seeing your CSS, it's hard to give a precise solution, but here are some general suggestions:
+
+1. **Use CSS Flexbox or Grid:** These are powerful layout models that allow for complex designs. They can be used to align and distribute space among items in a container, even when their size is unknown or dynamic.
+
+2. **Positioning:** You can use CSS positioning properties such as `relative`, `absolute`, `fixed`, or `sticky` to control the placement of elements. Be careful with these, as they can cause overlapping if not used properly.
+
+3. **Z-index:** If elements are overlapping, you can use the `z-index` property to control the stack order of elements. An element with a higher `z-index` will be displayed in front of an element with a lower `z-index`.
+
+Here's an example of how you might use Flexbox to align your buttons:
+
+```css
+#DanceScoreboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#GameStopped, #GameRunning {
+  order: 1;
+}
+
+#dancePoints {
+  order: 2;
+}
+```
+
+In this example, `display: flex;` makes `#DanceScoreboard` a flex container. `flex-direction: column;` stacks the children of `#DanceScoreboard` vertically. `align-items: center;` centers the children horizontally. The `order` property is used to control the order in which the children appear in the flex container.
+
+Remember to adjust these suggestions according to your specific needs and existing CSS.

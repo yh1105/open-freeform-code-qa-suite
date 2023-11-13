@@ -1,0 +1,17 @@
+Yes, you can add the `displayName` property to the component function to shut down the ESLint error. Here's an example:
+
+```jsx
+const columns_payment_summary_table = [ 
+  {
+    title: FooConstants.LABEL_QUANTITY_SELECTED,
+    dataIndex: 'group',
+    key: 'group',
+    render: function CustomRender(text) {
+      return <span>{getCountForCountry(text)}</span>;
+    },
+    displayName: 'CustomRender',
+  },
+];
+```
+
+In this example, I added the `displayName` property to the `CustomRender` function. You can replace `CustomRender` with any name you like. This should shut down the ESLint error.

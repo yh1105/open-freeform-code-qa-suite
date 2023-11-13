@@ -1,0 +1,13 @@
+The issue you're facing might be due to the version of IntelliJ IDEA you're using. IntelliJ IDEA 2017.x versions have partial support for Java 9 and don't support Java 11.
+
+Here are the steps you can follow:
+
+1. Upgrade your IntelliJ IDEA to the latest version (2021.x or later). You can download it from the [official JetBrains website](https://www.jetbrains.com/idea/download/).
+
+2. After upgrading, go to `File > Project Structure > Project Settings > Project` and set the `Project SDK` to `11 (java version "11.0.1")`.
+
+3. Then, go to `File > Project Structure > Project Settings > Modules`, select your module, and set the `Module SDK` to `11 (java version "11.0.1")`.
+
+4. Finally, go to `File > Settings > Build, Execution, Deployment > Compiler > Java Compiler` and set the `Target bytecode version` to `11` for your module.
+
+After these changes, your project should compile and run with Java 11.

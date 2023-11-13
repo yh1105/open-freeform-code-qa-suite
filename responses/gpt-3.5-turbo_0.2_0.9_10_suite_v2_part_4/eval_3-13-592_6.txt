@@ -1,0 +1,14 @@
+In AndroidX, you can instantiate a ViewModel using the `ViewModelProvider` class. Here's an example:
+
+```
+val viewModel = ViewModelProvider(this).get(MyViewModel::class.java)
+```
+
+Make sure you have added the necessary dependencies in your app's build.gradle file:
+
+```
+implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
+implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
+``` 
+
+Also, make sure that your ViewModel class extends `ViewModel`.

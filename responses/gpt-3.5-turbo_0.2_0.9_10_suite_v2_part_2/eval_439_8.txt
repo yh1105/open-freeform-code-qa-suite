@@ -1,0 +1,36 @@
+Based on the error message, it seems like Doctrine is unable to find the migration class. Here are a few things you can try:
+
+1. Use the full namespace of the migration class:
+```
+bin/console --env=dev doctrine:migrations:execute 'Application\Migrations\Version20210909072642' --down --no-interaction -vvv
+```
+
+2. Check if the migration class file exists in the correct directory:
+```
+app/DoctrineMigrations/Version20210909072642.php
+```
+
+3. Make sure that the migration class is properly defined with the correct namespace and class name:
+```
+namespace Application\Migrations;
+
+use Doctrine\DBAL\Schema\Schema;
+use Doctrine\Migrations\AbstractMigration;
+
+class Version20210909072642 extends AbstractMigration
+{
+    public function up(Schema $schema): void
+    {
+        // ...
+    }
+
+    public function down(Schema $schema): void
+    {
+        // ...
+    }
+}
+```
+
+4. Verify that the migration has been executed by checking the `migration_versions` table in your database. If the migration has already been executed, you won't be able to rollback to it.
+
+If none of these solutions work, you can try running the `doctrine:migrations:status` command to see if the migration is listed as "available" or "executed". This may help you identify any issues with the migration configuration.

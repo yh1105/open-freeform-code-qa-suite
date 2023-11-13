@@ -1,0 +1,7 @@
+When you run the container with `docker run IMAGE_NAME`, it does not execute the `.bashrc` file because it is not an interactive shell. To source the `.bashrc` file, you can modify your `launch.sh` script to source it before running the `npm` and `node` commands. Add the following line at the beginning of `launch.sh`:
+
+```
+source /root/.bashrc
+```
+
+This will ensure that the `nvm` script is loaded and the `npm` and `node` commands are available.

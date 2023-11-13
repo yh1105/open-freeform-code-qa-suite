@@ -1,0 +1,50 @@
+Yes, you can achieve this by using refs in React. Here's how you can modify your code to accomplish this:
+
+```javascript
+import React, { Component } from "react";
+import ReactDOM from "react-dom";
+
+class CustomForm extends Component {
+  handleSubmit = (event) => {
+    event.preventDefault();
+    alert('Form submitted!');
+  }
+
+  render() {
+    return (
+      <form id='my-form' onSubmit={this.handleSubmit}>
+        <button type='submit'>Inside Custom</button>
+      </form>
+    );
+  }
+}
+
+class App extends Component {
+  customFormRef = React.createRef();
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+    this.customFormRef.current.handleSubmit(event);
+  }
+
+  render() {
+    return (
+      <div>
+        <CustomForm ref={this.customFormRef} />
+        <button onClick={this.handleSubmit}>In Root</button>
+      </div>
+    );
+  }
+}
+
+const rootElement = document.getElementById("root");
+ReactDOM.render(<App />, rootElement);
+```
+
+In the `CustomForm` component, we define a `handleSubmit` method that prevents the default form submission behavior and shows an alert instead.
+
+In the `App` component, we create a `customFormRef` using `React.createRef()`. We also define a `handleSubmit` method that prevents the default button behavior and calls the `handleSubmit` method of the `CustomForm` component using the `customFormRef`.
+
+We pass the `customFormRef` to the `CustomForm` component using the `ref` prop. Finally, we modify the 'In Root' button to call the `handleSubmit` method when clicked.
+
+With these changes, clicking the 'In Root' button will trigger the `handleSubmit` method of the `CustomForm` component, which will show the alert.

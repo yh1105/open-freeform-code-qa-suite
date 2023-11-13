@@ -1,0 +1,29 @@
+Sure, you can achieve this by using Tailwind CSS's `group-hover` utility to apply styles on hover. Here's how you can modify your code:
+
+```html
+<a href="#" class="group">
+    <span class="text-sky-600 transition duration-300 group-hover:underline">Link</span>
+    <span class="block h-0.5 bg-sky-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></span>
+</a>
+```
+
+In this code, the `group-hover:underline` utility applies an underline to the text when the parent with the `group` class is hovered over. The `transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500` utilities are used to animate the underline. The underline starts with a scale of 0 (not visible) and scales to 100 (fully visible) when the link is hovered over.
+
+Please note that you need to enable the `group-hover` variant for `scale` and `transform` in your Tailwind CSS configuration file (`tailwind.config.js`) if it's not already enabled:
+
+```js
+module.exports = {
+  theme: {
+    extend: {},
+  },
+  variants: {
+    extend: {
+      scale: ['group-hover'],
+      transform: ['group-hover'],
+    },
+  },
+  plugins: [],
+}
+```
+
+Also, make sure you have the `@tailwindcss/forms` plugin installed and included in your Tailwind CSS configuration file.

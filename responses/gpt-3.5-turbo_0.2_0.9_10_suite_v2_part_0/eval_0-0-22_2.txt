@@ -1,0 +1,68 @@
+For the first way, you can pass the `options` prop to the `Tab.Screen` component for the "Settings" screen and set the `tabBarVisible` option to `false`. Here's the updated code:
+
+```javascript
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Tab.Navigator>
+        <Tab.Screen name="Home" component={ProfileStackScreen} />
+        <Tab.Screen name="Settings" component={SettingsStackScreen} options={{ tabBarVisible: false }} />
+      </Tab.Navigator>
+    </NavigationContainer>
+  );
+}
+```
+
+For the second way, you can use the `useEffect` hook to set the `navigation` options for the `SettingsStackScreen` component. Here's the updated code:
+
+```javascript
+import * as React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
+
+import Home from './components/Home';
+import SettingsScreen from './components/Settings';
+
+const SettingsStack = createStackNavigator();
+const ProfileStack  = createStackNavigator();
+
+function SettingsStackScreen({ navigation }) {
+  React.useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      navigation.setOptions({ tabBarVisible: false });
+    });
+
+    return unsubscribe;
+  }, [navigation]);
+
+  return (
+    <SettingsStack.Navigator>
+      <SettingsStack.Screen name="Settings" component={SettingsScreen} />
+    </SettingsStack.Navigator>
+  );
+}
+
+function ProfileStackScreen() {
+  return (
+    <ProfileStack.Navigator>
+      <ProfileStack.Screen name="Home" component={Home} />
+    </ProfileStack.Navigator>
+  );
+}
+
+const Tab = createBottomTabNavigator();
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Tab.Navigator>
+        <Tab.Screen name="Home" component={ProfileStackScreen} />
+        <Tab.Screen name="Settings" component={SettingsStackScreen} />
+      </Tab.Navigator>
+    </NavigationContainer>
+  );
+}
+```
+
+In this updated code, we use the `useEffect` hook to add a listener to the `focus` event of the `navigation` object. When the "Settings" screen is focused, we set the `tabBarVisible` option to `false` using the `setOptions` method of the `navigation` object. We also return a cleanup function from the `useEffect

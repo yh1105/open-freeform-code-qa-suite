@@ -1,0 +1,28 @@
+```go
+type A struct {
+}
+
+type B struct {
+}
+
+type AB interface {
+    *A | *B
+    some() bool
+}
+
+func (a *A) some() bool {
+    return true
+}
+
+func (b *B) some() bool {
+    return false
+}
+
+func some[T AB](x T) bool {
+    return x.some()
+}
+```
+
+The issue with the original code is that the `AB` interface only specifies the union of `*A` and `*B`, but does not include the `some()` method. Therefore, when the `some()` function tries to call `x.some()`, the compiler complains that `T` (which is constrained to `AB`) has no method `some`.
+
+To fix this, you can add the `some()` method to the `AB` interface, so that any type that implements `AB` must also implement `some()`.

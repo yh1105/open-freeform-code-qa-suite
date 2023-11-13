@@ -1,0 +1,42 @@
+The error you're seeing is because you're trying to redefine `$theme-colors` after it's been initially defined in the Bootstrap's `_variables.scss` file. When you import Bootstrap's `variables.scss` file, it already contains a definition for `$theme-colors`.
+
+To override the default theme colors, you should define your `$theme-colors` map before importing Bootstrap's SCSS files. Here's how you can do it:
+
+```scss
+// Define your custom colors
+$theme-colors: (
+  "primary": #your-color-here,
+  // add more colors if needed
+);
+
+// Import Bootstrap's `variables.scss` and `bootstrap.scss`
+@import "../../node_modules/bootstrap/scss/bootstrap";
+```
+
+This way, your custom `$theme-colors` map will be used when compiling the Bootstrap SCSS files.
+
+Also, make sure you're using a valid color value for `#your-color-here`. It can be a hexadecimal color, a named color, or an `rgb()`/`rgba()` color.
+
+If you want to keep the other default colors and only change some of them, you can do it like this:
+
+```scss
+// Import Bootstrap's `functions.scss` to use map-merge() function
+@import "../../node_modules/bootstrap/scss/functions";
+
+// Import Bootstrap's `variables.scss` to get the default $theme-colors
+@import "../../node_modules/bootstrap/scss/variables";
+
+// Define your custom colors
+$custom-colors: (
+  "primary": #your-color-here,
+  // add more colors if needed
+);
+
+// Merge the custom colors with the default theme colors
+$theme-colors: map-merge($theme-colors, $custom-colors);
+
+// Import the rest of Bootstrap
+@import "../../node_modules/bootstrap/scss/bootstrap";
+```
+
+In this case, the `map-merge()` function will combine your custom colors with the default theme colors, and your custom colors will override the default ones.

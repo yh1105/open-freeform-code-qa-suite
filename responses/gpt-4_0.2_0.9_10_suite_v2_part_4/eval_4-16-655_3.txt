@@ -1,0 +1,23 @@
+GitLab CI/CD variables do not support nested parameter expansion like Bash does. The parsing of the variables in GitLab CI/CD is more simplistic and doesn't have the full capabilities of a shell.
+
+In your case, GitLab CI/CD is trying to parse `${CI_MERGE_REQUEST_SOURCE_BRANCH_NAME:-${CI_COMMIT_BRANCH:-$CI_DEFAULT_BRANCH}}` and it stops at the first `}` it encounters, hence the output `}`.
+
+To achieve the desired effect, you could use a script to set the `GIT_BRANCH` variable:
+
+```yaml
+before_script:
+  - |
+    if [[ -n "$CI_MERGE_REQUEST_SOURCE_BRANCH_NAME" ]]; then
+      export GIT_BRANCH=$CI_MERGE_REQUEST_SOURCE_BRANCH_NAME
+    elif [[ -n "$CI_COMMIT_BRANCH" ]]; then
+      export GIT_BRANCH=$CI_COMMIT_BRANCH
+    else
+      export GIT_BRANCH=$CI_DEFAULT_BRANCH
+    fi
+
+job1:
+  script:
+    - echo $GIT_BRANCH
+```
+
+This script will check the variables in order and set `GIT_BRANCH` to the first one that is set.

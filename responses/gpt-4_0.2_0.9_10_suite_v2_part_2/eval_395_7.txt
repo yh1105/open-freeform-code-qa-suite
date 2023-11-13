@@ -1,0 +1,20 @@
+You can't directly inject a generic interface, but you can inject a concrete class that implements the generic interface. Here is an example:
+
+```c#
+public class DatabaseService<T> : IDatabaseService<T>
+{
+    public IEnumerable<T> GetList()
+    {
+        // Implementation here
+    }
+    ...
+}
+```
+
+Then in your `Startup.cs`, you can inject it like this:
+
+```c#
+services.AddScoped(typeof(IDatabaseService<>), typeof(DatabaseService<>));
+```
+
+This will allow you to inject `IDatabaseService<T>` into your controllers, where `T` is the type you want to use.

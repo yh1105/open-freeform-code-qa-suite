@@ -1,0 +1,23 @@
+The two ways you've implemented are already quite efficient for removing duplicates from an array in Rust. 
+
+The first way uses the `unique` method from the `itertools` crate, which removes duplicates by creating a new iterator that returns unique elements. The second way uses a `HashSet` to keep track of seen elements and only keeps the first occurrence of each element.
+
+If you want to simplify the code a bit more, you could use the `dedup` method from the standard library, but this only works if your array is sorted and if your elements implement the `PartialEq` trait. Here's an example:
+
+```rust
+fn main() {
+    let mut arr = [
+        Person { name: "aaa".to_string(), age: 10 },
+        Person { name: "bbb".to_string(), age: 20 },
+        Person { name: "bbb".to_string(), age: 20 },
+        Person { name: "ccc".to_string(), age: 30 },
+    ];
+
+    arr.sort_by(|a, b| a.name.cmp(&b.name));
+    arr.dedup();
+}
+```
+
+In this example, `sort_by` is used to sort the array by the `name` field, and then `dedup` is used to remove consecutive duplicates. Note that this modifies the array in-place, so if you need to keep the original array unchanged, you'll need to clone it first.
+
+However, please note that this method only works for arrays of elements that implement the `PartialEq` and `Ord` traits, which might not always be the case. If your elements are complex structures like in your example, you'll probably need to stick with the `itertools` or `HashSet` methods.

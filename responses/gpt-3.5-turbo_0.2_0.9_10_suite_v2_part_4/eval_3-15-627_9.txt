@@ -1,0 +1,1 @@
+You can create a calendar input in VBA Excel without using any external ocx files by creating a userform and adding a calendar control to it. You can then use VBA code to display the userform when the user clicks on a cell or a button, and retrieve the selected date from the calendar control.

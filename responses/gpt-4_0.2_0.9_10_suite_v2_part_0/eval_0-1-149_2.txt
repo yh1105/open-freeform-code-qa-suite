@@ -1,0 +1,25 @@
+Sure, you can achieve this by using Tailwind CSS's group-hover variant. Here's how you can modify your code:
+
+```html
+<a href="#" class="group inline-block text-sky-600 transition duration-300">
+    Link
+    <span class="block w-0 h-0.5 bg-sky-600 transition-all duration-500 group-hover:w-full"></span>
+</a>
+```
+
+In this code, I've added the `inline-block` class to the anchor tag to make the width transition work properly. I've also changed the `max-w-0` class to `w-0` in the span tag to start the width from 0. The `transition-all` class is added to apply the transition to all properties. Finally, the `group-hover:w-full` class is added to make the width 100% when the anchor tag is hovered over.
+
+Please note that the `group-hover` variant is not enabled by default in Tailwind CSS. You need to enable it in your Tailwind CSS configuration file (`tailwind.config.js`) like this:
+
+```javascript
+module.exports = {
+  variants: {
+    extend: {
+      width: ['group-hover'],
+    },
+  },
+  plugins: [],
+}
+```
+
+This will enable the `group-hover` variant for the `width` utility. If you want to enable it for all utilities, you can replace `width` with `all`.

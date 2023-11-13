@@ -1,0 +1,45 @@
+The error you're encountering is likely due to changes in how Android 11 handles file storage. Android 11 introduced scoped storage which restricts access to certain directories that were previously accessible.
+
+The `Environment.getExternalStorageDirectory()` method you're using is deprecated in API 29 and higher. It doesn't work on Android 10 (API 29) and above unless you set `requestLegacyExternalStorage` to `true` in your `AndroidManifest.xml` file. However, this is not a recommended long-term solution as this attribute is ignored in Android 11 (API 30) and higher.
+
+Here's how you can fix your issue:
+
+1. **Use app-specific storage**: If the files you're creating are meant for your app's use only, consider using app-specific storage. You can get the path to this directory using `Context.getExternalFilesDir()`. This does not require any permissions.
+
+```java
+private fun getTempFolder(): File {
+    val directoryFolder = File(context.getExternalFilesDir(null), "sample-take-image")
+    directoryFolder.mkdirs()
+    return directoryFolder
+}
+```
+
+2. **Use MediaStore API**: If the files you're creating are images, videos, or audio files that should be available to other apps (like the gallery app), consider using the MediaStore API. This does not require any permissions if you're only accessing your app's own files.
+
+```java
+val resolver = context.contentResolver
+val contentValues = ContentValues().apply {
+    put(MediaStore.MediaColumns.DISPLAY_NAME, "Image name")
+    put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg")
+    put(MediaStore.MediaColumns.RELATIVE_PATH, "DCIM/sample-take-image")
+}
+val imageUri = resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)
+
+resolver.openOutputStream(imageUri).use { outputStream ->
+    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
+}
+```
+
+3. **Request permission**: If you still need to access a shared storage directory, you'll need to request the `MANAGE_EXTERNAL_STORAGE` permission. Note that this permission is considered dangerous, so it should be used as a last resort.
+
+```xml
+<uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+```
+
+Then in your code:
+
+```java
+if (Environment.isExternalStorageManager()) {
+    // You have the permission, you can perform your operation here.
+} else {
+    // You don

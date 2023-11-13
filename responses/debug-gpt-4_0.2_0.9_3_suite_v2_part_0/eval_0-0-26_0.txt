@@ -1,0 +1,18 @@
+ESLint is complaining because it's a best practice to name your components in React. This helps in debugging and also improves readability of the code.
+
+In your case, you are using an anonymous function as a component. To fix the ESLint error, you can assign a name to the function. Here's how you can do it:
+
+```jsx
+const columns_payment_summary_table = [ 
+    {
+      title: FooConstants.LABEL_QUANTITY_SELECTED,
+      dataIndex: 'group',
+      key: 'group',
+      render: function RenderCountForCountry(text) {
+        return <span>{getCountForCountry(text)}</span>
+      },
+    }
+  ]
+```
+
+In the above code, I have named the function `RenderCountForCountry`. This should fix the ESLint error.

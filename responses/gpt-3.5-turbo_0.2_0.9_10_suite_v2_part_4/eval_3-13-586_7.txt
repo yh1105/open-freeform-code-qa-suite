@@ -1,0 +1,29 @@
+The error message indicates that you need to specify either `FLAG_IMMUTABLE` or `FLAG_MUTABLE` when creating a `PendingIntent`. You can fix the error by updating the code that creates the `PendingIntent` in your `MediaSessionCompat` constructor.
+
+If you want to use `FLAG_IMMUTABLE`, you can update the code as follows:
+```
+if (mbrComponent != null && mbrIntent == null) {
+  // construct a PendingIntent for the media button
+  Intent mediaButtonIntent = new Intent(Intent.ACTION_MEDIA_BUTTON);
+  // the associated intent will be handled by the component being registered
+  mediaButtonIntent.setComponent(mbrComponent);
+  mbrIntent = PendingIntent.getBroadcast(context,
+    0/* requestCode, ignored */, mediaButtonIntent,
+    PendingIntent.FLAG_IMMUTABLE);
+}
+```
+
+If you want to use `FLAG_MUTABLE`, you can update the code as follows:
+```
+if (mbrComponent != null && mbrIntent == null) {
+  // construct a PendingIntent for the media button
+  Intent mediaButtonIntent = new Intent(Intent.ACTION_MEDIA_BUTTON);
+  // the associated intent will be handled by the component being registered
+  mediaButtonIntent.setComponent(mbrComponent);
+  mbrIntent = PendingIntent.getBroadcast(context,
+    0/* requestCode, ignored */, mediaButtonIntent,
+    PendingIntent.FLAG_MUTABLE);
+}
+```
+
+Note that the Android documentation recommends using `FLAG_IMMUTABLE` unless you need to use `FLAG_MUTABLE` for specific functionality.

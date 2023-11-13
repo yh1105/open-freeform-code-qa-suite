@@ -1,0 +1,35 @@
+Yes, you can achieve the same result using `INDEX` and `SMALL` functions in combination with `IF` and `ROW` functions. Here's how you can do it:
+
+```excel
+=INDEX($B$1:$B$100, SMALL(IF($A$1:$A$100="x", ROW($A$1:$A$100)-ROW(INDEX($A$1:$A$100,1,1))+1), ROW(1:1)))
+```
+
+This is an array formula, so you need to press `Ctrl+Shift+Enter` after typing the formula instead of just `Enter`.
+
+This formula will return the first match. To get the next matches, copy the formula down the column.
+
+This formula works by creating an array of row numbers for rows where `Column A` is "x". The `SMALL` function then returns the smallest row number on the first row, the second smallest on the second row, and so on. The `INDEX` function then returns the value from `Column B` for that row number.
+
+If you want to use a VBA Macro, you can use the following code:
+
+```vba
+Sub FilterData()
+    Dim rng As Range
+    Dim outputCol As Range
+    Dim cell As Range
+    Dim outputRow As Integer
+
+    Set rng = ThisWorkbook.Sheets("Sheet1").Range("A1:A100")
+    Set outputCol = ThisWorkbook.Sheets("Sheet1").Range("C1")
+    outputRow = 1
+
+    For Each cell In rng
+        If cell.Value = "x" Then
+            outputCol.Offset(outputRow - 1, 0).Value = cell.Offset(0, 1).Value
+            outputRow = outputRow + 1
+        End If
+    Next cell
+End Sub
+```
+
+This macro will copy the values from `Column B` to `Column C` if the corresponding value in `Column A` is "x". You can adjust the range and output column as needed.

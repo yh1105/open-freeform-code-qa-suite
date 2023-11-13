@@ -1,0 +1,11 @@
+You can try using the `--no-cache` flag when running the `docker build` command. This will force Docker to rebuild all the layers, including the ones that were previously cached. 
+
+Additionally, you can try using the `-t` flag to tag the image with a name and then run the `docker history` command to see the full build history of the image. This will show you all the layers that were built and their respective commands.
+
+For example:
+```
+docker build -t myimage:latest --no-cache .
+docker history myimage:latest
+```
+
+This should give you a more detailed output of the build process.

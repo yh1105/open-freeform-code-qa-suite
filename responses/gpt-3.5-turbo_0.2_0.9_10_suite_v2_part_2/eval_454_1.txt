@@ -1,0 +1,17 @@
+The err113 error from golangci-lint is suggesting that you should not define dynamic errors using `errors.New()` and instead use wrapped static errors. 
+
+To fix this, you can create a static error variable and use it instead of defining a new error each time. Here's an example:
+
+```
+var (
+    ErrRepo = errors.New("repo error")
+    ErrOops = errors.New("oops error")
+)
+
+// ...
+
+repoMock.EXPECT().Save(gomock.Eq(&foooBarBar)).Return(nil, ErrRepo)
+repoMock.EXPECT().FindAll().Return(nil, ErrOops)
+```
+
+By using static errors, you can ensure that the error messages are consistent throughout your codebase and make it easier to handle errors in a centralized way.

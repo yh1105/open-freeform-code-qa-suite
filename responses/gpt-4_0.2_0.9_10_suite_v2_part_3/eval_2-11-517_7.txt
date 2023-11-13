@@ -1,0 +1,39 @@
+In C++, string interpolation isn't as straightforward as in C# or JavaScript. However, you can achieve similar results using `std::ostringstream` or `std::to_string` or `printf` function. Here are some examples:
+
+1. Using `std::ostringstream`:
+
+```cpp
+#include <sstream>
+
+int myVariable = 5;
+std::ostringstream oss;
+oss << "My variable has value " << myVariable;
+std::string result = oss.str();
+```
+
+2. Using `std::to_string`:
+
+```cpp
+int myVariable = 5;
+std::string result = "My variable has value " + std::to_string(myVariable);
+```
+
+3. Using `printf`:
+
+```cpp
+int myVariable = 5;
+printf("My variable has value %d", myVariable);
+```
+
+Please note that the `printf` function will not return a string, it will directly print the output.
+
+Also, if you are using C++20, you can use `std::format`:
+
+```cpp
+#include <format>
+
+int myVariable = 5;
+std::string result = std::format("My variable has value {}", myVariable);
+```
+
+This is the closest to the string interpolation syntax you're used to from C# and JavaScript, but it requires C++20.

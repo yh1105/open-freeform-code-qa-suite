@@ -1,0 +1,25 @@
+Yes, you can achieve the same result using an array formula with `INDEX` and `SMALL` functions in Excel versions that do not support `FILTER` function. Here is how you can do it:
+
+Assuming your data starts from row 2, enter the following formula in the cell where you want to start your filtered list:
+
+```excel
+=IFERROR(INDEX($B$2:$B$100, SMALL(IF($A$2:$A$100="x", ROW($A$2:$A$100)-ROW($A$2)+1), ROW(1:1))), "")
+```
+
+This is an array formula, so you need to press `Ctrl+Shift+Enter` instead of just `Enter` after typing the formula. Then drag the fill handle down to get all the values.
+
+This formula works by creating an array of row numbers for rows where `Column A` is "x", then uses `SMALL` with `ROW(1:1)` to get the nth smallest row number, and `INDEX` to return the value from `Column B` in that row. `IFERROR` is used to return an empty string when there are no more matches.
+
+For a VBA solution, you can use `AutoFilter` method to filter the data and then copy the visible (filtered) cells to another location. Here is a basic example:
+
+```vba
+Sub FilterAndCopy()
+    With ThisWorkbook.Sheets("Sheet1") 'Change to your sheet name
+        .Range("A1:B100").AutoFilter Field:=1, Criteria1:="x"
+        .Range("B1:B100").SpecialCells(xlCellTypeVisible).Copy Destination:=Sheets("Sheet2").Range("A1")
+        .AutoFilterMode = False
+    End With
+End Sub
+```
+
+This macro filters `Column A` for "x", then copies the visible cells in `Column B` to `Sheet2`. Adjust the ranges and sheet names to fit your data.

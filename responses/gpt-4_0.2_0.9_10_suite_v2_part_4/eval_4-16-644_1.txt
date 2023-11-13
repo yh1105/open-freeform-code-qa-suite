@@ -1,0 +1,7 @@
+This error typically occurs because the `startup.sh` script does not have execute permissions. You can add execute permissions to the script by running the following command:
+
+```bash
+chmod +x startup.sh
+```
+
+This command changes the permissions of the `startup.sh` file to be executable. After running this command, you should be able to run the `./startup.sh nginx:start` command without encountering the permission denied error.

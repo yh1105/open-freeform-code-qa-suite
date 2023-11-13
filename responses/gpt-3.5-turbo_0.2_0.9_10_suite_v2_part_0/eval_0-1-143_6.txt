@@ -1,0 +1,19 @@
+Yes, you can modify the internal CSS of Firefox to adjust the spacing between menu items. Here's how you can do it:
+
+1. Open Firefox and type `about:config` in the address bar.
+2. Search for the preference `toolkit.legacyUserProfileCustomizations.stylesheets` and set it to `true`.
+3. Open your Firefox profile folder. You can find the location of your profile folder by typing `about:support` in the address bar and looking for the "Profile Folder" entry.
+4. Create a new folder named `chrome` in your profile folder if it doesn't already exist.
+5. Inside the `chrome` folder, create a new file named `userChrome.css`.
+6. Open the `userChrome.css` file in a text editor and add the following code:
+
+```
+/* Reduce spacing between menu items */
+#PanelUI-menu .panel-subview-body > :not(:first-child) {
+  margin-block-start: 0px !important;
+}
+```
+
+7. Save the `userChrome.css` file and restart Firefox.
+
+This code targets the menu items in Firefox's main menu (also known as the "hamburger menu") and reduces the spacing between them. You can adjust the `margin-block-start` value to your liking to increase or decrease the spacing.

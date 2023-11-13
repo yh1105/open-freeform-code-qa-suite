@@ -1,0 +1,9 @@
+Source maps are files that associate the transpiled, minified, or otherwise transformed source code to the original source code. They are a critical tool for debugging because they allow you to trace a bug in the transformed code back to the original source code, where it's usually easier to understand and fix.
+
+In Angular, the `sourceMap` option in the `tsconfig.json` file controls whether source maps are generated for your TypeScript files. By default, this option is set to `true`, which means source maps are generated.
+
+If you set `"sourceMap": false`, Angular will not generate source maps for your TypeScript files. This means that if you're debugging your app, you'll be looking at the transpiled JavaScript code, not your original TypeScript code. This can make debugging more difficult, especially if you're not familiar with the JavaScript code that TypeScript transpiles to.
+
+However, turning off source maps can make your build faster and the resulting JavaScript file smaller, which might be beneficial in a production environment.
+
+In summary, the change won't be visible in your app's behavior or appearance, but it will affect the debugging process.

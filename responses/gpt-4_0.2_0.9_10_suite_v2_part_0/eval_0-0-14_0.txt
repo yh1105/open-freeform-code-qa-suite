@@ -1,0 +1,14 @@
+The code you provided seems to be correct. However, if you're having trouble getting the value from the switch in the `onCreate` function, you might want to ensure that the `onCreate` function is correctly handling the `values` object.
+
+The `values` object should contain a key-value pair where the key is the name of the form item and the value is the current value of the form item. In your case, the key should be "switch" and the value should be either `true` or `false`.
+
+Here is the revised version of your code:
+
+```html
+<Form.Item name="switch" valuePropName="checked">
+    <Switch checkedChildren="Yes" unCheckedChildren="No" />
+    <span>Chargable</span>
+</Form.Item>
+```
+
+In your `onCreate` function, you should be able to access the value of the switch with `values.switch`. If `values.switch` is `true`, the switch is checked. If `values.switch` is `false`, the switch is not checked.

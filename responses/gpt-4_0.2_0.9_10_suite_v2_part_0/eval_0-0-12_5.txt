@@ -1,0 +1,24 @@
+The error message `Error: Invalid login: 535-5.7.8 Username and Password not accepted` indicates that the username and password you're using to authenticate with Gmail's SMTP server are incorrect or not accepted.
+
+Here are some steps to troubleshoot this issue:
+
+1. **Check your username and password**: Make sure that the username and password you're using are correct. The username should be your full email address, and the password should be your Gmail password.
+
+2. **Enable Less Secure Apps**: By default, Google blocks attempts to sign in via apps it deems less secure. You can change this setting by going to your Google Account settings, then to "Security" and turning on "Less secure app access". However, this is not recommended because it can make your account more vulnerable to hacking.
+
+3. **Use App Passwords**: If you have 2-Step Verification enabled on your Google account, you may need to generate and use an app password instead of your regular password. You can generate an app password by going to your Google Account settings, then to "Security" and "App passwords". 
+
+Here is how you can generate an App Password:
+
+- Go to your Google Account.
+- On the left navigation panel, choose Security.
+- On the "Signing in to Google" panel, choose App Passwords. If you don’t see this option, 2-Step Verification is not set up for your account, or set up for security keys only.
+- At the bottom, choose Select app and choose the app you’re using.
+- Choose Select device and choose the device you’re using.
+- Choose Generate.
+- Follow the instructions to enter the App Password. The App Password is the 16-character code in the yellow bar on your device.
+- Choose Done.
+
+Once you have your App Password, you can use that in your code in place of your regular password.
+
+Remember to never share your passwords and sensitive information in your code or with others. Always use environment variables or other secure methods to store and use such information.

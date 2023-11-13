@@ -1,0 +1,36 @@
+The error message you're seeing is because Bootstrap requires `Popper.js` for the dropdowns and other interactive components to work.
+
+You can install `Popper.js` via npm by running the following command in your terminal:
+
+```bash
+npm install popper.js --save
+```
+
+After installing `Popper.js`, you need to import it into your project. If you're using ES6 modules, you can do this with:
+
+```javascript
+import Popper from 'popper.js';
+```
+
+Or if you're using CommonJS modules:
+
+```javascript
+const Popper = require('popper.js');
+```
+
+Now, you should be able to compile your project without the "Module not found: Can't resolve 'popper.js'" error.
+
+If you're using Bootstrap with a bundler like Webpack, you might need to add an alias to your Webpack configuration to ensure that `Popper.js` is correctly resolved:
+
+```javascript
+module.exports = {
+  //...
+  resolve: {
+    alias: {
+      'popper.js': path.resolve(__dirname, 'node_modules/popper.js'),
+    },
+  },
+};
+```
+
+Replace `__dirname` with the path to your `node_modules` directory if it's not in the same directory as your Webpack configuration file.

@@ -1,0 +1,31 @@
+You should be using `REDIS_TLS_URL` if you're connecting to Heroku Redis via TLS. Here's a simple example of how to connect to Heroku Redis using TLS with `node_redis`:
+
+```javascript
+var redis = require('redis');
+var url = require('url');
+
+var redisURL = url.parse(process.env.REDIS_TLS_URL);
+var client = redis.createClient(redisURL.port, redisURL.hostname, { no_ready_check: true });
+
+client.auth(redisURL.auth.split(":")[1]);
+
+client.on('connect', function() {
+    console.log('connected to Redis');
+});
+
+client.on('error', function (err) {
+    console.log('Error ' + err);
+});
+```
+
+This script will connect to the Redis server specified in the `REDIS_TLS_URL` environment variable. The `no_ready_check` option is used to suppress the READY check which can cause issues when connecting to Heroku Redis.
+
+Remember to replace `REDIS_TLS_URL` with your actual Redis URL. You can find this in the settings of your Heroku app.
+
+Also, don't forget to install the `redis` and `url` packages using npm:
+
+```bash
+npm install redis url
+```
+
+This example assumes you're using `node_redis` version 3.x. If you're using a different version, the code might need to be adjusted.

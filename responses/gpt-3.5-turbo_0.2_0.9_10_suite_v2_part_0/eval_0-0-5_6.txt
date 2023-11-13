@@ -1,0 +1,21 @@
+The error message indicates that Python is not installed on your system. You need to install Python 2.7.x version on your Windows machine and add it to your system's PATH environment variable.
+
+Here are the steps to follow:
+
+1. Download Python 2.7.x version from the official website: https://www.python.org/downloads/windows/
+2. Install Python by running the downloaded installer and follow the installation wizard.
+3. During the installation, make sure to select the option "Add Python to PATH".
+4. After the installation is complete, open a new command prompt and run the following command to verify that Python is installed and added to the PATH:
+
+```
+python --version
+```
+
+5. If the command returns the version number of Python, then it is installed correctly. If not, you may need to add Python to the PATH manually.
+6. To add Python to the PATH manually, follow these steps:
+   - Open the Control Panel and go to System and Security > System > Advanced system settings.
+   - Click on the Environment Variables button.
+   - Under System Variables, scroll down and find the PATH variable, then click on Edit.
+   - Add the path to the Python installation directory (e.g. C:\Python27) to the end of the variable value, separated by a semicolon (;).
+   - Click OK to save the changes.
+7. After adding Python to the PATH, try running the build again. It should now be able to find the Python executable and complete the build successfully.

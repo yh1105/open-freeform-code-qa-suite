@@ -1,0 +1,36 @@
+First way:
+
+```javascript
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Tab.Navigator>
+        <Tab.Screen name="Home" component={ProfileStackScreen} />
+        <Tab.Screen options={{ tabBarVisible: false }} name="Settings" component={SettingsStackScreen} />
+      </Tab.Navigator>
+    </NavigationContainer>
+  );
+}
+```
+
+Second way:
+
+```javascript
+function SettingsStackScreen({ navigation }) {
+    React.useEffect(() => {
+        const unsubscribe = navigation.addListener('focus', () => {
+            navigation.setOptions({tabBarVisible:false});
+        });
+        return unsubscribe;
+    }, [navigation]);
+    return (
+        <SettingsStack.Navigator>
+            <SettingsStack.Screen name="Settings" component={SettingsScreen} />
+        </SettingsStack.Navigator>
+    )
+}
+```
+
+In the first way, we are setting the `tabBarVisible` option to `false` for the "Settings" tab. This will hide the tab bar when the "Settings" tab is active.
+
+In the second way, we are using a `useEffect` hook to add a listener to the navigation. When the "Settings" screen gains focus, we set the `tabBarVisible` option to `false`, hiding the tab bar. The listener is removed when the component is unmounted.

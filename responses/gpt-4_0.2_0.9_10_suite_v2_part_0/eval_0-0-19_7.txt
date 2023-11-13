@@ -1,0 +1,15 @@
+The error message indicates that npm cannot find the package `aws-sdk-js` in the npm registry. This is because there is no package with the name `aws-sdk-js` in the npm registry. 
+
+The correct name for the AWS SDK in npm is `aws-sdk`. You should install it with:
+
+```bash
+npm install --save aws-sdk
+```
+
+This command will install the `aws-sdk` package and also add it as a dependency in your `package.json` file. 
+
+The `--save` option is used to include the package in the dependencies list in your `package.json` file. If you don't want to include it in your `package.json`, you can simply use:
+
+```bash
+npm install aws-sdk
+```

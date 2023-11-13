@@ -1,0 +1,43 @@
+You can use the `resizeToAvoidBottomInset` property of the `Scaffold` widget to control the behavior of the bottom navigation bar when the keyboard is shown. By default, this property is set to `true`, which means that the bottom navigation bar will move up with the keyboard. To disable this behavior, you can set `resizeToAvoidBottomInset` to `false` in your `Scaffold` widget like this:
+
+```dart
+class _AppHomeViewState extends State<AppHomeView>
+    with TickerProviderStateMixin {
+
+  TabController tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    tabController = TabController(length: 4, vsync: this, initialIndex: 0);
+    tabController.addListener(handleTabSelection);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final scaffold = Scaffold(
+      resizeToAvoidBottomInset: false, // disable bottom navigation bar movement with keyboard
+      body: SafeArea(child: _buildBody(context)),
+      bottomNavigationBar: Container(
+        height: 48,
+        decoration: BoxDecoration(
+          color: StyledColors.BACKGROUND_COLOR,
+          boxShadow: [
+            BoxShadow(
+              color: StyledColors.FORGROUND_COLOR.withOpacity(0.16),
+              blurRadius: 12,
+              offset: Offset(0, 0),
+            ),
+          ],
+        ),
+        child: SafeArea(
+          child: _buildTabBar(context),
+        ),
+      ),
+    );
+  }
+  ...
+}
+``` 
+
+Setting `resizeToAvoidBottomInset` to `false` will prevent the bottom navigation bar from moving up with the keyboard and it will stay behind the keyboard.

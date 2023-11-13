@@ -1,0 +1,18 @@
+The error message you're seeing is because `req.logout()` is not a function in Express.js by default. It's added by Passport.js when you use it as middleware. 
+
+In your case, you are using Passport.js correctly and `req.logout()` should be available. The error you're seeing might be due to the request not being authenticated when the `/logout` route is hit. 
+
+However, Passport.js is designed to fail silently if `req.logout()` is called when no user is authenticated. This means that the error might be coming from somewhere else in your code.
+
+That said, your logout route seems to be correct. Here is the correct way to implement a logout route with Passport.js:
+
+```javascript
+app.get('/logout', function(req, res){
+  req.logout();
+  res.redirect('/');
+});
+```
+
+This is exactly what you have in your code. 
+
+If you're still seeing the error, I would recommend checking other parts of your code to make sure you're not calling `req.logout()` somewhere else without an authenticated user.

@@ -1,0 +1,11 @@
+In TypeScript, you can define an array of objects with a specific structure by using the `Array<T>` generic type or `T[]` shorthand, where `T` is the type of the objects in the array. 
+
+Here is the corrected function definition:
+
+```typescript
+bagTotal = (products: {name: string, price: number, description: string}[]) => {
+ // function does stuff
+}
+```
+
+In this case, `products` is an array of objects, where each object has a `name` property of type `string`, a `price` property of type `number`, and a `description` property of type `string`.

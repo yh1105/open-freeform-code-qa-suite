@@ -1,0 +1,17 @@
+The issue is that `~/.bashrc` is not sourced when you run non-interactive shell sessions, which is the case when you run a Docker container. 
+
+To solve this, you can source `~/.bashrc` in your `launch.sh` script before running `npm install` and `node index.js`. 
+
+Here's how you can modify your `launch.sh`:
+
+```bash
+#!/bin/bash
+
+source $HOME/.bashrc
+
+cd /workspace/demo
+npm install
+node index.js
+```
+
+This will ensure that the `nvm` environment is set up correctly before running your Node.js application.

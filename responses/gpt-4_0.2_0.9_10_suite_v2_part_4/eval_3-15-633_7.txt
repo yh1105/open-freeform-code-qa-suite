@@ -1,0 +1,11 @@
+Yes, you can achieve the same result using an array formula with `INDEX` and `SMALL` functions. Here's how you can do it:
+
+```excel
+=IFERROR(INDEX($B$1:$B$100, SMALL(IF($A$1:$A$100="x", ROW($A$1:$A$100)-ROW(INDEX($A$1:$A$100,1,1))+1), ROW(1:1))), "")
+```
+
+This is an array formula, so you need to press `Ctrl+Shift+Enter` after typing it, instead of just `Enter`.
+
+This formula will return the first match in the first row where you enter it, and then you can drag the fill handle down to get the rest of the matches. It will return an empty string when there are no more matches.
+
+This formula works by creating an array of the row numbers where `Column A` equals "x", and then using the `SMALL` function with `ROW(1:1)` to get the nth smallest value from that array, where n is the row number of the cell where you're entering the formula. The `INDEX` function then returns the value from `Column B` in that row. The `IFERROR` function is used to return an empty string when there are no more matches.

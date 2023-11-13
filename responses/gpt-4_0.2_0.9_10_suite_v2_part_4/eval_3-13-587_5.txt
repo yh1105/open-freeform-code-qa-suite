@@ -1,0 +1,11 @@
+The error message you're seeing is related to the version of Jacoco you're using. Jacoco version 0.8.6 does not support Java 16, which is likely the version you're using given your Kotlin and Gradle versions.
+
+To fix this issue, you should upgrade your Jacoco version to 0.8.7 which supports Java 16. You can do this by changing the `toolVersion` in your `jacoco` block:
+
+```groovy
+jacoco {
+    toolVersion = "0.8.7"
+}
+```
+
+After making this change, try running your tests again. If you're still encountering issues, you may need to check your Java version and ensure it's compatible with your current setup.

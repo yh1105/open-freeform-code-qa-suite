@@ -1,0 +1,26 @@
+The `lastIndexOf` method will return the last index of the specified string, which is not what you want in this case. Instead, you should use the `indexOf` method to get the first occurrence of "-354" in the string. 
+
+However, `indexOf` will return the index where "-354" starts. You want to keep "-354" in your output, so you should add 4 to the index (since "-354" has 4 characters).
+
+Here is the corrected code:
+
+```powershell
+$FileArray = @("Name1-354-03.pdf", "Name23-354-H11.pdf", "Name354-354-02.pdf", "Name3545-354.pdf")
+ForEach ($n in $FileArray){
+     $index = $n.indexOf('-354')
+     if ($index -ne -1) {
+         Write-Host $n.Substring(0, $index+4)
+     }
+}
+```
+
+This script will output:
+
+```
+Name1-354
+Name23-354
+Name354-354
+Name3545-354
+```
+
+This code will check if "-354" is found in the string (`$index -ne -1`). If it is found, it will print the substring from the start of the string to the end of "-354". If "-354" is not found, it will not print anything.

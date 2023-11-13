@@ -1,0 +1,12 @@
+Nested parameter expansion is not supported in GitLab CI/CD. You can achieve the desired result by using `if` statements to check if the variables are set and fallback to default values if they are not. Here's an example:
+
+```
+variables:
+  GIT_BRANCH: ""
+
+job1:
+  script:
+    - if [ -n "$CI_MERGE_REQUEST_SOURCE_BRANCH_NAME" ]; then echo "$CI_MERGE_REQUEST_SOURCE_BRANCH_NAME"; elif [ -n "$CI_COMMIT_BRANCH" ]; then echo "$CI_COMMIT_BRANCH"; else echo "$CI_DEFAULT_BRANCH"; fi
+```
+
+This will output the value of `$CI_MERGE_REQUEST_SOURCE_BRANCH_NAME` if it is set, otherwise the value of `$CI_COMMIT_BRANCH` if it is set, otherwise the value of `$CI_DEFAULT_BRANCH`.

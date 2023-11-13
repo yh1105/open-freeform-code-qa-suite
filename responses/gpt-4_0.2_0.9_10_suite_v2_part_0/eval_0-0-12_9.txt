@@ -1,0 +1,13 @@
+The error message you're seeing is from Gmail, not from Nodemailer. It's telling you that the username and password you're using to authenticate with Gmail's SMTP server are not being accepted.
+
+Here are some possible solutions:
+
+1. **Check your credentials**: Make sure that the username and password you're using are correct. The username should be your full email address, and the password should be your Gmail password.
+
+2. **Enable Less Secure Apps**: Google may block sign-in attempts from some apps or devices that do not use modern security standards. You can change your settings to allow less secure apps into your account. However, this is not recommended because it can make your account more vulnerable to hacking. Here is the link to enable it: [Less Secure Apps](https://myaccount.google.com/lesssecureapps)
+
+3. **Use App Passwords**: If you have 2-Step Verification enabled for your Google account, you'll need to generate and use an App Password for Nodemailer instead of your regular password. Here is the link to generate it: [App Passwords](https://myaccount.google.com/apppasswords)
+
+4. **Unlock Captcha**: Sometimes, Google may block a sign-in attempt if it's not recognized. You can unlock it by visiting this link: [Unlock Captcha](https://accounts.google.com/DisplayUnlockCaptcha)
+
+Remember to replace the placeholders in your code with the actual username and password (or App Password if you're using 2-Step Verification).

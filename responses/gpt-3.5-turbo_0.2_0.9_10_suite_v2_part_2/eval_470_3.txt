@@ -1,0 +1,24 @@
+You need to add a `go_package` option in your `.proto` file to specify the Go package name and import path for the generated code. Here's an example:
+
+```go
+syntax="proto3";
+
+package main;
+
+option go_package = "example.com/myproject/mypackage";
+
+message Person {
+      string name = 1;
+      int32 age = 2;
+}
+```
+
+In this example, the `go_package` option specifies the Go package name and import path as `example.com/myproject/mypackage`. You can replace this with your own package name and import path.
+
+Then, when you run the `protoc` command, you need to specify the import path using the `-I` option:
+
+```bash
+protoc -I=. --go_out=. simple.proto
+```
+
+This tells `protoc` to look for the `.proto` file in the current directory (`-I=.`) and to generate Go code in the same directory (`--go_out=.`).

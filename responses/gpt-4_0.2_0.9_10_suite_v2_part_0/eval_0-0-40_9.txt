@@ -1,0 +1,29 @@
+The issue you're facing is due to the fact that your system is trying to use the Windows version of `npm` instead of the one installed in your WSL2 Ubuntu environment. This is because the Windows path is included in your WSL2 path.
+
+To solve this issue, you can remove the Windows path from your WSL2 path. You can do this by editing your `.bashrc` or `.bash_profile` file. Open the file with a text editor like `nano`:
+
+```bash
+nano ~/.bashrc
+```
+
+Then, add the following line to the end of the file:
+
+```bash
+export PATH=$(echo "$PATH" | sed -e 's/:\/mnt.*//g')
+```
+
+This command will remove the Windows path from your WSL2 path.
+
+After adding this line, save the file and exit the text editor. Then, run the following command to apply the changes:
+
+```bash
+source ~/.bashrc
+```
+
+Now, when you run `npm -v`, it should use the `npm` installed in your WSL2 environment. If you still face the same issue, you might need to reinstall `npm` in your WSL2 environment using the following command:
+
+```bash
+sudo apt-get install -y npm
+```
+
+After the installation, check the version of `npm` again using `npm -v`. It should now display the correct version.

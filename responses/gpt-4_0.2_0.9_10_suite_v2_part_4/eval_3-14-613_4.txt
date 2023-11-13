@@ -1,0 +1,15 @@
+This issue can be caused by several reasons. Here are some steps you can try to resolve it:
+
+1. **Clean the project**: Use the shortcut `Shift + Command + K` to clean the build folder.
+
+2. **Delete derived data**: Go to `Xcode -> Preferences -> Locations -> Derived Data`, click on the arrow to open the folder in Finder and delete it.
+
+3. **Check your scheme**: Make sure your preview is included in the current scheme. Go to `Product -> Scheme -> Edit Scheme -> Build`, and check if your target is included.
+
+4. **Restart Xcode**: Sometimes, simply restarting Xcode can solve the problem.
+
+5. **Update your macOS**: Make sure your macOS is updated to the latest version. SwiftUI previews require macOS Catalina or later.
+
+6. **Check your code**: Make sure your `ContentView_Previews` is in the same file as `ContentView`. If it's in a separate file, move it to the `ContentView` file.
+
+If none of the above steps work, it could be a bug in Xcode. You might want to report it to Apple via their Feedback Assistant.

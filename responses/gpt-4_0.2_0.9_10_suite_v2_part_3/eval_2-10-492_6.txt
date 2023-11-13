@@ -1,0 +1,23 @@
+Sure, here is the code snippet with the blanks filled:
+
+```rust
+    let ix = anchor_lang::solana_program::system_instruction::transfer(
+        &user_account.key(),
+        &event_vault_address,
+        amount,
+    );
+    anchor_lang::solana_program::program::invoke(
+        &ix,
+        &[
+            user_account.clone(),
+            event_vault.clone(),
+        ],
+    );
+```
+
+In this code:
+
+- `user_account` is the account of the user who is depositing SOL.
+- `event_vault_address` is the address of the event account's vault where the SOL is being deposited.
+- `amount` is the amount of SOL being transferred.
+- `user_account.clone()` and `event_vault.clone()` are the accounts that are passed to the `invoke` function. They are cloned because the `invoke` function takes ownership of its arguments.

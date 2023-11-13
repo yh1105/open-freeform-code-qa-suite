@@ -1,0 +1,10 @@
+You can use the `Split-Path` cmdlet to split the PATH environment variable into an array of directories, and then check if the specified folder is in that array using the `-contains` operator. Here's an example function:
+
+```
+function FolderIsInPATH($Path_to_directory) {
+    $path_dirs = $env:PATH -split ';'
+    return $path_dirs -contains $Path_to_directory
+}
+```
+
+Note that the PATH environment variable uses semicolons as separators on Windows, but uses colons on Unix-like systems.

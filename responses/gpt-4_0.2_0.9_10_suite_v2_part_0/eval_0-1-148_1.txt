@@ -1,0 +1,27 @@
+Sure, you can use the `last:` variant provided by Tailwind CSS to target the last element in a list. You can use the `border-b-0` class to remove the border from the last `<li>` element. Here is the revised code:
+
+```html
+  <ul>
+    <li
+      v-for="(item, index) in items"
+      :key="`item-${index}`"
+      :class="{'border-b-0': index === items.length - 1, 'border-solid border-b border-black': true}"
+    >
+      Item
+    </li>
+  </ul>
+```
+
+In this code, we are using Vue's dynamic class binding (`:class`). We are checking if the current index is the last one (`index === items.length - 1`). If it is, we are applying the `border-b-0` class to remove the bottom border. Otherwise, we are applying the `border-solid border-b border-black` classes.
+
+Please note that you need to enable the `last` variant for `borderWidth` in your Tailwind CSS configuration file (`tailwind.config.js`) if it's not enabled by default:
+
+```javascript
+module.exports = {
+  variants: {
+    borderWidth: ['responsive', 'last'],
+  },
+}
+```
+
+This will allow you to use the `last:` variant with the `borderWidth` utility.

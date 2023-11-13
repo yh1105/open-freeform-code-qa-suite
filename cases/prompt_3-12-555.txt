@@ -1,0 +1,172 @@
+How to change from Stateless Widget to Stateful Widget?
+
+I have an app screen that uses Checkboxes and a Drop down Menu. However, I have realised I'd coded it inside a StatelessWidget so I am unable to change the state when an option is selected. How do I get this working so that when a Checkbox is selected then it will display as being "checked" rather than empty?
+
+I have tried pasting in my code into a Stateful Widget, however keep running into errors, as I am not totally sure on which parts should go where. 
+
+```
+import 'package:carve_brace_app/model/activity.dart';
+import 'package:flutter/material.dart';
+
+class DetailPage extends StatelessWidget {
+  final Activity activity;
+  DetailPage({Key key, this.activity}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final levelIndicator = Container(
+      child: Container(
+        child: LinearProgressIndicator(
+            backgroundColor: Color.fromRGBO(209, 224, 224, 0.2),
+            value: 2.0,
+            valueColor: AlwaysStoppedAnimation(Colors.green)),
+      ),
+    );
+
+    final topContentText = Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        SizedBox(height: 120.0),
+        Container(
+          width: 90.0,
+          child: new Divider(color: Colors.green),
+        ),
+        SizedBox(height: 10.0),
+        Text(
+          activity.activityName,
+          style: TextStyle(color: Colors.white, fontSize: 45.0),
+        ),
+        SizedBox(height: 30.0),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            Expanded(
+                flex: 6,
+                child: Padding(
+                    padding: EdgeInsets.only(left: 10.0),
+                    child: Text(
+                      "Last Run: 3-2-19\n"+
+                      "Last Avg Strain: 34%\n"+
+                      "Last Run Time: 00:45:23",
+                      style: TextStyle(color: Colors.white),
+                    ))),
+            // Expanded(flex: 1, child: newRow)
+          ],
+        ),
+      ],
+    );
+
+    final topContent = Stack(
+      children: <Widget>[
+        Container(
+          height: MediaQuery.of(context).size.height * 0.45,
+          padding: EdgeInsets.all(40.0),
+          width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+                colors: [
+                  Color.fromRGBO(33, 147, 176, 100),
+                  Color.fromRGBO(109, 213, 237, 100)
+                ],
+              ),
+            ),
+          child: Center(
+            child: topContentText,
+          ),
+        ),
+        Positioned(
+          left: 235.0,
+          top: 180.0,
+          child: InkWell(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: new CircleAvatar(
+                radius: 80.0,
+                backgroundImage: NetworkImage(activity.icon),
+                backgroundColor: Colors.white,
+              ),
+          ),
+        ),
+        Positioned(
+          left: 8.0,
+          top: 60.0,
+          child: InkWell(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: Icon(Icons.arrow_back, color: Colors.white),
+          ),
+        )
+      ],
+    );
+
+    final bottomContentText = Text(
+      "Config:",
+      style: TextStyle(fontSize: 18.0),
+    );
+    final mappedCheckbox = CheckboxListTile(
+     title: Text("Mapped"),
+    value: false,
+    onChanged: (newValue) { },
+    controlAffinity: ListTileControlAffinity.leading,  //  <-- leading Checkbox
+    );
+    final rtCheckBox = CheckboxListTile(
+     title: Text("Real-time Tracking"),
+    value: false,
+    onChanged: (newValue) { },
+    controlAffinity: ListTileControlAffinity.leading,  //  <-- leading Checkbox
+    );
+    final descriptionText = Text(
+      "Description:",
+      style: TextStyle(fontSize: 12.0),
+    );
+    final description = TextFormField(
+      decoration: InputDecoration(
+      hintText: 'Enter an activity description',
+    ),
+  );
+    final scheduledFor = Text(
+      "Scheduled for:",
+      style: TextStyle(fontSize: 12.0),
+    );
+    final dropdown = new DropdownButton<String>(
+  items: <String>['Now (Default)', 'B', 'C', 'D'].map((String value) {
+    return new DropdownMenuItem<String>(
+      value: value,
+      child: new Text(value),
+    );
+  }).toList(),
+  hint: Text("Now (Default)"),
+  onChanged: (_) {},
+);
+    final readButton = Container(
+        padding: EdgeInsets.symmetric(vertical: 16.0),
+        width: 170,//MediaQuery.of(context).size.width,
+        child: RaisedButton(
+          onPressed: () => {},
+          color: Colors.lightBlue,
+          child:
+              Text("Start", style: TextStyle(color: Colors.white, fontSize: 20)),
+        ));
+    final bottomContent = Container(
+      width: MediaQuery.of(context).size.width,
+      padding: EdgeInsets.all(40.0),
+      child: Center(
+        child: Column(
+          children: <Widget>[bottomContentText, mappedCheckbox, rtCheckBox, descriptionText, description, Text("\n"), scheduledFor, dropdown, readButton],
+        ),
+      ),
+    );
+
+    return Scaffold(
+      body: Column(
+        children: <Widget>[topContent, bottomContent],
+      ),
+    );
+  }
+}
+```
+

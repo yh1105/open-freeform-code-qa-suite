@@ -1,0 +1,15 @@
+The Rule of Five is not outdated, but it's true that with the advent of smart pointers and RAII (Resource Acquisition Is Initialization) in modern C++, the need for user-defined destructors, copy/move constructors, and copy/move assignment operators has been greatly reduced.
+
+However, there are still cases where you might need to define these yourself:
+
+1. **Performance**: While smart pointers are great, they do introduce a level of indirection and can have performance implications. In performance-critical code, you might want to manage memory directly.
+
+2. **Legacy Code**: If you're working with older code that doesn't use smart pointers, you'll likely need to follow the Rule of Five.
+
+3. **Custom Memory Management**: If you're doing something unusual with memory management, such as using a memory pool, you'll need to define these functions.
+
+4. **Reference Counting**: If you're implementing a shared object with reference counting, you'll need to define these functions.
+
+5. **Non-Memory Resources**: The Rule of Five also applies to other resources besides memory, like file handles, network sockets, database connections, etc. While there are RAII wrappers for many of these resources, you might need to manage them manually in some cases.
+
+So while it's true that modern C++ has reduced the need for these functions, there are still cases where they're necessary. It's also worth noting that even if you're using smart pointers, you should still be aware of the Rule of Five, because it's an important part of understanding how resources are managed in C++.

@@ -1,0 +1,38 @@
+Flutter - How to show text and icon in one line in row?
+
+I am using row widget with three child widgets:
+Text
+Icon
+Text
+
+I want all of them to appear in single line same level horizontally  and drop to new line if text increases.
+
+I am using below code for Row widget but last Text widget is not aligned correctly
+[](https://i.stack.imgur.com/R1eeS.png)
+
+The text dropping should start below the "`Tap`" and "`on the right hand`" is not aligned
+
+```
+Row(
+  mainAxisAlignment: MainAxisAlignment.start,
+  mainAxisSize: MainAxisSize.min,
+  children: <Widget>[
+    Text(
+      'Tap ',
+      style: TextStyle(
+        fontSize: 17,
+      ),
+    ),
+    Icon(Icons.add),
+    Expanded(
+      child: Text(
+        'on the right hand corner to start a new chat.',
+        style: TextStyle(
+          fontSize: 17,
+        ),
+      ),
+    )
+  ],
+)
+```
+

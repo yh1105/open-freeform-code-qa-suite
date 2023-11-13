@@ -1,0 +1,16 @@
+You can use the `group-hover` variant in Tailwind to achieve this effect. Here's an example code snippet:
+
+```html
+<a href="#" class="group relative text-sky-600 transition duration-300">
+    Link
+    <span class="absolute bottom-0 left-0 w-full h-0.5 bg-sky-600 transition duration-500 transform origin-left scale-x-0 group-hover:scale-x-100"></span>
+</a>
+```
+
+In this code, we've added the `group` class to the link and made it `relative`. We've also added an absolutely positioned `span` element inside the link with a `bottom-0` and `left-0` position. This `span` element will serve as the line that animates on hover.
+
+To animate the line, we've added the `transition` and `duration` classes to both the link and the `span` element. We've also added the `transform` and `origin-left` classes to the `span` element to specify the animation effect.
+
+Finally, we've used the `group-hover` variant to apply the `scale-x-100` class to the `span` element when the link is hovered over. This class scales the `span` element horizontally to its full width, creating the animation effect.
+
+I hope this helps! Let me know if you have any further questions.

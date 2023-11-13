@@ -1,0 +1,26 @@
+The error message indicates that there is a problem with the way the command is formatted. It seems that the command is not being parsed correctly due to the presence of embedded quotes. 
+
+In Windows, the command line interpreter cmd.exe has some peculiar rules for handling quotes. The error message suggests that these rules are not being followed correctly.
+
+Here's a possible solution:
+
+1. Open the `NetBeans IDE`.
+2. Go to `Tools > Options > Java > Maven > Execution`.
+3. In the `Global Execution Options` field, remove the quotes around the paths.
+
+For example, change this:
+
+```bash
+-Dmaven.ext.class.path="C:\Program Files\NetBeans-11.1\netbeans\java\maven-nblib\netbeans-eventspy.jar"
+```
+
+to this:
+
+```bash
+-Dmaven.ext.class.path=C:\Program Files\NetBeans-11.1\netbeans\java\maven-nblib\netbeans-eventspy.jar
+```
+
+4. Click `OK` to save the changes.
+5. Try to build the project again.
+
+This should resolve the issue. If the problem persists, it might be a bug in NetBeans itself. In that case, you should consider updating to a newer version of NetBeans or reporting the issue to the NetBeans community.

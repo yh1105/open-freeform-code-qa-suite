@@ -1,0 +1,16 @@
+Yes, you can use Tailwind's `hover` and `transition` utilities to create an animation effect on hover. Here's an example code snippet that should achieve the desired effect:
+
+```html
+<a href="#" class="group relative text-sky-600">
+  Link
+  <span class="absolute bottom-0 left-0 w-full h-0.5 bg-sky-600 transition duration-500 transform origin-left scale-x-0 group-hover:scale-x-100"></span>
+</a>
+```
+
+In this code, we've added the `relative` class to the link container and the `absolute` class to the span element to position it relative to the link container. We've also added the `bottom-0` and `left-0` classes to position the span element at the bottom left corner of the link container.
+
+To create the animation effect, we've added the `transition` and `transform` utilities to the span element. The `transition` utility specifies the duration of the animation, and the `transform` utility specifies the transformation to apply to the element. We've set the `origin-left` property to specify that the transformation should originate from the left side of the element.
+
+Finally, we've added the `scale-x-0` and `group-hover:scale-x-100` classes to the span element to specify the initial and final states of the transformation. The `scale-x-0` class sets the element's horizontal scale to 0, and the `group-hover:scale-x-100` class sets the element's horizontal scale to 100 when the link container is hovered over.
+
+I hope this helps! Let me know if you have any further questions.

@@ -1,0 +1,20 @@
+It seems like the issue is with the Docker configuration. When you run the command `docker-compose run --publish 8080:8080 --rm app bash`, you are starting a new container and running the `bash` command inside it. However, you are not actually starting the Vite server inside the container.
+
+To fix this, you can modify your `docker-compose.yml` file to start the Vite server when the container is started:
+
+```yaml
+version: '3.7'
+
+services:
+  app:
+    image: myapp
+    build: .
+    container_name: myapp
+    ports:
+      - "8080:8080"
+    command: npm run vite
+```
+
+With this configuration, when you run `docker-compose up`, it will start the container and run the `npm run vite` command inside it. This should allow you to access the Vite server from your host machine.
+
+Note that you can remove the `docker-compose run` command and just use `docker-compose up` to start the container. The `--publish` option is not needed in this case since it is already defined in the `docker-compose.yml` file.

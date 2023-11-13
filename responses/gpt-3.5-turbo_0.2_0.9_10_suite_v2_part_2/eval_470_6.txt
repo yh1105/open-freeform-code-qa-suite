@@ -1,0 +1,17 @@
+You need to add a `go_package` option to your `.proto` file to specify the Go package name and import path. 
+
+For example, you can add the following line at the top of your `.proto` file:
+
+```go
+option go_package = "github.com/yourusername/yourproject/yourpackage";
+```
+
+Replace `github.com/yourusername/yourproject/yourpackage` with the actual import path for your Go package.
+
+Then, run the `protoc` command again with the `--go_out` flag and the `M` argument:
+
+```bash
+protoc --go_out=plugins=grpc,Mgoogle/protobuf/timestamp.proto=github.com/golang/protobuf/ptypes/timestamp:. simple.proto
+```
+
+Note that the `M` argument specifies the mapping between the protobuf package and the Go package. In this example, we're mapping the `google/protobuf/timestamp.proto` package to the `github.com/golang/protobuf/ptypes/timestamp` Go package.

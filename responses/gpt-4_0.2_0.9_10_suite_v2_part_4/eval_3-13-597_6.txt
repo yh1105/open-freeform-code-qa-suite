@@ -1,0 +1,7 @@
+In Kotlin, you can use the `ArrayList` constructor with an initial capacity if you know the eventual number of elements in advance. This can indeed help to avoid resizing and potentially improve performance. Here's how you can do it:
+
+```kotlin
+val list = ArrayList<Int>(initialCapacity)
+```
+
+This is perfectly idiomatic in Kotlin, as `ArrayList` is a `MutableList`. So, the answer is option 1: Go ahead and use the `ArrayList` constructor; `ArrayList` is a perfectly valid `MutableList`.

@@ -1,0 +1,5 @@
+No. 
+
+C++ does not provide a standard way to query the properties of threads or enforce on which cores they will run. The behavior of threads is dependent on the underlying operating system and hardware, and C++ only provides a high-level interface for creating and managing threads. 
+
+However, some operating systems and hardware architectures may provide specific APIs or tools for managing thread affinity and performance, which can be used in conjunction with C++ code.

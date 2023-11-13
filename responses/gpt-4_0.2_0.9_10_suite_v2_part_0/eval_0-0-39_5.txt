@@ -1,0 +1,48 @@
+Yes, you can accomplish this by using React's `ref` feature to create a reference to the form, and then use this reference to submit the form when the 'In Root' button is clicked. Here's how you can do it:
+
+```javascript
+import React, { Component, createRef } from "react";
+import ReactDOM from "react-dom";
+
+class CustomForm extends Component {
+  formRef = createRef(); // Create a reference to the form
+
+  submitForm = () => {
+    this.formRef.current.submit(); // Submit the form using the reference
+  }
+
+  render() {
+    return (
+      <form id='my-form' onSubmit={(e) => {e.preventDefault(); alert('Form submitted!')}} ref={this.formRef}>
+        <button type='submit'>Inside Custom</button>
+      </form>
+    );
+  }
+}
+
+class App extends Component {
+  customFormRef = createRef(); // Create a reference to the CustomForm component
+
+  submitForm = () => {
+    this.customFormRef.current.submitForm(); // Submit the form using the reference
+  }
+
+  render() {
+    return (
+      <div>
+        <CustomForm ref={this.customFormRef} />
+        <button onClick={this.submitForm}>In Root</button>
+      </div>
+    );
+  }
+}
+
+const rootElement = document.getElementById("root");
+ReactDOM.render(<App />, rootElement);
+```
+
+In this code, we first create a reference to the form in the `CustomForm` component using `createRef()`. We then create a `submitForm` method in the `CustomForm` component that submits the form using this reference.
+
+In the `App` component, we create a reference to the `CustomForm` component, and a `submitForm` method that calls the `submitForm` method of the `CustomForm` component. Finally, we set the `onClick` prop of the 'In Root' button to this `submitForm` method.
+
+Note that we also prevent the default form submission behavior in the `onSubmit` prop of the form to prevent the page from refreshing when the form is submitted.

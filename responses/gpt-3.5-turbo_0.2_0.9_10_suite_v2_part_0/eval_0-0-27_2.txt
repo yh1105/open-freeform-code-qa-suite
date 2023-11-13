@@ -1,0 +1,19 @@
+It seems that the issue is related to the network connection. The URI provided in the code is not working properly. 
+
+You can try changing the URI to a working GraphQL API endpoint. For example, you can use the following URI:
+
+```
+https://48p1r2roz4.sse.codesandbox.io/graphql
+```
+
+Also, make sure that your device or emulator is connected to the internet. 
+
+If the issue persists, you can try adding the `fetchPolicy` option to your `useQuery` hook. For example, you can set it to `network-only` to force the query to always fetch data from the server:
+
+```javascript
+const { loading, error, data } = useQuery(EXCHANGE_RATES, {
+  fetchPolicy: 'network-only',
+});
+```
+
+I hope this helps!

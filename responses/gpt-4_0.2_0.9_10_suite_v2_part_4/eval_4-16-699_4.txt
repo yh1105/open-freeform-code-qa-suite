@@ -1,0 +1,20 @@
+You can use the `-split` operator in PowerShell to split the string at the `-354` sequence and then take the first part. Here's how you can do it:
+
+```powershell
+$FileArray = @("Name1-354-03.pdf", "Name23-354-H11.pdf", "Name354-354-02.pdf", "Name3545-354.pdf")
+ForEach ($n in $FileArray){
+     $split = $n -split '-354', 2
+     Write-Host ($split[0] + "-354")
+}
+```
+
+In this script, `-split '-354', 2` splits the string into two parts at the `-354` sequence. The `2` indicates that it should make at most 2 substrings. The first substring (`$split[0]`) is everything before `-354`, and then we append `-354` back to it.
+
+This will give you the output you want:
+
+```
+Name1-354
+Name23-354
+Name354-354
+Name3545-354
+```

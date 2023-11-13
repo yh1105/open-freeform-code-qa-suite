@@ -1,0 +1,16 @@
+Sure, here's the revised version of your code:
+
+```jsx
+<Form.Item name="switch" valuePropName="checked">
+    <Switch checkedChildren="Yes" unCheckedChildren="No" />
+    <span>Chargable</span>
+</Form.Item>
+```
+
+In your original code, you used `noStyle` prop which is not necessary in this case. The `noStyle` prop is used when you don't want to create a new DOM node for the `Form.Item`. This could be useful when you want to keep the DOM structure.
+
+Also, make sure that the `name` prop in `Form.Item` matches the field name in your form model. If the switch's value is not being passed to `onCreate`, it could be because the `name` prop is not correctly set. 
+
+The `valuePropName` prop is used to specify which prop on the child component will receive the `Form.Item`'s value. In this case, it's the `checked` prop on the `Switch` component. 
+
+If you're still having issues, please ensure that your `onCreate` function is correctly handling the form values.

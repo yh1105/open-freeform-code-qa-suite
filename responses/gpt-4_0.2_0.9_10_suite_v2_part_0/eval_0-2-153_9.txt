@@ -1,0 +1,7 @@
+You can use the `border-t` class to apply border only to the top. Here is the correct way to do it:
+
+```html
+<div class="border-t border-blue-900">foo</div>
+```
+
+This will apply a border only to the top of the div and the color of the border will be blue-900.

@@ -1,0 +1,25 @@
+Yes, you can detect if the user's system is in Dark Mode by checking the value of the `prefers-color-scheme` media query. This media query returns `dark` if the user's system is in Dark Mode, and `light` otherwise.
+
+Here's an example of how to use it in CSS:
+
+```css
+@media (prefers-color-scheme: dark) {
+  /* Styles for Dark Mode */
+}
+
+@media (prefers-color-scheme: light) {
+  /* Styles for Light Mode */
+}
+```
+
+You can also use JavaScript to detect the value of the `prefers-color-scheme` media query and apply different styles based on the result. Here's an example:
+
+```javascript
+if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+  // Dark Mode
+} else {
+  // Light Mode
+}
+```
+
+Note that not all browsers support the `prefers-color-scheme` media query yet, so you may need to provide fallback styles for older browsers.

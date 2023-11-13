@@ -1,0 +1,23 @@
+The issue you're experiencing is likely due to a conflict between the Node.js version installed on your Windows system and the one you've installed in your WSL2 Ubuntu environment. 
+
+When you run `npm -v`, the system might be trying to execute the npm installed on your Windows system, which won't work because of the different file system and environment variables.
+
+To solve this issue, you need to make sure that the WSL2 environment is using the Node.js and npm installed in Ubuntu, not the ones installed in Windows. 
+
+You can do this by adding the following lines to your `.bashrc` or `.zshrc` file (depending on which shell you're using):
+
+```bash
+export PATH="/usr/bin:$PATH"
+```
+
+This line will prioritize the `/usr/bin` directory (where your Ubuntu Node.js and npm binaries are located) over other directories in your PATH.
+
+After adding this line, you need to source your `.bashrc` or `.zshrc` file to apply the changes:
+
+```bash
+source ~/.bashrc
+# or
+source ~/.zshrc
+```
+
+Now, when you run `node -v` and `npm -v`, you should see the versions installed in your Ubuntu environment.

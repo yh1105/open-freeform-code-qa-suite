@@ -1,0 +1,70 @@
+You can create a button and add an `onClick` event to it. In the `onClick` event, you can create a function that will get the value of the input field. Here's how you can do it:
+
+```javascript
+import React, { useState } from 'react';
+
+export default function InputField({name,label}) {
+  const [state, setState] = useState('')
+
+  const handleClick = () => {
+    alert(`Button clicked with input value: ${state}`);
+  }
+
+  return (
+    <div>
+     <label>{label}</label>
+      <input type="text" 
+      value={state} 
+      name={name}
+      onChange={(e) => setState(e.target.value)} />
+
+      <button onClick={handleClick}>Click me</button>
+
+      {state}
+    </div>
+  );
+}
+```
+
+In the `handleClick` function, I used `alert` to display the value of the input field when the button is clicked. You can replace this with your own logic.
+
+If you have multiple input fields (like first name and last name), you can use an object to store the state:
+
+```javascript
+import React, { useState } from 'react';
+
+export default function InputField() {
+  const [state, setState] = useState({ firstName: '', lastName: '' })
+
+  const handleChange = (e) => {
+    setState({
+      ...state,
+      [e.target.name]: e.target.value
+    });
+  }
+
+  const handleClick = () => {
+    alert(`First name: ${state.firstName}, Last name: ${state.lastName}`);
+  }
+
+  return (
+    <div>
+     <label>First Name</label>
+      <input type="text" 
+      value={state.firstName} 
+      name="firstName"
+      onChange={handleChange} />
+
+     <label>Last Name</label>
+      <input type="text" 
+      value={state.lastName} 
+      name="lastName"
+      onChange={handleChange} />
+
+      <button onClick={handleClick}>Click me</button>
+    </div>
+  );
+}
+```
+
+In this example, the `handleChange` function is using the `name` attribute of the input field to update the correct property in the state object.

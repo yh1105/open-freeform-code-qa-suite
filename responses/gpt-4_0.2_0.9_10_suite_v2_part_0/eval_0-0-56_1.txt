@@ -1,0 +1,20 @@
+The issue you're experiencing is likely due to Vite's server only being accessible from inside the Docker container. By default, Vite's server only listens on the localhost interface (`127.0.0.1`), which is not accessible from outside the Docker container.
+
+To make the Vite server accessible from outside the Docker container, you need to configure it to listen on all network interfaces (`0.0.0.0`). You can do this by adding the `host` property to the `server` object in your `vite.config.ts` file:
+
+```typescript
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+
+// https://vitejs.dev/config/
+export default defineConfig({
+    resolve: { alias: { '@': '/src' } },
+    plugins: [vue()],
+    server: {
+        host: '0.0.0.0',
+        port: 8080
+    }
+})
+```
+
+This should allow you to access the Vite server from your host machine via `localhost:8080`.

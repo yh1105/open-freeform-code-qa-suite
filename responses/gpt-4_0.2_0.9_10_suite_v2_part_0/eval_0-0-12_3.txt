@@ -1,0 +1,25 @@
+The error message you're seeing, `Error: Invalid login: 535-5.7.8 Username and Password not accepted`, is indicating that the username and password you're using to authenticate with Gmail's SMTP server are not being accepted.
+
+Here are a few things you can do to troubleshoot this issue:
+
+1. **Check your username and password**: Make sure that the username and password you're using are correct. The username should be your full email address, and the password should be your Gmail password.
+
+2. **Enable Less Secure Apps**: By default, Google may block sign-in attempts from some apps or devices that do not use modern security standards. You can change this setting by going to your Google Account settings, then to "Security" and turning on "Less secure app access". However, this is not recommended as it can make your account less secure.
+
+3. **Use App Password**: If you have 2-Step Verification enabled on your Google account, you may need to use an app password instead of your regular password. You can generate an app password by going to your Google Account settings, then to "Security" and "App passwords". 
+
+4. **Unlock Captcha**: Sometimes Google may block sign-in attempts from new locations or devices. You can resolve this by visiting the [Display Unlock Captcha](https://accounts.google.com/DisplayUnlockCaptcha) page and following the instructions.
+
+Remember to replace the `pass` field in your code with the new password or App Password you generate.
+
+```javascript
+var transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'haideryaqoobengr@gmail.com',
+    pass: 'your-new-password-or-app-password'
+  }
+});
+```
+
+If you're still having trouble after trying these steps, you may want to consider using a different method to send email from your Node.js app, such as using a service like SendGrid or Mailgun, which are designed for sending email from applications.

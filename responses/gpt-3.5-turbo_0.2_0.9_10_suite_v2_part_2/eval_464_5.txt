@@ -1,0 +1,28 @@
+```go
+type A struct {
+}
+
+type B struct {
+}
+
+type AB interface {
+    *A | *B
+    some() bool
+}
+
+func (a *A) some() bool {
+    return true
+}
+
+func (b *B) some() bool {
+    return false
+}
+
+func some[T AB](x T) bool {
+    return x.some()
+}
+```
+
+The issue with the original code is that the `AB` interface only specifies the types that it can be implemented by, but it doesn't specify any methods that those types must have. Therefore, when you try to call the `some()` method on a value of type `T`, the compiler doesn't know if `T` actually has that method.
+
+To fix this, you can add the `some()` method to the `AB` interface, so that any type that implements `AB` must also implement `some()`.

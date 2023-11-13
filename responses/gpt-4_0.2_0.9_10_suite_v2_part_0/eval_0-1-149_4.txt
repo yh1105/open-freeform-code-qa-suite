@@ -1,0 +1,29 @@
+Sure, you can achieve this by using the `group-hover` utility in Tailwind CSS. Here's how you can modify your code:
+
+```html
+<a href="#" class="group">
+    <span class="text-sky-600 transition duration-300 group-hover:underline">Link</span>
+    <span class="block h-0.5 bg-sky-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
+</a>
+```
+
+In this code, `group-hover:underline` applies an underline to the text when you hover over the link. The `transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300` applies a scaling transformation to the span element, making it grow in width from 0 to full width when you hover over the link.
+
+Please note that you need to enable `group-hover` variant for `scale` and `transform` in your tailwind.config.js file if it's not enabled by default:
+
+```javascript
+module.exports = {
+  theme: {},
+  variants: {
+    extend: {
+      scale: ['group-hover'],
+      transform: ['group-hover'],
+    },
+  },
+  plugins: [],
+}
+```
+
+After updating the config file, you need to rebuild your CSS.
+
+This solution assumes that you are using Tailwind CSS v2.0 or later. If you are using an older version, you may need to update your Tailwind CSS or adjust the code accordingly.

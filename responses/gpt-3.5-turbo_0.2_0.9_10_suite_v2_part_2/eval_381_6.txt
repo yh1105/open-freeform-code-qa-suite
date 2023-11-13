@@ -1,0 +1,26 @@
+To use Swagger UI with Spring Boot, you need to make sure that you have the following:
+
+1. The `@EnableSwagger2` annotation on your Spring Boot application class. This enables Swagger support in your application.
+
+2. The `@Configuration` annotation on your Swagger configuration class. This tells Spring that this class contains configuration information.
+
+Here's an example of how to set up Swagger UI with Spring Boot:
+
+```java
+@Configuration
+@EnableSwagger2
+public class SwaggerConfig {
+    @Bean
+    public Docket api() {
+        return new Docket(DocumentationType.SWAGGER_2)
+                .select()
+                .apis(RequestHandlerSelectors.any())
+                .paths(PathSelectors.any())
+                .build();
+    }
+}
+```
+
+Make sure that you have the correct version of the `springdoc-openapi-ui` dependency in your `pom.xml` file. You can check the latest version on the [Maven Repository](https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-ui).
+
+If you have followed these steps and are still getting a 404 error, try accessing `localhost:8080/v3/api-docs` to see if the OpenAPI specification is being generated correctly. If it is, then the issue may be with the Swagger UI configuration.

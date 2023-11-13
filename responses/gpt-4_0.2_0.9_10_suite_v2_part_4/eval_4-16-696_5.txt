@@ -1,0 +1,11 @@
+The problem is that the command substitution `$(echo {} | sed 's/\?.*//g')` is evaluated before `find` starts its execution, so it doesn't have the expected effect. 
+
+You can use a small shell script within the `-exec` option to solve this. Here is a corrected version of your command:
+
+```bash
+find . -type f -name '*\?*' -exec bash -c 'mv "$0" "${0%%\?*}"' {} \;
+```
+
+This command will find all files (`-type f`) in the current directory (`.`) and its subdirectories whose names contain a question mark (`*\?*`). For each such file, it will execute the command `mv "$0" "${0%%\?*}"`, which renames the file by removing the question mark and everything after it.
+
+Please note that this command can overwrite files if the truncated names are not unique.

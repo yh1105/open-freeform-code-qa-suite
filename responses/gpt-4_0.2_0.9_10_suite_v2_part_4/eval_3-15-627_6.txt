@@ -1,0 +1,15 @@
+Creating a calendar input in VBA Excel can be done by creating a UserForm with a Calendar Control. Here's a simple step-by-step guide:
+
+1. Open VBA Editor by pressing `Alt + F11`.
+
+2. In the VBA Project window, right-click on your workbook name and select `Insert > UserForm`.
+
+3. In the UserForm, go to `Toolbox` (View > Toolbox), then right-click on the Toolbox and select `Additional Controls`.
+
+4. In the `Additional Controls` window, find and check `Microsoft Date and Time Picker Control`. Click `OK`.
+
+5. Now, you should see the `Date and Time Picker` control in your Toolbox. Click on it and draw it on your UserForm.
+
+6. You can now use this UserForm as a calendar input in your VBA code.
+
+Please note that the `Microsoft Date and Time Picker Control` is not available in all versions of Office. If it's not available, you might need to use a third-party date picker or create your own custom calendar.

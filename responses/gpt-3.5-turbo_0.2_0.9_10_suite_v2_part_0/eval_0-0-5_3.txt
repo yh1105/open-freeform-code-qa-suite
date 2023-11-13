@@ -1,0 +1,19 @@
+The error message indicates that Python is not installed on your system or it is not added to the PATH environment variable. 
+
+To fix this issue, you can follow these steps:
+
+1. Install Python 2.7.x from the official website: https://www.python.org/downloads/release/python-2715/
+2. During the installation process, make sure to select the option to add Python to the PATH environment variable.
+3. After the installation is complete, open a new command prompt and run the following command to verify that Python is installed and added to the PATH: `python --version`
+4. If the command returns the Python version number, then it is installed correctly.
+5. Try running the Node.js build again and it should work without any issues.
+
+If you still face issues, you can try running the following command to set the PYTHON environment variable to the path where Python is installed:
+
+```
+set PYTHON=C:\Python27\python.exe
+```
+
+Replace `C:\Python27\python.exe` with the path where Python is installed on your system.
+
+After setting the environment variable, try running the Node.js build again.

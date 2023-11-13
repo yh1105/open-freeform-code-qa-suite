@@ -1,0 +1,1 @@
+=IFERROR(INDEX($B$1:$B$100,AGGREGATE(15,7,ROW($A$1:$A$100)/($A$1:$A$100="x"),ROW($ZZ1))),"")

@@ -1,0 +1,48 @@
+In Rust, `Box<T>` is a smart pointer that points to data on the heap. It's important to note that Rust doesn't use null pointers like C++ or other languages. Instead, Rust uses the `Option<T>` type to express the possibility of absence.
+
+So, if you want to express that a `Node` might not exist, you should use `Option<Box<Node>>` instead of `Box<Node>`. Here's how you can modify your code:
+
+```rust
+struct Node {
+    value: i32,
+    next: Option<Box<Node>>,
+}
+
+struct Stack {
+    top: Option<Box<Node>>,
+}
+```
+
+Now, `top` and `next` can be `None`, which is equivalent to a null pointer in other languages. You can check if `top` or `next` is `None` (null) like this:
+
+```rust
+if let Some(node) = &stack.top {
+    // top is not null
+} else {
+    // top is null
+}
+```
+
+Or using `is_none()` and `is_some()` methods:
+
+```rust
+if stack.top.is_some() {
+    // top is not null
+} else if stack.top.is_none() {
+    // top is null
+}
+```
+
+Remember to initialize `top` as `None` in the `Stack`:
+
+```rust
+struct Stack {
+    top: Option<Box<Node>>,
+}
+
+impl Stack {
+    fn new() -> Stack {
+        Stack { top: None }
+    }
+}
+```

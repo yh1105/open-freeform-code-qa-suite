@@ -1,0 +1,25 @@
+The Docker build output on MacOS is different from Linux due to the way Docker is implemented on MacOS. Docker runs natively on Linux, but on MacOS, it runs inside a virtual machine, which can cause differences in behavior.
+
+The `--progress=plain` option changes the output format to a non-interactive, plain text format. It doesn't change the level of detail in the output.
+
+The output you're seeing is the expected output when Docker is using its build cache. When a layer of the Docker image is built and hasn't changed, Docker uses the cached version of the layer instead of rebuilding it. This is why you're seeing `CACHED` in the output.
+
+If you want to see the full output of the `RUN ls -la` commands, you need to make sure that Docker isn't using the cached version of these layers. You can do this by making a change to the Dockerfile that invalidates the cache for these layers.
+
+For example, you could add a `RUN echo "Cache bust"` line before the `RUN ls -la` command. This will cause Docker to rebuild this layer and all subsequent layers, and you should see the full output of the `ls -la` command.
+
+Here's an example of how you could modify your Dockerfile:
+
+```dockerfile
+FROM debian:stretch-slim
+RUN apt-get update && apt-get upgrade -y
+RUN apt-get install wget -y
+RUN wget https://dev.mysql.com/get/Downloads/MySQL-5.7/mysql-5.7.22-linux-glibc2.12-x86_64.tar.gz
+RUN tar -zxvf mysql-5.7.22-linux-glibc2.12-x86_64.tar.gz
+RUN mv mysql-5.7.22-linux-glibc2.12-x86_64 mysql-5.7.22
+RUN echo "Cache bust" # This line will invalidate the cache
+RUN ls -la
+# ... rest of your Dockerfile ...
+```
+
+After making this change, run `docker build` again and you should see the full output of the `ls -la` command.

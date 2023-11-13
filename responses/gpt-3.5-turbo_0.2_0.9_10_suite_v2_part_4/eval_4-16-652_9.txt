@@ -1,0 +1,9 @@
+You can use the `--cli-pager` option to disable the pager for AWS CLI return values. You can set it to an empty string to turn off the pager. Here's an example of how you can modify your script to disable the pager:
+
+```
+for x in 1 2 3; do 
+  aws sqs purge-queue --queue-url https://sqs.<aws-region>.amazonaws.com/<id>/<env>-$x-<queueName>.fifo --cli-pager ""; 
+done
+```
+
+This will disable the pager and allow the script to continue to the next iteration without any manual intervention.

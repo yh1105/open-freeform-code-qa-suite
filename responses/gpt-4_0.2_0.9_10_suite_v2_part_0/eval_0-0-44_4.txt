@@ -1,0 +1,54 @@
+To create an index in Mongoose schema using Nest.js, you can use the `@Index()` decorator from the `@nestjs/mongoose` package. 
+
+Here is how you can do it:
+
+```javascript
+import { Prop, Schema, SchemaFactory, Index } from '@nestjs/mongoose';
+import { Document } from 'mongoose';
+
+@Schema()
+@Index({ type: 1 }) // This line creates an index on the 'type' field
+export class MySchema extends Document {
+
+  @Prop()
+  _id: string;
+
+  @Prop({required: true})
+  type: string;
+
+  @Prop()
+  creationDate: string;
+
+  @Prop()
+  name: string;
+}
+
+export const MySchemaModel = SchemaFactory.createForClass(MySchema);
+```
+
+In the above code, `@Index({ type: 1 })` creates an index on the `type` field. The `1` in `{ type: 1 }` specifies an ascending index. If you want a descending index, you can use `-1` instead.
+
+After you have defined the index, you need to ensure that the index is actually created in MongoDB. This is typically done when the application starts up. In Mongoose, you can use the `Model.ensureIndexes()` function to create the indexes.
+
+In Nest.js, you can do this in the `onModuleInit()` lifecycle hook of your module:
+
+```javascript
+import { Module, OnModuleInit } from '@nestjs/common';
+import { MongooseModule } from '@nestjs/mongoose';
+import { MySchema, MySchemaModel } from './my-schema.model';
+
+@Module({
+  imports: [
+    MongooseModule.forFeature([{ name: MySchema.name, schema: MySchemaModel }]),
+  ],
+})
+export class MyModule implements OnModuleInit {
+  constructor(@InjectModel(MySchema.name) private readonly myModel: Model<MySchema>) {}
+
+  async onModuleInit() {
+    await this.myModel.ensureIndexes(); // This will create the indexes
+  }
+}
+```
+
+In the above code, `onModuleInit()` is a lifecycle hook that is called when the module is fully initialized. Inside this function, we call `myModel.ensureIndexes()` to create the indexes in MongoDB.

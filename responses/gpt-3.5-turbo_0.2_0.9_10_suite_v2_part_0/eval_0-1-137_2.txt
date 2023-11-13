@@ -1,0 +1,13 @@
+The issue is that you are missing a comma after the value of the primary color in the `$theme-colors` map. Here's the corrected code:
+
+```scss
+@import "../../node_modules/bootstrap/scss/variables";
+
+$theme-colors: (
+  "primary": #0d6efd, // add a comma here
+);
+
+@import "../../node_modules/bootstrap/scss/bootstrap";
+```
+
+Make sure to add a comma after each key-value pair in the `$theme-colors` map. This should fix the invalid CSS value error.

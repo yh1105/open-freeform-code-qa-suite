@@ -1,0 +1,13 @@
+It seems that you are trying to fetch data from a GraphQL API that is not available. The `uri` you are using in your `ApolloClient` configuration is `https://48p1r2roz4.sse.codesandbox.io`, which is a demo API provided by Apollo Client. It may not be available at all times.
+
+You should replace the `uri` with the actual GraphQL API endpoint that you want to fetch data from. You can check with the API provider for the correct endpoint.
+
+If you are still having issues after updating the `uri`, you can try adding the `fetchPolicy` option to your `useQuery` hook. For example, you can set it to `network-only` to always fetch data from the network and not use the cache:
+
+```javascript
+const { loading, error, data } = useQuery(EXCHANGE_RATES, {
+  fetchPolicy: 'network-only',
+});
+```
+
+This may help if you are having issues with cached data.

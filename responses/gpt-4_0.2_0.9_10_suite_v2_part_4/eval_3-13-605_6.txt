@@ -1,0 +1,58 @@
+The error message you're seeing is because your project is using a different version of Kotlin than the one used to compile the Stripe SDK. To fix this, you need to update your Kotlin version to match the one used by the Stripe SDK.
+
+Here are the steps to do that:
+
+1. Open your project-level `build.gradle` file.
+2. Update the Kotlin version in the `buildscript` block to match the one used by the Stripe SDK. In your case, it should be `1.5.1`.
+
+```gradle
+buildscript {
+    ext.kotlin_version = '1.5.1'
+    repositories {
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+```
+
+3. Sync your project with Gradle files.
+
+As for adding the email and cardholder name in Stripe, the `CardMultilineWidget` does not support these fields. You will need to create your own UI to collect these details.
+
+Here is a simple example of how you can do this:
+
+```xml
+<EditText
+    android:id="@+id/cardholderName"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:hint="Cardholder Name"/>
+
+<EditText
+    android:id="@+id/email"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:hint="Email"
+    android:inputType="textEmailAddress"/>
+
+<com.stripe.android.view.CardMultilineWidget
+    android:id="@+id/cardInputWidget"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"/>
+```
+
+In your activity, you can get the values like this:
+
+```kotlin
+val cardholderName = findViewById<EditText>(R.id.cardholderName).text.toString()
+val email = findViewById<EditText>(R.id.email).text.toString()
+val cardInputWidget = findViewById<CardMultilineWidget>(R.id.cardInputWidget)
+val card = cardInputWidget.card
+```
+
+Remember to validate the email and cardholder name before processing the payment.

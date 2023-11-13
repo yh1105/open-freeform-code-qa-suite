@@ -1,0 +1,11 @@
+It looks like the issue might be with the way you're running the container. Specifically, you're using `docker-compose run` instead of `docker-compose up`. 
+
+The `run` command is used to run a one-off command in a container, whereas `up` is used to start the containers defined in your `docker-compose.yml` file. When you use `run`, it creates a new container each time, which means that the ports you've exposed in your `docker-compose.yml` file won't be available.
+
+To fix this, try using `docker-compose up` instead:
+
+```bash
+docker-compose up --build
+```
+
+This will start the containers defined in your `docker-compose.yml` file and build any images that need to be built. Once the containers are running, you should be able to access your app at `localhost:8080`.

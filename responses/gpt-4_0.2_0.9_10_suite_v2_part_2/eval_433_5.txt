@@ -1,0 +1,31 @@
+The "419 Page Expired" error is related to Laravel's CSRF protection. When you log out from one tab, the session is invalidated, and the CSRF token stored in the session is also invalidated. When you try to log out from the second tab, the server can't find the CSRF token in the session (because it's already invalidated), hence the "419 Page Expired" error.
+
+To handle this situation, you can override the `logout` method in your `LoginController` to not require CSRF protection. Here's how you can do it:
+
+```php
+namespace App\Http\Controllers\Auth;
+
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
+
+class LoginController extends Controller
+{
+    use AuthenticatesUsers;
+
+    // ...
+
+    public function logout(Request $request)
+    {
+        $this->guard()->logout();
+
+        $request->session()->invalidate();
+
+        return $this->loggedOut($request) ?: redirect('/');
+    }
+}
+```
+
+This will ensure that even if the CSRF token is not present or is invalidated, the user will be logged out and redirected to the homepage.
+
+However, please note that disabling CSRF protection can expose your application to cross-site request forgery attacks. It's generally recommended to keep CSRF protection enabled for all POST, PUT, PATCH, and DELETE requests. In this specific case, it should be safe to disable it for the logout action, as the action itself doesn't modify any data.

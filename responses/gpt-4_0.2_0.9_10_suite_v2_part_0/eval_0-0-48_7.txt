@@ -1,0 +1,11 @@
+Sure, you can define the `FruitsAndColors` type as follows:
+
+```typescript
+type FruitsAndColors = {
+  [K in fruit]: number;
+} & {
+  [K in color]: boolean;
+}
+```
+
+This uses the `&` operator to combine two mapped types into one. The first mapped type assigns a `number` to each `fruit`, and the second mapped type assigns a `boolean` to each `color`.

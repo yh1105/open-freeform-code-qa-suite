@@ -1,0 +1,16 @@
+The issue you're facing might be due to the incorrect usage of the `Switch` component inside the `Form.Item`. The `Switch` component should be wrapped with the `Form.Item` and the `valuePropName` should be set to `checked` to get the value of the switch.
+
+Here is the corrected code:
+
+```jsx
+<Form.Item
+  name="switch"
+  valuePropName="checked"
+  label="Chargable"
+  rules={[{ required: true, message: 'Please check the switch' }]}
+>
+  <Switch checkedChildren="Yes" unCheckedChildren="No" />
+</Form.Item>
+```
+
+In the above code, the `Switch` component is wrapped inside the `Form.Item` and the `valuePropName` is set to `checked`. This will ensure that the value of the switch is correctly captured when the form is submitted. The `label` prop is used to add a label to the switch. The `rules` prop is used to add validation rules to the switch.

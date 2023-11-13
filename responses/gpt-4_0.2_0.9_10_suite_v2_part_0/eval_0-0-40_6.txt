@@ -1,0 +1,35 @@
+The error message you're seeing is because WSL2 is trying to use the Windows version of npm, which is not compatible with WSL2. 
+
+You can solve this issue by adding the following lines to your `.bashrc` or `.zshrc` file:
+
+```bash
+export PATH="/usr/bin:$PATH"
+```
+
+This line will prioritize the WSL2 versions of node and npm over the Windows versions.
+
+After adding this line, you need to source your `.bashrc` or `.zshrc` file to apply the changes:
+
+```bash
+source ~/.bashrc
+```
+
+or 
+
+```bash
+source ~/.zshrc
+```
+
+Now, when you run `npm -v`, you should see the version of npm installed on your WSL2 Ubuntu 20.04, not the Windows version. 
+
+If you still face the same issue, you might need to reinstall `nodejs` and `npm`:
+
+```bash
+sudo apt-get purge nodejs npm
+curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+sudo apt-get install -y nodejs
+```
+
+This will remove the current installation of `nodejs` and `npm`, and then install the latest LTS version of `nodejs`, which includes `npm`. 
+
+Remember to replace `14.x` with the version of Node.js you want to install.

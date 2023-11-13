@@ -1,0 +1,15 @@
+The error message is indicating that you are using a non-primitive value as a key in your `v-for` loop. In this case, you are using the entire `comment` object as the key, which is not recommended.
+
+To fix this, you should use a unique identifier from the `comment` object as the key instead. For example, if each `comment` object has a unique `id` property, you could use that as the key:
+
+```html
+<div v-for="comment in comments" :key="comment.id">
+```
+
+If there is no unique identifier available, you could use the index of the comment in the array as the key:
+
+```html
+<div v-for="(comment, index) in comments" :key="index">
+```
+
+However, using the index as the key is not recommended if the order of the comments can change, as it can cause issues with reactivity.

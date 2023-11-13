@@ -1,0 +1,12 @@
+Sure, you need to wrap the `Switch` component and the `span` inside a `div` or any other container. Here is the revised version of your code:
+
+```jsx
+<Form.Item name="switch" valuePropName="checked">
+  <div>
+    <Switch checkedChildren="Yes" unCheckedChildren="No" />
+    <span>Chargable</span>
+  </div>
+</Form.Item>
+```
+
+This way, the `Switch` component and the `span` will be treated as a single unit, and the `Switch` value will be correctly passed to the `onCreate` function.

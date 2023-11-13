@@ -1,0 +1,26 @@
+It's possible that the issue is related to the dynamic route. When deploying to Vercel, you need to make sure that all pages are pre-rendered. This means that dynamic routes need to be statically generated at build time, rather than being generated on the fly at runtime.
+
+To fix this issue, you can try the following steps:
+
+1. Create a `next.config.js` file in the root of your project if you don't have one already.
+2. Add the following code to the `next.config.js` file:
+
+```
+module.exports = {
+  async rewrites() {
+    return [
+      {
+        source: '/:path*',
+        destination: '/api/:path*',
+      },
+    ]
+  },
+}
+```
+
+This code will rewrite all requests to dynamic routes to an API route. This will allow you to pre-render the pages and avoid the 404 error.
+
+3. Run `yarn run build` to build your app.
+4. Deploy your app to Vercel.
+
+With these steps, your app should be able to deploy successfully to Vercel.

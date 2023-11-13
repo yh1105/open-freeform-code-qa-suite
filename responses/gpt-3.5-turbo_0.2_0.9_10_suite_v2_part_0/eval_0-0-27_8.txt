@@ -1,0 +1,52 @@
+The issue might be related to the fact that the `useQuery` hook is being called before the ApolloProvider is mounted. To fix this, you can try wrapping your `TestScreen` component with the `ApolloProvider` component instead of wrapping the entire `App` component. Here's how you can modify your code:
+
+```javascript
+import React from 'react';
+import { SafeAreaView, Text, View } from 'react-native';
+import { ApolloClient, ApolloProvider, InMemoryCache, gql, useQuery } from '@apollo/client';
+
+const EXCHANGE_RATES = gql`
+  query GetExchangeRates {
+    rates(currency: "USD") {
+      currency
+      rate
+    }
+  }
+`;
+
+const TestScreen = () => {
+  const { loading, error, data } = useQuery(EXCHANGE_RATES);
+
+  console.log(loading, error, data);
+
+  if (loading) return <Text>Loading...</Text>;
+  if (error) return <Text>Error :(</Text>;
+
+  return data.rates.map(({ currency, rate }) => (
+    <View key={currency}>
+      <Text>
+        {currency}: {rate}
+      </Text>
+    </View>
+  ));
+};
+
+const apolloClient = new ApolloClient({
+  uri: 'https://48p1r2roz4.sse.codesandbox.io',
+  cache: new InMemoryCache(),
+});
+
+const App = () => {
+  return (
+    <SafeAreaView>
+      <ApolloProvider client={apolloClient}>
+        <TestScreen />
+      </ApolloProvider>
+    </SafeAreaView>
+  );
+};
+
+export default App;
+```
+
+By doing this, the `ApolloProvider` will be mounted before the `TestScreen` component, allowing the `useQuery` hook to work properly.

@@ -1,0 +1,16 @@
+Sure, you can use the `onChange` event of the `Switch` component to update the value of the form field. Here is how you can do it:
+
+```jsx
+<Form.Item name="switch" valuePropName="checked">
+  <Switch 
+    checkedChildren="Yes" 
+    unCheckedChildren="No" 
+    onChange={(checked) => {
+      form.setFieldsValue({ switch: checked });
+    }}
+  />
+  <span>Chargable</span>
+</Form.Item>
+```
+
+In this code, whenever the switch is toggled, the `onChange` event is triggered, and the new value of the switch is set in the form field named "switch".

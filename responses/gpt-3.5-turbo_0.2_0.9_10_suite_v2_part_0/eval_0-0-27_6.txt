@@ -1,0 +1,15 @@
+It seems like you are trying to fetch data from a GraphQL API using Apollo Client, but the loading state hangs at `true` and you are unable to fetch the data.
+
+One possible reason for this issue could be that the GraphQL API you are trying to fetch data from is not accessible from your device or emulator. You can try opening the GraphQL API URL in your browser or using a tool like Postman to check if you are able to access the API.
+
+If the API is accessible, you can try adding the `networkPolicy` option to your `useQuery` hook to ensure that the data is fetched from the network and not from the cache. Here's an example:
+
+```javascript
+const { loading, error, data } = useQuery(EXCHANGE_RATES, {
+  networkPolicy: NetworkPolicy.NetworkOnly,
+});
+```
+
+If the issue persists, you can try enabling the Apollo Client Devtools to debug the issue. You can install the `react-native-flipper-apollo-devtools` package and follow the instructions in the documentation to enable the devtools.
+
+I hope this helps! Let me know if you have any further questions.

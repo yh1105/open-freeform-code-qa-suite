@@ -1,0 +1,11 @@
+You can disable the animation in ViewPager2 by setting the `offscreenPageLimit` to 0. This will prevent ViewPager2 from preloading any pages and will show the new fragment immediately without any animation. Here's an example:
+
+```
+viewPager2.offscreenPageLimit = 0
+```
+
+Alternatively, you can also set the `isUserInputEnabled` property to false to disable user input and prevent any swiping animation. Here's an example:
+
+```
+viewPager2.isUserInputEnabled = false
+```

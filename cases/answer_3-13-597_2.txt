@@ -1,0 +1,1 @@
+val list = MutableList<Int?>(10) { null }

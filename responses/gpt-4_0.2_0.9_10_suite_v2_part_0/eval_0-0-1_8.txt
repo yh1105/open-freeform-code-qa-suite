@@ -1,0 +1,24 @@
+Based on your description, it seems like you're having trouble deploying your Next.js application to Vercel. Here are some steps you can follow to debug and potentially solve the issue:
+
+1. **Check your build command**: Make sure your build command is correct in your Vercel settings. The build command for a Next.js application should be `yarn run build` or `npm run build`.
+
+2. **Check your output directory**: In your Vercel settings, make sure the output directory is set to `.next`.
+
+3. **Check your routes**: If you're using dynamic routes, make sure you're using the `getStaticPaths` function to generate the paths at build time. If you're using `getServerSideProps`, it might not work as expected because Vercel statically generates pages at build time.
+
+4. **Check your `vercel.json` file**: If you have a `vercel.json` file in your project root, make sure it's correctly configured. If you don't have one, you might need to create one. Here's an example of a basic `vercel.json` file for a Next.js project:
+
+    ```json
+    {
+      "version": 2,
+      "builds": [{ "src": "package.json", "use": "@vercel/next" }]
+    }
+    ```
+
+5. **Check your dependencies**: Make sure all your dependencies are listed in your `package.json` file and that you're not importing any modules that aren't listed as dependencies.
+
+6. **Check your logs**: After deploying your application, check the build logs in the Vercel dashboard. They might contain useful information about what's causing the 404 error.
+
+7. **Upgrade Next.js**: You're using Next.js 10.0.3. There have been many updates and bug fixes since that version. Consider upgrading to the latest version of Next.js.
+
+If none of these steps solve your issue, I would recommend creating a minimal reproduction of your problem and asking for help on the Vercel support or Next.js GitHub issues.

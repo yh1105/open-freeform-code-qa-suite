@@ -1,0 +1,31 @@
+The reason why `2` is logged before `1` is because the `onItemSelectedListener` is triggered asynchronously when the user selects an item from the spinner. This means that the `return` statement is executed before the `onItemSelected` callback is called, and therefore the `itemSelected` variable is still an empty string.
+
+To fix this, you can use a callback function to return the selected item instead of returning it directly from the `setupListWithAdapter` function. Here's an example:
+
+```
+fun Spinner.setupListWithAdapter(list: MutableList<String>, onItemSelected: (String) -> Unit) {
+    val adapter = ArrayAdapter(context, android.R.layout.simple_spinner_item, list)
+    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+    this.adapter = adapter
+    this.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+            val itemSelected = list[p2]
+            onItemSelected(itemSelected)
+        }
+        override fun onNothingSelected(p0: AdapterView<*>?) {
+        }
+    }
+}
+```
+
+In this version of the function, instead of returning the selected item, we pass a callback function `onItemSelected` as a parameter. This function takes a `String` parameter, which is the selected item from the spinner.
+
+To use this function, you can call it like this:
+
+```
+spinner.setupListWithAdapter(list) { selectedItem ->
+    // Do something with the selected item
+}
+```
+
+In this example, the `setupListWithAdapter` function takes a `list` parameter and a lambda expression that takes a `selectedItem` parameter. This lambda expression is called when the user selects an item from the spinner, and it receives the selected item as a parameter. You can then use this `selectedItem` value to do whatever you need to do with it.

@@ -1,0 +1,23 @@
+One way to express this more idiomatically is to use the `filter()` method on `Option`. Here's an example:
+
+```rust
+fn main() {
+    let mut foo: Option<u8> = None;
+    foo = foo.filter(|&x| x < 5).or(Some(5));
+}
+```
+
+This code first filters out the `Some` value if it is greater than or equal to 5, and then replaces it with `Some(5)` if it is `None`. 
+
+Another way to express this is to use the `map_or_else()` method on `Option`. Here's an example:
+
+```rust
+fn main() {
+    let mut foo: Option<u8> = None;
+    foo = foo.map_or_else(|| Some(5), |x| if x < 5 { Some(x) } else { None });
+}
+```
+
+This code maps the `Some` value to itself if it is less than 5, or to `None` if it is greater than or equal to 5. If the original value is `None`, it replaces it with `Some(5)`.
+
+Both of these approaches are more concise and expressive than the original `match` statement.

@@ -1,0 +1,30 @@
+The error you're getting is because you're trying to import the Bootstrap variables before you define your own. The `$theme-colors` map is defined in the `_variables.scss` file, so when you import it before defining your own, it's already set and can't be changed.
+
+To fix this, you should define your `$theme-colors` map before importing the Bootstrap files. Also, you need to import all the Bootstrap SCSS files, not just the `variables.scss` file.
+
+Here's how you can do it:
+
+```scss
+// Define your own theme colors
+$theme-colors: (
+  "primary": #your-color,
+  // Add other colors if needed
+);
+
+// Import Bootstrap and its variables
+@import "../../node_modules/bootstrap/scss/bootstrap";
+```
+
+Replace `#your-color` with the color you want to use for the primary color. You can add more colors to the map if you want to change other theme colors as well.
+
+Also, make sure you're using Dart Sass instead of Node Sass. Bootstrap 5 requires Dart Sass, and Node Sass is deprecated. You can install Dart Sass with npm:
+
+```bash
+npm install -D sass
+```
+
+Then you can compile your SCSS file with Dart Sass:
+
+```bash
+npx sass style.scss custom.css
+```

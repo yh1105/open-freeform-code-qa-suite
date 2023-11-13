@@ -1,0 +1,25 @@
+Certainly! To implement the `findObject` function in JavaScript, we can use a recursive approach to traverse through the nested object tree. Here's the function:
+
+```javascript
+function findObject(id, node) {
+    // Check if the current node matches the id
+    if (node.id === id) {
+        return node;
+    }
+
+    // Traverse child nodes if they exist
+    if (node.child && node.child.length > 0) {
+        for (let child of node.child) {
+            let result = findObject(id, child);
+            if (result) {
+                return result;
+            }
+        }
+    }
+
+    // Return null if the node is not found in the current path
+    return null;
+}
+```
+
+This function checks the current node for a match with the `id`. If it doesn't find a match, it recursively calls itself for each child node until it finds the matching node or exhausts all nodes in the tree.

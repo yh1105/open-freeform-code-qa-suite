@@ -1,0 +1,16 @@
+Yes, there is an unofficial adapter for React 17. It's called `@wojtekmaj/enzyme-adapter-react-17`. You can install it via npm:
+
+```bash
+npm install --save @wojtekmaj/enzyme-adapter-react-17
+```
+
+Then, you can use it in your code like this:
+
+```javascript
+import Enzyme from 'enzyme';
+import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
+
+Enzyme.configure({ adapter: new Adapter() });
+```
+
+This adapter is not officially supported by the Enzyme team, but it's currently the best solution available for testing React 17 projects with Enzyme.

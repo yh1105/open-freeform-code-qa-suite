@@ -1,0 +1,11 @@
+This error message suggests that the preview is not associated with any target in your Xcode project. To fix this, try the following steps:
+
+1. Make sure that your project has at least one target. You can check this by going to the project settings and looking under the "Targets" section.
+
+2. Make sure that the file containing the preview is included in the target. You can check this by selecting the file in the project navigator, and then checking the "Target Membership" section in the file inspector.
+
+3. Clean your project by going to "Product" > "Clean Build Folder" in the Xcode menu.
+
+4. Try running the preview again.
+
+If the above steps do not work, you can also try creating a new Xcode project and copying your source files over to see if the issue persists.

@@ -1,0 +1,20 @@
+The `getDoctrine()` method is not officially deprecated in Symfony 5. However, it is marked as deprecated in Symfony 4.4 and will be removed in Symfony 5.0.
+
+If you are using Symfony 4.4, you should use the `getDoctrine()` method with a `ContainerInterface` argument instead of calling it directly on the controller. Here's an example:
+
+```php
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+
+class MyController extends AbstractController
+{
+    public function myAction(ContainerInterface $container)
+    {
+        $doctrine = $container->get('doctrine');
+
+        // ...
+    }
+}
+```
+
+If you are using Symfony 5.0 or later, you should use the `getDoctrine()` method directly on the controller, as it is no longer marked as deprecated.

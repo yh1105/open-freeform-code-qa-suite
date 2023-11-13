@@ -1,0 +1,19 @@
+The problem is that you're trying to inject `ILogger` directly, but the DI container doesn't know what to provide for it. You should use `ILogger<TCategoryName>` instead, where `TCategoryName` is the class into which the logger is being injected. 
+
+Here's how you should modify your class:
+
+```c#
+private readonly ILogger<MyClass> _logger;
+
+public MyClass(ILogger<MyClass> logger)
+{
+    _logger = logger;
+}
+
+public void MyFunc()
+{
+    _logger.Log(LogLevel.Error, "My Message");
+}
+```
+
+This way, the DI container will be able to provide an instance of `ILogger<MyClass>` when `MyClass` is being created.

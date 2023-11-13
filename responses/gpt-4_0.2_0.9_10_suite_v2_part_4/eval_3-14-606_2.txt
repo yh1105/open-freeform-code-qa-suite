@@ -1,0 +1,25 @@
+It seems like there's a misunderstanding here. iOS doesn't have a "Developer Mode" that you can enable or disable like Android. The alert you're seeing is likely related to the app being a developer or test build, not the iOS system itself.
+
+If you're trying to install a developer or test build of an app on your iOS device, you'll need to do so through a method that provisions the app for your device. This is usually done through a service like TestFlight or directly via Xcode.
+
+Here are the steps to install a test build via TestFlight:
+
+1. Download and install the TestFlight app from the App Store on your iOS device.
+
+2. The developer should provide you with a TestFlight invitation code or URL.
+
+3. Open the invitation in your email or Messages app and tap on the invitation link.
+
+4. This will open TestFlight, where you can redeem the invitation code if necessary, and install the test build of the app.
+
+If you're a developer and you're trying to run your app on your device via Xcode, you'll need to do the following:
+
+1. Connect your device to your Mac.
+
+2. Open Xcode and select your device from the list of available devices.
+
+3. You may need to register your device with your Apple Developer account if you haven't done so already. You can do this in the Devices and Simulators window in Xcode.
+
+4. Once your device is selected, you can run your app on your device by clicking the Run button.
+
+If you're still having trouble, the issue may be with the app itself or the way it was provisioned. You should contact the developer or check the app's documentation for more information.

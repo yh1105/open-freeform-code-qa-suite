@@ -1,0 +1,35 @@
+The `@Binding` property wrapper is used to create a two-way connection between a property that stores data, and a view that displays and changes the data. However, in your case, you're using `@Binding` in a standalone view, which doesn't have a parent view to bind to.
+
+To fix this, you can create a parent view that has a `@State` variable, and pass it as a `@Binding` to the `ContentView`. Here's an example:
+
+```swift
+import SwiftUI
+
+struct ParentView: View {
+    @State private var isSelected: Bool = false
+
+    var body: some View {
+        ContentView(isSelected: $isSelected)
+    }
+}
+
+struct ContentView: View {
+    @Binding var isSelected: Bool
+
+    var body: some View {
+        Button(action: {
+            self.isSelected.toggle()
+        }) {
+            Text(isSelected ? "Selected" : "Not Selected")
+        }
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ParentView()
+    }
+}
+```
+
+In this code, `ParentView` has a `@State` variable `isSelected`, which is passed to `ContentView` as a `@Binding`. When `isSelected` is toggled in `ContentView`, it will also update in `ParentView`, causing the view to refresh.

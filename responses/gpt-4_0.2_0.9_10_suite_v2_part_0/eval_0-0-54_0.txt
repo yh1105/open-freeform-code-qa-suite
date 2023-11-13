@@ -1,0 +1,34 @@
+You can create two state variables, one for the first name and one for the last name. Then, you can create a button that, when clicked, logs the current values of the first name and last name to the console. Here's how you can do it:
+
+```javascript
+import React, { useState } from 'react';
+
+export default function InputField() {
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
+
+  const handleClick = () => {
+    console.log(`First Name: ${firstName}, Last Name: ${lastName}`);
+  }
+
+  return (
+    <div>
+      <label>First Name</label>
+      <input type="text" 
+        value={firstName} 
+        name="firstName"
+        onChange={(e) => setFirstName(e.target.value)} />
+
+      <label>Last Name</label>
+      <input type="text" 
+        value={lastName} 
+        name="lastName"
+        onChange={(e) => setLastName(e.target.value)} />
+
+      <button onClick={handleClick}>Submit</button>
+    </div>
+  );
+}
+```
+
+In this code, `setFirstName` and `setLastName` are used to update the state of `firstName` and `lastName` respectively whenever the value of the corresponding input field changes. When the button is clicked, the `handleClick` function is called, which logs the current values of `firstName` and `lastName` to the console.

@@ -1,0 +1,17 @@
+The err113 lint error is suggesting that instead of defining dynamic errors using `errors.New()`, you should use wrapped static errors. Wrapped static errors are errors that are defined once and then reused throughout the codebase. This makes it easier to manage and standardize error messages.
+
+To fix this error, you can define a static error variable and use it instead of defining a new error message each time. Here's an example:
+
+```
+var (
+    ErrRepo = errors.New("repo error")
+    ErrOops = errors.New("oops")
+)
+
+// ...
+
+repoMock.EXPECT().Save(gomock.Eq(&foooBarBar)).Return(nil, ErrRepo)
+repoMock.EXPECT().FindAll().Return(nil, ErrOops)
+```
+
+By defining the errors as variables, you can reuse them throughout your codebase and avoid the err113 lint error.

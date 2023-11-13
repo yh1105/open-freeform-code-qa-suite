@@ -1,0 +1,45 @@
+The `AbstractController::getDoctrine()` method was deprecated in Symfony 4.2, and it's recommended to use dependency injection instead.
+
+If you want to get the Doctrine's entity manager, you can inject the `Doctrine\ORM\EntityManagerInterface` service. Here is an example:
+
+```php
+use Doctrine\ORM\EntityManagerInterface;
+
+class YourController extends AbstractController
+{
+    private $entityManager;
+
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
+    public function yourMethod()
+    {
+        // Use $this->entityManager instead of $this->getDoctrine()->getManager()
+    }
+}
+```
+
+If you want to get a repository, you can inject the `Doctrine\Persistence\ManagerRegistry` service. Here is an example:
+
+```php
+use Doctrine\Persistence\ManagerRegistry;
+
+class YourController extends AbstractController
+{
+    private $registry;
+
+    public function __construct(ManagerRegistry $registry)
+    {
+        $this->registry = $registry;
+    }
+
+    public function yourMethod()
+    {
+        // Use $this->registry->getRepository(YourEntity::class) instead of $this->getDoctrine()->getRepository(YourEntity::class)
+    }
+}
+```
+
+Remember to register your controller as a service and enable autowiring for these injections to work.

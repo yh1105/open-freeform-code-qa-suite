@@ -1,0 +1,7 @@
+You are using Tailwind CSS classes. To apply a border only to the top, you should use the `border-t` class for the top border and specify the color with `border-blue-900`. Here is the correct code:
+
+```html
+<div class="border-t border-blue-900">foo</div>
+```
+
+This will apply a border only to the top of the div and the color of the border will be blue-900.

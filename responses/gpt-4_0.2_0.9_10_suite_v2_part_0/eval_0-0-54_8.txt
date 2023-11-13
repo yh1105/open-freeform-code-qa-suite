@@ -1,0 +1,33 @@
+You can create a button and add an `onClick` event to it. When the button is clicked, it will call a function that will log the current state (which is the value of the input field).
+
+Here's how you can do it:
+
+```javascript
+import React, { useState } from 'react';
+
+export default function InputField({name,label}) {
+  const [state, setState] = useState('')
+
+  const handleClick = () => {
+    console.log(state);
+  }
+
+  return (
+    <div>
+     <label>{label}</label>
+      <input type="text" 
+      value={state} 
+      name={name}
+      onChange={(e) => setState(e.target.value)} />
+
+      <button onClick={handleClick}>Click me</button>
+
+      {state}
+    </div>
+  );
+}
+```
+
+In this code, `handleClick` is a function that logs the current state when the button is clicked. The `onClick` attribute on the button is set to this function.
+
+If you want to get the first name and last name values on button click, you would need to create two separate states for the first name and last name, and then log both of them in the `handleClick` function.

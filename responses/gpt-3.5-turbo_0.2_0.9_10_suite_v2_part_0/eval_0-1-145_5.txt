@@ -1,0 +1,16 @@
+To use the `truncate` class in TailwindCSS, you need to make sure that the parent element has a defined width. 
+
+Try adding a width to the parent element like this:
+
+```html
+<div class="ml-1 inline-block w-64">
+   <span>Label: </span>
+   <span class="font-semibold truncate">
+     long texttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt
+   </span>
+</div>
+```
+
+In this example, the parent element has a width of 64 pixels (`w-64`), but you can adjust this to fit your needs. 
+
+Also, make sure that you are using `class` instead of `className` in your HTML code.

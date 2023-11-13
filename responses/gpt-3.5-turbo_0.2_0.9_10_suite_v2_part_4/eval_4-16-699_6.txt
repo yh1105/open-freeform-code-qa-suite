@@ -1,0 +1,17 @@
+Your approach is correct, but you need to add 4 to the result of `lastIndexOf` to include the "-354" sequence in the output. Here's the corrected code:
+
+```
+$FileArray = @("Name1-354-03.pdf", "Name23-354-H11.pdf", "Name354-354-02.pdf", "Name3545-354.pdf")
+ForEach ($n in $FileArray){
+     Write-Host $n.Substring(0, $n.lastIndexOf('-354')+4)
+}
+```
+
+This will output:
+
+```
+Name1-354
+Name23-354
+Name354-354
+Name3545-354
+```

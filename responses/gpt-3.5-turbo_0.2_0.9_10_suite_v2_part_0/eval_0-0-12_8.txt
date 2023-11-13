@@ -1,0 +1,11 @@
+The error message you are receiving indicates that the login credentials you are using are not being accepted by the email service provider. Here are a few things you can try to fix this issue:
+
+1. Make sure that you have enabled "Less secure app access" in your Gmail account settings. You can do this by going to your Google Account settings, clicking on "Security" in the left-hand menu, and then scrolling down to "Less secure app access". Make sure that this option is turned on.
+
+2. Double-check that you are using the correct username and password for your Gmail account. Make sure that there are no typos or errors in the credentials you are providing.
+
+3. If you have two-factor authentication enabled for your Gmail account, you will need to generate an "App password" to use instead of your regular password. You can do this by going to your Google Account settings, clicking on "Security" in the left-hand menu, and then scrolling down to "App passwords". Generate a new app password and use that in your code instead of your regular password.
+
+4. If none of the above solutions work, you may need to enable "IMAP access" for your Gmail account. You can do this by going to your Google Account settings, clicking on "Forwarding and POP/IMAP" in the left-hand menu, and then scrolling down to "IMAP access". Make sure that this option is turned on.
+
+I hope this helps!

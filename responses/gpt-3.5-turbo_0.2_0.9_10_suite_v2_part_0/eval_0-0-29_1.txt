@@ -1,0 +1,16 @@
+To make sure the second query runs only after the first one is fulfilled, you can use the `useEffect` hook to watch for changes in the `userFulfilled` variable. Once it becomes `true`, you can then run the second query.
+
+Here's the code for the second query:
+
+```javascript
+const [userBio, setUserBio] = useState(null);
+
+useEffect(() => {
+  if (userFulfilled && user) {
+    const { data } = await useGetUserBioQuery(user.id).unwrap();
+    setUserBio(data);
+  }
+}, [userFulfilled, user]);
+```
+
+In this code, we're using the `useState` hook to store the result of the second query. We're also using the `useEffect` hook to watch for changes in `userFulfilled` and `user`. Once both of these variables are truthy, we run the second query using `useGetUserBioQuery(user.id).unwrap()`. The `unwrap()` method is used to extract the data from the query result. Finally, we set the result of the second query using `setUserBio(data)`.

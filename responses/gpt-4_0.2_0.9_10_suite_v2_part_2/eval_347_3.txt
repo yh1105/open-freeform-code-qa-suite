@@ -1,0 +1,17 @@
+The error you're encountering is likely due to the Gradle version you're using. Gradle versions prior to 7.0 do not support Java 17. 
+
+To resolve this issue, you need to upgrade your Gradle version to 7.0 or later. You can do this by updating your `gradle-wrapper.properties` file:
+
+```properties
+distributionUrl=https\://services.gradle.org/distributions/gradle-7.3.1-bin.zip
+```
+
+After updating the Gradle version, re-import the Gradle project in IntelliJ IDEA to apply the changes. 
+
+If you're using the Gradle wrapper, you might also need to update it using the following command in your terminal:
+
+```bash
+./gradlew wrapper --gradle-version 7.3.1
+```
+
+This command will update the Gradle wrapper to use the specified version.

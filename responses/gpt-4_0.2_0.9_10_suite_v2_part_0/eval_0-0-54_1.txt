@@ -1,0 +1,38 @@
+You can use two separate states for first name and last name. Then, on button click, you can get the values of these states. Here is an example:
+
+```javascript
+import React, { useState } from 'react';
+
+function App() {
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+
+  const handleClick = () => {
+    console.log(`First Name: ${firstName}, Last Name: ${lastName}`);
+  }
+
+  return (
+    <div>
+      <label>First Name</label>
+      <input 
+        type="text" 
+        value={firstName} 
+        onChange={(e) => setFirstName(e.target.value)} 
+      />
+
+      <label>Last Name</label>
+      <input 
+        type="text" 
+        value={lastName} 
+        onChange={(e) => setLastName(e.target.value)} 
+      />
+
+      <button onClick={handleClick}>Submit</button>
+    </div>
+  );
+}
+
+export default App;
+```
+
+In this code, `setFirstName` and `setLastName` are used to update the state of `firstName` and `lastName` respectively. The `handleClick` function is called when the button is clicked, and it logs the current values of `firstName` and `lastName`.

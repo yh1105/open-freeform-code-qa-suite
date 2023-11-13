@@ -1,0 +1,34 @@
+The error you're seeing is because Bootstrap requires `popper.js` for tooltips, popovers, and dropdowns. You can fix this issue by installing `popper.js` in your project.
+
+Here are the steps to install `popper.js`:
+
+1. Install `popper.js` via npm:
+
+```bash
+npm install popper.js --save
+```
+
+2. After installing `popper.js`, you need to import it in your file where you're using Bootstrap:
+
+```javascript
+import Popper from 'popper.js';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.min.js';
+```
+
+3. If you're using Webpack, you can add the following plugins to your webpack configuration file:
+
+```javascript
+plugins: [
+    new webpack.ProvidePlugin({
+        $: 'jquery',
+        jQuery: 'jquery',
+        'window.jQuery': 'jquery',
+        Popper: ['popper.js', 'default'],
+    })
+]
+```
+
+This will automatically load `$` and `jQuery` whenever it's used in your application, so you don't have to import it in every file.
+
+Remember to restart your server after these changes. If the problem persists, try deleting the `node_modules` folder and `package-lock.json` file, then run `npm install` again.

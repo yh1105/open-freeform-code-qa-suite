@@ -1,0 +1,11 @@
+This issue is caused by the way GitLab CI/CD processes variable expansion. GitLab CI/CD uses its own custom shell, which does not support nested parameter expansion. As a workaround, you can use a script block to perform the nested parameter expansion using a supported shell, such as `bash`. Here's an example:
+
+```
+variables:
+  GIT_BRANCH: ""
+
+job1:
+  script:
+    - GIT_BRANCH="${CI_MERGE_REQUEST_SOURCE_BRANCH_NAME:-${CI_COMMIT_BRANCH:-$CI_DEFAULT_BRANCH}}"
+    - echo $GIT_BRANCH
+```

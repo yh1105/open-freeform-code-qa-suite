@@ -1,0 +1,19 @@
+Your approach is correct. You can use the `lastIndexOf` method to find the position of the last occurrence of "-354" in the string and then use the `Substring` method to extract the part of the string before that position.
+
+Here's the corrected code:
+
+```
+$FileArray = @("Name1-354-03.pdf", "Name23-354-H11.pdf", "Name354-354-02.pdf", "Name3545-354.pdf")
+ForEach ($n in $FileArray){
+     Write-Host $n.Substring(0, $n.lastIndexOf('-354'))
+}
+```
+
+This should give you the desired output:
+
+```
+Name1-354
+Name23-354
+Name354-354
+Name3545-354
+```

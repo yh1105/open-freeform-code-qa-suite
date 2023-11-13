@@ -1,0 +1,15 @@
+Your code seems correct and should work as expected. However, there are a few things you can check if you're having issues:
+
+1. **Network Connection**: Make sure your device/emulator has a proper internet connection. Apollo Client fetches data over the network, so a lack of connectivity could cause the loading state to persist.
+
+2. **Server Availability**: Check if the server at 'https://48p1r2roz4.sse.codesandbox.io' is up and running. You can do this by visiting the URL in a web browser.
+
+3. **GraphQL Query**: Ensure that your GraphQL query is correct. The query you're using is for fetching exchange rates. If the server doesn't support this query, it could cause an error. You can test your query using a GraphQL playground or tool like GraphiQL.
+
+4. **Apollo Client Version**: There might be compatibility issues with the version of Apollo Client you're using. Try downgrading or upgrading the version.
+
+5. **React Native Version**: Similarly, there might be compatibility issues with the version of React Native. Try downgrading or upgrading the version.
+
+6. **Error Handling**: You're currently not logging any error messages. Modify your code to log the error message to get more information about what's going wrong. You can do this by adding `console.log(error.message);` in your error handling code.
+
+If none of these solutions work, you might want to consider creating a minimal reproducible example and asking for help on the Apollo Client GitHub issues page or on a platform like Stack Overflow.

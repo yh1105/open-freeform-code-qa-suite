@@ -1,0 +1,24 @@
+Sure, here's how you can fill in the blanks for transferring native SOL:
+
+```rust
+    let ix = anchor_lang::solana_program::system_instruction::transfer(
+        &user_account.key(), // the sender's public key
+        &event_vault_address, // the receiver's public key
+        amount,
+    );
+    anchor_lang::solana_program::program::invoke(
+        &ix,
+        &[
+            user_account.clone(), // the sender's account
+            ctx.accounts.system_program.clone(), // the system program account
+        ],
+    );
+```
+
+In this code:
+
+- `user_account.key()` is the public key of the user's account from which SOL will be transferred.
+- `event_vault_address` is the public key of the event account's vault address to which SOL will be transferred.
+- `amount` is the amount of SOL to be transferred.
+- `user_account.clone()` is the user's account from which SOL will be transferred.
+- `ctx.accounts.system_program.clone()` is the system program account, which is necessary for the transfer instruction.

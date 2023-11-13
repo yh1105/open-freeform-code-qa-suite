@@ -1,0 +1,11 @@
+You can use the `.toast('show')` method to show the toast. Here is how you can modify your JavaScript code:
+
+```javascript
+$(document).ready(function(){
+    $('.toast').toast('show');
+});
+```
+
+This code will show the toast when the document is ready. The `$(document).ready()` function is used to make a function available after the document is loaded. Whatever code you write inside the `$(document).ready()` function will run once the page DOM is ready to execute JavaScript code.
+
+Please make sure you have included the necessary Bootstrap CSS and JS files in your HTML file. Also, make sure jQuery is loaded before Bootstrap's JavaScript in your HTML file, as Bootstrap's JavaScript relies on jQuery.

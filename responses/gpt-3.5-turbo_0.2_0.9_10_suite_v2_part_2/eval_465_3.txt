@@ -1,0 +1,34 @@
+The error message indicates that the Lambda function is unable to find the executable file `main` in the expected location `/var/task/main`. This is because the file was built on a Windows platform and has a different file extension (`.exe`) than the expected file extension on the Linux-based AWS Lambda platform.
+
+To fix this issue, you need to build the executable file with the correct file name and extension for the AWS Lambda platform. You can do this by setting the `GOOS` and `GOARCH` environment variables to `linux` and `amd64` respectively before building the executable file.
+
+Here are the steps to build and deploy the Go AWS Lambda handler on a Windows platform:
+
+1. Open a command prompt and navigate to the directory containing your Go code.
+
+2. Set the `GOOS` and `GOARCH` environment variables to `linux` and `amd64` respectively by running the following commands:
+
+   ```
+   set GOOS=linux
+   set GOARCH=amd64
+   ```
+
+3. Build the executable file with the correct file name and extension by running the following command:
+
+   ```
+   go build -o main main.go
+   ```
+
+   This will create an executable file named `main` without the `.exe` extension.
+
+4. Zip the `main` executable file by running the following command:
+
+   ```
+   zip main.zip main
+   ```
+
+5. Upload the `main.zip` file to your AWS Lambda function using the AWS console.
+
+6. Test your Lambda function to ensure that it is working correctly.
+
+With these steps, your Go AWS Lambda function should be able to find the executable file and run without any issues.

@@ -1,0 +1,17 @@
+You can solve this issue by assigning the render function to a variable and then setting the `displayName` property on that function. Here's how you can do it:
+
+```jsx
+const renderGroup = (text) => <span>{getCountForCountry(text)}</span>;
+renderGroup.displayName = 'renderGroup';
+
+const columns_payment_summary_table = [ 
+    {
+      title: FooConstants.LABEL_QUANTITY_SELECTED,
+      dataIndex: 'group',
+      key: 'group',
+      render: renderGroup,
+    }
+]
+```
+
+In this code, we define the `renderGroup` function and set its `displayName` property to 'renderGroup'. Then, we use this function in the `render` property of the column definition. This should satisfy the ESLint rule.

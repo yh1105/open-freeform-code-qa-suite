@@ -1,0 +1,13 @@
+Sure, you can use the `*` wildcard in your route to catch all the remaining segments of your URL. Here is the revised route pattern:
+
+```javascript
+/route/:param1/config/:OptionalParam2?/:OptionalParam3*
+```
+
+This route will match:
+
+- `route/aa/config`
+- `route/aa/config/bb`
+- `route/aa/config/bb/cc`
+
+Please note that `OptionalParam3*` will catch everything after `OptionalParam2`, including slashes, so you will need to parse it manually if you want to get individual segments.

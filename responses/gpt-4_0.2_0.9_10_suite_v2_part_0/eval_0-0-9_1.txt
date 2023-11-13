@@ -1,0 +1,23 @@
+The `req.logout()` function is provided by Passport.js and is used to log out a user. This function does not require a callback function and does not return an error. The error you're seeing might be due to some other part of your code.
+
+However, it's important to note that `req.logout()` only removes the `req.user` property and clears the login session (if any). If you're using persistent login sessions, `req.logout()` will not clear the session cookie. You need to do it manually.
+
+Here's how you can modify your logout route to clear the session cookie:
+
+```javascript
+app.get("/logout", (req, res) => {
+    req.logout();
+    req.session.destroy(function (err) {
+        if (err) {
+            // handle error
+        }
+        res.clearCookie('connect.sid');
+        // the redirect can be wherever you want it to be
+        res.redirect('/');
+    });
+});
+```
+
+In this code, `req.session.destroy()` is used to destroy the session, and `res.clearCookie('connect.sid')` is used to clear the session cookie. After that, the user is redirected to the home page. 
+
+Please replace `'connect.sid'` with the name of your session cookie if it's different. You can find this name in your browser's developer tools under the "Application" tab.

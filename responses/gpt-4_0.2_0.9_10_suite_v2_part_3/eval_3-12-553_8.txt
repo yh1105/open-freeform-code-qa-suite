@@ -1,0 +1,33 @@
+The error message indicates that your Flutter project is not using AndroidX. AndroidX is a major improvement to the original Android Support Library, which is no longer maintained. It provides parity across all devices running Android 9 (API level 28) and later.
+
+To fix this issue, you need to migrate your Flutter project to AndroidX. Here are the steps to do that:
+
+1. First, you need to ensure that your `android/gradle.properties` file includes the following:
+
+```markdown
+android.useAndroidX=true
+android.enableJetifier=true
+```
+
+2. Then, you need to refactor the Android package's Java code (usually located in `android/app/src/main/java/...`). Replace the old Android package imports with the AndroidX equivalents. For example, if you have an import for `android.support.v4.content.ContextCompat`, it should be replaced with `androidx.core.content.ContextCompat`.
+
+3. Also, you need to update your `android/app/build.gradle` file to set the `compileSdkVersion` to 28 (or higher) and change the `androidTestImplementation` and `testImplementation` dependencies to the AndroidX equivalents:
+
+```markdown
+android {
+    compileSdkVersion 28
+
+    ...
+
+    dependencies {
+        ...
+
+        androidTestImplementation 'androidx.test:runner:1.1.1'
+        androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    }
+}
+```
+
+4. Finally, run your app to see if the migration to AndroidX has been successful. If you still encounter issues, you might need to update your dependencies in the `pubspec.yaml` file to their latest versions that support AndroidX.
+
+After migrating to AndroidX, you should be able to generate the Android project and its APK without any issues.

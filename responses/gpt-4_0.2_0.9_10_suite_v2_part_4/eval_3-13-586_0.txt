@@ -1,0 +1,21 @@
+The error message indicates that you are targeting Android S (API level 31) or above, and you need to specify either `FLAG_IMMUTABLE` or `FLAG_MUTABLE` when creating a `PendingIntent`.
+
+The issue is that `MediaSessionCompat` is trying to create a `PendingIntent` without specifying either of these flags. This is a known issue with the AndroidX Media library version 1.4.0 and below when targeting Android 12 (API level 31).
+
+To fix this issue, you have two options:
+
+1. **Downgrade your target SDK version to 30 or below** until the AndroidX Media library is updated to handle this requirement. This is not a long-term solution, but it will allow your app to continue working as it currently does.
+
+2. **Use the newer version of the AndroidX Media library**. The AndroidX team has released a new version of the AndroidX Media library (version 1.4.3) that fixes this issue. You can update your `build.gradle` file to use this version:
+
+```groovy
+dependencies {
+    ...
+    implementation 'androidx.media:media:1.4.3'
+    ...
+}
+```
+
+After updating the library, clean and rebuild your project. The error should be resolved.
+
+Remember, it's always a good practice to keep your dependencies up-to-date to benefit from the latest bug fixes and improvements.

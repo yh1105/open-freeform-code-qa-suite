@@ -1,0 +1,53 @@
+You can create a state for first name and last name in your parent component and pass them as props to your `InputField` component. Then, you can use `useState` hook to update the state of first name and last name on input change. Finally, you can use these values on button click.
+
+Here's an example:
+
+```javascript
+import React, { useState } from 'react';
+import InputField from './InputField';
+
+export default function ParentComponent() {
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+
+  const handleClick = () => {
+    console.log('First Name:', firstName);
+    console.log('Last Name:', lastName);
+  };
+
+  return (
+    <div>
+      <InputField
+        label="First Name"
+        name="firstName"
+        value={firstName}
+        onChange={(e) => setFirstName(e.target.value)}
+      />
+      <InputField
+        label="Last Name"
+        name="lastName"
+        value={lastName}
+        onChange={(e) => setLastName(e.target.value)}
+      />
+      <button onClick={handleClick}>Submit</button>
+    </div>
+  );
+}
+```
+
+In your `InputField` component, you can remove the `state` and `setState` variables and use the `value` and `onChange` props instead:
+
+```javascript
+import React from 'react';
+
+export default function InputField({ name, label, value, onChange }) {
+  return (
+    <div>
+      <label>{label}</label>
+      <input type="text" value={value} name={name} onChange={onChange} />
+    </div>
+  );
+}
+``` 
+
+This way, the `InputField` component is now a controlled component, meaning that its value is controlled by the parent component.

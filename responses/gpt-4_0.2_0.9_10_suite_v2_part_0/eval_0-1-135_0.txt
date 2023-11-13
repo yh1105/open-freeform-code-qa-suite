@@ -1,0 +1,25 @@
+Yes, Safari has some issues with flexbox and images. The problem is that Safari doesn't seem to respect the `height: auto` for images in a flex container. 
+
+To fix this, you can add `align-self: flex-start` to the image. This will align the image at the start of the cross axis, which is the vertical axis in this case, and prevent it from stretching.
+
+Here's the updated CSS:
+
+```css
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.container section:first-child {
+  display: flex;
+  margin-bottom: 25px;
+}
+
+.container img {
+  width: 125px;
+  height: auto;
+  align-self: flex-start; /* Add this line */
+}
+```
+
+This should make the image display correctly in Safari.

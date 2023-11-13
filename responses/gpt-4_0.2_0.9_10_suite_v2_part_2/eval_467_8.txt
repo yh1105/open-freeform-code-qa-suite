@@ -1,0 +1,41 @@
+The Gin framework is a web framework written in Go (Golang) that features a Martini-like API with better performance, up to 40 times faster. If you want to use the Gin framework with the Prometheus Go client, you can do so by using the `gin.WrapH` function to wrap the Prometheus HTTP handler.
+
+Here's how you can modify the metrics handler to work with the Gin framework:
+
+```go
+package main
+
+import (
+    "log"
+    "github.com/gin-gonic/gin"
+    "github.com/prometheus/client_golang/prometheus"
+    "github.com/prometheus/client_golang/prometheus/promhttp"
+)
+
+var cpuTemp = prometheus.NewGauge(prometheus.GaugeOpts{
+        Name: "cpu_temperature_celsius",
+        Help: "Current temperature of the CPU.",
+    })
+
+func init() {
+    // Metrics have to be registered to be exposed:
+    prometheus.MustRegister(cpuTemp)
+}
+
+func main() {
+    cpuTemp.Set(65.3)
+
+    // Create a new gin router
+    router := gin.Default()
+
+    // The Handler function provides a default handler to expose metrics
+    // via an HTTP server. "/metrics" is the usual endpoint for that.
+    // Use gin.WrapH to wrap the promhttp Handler
+    router.GET("/metrics", gin.WrapH(promhttp.Handler()))
+
+    // Start the gin server
+    log.Fatal(router.Run(":8080"))
+}
+```
+
+In this code, we first create a new Gin router with `gin.Default()`. Then, we use `router.GET` to set up a new GET route for "/metrics". Instead of using `http.Handle` like in the original code, we use `gin.WrapH` to wrap the `promhttp.Handler()`. Finally, we start the Gin server with `router.Run(":8080")`.

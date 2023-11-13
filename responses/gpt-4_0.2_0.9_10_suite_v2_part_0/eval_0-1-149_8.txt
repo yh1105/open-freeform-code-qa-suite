@@ -1,0 +1,12 @@
+Sure, I can help you with that. You can use the `group-hover` utility to apply styles on hover. Here's an example of how you can animate the underline on hover:
+
+```html
+<a href="#" class="group inline-block text-sky-600 transition duration-300">
+    Link
+    <span class="block w-0 h-0.5 bg-sky-600 transition-all duration-500 group-hover:w-full"></span>
+</a>
+```
+
+In this code, the `w-0` class sets the initial width of the underline to 0, and the `group-hover:w-full` class sets the width to full when the link is hovered. The `transition-all` and `duration-500` classes are used to animate the width change.
+
+Please note that `group-hover` requires the parent to have the `group` class, and the `inline-block` class is used to prevent the link from taking up the full width.

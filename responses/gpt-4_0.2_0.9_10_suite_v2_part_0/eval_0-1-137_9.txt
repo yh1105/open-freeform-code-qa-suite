@@ -1,0 +1,30 @@
+The error you're getting is because you're trying to import the Bootstrap variables before you define your own. The `!default` flag in SASS means that the variable should only be assigned if it hasn't been assigned yet. So, you should define your variables before importing the Bootstrap variables.
+
+Here's how you can do it:
+
+```scss
+// Define your own colors
+$theme-colors: (
+  "primary": #your-color,
+  // Add other colors if needed
+);
+
+// Then import the Bootstrap variables and Bootstrap
+@import "../../node_modules/bootstrap/scss/bootstrap";
+```
+
+Replace `#your-color` with the color you want to use. If you want to change other colors, just add them to the `$theme-colors` map.
+
+Also, make sure you're using Dart Sass as LibSass (which includes Node Sass) is deprecated. Bootstrap v5 recommends Dart Sass. You can install it with npm:
+
+```bash
+npm install -D sass
+```
+
+And then compile your SCSS file:
+
+```bash
+npx sass your-file.scss output.css
+```
+
+Replace `your-file.scss` with the path to your SCSS file and `output.css` with the path where you want the compiled CSS file to be saved.

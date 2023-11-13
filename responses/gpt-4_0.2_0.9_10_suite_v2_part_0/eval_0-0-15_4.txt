@@ -1,0 +1,13 @@
+Sure, you need to mock the class and its constructor. Here is the revised version of your code:
+
+```javascript
+import API from 'utils/API';
+
+jest.mock('utils/API', () => {
+  return jest.fn().mockImplementation(() => {
+    return {someMethod: () => {}};
+  });
+});
+```
+
+In this revised version, `jest.fn().mockImplementation()` is used to mock the class constructor and the `someMethod` method. Now, you can create a new instance of the `API` class without any errors.

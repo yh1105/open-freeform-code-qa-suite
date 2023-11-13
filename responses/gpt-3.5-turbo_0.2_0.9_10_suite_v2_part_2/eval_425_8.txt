@@ -1,0 +1,13 @@
+The error message "Failed to clear cache. Make sure you have the appropriate permissions." indicates that the user running the command does not have the necessary permissions to clear the cache. 
+
+You can try running the command with elevated privileges using `sudo`:
+```
+sudo php artisan cache:clear
+```
+
+Alternatively, you can manually delete the contents of the `bootstrap/cache` directory:
+```
+rm -rf bootstrap/cache/*
+```
+
+Make sure to run these commands from the root directory of your Laravel project.

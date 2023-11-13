@@ -1,0 +1,23 @@
+The error message you're seeing suggests that the `/data` directory is on a read-only file system. This could be due to a few reasons:
+
+1. The directory is on a mounted drive that is read-only.
+2. The directory is protected by System Integrity Protection (SIP).
+
+In macOS Catalina and later versions, the system disk is split into two volumes: one for the system files and another for data. The system volume is mounted as read-only to prevent modifications.
+
+If you're trying to create a directory at the root level, it's likely that you're trying to create it on the system volume, which is why you're seeing this error.
+
+Instead, you should create directories in your home directory or under `/Users/Shared`.
+
+If you need to create the directory specifically under `/data/db` for MongoDB, you can create it under `/System/Volumes/Data/data/db` instead, which corresponds to the data volume.
+
+Here's how you can do it:
+
+```bash
+sudo mkdir -p /System/Volumes/Data/data/db
+sudo chown -R `id -un` /System/Volumes/Data/data/db
+```
+
+The second command changes the ownership of the directory to the current user, which should allow MongoDB to access it.
+
+Remember to update your MongoDB configuration to use the new path.

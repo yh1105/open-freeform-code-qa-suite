@@ -1,0 +1,29 @@
+The error "error: ‘std::filesystem’ has not been declared" occurs because you are trying to use the `std::filesystem` namespace which is not declared in the `<experimental/filesystem>` library. 
+
+In C++17, the filesystem library is still experimental and is under the `std::experimental::filesystem` namespace. So you should use `std::experimental::filesystem` instead of `std::filesystem`.
+
+Here is the corrected code:
+
+```c++
+#include <experimental/filesystem>
+#include <iostream>
+#include <vector>
+
+namespace fs = std::experimental::filesystem;
+
+int main(int argc, char** argv)
+{
+    std::string imageDirectory = "./image";
+    std::vector<std::string> imagePath;
+    for (const auto& entry: fs::directory_iterator(imageDirectory))
+    {
+        imagePath.push_back(entry.path());
+        std::cout << entry.path() << std::endl;
+    }
+    return 0;
+}
+```
+
+In the corrected code, I've added a namespace alias `fs` for `std::experimental::filesystem` to make the code cleaner and easier to read.
+
+Also, please note that in C++17, the filesystem library is still experimental and not all compilers support it. If you are using GCC, you need version 8 or later to use the filesystem library without the experimental namespace. If you are using an older version of GCC, you may need to link against `-lstdc++fs` to use the filesystem library.

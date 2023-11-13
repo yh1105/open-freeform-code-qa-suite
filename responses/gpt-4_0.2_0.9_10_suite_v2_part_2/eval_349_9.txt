@@ -1,0 +1,18 @@
+The error message suggests that there's a problem with the way the command is formatted. It's complaining about a "malformed argument" with an "embedded quote". 
+
+This issue is related to the way Java 7 and later handles quotes in arguments for ProcessBuilder and similar classes. The issue is that it's not correctly escaping quotes in some cases, leading to this error.
+
+Here's a workaround that might help:
+
+1. Open the `mvn.cmd` file in a text editor.
+2. Look for a line that starts with `set MAVEN_CMD_LINE_ARGS=`.
+3. Replace that line with the following two lines:
+
+```cmd
+set "MAVEN_CMD_LINE_ARGS=%*"
+set MAVEN_CMD_LINE_ARGS=%MAVEN_CMD_LINE_ARGS:"=\"%
+```
+
+This will escape the quotes in the command line arguments, which should prevent the error you're seeing.
+
+If the problem still persists, you might want to consider downgrading to an older version of NetBeans or Java, as this issue doesn't occur in Java 6 and earlier.

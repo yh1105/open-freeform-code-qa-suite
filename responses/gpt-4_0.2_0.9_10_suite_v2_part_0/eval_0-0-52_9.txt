@@ -1,0 +1,23 @@
+Angular CLI doesn't provide a specific command to remove a package. However, you can manually uninstall the package using npm or yarn, and then remove the related code from your project.
+
+Here's how you can do it:
+
+1. Uninstall the package using npm or yarn:
+
+   - If you are using npm, run the following command:
+
+     ```markdown
+     npm uninstall <package-name>
+     ```
+
+   - If you are using yarn, run the following command:
+
+     ```markdown
+     yarn remove <package-name>
+     ```
+
+2. Remove the related code from your project. This step depends on what the package does and how it's used in your project. You'll need to manually remove any imports, usage, or configuration related to the package.
+
+3. (Optional) If the package has added new entries in your `angular.json` file, you should remove them manually.
+
+Remember to replace `<package-name>` with the name of the package you want to remove.

@@ -1,0 +1,26 @@
+```go
+type A struct {
+}
+
+type B struct {
+}
+
+type AB interface {
+    *A | *B
+    some() bool
+}
+
+func (a *A) some() bool {
+    return true
+}
+
+func (b *B) some() bool {
+    return false
+}
+
+func some[T AB](x T) bool {
+    return x.some()
+}
+```
+
+In the `AB` interface, you need to add the `some()` method signature. This is because the `some()` method is not defined in the `*A` or `*B` types, but rather in the `AB` interface. By adding the method signature to the interface, you are telling the compiler that any type that implements the `AB` interface must also implement the `some()` method.

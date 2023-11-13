@@ -1,0 +1,33 @@
+From your HTML code, it seems like your "Stop Game" button is inside the `#GameRunning` div, which might be positioned behind the game frame. Here are a few suggestions to fix this issue:
+
+1. **Change the HTML structure**: You could move the "Stop Game" button outside of the `#GameRunning` div and place it next to the "Begin Game" button. This way, both buttons will be in the same container and should align properly.
+
+2. **Use CSS positioning**: If you don't want to change the HTML structure, you can use CSS to position the "Stop Game" button. You can use the `position: absolute;` property to position the button relative to the nearest positioned ancestor. You'll also need to set `top`, `right`, `bottom`, or `left` properties to position the button correctly.
+
+Here's an example of how you could use CSS positioning:
+
+```css
+#GameRunning {
+  position: relative; /* Make sure this is relative if it's not already */
+}
+
+#StopBtn {
+  position: absolute;
+  top: 0; /* Adjust as necessary */
+  right: 0; /* Adjust as necessary */
+}
+```
+
+3. **Use CSS Flexbox or Grid**: If your layout allows it, you can use CSS Flexbox or Grid to align the buttons. These CSS properties provide a more flexible and efficient way to layout, align, and distribute space among items in a container, even when their size is unknown or dynamic.
+
+Here's an example of how you could use Flexbox:
+
+```css
+#DanceScoreboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* This will center the buttons */
+}
+```
+
+Remember to adjust these examples to fit your specific needs and layout.

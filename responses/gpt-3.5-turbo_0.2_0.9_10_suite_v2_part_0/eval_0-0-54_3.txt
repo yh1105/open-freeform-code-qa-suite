@@ -1,0 +1,37 @@
+Sure, you can create a state for first name and last name and update them on input change. Then, on button click, you can access those state values to perform any action. Here's an example:
+
+```javascript
+import React, { useState } from 'react';
+
+export default function InputField({ name, label }) {
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+
+  const handleButtonClick = () => {
+    console.log('First Name:', firstName);
+    console.log('Last Name:', lastName);
+    // Perform any action with first name and last name values
+  };
+
+  return (
+    <div>
+      <label>{label}</label>
+      <input
+        type="text"
+        value={firstName}
+        name={`${name}-firstName`}
+        onChange={(e) => setFirstName(e.target.value)}
+      />
+      <input
+        type="text"
+        value={lastName}
+        name={`${name}-lastName`}
+        onChange={(e) => setLastName(e.target.value)}
+      />
+      <button onClick={handleButtonClick}>Submit</button>
+    </div>
+  );
+}
+```
+
+In this example, we have created two states for first name and last name. We have also added a button with an `onClick` handler that logs the first name and last name values to the console. You can replace the console log with any action you want to perform with the values.

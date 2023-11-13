@@ -1,0 +1,13 @@
+With Font Awesome 5, the syntax for using icons in CSS has changed. You need to use the `font-family` property to specify the Font Awesome font family and the `content` property to specify the icon using its Unicode value.
+
+Here's how you can modify your code to work with Font Awesome 5:
+
+```css
+#mainNav .navbar-collapse .navbar-sidenav .nav-link-collapse:after {
+  float: right;
+  font-family: "Font Awesome 5 Free";
+  content: "\f107";
+}
+```
+
+Note that the `font-family` value is now `"Font Awesome 5 Free"` instead of `"FontAwesome"`. Also, the Unicode value for the icon remains the same (`"\f107"` in this case).

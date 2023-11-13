@@ -1,0 +1,13 @@
+The error message you're seeing is coming from Google's mail servers. It's saying that the username and password you're providing in your `nodemailer` configuration are not being accepted.
+
+Here are a few things you can try to resolve this issue:
+
+1. **Check your username and password**: Make sure that the username (email address) and password you're providing are correct. Note that the password should be the actual password of the email account if 2-step verification is not enabled. If 2-step verification is enabled, then you should use an app password.
+
+2. **Enable Less Secure Apps**: Google may block sign in attempts from some apps or devices that do not use modern security standards. You can change your settings to allow less secure apps into your account. However, this is not recommended by Google. You can do this by going to your Google Account > Security > Less secure app access > Turn on access.
+
+3. **Use an App Password**: If you have 2-Step Verification enabled for your Google Account, you'll need to generate and use an App Password for `nodemailer`. An App Password is a 16-digit passcode that gives less secure apps or devices permission to access your Google Account. You can generate an App Password by going to your Google Account > Security > App passwords.
+
+4. **Unlock CAPTCHA**: Sometimes, Google may require a CAPTCHA unlock before an app is allowed to access your account. You can unlock CAPTCHA by visiting this link: https://accounts.google.com/b/0/DisplayUnlockCaptcha.
+
+Remember to replace the placeholders in your code with actual values after following the above steps.

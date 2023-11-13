@@ -1,0 +1,19 @@
+You can use the `source` command to load any changes you've made to your `.bash_profile` without having to close and reopen your terminal. Here's how:
+
+```bash
+source ~/.bash_profile
+```
+
+This command will read and execute commands from the filename argument in the current shell context. 
+
+If you've made changes to your `.bash_profile`, running the `source` command will apply those changes to your current terminal session.
+
+Please note that this won't "restart" your terminal in the sense of clearing your history or resetting any environment variables you've set in your current session. It will just apply any new changes you've made to your `.bash_profile`. 
+
+If you want to completely restart your shell, you can use the `exec` command with `-l` option:
+
+```bash
+exec -l $SHELL
+```
+
+The `-l` option means that the shell is a login shell, which will completely restart your shell session.

@@ -1,0 +1,17 @@
+Here is the function you requested:
+
+```java
+public static PriorityQueue<Pair<Integer, Integer>> createPriorityQueue() {
+    PriorityQueue<Pair<Integer, Integer>> pq = new PriorityQueue<>(
+        new Comparator<Pair<Integer, Integer>>() {
+            @Override
+            public int compare(Pair<Integer, Integer> p1, Pair<Integer, Integer> p2) {
+                return p1.getKey().compareTo(p2.getKey());
+            }
+        }
+    );
+    return pq;
+}
+```
+
+This function creates a `PriorityQueue` of `Pair<Integer, Integer>`. The `Comparator` is used to determine the order of the elements in the queue. In this case, the `compare` method compares the keys of the pairs, so the pair with the smallest key will be considered as the highest priority.

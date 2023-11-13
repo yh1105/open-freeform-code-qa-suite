@@ -1,0 +1,42 @@
+The error message indicates that Jackson is trying to serialize the `MultipartFile` object to JSON, but it can't because `MultipartFile` is not a simple POJO and contains complex objects like `InputStream` which can't be serialized to JSON.
+
+The `MultipartFile` should be converted to `FileSystemResource` before sending it. Here is how you can do it:
+
+```java
+HttpHeaders headers = new HttpHeaders();
+headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+
+MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
+
+// convert MultipartFile to FileSystemResource
+FileSystemResource fileSystemResource = new FileSystemResource(convert(souqBean.getCircularAttachment()));
+body.add("circularAttachment", fileSystemResource);
+body.add("circularEntryId", souqBean.getCircularEntryId());
+body.add("circularTitle", souqBean.getCircularTitle());
+
+HttpEntity<?> entity = new HttpEntity<>(body, headers);
+
+ResponseEntity<Boolean> response = restTemplate.postForEntity("http://localhost:8081/circular-save", entity, Boolean.class);
+status = response.getBody();
+```
+
+And here is the `convert` method:
+
+```java
+public static File convert(MultipartFile file) {
+    File convFile = new File(file.getOriginalFilename());
+    try {
+        convFile.createNewFile();
+        FileOutputStream fos = new FileOutputStream(convFile);
+        fos.write(file.getBytes());
+        fos.close();
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+    return convFile;
+}
+```
+
+This `convert` method will convert `MultipartFile` to `File`, and then `FileSystemResource` wraps that `File`.
+
+Please note that this will create a temporary file in your application's running directory. You should handle the deletion of this temporary file after the request is made.

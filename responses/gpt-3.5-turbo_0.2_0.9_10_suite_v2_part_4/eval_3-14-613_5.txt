@@ -1,0 +1,14 @@
+This error message is indicating that the preview target is not included in the current scheme. To fix this, you can try the following steps:
+
+1. Go to the project navigator and select your project.
+2. Select the target that contains your preview code.
+3. Go to the "Build Phases" tab.
+4. Make sure that "Compile Sources" includes all the necessary files for your preview code.
+5. Go to the "Build Settings" tab.
+6. Under "Build Options", make sure that "Enable Testability" is set to "Yes".
+7. Go to the "Scheme" menu and select "Edit Scheme".
+8. Select the "Test" action on the left.
+9. Make sure that your preview target is selected under "Targets".
+10. Click "Close" to save the changes.
+
+After following these steps, try running your preview again. If the issue persists, you may need to clean your build folder and restart Xcode.

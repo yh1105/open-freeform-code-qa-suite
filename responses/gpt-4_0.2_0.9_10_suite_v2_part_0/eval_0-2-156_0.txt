@@ -1,0 +1,36 @@
+It seems like you want to align the "Stop Game" button with the "Begin Game" button. To do this, you can use CSS to position the buttons. Here are a few methods:
+
+1. **Flexbox**: You can use CSS Flexbox to align items along a horizontal or vertical line. For example, you can make `#DanceScoreboard` a flex container and align its children (`#GameStopped` and `#GameRunning`) in a column. Then, you can use `justify-content: space-between;` to distribute the space between the children evenly.
+
+```css
+#DanceScoreboard {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+```
+
+2. **Grid**: CSS Grid is another powerful tool for layout design. You can define a grid on the `#DanceScoreboard` and place the children in the grid cells.
+
+```css
+#DanceScoreboard {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+}
+```
+
+3. **Positioning**: You can use CSS positioning to place the buttons. This method requires more manual work and may not be as flexible as the previous methods. For example, you can use `position: absolute;` to position the buttons relative to the `#DanceScoreboard`.
+
+```css
+#StartBtn {
+  position: absolute;
+  top: 0;
+}
+
+#StopBtn {
+  position: absolute;
+  top: 50px; /* adjust this value as needed */
+}
+```
+
+Remember to adjust these examples according to your needs. You may need to add more CSS properties to achieve the desired layout.

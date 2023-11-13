@@ -1,0 +1,1 @@
+Another interesting use is code organization. Styled-components only work with the style prop but many custom components don't expose this prop. Instead they provide a *Style prop which is passed to child component style props. We use the attrs function to keep the organization of styles in one file with the rest of the styled components.

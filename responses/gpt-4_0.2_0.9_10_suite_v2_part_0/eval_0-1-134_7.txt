@@ -1,0 +1,15 @@
+It sounds like you're referring to a feature provided by Emmet, a plugin for many text editors that helps to speed up your HTML & CSS workflow.
+
+Emmet allows you to write abbreviations that are then expanded into full HTML or CSS code. For example, writing `.classname` and then pressing `Tab` will expand to `<div class="classname"></div>`.
+
+Here are some steps to ensure you have Emmet set up correctly:
+
+1. **Check your text editor:** Emmet is built into some text editors like VS Code, but for others, you may need to install it as a plugin. Check if your text editor supports Emmet or if you need to install it.
+
+2. **Check your file type:** Emmet usually works automatically in HTML and CSS files. Make sure your file is saved with the correct extension (.html for HTML files, .css for CSS files).
+
+3. **Check your syntax:** Make sure you're writing the Emmet abbreviations correctly. For classes, it should be `.classname`, and for IDs, it should be `#idname`.
+
+4. **Use the Tab key:** After writing your Emmet abbreviation, press the `Tab` key to expand it. If you're using a different key, it might not work.
+
+If you've checked all these and it's still not working, there might be an issue with your text editor settings. You might need to look into the specific settings or documentation for your text editor to see how to enable or troubleshoot Emmet.

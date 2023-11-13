@@ -1,0 +1,21 @@
+GitLab CI/CD doesn't support nested variable expansion. The variables are expanded by GitLab Runner before the script is executed, and it doesn't have the same level of complexity as a shell interpreter. 
+
+In your case, the runner is trying to expand `${CI_MERGE_REQUEST_SOURCE_BRANCH_NAME:-${CI_COMMIT_BRANCH:-$CI_DEFAULT_BRANCH}}` as a single variable, which doesn't exist, so it's falling back to the default value, which it interprets as `${CI_COMMIT_BRANCH:-$CI_DEFAULT_BRANCH}`, and again, it doesn't exist, so it falls back to `$CI_DEFAULT_BRANCH`. The `}` at the end is treated as a literal character, hence the output `}`.
+
+To achieve the desired result, you can use a script to set the `GIT_BRANCH` variable:
+
+```yaml
+job1:
+  script:
+    - >
+      if [[ -n "$CI_MERGE_REQUEST_SOURCE_BRANCH_NAME" ]]; then
+        GIT_BRANCH=$CI_MERGE_REQUEST_SOURCE_BRANCH_NAME
+      elif [[ -n "$CI_COMMIT_BRANCH" ]]; then
+        GIT_BRANCH=$CI_COMMIT_BRANCH
+      else
+        GIT_BRANCH=$CI_DEFAULT_BRANCH
+      fi
+    - echo $GIT_BRANCH
+```
+
+This script checks each variable in turn and assigns the first non-empty one to `GIT_BRANCH`.

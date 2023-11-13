@@ -1,0 +1,8 @@
+You can try running the following command to rollback the migration:
+```
+bin/console doctrine:migrations:execute Application\Migrations\Version20210909072642 --down --no-interaction -vvv
+```
+
+This command should work because it specifies the full namespace of the migration class. The `doctrine:migrations:execute` command expects the full namespace of the migration class as an argument, not just the version number.
+
+If you still encounter the same error, you can try running the `doctrine:migrations:status` command to check if the migration is registered in the database. If it's not registered, you can try running the `doctrine:migrations:version` command to manually add the migration to the database.

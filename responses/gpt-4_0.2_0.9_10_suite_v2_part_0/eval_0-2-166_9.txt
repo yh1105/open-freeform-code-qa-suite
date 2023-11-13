@@ -1,0 +1,33 @@
+Tailwind CSS is a utility-first CSS framework that doesn't provide a direct way to target child elements like you would do in traditional CSS. It doesn't support selectors like `>` or `+`.
+
+However, you can use Tailwind CSS with traditional CSS. If you need to style direct children of a specific div, you can still use traditional CSS in your stylesheets.
+
+For example:
+
+```css
+div.section > div {
+  @apply bg-red-500; /* Tailwind utility classes */
+}
+```
+
+In this example, `@apply` directive is used to apply Tailwind utility classes within a CSS rule-set.
+
+Remember to configure your `tailwind.config.js` to enable this feature:
+
+```js
+module.exports = {
+  purge: [],
+  darkMode: false,
+  theme: {
+    extend: {},
+  },
+  variants: {
+    extend: {},
+  },
+  plugins: [
+    require('@tailwindcss/forms'),
+  ],
+}
+```
+
+This is a workaround as Tailwind CSS is not designed to handle child or sibling selectors directly. It's more about applying utility classes directly to the HTML elements.

@@ -1,0 +1,13 @@
+To remove a package installed using `ng add`, you can use the following command:
+
+```
+ng remove <package-name>
+```
+
+For example, if you want to remove the `@angular/material` package, you can use the following command:
+
+```
+ng remove @angular/material
+```
+
+This will remove the package and also remove any configuration changes made by the package.

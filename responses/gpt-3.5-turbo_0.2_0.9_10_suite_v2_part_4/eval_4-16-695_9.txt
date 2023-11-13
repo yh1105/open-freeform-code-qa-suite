@@ -1,0 +1,9 @@
+You can try adding the `--no-cache` flag to your `docker build` command. This will force Docker to rebuild all the layers, including the ones that were previously cached. This should give you the full build output, including the results of the `ls -la` commands in steps 7 and 15.
+
+Alternatively, you can try running the `docker build` command with the `-t` flag and a new tag name, like so:
+
+```
+docker build -t myimage:v2 .
+```
+
+This will create a new image with a different tag, and Docker will not use the cached layers from the previous build. You can then run the new image and see the full build output.

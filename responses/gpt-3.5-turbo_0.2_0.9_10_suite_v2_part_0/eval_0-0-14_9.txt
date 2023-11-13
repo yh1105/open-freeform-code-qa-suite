@@ -1,0 +1,36 @@
+To make the switch work, you need to pass the `switch` value to the `onCreate` function. Here's the revised code:
+
+```html
+<Form form={form} layout="vertical">
+  <Form.Item
+    label="Description"
+    name="description"
+    rules={[{ required: true, message: 'Enter a description' }]}
+  >
+    <Input placeholder="Enter Description" />
+  </Form.Item>
+
+  <Form.Item name="switch" valuePropName="checked">
+    <Switch checkedChildren="Yes" unCheckedChildren="No" />
+    <span>Chargable</span>
+  </Form.Item>
+
+  <Button
+    onClick={() => {
+      form
+        .validateFields()
+        .then((values) => {
+          form.resetFields()
+          onCreate({ ...values, switch: values.switch ? 'Yes' : 'No' })
+        })
+        .catch((info) => {
+          console.log('Validate Failed:', info)
+        })
+    }}
+  >
+    Save
+  </Button>
+</Form>
+```
+
+In the `onCreate` function, you can access the value of the switch using `values.switch`. The `onClick` function of the `Save` button has been updated to pass the `switch` value as a string ('Yes' or 'No') along with the other form values.

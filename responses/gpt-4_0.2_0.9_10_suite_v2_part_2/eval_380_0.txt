@@ -1,0 +1,37 @@
+In Java, you can use the `getClass()` method to get the class of an object. However, as you mentioned, it doesn't work with primitive types because they are not objects in Java. 
+
+Here is an example:
+
+```java
+String str = "Hello";
+System.out.println(str.getClass().getName()); // java.lang.String
+
+Integer num = 123;
+System.out.println(num.getClass().getName()); // java.lang.Integer
+
+Object obj = new Object();
+System.out.println(obj.getClass().getName()); // java.lang.Object
+```
+
+For primitive types, you can use wrapper classes and then use `getClass().getName()`. But this is not a good practice because it involves unnecessary boxing and unboxing.
+
+```java
+int i = 10;
+Integer integer = i;
+System.out.println(integer.getClass().getName()); // java.lang.Integer
+```
+
+If you want to check the type of a variable and you don't know whether it's a primitive type or an object, you can use a method that takes an `Object` as a parameter. If a primitive type is passed, it will be autoboxed.
+
+```java
+public void checkType(Object obj) {
+    System.out.println(obj.getClass().getName());
+}
+
+checkType(10); // java.lang.Integer
+checkType("Hello"); // java.lang.String
+```
+
+However, this approach is not recommended because it involves unnecessary boxing and unboxing, which can lead to performance issues.
+
+In general, the need to check the type of a variable at runtime is a sign that the design of your program can be improved. In a well-designed program, you should know the types of your variables at compile time.

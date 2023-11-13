@@ -1,0 +1,31 @@
+The `SelectByID2` method requires you to know the name of the entity you want to select. If you are trying to select a face or an edge, these entities usually don't have a name unless you manually assign one.
+
+Here is a simple way to create a reference plane using a face and a point:
+
+1. Select the face and the point using the `Select4` method. This method allows you to select entities directly without knowing their names.
+
+```vba
+faceObj.Select4(True, Nothing)
+midpointObj.Select4(True, Nothing)
+```
+
+2. Use the `InsertRefPlane` method to create a reference plane using the selected entities.
+
+```vba
+swFeatMgr.InsertRefPlane(3, 0, 0, 0, 0, 0)
+```
+
+The `InsertRefPlane` method creates a reference plane using the entities that are currently selected in the model. The first argument specifies the type of reference plane to create. In this case, `3` means to create a plane using a face and a point.
+
+Here is how you can modify your code:
+
+```vba
+' Select the face and the point
+faceObj.Select4 True, Nothing
+midpointObj.Select4 True, Nothing
+
+' Create a reference plane using the selected face and point
+swFeatMgr.InsertRefPlane 3, 0, 0, 0, 0, 0
+```
+
+This should create a reference plane using the selected face and point.

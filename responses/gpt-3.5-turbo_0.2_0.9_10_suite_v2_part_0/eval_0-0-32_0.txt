@@ -1,0 +1,53 @@
+To identify if a div is visible on the viewport, you can use the Intersection Observer API. Here is an example of how you can use it:
+
+```javascript
+import React, { useRef, useEffect, useState } from "react";
+
+const ParentComponent = ({ data }) => {
+  const parentRef = useRef(null);
+  const [visibleDivs, setVisibleDivs] = useState([]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visibleIds = entries
+          .filter((entry) => entry.isIntersecting)
+          .map((entry) => entry.target.id);
+        setVisibleDivs(visibleIds);
+      },
+      { rootMargin: "0px", threshold: 1 }
+    );
+
+    const divs = parentRef.current.querySelectorAll("div");
+    divs.forEach((div) => observer.observe(div));
+
+    return () => {
+      divs.forEach((div) => observer.unobserve(div));
+    };
+  }, [data]);
+
+  return (
+    <div id="parent" ref={parentRef}>
+      {data.map((item) => (
+        <div key={item.id} id={item.id}>
+          {item.title}
+        </div>
+      ))}
+    </div>
+  );
+};
+
+export default ParentComponent;
+```
+
+In this example, we are using the `useRef` hook to get a reference to the parent div. We are also using the `useState` hook to keep track of the visible divs.
+
+In the `useEffect` hook, we are creating a new `IntersectionObserver` instance with a callback function that will be called whenever a div intersects with the viewport. We are also setting the `rootMargin` to `0px` and the `threshold` to `1` to ensure that the callback is called when the entire div is visible on the viewport.
+
+We are then using the `querySelectorAll` method to get all the divs inside the parent div and calling the `observe` method on each of them to start observing them.
+
+Finally, we are returning a cleanup function that calls the `unobserve` method on each div to stop observing them.
+
+In the callback function, we are filtering the entries to get only the ones that are intersecting with the viewport and mapping them to get their ids. We are then setting the visible divs state to the array of ids.
+
+Note that this example assumes that the `data` prop is an array of objects with

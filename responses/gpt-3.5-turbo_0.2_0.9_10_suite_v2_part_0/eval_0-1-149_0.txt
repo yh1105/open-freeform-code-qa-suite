@@ -1,0 +1,16 @@
+To create an animation after hovering over the link using Tailwind-CSS, you can use the `group-hover` variant and the `transform` property to scale the `span` element. Here's an example code:
+
+```html
+<a href="#" class="group text-sky-600 transition duration-300 relative">
+    Link
+    <span class="block absolute w-full h-0.5 bg-sky-600 bottom-0 left-0 transform scale-x-0 transition duration-500 group-hover:scale-x-100"></span>
+</a>
+```
+
+In this code, we added the `relative` class to the `a` element to make the `span` element positioned absolutely relative to it. We also added the `scale-x-0` class to the `span` element to hide it initially.
+
+Then, we added the `group-hover:scale-x-100` class to the `span` element to scale it horizontally to its full width when the `a` element is hovered over.
+
+Finally, we added the `transition duration-500` classes to the `span` element to make the animation smooth and last for 500 milliseconds.
+
+I hope this helps! Let me know if you have any further questions.

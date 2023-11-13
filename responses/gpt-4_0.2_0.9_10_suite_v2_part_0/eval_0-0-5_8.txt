@@ -1,0 +1,25 @@
+The error log shows that the build process is unable to find Python in your system. Node-gyp, which is a part of the build process, requires Python to work. 
+
+Here are the steps to fix this issue:
+
+1. **Install Python**: If Python is not installed on your system, you need to install it. You can download Python from the [official Python website](https://www.python.org/downloads/). Node-gyp requires Python 2.7, so make sure to install that version. Python 3.x is not supported.
+
+2. **Set the PATH**: After installing Python, you need to add it to your system's PATH environment variable. This allows the system to find Python when needed. Here's how you can do it:
+
+    - Open the Start Menu and search for "Environment Variables".
+    - Click on "Edit the system environment variables".
+    - In the System Properties window that opens, click on "Environment Variables".
+    - In the Environment Variables window, under "System variables", find the variable named "Path" and click on "Edit".
+    - In the Edit Environment Variable window, click on "New" and add the path to the Python installation directory. This is usually `C:\Python27\`.
+
+3. **Install Windows Build Tools**: Node-gyp also requires some additional tools to work on Windows. You can install these using npm (Node Package Manager) by running the following command in the command prompt:
+
+    ```bash
+    npm install --global --production windows-build-tools
+    ```
+
+    This command installs both Python 2.7 (if it's not already installed) and the Visual Studio Build Tools.
+
+4. **Rebuild the project**: After following the above steps, try to rebuild your project. The build process should now be able to find Python and complete successfully.
+
+Remember to run your command prompt or terminal as an administrator when executing these commands.

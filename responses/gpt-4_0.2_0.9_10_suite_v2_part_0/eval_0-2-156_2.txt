@@ -1,0 +1,35 @@
+You can use CSS to position your stop button at the top. Here are a few methods:
+
+1. **Flexbox**: You can use CSS Flexbox to align your buttons. You can make the parent div a flex container and then use `justify-content: space-between;` to put space between your buttons. Here's an example:
+
+```css
+#DanceScoreboard {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+```
+
+2. **Absolute Positioning**: You can use absolute positioning to move your stop button to the top. This will take the button out of the normal flow of the document and position it relative to the nearest positioned ancestor. Here's an example:
+
+```css
+#StopBtn {
+  position: absolute;
+  top: 0;
+}
+```
+
+3. **Grid Layout**: You can use CSS Grid Layout to position your buttons. This allows you to create a grid structure in your HTML and place your items anywhere on the grid. Here's an example:
+
+```css
+#DanceScoreboard {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+}
+
+#GameRunning {
+  grid-row: 1;
+}
+```
+
+Remember to adjust the rest of your layout accordingly, as these changes can affect the positioning of other elements.

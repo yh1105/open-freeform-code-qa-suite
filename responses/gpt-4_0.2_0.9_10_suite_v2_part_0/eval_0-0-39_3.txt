@@ -1,0 +1,56 @@
+Yes, you can accomplish this by using the `ref` attribute in React. You can create a reference to your form in the `CustomForm` component, and then use this reference to submit the form when the 'In Root' button is clicked.
+
+Here's how you can do it:
+
+```javascript
+import React, { Component, createRef } from "react";
+import ReactDOM from "react-dom";
+
+class CustomForm extends Component {
+  formRef = createRef();
+
+  componentDidMount() {
+    this.props.onRef(this);
+  }
+
+  componentWillUnmount() {
+    this.props.onRef(undefined);
+  }
+
+  handleSubmit = () => {
+    if (this.formRef.current) {
+      this.formRef.current.dispatchEvent(new Event('submit', { cancelable: true }));
+    }
+  }
+
+  render() {
+    return (
+      <form ref={this.formRef} id='my-form' onSubmit={(e) => { e.preventDefault(); alert('Form submitted!'); }}>
+        <button type='submit'>Inside Custom</button>
+      </form>
+    );
+  }
+}
+
+class App extends Component {
+  submitForm = () => {
+    this.customForm.handleSubmit();
+  }
+
+  render() {
+    return (
+      <div>
+        <CustomForm onRef={ref => (this.customForm = ref)} />
+        <button onClick={this.submitForm}>In Root</button>
+      </div>
+    );
+  }
+}
+
+const rootElement = document.getElementById("root");
+ReactDOM.render(<App />, rootElement);
+```
+
+In this code, we are creating a reference to the form in the `CustomForm` component using `createRef()`. We then pass this reference to the `App` component through a prop called `onRef`. In the `App` component, we store this reference in `this.customForm` and use it to submit the form when the 'In Root' button is clicked.
+
+Please note that the `onRef` prop is not a standard React prop, but a custom prop that we are using to pass the form reference to the parent component. Also, we are using the `componentDidMount` and `componentWillUnmount` lifecycle methods to set and clear the reference when the `CustomForm` component is mounted and unmounted, respectively.

@@ -1,0 +1,23 @@
+This issue is caused by a bug in GitLab CI/CD where nested parameter expansion is not supported. As a workaround, you can use a script block to perform the nested expansion, like this:
+
+```
+variables:
+  GIT_BRANCH: ""
+
+job1:
+  script:
+    - >
+      if [[ -n "${CI_MERGE_REQUEST_SOURCE_BRANCH_NAME}" ]]; then
+        echo "Using merge request source branch"
+        export GIT_BRANCH="${CI_MERGE_REQUEST_SOURCE_BRANCH_NAME}"
+      elif [[ -n "${CI_COMMIT_BRANCH}" ]]; then
+        echo "Using commit branch"
+        export GIT_BRANCH="${CI_COMMIT_BRANCH}"
+      else
+        echo "Using default branch"
+        export GIT_BRANCH="${CI_DEFAULT_BRANCH}"
+      fi
+    - echo $GIT_BRANCH
+```
+
+This script block checks if each variable is set, and sets `GIT_BRANCH` accordingly. The `>` character is used to allow for multi-line commands in the script block.

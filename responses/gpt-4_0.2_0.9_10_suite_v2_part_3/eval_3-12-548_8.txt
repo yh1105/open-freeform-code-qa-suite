@@ -1,0 +1,3 @@
+Use `WillPopScope` instead of `Navigator.pop(context)` or `Navigator.of(context).pop()`. 
+
+The `WillPopScope` widget intercepts the popping of the current route, which can be useful to prevent the user from going back to the previous screen. You can use it to wrap your login page and define a callback for the `onWillPop` property to either exit the app or do nothing when the back button is pressed.

@@ -1,0 +1,61 @@
+You can create a factory method that creates and returns a `ServiceBusSender` instance for a given queue name. Then, you can register this factory method as a singleton in the DI container. Here's an example:
+
+```c#
+// Define a factory method that creates a ServiceBusSender instance for a given queue name
+private ServiceBusSender CreateServiceBusSender(string queueName)
+{
+    var serviceBusConfiguration = _configuration.GetSection("UserEventConsumerSetting").Get<UserEventConsumerSetting>();
+
+    var serviceBusClient = new ServiceBusClient(serviceBusConfiguration.ServiceBusConnectionString, new ServiceBusClientOptions
+    {
+        TransportType = ServiceBusTransportType.AmqpWebSockets
+    });
+
+    return serviceBusClient.CreateSender(queueName);
+}
+
+// Register the factory method as a singleton in the DI container
+_services.AddSingleton<Func<string, ServiceBusSender>>(serviceProvider => queueName => serviceProvider.GetRequiredService<ServiceBusSenderFactory>().CreateServiceBusSender(queueName));
+
+// Define a factory class that uses the factory method to create ServiceBusSender instances
+public class ServiceBusSenderFactory
+{
+    private readonly Func<string, ServiceBusSender> _factoryMethod;
+
+    public ServiceBusSenderFactory(Func<string, ServiceBusSender> factoryMethod)
+    {
+        _factoryMethod = factoryMethod;
+    }
+
+    public ServiceBusSender CreateServiceBusSender(string queueName)
+    {
+        return _factoryMethod(queueName);
+    }
+}
+
+// Register the factory class as a singleton in the DI container
+_services.AddSingleton<ServiceBusSenderFactory>();
+```
+
+Now, you can inject the `Func<string, ServiceBusSender>` factory method into your `CarReservationMessagingService` class and use it to create `ServiceBusSender` instances for different queue names:
+
+```c#
+private readonly Func<string, ServiceBusSender> _serviceBusSenderFactory;
+
+public CarReservationMessagingService(Func<string, ServiceBusSender> serviceBusSenderFactory)
+{
+    _serviceBusSenderFactory = serviceBusSenderFactory ?? throw new ArgumentNullException(nameof(serviceBusSenderFactory));
+}
+
+public async Task PublishNewCarReservationMessageAsync(CarReservation carReservation, string queueName)
+{
+    var carReservationIntegrationMessage = new CarReservationIntegrationMessage
+    {
+        Id = Guid.NewGuid().ToString(),
+        CarId = carReservation.CarId,
+        CustomerId = carReservation.CustomerId,
+        RentFrom = carReservation.RentFrom,
+        RentTo = carReservation.RentTo
+    };
+
+    var serializedMessage = JsonSerializer

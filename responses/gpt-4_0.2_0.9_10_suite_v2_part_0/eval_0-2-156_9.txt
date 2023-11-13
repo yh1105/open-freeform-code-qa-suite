@@ -1,0 +1,26 @@
+Based on your HTML structure, it seems like your `Stop Game` button is inside the `GameRunning` div, which might be positioned behind the game frame. 
+
+Here are some general methods to solve this issue:
+
+1. **Change the HTML structure**: You can move the `StopBtn` outside of the `GameRunning` div or place it in the same div where the `StartBtn` is located. This way, you can ensure that both buttons are in the same container and will not be affected by the positioning of the game frame.
+
+2. **Use CSS positioning**: If you want to keep your current HTML structure, you can use CSS to position your `StopBtn`. You can use `position: absolute;` or `position: relative;` to move your button to the desired location. Remember to set the parent container's position property to `position: relative;` if you're using `position: absolute;` for the child element.
+
+3. **Use CSS z-index**: If the problem is that the `StopBtn` is behind the game frame, you can use the `z-index` property to bring it to the front. The `z-index` property specifies the stack order of an element. An element with greater stack order is always in front of an element with a lower stack order. Note that `z-index` only works on positioned elements (`position: absolute;`, `position: relative;`, or `position: fixed;`).
+
+Here's an example of how you can use CSS to position your `StopBtn`:
+
+```css
+#GameRunning {
+  position: relative;
+}
+
+#StopBtn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
+}
+```
+
+This will position your `StopBtn` at the top right corner of the `GameRunning` div and ensure it's not behind any other elements within the same container. Adjust the `top` and `right` values as needed to align it properly with the `StartBtn`.

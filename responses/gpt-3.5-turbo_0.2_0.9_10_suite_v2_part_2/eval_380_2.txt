@@ -1,0 +1,27 @@
+In Java 8, you can use the `getClass()` method to get the class of an object. Here's an example:
+
+```java
+String str = "Hello";
+System.out.println(str.getClass()); // class java.lang.String
+
+Integer num = 123;
+System.out.println(num.getClass()); // class java.lang.Integer
+
+Float f = 12.3f;
+System.out.println(f.getClass()); // class java.lang.Float
+```
+
+This approach works for both primitive and reference types. However, it returns the class of the object, not the name of the type. If you need the name of the type, you can use the `getSimpleName()` method:
+
+```java
+String str = "Hello";
+System.out.println(str.getClass().getSimpleName()); // String
+
+Integer num = 123;
+System.out.println(num.getClass().getSimpleName()); // Integer
+
+Float f = 12.3f;
+System.out.println(f.getClass().getSimpleName()); // Float
+```
+
+This will give you the name of the type as a string.

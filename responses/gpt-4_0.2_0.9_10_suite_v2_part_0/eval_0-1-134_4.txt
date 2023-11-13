@@ -1,0 +1,13 @@
+It sounds like you're referring to a feature provided by a tool called Emmet, which is a plugin for many popular code editors like Visual Studio Code, Sublime Text, Atom, etc. Emmet provides handy shortcuts for quickly writing HTML and CSS, and what you're describing (typing `.classname` and having a div with that class appear) is one of those shortcuts.
+
+Here's how you can get it working:
+
+1. **Check if your code editor supports Emmet**: Most modern code editors do. If you're using Visual Studio Code, for example, Emmet is built in and you don't need to install anything extra.
+
+2. **Make sure you're in an HTML file**: Emmet shortcuts only work in the appropriate context. If you're trying to use an HTML shortcut, make sure your file is saved with an `.html` extension and your editor recognizes it as an HTML file.
+
+3. **Use the shortcut correctly**: To create a div with a class, you should type `.classname` and then press `Tab`. If you want to create an element other than a div, you need to specify it, like `p.classname` for a paragraph.
+
+4. **Check your editor's settings**: If Emmet isn't working, there might be a setting you need to enable in your code editor. In Visual Studio Code, for example, you can check your settings by going to `File > Preferences > Settings` and searching for "Emmet".
+
+If you've checked all these things and it's still not working, you might want to look up "[your code editor] Emmet not working" or similar to see if there are any known issues or additional steps you need to take.

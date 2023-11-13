@@ -1,0 +1,35 @@
+The issue you're facing is likely due to changes in how Android 11 handles file storage. Android 11 introduced scoped storage which restricts broad access to shared storage for all apps running Android 11 and higher, so the `Environment.getExternalStorageDirectory()` method is no longer available.
+
+You should use the app-specific directory to store your files. You can get it by using `context.getExternalFilesDir(null)`. Here's how you can modify your `getTempFolder()` function:
+
+```java
+private fun getTempFolder(): File {
+    val directoryFolder = File(context.getExternalFilesDir(null), "sample-take-image")
+    directoryFolder.mkdirs()
+    return directoryFolder
+}
+```
+
+Remember to replace `context` with your own Context object.
+
+Also, make sure you have the necessary permissions to write to the external storage. You need to declare the `WRITE_EXTERNAL_STORAGE` permission in your manifest file and also request it at runtime:
+
+```xml
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+```
+
+And in your code:
+
+```java
+if (ContextCompat.checkSelfPermission(thisActivity, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+    != PackageManager.PERMISSION_GRANTED) {
+    // Permission is not granted
+    ActivityCompat.requestPermissions(thisActivity,
+        arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+        MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE)
+}
+```
+
+Replace `thisActivity` with your own Activity object and `MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE` with your own request code.
+
+Please note that if you target Android 11, you also need to declare the `MANAGE_EXTERNAL_STORAGE` permission in your manifest file and request it at runtime. However, this permission is intended for apps that need broad access to shared storage, such as file managers, and Google Play restricts its use to certain types of apps.

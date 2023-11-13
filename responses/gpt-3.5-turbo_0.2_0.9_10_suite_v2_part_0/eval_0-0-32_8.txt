@@ -1,0 +1,58 @@
+To identify if a div is visible on the viewport on scroll, you can use the Intersection Observer API. Here is an example implementation:
+
+```javascript
+import React, { useRef, useEffect, useState } from "react";
+
+const VisibleDivs = ({ data }) => {
+  const parentRef = useRef(null);
+  const [visibleDivs, setVisibleDivs] = useState([]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visibleIds = entries
+          .filter((entry) => entry.isIntersecting)
+          .map((entry) => entry.target.id);
+        setVisibleDivs(visibleIds);
+      },
+      { rootMargin: "0px", threshold: 0.5 }
+    );
+
+    const childDivs = parentRef.current.querySelectorAll("div");
+    childDivs.forEach((div) => observer.observe(div));
+
+    return () => observer.disconnect();
+  }, [data]);
+
+  return (
+    <div id="parent" ref={parentRef}>
+      {data.map((item) => (
+        <div key={item.id} id={item.id}>
+          {item.title}
+        </div>
+      ))}
+      <p>Visible divs: {visibleDivs.join(", ")}</p>
+    </div>
+  );
+};
+
+export default VisibleDivs;
+```
+
+In this example, we use the `useRef` hook to get a reference to the parent div. We also use the `useState` hook to keep track of the visible divs.
+
+In the `useEffect` hook, we create a new `IntersectionObserver` instance and observe all child divs of the parent div. We set the `rootMargin` to "0px" and the `threshold` to 0.5, which means that the intersection ratio needs to be at least 50% for the div to be considered visible.
+
+In the observer callback, we filter the entries to only include the ones that are intersecting and extract their ids. We then update the state with the visible ids.
+
+Finally, we render the visible divs as a comma-separated list.
+
+You can use this component like this:
+
+```javascript
+<VisibleDivs
+  data={[
+    { id: "div1", title: "Div 1" },
+    { id: "div2", title: "Div 2" },
+    { id: "div3", title: "Div 3" },
+    { id

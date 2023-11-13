@@ -1,0 +1,31 @@
+The reason why you are seeing the logs in that order is because the `onItemSelected` method is called asynchronously when the user selects an item from the spinner, and it takes some time for the user to make a selection. Meanwhile, the function continues to execute and logs the value of `itemSelected` before it is updated in the `onItemSelected` method.
+
+To fix this issue, you can change the return type of the function to `Unit` and use a callback to pass the selected item back to the calling code. Here's an example:
+
+```
+fun Spinner.setupListWithAdapter(list: MutableList<String>, onItemSelected: (String) -> Unit) {
+    val adapter = ArrayAdapter(context, android.R.layout.simple_spinner_item, list)
+    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+    this.adapter = adapter
+    this.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+            val itemSelected = list[p2]
+            onItemSelected(itemSelected)
+        }
+        override fun onNothingSelected(p0: AdapterView<*>?) {
+        }
+    }
+}
+```
+
+In this version of the function, we pass a lambda function `onItemSelected` as a parameter, which takes a `String` argument representing the selected item. When the user selects an item from the spinner, we call this lambda function with the selected item.
+
+To use this function, you can call it like this:
+
+```
+spinner.setupListWithAdapter(list) { selectedItem ->
+    // Do something with the selected item
+}
+```
+
+In the lambda function, you can perform any action you want with the selected item.

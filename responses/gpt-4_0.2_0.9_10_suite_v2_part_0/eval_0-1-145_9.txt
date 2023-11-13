@@ -1,0 +1,25 @@
+The `truncate` class in Tailwind CSS only works for single line text. It sets `overflow: hidden`, `text-overflow: ellipsis`, and `white-space: nowrap` on an element. So, if you want to truncate text that spans multiple lines, you'll need to use a different approach.
+
+Unfortunately, Tailwind CSS does not support multiline text truncation out of the box. You would need to write custom CSS for this. Here is an example of how you can do it:
+
+```css
+.truncate-multiline {
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Number of lines to display before truncation */
+  -webkit-box-orient: vertical;  
+  overflow: hidden;
+}
+```
+
+Then, you can use this class in your HTML:
+
+```html
+<div className="ml-1 inline-block">
+   <span>Label: </span>
+   <span className="font-semibold truncate-multiline">
+     long texttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt
+   </span>
+</div>
+```
+
+Please note that this solution uses the `-webkit-line-clamp` property, which is not a standard CSS property but a non-standard line-clamping property that is only supported in WebKit-based browsers (like Chrome and Safari). It may not work in all browsers.

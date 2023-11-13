@@ -1,0 +1,23 @@
+You can't directly initialize a `@State` variable in the `init()` method. Instead, you can use a workaround by creating a normal variable in the `init()` method and then use that variable to initialize your `@State` variable. Here is how you can do it:
+
+```swift
+struct StateFromOutside: View {
+    let list = [
+        "a": "Letter A",
+        "b": "Letter B",
+        // ...
+    ]
+    @State var fullText: String
+
+    init(letter: String) {
+        let initialText = list[letter] ?? ""
+        _fullText = State(initialValue: initialText)
+    }
+
+    var body: some View {
+        TextField("Placeholder", text: $fullText)
+    }
+}
+```
+
+In the above code, `initialText` is a normal variable that gets its value from the `list` dictionary. Then, `_fullText` (which is the underlying variable for `@State var fullText`) is initialized with `State(initialValue: initialText)`.

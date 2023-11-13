@@ -1,0 +1,5 @@
+Currently, SwiftUI does not provide a built-in way to get the current scroll position of a `ScrollView`. The `ScrollViewReader` and `ScrollViewProxy` only provide the `scrollTo` method, which allows you to programmatically scroll to a specific view.
+
+If you need to get the current scroll position, you might need to use `UIKit` components and `UIViewRepresentable` to wrap them in SwiftUI views. This will allow you to use `UIScrollView` and its delegate methods to track the scroll position. 
+
+However, this is a workaround and not a SwiftUI-native solution. Hopefully, future updates of SwiftUI will provide a more straightforward way to get the current scroll position.

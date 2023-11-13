@@ -1,0 +1,119 @@
+How to set the background color of a Row() in Flutter?
+
+I'm trying to set up a background color for a Row() widget, but Row itself has no background color or color attribute. I've been able to set the background color of a container to grey, right before the purple-backgrounded text, but the text itself does not fill the background completely and the following spacer does not take any color at all.
+
+So how can I have the Row background set to the "HexColor(COLOR_LIGHT_GREY)" value so it spans over the whole row? 
+
+Any idea? Thanks a lot!
+
+[](https://i.stack.imgur.com/hCeM3.png)
+
+Here's the code that I have so far:
+
+```
+import 'package:flutter/material.dart';
+import '../manager/ShoppingListManager.dart';
+import '../model/ShoppingListModel.dart';
+import '../hexColor.dart';
+import '../Constants.dart';
+
+class ShoppingListWidget extends StatelessWidget {
+  final Color color = Colors.amberAccent;
+  final int shoppingListIndex;
+
+  ShoppingListWidget({this.shoppingListIndex});
+
+  @override
+  Widget build(BuildContext context) {
+    ShoppingListManager slm = new ShoppingListManager();
+    String shoppingListName =
+        slm.myShoppingLists.shoppingLists[shoppingListIndex].name;
+    int categoryCount =
+        slm.myShoppingLists.shoppingLists[shoppingListIndex].categories.length;
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(shoppingListName),
+        automaticallyImplyLeading: true,
+      ),
+      body: ListView.builder(
+        itemBuilder: (context, index) {
+          Category cat = slm.myShoppingLists.shoppingLists[shoppingListIndex]
+              .categories[index];
+
+          return Container(
+            decoration: new BoxDecoration(
+              border: new Border.all(color: Colors.grey[500]),
+              color: Colors.white,
+            ),
+            child: new Column(
+              children: <Widget>[
+                getCategoryWidget(context, cat),
+                getCategoryItems(context, cat),
+              ],
+            ),
+          );
+        },
+        itemCount: categoryCount,
+      ),
+    );
+  }
+
+  // Render the category "headline" row where I want to set the background color
+  // to HexColor(COLOR_LIGHT_GREY)
+  Widget getCategoryWidget(BuildContext context, Category cat) {
+    return new Row(
+      children: <Widget>[
+        new Container(height: 40.0, width: 10.0, color: HexColor(cat.color)),
+        new Container(
+            height: 40.0, width: 15.0, color: HexColor(COLOR_LIGHT_GREY)),
+        new Container(
+          child: new Text("Category", textAlign: TextAlign.start,
+            style: TextStyle(
+                fontFamily: 'Bold',
+                fontSize: 18.0,
+                color: Colors.black),
+          ),
+          decoration: new BoxDecoration(
+            color: Colors.purple,
+          ),
+          height: 40.0,
+        ),
+        Spacer(),
+
+        CircleAvatar(
+          backgroundImage:
+              new AssetImage('assets/icons/food/food_settings.png'),
+          backgroundColor: HexColor(COLOR_LIGHT_GREY),
+          radius: 15.0,
+        ),
+        new Container(height: 15.0, width: 10.0, color: Colors.transparent),
+      ],
+    );
+  }
+
+  // render the category items
+  Widget getCategoryItems(BuildContext context, Category cat) {
+    return ListView.builder(
+      itemBuilder: (context, index) {
+        String itemName = "Subcategory";
+        return new Row(children: <Widget>[
+          new Container(height: 40.0, width: 5.0, color: HexColor(cat.color)),
+          new Container(height: 40.0, width: 20.0, color: Colors.white),
+          new Container(
+            child: new Text(itemName),
+              color: Colors.white,
+          ),
+          Spacer()
+        ]);
+      },
+      itemCount: cat.items.length,
+      shrinkWrap: true,
+      physics:
+          ClampingScrollPhysics(),
+    );
+  }
+
+}
+```
+

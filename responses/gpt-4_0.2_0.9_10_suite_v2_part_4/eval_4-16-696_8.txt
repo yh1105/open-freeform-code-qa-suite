@@ -1,0 +1,9 @@
+The problem is that the command substitution `$(echo {} | sed 's/\?.*//g')` is evaluated before `find` starts executing, so it doesn't have the expected effect.
+
+You can solve this by using a shell loop inside `-exec`:
+
+```bash
+find . -type f -name '*\?*' -exec bash -c 'mv "$0" "${0%%\?*}"' {} \;
+```
+
+This command will find all files (`-type f`) in the current directory (`.`) and its subdirectories whose names contain a question mark (`*\?*`). For each such file, it will execute the `bash -c` command, which runs the `mv` command to rename the file. The new name is obtained by removing the question mark and everything after it from the original name (`${0%%\?*}`). The `$0` inside the `bash -c` command is replaced by the `{}` placeholder of `find`, which represents the current file.

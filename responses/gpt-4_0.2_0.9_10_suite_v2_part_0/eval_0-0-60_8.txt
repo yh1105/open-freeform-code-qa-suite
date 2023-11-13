@@ -1,0 +1,43 @@
+The error message you're seeing is because Bootstrap requires `Popper.js` for the dropdowns and other interactive components. 
+
+You can install it using npm or yarn:
+
+**npm:**
+
+```bash
+npm install popper.js --save
+```
+
+**yarn:**
+
+```bash
+yarn add popper.js
+```
+
+After installing, you can import it in your file:
+
+```javascript
+import Popper from 'popper.js';
+```
+
+If you're using Bootstrap 4, you can also consider using `@popperjs/core` instead of `popper.js`. It's the successor to `popper.js` and is used in Bootstrap 5.
+
+**npm:**
+
+```bash
+npm install @popperjs/core --save
+```
+
+**yarn:**
+
+```bash
+yarn add @popperjs/core
+```
+
+Then import it in your file:
+
+```javascript
+import { createPopper } from '@popperjs/core';
+```
+
+Remember to restart your development server after installing new dependencies.

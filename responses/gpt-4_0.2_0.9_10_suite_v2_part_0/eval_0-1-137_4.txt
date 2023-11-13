@@ -1,0 +1,22 @@
+The error message you're seeing indicates that the SASS compiler is having trouble interpreting the `$theme-colors` map. This is likely because you're trying to redefine `$theme-colors` after it has already been defined in the Bootstrap's `_variables.scss` file.
+
+To fix this issue, you should redefine `$theme-colors` before importing Bootstrap's `_variables.scss` file. Here's how you can do it:
+
+```scss
+$theme-colors: (
+  "primary": #your-color, // replace #your-color with your desired color
+  "secondary": #6c757d,
+  "success": #198754,
+  "info": #0dcaf0,
+  "warning": #ffc107,
+  "danger": #dc3545,
+  "light": #f8f9fa,
+  "dark": #212529
+);
+
+@import "../../node_modules/bootstrap/scss/bootstrap";
+```
+
+In this code, we're redefining the `$theme-colors` map before importing the Bootstrap SCSS files. This allows us to override the default theme colors with our own. Make sure to replace `#your-color` with the actual color you want to use.
+
+Also, please note that you need to define all the color keys in the `$theme-colors` map, not just the `primary` one. If you don't want to change the other colors, you can just copy their default values from Bootstrap's `_variables.scss` file, as I did in the example above.

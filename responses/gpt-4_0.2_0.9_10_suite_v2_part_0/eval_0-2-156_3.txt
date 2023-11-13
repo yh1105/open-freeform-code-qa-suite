@@ -1,0 +1,27 @@
+From your HTML structure, it seems that your "Stop Game" button is within the `#GameRunning` div, which might be positioned in a way that it's behind the game frame. 
+
+To move the "Stop Game" button to the top and align it with the "Begin Game" button, you could consider the following steps:
+
+1. **Change HTML Structure:** Move the "Stop Game" button outside of the `#GameRunning` div and place it next to the "Begin Game" button. This will ensure that both buttons are in the same container and can be aligned easily.
+
+```html
+<div id="GameStopped">
+    <button id="StartBtn" class="btnStyle" onclick="gameStarted=true;">Begin Game</button>
+    <button id="StopBtn" class="btnStyle" onclick="self.close()">Stop Game</button>
+    <br><br><br>
+    <div class="Status">Click Begin Game to start</div>
+</div>
+```
+
+2. **CSS Styling:** Add CSS to align the buttons horizontally. You can use `display: inline-block;` or `display: flex;` on the parent container (`#GameStopped`) to achieve this.
+
+```css
+#GameStopped {
+    display: flex;
+    justify-content: space-between; /* This will put some space between the buttons */
+}
+```
+
+Remember to remove any absolute positioning or negative margins from the `#StopBtn` if there are any in your CSS, as these could be causing the button to appear behind other elements.
+
+Please note that the above solution assumes that you want both buttons to be visible at the same time. If you want to show only one button at a time (i.e., show the "Stop Game" button only when the game is running), you might need to use JavaScript to toggle the visibility of the buttons based on the game state.

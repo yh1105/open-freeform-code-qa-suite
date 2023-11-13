@@ -1,0 +1,15 @@
+The error message `Error: Invalid login: 535-5.7.8 Username and Password not accepted` indicates that the username and password you're using to authenticate with Gmail's SMTP server are incorrect. 
+
+Here are some steps to fix this issue:
+
+1. **Check your credentials**: Make sure that the email address and password you're using are correct. 
+
+2. **Enable Less Secure Apps**: By default, Google may block sign-in attempts from some apps or devices that do not use modern security standards. To fix this, you need to allow less secure apps to access your account. You can do this by going to your Google Account settings, then to the "Security" section, and then turning on "Access for less secure apps". 
+
+3. **Enable Display Unlock Captcha**: Sometimes, Google may block a sign-in attempt even if you've entered the correct password. This can happen when you're signing in from a new location or from a different device. To fix this, you can try to unlock your account with Google's Display Unlock Captcha page. 
+
+4. **Use App Passwords**: If you have 2-Step Verification enabled on your Google Account, you may need to use an App Password instead of your regular password to sign in. You can generate an App Password by going to your Google Account settings, then to the "Security" section, and then selecting "App Passwords".
+
+Please replace your password in the code with the newly generated App Password.
+
+Remember, these changes can make your account less secure, so make sure you understand the risks.

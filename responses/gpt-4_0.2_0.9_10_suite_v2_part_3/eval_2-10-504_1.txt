@@ -1,0 +1,31 @@
+Both of your ways are correct and efficient. However, if you're looking for a simpler way, you can use the `dedup_by` method provided by Rust's `Vec` type. This method removes consecutive repeated elements in the vector according to a comparison function.
+
+The `dedup_by` method only works if the repeated elements are next to each other, so you need to sort the array first. Here's how you can do it:
+
+```rust
+use std::collections::HashSet;
+
+#[derive(Debug, Eq, PartialEq, Hash, Clone)]
+struct Person {
+    name: String,
+    age: u32,
+}
+
+fn main() {
+    let mut arr = vec![
+        Person { name: "aaa".to_string(), age: 10 },
+        Person { name: "bbb".to_string(), age: 20 },
+        Person { name: "bbb".to_string(), age: 20 },
+        Person { name: "ccc".to_string(), age: 30 },
+    ];
+
+    arr.sort_by(|a, b| a.name.cmp(&b.name));
+    arr.dedup_by(|a, b| a.name == b.name);
+
+    dbg!(arr);
+}
+```
+
+In this code, we first sort the array by the `name` field of `Person`, then we call `dedup_by` to remove the duplicates. Note that we need to derive `Eq`, `PartialEq`, and `Clone` for `Person` to make this work.
+
+Also, note that this method modifies the array in-place, so if you need the original array later, you should clone it before sorting and deduplicating.

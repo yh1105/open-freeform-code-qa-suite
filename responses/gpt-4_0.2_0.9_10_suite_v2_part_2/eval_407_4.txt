@@ -1,0 +1,43 @@
+In a .NET 6 console application, you don't have the `WebApplication` class available. Instead, you can use the `ConfigurationBuilder` class to read your `appsettings.json` file.
+
+Here is a sample code snippet:
+
+```csharp
+using Microsoft.Extensions.Configuration;
+using System.IO;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        var builder = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+
+        IConfigurationRoot configuration = builder.Build();
+
+        // Now you can use configuration.GetSection or configuration.GetValue to read your settings
+        var mySetting = configuration.GetSection("MySetting").Value;
+    }
+}
+```
+
+In this code:
+
+- `SetBasePath(Directory.GetCurrentDirectory())` sets the base path for the configuration file to the current directory.
+- `AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)` adds the `appsettings.json` file to the configuration sources.
+- `configuration.GetSection("MySetting").Value` reads the value of `MySetting` from the configuration.
+
+Remember to add the `Microsoft.Extensions.Configuration.Json` NuGet package to your project to use the `AddJsonFile` extension method. You can do this by running the following command in your package manager console:
+
+```bash
+Install-Package Microsoft.Extensions.Configuration.Json
+```
+
+Or by adding the following line to your `.csproj` file:
+
+```xml
+<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
+```
+
+And then running `dotnet restore` in your terminal.

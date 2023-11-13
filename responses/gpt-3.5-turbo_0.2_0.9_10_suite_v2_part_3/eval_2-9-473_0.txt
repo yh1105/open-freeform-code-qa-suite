@@ -1,0 +1,25 @@
+The error message suggests that there is an issue with the encryption of messages in your Rails app. To fix this, you can try resetting your app's secret key base by following these steps:
+
+1. Remove the `master.key` and `credentials.yml.enc` files:
+```
+rm config/master.key config/credentials.yml.enc
+```
+2. Create a new `master.key` file:
+```
+EDITOR="mate --wait" bin/rails credentials:edit
+```
+This will open up a text editor where you can add your new credentials. Save and close the file to generate a new `master.key` file.
+
+3. Re-encrypt your credentials:
+```
+bin/rails credentials:edit
+```
+This will open up the text editor again. Save and close the file to re-encrypt your credentials with the new `master.key`.
+
+4. Commit and push your changes to Heroku:
+```
+git add config/master.key config/credentials.yml.enc
+git commit -m "Reset secret key base"
+git push heroku master
+```
+This should fix the encryption issue and allow you to deploy your app to Heroku successfully.

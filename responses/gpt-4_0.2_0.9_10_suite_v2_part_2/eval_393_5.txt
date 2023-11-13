@@ -1,0 +1,7 @@
+No, it's not a bad practice to have separate pipelines for different requests if they require different logic. 
+
+The purpose of the pipeline behavior in MediatR (assuming you're using MediatR based on your code) is to allow you to add pre-processing and post-processing logic around the handling of your requests. If `RequestOne` and `RequestTwo` have different requirements for this pre/post-processing, then it makes sense to have separate pipeline behaviors for each.
+
+The key is to ensure that the logic within each pipeline behavior is relevant only to the requests that it processes. If you find that there is common logic between the two, consider creating a base pipeline behavior that contains this common logic, and then have your specific pipeline behaviors inherit from this base.
+
+Remember, the goal is to keep your code DRY (Don't Repeat Yourself), maintainable and easy to understand. If having separate pipeline behaviors helps achieve this, then it's a good practice.

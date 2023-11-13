@@ -1,0 +1,26 @@
+The `index` option in the `@Prop()` decorator should work as expected. However, Mongoose will not create the index until the model is compiled and a query is executed. 
+
+If you want to ensure the indexes are created, you can use the `Model.ensureIndexes()` function. This function tells Mongoose to push the index creation to MongoDB immediately, rather than waiting for Mongoose to decide when to push them.
+
+Here is how you can do it:
+
+```javascript
+import { Injectable, OnModuleInit } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+
+@Injectable()
+export class MyService implements OnModuleInit {
+  constructor(@InjectModel(Schema.name) private readonly myModel: Model<Schema>) {}
+
+  async onModuleInit(): Promise<void> {
+    await this.myModel.ensureIndexes(); // This will ensure the indexes are created
+  }
+}
+```
+
+In this example, `MyService` implements `OnModuleInit` lifecycle hook and `onModuleInit` method is called when the module has been initialized. Inside this method, we are ensuring the indexes are created.
+
+Remember, `ensureIndexes()` returns a promise, so you should wait for it to finish before proceeding. This is why `await` is used in the `onModuleInit` method.
+
+Also, note that creating indexes can be a potentially long operation, especially on large collections, so it's not recommended to use `ensureIndexes()` in production, because it may cause performance issues. It's better to manage indexes manually or via some database management tool.

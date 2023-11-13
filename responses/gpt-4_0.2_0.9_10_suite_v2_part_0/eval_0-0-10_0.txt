@@ -1,0 +1,19 @@
+Sure, here's how you can fill in the blanks:
+
+Way 1:
+
+```javascript
+cy.get(".ibxudA").find('.WildnessText-kRKTej').should('have.text', "Wildness")
+```
+
+Way 2:
+
+```javascript
+cy.get(".ibxudA").find('.WildnessText-kRKTej').invoke('text').then((text) => {
+    expect(text.trim()).to.equal('Wildness')
+});
+```
+
+In the first way, we are using the `should` function to assert that the text of the element with class `WildnessText-kRKTej` should be "Wildness".
+
+In the second way, we are using the `invoke` function to get the text of the element, and then using the `then` function to assert that the trimmed text should be "Wildness". The `expect` function is used to perform the assertion.

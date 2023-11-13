@@ -1,0 +1,38 @@
+First way:
+
+In the first way, you can use the `tabBarVisible` option to hide the tab bar when the "Settings" screen is active. You should set this option to `false`.
+
+```javascript
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Tab.Navigator>
+        <Tab.Screen name="Home" component={ProfileStackScreen} />
+        <Tab.Screen options={{ tabBarVisible: false }} name="Settings" component={SettingsStackScreen} />
+      </Tab.Navigator>
+    </NavigationContainer>
+  );
+}
+```
+
+Second way:
+
+In the second way, you can use the `useEffect` hook to hide the tab bar when the "Settings" screen is mounted. You should call the `setOptions` method of the `navigation` prop and set the `tabBarVisible` option to `false`.
+
+```javascript
+import React, { useEffect } from 'react';
+
+function SettingsStackScreen({ navigation }) {
+    useEffect(() => {
+        navigation.setOptions({ tabBarVisible: false });
+    }, [navigation]);
+
+    return (
+        <SettingsStack.Navigator>
+            <SettingsStack.Screen name="Settings" component={SettingsScreen} />
+        </SettingsStack.Navigator>
+    )
+}
+```
+
+Please note that hiding the tab bar will not prevent the user from navigating to the "Settings" screen using gestures or the back button.

@@ -1,0 +1,19 @@
+The error message you're seeing indicates that your system is trying to run the npm executable located at `/mnt/c/Program Files/nodejs/npm`, which is the Windows version of npm. This is happening because WSL (Windows Subsystem for Linux) includes both the Windows and Linux paths in the PATH environment variable.
+
+To solve this issue, you need to ensure that the Linux version of npm (located at `/usr/bin/npm`) is found first in your PATH. You can do this by adding the following line to your `~/.bashrc` or `~/.bash_profile` file:
+
+```bash
+export PATH=/usr/bin:$PATH
+```
+
+Then, source your `~/.bashrc` or `~/.bash_profile` file to apply the changes:
+
+```bash
+source ~/.bashrc
+# or
+source ~/.bash_profile
+```
+
+Now, when you run `npm -v`, your system should use the Linux version of npm.
+
+Please note that this solution assumes that you want to use the Linux versions of node and npm. If you want to use the Windows versions instead, you would need to adjust your PATH so that `/mnt/c/Program Files/nodejs` comes before `/usr/bin`.

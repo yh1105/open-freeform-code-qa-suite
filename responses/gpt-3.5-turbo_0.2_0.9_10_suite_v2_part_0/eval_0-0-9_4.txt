@@ -1,0 +1,12 @@
+Sure! The error message "Error: req#logout requires a callback function" means that the `req.logout()` function requires a callback function as an argument. You can add an empty callback function to resolve the issue. Here's the revised code:
+
+```javascript
+app.get("/logout", (req, res) => {
+    req.logout();
+    res.redirect("/");
+}, function(err) {
+    console.log(err);
+});
+```
+
+This should resolve the error message you were seeing.

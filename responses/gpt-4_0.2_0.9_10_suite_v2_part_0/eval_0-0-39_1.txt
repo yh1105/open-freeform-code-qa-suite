@@ -1,0 +1,44 @@
+Yes, you can accomplish this by using React's `ref` feature. Here's how you can modify your `App` component to submit the form when the 'In Root' button is clicked:
+
+```javascript
+import React, { Component, createRef } from "react";
+import ReactDOM from "react-dom";
+
+class CustomForm extends Component {
+  render() {
+    return (
+      <form id='my-form' onSubmit={this.props.onSubmit}>
+        <button type='submit'>Inside Custom</button>
+      </form>
+    );
+  }
+}
+
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.formRef = createRef();
+  }
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+    if (this.formRef.current) {
+      alert('Form submitted!');
+    }
+  }
+
+  render() {
+    return (
+      <div>
+        <CustomForm ref={this.formRef} onSubmit={this.handleSubmit} />
+        <button onClick={this.handleSubmit}>In Root</button>
+      </div>
+    );
+  }
+}
+
+const rootElement = document.getElementById("root");
+ReactDOM.render(<App />, rootElement);
+```
+
+In this code, we're creating a `ref` in the `App` component that points to the `CustomForm` component. We're also defining a `handleSubmit` method in `App` that gets called when either button is clicked. This method checks if the `formRef` is currently pointing to a form, and if it is, it submits that form.

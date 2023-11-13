@@ -1,0 +1,17 @@
+You can use the `date` command in the shell to convert the date format. Here's an example command that should work for your case:
+
+```
+date -d "2021-05-10T18:25:00.000+0100" +"%d %b %Y"
+```
+
+This will output `10 May 2021`. To apply this to a file, you can use a loop and `awk` to extract the date column:
+
+```
+while read line; do
+  date=$(echo $line | awk '{print $1}')
+  new_date=$(date -d "$date" +"%d %b %Y")
+  echo $new_date
+done < filename.txt
+``` 
+
+This will read each line of the file `filename.txt`, extract the date column, convert it to the desired format, and print it out.

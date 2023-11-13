@@ -1,0 +1,51 @@
+The `apt-get` package manager may not have the latest version of cmake. You can download the latest version directly from the cmake website and install it manually. Here are the steps:
+
+1. First, remove the existing cmake:
+
+```bash
+sudo apt-get remove cmake
+```
+
+2. Download the latest version of cmake from the official website. At the time of writing, the latest version is 3.21.1. Replace `3.21.1` with the latest version number if it's different:
+
+```bash
+wget https://github.com/Kitware/CMake/releases/download/v3.21.1/cmake-3.21.1.tar.gz
+```
+
+3. Extract the downloaded file:
+
+```bash
+tar -xzvf cmake-3.21.1.tar.gz
+```
+
+4. Navigate to the extracted directory:
+
+```bash
+cd cmake-3.21.1
+```
+
+5. Run the bootstrap script:
+
+```bash
+./bootstrap
+```
+
+6. Compile the source code:
+
+```bash
+make
+```
+
+7. Install cmake:
+
+```bash
+sudo make install
+```
+
+8. Verify the installed version:
+
+```bash
+cmake --version
+```
+
+This should display the version number of cmake that you just installed.

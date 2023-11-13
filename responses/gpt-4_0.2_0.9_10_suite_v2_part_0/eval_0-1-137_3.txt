@@ -1,0 +1,22 @@
+The error you're getting is because you're trying to import the `variables.scss` file from Bootstrap before you declare your own `$theme-colors` map. The `variables.scss` file already contains a `$theme-colors` map, and when you import it, it gets processed before your own map, causing the error.
+
+To fix this, you should declare your `$theme-colors` map before importing the Bootstrap files. Here's how you can do it:
+
+```scss
+$theme-colors: (
+  "primary": #your-color, // replace #your-color with your desired color
+  "secondary": #6c757d,
+  "success": #28a745,
+  "info": #17a2b8,
+  "warning": #ffc107,
+  "danger": #dc3545,
+  "light": #f8f9fa,
+  "dark": #343a40
+);
+
+@import "../../node_modules/bootstrap/scss/bootstrap";
+```
+
+In the above code, replace `#your-color` with the color you want to use for the primary theme color. You can also change the other colors if you want.
+
+This will override the default Bootstrap theme colors with your own. When you compile your SCSS, it should now work without any errors.

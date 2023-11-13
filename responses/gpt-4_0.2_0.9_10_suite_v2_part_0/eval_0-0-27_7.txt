@@ -1,0 +1,21 @@
+Your code seems correct and should work as expected. However, there are a few things you can check if you're facing issues:
+
+1. **Network Connection:** Make sure your device/emulator has a proper network connection. Sometimes, network issues can cause the query to hang indefinitely.
+
+2. **Server Status:** Check if the server at 'https://48p1r2roz4.sse.codesandbox.io' is up and running. You can do this by simply pasting the URL into your web browser and seeing if it loads. If the server is down, the query will not be able to fetch data.
+
+3. **GraphQL Query:** Ensure that your GraphQL query is correct. You can test your query using a GraphQL playground or a tool like Postman. If the query is incorrect, it will not be able to fetch data.
+
+4. **Apollo Client Version:** There might be compatibility issues with the version of Apollo Client you're using. Try downgrading or upgrading the version to see if that resolves the issue.
+
+5. **Error Handling:** It's possible that an error is occurring but not being displayed. Try logging the error object to see if it contains any useful information:
+
+```javascript
+const { loading, error, data } = useQuery(EXCHANGE_RATES);
+
+console.log('Error:', error);
+```
+
+6. **React Native Debugger:** If you're using a debugger, make sure it's not causing any issues. Sometimes, debuggers can interfere with network requests.
+
+If none of these suggestions solve your problem, please provide more details about your environment and any error messages you're seeing.

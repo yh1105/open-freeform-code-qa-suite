@@ -1,0 +1,13 @@
+The error message suggests that Xcode cannot find the preview in any of the targets in your current scheme. Here are a few things you can try:
+
+1. **Check your target membership**: Ensure that your `ContentView_Previews` is part of the correct target. You can do this by selecting the file in the Project Navigator and checking the Target Membership in the File Inspector.
+
+2. **Clean and rebuild your project**: Sometimes, Xcode can get into a state where it doesn't properly recognize changes. You can clean your project by going to `Product > Clean Build Folder` and then rebuild it.
+
+3. **Restart Xcode**: This can also help to reset any internal state that might be causing the problem.
+
+4. **Update your SwiftUI code**: Make sure your SwiftUI code is compatible with SwiftUI 2.0 if you're using Xcode 12.
+
+5. **Check your scheme**: Make sure the scheme is set to the correct target. You can do this by going to `Product > Scheme > Edit Scheme`.
+
+If none of these work, it might be a bug in Xcode. You can report it to Apple through their bug reporting system.

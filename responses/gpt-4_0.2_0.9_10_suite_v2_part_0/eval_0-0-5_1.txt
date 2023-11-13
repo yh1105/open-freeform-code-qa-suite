@@ -1,0 +1,33 @@
+The error message indicates that Python is not found in your PATH. Node-gyp, which is a part of the build process, requires Python to be installed and accessible.
+
+Here are the steps to fix this issue:
+
+1. Install Python 2.7.x from the [official website](https://www.python.org/downloads/). Node-gyp does not work with Python 3.x, so make sure to install a 2.7.x version.
+
+2. During the installation, check the box that says "Add Python.exe to Path". This will allow the system to find Python from any command prompt.
+
+3. After the installation, open a new command prompt and type `python --version`. This should return the Python version if it was installed correctly.
+
+4. If Python is installed and accessible, try to rebuild your project.
+
+If you have already installed Python and it's still not recognized, you might need to manually add it to your system PATH. Here's how to do it:
+
+1. Open System Properties (Right click Computer in the start menu, or use the keyboard shortcut Win+Pause)
+
+2. Click Advanced system settings in the sidebar.
+
+3. Click Environment Variables....
+
+4. Select PATH in the System variables section
+
+5. Click Edit
+
+6. Add Python's path to the end of the list (the paths are separated by semicolons). For example:
+   ```
+   C:\Program Files\Some Other App;C:\Python27
+   ```
+7. Click OK
+
+8. Open a new command prompt and type `python --version` to verify the installation.
+
+Remember to replace `C:\Python27` with your actual Python installation path.

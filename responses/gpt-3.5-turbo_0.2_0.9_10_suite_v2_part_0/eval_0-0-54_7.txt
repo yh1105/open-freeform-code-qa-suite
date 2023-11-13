@@ -1,0 +1,37 @@
+Sure! You can create a function that handles the button click and gets the values of the input fields using the `useState` hook. Here's an example:
+
+```javascript
+import React, { useState } from 'react';
+
+export default function InputField({ name, label }) {
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+
+  const handleClick = () => {
+    console.log(`First name: ${firstName}, Last name: ${lastName}`);
+  };
+
+  return (
+    <div>
+      <label>{label}</label>
+      <input
+        type="text"
+        value={firstName}
+        name={`${name}-firstName`}
+        onChange={(e) => setFirstName(e.target.value)}
+      />
+      <input
+        type="text"
+        value={lastName}
+        name={`${name}-lastName`}
+        onChange={(e) => setLastName(e.target.value)}
+      />
+      <button onClick={handleClick}>Submit</button>
+    </div>
+  );
+}
+```
+
+In this example, we have two `useState` hooks to store the values of the first name and last name input fields. We also have a `handleClick` function that logs the values of the input fields to the console. Finally, we have a button that triggers the `handleClick` function when clicked.
+
+Note that we added a `name` attribute to each input field with a unique identifier for each field. This is useful if you have multiple instances of this component on the same page and want to differentiate between the input fields.

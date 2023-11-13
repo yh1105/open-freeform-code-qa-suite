@@ -1,0 +1,19 @@
+To connect to Heroku Redis using TLS on Node.js with `node_redis` v3, you should use the `REDIS_TLS_URL` environment variable instead of `REDIS_URL`. Here's an example code snippet:
+
+```javascript
+const redis = require('redis');
+const url = require('url');
+
+const redisUrl = url.parse(process.env.REDIS_TLS_URL);
+const client = redis.createClient(redisUrl.port, redisUrl.hostname, {
+  tls: {
+    rejectUnauthorized: false
+  }
+});
+
+client.auth(redisUrl.auth.split(":")[1]);
+```
+
+In this example, we're using the `url` module to parse the `REDIS_TLS_URL` environment variable, and then passing the hostname and port to `redis.createClient()`. We're also passing an options object to enable TLS and disable certificate validation. Finally, we're authenticating with the Redis instance using the password from the `REDIS_TLS_URL` environment variable.
+
+Note that disabling certificate validation is not recommended in production environments, as it can leave your application vulnerable to man-in-the-middle attacks. Instead, you should use a trusted certificate authority to validate the Redis server's certificate.

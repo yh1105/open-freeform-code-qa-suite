@@ -1,0 +1,21 @@
+It's possible that the issue is related to the dynamic route, but it's hard to say without more information. Here are a few things you can try:
+
+1. Create a `next.config.js` file in the root of your project and add the following code:
+
+```
+module.exports = {
+  target: 'serverless'
+}
+```
+
+This tells Next.js to use the serverless deployment mode, which can help with some issues related to dynamic routes.
+
+2. Check your `package.json` file and make sure that the `start` script is set to `next start`. This is the command that Vercel will use to start your app.
+
+3. Make sure that all of your pages are located in the `pages` directory and have the correct file extension (`.js`, `.jsx`, or `.tsx`). If you have any pages located outside of the `pages` directory, they won't be included in the build and will result in a 404 error.
+
+4. If you're using any custom server code, make sure that it's compatible with the serverless deployment mode. In general, it's best to avoid custom server code if possible when deploying to Vercel.
+
+5. Check the Vercel logs to see if there are any error messages that might give you more information about what's going wrong. You can access the logs by clicking on the "Logs" button in the Vercel dashboard.
+
+Hopefully one of these suggestions will help you resolve the issue!

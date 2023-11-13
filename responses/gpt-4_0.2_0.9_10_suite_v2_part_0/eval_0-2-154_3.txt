@@ -1,0 +1,29 @@
+Sure, here is a generator function that uses recursion to handle nested tags:
+
+```javascript
+function* iterLeafNodes(strHTML, format=[]) {
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(strHTML, 'text/html');
+  const body = doc.body;
+
+  function* iterNodes(node, format=[]) {
+    if (node.nodeType === Node.TEXT_NODE) {
+      yield { text: node.textContent, format };
+    } else if (node.nodeType === Node.ELEMENT_NODE) {
+      const newFormat = [...format];
+      if (node.tagName !== 'P') {
+        newFormat.push(node.tagName.toLowerCase());
+      }
+      for (const child of node.childNodes) {
+        yield* iterNodes(child, newFormat);
+      }
+    }
+  }
+
+  for (const child of body.childNodes) {
+    yield* iterNodes(child);
+  }
+}
+```
+
+This function will iterate over all the leaf nodes of the parsed HTML string and yield objects with the text and format of each node. The format is determined by the tags that enclose the node, and the function handles nested tags by using recursion and maintaining a stack of formats.
