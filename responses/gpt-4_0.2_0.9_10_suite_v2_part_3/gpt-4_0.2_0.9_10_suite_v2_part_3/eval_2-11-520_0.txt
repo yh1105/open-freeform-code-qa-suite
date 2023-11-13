@@ -1,0 +1,37 @@
+The error message is indicating that the `operator==` in your derived class `SeviceClient` does not match the signature of the `operator==` in the base class `IClient`. 
+
+In your base class `IClient`, the `operator==` is defined to take a reference to an `IClient` object as its parameter:
+
+```c++
+virtual bool operator==(const IClient& anotherClient) = 0;
+```
+
+However, in your derived class `SeviceClient`, the `operator==` is defined to take a reference to a `SeviceClient` object as its parameter:
+
+```c++
+bool operator==(const SeviceClient& anotherClient) override;
+```
+
+To fix this issue, you need to make sure that the `operator==` in your derived class `SeviceClient` has the same parameter type as the one in the base class `IClient`. Here is the corrected code:
+
+```c++
+class SeviceClient : public IClient<int8_t> {
+  const std::vector<int8_t> ID;
+
+ public:
+  SeviceClient(const std::vector<int8_t>& ID) : ID(std::move(ID)) {}
+  SeviceClient(const std::vector<int8_t>&& ID) : ID(std::move(ID)) {}
+
+  const std::vector<int8_t>& getID() override {
+      return ID;
+  }
+  bool isEqual(const std::vector<int8_t>& anotherID) override {
+      return true;
+  }
+  bool operator==(const IClient<int8_t>& anotherClient) override {
+      return true;
+  }
+};
+```
+
+Now, the `operator==` in `SeviceClient` matches the signature of the `operator==` in `IClient`, and the code should compile without the override error.

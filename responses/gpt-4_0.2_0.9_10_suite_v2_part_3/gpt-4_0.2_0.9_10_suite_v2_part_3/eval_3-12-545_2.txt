@@ -1,0 +1,27 @@
+The error message is indicating that you're trying to send a JSON body with the `http.post` method, but you're not encoding your body as JSON. The `http.post` method expects a `Map<String, String>` for its body and you're providing a `Map<String, dynamic>`.
+
+You should encode your body to JSON using `json.encode`. Here's how you can do it:
+
+```dart
+import 'dart:convert';
+
+Map<String,String> headers = {
+  'Content-Type':'application/json',
+  'authorization':'Basic c3R1ZHlkb3RlOnN0dWR5ZG90ZTEyMw=='
+};
+
+Map<String, dynamic> body = {
+  "grant_type":"password",
+  "username":"******",
+  "password":"*****",
+  "scope":"offline_access"
+};
+
+var response = await post(
+  Urls.getToken,
+  headers: headers,
+  body: json.encode(body),
+);
+```
+
+In this code, `json.encode(body)` will convert your `Map<String, dynamic>` to a JSON string which can be sent in the body of your HTTP request.

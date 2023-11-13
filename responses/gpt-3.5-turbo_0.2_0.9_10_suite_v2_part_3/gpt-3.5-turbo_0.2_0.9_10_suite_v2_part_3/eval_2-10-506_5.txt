@@ -1,0 +1,9 @@
+You can use the `iter()` method to create an iterator over the vector, and then use the `min()` method to get the minimum value. Here's an example:
+
+```rust
+let v = vec![5, 6, 8, 4, 2, 7];
+let min_value = *v.iter().min().unwrap();
+println!("Minimum value: {}", min_value);
+```
+
+The `min()` method returns an `Option<&i32>`, which represents the minimum value if the vector is not empty. We use the `unwrap()` method to get the `i32` value from the `Option`. The `*` operator is used to dereference the resulting reference to an `i32` value.

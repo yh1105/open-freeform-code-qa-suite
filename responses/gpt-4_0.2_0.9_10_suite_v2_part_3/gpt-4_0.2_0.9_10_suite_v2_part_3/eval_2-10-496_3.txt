@@ -1,0 +1,42 @@
+You can use the `sort_by` function provided by Rust's standard library to sort your `Vec` of structs. This function takes a closure which receives two elements of the vector and must return an order.
+
+In your case, you want to sort by `row` and then by `column`. You can achieve this by using the `cmp` function on tuples. Here is how you can do it:
+
+```rust
+my_vector.sort_by(|a, b| (a.row, a.column).cmp(&(b.row, b.column)));
+```
+
+This will sort your vector in ascending order first by `row` and then by `column`. If `row` is equal for two elements, it will compare `column`.
+
+Here is the full code:
+
+```rust
+struct MyStruct {
+    row: u8,
+    column: u8,
+}
+
+fn main() {
+    let mut my_vector = vec![
+        MyStruct { row: 10, column: 3 },
+        MyStruct { row: 10, column: 2 },
+        MyStruct { row: 10, column: 1 },
+        // Add more elements as needed
+    ];
+
+    my_vector.sort_by(|a, b| (a.row, a.column).cmp(&(b.row, b.column)));
+
+    // Now my_vector is sorted by row and column
+    for item in my_vector {
+        println!("row: {}, column: {}", item.row, item.column);
+    }
+}
+```
+
+This code will print:
+
+```rust
+row: 10, column: 1
+row: 10, column: 2
+row: 10, column: 3
+```

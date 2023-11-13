@@ -1,54 +1,17 @@
-You can create the JSON object by defining a struct that represents the structure of the JSON object. Then, you can use the `encoding/json` package's `Marshal` function to convert the struct to JSON. Here's an example:
+Sure, here is the `ClientInfo` struct that you can use for serialization:
 
 ```go
-package main
-
-import (
-	"encoding/json"
-	"fmt"
-	"log"
-)
-
-type Client struct {
+type ClientInfo struct {
 	Hostname string `json:"Hostname"`
 	IP       string `json:"IP"`
 	MacAddr  string `json:"MacAddr"`
 }
 
 type Clients struct {
-	Clients []Client `json:"Clients"`
-}
-
-func main() {
-	clients := Clients{
-		Clients: []Client{
-			{
-				Hostname: "example.com",
-				IP:       "127.0.0.1",
-				MacAddr:  "mactonight",
-			},
-			{
-				Hostname: "foo.biz",
-				IP:       "0.0.0.0",
-				MacAddr:  "12:34:56:78",
-			},
-		},
-	}
-
-	jsonData, err := json.MarshalIndent(clients, "", "  ")
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	fmt.Println(string(jsonData))
+	Clients []ClientInfo `json:"Clients"`
 }
 ```
 
-In this code:
+In this code, `ClientInfo` is a struct that represents a single client with fields `Hostname`, `IP`, and `MacAddr`. The `json` tags are used to map the JSON keys to the struct fields. 
 
-- We define two structs, `Client` and `Clients`. `Client` represents an individual client, and `Clients` represents a collection of clients.
-- We use the `json` struct tags to specify the JSON keys that correspond to each struct field.
-- We create a `Clients` instance and populate it with two `Client` instances.
-- We use `json.MarshalIndent` to convert the `Clients` instance to JSON. The second and third arguments to `json.MarshalIndent` specify the prefix and indent strings to use for pretty-printing the JSON.
-- If `json.MarshalIndent` returns an error, we log the error and exit the program.
-- Finally, we print the JSON to the terminal.
+The `Clients` struct is a wrapper that represents the array of `ClientInfo` objects in your JSON. The `Clients` field is a slice of `ClientInfo` structs.

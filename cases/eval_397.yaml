@@ -16,4 +16,5 @@ to
     targets:
       - content:
         - 'declare module "*.png" {\n  const value: any;\n  export default value;\n}'
+      - content:
         - 'declare module "*.png" {\n  const value: any;\n  export = value;\n}'

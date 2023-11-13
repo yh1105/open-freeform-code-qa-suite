@@ -1,0 +1,37 @@
+The error message is indicating that the `operator==` in your derived class `SeviceClient` is not overriding a base class method. This is because the `operator==` in your base class `IClient` is expecting a reference to an `IClient` object, but in your derived class `SeviceClient`, you're providing a reference to a `SeviceClient` object.
+
+To fix this, you need to make sure that the `operator==` in your derived class matches the signature of the `operator==` in your base class. Here's how you can do it:
+
+```c++
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+template <typename T>
+class IClient {
+public:
+  virtual const std::vector<T>& getID() = 0;
+  virtual bool isEqual(const std::vector<T>& anotherID) = 0;
+  virtual bool operator==(const IClient& anotherClient) = 0;
+};
+
+class SeviceClient : public IClient<int8_t> {
+  const std::vector<int8_t> ID;
+
+public:
+  SeviceClient(const std::vector<int8_t>& ID) : ID(ID) {}
+  SeviceClient(std::vector<int8_t>&& ID) : ID(std::move(ID)) {}
+
+  const std::vector<int8_t>& getID() override {
+      return ID;
+  }
+  bool isEqual(const std::vector<int8_t>& anotherID) override {
+      return true;
+  }
+  bool operator==(const IClient<int8_t>& anotherClient) override {
+      return true;
+  }
+};
+```
+In the above code, the `operator==` in `SeviceClient` now takes a reference to an `IClient<int8_t>` object, which matches the signature of the `operator==` in the `IClient` base class.

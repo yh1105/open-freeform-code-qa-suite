@@ -1,0 +1,18 @@
+This error occurs because `travis-cli` depends on the `ffi` gem, which requires the `libffi` library to be installed on your system. Here's how you can fix it:
+
+1. Install `libffi` using Homebrew:
+   ```
+   brew install libffi
+   ```
+
+2. Set the `PKG_CONFIG_PATH` environment variable to point to the `libffi` package configuration file:
+   ```
+   export PKG_CONFIG_PATH=/usr/local/opt/libffi/lib/pkgconfig
+   ```
+
+3. Try installing `travis` again:
+   ```
+   gem install travis
+   ```
+
+This should resolve the issue and allow you to install `travis-cli`.

@@ -1,0 +1,13 @@
+The `FormatException: Unexpected character (at character 1)` error occurs when the response body is not in a valid JSON format. In your case, it seems that the response body is not a valid JSON string.
+
+To solve this issue, you can try the following steps:
+
+1. Check the response body: You can print the response body to the console to see what it contains. You can use `print(response.body)` to print the response body.
+
+2. Check the PHP file: Make sure that the PHP file is returning a valid JSON response. You can test the PHP file separately to see if it is returning a valid JSON response.
+
+3. Check the encoding: Make sure that the encoding of the response body is correct. In your code, you are using `Encoding.getByName("utf-8")` to encode the body. Make sure that the encoding is correct and matches the encoding used by the PHP file.
+
+4. Check the headers: Make sure that the headers of the response are correct. In your code, you are using `"Accept": "application/json"` as the header. Make sure that the PHP file is returning a JSON response and that the header is correct.
+
+If none of these steps work, you can try using a JSON validator to validate the response body and see if it is a valid JSON string.

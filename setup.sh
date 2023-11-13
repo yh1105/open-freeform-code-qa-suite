@@ -9,3 +9,5 @@ npm install -g typescript
 export NODE_PATH=$(npm root --quiet -g)
 # setup c# env:
 apt-get install -y mono-complete
+# setup go env:
+apt-get install -y golang-go

@@ -1,45 +1,15 @@
-You can create the JSON object using Go by defining a struct to represent the structure of your JSON object, and then using the `json.Marshal` function to convert the struct to JSON. Here's an example:
+Sure, here is the `ClientInfo` struct that you can use for serialization:
 
 ```go
-package main
-
-import (
-	"encoding/json"
-	"fmt"
-)
-
-type Client struct {
+type ClientInfo struct {
 	Hostname string `json:"Hostname"`
 	IP       string `json:"IP"`
 	MacAddr  string `json:"MacAddr"`
 }
 
 type Clients struct {
-	Clients []Client `json:"Clients"`
-}
-
-func main() {
-	clients := Clients{
-		Clients: []Client{
-			{
-				Hostname: "example.com",
-				IP:       "127.0.0.1",
-				MacAddr:  "mactonight",
-			},
-			{
-				Hostname: "foo.biz",
-				IP:       "0.0.0.0",
-				MacAddr:  "12:34:56:78",
-			},
-		},
-	}
-
-	jsonData, err := json.MarshalIndent(clients, "", "  ")
-	if err != nil {
-		fmt.Println(err)
-	}
-	fmt.Println(string(jsonData))
+	Clients []ClientInfo `json:"Clients"`
 }
 ```
 
-This code will print the JSON object to the terminal. The `json:"Hostname"` syntax in the struct definition is used to specify the key name in the JSON object. The `json.MarshalIndent` function is used to convert the struct to JSON with indentation for readability.
+In this code, `ClientInfo` represents an individual client with fields for `Hostname`, `IP`, and `MacAddr`. The `Clients` struct is a wrapper that contains a slice of `ClientInfo` objects. The `json` tags are used to map the Go struct fields to the corresponding JSON fields.

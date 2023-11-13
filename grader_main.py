@@ -177,6 +177,8 @@ def grade_response(config: dict, case_dir: str, response: str, full_score: float
             lang = 'typescript'
         elif lang == 'r':
             lang = 'r'
+        elif lang == 'go':
+            lang = 'go'
         else:
             raise NotImplementedError(f'Does not support this language yet: {lang}.')
 

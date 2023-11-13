@@ -1,0 +1,23 @@
+The `Ok()` method is a helper method that creates an `OkResult` (HTTP 200) with an optional value. The `Json()` method is another helper method that serializes the given value as JSON. You don't need to use both of them together.
+
+If you want to return a JSON response with a HTTP status code, you can just pass your data to the `Ok()` method directly. It will be serialized to JSON by default. Here is how you can do it:
+
+```csharp
+public ActionResult IsAuthenticated()
+{
+    return Ok("123");
+}
+```
+
+This will return a HTTP 200 status code with a JSON response body of `"123"`.
+
+If you want to return a different HTTP status code, you can use the `StatusCode()` method, which allows you to specify the status code. For example, to return a 201 status code, you can do:
+
+```csharp
+public ActionResult IsAuthenticated()
+{
+    return StatusCode(201, "123");
+}
+```
+
+This will return a HTTP 201 status code with a JSON response body of `"123"`.

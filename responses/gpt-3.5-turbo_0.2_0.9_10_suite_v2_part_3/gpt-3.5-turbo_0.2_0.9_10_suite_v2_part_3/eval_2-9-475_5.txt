@@ -1,0 +1,15 @@
+You can try installing `libffi` using Homebrew, which is a package manager for macOS. Here are the steps:
+
+1. Install Homebrew by running this command in your terminal:
+```
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+2. Once Homebrew is installed, run this command to install `libffi`:
+```
+brew install libffi
+```
+
+3. After `libffi` is installed, try running `gem install travis` again and it should work.
+
+Let me know if this helps!

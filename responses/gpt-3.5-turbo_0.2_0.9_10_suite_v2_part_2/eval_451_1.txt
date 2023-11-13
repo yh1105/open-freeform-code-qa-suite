@@ -1,35 +1,13 @@
-Here's an example Go code that creates the JSON object you described and prints it to the terminal:
+Here is the declaration of `ClientInfo` struct in Go:
 
 ```go
-package main
-
-import (
-	"encoding/json"
-	"fmt"
-)
-
-func main() {
-	type Client struct {
-		Hostname string `json:"Hostname"`
-		IP       string `json:"IP"`
-		MacAddr  string `json:"MacAddr"`
-	}
-
-	clients := []Client{
-		{Hostname: "example.com", IP: "127.0.0.1", MacAddr: "mactonight"},
-		{Hostname: "foo.biz", IP: "0.0.0.0", MacAddr: "12:34:56:78"},
-	}
-
-	data := map[string][]Client{"Clients": clients}
-
-	jsonData, err := json.MarshalIndent(data, "", "  ")
-	if err != nil {
-		fmt.Println("Error marshaling JSON:", err)
-		return
-	}
-
-	fmt.Println(string(jsonData))
+type ClientInfo struct {
+    Clients []struct {
+        Hostname string `json:"Hostname"`
+        IP string `json:"IP"`
+        MacAddr string `json:"MacAddr"`
+    } `json:"Clients"`
 }
 ```
 
-This code defines a `Client` struct with the fields `Hostname`, `IP`, and `MacAddr`. It then creates a slice of `Client` objects and assigns it to a map with the key `"Clients"`. The `json.MarshalIndent` function is used to convert the map to a JSON string with indentation for readability. Finally, the JSON string is printed to the terminal using `fmt.Println`.
+This struct has a field named `Clients` which is an array of anonymous structs. Each anonymous struct has three fields: `Hostname`, `IP`, and `MacAddr`. The `json` tags are used to specify the names of the fields in the resulting JSON object. The outermost field is also named `Clients` and has the same `json` tag.

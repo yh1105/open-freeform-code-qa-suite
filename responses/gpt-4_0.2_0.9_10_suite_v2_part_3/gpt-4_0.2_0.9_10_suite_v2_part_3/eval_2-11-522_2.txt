@@ -1,0 +1,7 @@
+No, C++ standard library does not provide a direct way to query or set the properties of a thread such as its affinity to a specific core or whether it is a high-performance or low-performance core. 
+
+The reason is that C++ standard library is designed to be platform-independent, and the details of how threads are scheduled and run is usually determined by the operating system. Therefore, these kinds of operations are typically platform-dependent and are not part of the C++ standard library.
+
+However, you can use platform-specific APIs to achieve this. For example, on a POSIX system, you can use the `pthread_setaffinity_np` function to set the CPU affinity of a thread. On Windows, you can use the `SetThreadAffinityMask` function. But remember, these are not portable solutions. 
+
+For high-performance and low-performance cores, the situation is similar. The C++ standard library does not provide a way to distinguish between them. You would need to use platform-specific or hardware-specific APIs to determine this information, and how to do this can vary widely depending on the specific hardware and operating system you are using.

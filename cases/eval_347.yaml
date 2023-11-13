@@ -1,0 +1,12 @@
+id: 347
+# for case self identificaton
+prompt_path: prompt_347.txt
+# relative path to the prompt text
+type: non-code debugging
+# question type, for later statistics, e.g., 'knowledge question-answering'
+lang: java
+grading:
+  similarity:
+    - metric: rougeLsum
+      references:
+        - path: answer_347_0.txt

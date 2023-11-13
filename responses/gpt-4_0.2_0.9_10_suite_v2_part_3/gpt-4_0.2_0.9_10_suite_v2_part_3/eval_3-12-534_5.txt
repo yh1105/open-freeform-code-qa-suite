@@ -1,0 +1,56 @@
+You can use multiple `Consumer` widgets to listen to multiple `ChangeNotifier` classes in a single widget. Here is an example:
+
+```dart
+class MyWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<FirstChangeNotifier>(
+      builder: (context, firstNotifier, _) => Consumer<SecondChangeNotifier>(
+        builder: (context, secondNotifier, _) => Consumer<ThirdChangeNotifier>(
+          builder: (context, thirdNotifier, _) => Consumer<FourthChangeNotifier>(
+            builder: (context, fourthNotifier, _) => CurvedNavigationBar(
+              index: firstNotifier.currentIndex,
+              items: <Widget>[
+                Icon(Icons.add, size: 30),
+                Icon(Icons.list, size: 30),
+                Icon(Icons.compare_arrows, size: 30),
+                Icon(Icons.call_split, size: 30),
+              ],
+              onTap: (index) {
+                firstNotifier.updateIndex(index);
+                secondNotifier.doSomething();
+                thirdNotifier.doSomethingElse();
+                fourthNotifier.doAnotherThing();
+              },
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+```
+
+In this example, `FirstChangeNotifier`, `SecondChangeNotifier`, `ThirdChangeNotifier`, and `FourthChangeNotifier` are your four different classes that extend `ChangeNotifier`. 
+
+When the `onTap` function of `CurvedNavigationBar` is called, it updates the `currentIndex` in `FirstChangeNotifier` and calls some functions in the other `ChangeNotifier` classes.
+
+Remember to provide your `ChangeNotifier` classes in the widget tree above `MyWidget`:
+
+```dart
+void main() {
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => FirstChangeNotifier()),
+        ChangeNotifierProvider(create: (_) => SecondChangeNotifier()),
+        ChangeNotifierProvider(create: (_) => ThirdChangeNotifier()),
+        ChangeNotifierProvider(create: (_) => FourthChangeNotifier()),
+      ],
+      child: MyApp(),
+    ),
+  );
+}
+```
+
+This way, all the `ChangeNotifier` classes are available to `MyWidget` and its descendants.

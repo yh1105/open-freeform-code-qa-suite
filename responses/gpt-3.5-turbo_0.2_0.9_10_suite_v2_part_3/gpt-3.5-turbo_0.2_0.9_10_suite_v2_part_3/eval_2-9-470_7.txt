@@ -1,0 +1,24 @@
+This error occurs because the libffi.so.6 library is missing on your system. To fix it, you can follow these steps:
+
+1. Open a terminal and run the following command to install the libffi6 library:
+
+   ```
+   sudo apt-get install libffi6
+   ```
+
+2. If the above command doesn't work, you can try installing the libffi-dev package instead:
+
+   ```
+   sudo apt-get install libffi-dev
+   ```
+
+3. After installing the library, you may need to rebuild the ffi gem. Run the following command to uninstall and reinstall the ffi gem:
+
+   ```
+   gem uninstall ffi
+   gem install ffi
+   ```
+
+4. Finally, try running your rails command again. It should work now.
+
+If you still face the same issue, you may need to check if the libffi.so.6 library is installed in the correct location. You can use the `ldconfig` command to update the library cache and ensure that the library is in the correct location.

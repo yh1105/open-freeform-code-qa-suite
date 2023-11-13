@@ -5,7 +5,7 @@ id: 3-13-587
 prompt_path: prompt_3-13-587.txt
 # relative path to the prompt text
 
-# type: code debugging
+type: code debugging
 # type: code completion
 # type: knowledge question-answering
 # question type, for later statistics

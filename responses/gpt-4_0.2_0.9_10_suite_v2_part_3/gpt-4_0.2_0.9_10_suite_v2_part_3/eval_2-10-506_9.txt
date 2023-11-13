@@ -1,0 +1,15 @@
+You can use the `iter()` method in combination with the `min()` method to find the minimum value in a vector in Rust. Here is an example:
+
+```rust
+let v = vec![5, 6, 8, 4, 2, 7];
+
+if let Some(min) = v.iter().min() {
+    println!("The minimum value is {}", min);
+} else {
+    println!("The vector is empty");
+}
+```
+
+In this code, `v.iter().min()` returns an `Option<&i32>` that contains the minimum value if the vector is not empty, or `None` if the vector is empty. The `if let` statement is used to handle this `Option` and print the minimum value if it exists.
+
+Please note that the `min()` method returns a reference to the minimum value, not the value itself. If you need the value, you can dereference it using `*min`.

@@ -1,0 +1,21 @@
+One way to express this more idiomatically is to use the `filter()` method on `Option`. Here's an example:
+
+```rust
+fn main() {
+    let mut foo: Option<u8> = None;
+    foo = foo.filter(|&x| x < 5).or(Some(5));
+}
+```
+
+This code first filters the `Option` by the condition that the inner value is less than 5. If the filter returns `None`, then `or(Some(5))` replaces it with `Some(5)`. This code is more concise and arguably more readable than the original `match` statement.
+
+Another way to express this is to use the `unwrap_or_else()` method. Here's an example:
+
+```rust
+fn main() {
+    let mut foo: Option<u8> = None;
+    foo = Some(5).filter(|&x| x < 5).unwrap_or_else(|| foo);
+}
+```
+
+This code first creates a `Some(5)` value, then filters it by the condition that the inner value is less than 5. If the filter returns `None`, then `unwrap_or_else()` replaces it with the original `foo` value. This code is also more concise than the original `match` statement.

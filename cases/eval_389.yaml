@@ -1,0 +1,14 @@
+id: 389
+prompt_path: prompt_389.txt
+type: code debugging
+lang: c#
+grading:
+  keywords:
+    - content:
+        or:
+          - content:
+              content: 'Not supported'
+              to_lower: true
+          - content:
+              content: 'HasNoKey()'
+      weight: 1

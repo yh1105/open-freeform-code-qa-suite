@@ -1,6 +1,6 @@
 xlrd==1.2.0
 pyyaml
-openai
+openai==0.28
 tqdm
 numpy
 numba

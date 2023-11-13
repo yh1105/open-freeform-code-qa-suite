@@ -1,0 +1,1 @@
+Is there a go command to force go test to always run test and not to cache test results.

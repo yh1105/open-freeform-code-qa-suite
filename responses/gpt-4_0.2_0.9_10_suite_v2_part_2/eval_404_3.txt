@@ -1,0 +1,35 @@
+The `Ok()` method of the controller automatically converts the object you pass into JSON. So, you don't need to use `Json()` method inside `Ok()`. 
+
+Here is the corrected code:
+
+```csharp
+public ActionResult IsAuthenticated()
+{
+    return Ok("123");
+}
+```
+
+This will return a HTTP 200 status code with the body containing just the string "123".
+
+If you want to return a different HTTP status code, you can use the `StatusCode()` method, like this:
+
+```csharp
+public ActionResult IsAuthenticated()
+{
+    return StatusCode(201, "123");
+}
+```
+
+This will return a HTTP 201 status code with the body containing just the string "123".
+
+If you want to return a complex object as JSON, you can do it like this:
+
+```csharp
+public ActionResult IsAuthenticated()
+{
+    var data = new { Name = "John", Age = 30 };
+    return Ok(data);
+}
+```
+
+This will return a HTTP 200 status code with the body containing the JSON representation of the `data` object.

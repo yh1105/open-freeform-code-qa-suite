@@ -1,0 +1,3 @@
+No. 
+
+The C++ standard library does not provide a way to query or enforce thread properties such as which core they will run on. The behavior of threads is left to the implementation and the operating system's scheduler. While some operating systems may provide APIs to control thread affinity, these are typically platform-specific and not part of the C++ standard library.

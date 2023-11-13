@@ -1,0 +1,15 @@
+The error you're getting is because the latest version of Devise is not compatible with the version of Rails you're using. 
+
+To fix this issue, you can specify a version of Devise that is compatible with your Rails version in your Gemfile. 
+
+For example, if you're using Rails 5.2, you can use Devise 4.7.1. 
+
+To do this, you can modify your Gemfile like this:
+
+```ruby
+gem 'devise', '~> 4.7.1'
+```
+
+After modifying the Gemfile, run `bundle install` to install the specified version of Devise.
+
+If you're not sure which version of Devise is compatible with your Rails version, you can check the [Devise GitHub page](https://github.com/heartcombo/devise) for more information.

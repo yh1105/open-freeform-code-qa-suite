@@ -1,0 +1,22 @@
+The `<experimental/filesystem>` header was deprecated in C++17 and replaced with `<filesystem>`. To fix the error, replace the header with `<filesystem>` and change the namespace from `std::experimental::filesystem` to `std::filesystem`. Here is the updated code:
+
+```c++
+#include <filesystem>
+#include <iostream>
+#include <string>
+#include <vector>
+
+int main(int argc, char** argv)
+{
+    std::string imageDirectory = "./image";
+    std::vector<std::string> imagePath;
+    for (const auto& entry: std::filesystem::directory_iterator(imageDirectory))
+    {
+        imagePath.push_back(entry.path());
+        std::cout << entry.path() << std::endl;
+    }
+    return 0;
+}
+``` 
+
+Make sure to compile with the `-std=c++17` flag to enable C++17 features.

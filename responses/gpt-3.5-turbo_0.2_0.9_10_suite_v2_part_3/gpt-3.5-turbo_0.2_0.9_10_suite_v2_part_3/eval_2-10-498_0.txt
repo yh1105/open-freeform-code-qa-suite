@@ -1,0 +1,20 @@
+In Rust, the caret operator (`^`) is not used for exponentiation. Instead, you can use the `pow` method provided by the `num_traits` crate. Here's an example:
+
+```rust
+use num_traits::pow;
+
+fn main() {
+    let base = 2;
+    let exponent = 3;
+    let result = pow(base, exponent);
+    println!("{} raised to the power of {} is {}", base, exponent, result);
+}
+```
+
+This will output:
+
+```
+2 raised to the power of 3 is 8
+```
+
+Note that the `pow` method takes two arguments: the base and the exponent. It returns the result of raising the base to the power of the exponent.

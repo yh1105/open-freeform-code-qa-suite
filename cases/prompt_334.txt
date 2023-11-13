@@ -12,7 +12,8 @@ status may be true or false.
 Now if the status is false then I have to remove those objects from a subjects list.
 How to do it?
 
-Specifically, please fill in the [blank] with Java code in the following code context:
+Please write a function `removeFalseSubjects` in Java, which remove the objects from a subjects list if their status is false.
+The context of the function is:
 ```java
 package main;
 
@@ -27,8 +28,9 @@ public class Main {
         // getters & setters
     }
     public static void removeFalseSubjects(List<Subject> subjects){
-        [blank]
+        //You should implement here
     }
 }
 ```
-Please don't add other text and only give me the code to replace [blank].
+Please give me the whole function with body without context such as class definition or imports.
+Function signature is: `public static void removeFalseSubjects(List<Subject> subjects)`

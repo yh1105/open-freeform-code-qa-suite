@@ -1,0 +1,20 @@
+To transfer native SOL directly into the event account's vault address in an anchor smart contract instruction, you can use the following code:
+
+```
+let ix = anchor_lang::solana_program::system_instruction::transfer(
+    ctx.accounts.from.to_account_info().key,
+    ctx.accounts.to.to_account_info().key,
+    amount,
+);
+anchor_lang::solana_program::program::invoke(
+    &ix,
+    &[
+        ctx.accounts.from.to_account_info(),
+        ctx.accounts.to.to_account_info(),
+    ],
+)?;
+```
+
+In this code, `ctx.accounts.from` is the account that will be debited, `ctx.accounts.to` is the account that will be credited, and `amount` is the amount of SOL to transfer. 
+
+Note that `ctx.accounts.from` and `ctx.accounts.to` are Anchor account structs that have been generated from the program's IDL. You will need to ensure that these structs have the correct fields and that the `from` account has sufficient SOL balance to complete the transfer.
