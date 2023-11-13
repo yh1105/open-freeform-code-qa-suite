@@ -1,0 +1,20 @@
+This issue might be happening because the Jackson XML library is not included in your project's dependencies. 
+
+To fix this, you can add the following dependency to your `build.gradle` file:
+
+```groovy
+implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml'
+```
+
+Then, you need to configure your Spring Boot application to use the Jackson XML library for XML serialization and deserialization. You can do this by adding the following configuration to your `application.properties` file:
+
+```properties
+spring.jackson.serialization.INDENT_OUTPUT=true
+spring.jackson.xml.enabled=true
+spring.jackson.xml.prefix=<your-xml-prefix>
+spring.jackson.xml.dedent-objects=true
+```
+
+Make sure to replace `<your-xml-prefix>` with the prefix you want to use for your XML elements.
+
+After making these changes, you should be able to receive XML responses from your API.

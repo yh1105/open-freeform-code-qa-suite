@@ -1,0 +1,27 @@
+You can't directly inject a generic interface, but you can inject a concrete class that implements the generic interface. 
+
+For example, if you have a class `DatabaseService<T>` that implements `IDatabaseService<T>`, you can register it in your Startup.cs like this:
+
+```csharp
+services.AddScoped(typeof(IDatabaseService<>), typeof(DatabaseService<>));
+```
+
+This way, when you inject `IDatabaseService<T>` in your controllers, the DI container will resolve it to `DatabaseService<T>`.
+
+Here is an example of how you might use it in a controller:
+
+```csharp
+public class MyController : Controller
+{
+    private readonly IDatabaseService<MyEntity> _service;
+
+    public MyController(IDatabaseService<MyEntity> service)
+    {
+        _service = service;
+    }
+
+    // Use _service in your actions...
+}
+```
+
+In this example, `MyEntity` is the type you want to use for `T` in `IDatabaseService<T>`. The DI container will automatically resolve `IDatabaseService<MyEntity>` to `DatabaseService<MyEntity>`.

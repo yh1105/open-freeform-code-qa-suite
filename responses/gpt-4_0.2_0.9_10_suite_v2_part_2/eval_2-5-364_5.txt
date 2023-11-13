@@ -1,0 +1,37 @@
+If you want to use a specific version of Java with Maven, you can specify it in the `pom.xml` file of your project. Here is an example of how to do it:
+
+```xml
+<project>
+  ...
+  <build>
+    ...
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.8.0</version>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+        </configuration>
+      </plugin>
+    </plugins>
+    ...
+  </build>
+  ...
+</project>
+```
+
+In this example, Maven will use Java 1.8 for compiling the project. You can replace `1.8` with the version of Java you want to use.
+
+If you are using the Maven Wrapper (`mvnw` or `mvnw.cmd`), it will use the version of Java specified in the `JAVA_HOME` environment variable. If you want to use a different version of Java, you can change the `JAVA_HOME` environment variable to point to the directory where the desired version of Java is installed.
+
+If you are using a continuous integration server, it may provide a way to specify the version of Java to use. For example, in Jenkins, you can specify the version of Java to use in the "JDK" section of the job configuration.
+
+If you want to use a specific version of Java for a single command, you can specify the `JAVA_HOME` environment variable on the command line. For example:
+
+```bash
+JAVA_HOME=/path/to/java mvn clean install
+```
+
+In this example, Maven will use the version of Java located at `/path/to/java`.

@@ -1,0 +1,40 @@
+The error message suggests that the response from the server is not in the expected JSON format. It looks like the response starts with a '<' character, which indicates that it might be an HTML error page instead of a JSON response.
+
+To fix this issue, you can try the following steps:
+
+1. Check the URL of the API endpoint. Make sure it is correct and matches the route defined in the controller.
+
+2. Test the API endpoint using a tool like Postman or curl to see if it returns the expected JSON response.
+
+3. Check the server logs to see if there are any errors or exceptions being thrown when the API endpoint is called.
+
+4. If the API endpoint is working correctly, try adding the `[Produces("application/json")]` attribute to the controller method to ensure that the response is always returned in JSON format.
+
+5. If the issue persists, try using a different HTTP client library like `HttpClient` instead of `Http` to make the server call. You can also try using the `JsonSerializer.DeserializeAsync` method to deserialize the JSON response manually.
+
+Here's an example of how you can use `HttpClient` to make the server call and deserialize the JSON response:
+
+```c#
+using System.Net.Http.Json;
+
+// ...
+
+private readonly HttpClient httpClient;
+
+public FetchEmployee(HttpClient httpClient)
+{
+    this.httpClient = httpClient;
+}
+
+protected override async Task OnInitializedAsync()
+{
+    var response = await httpClient.GetAsync("/api/Employee/Index");
+    var empList = await response.Content.ReadFromJsonAsync<Employee[]>();
+}
+```
+
+Note that you need to register the `HttpClient` in the DI container in `Program.cs`:
+
+```c#
+builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+```

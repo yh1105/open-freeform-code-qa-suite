@@ -1,0 +1,15 @@
+It seems like IntelliJ is still using the Java 8 compiler to build your project. Here are a few things you can try:
+
+1. Make sure that you have set the correct JDK version in IntelliJ IDEA. Go to `File > Project Structure > Project Settings > Project` and make sure that the `Project SDK` is set to JDK 11.
+
+2. Check the `Project Language Level` in the same settings window. Make sure that it is set to `11 - Local variable syntax for lambda parameters and try-with-resources`.
+
+3. Go to `File > Settings > Build, Execution, Deployment > Compiler > Java Compiler` and make sure that the `Target bytecode version` is set to `11`.
+
+4. If you have multiple modules in your project, make sure that you have set the correct JDK version for each module. Go to `File > Project Structure > Project Settings > Modules` and select each module to check its JDK version.
+
+5. If none of the above steps work, try invalidating the IntelliJ IDEA cache and restarting the IDE. Go to `File > Invalidate Caches / Restart` and select `Invalidate and Restart`.
+
+6. If you still can't get it to work, try creating a new project in IntelliJ IDEA and see if you can build it with JDK 11. If that works, you can try importing your existing project into the new one.
+
+Regarding your concern about the JDK 11 installation, it seems like you have installed the correct version. The JDK folder should contain everything you need to develop and run Java applications. The JRE folder is only needed if you want to run Java applications without the development tools.

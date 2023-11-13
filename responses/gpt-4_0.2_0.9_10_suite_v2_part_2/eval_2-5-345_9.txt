@@ -1,0 +1,13 @@
+The error you're encountering is related to the compatibility of IntelliJ IDEA with the Maven version that comes with Spring Boot 2.7.0. 
+
+The issue is that IntelliJ IDEA is trying to use a class (`org.apache.maven.model.validation.DefaultModelValidator`) from Maven 3.8.5 that has been removed or changed, hence the `NoSuchMethodError`.
+
+To solve this issue, you can try the following solutions:
+
+1. **Downgrade Maven version**: You can manually change the Maven version in your project to a version that is compatible with your IntelliJ IDEA. You can do this by modifying the `pom.xml` file in your project and changing the Maven version.
+
+2. **Update IntelliJ IDEA**: Make sure you are using the latest version of IntelliJ IDEA. JetBrains regularly releases updates to IntelliJ IDEA to support the latest versions of Maven. You can check for updates by going to `Help -> Check for Updates...` in IntelliJ IDEA.
+
+3. **Use IntelliJ IDEA's bundled Maven**: IntelliJ IDEA comes with a bundled version of Maven that should be compatible with it. You can switch to using this version by going to `File -> Settings -> Build, Execution, Deployment -> Build Tools -> Maven` and then selecting the `Bundled (Maven 3)` option in the `Maven home directory` dropdown.
+
+Remember to re-import your project after making these changes.

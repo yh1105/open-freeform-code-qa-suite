@@ -1,0 +1,10 @@
+You need to register the ILogger service in your `ServiceCollection`. You can do this by adding the following line to your `ServiceCollection` configuration:
+```c#
+services.AddLogging();
+```
+This will register the `ILoggerFactory` and `ILogger<T>` services, which are required for logging. Your updated `ServiceCollection` configuration should look like this:
+```c#
+var services = new ServiceCollection()
+    .AddLogging()
+    .BuildServiceProvider();
+```

@@ -1,0 +1,15 @@
+id: 2-7-438
+prompt_path: prompt_2-7-438.txt
+type: non-code debugging
+lang: php
+grading:
+  blank_filling:
+    template: 'You can use:
+```
+[blank]
+```'
+    escape: " '\"\n`"
+    targets:
+      - "bin/console --env=dev doctrine:migrations:execute  'Application\\Migrations\\Version20210909072642' --down --no-interaction -vvv"
+
+

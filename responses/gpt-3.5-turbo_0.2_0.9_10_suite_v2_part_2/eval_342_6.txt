@@ -1,1 +1,0 @@
-It's possible that the XML format is not properly configured in your project. Check if you have the necessary dependencies for XML serialization and deserialization, such as Jackson XML, and if they are properly configured in your project. Also, make sure that the `produces` attribute in your OpenAPI specification includes `application/xml` as a valid response format.

@@ -1,0 +1,43 @@
+In a .NET 6 console application, you don't have the `WebApplication` class available. Instead, you can use `ConfigurationBuilder` to read from `appsettings.json`. 
+
+Here's an example of how you can do this:
+
+```csharp
+using Microsoft.Extensions.Configuration;
+using System.IO;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        var builder = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+
+        IConfigurationRoot configuration = builder.Build();
+
+        // Now you can use configuration.GetSection or configuration.GetValue to read your settings
+    }
+}
+```
+
+In this code:
+
+- `SetBasePath(Directory.GetCurrentDirectory())` sets the base path for the configuration file to the current directory.
+- `AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)` adds the `appsettings.json` file as a source of configuration settings. The `optional: true` parameter means that the application will not throw an exception if the file is not found. The `reloadOnChange: true` parameter means that the configuration will be reloaded if the `appsettings.json` file changes.
+
+You can then use `configuration.GetSection` or `configuration.GetValue` to read your settings. For example, if you have a setting like this in your `appsettings.json`:
+
+```json
+{
+    "MySetting": "MyValue"
+}
+```
+
+You can read it like this:
+
+```csharp
+string mySetting = configuration.GetValue<string>("MySetting");
+```
+
+This will give you the value `"MyValue"`.

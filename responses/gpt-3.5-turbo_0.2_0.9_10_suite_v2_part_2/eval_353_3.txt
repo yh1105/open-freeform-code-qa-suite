@@ -1,7 +1,0 @@
-The error message suggests that the `--add-opens` option is not recognized by the Java Virtual Machine. This option is used by Hyperledger Besu to open packages that are not accessible by default due to Java's module system. 
-
-It's possible that the version of Java you have installed does not support this option. The `--add-opens` option was introduced in Java 9, so if you're using Java 8, it won't work. 
-
-You can try upgrading to a newer version of Java that supports this option. Alternatively, you can try using an older version of Hyperledger Besu that doesn't use this option. 
-
-You can also try running the command without the `--add-opens` option to see if it works. However, this may cause other issues if the required packages are not opened.

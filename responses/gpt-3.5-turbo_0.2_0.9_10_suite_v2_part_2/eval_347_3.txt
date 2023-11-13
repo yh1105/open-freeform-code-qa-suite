@@ -1,7 +1,0 @@
-You need to set the `targetCompatibility` in your Gradle build file to `17` as well. Add the following line to your `build.gradle` file:
-
-```
-targetCompatibility = '17'
-```
-
-This will ensure that the compiled code is compatible with Java 17.

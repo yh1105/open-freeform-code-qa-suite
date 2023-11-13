@@ -1,0 +1,7 @@
+Having separate pipelines for specific requests is not necessarily a bad practice. In fact, it can be a good practice to keep the logic for each request separate and organized.
+
+However, it's important to consider the overall design and architecture of your application. If you find yourself creating many separate pipelines for different requests, it may be a sign that your application is becoming too complex and difficult to maintain.
+
+In some cases, it may be possible to refactor your code to use a more generic implementation of TResponse and TRequest that can handle multiple types of requests. This can help simplify your code and make it easier to maintain in the long run.
+
+Ultimately, the decision of whether to use separate pipelines or a more generic implementation will depend on the specific requirements and constraints of your application.

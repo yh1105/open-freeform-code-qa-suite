@@ -1,9 +1,0 @@
-id: 388
-prompt_path: prompt_388.txt
-type: code debugging
-lang: c#
-grading:
-  keywords:
-    - 'AddIdentityServer'
-    - 'KeyManagement.Enabled'
-    - 'false'

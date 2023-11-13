@@ -1,0 +1,26 @@
+The error message you're seeing is because the `--add-opens` option is not recognized. This option is a JVM argument introduced in Java 9 to relax the strong encapsulation of Java Platform Module System. 
+
+Hyperledger Besu requires Java 11 or later to run. Your current Java version is 1.8.0_241 (which is Java 8), and that's why it doesn't recognize the `--add-opens` option.
+
+To solve this issue, you need to upgrade your Java version to 11 or later. Here are the steps:
+
+1. Download the latest Java Development Kit (JDK) from the [official Oracle website](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html) or [OpenJDK website](https://jdk.java.net/11/).
+
+2. Install the downloaded JDK.
+
+3. After installation, set the `JAVA_HOME` environment variable to point to the JDK 11 installation directory. Here's how you can do it:
+
+    - Open System Properties (Right click on Computer in the start menu, or use the keyboard shortcut Win+Pause)
+    - Click Advanced system settings in the sidebar.
+    - Click Environment Variables...
+    - Click New... under System variables
+    - Enter `JAVA_HOME` as the variable name and the path to the JDK 11 installation directory as the variable value.
+
+4. Update the `Path` system variable to include the JDK 11 `bin` directory:
+
+    - In the Environment Variables window, under System variables, scroll down and select `Path` then click Edit...
+    - In the Edit Environment Variable window, click New and add the path to the JDK 11 `bin` directory.
+
+5. Verify the installation by opening a new command prompt and typing `java -version`. It should display the installed Java version.
+
+After these steps, you should be able to run Hyperledger Besu without the error.

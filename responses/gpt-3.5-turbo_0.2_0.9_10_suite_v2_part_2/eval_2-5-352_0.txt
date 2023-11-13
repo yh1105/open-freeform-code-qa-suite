@@ -1,0 +1,17 @@
+The error message suggests that the `--add-opens` option is not recognized by the version of Java that you are using. This option was introduced in Java 9, so it is possible that you are using an older version of Java that does not support it.
+
+You can check the version of Java that is being used by running the following command:
+
+```shell
+java -version
+```
+
+If you are using an older version of Java, you can try upgrading to a newer version that supports the `--add-opens` option. Alternatively, you can try using an older version of Besu that does not require this option.
+
+If you are already using a version of Java that supports the `--add-opens` option, you can try running Besu with the following command instead:
+
+```shell
+bin\besu -Djava.util.logging.manager=org.apache.logging.log4j.jul.LogManager --help
+```
+
+This command sets the logging manager to use Log4j instead of the default Java logging framework, which can sometimes cause issues with Besu.

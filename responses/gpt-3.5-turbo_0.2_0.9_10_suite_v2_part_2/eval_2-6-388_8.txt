@@ -1,0 +1,30 @@
+The `[Keyless]` attribute was introduced in Entity Framework Core 5.0. If you are using an earlier version of Entity Framework Core, you will not have access to this attribute.
+
+To use the `[Keyless]` attribute, you need to make sure that you are using Entity Framework Core 5.0 or later. You can check the version of Entity Framework Core that you are using by looking at the version number of the `Microsoft.EntityFrameworkCore` package in your project's dependencies.
+
+If you are using an earlier version of Entity Framework Core, you can still create keyless entities by defining a class with properties that match the columns in your database view or query, and then using the `DbQuery` class to represent the entity in your `DbContext`. For example:
+
+```c#
+public class MyKeylessClass
+{
+    public int Column1 { get; set; }
+    public string Column2 { get; set; }
+}
+
+public class MyDbContext : DbContext
+{
+    public DbSet<MyEntity> MyEntities { get; set; }
+    public DbQuery<MyKeylessClass> KeylessModel { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Query<MyKeylessClass>().ToView("MyView");
+    }
+}
+```
+
+In this example, `MyKeylessClass` represents a keyless entity with two columns, `Column1` and `Column2`. The `DbQuery<MyKeylessClass>` property `KeylessModel` is used to represent the keyless entity in the `DbContext`. The `ToView` method is used to map the keyless entity to a database view named `MyView`. You can then use `FromSqlRaw` to query the view:
+
+```c#
+var keylessEntities = context.KeylessModel.FromSqlRaw("SELECT Column1, Column2 FROM MyView").ToList();
+```

@@ -1,0 +1,30 @@
+The error message indicates that Jackson, the JSON serializer/deserializer used by Spring, cannot serialize the `ByteArrayInputStream` object that is part of the `MultipartFile` object. To solve this, you can configure Jackson to ignore the `ByteArrayInputStream` property by adding the following configuration to your application:
+
+```java
+@Configuration
+public class JacksonConfig {
+
+    @Bean
+    public ObjectMapper objectMapper() {
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
+        objectMapper.registerModule(new SimpleModule().addSerializer(MultipartFile.class, new MultipartSerializer()));
+        return objectMapper;
+    }
+
+    public static class MultipartSerializer extends JsonSerializer<MultipartFile> {
+
+        @Override
+        public void serialize(MultipartFile value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
+            gen.writeStartObject();
+            gen.writeStringField("name", value.getName());
+            gen.writeStringField("originalFilename", value.getOriginalFilename());
+            gen.writeStringField("contentType", value.getContentType());
+            gen.writeNumberField("size", value.getSize());
+            gen.writeEndObject();
+        }
+    }
+}
+```
+
+This configuration registers a custom serializer for the `MultipartFile` class that only serializes the properties that are relevant for your use case. Note that this serializer only serializes the metadata of the file, not the actual content. If you need to transfer the file content as well, you may need to use a different approach, such as Base64 encoding the content.

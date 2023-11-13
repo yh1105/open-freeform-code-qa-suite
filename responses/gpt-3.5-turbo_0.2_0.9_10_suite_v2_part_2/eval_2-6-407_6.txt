@@ -1,0 +1,32 @@
+The error message suggests that the response from the server is not in the expected JSON format. It's possible that the server is returning an error page or HTML instead of JSON.
+
+To troubleshoot this issue, you can try the following steps:
+
+1. Check the network tab in your browser's developer tools to see the response from the server. Make sure it's a valid JSON object.
+
+2. Try accessing the API endpoint directly in your browser to see if it returns a valid JSON object.
+
+3. If the server is returning an error page or HTML, you may need to modify the server-side code to return a JSON object instead.
+
+4. If the server is returning a valid JSON object, you can try using a different method to deserialize the JSON object. For example, you can try using the `System.Text.Json.JsonSerializer.Deserialize` method instead of the `Http.GetJsonAsync` method.
+
+Here's an example of how to use the `System.Text.Json.JsonSerializer.Deserialize` method:
+
+```c#
+var response = await Http.GetAsync("/api/Employee/Index");
+if (response.IsSuccessStatusCode)
+{
+    var json = await response.Content.ReadAsStringAsync();
+    var empList = JsonSerializer.Deserialize<Employee[]>(json, new JsonSerializerOptions
+    {
+        PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+        IgnoreNullValues = true
+    });
+}
+else
+{
+    // handle error
+}
+```
+
+This code sends a GET request to the API endpoint and reads the response as a string. It then uses the `JsonSerializer.Deserialize` method to deserialize the JSON string into an array of `Employee` objects. The `JsonSerializerOptions` object is used to configure the deserialization process.

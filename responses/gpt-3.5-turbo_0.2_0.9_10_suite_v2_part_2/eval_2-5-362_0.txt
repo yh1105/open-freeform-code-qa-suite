@@ -1,0 +1,26 @@
+The error message indicates that the `ConfigServerConfigDataMissingEnvironmentPostProcessor` is looking for the `spring.config.import` property, which is not set in your project. This property is used to import external configuration files into your application.
+
+Since your project is not a ConfigServer and does not use ConfigServer, you can safely ignore this error by disabling the `ConfigServerConfigDataMissingEnvironmentPostProcessor` post-processor.
+
+To disable the post-processor, add the following line to your `@SpringBootTest` annotation:
+
+```java
+@SpringBootTest(
+    webEnvironment = WebEnvironment.RANDOM_PORT,
+    classes = {
+        ProductCompositeServiceApplication.class,
+        TestSecurityConfig.class },
+    properties = {
+        "spring.main.allow-bean-definition-overriding=true" },
+    // Disable ConfigServerConfigDataMissingEnvironmentPostProcessor
+    // by setting its order to a high value
+    // (higher than ConfigDataEnvironmentPostProcessor.DEFAULT_ORDER)
+    // See: https://docs.spring.io/spring-cloud-commons/docs/current/reference/htmlsingle/#spring-cloud-commons-config-data-environment-post-processor
+    // See: https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#features.external-config.importing
+    // See: https://github.com/spring-cloud/spring-cloud-config/blob/main/spring-cloud-config-client/src/main/java/org/springframework/cloud/config/client/ConfigServerConfigDataMissingEnvironmentPostProcessor.java
+    // See: https://github.com/spring-cloud/spring-cloud-commons/blob/main/spring-cloud-commons/src/main/java/org/springframework/cloud/commons/config/ConfigDataEnvironmentPostProcessor.java
+    // See: https://github.com/spring-cloud/spring-cloud-commons/blob/main/spring-cloud-commons/src/main/java/org/springframework/cloud/commons/config/ConfigDataEnvironmentPostProcessorUtils.java
+    // See: https://github.com/spring-cloud/spring-cloud-commons/blob/main/spring-cloud-commons/src/main/java/org/springframework/cloud/commons/config/ConfigDataEnvironmentPostProcessorOrder.java
+    // See: https://github.com/spring-cloud/spring-cloud-commons/blob/main/spring-cloud-commons/src/main/java/org/springframework/cloud/commons/config/ConfigDataEnvironmentPostProcessor.java
+    // See: https://github.com/spring-cloud/spring-cloud-commons/blob/main/spring-cloud-commons/src/main/java/org/springframework/cloud/commons/config/ConfigDataEnvironmentPostProcessorUtils.java
+    //

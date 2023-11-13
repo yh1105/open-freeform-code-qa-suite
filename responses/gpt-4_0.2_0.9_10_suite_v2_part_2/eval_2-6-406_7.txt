@@ -1,0 +1,39 @@
+In a .NET 6 console application, you don't have the `WebApplication` class available, which is part of the ASP.NET Core framework. However, you can still read the `appsettings.json` file using the `ConfigurationBuilder` class from the `Microsoft.Extensions.Configuration` namespace.
+
+Here is an example of how you can do it:
+
+```csharp
+using Microsoft.Extensions.Configuration;
+using System;
+using System.IO;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        var builder = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+
+        IConfigurationRoot configuration = builder.Build();
+
+        // Now you can access your settings.
+        var mySetting = configuration.GetSection("MySetting").Value;
+        Console.WriteLine(mySetting);
+    }
+}
+```
+
+In this example, `appsettings.json` should be in the same directory as your executable. If it's not, you should modify the `SetBasePath` method to point to the correct directory.
+
+Also, don't forget to set the `Copy to Output Directory` property of your `appsettings.json` file to `Copy if newer` or `Copy always` in the file properties in Visual Studio. This ensures that the `appsettings.json` file is copied to the output directory when you build your application.
+
+The `GetSection` method is used to access the settings in your `appsettings.json` file. For example, if you have the following `appsettings.json`:
+
+```json
+{
+    "MySetting": "Hello, World!"
+}
+```
+
+The `GetSection("MySetting").Value` will return "Hello, World!".

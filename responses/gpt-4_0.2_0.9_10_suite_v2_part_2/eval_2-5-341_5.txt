@@ -1,0 +1,22 @@
+The issue you're experiencing is likely due to the fact that Spring Boot, by default, uses Jackson for JSON serialization and deserialization. However, for XML, you need to include an additional dependency, Jackson Dataformat XML, in your `build.gradle` file.
+
+Here is the dependency you need to add:
+
+```groovy
+implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml'
+```
+
+After adding this dependency, Spring Boot should be able to handle both JSON and XML requests.
+
+If you still face issues, you might need to ensure that your `Pet` model class is properly annotated to support XML serialization. You can use JAXB annotations for this purpose. For example:
+
+```java
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
+public class Pet {
+    // your code
+}
+```
+
+Please note that JAXB annotations are not required if you're using Jackson for XML serialization/deserialization. Jackson can handle XML without them, but if you want to customize the XML output, you might need to use them.

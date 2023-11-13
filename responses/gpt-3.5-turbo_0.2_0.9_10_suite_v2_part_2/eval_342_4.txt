@@ -1,1 +1,0 @@
-It's possible that the XML format is not properly configured in your Spring Boot project. You may need to add a dependency for Jackson XML in your `build.gradle` file and configure it in your application. Alternatively, you can try using a tool like Postman to test the XML format and see if the issue is with the curl command or the server configuration.

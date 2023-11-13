@@ -1,0 +1,11 @@
+It seems like IntelliJ IDEA is still using the old version of Java (1.8) to compile your code. Here are some steps you can try to fix this issue:
+
+1. Make sure you have selected the correct JDK version in IntelliJ IDEA. Go to `File > Project Structure > SDKs` and make sure that the JDK version you want to use (in your case, JDK 11) is listed and selected.
+
+2. Set the project language level to Java 11. Go to `File > Project Structure > Project` and set the `Project language level` to `11 - Local variable syntax for lambda parameters and try-with-resources`.
+
+3. Make sure that the `Project bytecode version` is set to Java 11. Go to `File > Project Structure > Modules` and select the module you want to configure. In the `Sources` tab, set the `Language level` to `11 - Local variable syntax for lambda parameters and try-with-resources`. Then, in the `Output` tab, set the `Target bytecode version` to `11`.
+
+4. If the above steps don't work, try invalidating the IntelliJ IDEA cache and restarting the IDE. Go to `File > Invalidate Caches / Restart` and select `Invalidate and Restart`.
+
+If none of these steps work, it's possible that there is an issue with your JDK installation. You can try reinstalling JDK 11 and making sure that it is properly configured in your system environment variables.

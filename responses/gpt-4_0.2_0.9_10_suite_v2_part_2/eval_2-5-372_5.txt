@@ -1,0 +1,35 @@
+The error message indicates that Hibernate Validator cannot find a validator for the `@NotEmpty` and `@NotBlank` constraints. This is likely because these constraints were introduced in Hibernate Validator 5.2, and you're using Hibernate Validator 5.3.5.Final-redhat-2, which should support these constraints.
+
+However, you mentioned that Hibernate Validator 6.0.11 is resolved by Maven, but it's not the version that's being used at runtime. This suggests that there might be a version conflict, and the older version of Hibernate Validator (5.3.5.Final-redhat-2) is being used instead of the newer version (6.0.11).
+
+To resolve this issue, you can try the following steps:
+
+1. **Check your classpath**: Make sure that there are no other versions of Hibernate Validator in your classpath that could be causing a conflict.
+
+2. **Exclude the older version of Hibernate Validator**: If you find that the older version of Hibernate Validator is being included as a transitive dependency of another dependency, you can exclude it in your `pom.xml` file. Here's an example of how to do this:
+
+    ```xml
+    <dependency>
+        <groupId>org.some.groupId</groupId>
+        <artifactId>some-artifactId</artifactId>
+        <version>some-version</version>
+        <exclusions>
+            <exclusion>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-validator</artifactId>
+            </exclusion>
+        </exclusions>
+    </dependency>
+    ```
+
+3. **Specify the version of Hibernate Validator**: You can explicitly specify the version of Hibernate Validator that you want to use in your `pom.xml` file. Here's an example:
+
+    ```xml
+    <dependency>
+        <groupId>org.hibernate</groupId>
+        <artifactId>hibernate-validator</artifactId>
+        <version>6.0.11.Final</version>
+    </dependency>
+    ```
+
+Remember to run `mvn clean install` after modifying your `pom.xml` file to ensure that Maven updates your dependencies correctly.

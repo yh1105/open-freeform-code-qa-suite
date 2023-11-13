@@ -1,0 +1,37 @@
+In your code, you are using `Ok()` method which is a helper method that creates a `StatusCodeResult` with `Status200OK`. Then you are wrapping a `JsonResult` inside it. That's why you are getting the weird response.
+
+If you want to return JSON with a HTTP status code, you can directly return a `JsonResult` object. The `Json()` method automatically sets the content type to `application/json` and serializes the specified object to JSON.
+
+Here is how you can do it:
+
+```csharp
+public ActionResult IsAuthenticated()
+{
+    return Json("123");
+}
+```
+
+This will return a response with a `200 OK` status code and a body of `123`.
+
+If you want to return a different status code, you can use the `StatusCode()` method and pass the status code and the value you want to return:
+
+```csharp
+public ActionResult IsAuthenticated()
+{
+    return StatusCode(200, "123");
+}
+```
+
+This will return a response with a `200 OK` status code and a body of `123`.
+
+If you want to return a complex object, you can do it like this:
+
+```csharp
+public ActionResult IsAuthenticated()
+{
+    var data = new { Key = "123", Value = "abc" };
+    return Json(data);
+}
+```
+
+This will return a response with a `200 OK` status code and a body of `{"Key":"123","Value":"abc"}`.

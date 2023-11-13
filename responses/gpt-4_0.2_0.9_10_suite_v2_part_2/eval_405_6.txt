@@ -1,3 +1,0 @@
-```
-public Person() : this(0, string.Empty, string.Empty) {}
-```

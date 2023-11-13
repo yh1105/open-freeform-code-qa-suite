@@ -1,1 +1,0 @@
-It's possible that the XML format is not properly configured in your project. Check if you have the necessary dependencies for XML serialization/deserialization, such as Jackson XML or JAXB. Also, make sure that the `produces` attribute in your OpenAPI specification includes `application/xml` as a supported media type for the `getPetById` operation.

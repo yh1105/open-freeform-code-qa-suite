@@ -1,0 +1,32 @@
+In addition to adding the `springdoc-openapi-ui` dependency, you also need to configure it in your Spring Boot application.
+
+Here are the steps to configure `springdoc-openapi-ui` in your Spring Boot application:
+
+1. Add the `@EnableSwagger2WebMvc` annotation to your Spring Boot application class.
+
+```java
+@SpringBootApplication
+@EnableSwagger2WebMvc
+public class YourApplication {
+    // ...
+}
+```
+
+2. Create a `Docket` bean in your Spring Boot application class.
+
+```java
+@Bean
+public Docket api() {
+    return new Docket(DocumentationType.SWAGGER_2)
+            .select()
+            .apis(RequestHandlerSelectors.basePackage("com.your.package"))
+            .paths(PathSelectors.any())
+            .build();
+}
+```
+
+Replace `com.your.package` with the base package of your Spring Boot application.
+
+3. Access the Swagger UI by navigating to `http://localhost:8080/swagger-ui.html` in your web browser.
+
+If you have followed these steps and still get a 404 error, make sure that your application is running on port 8080 and that there are no conflicting mappings in your application.

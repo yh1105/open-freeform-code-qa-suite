@@ -1,0 +1,32 @@
+The error message you're seeing is because Spring Cloud 2020.0.2 (part of Spring Boot 2.4.2) introduced a new way of loading configuration data through the `spring.config.import` property. This is a breaking change from previous versions.
+
+However, since your project is not using a ConfigServer, you should not need to set this property. The fact that you're seeing this error suggests that Spring Cloud Config Client is on the classpath, and Spring Boot is trying to connect to a Config Server.
+
+Looking at your `build.gradle`, I see that you have the following dependency:
+
+```groovy
+implementation('org.springframework.cloud:spring-cloud-starter-config')
+```
+
+This is the Spring Cloud Config Client. If you're not using a Config Server, you should remove this dependency. This should resolve the error you're seeing.
+
+If you still want to keep the dependency, but not use it, you can disable the config client in your `application.properties` or `application.yml` file:
+
+```properties
+spring.cloud.config.enabled=false
+```
+
+Or in your test configuration:
+
+```java
+@SpringBootTest(
+    webEnvironment = WebEnvironment.RANDOM_PORT,
+    classes = {
+        ProductCompositeServiceApplication.class,
+        TestSecurityConfig.class },
+    properties = {
+        "spring.main.allow-bean-definition-overriding=true",
+        "spring.cloud.config.enabled=false" })
+```
+
+This will tell Spring Boot not to try to connect to a Config Server.

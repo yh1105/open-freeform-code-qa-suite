@@ -1,0 +1,25 @@
+In your code, you are using the `Json` method inside the `Ok` method. The `Json` method is used to serialize the given data to JSON format, and the `Ok` method is used to create a `StatusCodeResult` that when executed will produce a `HttpResponse` with a status code 200 (OK).
+
+The `Ok` method already serializes the object to JSON, so you don't need to use the `Json` method. You can directly pass the object to the `Ok` method.
+
+Here is the correct way to return JSON with a HTTP status code in .NET Core Web API:
+
+```csharp
+public ActionResult IsAuthenticated()
+{
+    return Ok("123");
+}
+```
+
+This will return a response with a status code 200 and a body containing the string "123".
+
+If you want to return a different status code, you can use the `StatusCode` method and pass the status code and the object:
+
+```csharp
+public ActionResult IsAuthenticated()
+{
+    return StatusCode(201, "123");
+}
+```
+
+This will return a response with a status code 201 (Created) and a body containing the string "123".

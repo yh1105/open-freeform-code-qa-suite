@@ -1,0 +1,11 @@
+If you want to use the same version of Java that is used by the Maven task, you can specify the `JAVA_HOME` environment variable to point to the correct Java installation.
+
+To do this, you can add the following line to your `mvnw` or `mvnw.cmd` file (depending on your operating system):
+
+```
+export JAVA_HOME=/path/to/java/home
+```
+
+Replace `/path/to/java/home` with the path to the Java installation that works with the Maven task.
+
+Alternatively, you can set the `JAVA_HOME` environment variable in your system settings or in your shell startup script (e.g. `.bashrc` or `.zshrc`).

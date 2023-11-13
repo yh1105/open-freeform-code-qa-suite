@@ -1,0 +1,33 @@
+The error you're encountering is because Gradle is not using the correct Java version. You've set the source compatibility to Java 17 in your `build.gradle` file, but Gradle might still be using an older version of Java.
+
+To resolve this issue, you need to ensure that Gradle is using Java 17. You can do this by setting the `org.gradle.java.home` property in the `gradle.properties` file to point to your Java 17 installation.
+
+Here's how to do it:
+
+1. Locate your `gradle.properties` file. This file is usually located in the root directory of your project. If it doesn't exist, you can create it.
+
+2. Add the following line to the `gradle.properties` file:
+
+```properties
+org.gradle.java.home=/path/to/your/java17/installation
+```
+
+Replace `/path/to/your/java17/installation` with the actual path to your Java 17 installation.
+
+3. Save the `gradle.properties` file and try to build your project again.
+
+If you're not sure where your Java 17 installation is, you can find it by running the following command in the terminal:
+
+```bash
+/usr/libexec/java_home -v 17
+```
+
+This command will print the path to your Java 17 installation.
+
+If you're using Windows, the path might look something like this:
+
+```properties
+org.gradle.java.home=C:\\Program Files\\Java\\jdk-17
+```
+
+Remember to use double backslashes (`\\`) in the path if you're using Windows.

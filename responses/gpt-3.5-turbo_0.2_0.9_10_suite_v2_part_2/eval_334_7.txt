@@ -1,6 +1,0 @@
-```java
-public static void removeFalseSubjects(List<Subject> subjects){
-    subjects.removeIf(subject -> !subject.isStatus());
-}
-```
-This will remove all the objects from the `subjects` list where the `status` is false. The `removeIf` method takes a `Predicate` as an argument, which is used to test each element of the list. In this case, we are using a lambda expression to test if the `status` of the `Subject` object is false. If it is false, the object is removed from the list.

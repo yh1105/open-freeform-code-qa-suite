@@ -1,0 +1,50 @@
+The issue you're experiencing is likely due to the fact that your Spring Boot application is not configured to produce XML responses. By default, Spring Boot applications are configured to produce JSON responses, which is why the JSON request is working as expected.
+
+To enable XML responses, you need to add the Jackson Dataformat XML dependency to your project. If you're using Maven, you can add the following to your `pom.xml`:
+
+```xml
+<dependency>
+    <groupId>com.fasterxml.jackson.dataformat</groupId>
+    <artifactId>jackson-dataformat-xml</artifactId>
+</dependency>
+```
+
+If you're using Gradle, add the following to your `build.gradle`:
+
+```groovy
+implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml'
+```
+
+This will add the necessary libraries to your project to allow Spring to serialize your responses as XML.
+
+Additionally, you may need to specify that your `getPetById` method can produce both JSON and XML responses. You can do this by adding the `@Produces` annotation to your method:
+
+```java
+@Service
+@RestController
+public class PetApiController implements PetApi {
+
+    @Override
+    @Produces({ "application/json", "application/xml" })
+    public ResponseEntity<Pet> getPetById(Long petId) {
+        // ...
+    }
+}
+```
+
+Please note that the `@Produces` annotation is part of the JAX-RS specification, which is not included in Spring by default. If you're using Spring MVC, you can achieve the same result with the `@RequestMapping` or `@GetMapping` annotation:
+
+```java
+@Service
+@RestController
+public class PetApiController implements PetApi {
+
+    @Override
+    @GetMapping(value = "/pet/{petId}", produces = { "application/json", "application/xml" })
+    public ResponseEntity<Pet> getPetById(@PathVariable Long petId) {
+        // ...
+    }
+}
+```
+
+After making these changes, your application should be able to produce both JSON and XML responses.

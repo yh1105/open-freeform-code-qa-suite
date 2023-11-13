@@ -1,0 +1,13 @@
+The error message suggests that there is a problem with the quotes in the command. It seems that the quotes are not properly escaped. You can try the following steps to fix the issue:
+
+1. Open the command prompt as an administrator.
+2. Navigate to the project directory using the `cd` command.
+3. Run the command without the quotes around the path to `mvn.cmd`. For example:
+
+```
+JAVA_HOME=C:\Program Files\Java\jdk-11.0.5 cmd /c "C:\Program Files\NetBeans-11.1\netbeans\java\maven\bin\mvn.cmd -DskipTests=true -Dmaven.ext.class.path=C:\Program Files\NetBeans-11.1\netbeans\java\maven-nblib\netbeans-eventspy.jar -Dfile.encoding=UTF-8 clean install"
+```
+
+4. If the command runs successfully, try running the same command from within NetBeans.
+
+If the above steps do not work, you can try reinstalling NetBeans and/or Maven to ensure that they are properly installed and configured.

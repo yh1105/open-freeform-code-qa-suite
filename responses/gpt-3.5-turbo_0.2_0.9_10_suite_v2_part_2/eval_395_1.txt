@@ -1,5 +1,0 @@
-You can use an open generic type to register your generic interface with the container. Here's an example of how to do it:
-```c#
-services.AddScoped(typeof(IDatabaseService<>), typeof(DatabaseService<>));
-```
-This registers `IDatabaseService<T>` with the container, and tells it to use `DatabaseService<T>` as the implementation. The `<>` syntax is used to indicate that this is an open generic type.

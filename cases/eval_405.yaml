@@ -1,9 +1,0 @@
-id: 405
-prompt_path: prompt_405.txt
-type: code debugging
-lang: c#
-grading:
-  similarity:
-    - metric: rougeLsum
-      references:
-        - path: answer_405_0.txt

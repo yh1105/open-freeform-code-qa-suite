@@ -1,9 +1,0 @@
-The error message is caused by the following line in your `OnModelCreating` method:
-```c#
-user.HasIndex(x => x.Gender);
-```
-You are trying to create an index on the `Gender` property, which is actually a navigation property. You should create the index on the `GenderId` property instead:
-```c#
-user.HasIndex(x => x.GenderId);
-```
-This should solve the problem.

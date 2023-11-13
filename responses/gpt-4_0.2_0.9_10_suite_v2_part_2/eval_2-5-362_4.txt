@@ -1,0 +1,16 @@
+The error you're encountering is due to the changes in Spring Cloud 2020.0.2. The Spring Cloud Config client is now activated by default if it is on the classpath. This is why you're seeing the error even though you're not using a Config Server.
+
+To solve this, you need to disable the Config client. You can do this by setting the `spring.cloud.config.enabled` property to `false` in your `@SpringBootTest` annotation like this:
+
+```java
+@SpringBootTest(
+    webEnvironment = WebEnvironment.RANDOM_PORT,
+    classes = {
+        ProductCompositeServiceApplication.class,
+        TestSecurityConfig.class },
+    properties = {
+        "spring.main.allow-bean-definition-overriding=true",
+        "spring.cloud.config.enabled=false" })
+```
+
+This will disable the Config client and should resolve the error you're seeing.

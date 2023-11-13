@@ -1,0 +1,9 @@
+Here is the implementation of the `removeFalseSubjects` function in Java:
+
+```java
+public static void removeFalseSubjects(List<Subject> subjects){
+    subjects.removeIf(subject -> !subject.isStatus());
+}
+```
+
+This function uses the `removeIf` method of the `List` interface to remove all the objects from the `subjects` list for which the `isStatus` method returns `false`. The `isStatus` method is a getter method for the `status` field of the `Subject` class. The lambda expression `subject -> !subject.isStatus()` is used as a predicate to test each element of the list. If the predicate returns `true` for an element, that element is removed from the list.

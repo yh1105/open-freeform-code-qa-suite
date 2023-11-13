@@ -1,0 +1,13 @@
+The error message you're seeing suggests that the `--add-opens` option is not recognized. This option is a JVM argument introduced in Java 9 to relax the strong encapsulation of Java's module system. 
+
+Your Java version is 1.8, which does not support this option. Hyperledger Besu requires Java 11 or later to run. 
+
+You should upgrade your Java version to at least Java 11. You can download it from the [official Oracle website](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html) or use OpenJDK which is available [here](https://jdk.java.net/11/).
+
+After installing Java 11 or later, you can verify the installation by running the following command in your terminal:
+
+```shell
+java -version
+```
+
+The output should indicate that you're running Java 11 or later. Once you have the correct Java version installed, try running the `bin\besu --help` command again.

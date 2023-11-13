@@ -1,8 +1,0 @@
-You need to register the `ILogger` service in the `ServiceCollection` before building the `ServiceProvider`. You can do this by adding the `Logging` service to the `ServiceCollection` like so:
-```c#
-var services = new ServiceCollection()
-    .AddLogging(logging => logging.AddConsole())
-    .AddTransient<MyClass>() // Add your class to the service collection
-    .BuildServiceProvider();
-```
-This will register the `ILogger` service and allow it to be injected into your `MyClass` constructor.

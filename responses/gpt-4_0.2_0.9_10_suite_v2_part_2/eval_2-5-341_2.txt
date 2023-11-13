@@ -1,0 +1,31 @@
+The issue you're experiencing is likely due to the fact that your Spring Boot application is not configured to produce XML responses. By default, Spring Boot applications are configured to produce JSON responses, which is why your JSON request is working as expected.
+
+To enable XML responses, you need to add the Jackson Dataformat XML library to your project. This library will allow your application to serialize and deserialize XML.
+
+You can add the following dependency to your `build.gradle` file:
+
+```groovy
+implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml'
+```
+
+After adding this dependency, you should be able to produce XML responses.
+
+However, please note that the XML serialization and deserialization might not work as expected if your `Pet` model does not have the correct JAXB annotations. JAXB (Java Architecture for XML Binding) is used to convert Java objects to XML and vice versa.
+
+For example, you might need to annotate your `Pet` class with `@XmlRootElement` and `@XmlElement`:
+
+```java
+@XmlRootElement
+public class Pet {
+    // ...
+
+    @XmlElement
+    public Long getId() {
+        return id;
+    }
+
+    // ...
+}
+```
+
+Please adjust your model classes accordingly.

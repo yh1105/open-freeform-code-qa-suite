@@ -1,0 +1,23 @@
+It seems like you are facing a version conflict issue. The `@NotEmpty` and `@NotBlank` annotations are part of the Bean Validation 2.0 specification, which is implemented by Hibernate Validator 6.0.0.Final and later versions. However, Spring Boot 2.0.4.RELEASE comes with Hibernate Validator 5.3.6.Final, which implements Bean Validation 1.1 and does not support these annotations.
+
+You can try to override the Hibernate Validator version by adding the following dependency to your `pom.xml`:
+
+```xml
+<dependency>
+    <groupId>org.hibernate.validator</groupId>
+    <artifactId>hibernate-validator</artifactId>
+    <version>6.0.11.Final</version>
+</dependency>
+```
+
+Also, you need to add the `validation-api` with version `2.0.1.Final`:
+
+```xml
+<dependency>
+    <groupId>javax.validation</groupId>
+    <artifactId>validation-api</artifactId>
+    <version>2.0.1.Final</version>
+</dependency>
+```
+
+However, please note that Hibernate Validator 6.x is not fully compatible with Spring Boot 2.0.x. You might face some other issues. It would be better to upgrade your Spring Boot version to 2.3.x or later, which comes with Hibernate Validator 6.x by default.

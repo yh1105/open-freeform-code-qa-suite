@@ -1,0 +1,13 @@
+The error message `Unrecognized option: --add-opens` indicates that the Java version you're using does not recognize the `--add-opens` option. This option is used to relax the strong encapsulation of Java module for the specified package to the specified module, and it's available from Java 9 onwards.
+
+The version of Java you're using, as per the output you've provided, is Java 8 (`java version "1.8.0_241"`). This is the reason why it doesn't recognize the `--add-opens` option.
+
+Hyperledger Besu requires Java 11 to run. You can download it from the [official Oracle website](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html) or install it using a package manager like `apt` for Ubuntu or `brew` for MacOS.
+
+After installing Java 11, you can verify the installation by running the following command:
+
+```shell
+java -version
+```
+
+The output should show that you're using Java 11. After that, you should be able to run Hyperledger Besu without encountering the `Unrecognized option: --add-opens` error.

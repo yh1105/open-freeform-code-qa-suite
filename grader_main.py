@@ -351,7 +351,7 @@ if __name__ == '__main__':
             # add other fields to detail results for later statistics
             if field != 'grading':
                 results[case_fname][field] = case_config[field]
-        pbar.set_description(f'Lang:{case_config["lang"]} CurScore={tot_now_score}/{tot_full_score}={(tot_now_score / tot_full_score * 100. if full_score > 0. else 0.):5.2f}%')
+        pbar.set_description(f'Lang:{case_config["lang"]} CurScore={tot_now_score:4.1f}/{tot_full_score}={(tot_now_score / tot_full_score * 100. if full_score > 0. else 0.):5.2f}%')
 
     summary_txt = f"""Total score: {tot_now_score} / {tot_full_score}
 Total cases: {tot_cases}

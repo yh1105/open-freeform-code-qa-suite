@@ -1,0 +1,25 @@
+The error message indicates that Jackson, the JSON serialization library used by Spring, is unable to serialize the `MultipartFile` object because it contains a `ByteArrayInputStream` that cannot be serialized. 
+
+To solve this, you can configure the `RestTemplate` to use a `FormHttpMessageConverter` instead of the default `MappingJackson2HttpMessageConverter` for multipart requests. The `FormHttpMessageConverter` can handle multipart requests and does not rely on JSON serialization.
+
+Here's an updated code snippet that uses `FormHttpMessageConverter`:
+
+```java
+HttpHeaders headers = new HttpHeaders();
+headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+
+MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
+body.add("circularAttachment", souqBean.getCircularAttachment()); //MultipartFile
+body.add("circularEntryId", souqBean.getCircularEntryId());
+body.add("circularTitle", souqBean.getCircularTitle());
+
+HttpEntity<MultiValueMap<String, Object>> entity = new HttpEntity<>(body, headers);
+
+RestTemplate restTemplate = new RestTemplate();
+restTemplate.getMessageConverters().add(new FormHttpMessageConverter());
+
+ResponseEntity<Boolean> response = restTemplate.postForEntity("http://localhost:8081/circular-save", entity, Boolean.class);
+status = response.getBody();
+```
+
+Note that we added a new `FormHttpMessageConverter` to the `RestTemplate`'s list of message converters using the `getMessageConverters()` method. This ensures that the `RestTemplate` will use the `FormHttpMessageConverter` for multipart requests instead of the default `MappingJackson2HttpMessageConverter`.

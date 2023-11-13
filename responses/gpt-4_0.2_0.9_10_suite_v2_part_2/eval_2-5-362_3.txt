@@ -1,0 +1,33 @@
+The error message you're seeing indicates that Spring Cloud is expecting a Config Server to be available, even though you're not using one. This is likely due to the presence of the `spring-cloud-starter-config` dependency in your `build.gradle` file.
+
+If you're not using Spring Cloud Config Server, you can remove the `spring-cloud-starter-config` dependency from your `build.gradle` file:
+
+```groovy
+dependencies {
+    // ...
+    // Remove this line if you're not using Spring Cloud Config Server
+    // implementation('org.springframework.cloud:spring-cloud-starter-config')
+    // ...
+}
+```
+
+If you still want to keep the `spring-cloud-starter-config` dependency for some reason, you can disable the Config Server by setting the `spring.cloud.config.enabled` property to `false` in your `application.properties` or `application.yml` file:
+
+```properties
+spring.cloud.config.enabled=false
+```
+
+Or in your test configuration:
+
+```java
+@SpringBootTest(
+    webEnvironment = WebEnvironment.RANDOM_PORT,
+    classes = {
+        ProductCompositeServiceApplication.class,
+        TestSecurityConfig.class },
+    properties = {
+        "spring.main.allow-bean-definition-overriding=true",
+        "spring.cloud.config.enabled=false" })
+```
+
+This should prevent Spring Cloud from trying to connect to a Config Server.

@@ -1,6 +1,0 @@
-You can write the following code to introduce another constructor overload with no parameters:
-```c#
-public Person() : this(default, default, default)
-{
-}
-```

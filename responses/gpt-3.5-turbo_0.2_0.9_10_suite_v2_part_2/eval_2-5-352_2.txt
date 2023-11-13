@@ -1,0 +1,10 @@
+The error message suggests that the `--add-opens` option is not recognized by the version of Java that you are using. This option was introduced in Java 9, so it is possible that you are using an older version of Java that does not support this option.
+
+To check which version of Java is being used by the `besu` command, you can run the following command:
+```shell
+bin\besu --version
+```
+
+If the output shows that you are using a version of Java older than Java 9, you will need to install a newer version of Java that supports the `--add-opens` option. You can download the latest version of Java from the official website: https://www.java.com/en/download/
+
+Once you have installed a newer version of Java, you can check that it is being used by the `besu` command by running the `--version` command again. If the output shows the correct version of Java, you should be able to run the `besu` command without any issues.

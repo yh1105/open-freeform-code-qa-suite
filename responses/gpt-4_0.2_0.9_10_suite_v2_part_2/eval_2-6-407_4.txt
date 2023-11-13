@@ -1,0 +1,30 @@
+The error message you're seeing is typically caused by an HTTP request that is not returning valid JSON. The '<' character at the start of the response suggests that you might be getting an HTML error page instead.
+
+Here are a few things you can try to resolve the issue:
+
+1. **Check the URL**: Make sure the URL you're using in your Blazor app matches the route defined in your API controller. In your case, the URL should be "/api/Employee/Index".
+
+2. **Check the HTTP response**: Use a tool like Postman or Fiddler to manually send a request to your API and see what it returns. If it's returning an HTML error page, this will help you figure out what the error is.
+
+3. **Use `GetFromJsonAsync` instead of `GetJsonAsync`**: In .NET 5.0 and later, the `GetJsonAsync` method is obsolete. You should use `GetFromJsonAsync` instead. Here's how you can modify your code:
+
+```csharp
+empList = await Http.GetFromJsonAsync<Employee[]>("/api/Employee/Index");
+```
+
+4. **Catch exceptions**: Modify your code to catch any exceptions that occur when making the HTTP request. This can help you understand what's going wrong:
+
+```csharp
+try
+{
+    empList = await Http.GetFromJsonAsync<Employee[]>("/api/Employee/Index");
+}
+catch (Exception ex)
+{
+    Console.WriteLine(ex.Message);
+}
+```
+
+5. **Check your API controller**: Make sure your API controller is correctly set up and returning the expected data. You can test this by adding a breakpoint in your `Index` method and debugging your API.
+
+Remember to replace `Http.GetJsonAsync` with `Http.GetFromJsonAsync` in your Blazor code, as `GetJsonAsync` is now obsolete.

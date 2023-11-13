@@ -1,0 +1,38 @@
+It seems like IntelliJ IDEA is still using the old version of Java (1.8) to compile your code. Here are some steps you can try to fix this issue:
+
+1. Make sure you have set the correct JDK version in IntelliJ IDEA. Go to `File > Project Structure > Project Settings > Project` and select the correct JDK version (11.0.1) from the dropdown list.
+
+2. Check the `pom.xml` file of your project (if you have one) and make sure the `maven-compiler-plugin` is configured to use Java 11. Here's an example configuration:
+
+   ```
+   <build>
+       <plugins>
+           <plugin>
+               <groupId>org.apache.maven.plugins</groupId>
+               <artifactId>maven-compiler-plugin</artifactId>
+               <version>3.8.0</version>
+               <configuration>
+                   <source>11</source>
+                   <target>11</target>
+               </configuration>
+           </plugin>
+       </plugins>
+   </build>
+   ```
+
+3. If you are using Gradle, make sure you have set the correct Java version in your `build.gradle` file. Here's an example configuration:
+
+   ```
+   plugins {
+       id 'java'
+   }
+
+   java {
+       sourceCompatibility = JavaVersion.VERSION_11
+       targetCompatibility = JavaVersion.VERSION_11
+   }
+   ```
+
+4. If none of the above steps work, try to invalidate the cache and restart IntelliJ IDEA. Go to `File > Invalidate Caches / Restart` and select `Invalidate and Restart`.
+
+Hope this helps!

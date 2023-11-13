@@ -1,0 +1,9 @@
+You can use an open generic type to register a generic interface with a DI container. Here's an example of how you can register your `IDatabaseService<T>` interface with the `IServiceCollection` in your `Startup.cs` file:
+
+```c#
+services.AddScoped(typeof(IDatabaseService<>), typeof(DatabaseService<>));
+```
+
+This registers the open generic type `IDatabaseService<>` with the closed generic type `DatabaseService<>`. Now, when you inject `IDatabaseService<T>` into your controllers, the DI container will automatically create an instance of `DatabaseService<T>` for you.
+
+Note that you need to have a concrete implementation of your generic interface, in this case `DatabaseService<T>`, for this to work.

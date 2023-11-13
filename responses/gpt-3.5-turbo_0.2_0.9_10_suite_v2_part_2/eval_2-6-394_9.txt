@@ -1,0 +1,9 @@
+You can use an open generic registration to register a generic interface with a specific implementation. Here's an example:
+
+```c#
+services.AddScoped(typeof(IDatabaseService<>), typeof(DatabaseService<>));
+```
+
+In this example, `DatabaseService<>` is the implementation of the `IDatabaseService<>` interface. The `<>` syntax indicates that it's a generic type, and the type parameter is left unspecified. 
+
+With this registration, you can inject `IDatabaseService<T>` into your controllers, and the container will resolve it to `DatabaseService<T>` at runtime.

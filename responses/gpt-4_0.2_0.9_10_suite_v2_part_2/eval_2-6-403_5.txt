@@ -1,0 +1,36 @@
+In your code, you are wrapping the JSON result inside an Ok result. The Ok result is already a type of `ActionResult` that returns a status code of 200. So you don't need to wrap it again with `Json()`. 
+
+Here is the correct way to return JSON with a HTTP status code in a .NET Core Web API controller:
+
+```csharp
+public ActionResult IsAuthenticated()
+{
+    return Ok("123");
+}
+```
+
+This will return a HTTP 200 status code with the body containing the string "123". 
+
+If you want to return a more complex object as JSON, you can do it like this:
+
+```csharp
+public ActionResult GetSomeData()
+{
+    var data = new { Name = "John", Age = 30 };
+    return Ok(data);
+}
+```
+
+This will return a HTTP 200 status code with the body containing the JSON representation of the `data` object.
+
+If you want to return a different status code, you can use different methods like `BadRequest()`, `NotFound()`, etc., or you can use the `StatusCode()` method to specify the status code directly. For example:
+
+```csharp
+public ActionResult GetSomeData()
+{
+    var data = new { Error = "Something went wrong" };
+    return StatusCode(500, data);
+}
+```
+
+This will return a HTTP 500 status code with the body containing the JSON representation of the `data` object.

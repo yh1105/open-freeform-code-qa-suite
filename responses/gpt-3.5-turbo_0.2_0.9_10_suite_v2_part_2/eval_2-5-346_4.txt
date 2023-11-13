@@ -1,0 +1,17 @@
+It seems like the Gradle build is not picking up the correct Java version. You can try adding the following lines to your `build.gradle` file:
+
+```
+tasks.withType(JavaCompile) {
+    options.compilerArgs << "--release" << "17"
+}
+```
+
+This will tell Gradle to use Java 17 when compiling your code. If that doesn't work, you can try specifying the Java home directory in your `gradle.properties` file:
+
+```
+org.gradle.java.home=/path/to/your/java/home
+```
+
+Replace `/path/to/your/java/home` with the path to your Java 17 installation directory. 
+
+If you're still having issues, you can try running `./gradlew clean build --debug` to get more information about what's going wrong during the build process.

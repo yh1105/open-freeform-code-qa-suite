@@ -1,0 +1,31 @@
+To inject a generic interface in ASP.NET Core, you need to specify the type when you register the service. For example, if you have a `User` class and a `DatabaseService<User>` class that implements `IDatabaseService<User>`, you would register it like this:
+
+```c#
+services.AddScoped<IDatabaseService<User>, DatabaseService<User>>();
+```
+
+If you have multiple classes that implement `IDatabaseService<T>`, you would need to register each one separately:
+
+```c#
+services.AddScoped<IDatabaseService<User>, DatabaseService<User>>();
+services.AddScoped<IDatabaseService<Order>, DatabaseService<Order>>();
+// etc.
+```
+
+Then, in your controller, you can inject `IDatabaseService<User>` or `IDatabaseService<Order>` as needed:
+
+```c#
+public class UserController : Controller
+{
+    private readonly IDatabaseService<User> _userService;
+
+    public UserController(IDatabaseService<User> userService)
+    {
+        _userService = userService;
+    }
+
+    // ...
+}
+```
+
+This way, the dependency injection system knows which implementation to use for each type.

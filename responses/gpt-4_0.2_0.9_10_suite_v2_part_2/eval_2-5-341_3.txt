@@ -1,0 +1,32 @@
+The issue you're experiencing might be due to the fact that Spring Boot doesn't support XML responses by default. To enable XML responses, you need to add the Jackson XML dependency to your project.
+
+Here's how you can do it:
+
+1. Add the following dependency to your `build.gradle` file:
+
+```groovy
+dependencies {
+    // ...
+    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml'
+    // ...
+}
+```
+
+2. Rebuild your project.
+
+3. Now your Spring Boot application should be able to produce XML responses.
+
+If you're still having issues, you might need to specify that your `Pet` class should be serialized to XML. You can do this by adding the `@XmlRootElement` annotation to your `Pet` class:
+
+```java
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
+public class Pet {
+    // ...
+}
+```
+
+Remember to import the `javax.xml.bind.annotation.XmlRootElement` package.
+
+After making these changes, your application should be able to handle requests that specify `application/xml` in the `Accept` header.

@@ -1,0 +1,19 @@
+The error message indicates that the `ConfigServerConfigDataMissingEnvironmentPostProcessor` is trying to import configuration from a Config Server, but it cannot find the `spring.config.import` property. This may be caused by a change in the default behavior of Spring Cloud Config in version `2020.0.2`.
+
+To fix this issue, you can try adding the following property to your test properties:
+
+```
+spring.config.import=optional:configserver:
+```
+
+This will tell Spring Cloud Config to look for configuration in a Config Server, but it will not fail if it cannot find one.
+
+Alternatively, you can disable the Config Server configuration completely by adding the following property:
+
+```
+spring.cloud.config.enabled=false
+```
+
+This will prevent Spring Cloud Config from trying to import configuration from a Config Server.
+
+Make sure to add these properties to the `@SpringBootTest` annotation in your test class.

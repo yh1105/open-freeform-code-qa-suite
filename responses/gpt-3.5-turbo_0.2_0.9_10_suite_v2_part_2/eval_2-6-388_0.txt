@@ -1,0 +1,26 @@
+The `[Keyless]` attribute was introduced in Entity Framework Core 5.0. If you are using an earlier version of Entity Framework Core, you will not have access to this attribute.
+
+To use `[Keyless]`, you need to make sure that you have installed Entity Framework Core 5.0 or later. You can check the version of Entity Framework Core that you are using by looking at the version number of the `Microsoft.EntityFrameworkCore` package in your project's dependencies.
+
+If you are using an earlier version of Entity Framework Core, you can still create keyless entities by defining a query type. A query type is a type that is not mapped to a database table, but can be used to represent the results of a query. To define a query type, you can use the `EntityTypeBuilder.HasNoKey` method in your `OnModelCreating` method, like this:
+
+```c#
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    modelBuilder.Query<MyKeylessClass>().ToView("MyView");
+}
+```
+
+Then, you can use the query type in your `DbContext` like this:
+
+```c#
+public DbQuery<MyKeylessClass> KeylessModel { get; set; }
+```
+
+And use it like this:
+
+```c#
+_context.KeylessModel.FromSqlRaw(...)
+```
+
+I hope this helps!

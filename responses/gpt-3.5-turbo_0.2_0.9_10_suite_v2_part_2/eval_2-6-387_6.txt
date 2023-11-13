@@ -1,0 +1,28 @@
+The error message indicates that the `Keys` table is missing in the database. This could be caused by a migration issue during the upgrade process.
+
+To solve this problem, you can try the following steps:
+
+1. Open the Package Manager Console in Visual Studio by going to Tools > NuGet Package Manager > Package Manager Console.
+
+2. Run the following command to generate a new migration:
+
+   ```
+   Add-Migration AddKeysTable
+   ```
+
+3. Run the following command to update the database:
+
+   ```
+   Update-Database
+   ```
+
+   This will apply the migration and create the `Keys` table in the database.
+
+If the above steps do not work, you can try deleting the database and creating a new one by running the following commands:
+
+```
+dotnet ef database drop
+dotnet ef database update
+```
+
+Note that this will delete all data in the database, so make sure to back up any important data before running these commands.

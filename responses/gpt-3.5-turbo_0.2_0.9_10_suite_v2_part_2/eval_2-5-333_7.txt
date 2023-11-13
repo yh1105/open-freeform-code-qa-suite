@@ -1,0 +1,15 @@
+Here is the implementation of the `removeFalseSubjects` function in Java:
+
+```java
+public static void removeFalseSubjects(List<Subject> subjects) {
+    Iterator<Subject> iterator = subjects.iterator();
+    while (iterator.hasNext()) {
+        Subject subject = iterator.next();
+        if (!subject.isStatus()) {
+            iterator.remove();
+        }
+    }
+}
+```
+
+This function uses an iterator to loop through the `subjects` list and remove any object whose `status` is false. The `iterator.remove()` method removes the current object from the list.

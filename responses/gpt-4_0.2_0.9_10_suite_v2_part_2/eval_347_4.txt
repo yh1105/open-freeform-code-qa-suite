@@ -1,9 +1,0 @@
-The issue is likely due to the Gradle version you are using. Gradle versions below 7.0 do not support Java 17. You need to upgrade your Gradle version to at least 7.0 to resolve this issue.
-
-You can upgrade Gradle version in your `gradle-wrapper.properties` file. The file is located in the `gradle/wrapper` directory in your project. Open the file and change the `distributionUrl` to use the desired Gradle version. For example:
-
-```properties
-distributionUrl=https\://services.gradle.org/distributions/gradle-7.3-bin.zip
-```
-
-After changing the Gradle version, refresh your Gradle project in IntelliJ IDEA. This should resolve the issue.

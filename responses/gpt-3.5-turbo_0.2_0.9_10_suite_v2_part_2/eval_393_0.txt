@@ -1,7 +1,0 @@
-Having separate pipelines for specific requests is not necessarily a bad practice. In fact, it can be a good practice as it allows you to have more control over the behavior of each pipeline and keep the logic separate and organized.
-
-However, having too many pipelines can also lead to complexity and maintenance issues. It's important to strike a balance between having enough pipelines to handle specific requests and keeping the overall design simple and manageable.
-
-If you find that you have many pipelines that are very similar, you may want to consider refactoring your code to use a more generic pipeline that can handle multiple types of requests. This can help simplify your code and make it easier to maintain in the long run.
-
-Ultimately, the decision to use separate pipelines or a more generic pipeline will depend on the specific requirements of your project and the trade-offs you are willing to make in terms of complexity and maintainability.

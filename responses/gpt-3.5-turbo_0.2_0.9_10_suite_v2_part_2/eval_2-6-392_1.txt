@@ -1,0 +1,7 @@
+Having separate pipelines for specific requests is not necessarily a bad practice. In fact, it can be a good way to keep your code organized and maintainable. 
+
+However, it's important to consider the trade-offs. Having multiple pipelines can increase the complexity of your code and make it harder to maintain in the long run. It can also make it harder to reuse code between pipelines.
+
+If you find that you have a lot of specific pipelines, it may be worth considering if there is a way to generalize the logic so that it can be reused across multiple pipelines. This could involve creating a base pipeline class that handles common logic and then inheriting from that class for specific pipelines.
+
+Ultimately, the decision of whether to have separate pipelines or not depends on the specific requirements of your application and the trade-offs you are willing to make.

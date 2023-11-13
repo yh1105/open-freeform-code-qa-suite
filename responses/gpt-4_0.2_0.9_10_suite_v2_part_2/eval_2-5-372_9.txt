@@ -1,0 +1,35 @@
+It seems like you are facing a version conflict issue. Hibernate Validator 5.x does not support `@NotEmpty` and `@NotBlank` for `String` types. These constraints are supported from Hibernate Validator 6.x onwards.
+
+The error message you are seeing indicates that Hibernate Validator 5.3.5.Final-redhat-2 is being used, which does not support these constraints for `String` types.
+
+The version of Hibernate Validator being used is likely coming from your application server (JBoss), which is probably bundled with Hibernate Validator 5.3.5.Final-redhat-2.
+
+To resolve this issue, you could try the following:
+
+1. **Exclude the Hibernate Validator from JBoss**: This can be done by creating a `jboss-deployment-structure.xml` file in your `WEB-INF` directory with the following content:
+
+```xml
+<jboss-deployment-structure>
+    <deployment>
+        <exclusions>
+            <module name="org.hibernate.validator" />
+        </exclusions>
+    </deployment>
+</jboss-deployment-structure>
+```
+
+This will tell JBoss to not use its bundled Hibernate Validator and instead use the one provided by your application.
+
+2. **Include Hibernate Validator 6.x in your application**: You can do this by adding the following dependency to your `pom.xml`:
+
+```xml
+<dependency>
+    <groupId>org.hibernate.validator</groupId>
+    <artifactId>hibernate-validator</artifactId>
+    <version>6.0.11.Final</version>
+</dependency>
+```
+
+This will ensure that your application is using Hibernate Validator 6.x, which supports `@NotEmpty` and `@NotBlank` for `String` types.
+
+Remember to rebuild your application after making these changes.

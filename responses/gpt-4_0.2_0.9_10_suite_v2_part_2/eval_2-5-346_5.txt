@@ -1,0 +1,14 @@
+The error message "invalid source release: 17" indicates that Gradle is not using Java 17 to compile your project. This is likely because the Gradle JVM is not set to Java 17.
+
+To resolve this issue, you need to set the Gradle JVM to Java 17. Here's how you can do it:
+
+1. Go to "File" -> "Settings" (On Mac, "IntelliJ IDEA" -> "Preferences").
+2. In the Settings/Preferences dialog, go to "Build, Execution, Deployment" -> "Build Tools" -> "Gradle".
+3. Under the "Gradle JVM" option, select your Java 17 SDK. If it's not in the list, you can add it by selecting "Add JDK..." from the dropdown menu.
+4. Click "OK" to save the changes.
+
+After doing this, try to rebuild your project. If everything is set up correctly, your project should now compile and run without the "invalid source release: 17" error.
+
+If the problem persists, you can try invalidating caches and restarting IntelliJ IDEA. Go to "File" -> "Invalidate Caches / Restart..." -> "Invalidate and Restart". This will clear the internal cache of the IDE and might resolve the issue.
+
+Also, make sure that you have the latest version of Gradle that supports Java 17. You can update Gradle by changing the version in your `gradle-wrapper.properties` file or by using a Gradle wrapper.

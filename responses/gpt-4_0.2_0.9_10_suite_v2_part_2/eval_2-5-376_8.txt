@@ -1,0 +1,11 @@
+It seems like you've done most of the things correctly. However, IntelliJ IDEA 2017 may not fully support Java 11. Here are a few things you can try:
+
+1. **Upgrade IntelliJ IDEA:** The first thing you should try is to upgrade your IntelliJ IDEA to the latest version. IntelliJ IDEA 2017 may not fully support Java 11. The latest version of IntelliJ IDEA has full support for Java 11.
+
+2. **Check the Project SDK:** Go to `File > Project Structure > Project`. Check if the Project SDK is set to the correct JDK (11.0.1 in your case). If not, set it to the correct JDK.
+
+3. **Check the Module SDK:** In the same `Project Structure` window, go to `Modules`, select your module, and check if the Module SDK is set to the correct JDK (11.0.1 in your case). If not, set it to the correct JDK.
+
+4. **Check the Compiler settings:** Go to `File > Settings > Build, Execution, Deployment > Compiler > Java Compiler`. Check if the `Target bytecode version` for your module is set to 11. If not, set it to 11.
+
+Regarding the JDK installation, Java 11 does not come with a separate JRE like previous versions. The JDK includes a JRE, and there is no need for a separate JRE. This is a change in Java 11 and is not an issue with your installation.

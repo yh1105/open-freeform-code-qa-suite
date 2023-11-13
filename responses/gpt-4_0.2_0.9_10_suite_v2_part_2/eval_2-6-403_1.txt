@@ -1,0 +1,23 @@
+The `Ok()` method in .NET Core Web API automatically converts the object you pass into it into JSON. So, you don't need to use `Json()` method inside `Ok()`. 
+
+Here's how you should modify your code:
+
+```csharp
+public ActionResult IsAuthenticated()
+{
+    return Ok("123");
+}
+```
+
+This will return a response with a 200 OK HTTP status code and a body of "123".
+
+If you want to return a different HTTP status code, you can use the `StatusCode()` method. For example, to return a 201 Created status code, you could do:
+
+```csharp
+public ActionResult IsAuthenticated()
+{
+    return StatusCode(201, "123");
+}
+```
+
+This will return a response with a 201 Created HTTP status code and a body of "123".

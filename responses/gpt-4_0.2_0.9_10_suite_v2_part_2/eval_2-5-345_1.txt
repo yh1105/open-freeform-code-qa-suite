@@ -1,0 +1,17 @@
+The error you're encountering is due to a compatibility issue between the version of Maven bundled with IntelliJ IDEA and the version of Maven used in your project.
+
+The issue is that IntelliJ IDEA is bundled with an older version of Maven, and your project is using a newer version of Maven. The older version of Maven in IntelliJ IDEA does not recognize the newer features used in your project, hence the `NoSuchMethodError`.
+
+Here are a few ways to solve this issue:
+
+1. **Update IntelliJ IDEA**: JetBrains regularly updates IntelliJ IDEA to support the latest versions of Maven. Make sure you're using the latest version of IntelliJ IDEA.
+
+2. **Configure IntelliJ IDEA to use the project's Maven version**: You can configure IntelliJ IDEA to use the same version of Maven as your project. Here's how:
+
+   - Open the `Settings/Preferences` dialog (Ctrl+Alt+S).
+   - In the left pane, select `Build, Execution, Deployment` > `Build Tools` > `Maven`.
+   - On the `Maven` settings page, in the `Maven home directory` field, specify the path to the local installation of Maven that matches the version used in your project.
+
+3. **Downgrade the Maven version in your project**: If you cannot update IntelliJ IDEA or configure it to use the project's Maven version, you can downgrade the Maven version in your project to match the version bundled with IntelliJ IDEA. However, this may not be feasible if your project relies on features available only in the newer version of Maven.
+
+Remember to re-import your project after making these changes.

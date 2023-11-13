@@ -1,0 +1,24 @@
+The error message you're seeing is indicating that the JSON deserializer is encountering an unexpected character at the beginning of the response. The '<' character is typically the start of an HTML or XML document, not a JSON document. This could mean that the server is returning an HTML error page instead of the expected JSON response.
+
+First, ensure that your server is correctly configured to return JSON. You can test this by manually visiting the URL "/api/Employee/Index" in your web browser or using a tool like Postman to make a GET request to that URL. The response should be a JSON array of employees.
+
+If the server is correctly returning JSON, the issue may be with how you're making the request in your Blazor app. In .NET Core 3.0, the `GetJsonAsync` method is deprecated. You should use `GetFromJsonAsync` instead. Here's how you can modify your code:
+
+```c#
+empList = await Http.GetFromJsonAsync<Employee[]>("/api/Employee/Index");
+```
+
+Also, ensure that the route in your API controller matches the URL you're requesting from the client. In your `EmployeeController`, you've defined the route as `api/Employee/Index`, but the `[Route("[controller]")]` attribute at the top of the controller will also be included in the route. This means the full route to your `Index` action is actually `/Employee/api/Employee/Index`.
+
+You can fix this by changing the route on your `Index` action to just `[Route("Index")]`:
+
+```c#
+[HttpGet]
+[Route("Index")]
+public IEnumerable<Employee> Index()
+{
+    return objemployee.GetAllEmployees();
+}
+```
+
+Now, the route to your `Index` action should be `/Employee/Index`, which matches the URL you're requesting from the client.

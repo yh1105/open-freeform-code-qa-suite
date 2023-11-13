@@ -1,0 +1,10 @@
+It seems like IntelliJ IDEA is still using the old JDK version (1.8) to compile your code. You need to configure IntelliJ IDEA to use the new JDK version (11.0.1) instead.
+
+Here's how you can do it:
+
+1. Go to `File > Project Structure`.
+2. Under `Project Settings`, select `Project`.
+3. In the `Project SDK` dropdown, select `11.0.1`.
+4. Click `OK`.
+
+This should configure IntelliJ IDEA to use the new JDK version for your project.

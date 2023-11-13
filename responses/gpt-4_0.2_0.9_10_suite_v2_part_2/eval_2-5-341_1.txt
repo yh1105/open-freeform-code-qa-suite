@@ -1,0 +1,24 @@
+The issue you're experiencing is likely due to the fact that your Spring Boot application is not properly configured to handle XML responses. By default, Spring Boot is configured to handle JSON responses, but XML requires additional configuration and dependencies.
+
+To enable XML responses in your Spring Boot application, you need to add the following dependency to your `build.gradle` file:
+
+```gradle
+implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml'
+```
+
+This dependency will add support for XML data format in your application.
+
+After adding this dependency, you should be able to handle XML responses in your application. However, please note that the XML support in Spring Boot is not as comprehensive as the JSON support. For example, you may need to add additional annotations to your model classes to ensure that they are correctly serialized/deserialized to/from XML.
+
+If you still face issues, make sure your `Pet` model and its related models (`Category`, `Tag`) are properly annotated for XML serialization/deserialization. You can use `@XmlRootElement`, `@XmlElement` and other related annotations from `javax.xml.bind.annotation` package.
+
+For example:
+
+```java
+@XmlRootElement
+public class Pet {
+    //...
+}
+```
+
+Remember to recompile your project after making these changes.

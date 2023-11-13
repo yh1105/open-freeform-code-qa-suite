@@ -1,0 +1,21 @@
+The error message indicates that the `Keys` table is missing in the database. You can try the following steps to solve the problem:
+
+1. Make sure that the database is up to date with the latest migrations. You can run the following command in the Package Manager Console to apply any pending migrations:
+
+   ```
+   Update-Database
+   ```
+
+2. If the `Update-Database` command doesn't solve the problem, you can try dropping the database and creating a new one. To do this, run the following commands in the Package Manager Console:
+
+   ```
+   Drop-Database
+   Create-Database
+   Update-Database
+   ```
+
+   Note that this will delete all data in the database, so make sure to backup any important data before running these commands.
+
+3. If the problem still persists, you can try checking the `Keys` table definition in the database. Make sure that the table exists and has the correct columns and data types. You can use a tool like SQLiteStudio to inspect the database.
+
+4. If none of the above steps work, you can try rolling back to the previous version of ASP.NET Core and IdentityServer4, or contacting the IdentityServer4 support team for further assistance.

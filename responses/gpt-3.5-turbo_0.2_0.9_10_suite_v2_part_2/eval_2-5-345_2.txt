@@ -1,0 +1,18 @@
+This error occurs because of a conflict between the version of Maven used by IntelliJ and the version of Maven used by the Spring Boot project. 
+
+To fix this error, you can try the following steps:
+
+1. In IntelliJ, go to File > Settings > Build, Execution, Deployment > Build Tools > Maven.
+2. Under "Maven home directory", select the option "Use bundled Maven 3".
+3. Click "OK" to save the changes.
+4. Re-import the Maven project.
+
+If the above steps do not work, you can try updating the version of Maven used by the Spring Boot project. To do this, open the `pom.xml` file of the project and update the `maven.version` property to the latest version of Maven. For example:
+
+```
+<properties>
+    <maven.version>3.8.3</maven.version>
+</properties>
+```
+
+Save the changes and re-import the Maven project.

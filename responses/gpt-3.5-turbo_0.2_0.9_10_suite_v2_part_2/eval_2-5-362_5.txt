@@ -1,0 +1,15 @@
+The error message indicates that the `ConfigServerConfigDataMissingEnvironmentPostProcessor` is trying to import configuration from a Config Server, but it cannot find the `spring.config.import` property. This is likely because the `spring-cloud-starter-config` dependency is included in your project, which enables the Config Client functionality by default.
+
+To fix this issue, you can exclude the `spring-cloud-starter-config` dependency from your project. You mentioned that you have already commented out the Config Client configuration, so excluding the dependency should not have any impact on your project.
+
+To exclude the `spring-cloud-starter-config` dependency, add the following to your `build.gradle` file:
+
+```
+implementation('org.springframework.cloud:spring-cloud-starter-config') {
+    exclude group: 'org.springframework.cloud', module: 'spring-cloud-config-client'
+}
+```
+
+This will exclude the `spring-cloud-config-client` module, which is responsible for the Config Client functionality.
+
+After making this change, you should be able to build and run your project without encountering the `spring.config.import` error.

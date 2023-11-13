@@ -1,0 +1,7 @@
+The Maven wrapper uses the version of Java that is specified in the `JAVA_HOME` environment variable. You can check the version of Java that is currently being used by running the command `java -version` in your terminal.
+
+To use the same version of Java that is used by the Maven task, you can set the `JAVA_HOME` environment variable to the path of the JDK that is used by the Maven task. You can find the path to the JDK by running the command `mvn -version` in your terminal and looking for the `Java home` line in the output.
+
+Once you have the path to the JDK, you can set the `JAVA_HOME` environment variable by running the command `export JAVA_HOME=/path/to/jdk` in your terminal, replacing `/path/to/jdk` with the actual path to the JDK.
+
+After setting the `JAVA_HOME` environment variable, you should be able to run the Maven wrapper using the same version of Java that is used by the Maven task.

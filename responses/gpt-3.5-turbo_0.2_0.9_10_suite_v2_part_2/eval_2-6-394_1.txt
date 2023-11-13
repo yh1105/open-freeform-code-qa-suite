@@ -1,0 +1,25 @@
+You can use an open generic type to register your generic interface with the dependency injection container. Here's an example of how to do it in your `Startup.cs` file:
+
+```c#
+services.AddScoped(typeof(IDatabaseService<>), typeof(DatabaseService<>));
+```
+
+In this example, `DatabaseService<>` is the implementation of your generic interface `IDatabaseService<>`. The `<>` syntax is used to indicate that it's a generic type. 
+
+With this registration, you can now inject `IDatabaseService<T>` into your controllers without specifying the generic type parameter `T`. The container will resolve the correct implementation based on the type parameter used in the injection site. For example:
+
+```c#
+public class MyController : Controller
+{
+    private readonly IDatabaseService<MyModel> _databaseService;
+
+    public MyController(IDatabaseService<MyModel> databaseService)
+    {
+        _databaseService = databaseService;
+    }
+
+    // ...
+}
+```
+
+In this example, `MyModel` is the type parameter used for `IDatabaseService<>`. The container will resolve `DatabaseService<MyModel>` as the implementation for `IDatabaseService<MyModel>`.

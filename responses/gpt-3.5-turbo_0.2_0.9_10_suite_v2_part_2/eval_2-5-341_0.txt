@@ -1,0 +1,9 @@
+This is happening because the `jackson-dataformat-xml` dependency is not included in your project. 
+
+To enable XML support in your Spring Boot project, you need to add the following dependency to your `build.gradle` file:
+
+```groovy
+implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml'
+```
+
+After adding this dependency, you should be able to receive XML responses from your API.

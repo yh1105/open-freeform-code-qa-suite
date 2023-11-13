@@ -1,0 +1,19 @@
+In order to inject a generic interface in ASP.NET Core, you need to specify the type argument when registering the service. 
+
+Here is an example of how you can do it:
+
+```c#
+services.AddScoped<IDatabaseService<MyClass>, DatabaseService<MyClass>>();
+```
+
+In this example, `MyClass` is the type argument you want to use with your generic interface. `DatabaseService<MyClass>` is the concrete class that implements `IDatabaseService<MyClass>`.
+
+If you have multiple classes that implement `IDatabaseService<T>`, you need to register each of them separately:
+
+```c#
+services.AddScoped<IDatabaseService<Class1>, DatabaseService<Class1>>();
+services.AddScoped<IDatabaseService<Class2>, DatabaseService<Class2>>();
+// and so on...
+```
+
+Remember to replace `MyClass`, `Class1`, `Class2`, etc. with your actual class names. Also, replace `DatabaseService<MyClass>`, `DatabaseService<Class1>`, `DatabaseService<Class2>`, etc. with your actual class names that implement the corresponding `IDatabaseService<T>`.

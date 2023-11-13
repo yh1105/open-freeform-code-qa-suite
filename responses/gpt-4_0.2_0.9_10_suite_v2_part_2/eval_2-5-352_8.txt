@@ -1,0 +1,21 @@
+The error message you're seeing suggests that the `--add-opens` option is not recognized. This is a JVM option that is used to open certain packages in Java for deep reflection. This option is available in Java 9 and later versions, but you're using Java 8, which is why it's not recognized.
+
+Hyperledger Besu requires Java 11 to run. You can download it from the [official Oracle website](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html) or use OpenJDK which can be downloaded from [AdoptOpenJDK](https://adoptopenjdk.net/).
+
+After installing Java 11, you will need to set it as your default Java version. You can do this by setting the `JAVA_HOME` environment variable to point to your Java 11 installation directory. 
+
+Here is how you can do it:
+
+1. Right click on 'My Computer' and select 'Properties'.
+2. Click on 'Advanced system settings'.
+3. Click on 'Environment Variables'.
+4. Click on 'New' under 'System variables'.
+5. Enter `JAVA_HOME` as 'Variable name' and path to your Java 11 installation directory as 'Variable value'. For example, `C:\Program Files\Java\jdk-11.0.1`.
+6. Click 'OK'.
+7. In the 'System Variables' section, find 'Path' and click on 'Edit'.
+8. In the 'Variable value' field, add `;%JAVA_HOME%\bin` at the end.
+9. Click 'OK' three times to close the dialog boxes.
+
+After setting `JAVA_HOME`, you can verify that you're using the correct version by opening a new command prompt and running `java -version`. You should see that Java 11 is now your default version. 
+
+Now, you should be able to run Hyperledger Besu without the `--add-opens` error.

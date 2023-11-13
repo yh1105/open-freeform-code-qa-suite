@@ -1,0 +1,11 @@
+This error is caused by an incompatibility between the version of Maven bundled with IntelliJ IDEA and the version of Maven used in the project. The Maven version that comes with IntelliJ IDEA is not compatible with the newer version of Maven (3.8.5) used in the Spring Boot 2.7 project.
+
+To resolve this issue, you can configure IntelliJ IDEA to use the same version of Maven as your project. Here are the steps:
+
+1. Open IntelliJ IDEA.
+2. Go to `File` > `Settings` (or `Preferences` for macOS).
+3. In the Settings/Preferences dialog, go to `Build, Execution, Deployment` > `Build Tools` > `Maven`.
+4. In the `Maven home directory` field, enter the path to the Maven installation that matches the version used in your project. If you don't have the required version installed, you can download it from the [Apache Maven website](https://maven.apache.org/download.cgi).
+5. Click `OK` to save the changes.
+
+Now, IntelliJ IDEA will use the specified Maven version for building your project, which should resolve the error.

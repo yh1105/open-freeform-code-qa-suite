@@ -1,0 +1,25 @@
+The error message you're seeing is indicating that the JSON deserializer is encountering an unexpected '<' character at the start of the response. This is usually an indication that the server is returning HTML instead of JSON. This could be due to an error page, or a redirect to a login page, etc.
+
+First, you should check the route of your API. In your `EmployeeController`, you have defined the route as `[Route("[controller]")]` and `[Route("api/Employee/Index")]` for the `Index` method. This would result in a route like `Employee/api/Employee/Index`, which is probably not what you want. 
+
+You should change the route to something like this:
+```csharp
+[ApiController]
+[Route("api/[controller]")]
+public class EmployeeController : ControllerBase
+{
+    EmployeeRepository objemployee = new EmployeeRepository();
+    [HttpGet]
+    public IEnumerable<Employee> Index()
+    {
+        return objemployee.GetAllEmployees();
+    }
+}
+```
+In this case, the route to your method would be `api/Employee`.
+
+Then, in your Blazor code, you should call the API like this:
+```csharp
+empList = await Http.GetJsonAsync<Employee[]>("api/Employee");
+```
+If you still encounter the issue, I would recommend you to use the browser's developer tools to inspect the network traffic and see what's actually being returned from the server when you make the request. This should give you more information about what's going wrong.

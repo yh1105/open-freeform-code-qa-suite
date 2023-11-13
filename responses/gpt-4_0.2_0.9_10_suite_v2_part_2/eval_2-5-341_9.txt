@@ -1,0 +1,23 @@
+The issue you're experiencing is likely due to the fact that your Spring Boot application is not configured to produce XML responses. By default, Spring Boot applications are configured to produce JSON responses.
+
+To enable XML responses, you need to add the following dependencies to your `build.gradle` file:
+
+```groovy
+implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml'
+implementation 'org.springframework.boot:spring-boot-starter-web'
+```
+
+The `jackson-dataformat-xml` dependency is needed to serialize and deserialize XML in your Spring Boot application.
+
+After adding these dependencies, you should be able to receive XML responses from your API.
+
+If you still face issues, you may need to explicitly set the `produces` attribute in your `@RequestMapping` or `@GetMapping` annotation to `application/xml`, like so:
+
+```java
+@GetMapping(value = "/pet/{petId}", produces = MediaType.APPLICATION_XML_VALUE)
+public ResponseEntity<Pet> getPetById(@PathVariable Long petId) {
+    // your code here
+}
+```
+
+This tells Spring Boot that this particular method should produce an XML response.

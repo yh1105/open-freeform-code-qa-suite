@@ -1,0 +1,27 @@
+The error you're encountering is due to the fact that Spring Cloud 2020.0.2 (aka Ilford) expects a `spring.config.import` property to be set if the `spring-cloud-starter-config` dependency is on the classpath. This is a change from previous versions of Spring Cloud, where the Config Server was optional even if the `spring-cloud-starter-config` dependency was present.
+
+If you're not using Spring Cloud Config Server, you can remove the `spring-cloud-starter-config` dependency from your `build.gradle`:
+
+```groovy
+dependencies {
+    // ...
+    // Remove this line
+    // implementation('org.springframework.cloud:spring-cloud-starter-config')
+    // ...
+}
+```
+
+If you need the `spring-cloud-starter-config` dependency for some reason but you're not using Spring Cloud Config Server, you can disable the Config Server bootstrap configuration using the `spring.cloud.config.enabled` property:
+
+```java
+@SpringBootTest(
+    webEnvironment = WebEnvironment.RANDOM_PORT,
+    classes = {
+        ProductCompositeServiceApplication.class,
+        TestSecurityConfig.class },
+    properties = {
+        "spring.main.allow-bean-definition-overriding=true",
+        "spring.cloud.config.enabled=false" })
+```
+
+This should prevent Spring Cloud from trying to connect to a Config Server and eliminate the error.

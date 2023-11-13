@@ -1,0 +1,9 @@
+This is happening because the `jackson-dataformat-xml` dependency is not included in your project. This dependency is required to serialize and deserialize XML data. 
+
+To fix this issue, you can add the following dependency to your `build.gradle` file:
+
+```groovy
+implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml'
+```
+
+After adding this dependency, you should be able to receive XML responses from your API.

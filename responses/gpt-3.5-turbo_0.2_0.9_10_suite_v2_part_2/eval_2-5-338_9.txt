@@ -1,0 +1,20 @@
+The error message indicates that Jackson (the JSON serializer/deserializer used by Spring) is unable to serialize the `MultipartFile` object because it contains a `ByteArrayInputStream` object, which it doesn't know how to serialize.
+
+To solve this, you can configure Jackson to ignore the `ByteArrayInputStream` property by adding the following annotation to your `MultipartFile` class:
+
+```java
+@JsonIgnoreProperties(value = {"inputStream"})
+public class MyMultipartFile implements MultipartFile {
+    // ...
+}
+```
+
+This will tell Jackson to ignore the `inputStream` property when serializing the `MultipartFile` object.
+
+Alternatively, you can configure Jackson to ignore all unknown properties by adding the following property to your application.properties file:
+
+```
+spring.jackson.deserialization.fail-on-unknown-properties=false
+```
+
+This will tell Jackson to ignore any unknown properties when deserializing JSON objects.

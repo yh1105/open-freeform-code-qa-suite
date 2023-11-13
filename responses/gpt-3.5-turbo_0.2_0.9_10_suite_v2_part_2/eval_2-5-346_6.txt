@@ -1,0 +1,17 @@
+It seems like the Gradle build is not picking up the Java 17 configuration from IntelliJ. You can try adding the following lines to your `build.gradle` file to explicitly set the Java version for Gradle:
+
+```
+compileJava {
+    options.release = 17
+}
+```
+
+This should tell Gradle to use Java 17 for compilation. If this doesn't work, you can also try adding the following line to your `gradle.properties` file:
+
+```
+org.gradle.java.home=/path/to/your/jdk
+```
+
+Replace `/path/to/your/jdk` with the path to your Java 17 installation. This should tell Gradle where to find the Java 17 installation.
+
+After making these changes, try running your app again.

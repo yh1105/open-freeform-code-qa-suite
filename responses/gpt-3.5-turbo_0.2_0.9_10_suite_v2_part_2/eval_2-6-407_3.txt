@@ -1,0 +1,35 @@
+The error message suggests that the response from the server is not in the expected JSON format. This could be due to a few reasons, such as an error in the server-side code or a network issue.
+
+Here are a few things you can try to troubleshoot the issue:
+
+1. Check the server-side code: Make sure that the `GetAllEmployees()` method in the `EmployeeRepository` class is returning a valid JSON response. You can test this by calling the API endpoint directly in a web browser or using a tool like Postman.
+
+2. Check the network traffic: Use the browser's developer tools or a tool like Fiddler to inspect the network traffic between the client and server. Look for any errors or unexpected responses.
+
+3. Try a different API endpoint: If the issue persists, try calling a different API endpoint to see if the issue is specific to this endpoint or a more general issue with the client-server communication.
+
+4. Use a different HTTP client: Instead of using `Http.GetJsonAsync`, try using a different HTTP client library like `HttpClient` to make the API call. This can help you better control the request and response format.
+
+Here's an example of how you can use `HttpClient` to make the API call:
+
+```c#
+using System.Net.Http;
+using System.Net.Http.Json;
+
+public class EmployeeService
+{
+    private readonly HttpClient _httpClient;
+
+    public EmployeeService(HttpClient httpClient)
+    {
+        _httpClient = httpClient;
+    }
+
+    public async Task<IEnumerable<Employee>> GetAllEmployees()
+    {
+        return await _httpClient.GetFromJsonAsync<IEnumerable<Employee>>("/api/Employee/Index");
+    }
+}
+```
+
+You can then inject the `EmployeeService` into your Blazor component and call the `GetAllEmployees` method to retrieve the data.

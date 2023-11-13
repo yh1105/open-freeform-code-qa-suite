@@ -1,9 +1,0 @@
-id: 395
-prompt_path: prompt_395.txt
-type: code completion
-lang: c#
-grading:
-  similarity:
-    - metric: rougeLsum
-      references:
-        - path: answer_395_0.txt

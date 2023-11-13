@@ -1,0 +1,20 @@
+The error message you are seeing is related to the Spring Cloud Config feature. It seems that the `spring-cloud-starter-config` dependency is causing the issue.
+
+To fix the issue, you can try removing the `spring-cloud-starter-config` dependency from your `build.gradle` file. Since you mentioned that your project is not a ConfigServer and does not use ConfigServer, this dependency may not be necessary.
+
+If you do need the `spring-cloud-starter-config` dependency for some reason, you can try setting the `spring.cloud.config.enabled` property to `false` in your test properties. This will disable the Spring Cloud Config feature for your tests.
+
+Here's an example of how you can set the `spring.cloud.config.enabled` property in your test properties:
+
+```java
+@SpringBootTest(
+    webEnvironment = WebEnvironment.RANDOM_PORT,
+    classes = {
+        ProductCompositeServiceApplication.class,
+        TestSecurityConfig.class },
+    properties = {
+        "spring.main.allow-bean-definition-overriding=true",
+        "spring.cloud.config.enabled=false" })
+```
+
+This should resolve the issue you are seeing in your JUnit tests.

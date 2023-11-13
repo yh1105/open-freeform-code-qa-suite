@@ -1,0 +1,39 @@
+The error message suggests that the response from the server is not in the expected JSON format. It looks like the response starts with a '<' character, which indicates that it might be an HTML error page instead of a JSON response.
+
+To troubleshoot this issue, you can try the following steps:
+
+1. Check the network tab in your browser's developer tools to see the actual response from the server. Make sure it is a valid JSON response and not an error page.
+
+2. Check the URL that you are using to make the API call. Make sure it is correct and matches the route defined in your API controller.
+
+3. Try adding a `[Produces("application/json")]` attribute to your API method to explicitly specify that it should return JSON.
+
+4. Try using a tool like Postman to make the API call and see if you get a valid JSON response.
+
+5. If none of the above steps work, try simplifying your API method to return a hardcoded JSON response and see if you can get that to work in your Blazor app. This will help you isolate the issue to either the API or the Blazor app.
+
+Here's an example of how you can modify your API method to return a hardcoded JSON response:
+
+```c#
+[HttpGet]
+[Route("api/Employee/Index")]
+[Produces("application/json")]
+public IActionResult Index()
+{
+    var employees = new List<Employee>
+    {
+        new Employee { Id = 1, Name = "John Doe" },
+        new Employee { Id = 2, Name = "Jane Smith" }
+    };
+
+    return Ok(employees);
+}
+```
+
+In your Blazor app, you can then use the following code to make the API call:
+
+```c#
+empList = await Http.GetJsonAsync<Employee[]>("/api/Employee/Index");
+``` 
+
+If this works, then the issue might be with the way your `EmployeeRepository` is returning data.

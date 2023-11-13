@@ -1,0 +1,37 @@
+The error message you're seeing is typically due to the server returning HTML when JSON is expected. This often happens when there's an error on the server and it returns an HTML error page instead of a JSON response.
+
+First, ensure that your server is correctly configured and that the API endpoint is working as expected. You can test this by navigating directly to the API URL in your web browser or using a tool like Postman.
+
+Second, the route attribute in your controller is not correct. You have defined the route as `api/Employee/Index` in your controller but you are trying to access it as `/Employee/Index` in your Blazor code. 
+
+Here's how you should define your controller:
+
+```c#
+[ApiController]
+[Route("api/[controller]")]
+public class EmployeeController : ControllerBase
+{
+    EmployeeRepository objemployee = new EmployeeRepository();
+
+    [HttpGet]
+    public IEnumerable<Employee> Index()
+    {
+        return objemployee.GetAllEmployees();
+    }
+}
+```
+
+And here's how you should call it from your Blazor code:
+
+```c#
+empList = await Http.GetJsonAsync<Employee[]>("api/Employee");
+```
+
+If you still encounter issues, you may want to consider using `HttpClient.GetStringAsync()` and then manually deserialize the JSON. This will allow you to see the raw response from the server, which can be helpful for debugging:
+
+```c#
+var json = await Http.GetStringAsync("api/Employee");
+empList = JsonSerializer.Deserialize<Employee[]>(json);
+```
+
+Remember to add `using System.Text.Json;` at the top of your file if you use `JsonSerializer`.

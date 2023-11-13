@@ -1,0 +1,8 @@
+Make sure that you are passing the `ILogger` instance to the constructor of `MyClass`. You can do this by registering `MyClass` with the `ServiceCollection` like so:
+```c#
+var services = new ServiceCollection()
+    .AddLogging(logging => logging.AddConsole())
+    .AddTransient<MyClass>()
+    .BuildServiceProvider();
+```
+This will ensure that an instance of `MyClass` is created with the correct dependencies, including the `ILogger` instance.

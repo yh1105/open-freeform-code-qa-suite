@@ -1,0 +1,25 @@
+The error message you're seeing is due to the fact that Spring Cloud 2020.0.2 (aka Ilford) is designed to work with Spring Boot 2.4.x, which introduced a new way to import configurations using the `spring.config.import` property.
+
+Even though your project is not a ConfigServer and you have commented out the ConfigClient, the `spring-cloud-starter-config` dependency is still in your `build.gradle` file. This starter brings in the ConfigClient, which is expecting the `spring.config.import` property to be set.
+
+If you're not using the ConfigServer or ConfigClient, you can simply remove the `spring-cloud-starter-config` dependency from your `build.gradle` file:
+
+```groovy
+// Remove this line
+// implementation('org.springframework.cloud:spring-cloud-starter-config')
+```
+
+If you are using the ConfigClient, but just not in this particular test, you can disable it for the test by adding the following property:
+
+```java
+@SpringBootTest(
+    webEnvironment = WebEnvironment.RANDOM_PORT,
+    classes = {
+        ProductCompositeServiceApplication.class,
+        TestSecurityConfig.class },
+    properties = {
+        "spring.main.allow-bean-definition-overriding=true",
+        "spring.cloud.config.enabled=false" }) // Add this line
+```
+
+This will disable the ConfigClient for this test, and you should no longer see the error about `spring.config.import` not being set.

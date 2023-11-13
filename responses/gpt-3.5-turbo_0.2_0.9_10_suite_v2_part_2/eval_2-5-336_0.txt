@@ -1,0 +1,9 @@
+Here is the implementation of the `createPriorityQueue` function in Java:
+
+```java
+public static PriorityQueue<Pair<Integer, Integer>> createPriorityQueue() {
+    return new PriorityQueue<>(Comparator.comparingInt(Pair::getKey));
+}
+```
+
+This function creates a new `PriorityQueue` of `Pair<Integer, Integer>` objects, where the smallest key of pairs is considered as priority. The `Comparator.comparingInt(Pair::getKey)` method is used to compare the keys of the pairs and determine their priority in the queue.

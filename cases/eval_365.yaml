@@ -1,7 +1,0 @@
-id: 365
-prompt_path: prompt_365.txt
-type: non-code debugging
-lang: java
-grading:
-  keywords:
-    - 'JavaToolInstaller'

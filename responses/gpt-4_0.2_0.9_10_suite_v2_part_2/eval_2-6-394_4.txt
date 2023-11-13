@@ -1,0 +1,26 @@
+You can't directly inject a generic interface without specifying the type, but you can register the specific implementations of that interface in your `Startup.cs` file. 
+
+For example, if you have a `User` class and a `DatabaseService<User>` implementation of `IDatabaseService<T>`, you can register it like this:
+
+```c#
+services.AddScoped<IDatabaseService<User>, DatabaseService<User>>();
+```
+
+This way, whenever `IDatabaseService<User>` is requested, an instance of `DatabaseService<User>` will be provided.
+
+You'll need to do this for each specific implementation of `IDatabaseService<T>` that you have.
+
+If you have many implementations and want to register them dynamically, you can use reflection:
+
+```c#
+var types = AppDomain.CurrentDomain.GetAssemblies()
+    .SelectMany(s => s.GetTypes())
+    .Where(p => typeof(IDatabaseService<>).IsAssignableFrom(p) && !p.IsInterface);
+
+foreach (var type in types)
+{
+    services.AddScoped(typeof(IDatabaseService<>).MakeGenericType(type.GenericTypeArguments[0]), type);
+}
+```
+
+This code will scan all assemblies for types that implement `IDatabaseService<T>`, and register them with the DI container.

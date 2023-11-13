@@ -1,0 +1,16 @@
+You need to register the `ILogger` service in the `ServiceCollection` before building the `ServiceProvider`. You can do this by adding the `ILoggerFactory` service to the `ServiceCollection` and then using it to create an `ILogger` instance. Here's an example:
+
+```c#
+var services = new ServiceCollection()
+    .AddLogging(logging =>
+    {
+        logging.AddConsole();
+    })
+    .AddTransient<MyClass>()
+    .BuildServiceProvider();
+
+var myClass = services.GetService<MyClass>();
+myClass.MyFunc();
+```
+
+In the above example, we register the `MyClass` service as transient, which means a new instance will be created every time it's requested. Then we build the `ServiceProvider` and get an instance of `MyClass`. Finally, we call the `MyFunc` method, which logs a message using the `ILogger` instance injected into the constructor of `MyClass`.

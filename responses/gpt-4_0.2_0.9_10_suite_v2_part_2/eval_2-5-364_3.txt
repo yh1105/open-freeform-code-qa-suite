@@ -1,0 +1,24 @@
+The Maven Wrapper is a shell script called `mvnw` (or `mvnw.cmd` on Windows) that automatically downloads and installs the correct version of Maven for your project. It also sets up the correct Java version for you.
+
+However, the Maven Wrapper doesn't control the Java version directly. It uses the Java version that's currently active in your shell. If you're seeing an error about the Java version, it's likely because you're running the Maven Wrapper in a shell where an older version of Java is active.
+
+To fix this, you need to change the active Java version in your shell. Here's how you can do it:
+
+1. First, check which Java versions you have installed. On a Unix-like system, you can do this with the command `ls /usr/lib/jvm`. On Windows, look in `C:\Program Files\Java`.
+
+2. Once you've found the correct Java version, you need to change the `JAVA_HOME` environment variable to point to it. On Unix-like systems, you can do this with the command `export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64` (replace `/usr/lib/jvm/java-11-openjdk-amd64` with the path to your Java version). On Windows, you can do this in the System Properties -> Environment Variables dialog.
+
+3. Finally, you need to add the `bin` directory of the new `JAVA_HOME` to your `PATH`. On Unix-like systems, you can do this with the command `export PATH=$JAVA_HOME/bin:$PATH`. On Windows, you can do this in the System Properties -> Environment Variables dialog.
+
+After doing this, the Maven Wrapper should use the correct Java version.
+
+If you want to specify the Java version directly in your Maven project, you can do this in the `pom.xml` file with the `maven.compiler.source` and `maven.compiler.target` properties. Here's an example:
+
+```xml
+<properties>
+    <maven.compiler.source>11</maven.compiler.source>
+    <maven.compiler.target>11</maven.compiler.target>
+</properties>
+```
+
+This tells Maven to use Java 11 for both compiling source code and generating bytecode.

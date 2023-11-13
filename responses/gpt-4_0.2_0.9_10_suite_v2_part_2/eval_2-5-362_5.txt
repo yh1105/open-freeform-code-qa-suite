@@ -1,0 +1,37 @@
+The error message you're seeing is due to the fact that Spring Cloud 2020.0.2 (aka Ilford) has introduced a new way of loading configuration data through the `spring.config.import` property. This property is used to import configuration data from Config Server or other sources.
+
+However, since you're not using Config Server in your project, you can disable this feature by excluding `ConfigDataImportSelector` from your test configuration.
+
+Here is how you can do it:
+
+```java
+@SpringBootTest(
+    webEnvironment = WebEnvironment.RANDOM_PORT,
+    classes = {
+        ProductCompositeServiceApplication.class,
+        TestSecurityConfig.class },
+    properties = {
+        "spring.main.allow-bean-definition-overriding=true" },
+    excludeAutoConfiguration = ConfigDataImportSelector.class)
+```
+
+This should solve your problem.
+
+Alternatively, you can also disable the Config Server bootstrap configuration by setting the `spring.cloud.config.enabled` property to `false` in your `application.properties` or `application.yml` file:
+
+```properties
+spring.cloud.config.enabled=false
+```
+
+Or in your test configuration:
+
+```java
+@SpringBootTest(
+    webEnvironment = WebEnvironment.RANDOM_PORT,
+    classes = {
+        ProductCompositeServiceApplication.class,
+        TestSecurityConfig.class },
+    properties = {
+        "spring.main.allow-bean-definition-overriding=true",
+        "spring.cloud.config.enabled=false" })
+```

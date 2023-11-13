@@ -1,0 +1,12 @@
+The error message is telling you that you cannot create an index on a navigation property, which is what `Gender` is in the `User` entity. To fix this, you need to create an index on the foreign key property `GenderId` instead. 
+
+Replace this line:
+```c#
+user.HasIndex(x => x.Gender);
+```
+with this:
+```c#
+user.HasIndex(x => x.GenderId);
+```
+
+This will create an index on the `GenderId` property, which is what you want.

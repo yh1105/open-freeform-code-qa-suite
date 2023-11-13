@@ -1,0 +1,47 @@
+You can't directly inject a generic interface without specifying the type parameter. However, you can create a non-generic interface that inherits from the generic one and then inject the non-generic interface. Here's an example:
+
+```c#
+public interface IDatabaseService<T>
+{
+    IEnumerable<T> GetList();
+    //...
+}
+
+public interface IProductDatabaseService : IDatabaseService<Product>
+{
+    // You can add more methods here if needed
+}
+
+public class ProductDatabaseService : IProductDatabaseService
+{
+    public IEnumerable<Product> GetList()
+    {
+        // Implementation here...
+    }
+    //...
+}
+```
+
+Then in your `Startup.cs` you can add the service like this:
+
+```c#
+services.AddScoped<IProductDatabaseService, ProductDatabaseService>();
+```
+
+And in your controller:
+
+```c#
+public class ProductsController : Controller
+{
+    private readonly IProductDatabaseService _service;
+
+    public ProductsController(IProductDatabaseService service)
+    {
+        _service = service;
+    }
+
+    //...
+}
+```
+
+This way, you can inject the specific service you need for each controller.

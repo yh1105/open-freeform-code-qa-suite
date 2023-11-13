@@ -1,0 +1,19 @@
+If you want to use the same version of Java that works with the Maven task, you can specify the path to the Java executable in your Maven wrapper configuration file (`./mvnw` or `./mvnw.cmd`).
+
+In the `mvnw` file, you can add the following line at the beginning of the file:
+
+```
+export JAVA_HOME=/path/to/java/home
+```
+
+Replace `/path/to/java/home` with the path to the Java home directory that works with the Maven task.
+
+In the `mvnw.cmd` file, you can add the following line at the beginning of the file:
+
+```
+set JAVA_HOME=C:\path\to\java\home
+```
+
+Replace `C:\path\to\java\home` with the path to the Java home directory that works with the Maven task.
+
+After making this change, you should be able to run Maven using the Maven wrapper with the same version of Java that works with the Maven task.

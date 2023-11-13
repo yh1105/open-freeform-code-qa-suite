@@ -1,0 +1,17 @@
+The `[Keyless]` attribute was introduced in Entity Framework Core 5.0. If you are using an earlier version of Entity Framework Core, you will not have access to this attribute.
+
+To use `[Keyless]`, you need to make sure that your project is targeting .NET 5.0 or later and that you have installed the Entity Framework Core 5.0 (or later) package.
+
+If you have already installed Entity Framework Core 5.0 and are still not seeing the `[Keyless]` attribute, try cleaning and rebuilding your project to make sure that all dependencies are properly resolved.
+
+If you are still having issues, you can try manually adding the `[Keyless]` attribute to your project by defining it as follows:
+
+```c#
+namespace System.ComponentModel.DataAnnotations
+{
+    [AttributeUsage(AttributeTargets.Class)]
+    public class KeylessAttribute : Attribute { }
+}
+```
+
+This should allow you to use `[Keyless]` in your code even if it is not available in the `System.ComponentModel.DataAnnotations` namespace.

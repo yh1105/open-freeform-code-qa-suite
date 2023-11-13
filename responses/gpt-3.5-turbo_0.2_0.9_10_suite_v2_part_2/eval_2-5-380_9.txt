@@ -1,0 +1,17 @@
+There are a few things you can check to troubleshoot this issue:
+
+1. Make sure that the `@EnableSwagger2WebMvc` annotation is present in your Spring Boot application class. This annotation enables Swagger support for your application.
+
+2. Check that the `springdoc.swagger-ui.path` property is set to `/swagger-ui.html` in your `application.properties` or `application.yml` file. This is the default path for the Swagger UI.
+
+3. Verify that the `@OpenAPIDefinition` annotation is present in your controller class. This annotation is used to define the OpenAPI specification for your API.
+
+4. Check that the `@Operation` annotation is present in your API methods. This annotation is used to define the operation details for each API method.
+
+5. Verify that the `@ApiParam` annotation is present in your API method parameters. This annotation is used to define the parameter details for each API method.
+
+6. Check that the `@ApiResponse` annotation is present in your API method return type. This annotation is used to define the response details for each API method.
+
+7. Finally, make sure that your application is running on the correct port. By default, Spring Boot applications run on port 8080, but this can be changed in the `application.properties` or `application.yml` file using the `server.port` property.
+
+If none of these steps solve the issue, you can try checking the logs for any error messages or try running the application in debug mode to see if there are any issues with the configuration.

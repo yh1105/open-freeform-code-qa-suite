@@ -1,0 +1,11 @@
+The error message suggests that the `--add-opens` option is not recognized by the Java Virtual Machine. This option is used by Hyperledger Besu to open packages that are not open by default in Java 9 and later versions. 
+
+It seems that you are using Java 8, which does not support this option. To use Hyperledger Besu, you need to install Java 11 or later versions. You can download the latest version of Java from the official website: https://www.oracle.com/java/technologies/javase-downloads.html
+
+After installing Java 11 or later, make sure to set the `JAVA_HOME` environment variable to the installation directory of the new Java version. You can check if the variable is set correctly by running the following command:
+
+```shell
+echo %JAVA_HOME%
+```
+
+It should output the path to the Java installation directory. Once you have set up Java 11 or later, try running the `bin\besu --help` command again. It should work without any issues.

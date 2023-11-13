@@ -1,6 +1,0 @@
-```java
-public static void removeFalseSubjects(List<Subject> subjects){
-    subjects.removeIf(subject -> !subject.isStatus());
-}
-```
-This code uses the `removeIf` method of the `List` interface to remove all elements that do not have a `status` of `true`. The lambda expression `subject -> !subject.isStatus()` is used as a predicate to test each element of the list. If the predicate returns `true`, the element is removed from the list.

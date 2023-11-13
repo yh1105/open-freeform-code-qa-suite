@@ -1,0 +1,21 @@
+The error message you're seeing typically indicates that the version of Gradle you're using doesn't support Java 17. 
+
+As of October 2021, Gradle 7.3 is the first version to offer support for Java 17. So, you should ensure that you're using Gradle 7.3 or later. 
+
+You can specify the Gradle version in your `gradle-wrapper.properties` file, which is located in the `gradle/wrapper` directory of your project. 
+
+Here's how you can specify the Gradle version:
+
+```properties
+distributionUrl=https\://services.gradle.org/distributions/gradle-7.3-bin.zip
+```
+
+After updating the Gradle version, you should refresh your Gradle project in IntelliJ IDEA. You can do this by clicking on the "Refresh all Gradle projects" button in the Gradle tool window.
+
+If you're using the Gradle Wrapper (which is recommended), you should also update the Wrapper to use the new version. You can do this by running the following command in your terminal:
+
+```shell
+./gradlew wrapper --gradle-version=7.3
+```
+
+This command will update the `gradle-wrapper.properties` file and also download the specified Gradle version if it's not already downloaded.

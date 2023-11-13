@@ -1,0 +1,1 @@
+@Configuration should be used when you want to define beans using Java configuration instead of XML or annotations. It is typically used to define beans that require complex initialization or have dependencies on other beans. On the other hand, @Service, @Controller, and @Component are used to annotate classes that provide specific functionality within a Spring application.

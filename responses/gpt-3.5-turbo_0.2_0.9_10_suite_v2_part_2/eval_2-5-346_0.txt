@@ -1,0 +1,19 @@
+It seems like the Gradle build is not picking up the correct Java version. You can try adding the following lines to your `build.gradle` file:
+
+```
+compileJava {
+    options.release = 17
+}
+```
+
+This will set the Java version to 17 for the compilation process. 
+
+If that doesn't work, you can also try adding the following line to your `gradle.properties` file:
+
+```
+org.gradle.java.home=/path/to/your/jdk
+```
+
+Replace `/path/to/your/jdk` with the path to your Java 17 installation directory. This will tell Gradle to use the specified JDK for the build process.
+
+After making these changes, try running your app again. It should now use Java 17 and the error should be resolved.

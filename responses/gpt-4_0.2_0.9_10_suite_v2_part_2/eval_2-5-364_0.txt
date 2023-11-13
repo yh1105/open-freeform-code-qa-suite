@@ -1,0 +1,25 @@
+The Maven Wrapper is a shell script used to automatically download and install the correct version of Maven for your project. It's a good way to ensure that everyone working on your project is using the same version of Maven.
+
+However, the Maven Wrapper doesn't control the version of Java that's used to run Maven. That's determined by the `JAVA_HOME` environment variable, or if `JAVA_HOME` is not set, then whichever `java` executable is on the system path.
+
+If you're using a CI/CD system like Jenkins or GitHub Actions, you can usually specify the version of Java to use as part of the build configuration. For example, in GitHub Actions, you can use the `actions/setup-java` action to install a specific version of Java and set `JAVA_HOME` appropriately.
+
+If you're running the Maven Wrapper on your local machine, you'll need to ensure that `JAVA_HOME` is set to the location of the correct JDK before you run the Maven Wrapper. You can do this in a shell script or batch file, or by setting `JAVA_HOME` in your system environment variables.
+
+Here's an example of how to set `JAVA_HOME` in a shell script:
+
+```bash
+export JAVA_HOME=/path/to/your/jdk
+./mvnw clean install
+```
+
+And here's how to do it in a batch file:
+
+```batch
+set JAVA_HOME=C:\path\to\your\jdk
+mvnw.cmd clean install
+```
+
+Remember to replace `/path/to/your/jdk` or `C:\path\to\your\jdk` with the actual path to your JDK.
+
+If you're not sure where your JDK is installed, you can usually find out by running `which java` (on Linux or macOS) or `where java` (on Windows) from the command line. This will tell you the path to the `java` executable, and the JDK is usually the directory that contains this executable.

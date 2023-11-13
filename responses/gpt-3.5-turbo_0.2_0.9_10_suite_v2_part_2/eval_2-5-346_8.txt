@@ -1,0 +1,11 @@
+It seems like Gradle is not picking up the Java version that you have set in your IntelliJ project settings. To fix this, you can add the following lines to your `build.gradle` file:
+
+```
+compileJava {
+    options.release = 17
+}
+```
+
+This will tell Gradle to compile your Java code with Java 17. 
+
+After adding this to your `build.gradle` file, try running your app again. It should now compile and run without any issues.

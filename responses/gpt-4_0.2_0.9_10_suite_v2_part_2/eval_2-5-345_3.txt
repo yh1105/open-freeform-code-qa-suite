@@ -1,0 +1,15 @@
+The error you're encountering is due to a compatibility issue between IntelliJ IDEA and the Maven version (3.8.5) that comes with Spring Boot 2.7. IntelliJ IDEA has a built-in Maven 3 which is not compatible with Maven 3.8.5.
+
+To resolve this issue, you can configure IntelliJ IDEA to use an external Maven instead of the built-in one. Here's how:
+
+1. Open IntelliJ IDEA and go to `File > Settings` (or `IntelliJ IDEA > Preferences` for macOS).
+
+2. In the Settings/Preferences dialog, expand the `Build, Execution, Deployment` node and select `Build Tools > Maven`.
+
+3. On the right side, in the `Maven home directory` field, point to the directory where Maven is installed. This should be a version that is compatible with your project, for example, Maven 3.8.4.
+
+4. Click `OK` to save the changes.
+
+Now, IntelliJ IDEA will use the specified external Maven for building and running your Maven projects. This should resolve the error you're encountering. 
+
+If you don't have Maven installed, you can download it from the [official Apache Maven website](https://maven.apache.org/download.cgi). After downloading, extract the archive to a directory of your choice. This is the directory you should point to in the `Maven home directory` field in IntelliJ IDEA.

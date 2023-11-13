@@ -1,0 +1,25 @@
+Your installation of JDK 11 seems to be correct. The JDK 11 package includes JRE so you won't see a separate JRE folder for JDK 11, which is expected.
+
+The issue seems to be with IntelliJ IDEA 2017. It does not fully support Java 11. You need IntelliJ IDEA 2018.2 or later to have full support for Java 11.
+
+Here are the steps to configure IntelliJ IDEA for Java 11:
+
+1. First, make sure you have the correct version of IntelliJ IDEA (2018.2 or later).
+
+2. Go to `File > Project Structure > Project`.
+
+3. In the `Project SDK` section, click `New > JDK`.
+
+4. Navigate to the location where you installed JDK 11, select the JDK 11 directory and click `OK`.
+
+5. In the `Project language level` field, select `11 - Local variable syntax for lambda parameters`.
+
+6. Click `OK`.
+
+7. Go to `File > Settings > Build, Execution, Deployment > Compiler > Java Compiler`.
+
+8. In the `Target bytecode version` section, make sure all your modules are set to 11.
+
+9. Click `OK`.
+
+Now, you should be able to build your application with Java 11.

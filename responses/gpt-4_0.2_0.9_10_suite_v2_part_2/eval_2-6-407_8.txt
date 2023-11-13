@@ -1,0 +1,41 @@
+The error message you're seeing is indicating that the JSON deserializer is trying to parse a '<' character, which is not valid JSON. This usually happens when the server is returning HTML instead of JSON, often as a result of an error page.
+
+Firstly, your API route is incorrect. You've defined the route as `api/Employee/Index` in your controller, but you've also defined a `[Route("[controller]")]` attribute at the controller level. This means that the actual route to your action is `/Employee/api/Employee/Index`.
+
+To fix this, you should change your controller to:
+
+```csharp
+[ApiController]
+[Route("api/[controller]")]
+public class EmployeeController : ControllerBase
+{
+    EmployeeRepository objemployee = new EmployeeRepository();
+    
+    [HttpGet]
+    public IEnumerable<Employee> Index()
+    {
+        return objemployee.GetAllEmployees();
+    }
+}
+```
+
+And then in your Blazor component, you should call:
+
+```csharp
+empList = await Http.GetJsonAsync<Employee[]>("api/Employee");
+```
+
+If you still encounter the error after fixing the route, it's possible that your API is returning an error page. You should check the status of the HTTP response before trying to parse the JSON. You can do this by using the `HttpResponseMessage.EnsureSuccessStatusCode` method, which will throw an exception if the response status code does not indicate success.
+
+Here's how you can do this:
+
+```csharp
+var response = await Http.GetAsync("api/Employee");
+
+response.EnsureSuccessStatusCode();
+
+var responseBytes = await response.Content.ReadAsByteArrayAsync();
+var empList = JsonSerializer.Deserialize<Employee[]>(responseBytes, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+```
+
+This will ensure that you only try to parse the response as JSON if the request was successful. If the request was not successful, it will throw an exception with a more helpful error message.

@@ -1,0 +1,26 @@
+The error message you're seeing indicates that the Hibernate Validator can't find a validator for the `@NotEmpty` and `@NotBlank` constraints. This is because these constraints were introduced in Hibernate Validator 6.0.0.Final, but your application is using Hibernate Validator 5.3.5.Final-redhat-2, which doesn't support these constraints. 
+
+In Hibernate Validator 5.x, you can use `@NotNull` and `@Size(min=1)` to achieve similar validation.
+
+If you want to use `@NotEmpty` and `@NotBlank`, you need to upgrade to Hibernate Validator 6.0.0.Final or later. 
+
+However, Spring Boot 2.0.4.RELEASE comes with Hibernate Validator 6.0.7.Final by default. It seems like your application is being overridden by JBoss to use Hibernate Validator 5.3.5.Final-redhat-2.
+
+To solve this, you can try to exclude the Hibernate Validator from JBoss and add the Hibernate Validator 6.0.11.Final to your `pom.xml`:
+
+```xml
+<dependency>
+    <groupId>org.hibernate.validator</groupId>
+    <artifactId>hibernate-validator</artifactId>
+    <version>6.0.11.Final</version>
+</dependency>
+```
+
+Also, make sure that you're using the correct import for the `@NotEmpty` and `@NotBlank` annotations:
+
+```java
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotBlank;
+```
+
+If you're still facing issues, you might need to check your JBoss configuration to ensure that it's not overriding the Hibernate Validator version.

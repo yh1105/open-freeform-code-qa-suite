@@ -1,0 +1,31 @@
+The error message indicates that the table "Keys" does not exist in the database. This could be caused by a few different things, such as a missing migration or a database schema that is out of sync with the code.
+
+Here are some steps you can take to try to resolve the issue:
+
+1. Check that the "Keys" table exists in the database. You can do this by connecting to the database using a SQLite client and running the following SQL command:
+
+   ```
+   SELECT name FROM sqlite_master WHERE type='table' AND name='Keys';
+   ```
+
+   If the table does not exist, you may need to create it using a migration or a SQL script.
+
+2. Check that the database schema is up to date with the code. You can do this by running the following command in the Package Manager Console:
+
+   ```
+   Update-Database
+   ```
+
+   This will apply any pending migrations to the database.
+
+3. If the above steps do not work, you may need to delete the database and recreate it from scratch. You can do this by deleting the database file (usually named "app.db") and running the following commands in the Package Manager Console:
+
+   ```
+   Remove-Migration
+   Add-Migration InitialCreate
+   Update-Database
+   ```
+
+   This will create a new migration and apply it to the database, effectively recreating the database from scratch.
+
+Hopefully one of these steps will help you resolve the issue.

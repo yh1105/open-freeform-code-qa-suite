@@ -1,0 +1,37 @@
+It looks like you're running into a version conflict between Hibernate Validator and the Bean Validation API. 
+
+The `@NotEmpty` and `@NotBlank` annotations are part of the Bean Validation 2.0 API, which is implemented by Hibernate Validator 6.0. However, your logs indicate that Hibernate Validator 5.3.5 is being used, which only supports Bean Validation 1.1. This version of the API does not include `@NotEmpty` and `@NotBlank`, which is why you're seeing this error.
+
+The version of Hibernate Validator is likely being managed by your application server (JBoss), which is why it's different from the version resolved by Maven.
+
+To resolve this issue, you can try one of the following options:
+
+1. Upgrade your application server to a version that includes Hibernate Validator 6.0 or higher. For example, WildFly 13 or higher.
+
+2. If upgrading the server is not an option, you can try to override the server's version of Hibernate Validator with the version from your `pom.xml`. To do this, you'll need to include Hibernate Validator as a compile-scoped dependency in your `pom.xml` and configure JBoss to use the application's version of Hibernate Validator. Note that this may cause issues if other parts of your application or server rely on the older version of Hibernate Validator.
+
+3. Use the Bean Validation 1.1-compatible annotations instead. For example, you can use `@NotNull` and `@Size(min=1)` together to achieve similar validation to `@NotEmpty` or `@NotBlank`.
+
+Here's how you can add Hibernate Validator as a compile-scoped dependency:
+
+```xml
+<dependency>
+    <groupId>org.hibernate.validator</groupId>
+    <artifactId>hibernate-validator</artifactId>
+    <version>6.0.11.Final</version>
+</dependency>
+```
+
+And here's how you can configure JBoss to use the application's version of Hibernate Validator (add this to your `jboss-deployment-structure.xml`):
+
+```xml
+<jboss-deployment-structure>
+    <deployment>
+        <exclusions>
+            <module name="org.hibernate.validator" />
+        </exclusions>
+    </deployment>
+</jboss-deployment-structure>
+```
+
+Remember to replace `6.0.11.Final` with the version of Hibernate Validator that you want to use.

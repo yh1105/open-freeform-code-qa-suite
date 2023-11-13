@@ -1,0 +1,38 @@
+You can't directly inject a generic interface without specifying the type. However, you can register all the specific implementations of the generic interface in your `Startup.cs` file.
+
+For example, if you have two classes `FooDatabaseService` and `BarDatabaseService` that implement `IDatabaseService<Foo>` and `IDatabaseService<Bar>` respectively, you can register them like this:
+
+```csharp
+services.AddScoped<IDatabaseService<Foo>, FooDatabaseService>();
+services.AddScoped<IDatabaseService<Bar>, BarDatabaseService>();
+```
+
+Then in your controllers, you can inject the specific service you need:
+
+```csharp
+public class FooController : Controller
+{
+    private readonly IDatabaseService<Foo> _fooService;
+
+    public FooController(IDatabaseService<Foo> fooService)
+    {
+        _fooService = fooService;
+    }
+
+    // Your actions here
+}
+
+public class BarController : Controller
+{
+    private readonly IDatabaseService<Bar> _barService;
+
+    public BarController(IDatabaseService<Bar> barService)
+    {
+        _barService = barService;
+    }
+
+    // Your actions here
+}
+```
+
+This way, you're injecting a specific implementation of the generic interface into your controllers.

@@ -1,0 +1,40 @@
+The Maven Wrapper is a shell script used to automatically manage the correct version of Maven for your project. It's similar to the Maven task, but it doesn't require you to have Maven installed on your machine.
+
+The Java version used by Maven is determined by the `JAVA_HOME` environment variable. If you're using the Maven Wrapper, you can specify the Java version in the `maven-wrapper.properties` file located in the `.mvn/wrapper` directory of your project.
+
+Here's an example of how to specify the Java version:
+
+```properties
+distributionUrl=https://repo.maven.apache.org/maven2/org/apache/maven/apache-maven/3.6.3/apache-maven-3.6.3-bin.zip
+wrapperUrl=https://repo.maven.apache.org/maven2/io/takari/maven-wrapper/0.5.6/maven-wrapper-0.5.6.jar
+wrapperVersion=0.5.6
+distributionBase=PROJECT
+distributionPath=wrapper/dists
+zipStoreBase=PROJECT
+zipStorePath=wrapper/dists
+distributionUrlPath=
+javaHome=/path/to/your/jdk
+```
+
+Replace `/path/to/your/jdk` with the path to your JDK installation.
+
+If you're using a continuous integration system, you might need to configure the `JAVA_HOME` environment variable in the system's settings.
+
+If you're using the Maven task, the Java version is determined by the `maven.compiler.source` and `maven.compiler.target` properties in the `pom.xml` file. Here's an example:
+
+```xml
+<properties>
+  <maven.compiler.source>1.8</maven.compiler.source>
+  <maven.compiler.target>1.8</maven.compiler.target>
+</properties>
+```
+
+This tells Maven to use Java 8 for compiling your project. If you want to use a different version of Java, just change the version number.
+
+If you're using the JavaInstaller task, you can specify the Java version in the `version` attribute. Here's an example:
+
+```xml
+<javaInstaller version="1.8" />
+```
+
+This tells the JavaInstaller task to install Java 8. If you want to use a different version of Java, just change the version number.

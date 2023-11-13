@@ -1,0 +1,24 @@
+The error message you're seeing suggests that Gradle is not using the correct Java version. Even though you've set the Java version in IntelliJ IDEA, Gradle might still be using a different version.
+
+To fix this, you need to tell Gradle to use the correct Java version. You can do this by setting the `org.gradle.java.home` property in the `gradle.properties` file.
+
+Here's how to do it:
+
+1. Open or create a `gradle.properties` file in the root directory of your project.
+2. Add the following line to the file, replacing `/path/to/java/home` with the path to your Java 17 installation:
+
+```properties
+org.gradle.java.home=/path/to/java/home
+```
+
+You can find the path to your Java 17 installation in IntelliJ IDEA by going to `File -> Project Structure -> SDKs`. The `JDK home path` is what you need.
+
+After doing this, try running your app again. Gradle should now use Java 17.
+
+If you still encounter issues, you can also try to update your Gradle version. Gradle 7.0 and later versions have support for Java 16 and 17. You can update the Gradle version in the `gradle/wrapper/gradle-wrapper.properties` file:
+
+```properties
+distributionUrl=https\://services.gradle.org/distributions/gradle-7.3-bin.zip
+```
+
+After changing the Gradle version, you might need to refresh the Gradle project in IntelliJ IDEA. You can do this by clicking on the `Refresh all Gradle projects` button in the Gradle tool window.

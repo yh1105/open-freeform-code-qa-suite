@@ -1,0 +1,38 @@
+The issue you're experiencing is likely due to the fact that Spring Boot's default configuration for HTTP message converters includes support for JSON out of the box, but not for XML. 
+
+To enable XML support, you need to add the appropriate dependencies to your `build.gradle` file. Here's how to do it:
+
+```groovy
+dependencies {
+    // other dependencies...
+
+    // Jackson Dataformat XML
+    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml'
+
+    // JAXB API and implementation for handling XML
+    implementation 'javax.xml.bind:jaxb-api'
+    implementation 'org.glassfish.jaxb:jaxb-runtime'
+}
+```
+
+After adding these dependencies, Spring Boot should be able to automatically configure a `MappingJackson2XmlHttpMessageConverter` bean, which will allow your application to handle requests and responses in XML format.
+
+Please note that you might need to annotate your `Pet`, `Category`, and `Tag` classes with `@XmlRootElement` and `@XmlElement` to specify how these objects should be serialized to and deserialized from XML. 
+
+For example:
+
+```java
+@XmlRootElement
+public class Pet {
+    // ...
+
+    @XmlElement
+    public Long getId() {
+        return id;
+    }
+
+    // ...
+}
+```
+
+Remember to recompile your project after making these changes.

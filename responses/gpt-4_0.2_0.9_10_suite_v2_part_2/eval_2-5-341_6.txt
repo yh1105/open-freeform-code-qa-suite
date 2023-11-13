@@ -1,0 +1,22 @@
+The issue you're experiencing is likely due to the fact that your Spring Boot application is not configured to produce XML responses. By default, Spring Boot applications are set up to produce JSON responses, which is why your JSON request is working fine.
+
+To enable XML responses, you need to add the following dependency to your `build.gradle` file:
+
+```groovy
+implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml'
+```
+
+This dependency will add Jackson's dataformat extension for reading and writing XML encoded data.
+
+After adding this dependency, Spring Boot should be able to automatically configure message converters for XML. You can then use the `@RequestMapping` or `@GetMapping` annotations in your controller to specify that a method can produce XML responses, like so:
+
+```java
+@GetMapping(value = "/pet/{petId}", produces = { "application/xml", "application/json" })
+public ResponseEntity<Pet> getPetById(@PathVariable("petId") Long petId) {
+    // Your code here
+}
+```
+
+This tells Spring that the `getPetById` method can produce both XML and JSON responses. The actual response format will depend on the `Accept` header of the HTTP request.
+
+If you're still having issues after adding the Jackson XML dependency, you may need to check your `application.properties` or `application.yml` file to ensure that XML is enabled as a message format.

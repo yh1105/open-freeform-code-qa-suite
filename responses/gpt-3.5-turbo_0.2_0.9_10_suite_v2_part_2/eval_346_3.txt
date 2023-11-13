@@ -1,1 +1,0 @@
-This error occurs because IntelliJ is using an older version of Maven than the one used to generate the project. To fix this, you can try updating the Maven version in IntelliJ or using the same version of Maven that was used to generate the project. You can also try deleting the `.idea` folder and re-importing the project into IntelliJ.

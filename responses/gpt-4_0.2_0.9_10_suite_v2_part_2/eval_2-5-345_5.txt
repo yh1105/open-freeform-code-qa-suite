@@ -1,0 +1,27 @@
+The error you're encountering is due to a compatibility issue between IntelliJ IDEA and the version of Maven that's bundled with Spring Boot 2.7.0. The version of Maven that comes with Spring Boot 2.7.0 is 3.8.5, which seems to be incompatible with some versions of IntelliJ IDEA.
+
+Here are a few possible solutions:
+
+1. **Downgrade Spring Boot version**: You can downgrade your Spring Boot version to 2.6.x or an earlier version that comes with a compatible Maven version.
+
+2. **Upgrade IntelliJ IDEA**: JetBrains is usually quick to release updates when these types of issues occur. Check if there's an update available for IntelliJ IDEA that resolves this issue.
+
+3. **Change Maven version in IntelliJ IDEA**: You can change the Maven version that IntelliJ IDEA uses to a version that's compatible with your version of IntelliJ IDEA. Here's how you can do it:
+
+    - Go to `File > Settings` (or `IntelliJ IDEA > Preferences` for macOS)
+    - Navigate to `Build, Execution, Deployment > Build Tools > Maven`
+    - In the `Maven home directory` field, point to a directory that contains a compatible version of Maven.
+
+4. **Use External Maven**: You can download a compatible version of Maven and configure your project to use this version instead of the bundled version. Here's how you can do it:
+
+    - Download a compatible version of Maven from the [official website](https://maven.apache.org/download.cgi)
+    - Extract the downloaded file to a directory of your choice
+    - In your project's `pom.xml` file, specify the Maven version in the `maven-wrapper.properties` file as follows:
+
+    ```xml
+    distributionUrl=https\://repo.maven.apache.org/maven2/org/apache/maven/apache-maven/3.8.4/apache-maven-3.8.4-bin.zip
+    ```
+
+    Replace `3.8.4` with the version you downloaded.
+
+Remember to restart IntelliJ IDEA after making these changes to ensure they take effect.

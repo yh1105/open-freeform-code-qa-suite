@@ -1,0 +1,50 @@
+The issue you're experiencing is likely due to the fact that Spring Boot, by default, uses Jackson for JSON serialization/deserialization, but does not include a similar library for XML.
+
+To enable XML responses, you need to add the Jackson Dataformat XML library to your project. This library will allow Spring Boot to serialize and deserialize XML.
+
+Add the following dependency to your `build.gradle` file:
+
+```groovy
+dependencies {
+    // ...
+    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml'
+    // ...
+}
+```
+
+After adding this dependency, Spring Boot should be able to return XML responses.
+
+Please note that this will only work if your `Pet`, `Category`, and `Tag` classes are annotated with `@XmlRootElement` and `@XmlElement` annotations. These annotations are used to define the rules for serializing and deserializing these classes to and from XML.
+
+Here is an example of how you might annotate your `Pet` class:
+
+```java
+@XmlRootElement
+public class Pet {
+    private Long id;
+    private String name;
+    // ...
+
+    @XmlElement
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @XmlElement
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    // ...
+}
+```
+
+You would need to do something similar for your `Category` and `Tag` classes.

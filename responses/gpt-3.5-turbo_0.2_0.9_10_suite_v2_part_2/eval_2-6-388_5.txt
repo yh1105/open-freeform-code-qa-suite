@@ -1,0 +1,15 @@
+The `[Keyless]` attribute was introduced in Entity Framework Core 5.0, so make sure you are using EF Core 5.0 or later. If you are using an earlier version of EF Core, the `[Keyless]` attribute will not be available.
+
+To check your EF Core version, you can open the NuGet Package Manager Console and run the following command:
+
+```
+PM> Get-Project -All | Get-Package | Where-Object { $_.Id -like 'Microsoft.EntityFrameworkCore' }
+```
+
+This will show you the version of EF Core that is installed in your project. If you need to upgrade to EF Core 5.0 or later, you can use the following command in the Package Manager Console:
+
+```
+PM> Install-Package Microsoft.EntityFrameworkCore -Version 5.0.0
+```
+
+After upgrading to EF Core 5.0 or later, you should be able to use the `[Keyless]` attribute in your models.

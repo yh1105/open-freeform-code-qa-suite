@@ -1,9 +1,0 @@
-It seems like you have set the sourceCompatibility to 17 in your Gradle file, but you also need to set the targetCompatibility to 17. 
-
-Add the following line to your Gradle file:
-
-```
-targetCompatibility = '17'
-```
-
-Then rebuild your project and try running your app again.

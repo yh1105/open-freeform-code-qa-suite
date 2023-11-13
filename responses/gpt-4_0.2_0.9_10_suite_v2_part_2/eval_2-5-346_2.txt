@@ -1,0 +1,33 @@
+The error message you're seeing is likely due to the Gradle version you're using. Gradle versions prior to 7.0 do not support Java 17. 
+
+You can check your Gradle version by running the following command in your terminal:
+
+```bash
+./gradlew --version
+```
+
+If your Gradle version is less than 7.0, you need to upgrade it. You can do this by changing the Gradle version in your `gradle/wrapper/gradle-wrapper.properties` file. 
+
+For example, to upgrade to Gradle 7.3, you would change the `distributionUrl` line in `gradle-wrapper.properties` to:
+
+```
+distributionUrl=https\://services.gradle.org/distributions/gradle-7.3-bin.zip
+```
+
+After changing the Gradle version, you should be able to build and run your project with Java 17. 
+
+Also, make sure that your `build.gradle` file has the correct `sourceCompatibility`:
+
+```groovy
+sourceCompatibility = '17'
+```
+
+And that the `java` plugin is applied:
+
+```groovy
+plugins {
+    id 'java'
+}
+```
+
+If you're still having issues after trying these steps, please let me know and I'll be happy to help further.

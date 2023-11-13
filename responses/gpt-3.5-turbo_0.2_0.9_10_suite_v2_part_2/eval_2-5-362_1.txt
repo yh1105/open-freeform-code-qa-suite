@@ -1,0 +1,29 @@
+The error message indicates that the `ConfigServerConfigDataMissingEnvironmentPostProcessor` is trying to import configuration data from a ConfigServer, but it cannot find the `spring.config.import` property. This suggests that there may be some residual configuration from a previous version of the project that is causing this issue.
+
+To resolve this issue, you can try the following steps:
+
+1. Clean your project build by running `./gradlew clean` in the terminal.
+
+2. Check if there are any configuration files in your project that reference a ConfigServer. If so, remove them or comment them out.
+
+3. Check if there are any environment variables or system properties that reference a ConfigServer. If so, remove them or comment them out.
+
+4. Add the following property to your `application.properties` file:
+
+   ```
+   spring.config.import=optional:configserver:
+   ```
+
+   This tells Spring to look for configuration data in a ConfigServer, but it will not fail if it cannot find one.
+
+5. Rebuild your project and run your tests again.
+
+If the issue persists, you can try adding the following property to your `application.properties` file instead:
+
+```
+spring.cloud.config.enabled=false
+```
+
+This will disable the ConfigServer completely, which should resolve the issue. However, this may not be desirable if you need to use a ConfigServer in your project.
+
+I hope this helps! Let me know if you have any further questions.

@@ -1,0 +1,15 @@
+This error occurs because IntelliJ IDEA is using an older version of Maven (3.6.3) which is not compatible with Spring Boot 2.7. To fix this issue, you need to configure IntelliJ IDEA to use the same version of Maven as the one used by Spring Boot 2.7.
+
+Here are the steps to configure IntelliJ IDEA to use the same version of Maven as Spring Boot 2.7:
+
+1. Open the Maven settings in IntelliJ IDEA by going to File > Settings > Build, Execution, Deployment > Build Tools > Maven.
+
+2. In the Maven settings, click on the "Maven home directory" field and select the directory where Maven 3.8.5 is installed.
+
+3. Click on the "Apply" button to save the changes.
+
+4. Re-import the Maven project by going to View > Tool Windows > Maven Projects, right-click on the project and select "Reimport".
+
+5. Wait for the project to re-import and the error should be resolved.
+
+If the error still persists, try deleting the `.idea` folder and the `target` folder in the project directory and re-import the project again.

@@ -1,0 +1,33 @@
+The issue with your code is that you are trying to format a `LocalDate` object as a date-time string. `LocalDate` only contains the date information, not the time information. To generate a random date and time, you can use the `LocalDateTime` class instead.
+
+Here's an updated version of your code that generates a random `LocalDateTime` object and formats it as a string in the desired format:
+
+```java
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Random;
+
+public class Main {
+    public static void main(String[] args) {
+        String randomDateTimeString = generateRandomDateAndTimeInString();
+        System.out.println(randomDateTimeString);
+    }
+
+    public static String generateRandomDateAndTimeInString() {
+        LocalDateTime dateTime = LocalDateTime.now().minusDays(new Random().nextInt(365 * 70)).minusHours(new Random().nextInt(24)).minusMinutes(new Random().nextInt(60)).minusSeconds(new Random().nextInt(60));
+        System.out.println("date and time :: " + dateTime.toString());
+        return formatDate(dateTime);
+    }
+
+    public static String formatDate(LocalDateTime dateTime) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'");
+        return dateTime.format(formatter);
+    }
+}
+```
+
+In this updated code, we use `LocalDateTime` instead of `LocalDate` to generate a random date and time. We subtract a random number of hours, minutes, and seconds from the current date and time to get a truly random date and time.
+
+We also use the `DateTimeFormatter` class to format the `LocalDateTime` object as a string in the desired format. Note that we use single quotes around the `Z` character to include it in the output string as a literal character.
+
+With these changes, the code should generate a random date and time in the desired format.

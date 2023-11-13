@@ -1,9 +1,0 @@
-It seems like the Gradle build is not picking up the Java version you have set in your project. You can try adding the following lines to your `build.gradle` file:
-
-```
-tasks.withType(JavaCompile) {
-    options.compilerArgs << '--release' << '17'
-}
-```
-
-This will tell Gradle to use Java 17 for compilation. If that doesn't work, you can try setting the `JAVA_HOME` environment variable to the path of your Java 17 installation.

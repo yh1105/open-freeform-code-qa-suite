@@ -1,0 +1,26 @@
+The error message you are seeing is related to the Spring Cloud Config feature, which is used to externalize configuration properties for your application. It seems that the upgrade to Spring Cloud BOM `2020.0.2` has introduced a change that requires the `spring.config.import` property to be set, even if you are not using Spring Cloud Config.
+
+To fix this issue, you can add the following property to your `application.properties` file:
+
+```
+spring.config.import=optional:configserver:
+```
+
+This will tell Spring to look for configuration properties in a ConfigServer, but since the `optional` prefix is used, it will not fail if the ConfigServer is not available.
+
+Alternatively, you can add the property to your test class, as you have already tried:
+
+```java
+@SpringBootTest(
+    webEnvironment = WebEnvironment.RANDOM_PORT,
+    classes = {
+        ProductCompositeServiceApplication.class,
+        TestSecurityConfig.class },
+    properties = {
+        "spring.main.allow-bean-definition-overriding=true",
+        "spring.config.import=optional:configserver:" })
+```
+
+Make sure to include the colon at the end of the property value, as it is required by the syntax of the `spring.config.import` property.
+
+With either of these solutions, your tests should run without errors.

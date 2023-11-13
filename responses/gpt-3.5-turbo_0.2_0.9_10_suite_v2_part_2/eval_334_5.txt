@@ -1,6 +1,0 @@
-```java
-public static void removeFalseSubjects(List<Subject> subjects){
-    subjects.removeIf(subject -> !subject.isStatus());
-}
-```
-This code uses the `removeIf` method of the `List` interface to remove all elements that do not have a `true` status. The `!` operator is used to negate the status value, so that only elements with a `false` status are removed.

@@ -1,0 +1,50 @@
+The `Ok()` method in ASP.NET Core already returns a status code of 200 and formats the response as JSON. So, you don't need to use the `Json()` method inside `Ok()`. 
+
+Here is the correct way to return JSON with a HTTP status code in your .NET Core Web API controller:
+
+```csharp
+public ActionResult IsAuthenticated()
+{
+    return Ok("123");
+}
+```
+
+This will return the following response:
+
+```json
+"123"
+```
+
+If you want to return a more complex JSON object, you can do it like this:
+
+```csharp
+public ActionResult IsAuthenticated()
+{
+    return Ok(new { key = "value" });
+}
+```
+
+This will return the following response:
+
+```json
+{
+    "key": "value"
+}
+```
+
+If you want to return a different HTTP status code, you can use different methods like `BadRequest()`, `NotFound()`, etc., or you can use the `StatusCode()` method to specify the status code directly. For example:
+
+```csharp
+public ActionResult IsAuthenticated()
+{
+    return StatusCode(401, new { error = "Not authenticated" });
+}
+```
+
+This will return a 401 status code with the following JSON body:
+
+```json
+{
+    "error": "Not authenticated"
+}
+```

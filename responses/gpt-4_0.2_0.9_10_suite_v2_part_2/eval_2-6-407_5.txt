@@ -1,0 +1,30 @@
+The error message you're seeing indicates that the JSON deserialization is failing because the response from the server is not valid JSON. The '<' character is not a valid start for a JSON document, which suggests that the server might be returning HTML or XML instead of JSON.
+
+The issue might be related to the route you've specified in your API controller. You've specified the route as `[Route("api/Employee/Index")]` on your action method, but also `[Route("[controller]")]` on your controller. This might result in a route like `/Employee/api/Employee/Index`, which is probably not what you want.
+
+Try changing your controller and action method to the following:
+
+```csharp
+[ApiController]
+[Route("api/[controller]")]
+public class EmployeeController : ControllerBase
+{
+    EmployeeRepository objemployee = new EmployeeRepository();
+
+    [HttpGet]
+    public IEnumerable<Employee> Index()
+    {
+        return objemployee.GetAllEmployees();
+    }
+}
+```
+
+This will result in a route like `/api/Employee` for your `Index` action method.
+
+Then, in your Blazor code, you can call the API like this:
+
+```csharp
+empList = await Http.GetJsonAsync<Employee[]>("api/Employee");
+```
+
+If you're still having issues, you might want to check what the server is actually returning. You can do this by calling the API with a tool like Postman, or by logging the response from the server in your Blazor code before trying to deserialize it.

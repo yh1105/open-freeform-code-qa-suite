@@ -1,1 +1,0 @@
-It is possible that the XML format is not properly configured in your project. You can check if the necessary dependencies for XML serialization and deserialization are included in your project. Additionally, you can check if the `produces` attribute in the `@RequestMapping` annotation for your `getPetById` method includes `MediaType.APPLICATION_XML_VALUE`.

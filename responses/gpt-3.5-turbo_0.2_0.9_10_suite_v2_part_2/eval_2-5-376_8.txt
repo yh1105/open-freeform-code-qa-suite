@@ -1,0 +1,14 @@
+It seems like IntelliJ IDEA is still using the old version of Java (1.8) to compile your code. You need to configure IntelliJ IDEA to use the new version of Java (11) instead.
+
+Here's how you can do it:
+
+1. Go to `File > Project Structure > SDKs`.
+2. Click the `+` button to add a new SDK.
+3. Select `JDK`.
+4. Navigate to the directory where you installed Java 11 (e.g. `C:\Program Files\Java\jdk-11.0.1`).
+5. Click `OK` to add the new SDK.
+6. Go to `File > Project Structure > Project`.
+7. Under `Project SDK`, select the newly added JDK 11.
+8. Click `OK` to save the changes.
+
+Now IntelliJ IDEA should be using Java 11 to compile your code. Try building your application again and see if it works.

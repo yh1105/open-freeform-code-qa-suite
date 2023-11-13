@@ -1,0 +1,17 @@
+The error message suggests that there is an issue with the path to the `mvn.cmd` file. The path contains spaces, which can cause issues with the command prompt.
+
+To fix this issue, you can try enclosing the path to the `mvn.cmd` file in double quotes. Here's an example:
+
+```
+cd C:\projects\open; "JAVA_HOME=C:\\Program Files\\Java\\jdk-11.0.5" cmd /c "\"\"\"C:\\Program Files\\NetBeans-11.1\\netbeans\\java\\maven\\bin\\mvn.cmd\"\" -DskipTests=true -Dmaven.ext.class.path=\"C:\\Program Files\\NetBeans-11.1\\netbeans\\java\\maven-nblib\\netbeans-eventspy.jar\" -Dfile.encoding=UTF-8 clean install\""
+```
+
+In this example, the path to the `mvn.cmd` file is enclosed in triple quotes. This should prevent any issues with spaces in the path.
+
+Alternatively, you can try using the short name for the "Program Files" directory, which is usually "PROGRA~1". Here's an example:
+
+```
+cd C:\projects\open; "JAVA_HOME=C:\\PROGRA~1\\Java\\jdk-11.0.5" cmd /c "\"\"C:\\PROGRA~1\\NetBeans-11.1\\netbeans\\java\\maven\\bin\\mvn.cmd\" -DskipTests=true -Dmaven.ext.class.path=\"C:\\PROGRA~1\\NetBeans-11.1\\netbeans\\java\\maven-nblib\\netbeans-eventspy.jar\" -Dfile.encoding=UTF-8 clean install\""
+```
+
+In this example, the path to the "Program Files" directory is replaced with "PROGRA~1". This should also prevent any issues with spaces in the path.

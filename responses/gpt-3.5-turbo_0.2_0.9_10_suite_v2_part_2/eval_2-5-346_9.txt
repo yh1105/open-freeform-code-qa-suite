@@ -1,0 +1,9 @@
+It seems like the Gradle build is not picking up the Java version set in IntelliJ. You can try adding the following lines to your `build.gradle` file to explicitly set the Java version for Gradle:
+
+```
+compileJava {
+    options.release = 17
+}
+```
+
+This should set the Java version to 17 for the Gradle build. If this doesn't work, you can try running the Gradle build with the `--info` flag to get more information about the build process and any errors that may be occurring.

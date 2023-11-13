@@ -1,0 +1,20 @@
+The error message suggests that Jackson, the JSON serialization/deserialization library used by Spring, is unable to serialize the `MultipartFile` object. This is because `MultipartFile` is not a serializable object.
+
+To solve this, you can use a `ByteArrayResource` to wrap the contents of the `MultipartFile` and send it as a byte array. Here's how you can modify your code:
+
+```java
+HttpHeaders headers = new HttpHeaders();
+headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+
+MultiValueMap<String, Object> body= new LinkedMultiValueMap<>();
+body.add("circularAttachment", new ByteArrayResource(souqBean.getCircularAttachment().getBytes())); // wrap the contents of the MultipartFile in a ByteArrayResource
+body.add("circularEntryId", souqBean.getCircularEntryId());
+body.add("circularTitle", souqBean.getCircularTitle());
+
+HttpEntity<MultiValueMap<String, Object>> entity = new HttpEntity<>(body, headers);
+
+ResponseEntity<Boolean> response = restTemplate.postForEntity("http://localhost:8081/circular-save", entity, Boolean.class);
+status = response.getBody();
+```
+
+In this modified code, we wrap the contents of the `MultipartFile` in a `ByteArrayResource` and add it to the `MultiValueMap`. Then, we create the `HttpEntity` with the modified `MultiValueMap` and send it using `RestTemplate`.

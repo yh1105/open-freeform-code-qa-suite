@@ -1,0 +1,26 @@
+The `[Keyless]` attribute is not part of the `System.ComponentModel.DataAnnotations` namespace. It's actually part of the `Microsoft.EntityFrameworkCore` namespace.
+
+In order to use the `[Keyless]` attribute, you need to have Entity Framework Core 5.0 or later installed in your project. If you don't have it installed, you can do so by using the following command in the NuGet Package Manager Console:
+
+```shell
+Install-Package Microsoft.EntityFrameworkCore -Version 5.0.0
+```
+
+After installing the package, you should be able to use the `[Keyless]` attribute by adding the following using statement to your file:
+
+```csharp
+using Microsoft.EntityFrameworkCore;
+```
+
+Then you can use the `[Keyless]` attribute like this:
+
+```csharp
+[Keyless]
+public class MyKeylessClass
+{
+    public string SomeProperty { get; set; }
+    // other properties...
+}
+```
+
+This will tell Entity Framework Core that your class does not have a key and should not be included in the `__EFMigrationsHistory` table.

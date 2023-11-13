@@ -1,0 +1,20 @@
+The error message you're seeing is typically due to the Gradle version being used not supporting Java 17. 
+
+As of the time of writing, Gradle 7.3 is the first version that provides support for Java 17. So, you need to upgrade your Gradle version to at least 7.3.
+
+You can do this by modifying the `gradle-wrapper.properties` file in your project. This file is typically located in the `gradle/wrapper` directory of your project.
+
+Here's what you need to do:
+
+1. Open the `gradle-wrapper.properties` file.
+2. Find the line that starts with `distributionUrl`.
+3. Change the Gradle version in the URL to the version you want. For example, if you're upgrading to Gradle 7.3, the line should look like this:
+
+```markdown
+distributionUrl=https\://services.gradle.org/distributions/gradle-7.3-bin.zip
+```
+
+4. Save and close the file.
+5. Now, you should be able to build your project with Java 17.
+
+If you're using IntelliJ, you might need to refresh your Gradle project after making these changes. You can do this by clicking on the "Refresh all Gradle projects" button in the Gradle tool window.

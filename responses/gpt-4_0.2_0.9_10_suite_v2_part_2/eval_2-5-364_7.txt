@@ -1,0 +1,27 @@
+The Java version used by Maven can be controlled by setting the `JAVA_HOME` environment variable. If you're using a CI/CD tool like Jenkins or Azure DevOps, you can set this variable in the pipeline configuration.
+
+If you're using the Maven Wrapper (`mvnw` or `mvnw.cmd`), it will use the Java version specified in the `.mvn/jvm.config` file if it exists. If this file doesn't exist, it will use the Java version specified by `JAVA_HOME`, or if that's not set, the Java version on the system path.
+
+Here's an example of how to set `JAVA_HOME` in a bash script:
+
+```bash
+export JAVA_HOME=/path/to/your/jdk
+./mvnw clean install
+```
+
+And here's an example of how to set `JAVA_HOME` in a Windows batch script:
+
+```batch
+set JAVA_HOME=C:\path\to\your\jdk
+mvnw.cmd clean install
+```
+
+If you want to specify the Java version in the `.mvn/jvm.config` file, you can do so like this:
+
+```text
+-jdk-home /path/to/your/jdk
+```
+
+Remember to replace `/path/to/your/jdk` with the actual path to the JDK you want to use.
+
+If you're using a CI/CD tool, you'll need to check the documentation for how to set environment variables. For example, in Jenkins you can set environment variables in the "Prepare an environment for the run" section of the job configuration, and in Azure DevOps you can set them in the "Variables" section of the pipeline configuration.

@@ -1,0 +1,28 @@
+It looks like the issue is with the response from the server. The error message suggests that the response is not in a valid JSON format. 
+
+One thing you can try is to remove the `[Route("api/Employee/Index")]` attribute from the `Index` method in your `EmployeeController`. This attribute is redundant since you already have the `[Route("[controller]")]` attribute on the controller itself. 
+
+Your updated `EmployeeController` should look like this:
+
+```c#
+[ApiController]
+[Route("[controller]")]
+public class EmployeeController : ControllerBase
+{
+    EmployeeRepository objemployee = new EmployeeRepository();
+    
+    [HttpGet]
+    public IEnumerable<Employee> Get()
+    {
+        return objemployee.GetAllEmployees();
+    }
+}
+```
+
+Then, in your Blazor component, you can update the `Http.GetJsonAsync` call to use the relative URL of the API endpoint:
+
+```c#
+empList = await Http.GetJsonAsync<Employee[]>("/Employee");
+```
+
+This should fix the issue and allow you to retrieve the list of employees from the server.

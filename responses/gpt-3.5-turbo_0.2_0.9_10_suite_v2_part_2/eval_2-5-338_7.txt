@@ -1,0 +1,44 @@
+The error message indicates that there is no serializer found for the `java.io.ByteArrayInputStream` class. This is because the `CommonsMultipartFile` class contains a `DiskFileItem` object, which in turn contains an `InputStream` object. The `InputStream` object cannot be serialized directly, so you need to configure the `RestTemplate` to use a `ByteArrayResource` instead.
+
+To do this, you can create a custom `HttpMessageConverter` that can handle `MultipartFile` objects. Here's an example:
+
+```java
+public class MultiPartHttpMessageConverter extends FormHttpMessageConverter {
+
+    public MultiPartHttpMessageConverter() {
+        super();
+        addPartConverter(new ByteArrayResourceHttpMessageConverter());
+    }
+
+    private static class ByteArrayResourceHttpMessageConverter extends ByteArrayHttpMessageConverter
+            implements ResourceHttpMessageConverter<ByteArrayResource> {
+
+        @Override
+        public boolean supports(Class<?> clazz) {
+            return ByteArrayResource.class.equals(clazz);
+        }
+
+        @Override
+        public void write(ByteArrayResource resource, MediaType contentType, HttpOutputMessage outputMessage)
+                throws IOException, HttpMessageNotWritableException {
+            outputMessage.getHeaders().setContentLength(resource.contentLength());
+            super.write(resource.getByteArray(), contentType, outputMessage);
+        }
+
+        @Override
+        public ByteArrayResource read(Class<? extends ByteArrayResource> clazz, HttpInputMessage inputMessage)
+                throws IOException, HttpMessageNotReadableException {
+            return new ByteArrayResource(FileCopyUtils.copyToByteArray(inputMessage.getBody()));
+        }
+    }
+}
+```
+
+Then, you can add this custom `HttpMessageConverter` to your `RestTemplate`:
+
+```java
+RestTemplate restTemplate = new RestTemplate();
+restTemplate.getMessageConverters().add(new MultiPartHttpMessageConverter());
+```
+
+With this configuration, the `RestTemplate` will be able to handle `MultipartFile` objects and send them as `ByteArrayResource` objects.

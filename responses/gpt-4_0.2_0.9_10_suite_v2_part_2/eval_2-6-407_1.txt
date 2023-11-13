@@ -1,0 +1,36 @@
+The error message you're seeing suggests that the server is returning HTML instead of JSON. This is often the case when an error page is returned. The '<' character is likely the start of an HTML tag.
+
+The problem might be related to the route of your API method. In your controller, you have defined the route as `api/Employee/Index`, but you have also defined a `[Route("[controller]")]` at the controller level. This might be causing a conflict.
+
+Try changing your controller to this:
+
+```csharp
+[ApiController]
+public class EmployeeController : ControllerBase
+{
+    EmployeeRepository objemployee = new EmployeeRepository();
+
+    [HttpGet]
+    [Route("api/Employee/Index")]
+    public IEnumerable<Employee> Index()
+    {
+        return objemployee.GetAllEmployees();
+    }
+}
+```
+
+And then in your Blazor code, you can call the API like this:
+
+```csharp
+empList = await Http.GetJsonAsync<Employee[]>("api/Employee/Index");
+```
+
+If the problem persists, you might want to check the actual response from the server. You can do this by changing your code to this:
+
+```csharp
+var response = await Http.GetAsync("api/Employee/Index");
+var responseBody = await response.Content.ReadAsStringAsync();
+Console.WriteLine(responseBody);
+```
+
+This will print the response body to the console, which should help you figure out what's going wrong. If the response is an error page, it should give you more information about the error.

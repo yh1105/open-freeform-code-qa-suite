@@ -1,0 +1,29 @@
+The error message suggests that the Jackson JSON serializer used by RestTemplate is unable to serialize the `MultipartFile` object. One solution is to configure RestTemplate to use a different message converter that can handle multipart requests.
+
+Here's an example of how to configure RestTemplate to use the `org.springframework.http.converter.FormHttpMessageConverter` message converter:
+
+```java
+RestTemplate restTemplate = new RestTemplate();
+restTemplate.getMessageConverters().add(new FormHttpMessageConverter());
+```
+
+With this configuration, RestTemplate will use the `FormHttpMessageConverter` to serialize the `MultiValueMap` containing the multipart request. The `FormHttpMessageConverter` can handle multipart requests and will properly serialize the `MultipartFile` object.
+
+Alternatively, you can use a different approach to send the multipart request, such as using the Apache HttpClient library directly. Here's an example of how to send a multipart request using HttpClient:
+
+```java
+CloseableHttpClient httpClient = HttpClients.createDefault();
+HttpPost httpPost = new HttpPost("http://localhost:8081/circular-save");
+
+MultipartEntityBuilder builder = MultipartEntityBuilder.create();
+builder.addBinaryBody("circularAttachment", souqBean.getCircularAttachment().getBytes(), ContentType.APPLICATION_OCTET_STREAM, souqBean.getCircularAttachment().getOriginalFilename());
+builder.addTextBody("circularEntryId", souqBean.getCircularEntryId());
+builder.addTextBody("circularTitle", souqBean.getCircularTitle());
+
+HttpEntity multipart = builder.build();
+httpPost.setEntity(multipart);
+
+CloseableHttpResponse response = httpClient.execute(httpPost);
+```
+
+This code creates a `MultipartEntityBuilder` and adds the `MultipartFile` object as a binary body. The `HttpPost` object is then created with the multipart entity as the request body. Finally, the request is executed using the `CloseableHttpClient` and the response is obtained as a `CloseableHttpResponse`.

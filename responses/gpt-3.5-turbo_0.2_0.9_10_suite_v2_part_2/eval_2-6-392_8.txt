@@ -1,0 +1,7 @@
+Having separate pipelines for specific requests is not necessarily a bad practice. In fact, it can be a good practice to keep your code organized and maintainable. 
+
+Using separate pipelines allows you to have more control over the behavior of each request and response pair. This can be especially useful if you have complex logic that needs to be executed for each request/response pair. 
+
+However, it's important to keep in mind that having too many pipelines can also make your code more complex and harder to maintain. So, it's important to strike a balance between having enough pipelines to handle your specific needs, but not so many that it becomes difficult to manage.
+
+In summary, having separate pipelines for specific requests can be a good practice, but it's important to consider the complexity and maintainability of your code.

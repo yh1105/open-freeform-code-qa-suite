@@ -1,0 +1,29 @@
+The error message "The selected directory is not a valid home for JDK" usually appears when IntelliJ IDEA cannot find the necessary JDK files in the specified directory. 
+
+Here are some steps you can follow to resolve this issue:
+
+1. **Check your JDK installation**: Make sure that your JDK installation is correct. You can verify this by checking if the `bin` directory exists in `C:\Program Files\Java\jdk-11.0.1`. If it doesn't exist, you may need to reinstall JDK 11.
+
+2. **Update IntelliJ IDEA**: IntelliJ IDEA 2017 may not fully support Java 11. You should consider updating your IntelliJ IDEA to the latest version. The latest versions of IntelliJ IDEA have better support for Java 11.
+
+3. **Set up JDK in IntelliJ IDEA**: After ensuring that JDK 11 is installed correctly and IntelliJ IDEA is updated, you can set up JDK in IntelliJ IDEA as follows:
+
+   - Go to `File > Project Structure > Project`.
+   - In the `Project SDK` section, click `New > JDK`.
+   - In the file chooser, navigate to `C:\Program Files\Java\jdk-11.0.1` and click `OK`.
+   - Make sure `Project language level` is set to `11 - Local variable syntax for lambda parameters`.
+   - Click `OK` to close the dialog.
+
+4. **Check the module settings**: Make sure that the correct JDK is used for each module:
+
+   - Go to `File > Project Structure > Modules`.
+   - For each module, make sure that the `Module SDK` is set to `11 (java version "11.0.1")`.
+   - Click `OK` to close the dialog.
+
+5. **Check the compiler settings**: Make sure that the correct bytecode version is used:
+
+   - Go to `File > Settings > Build, Execution, Deployment > Compiler > Java Compiler`.
+   - In the `Target bytecode version` section, make sure that `11` is selected for each module.
+   - Click `OK` to close the dialog.
+
+After following these steps, you should be able to compile your application with JDK 11 in IntelliJ IDEA.

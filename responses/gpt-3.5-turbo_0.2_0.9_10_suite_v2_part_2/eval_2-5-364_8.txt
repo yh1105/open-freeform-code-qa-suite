@@ -1,0 +1,11 @@
+If you want to use the same version of Java that works with the Maven task, you can specify the `JAVA_HOME` environment variable to point to the location of the JDK that works with Maven. 
+
+To do this, you can set the `JAVA_HOME` environment variable in your terminal or command prompt before running the Maven wrapper command. 
+
+For example, if your JDK is installed in `C:\Program Files\Java\jdk1.8.0_221`, you can set the `JAVA_HOME` environment variable by running the following command in your terminal or command prompt:
+
+```
+set JAVA_HOME=C:\Program Files\Java\jdk1.8.0_221
+```
+
+After setting the `JAVA_HOME` environment variable, you can run the Maven wrapper command as usual. The Maven wrapper will use the JDK specified in the `JAVA_HOME` environment variable instead of the default JDK.

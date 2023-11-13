@@ -1,0 +1,13 @@
+You can enable Dev Tools in IntelliJ 2021.2 by adding the following dependency to your Maven pom.xml file:
+
+```
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-devtools</artifactId>
+    <scope>runtime</scope>
+</dependency>
+```
+
+Then, you can configure IntelliJ to automatically reload changes by going to "Settings" -> "Build, Execution, Deployment" -> "Compiler" and checking the "Build project automatically" option.
+
+Finally, you can run your application in IntelliJ by clicking on the "Run" button, and any changes you make to your code will be automatically reloaded by Dev Tools without having to restart the Tomcat server.

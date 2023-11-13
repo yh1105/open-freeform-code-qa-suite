@@ -1,0 +1,24 @@
+The error message you're seeing is due to a change in Spring Cloud 2020.0.2. The `spring.config.import` property is now required for the Config Server client to work properly. However, since you're not using Config Server, you shouldn't need to set this property.
+
+The problem is that you have the `spring-cloud-starter-config` dependency in your `build.gradle` file. This dependency is used for connecting to a Config Server, and it's causing Spring Boot to look for the `spring.config.import` property.
+
+Since you're not using Config Server, you can remove the `spring-cloud-starter-config` dependency from your `build.gradle` file:
+
+```groovy
+dependencies {
+    // ...
+    // Remove this line:
+    // implementation('org.springframework.cloud:spring-cloud-starter-config')
+    // ...
+}
+```
+
+After removing this dependency, try rebuilding your project. The error should no longer occur.
+
+If you're actually using Config Server in some parts of your project and you need to keep the `spring-cloud-starter-config` dependency, you'll need to set the `spring.config.import` property to the URL of your Config Server. For example:
+
+```properties
+spring.config.import=configserver:http://my-config-server.com
+```
+
+If you're not using Config Server at all, it's best to remove the `spring-cloud-starter-config` dependency to avoid confusion.

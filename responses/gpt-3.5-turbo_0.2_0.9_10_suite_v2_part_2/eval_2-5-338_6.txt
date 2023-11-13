@@ -1,0 +1,19 @@
+The error message indicates that Jackson (the JSON serializer/deserializer used by Spring) cannot serialize the `ByteArrayInputStream` object that is part of the `MultipartFile` object. To solve this, you can configure Jackson to ignore the `ByteArrayInputStream` property by adding the following line to your application configuration:
+```
+spring.jackson.serialization.fail-on-empty-beans=false
+```
+Alternatively, you can use a different serializer/deserializer that can handle `MultipartFile` objects, such as the `MappingJackson2HttpMessageConverter` with the `ObjectMapper` configured to handle `MultipartFile` objects. Here's an example configuration:
+```
+@Configuration
+public class JacksonConfig {
+    @Bean
+    public MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter() {
+        MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new MultiPartModule());
+        converter.setObjectMapper(objectMapper);
+        return converter;
+    }
+}
+```
+Note that you need to add the `com.fasterxml.jackson.datatype:jackson-datatype-multipartfile` dependency to your project to use the `MultiPartModule`.

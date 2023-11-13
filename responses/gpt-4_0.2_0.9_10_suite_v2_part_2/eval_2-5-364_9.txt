@@ -1,0 +1,30 @@
+If you're using GitHub Actions, you can use the `actions/setup-java` action to specify the version of Java you want to use. This action will download and set up a particular version of a Java distribution. You can specify the version using the `java-version` input.
+
+Here's an example of how you can use it:
+
+```yaml
+name: Java CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up JDK 1.8
+      uses: actions/setup-java@v2
+      with:
+        distribution: 'adopt'
+        java-version: '8'
+    - name: Build with Maven
+      run: ./mvnw clean install
+```
+
+In this example, the `actions/setup-java` action is used to set up AdoptOpenJDK 8 before running the Maven wrapper command.
+
+If you're using a different CI/CD system, the way to specify the Java version might be different. Please refer to the documentation of your specific system for more information.
+
+If you're running this on your local machine, you can use a version manager like SDKMAN or jEnv to switch between different versions of Java.

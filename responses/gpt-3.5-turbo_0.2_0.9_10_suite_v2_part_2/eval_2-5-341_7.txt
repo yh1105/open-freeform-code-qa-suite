@@ -1,0 +1,14 @@
+This might be happening because the Jackson library, which is used by default in Spring Boot to serialize/deserialize JSON, is not configured to handle XML. To enable XML support, you can add the following dependencies to your Gradle build file:
+
+```groovy
+implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml'
+implementation 'com.fasterxml.jackson.module:jackson-module-jaxb-annotations'
+```
+
+Then, you can configure Jackson to support both XML and JSON by adding the following configuration to your `application.properties` file:
+
+```
+spring.jackson.serialization.content-type=application/xml,application/json
+```
+
+This will tell Jackson to serialize/deserialize both XML and JSON, and also set the appropriate content type in the response headers. After making these changes, try sending the XML request again and see if it works.

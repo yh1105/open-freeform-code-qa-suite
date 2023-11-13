@@ -1,0 +1,38 @@
+In addition to adding the `springdoc-openapi-ui` dependency, you also need to configure Spring Boot to use it. Here are the steps to follow:
+
+1. Add the `@EnableSwagger2WebMvc` annotation to your Spring Boot application class. This will enable Swagger UI and configure it to use the default URL `/swagger-ui.html`.
+
+```java
+@SpringBootApplication
+@EnableSwagger2WebMvc
+public class MyApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(MyApplication.class, args);
+    }
+}
+```
+
+2. Make sure that your application is running on the root context path (`/`). If your application is running on a different context path, you need to configure Swagger UI to use that path. You can do this by adding the following property to your `application.properties` file:
+
+```properties
+server.servlet.context-path=/my-app-context-path
+```
+
+3. If you're using Spring Security, you need to allow access to the Swagger UI resources. You can do this by adding the following configuration to your security configuration class:
+
+```java
+@Configuration
+@EnableWebSecurity
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.authorizeRequests()
+            .antMatchers("/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**")
+            .permitAll()
+            .anyRequest()
+            .authenticated();
+    }
+}
+```
+
+With these steps, you should be able to access Swagger UI at `http://localhost:8080/swagger-ui.html`.

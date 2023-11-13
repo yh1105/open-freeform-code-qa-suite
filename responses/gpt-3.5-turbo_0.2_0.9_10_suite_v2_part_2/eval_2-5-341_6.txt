@@ -1,0 +1,12 @@
+This might be happening because the Jackson XML library is not included in your project. By default, the openapi-generator-plugin generates code that uses Jackson for JSON serialization and deserialization, but it does not include the Jackson XML library. 
+
+To add support for XML serialization and deserialization, you need to add the Jackson XML library as a dependency in your Gradle build file. You can do this by adding the following lines to your `build.gradle` file:
+
+```groovy
+dependencies {
+    // other dependencies...
+    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.12.3'
+}
+```
+
+After adding this dependency, you should be able to receive XML responses from your API.

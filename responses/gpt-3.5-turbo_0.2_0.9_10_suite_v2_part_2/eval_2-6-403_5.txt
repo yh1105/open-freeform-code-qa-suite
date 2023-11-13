@@ -1,0 +1,15 @@
+You can use the `JsonResult` class to return JSON with a specific HTTP status code in your .NET Core Web API controller. Here's an example:
+
+```c#
+public JsonResult IsAuthenticated()
+{
+    return new JsonResult("123")
+    {
+        StatusCode = 200
+    };
+}
+```
+
+In this example, we're creating a new `JsonResult` object with the JSON data we want to return ("123"). We're then setting the `StatusCode` property of the `JsonResult` object to 200 (OK). This will ensure that the response from the server includes the correct HTTP status code.
+
+Note that we're using `JsonResult` instead of `ActionResult` because `JsonResult` allows us to set the HTTP status code directly. If you need to return other types of data (such as a view), you can use `ActionResult` instead.

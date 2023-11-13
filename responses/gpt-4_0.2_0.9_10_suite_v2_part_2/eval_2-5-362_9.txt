@@ -1,0 +1,29 @@
+The error message indicates that the Spring Cloud Config Client is active in your application, even though you mentioned that you're not using it. The `spring-cloud-starter-config` dependency is included in your `build.gradle` file, which activates the Config Client.
+
+If you're not using the Config Server, you should remove the `spring-cloud-starter-config` dependency from your `build.gradle` file:
+
+```groovy
+// Remove this line
+implementation('org.springframework.cloud:spring-cloud-starter-config')
+```
+
+If you still want to keep the dependency for some reason, but don't want to use the Config Server, you can disable it by setting the `spring.cloud.config.enabled` property to `false` in your `application.properties` or `application.yml` file:
+
+```properties
+spring.cloud.config.enabled=false
+```
+
+Or in your test configuration:
+
+```java
+@SpringBootTest(
+    webEnvironment = WebEnvironment.RANDOM_PORT,
+    classes = {
+        ProductCompositeServiceApplication.class,
+        TestSecurityConfig.class },
+    properties = {
+        "spring.main.allow-bean-definition-overriding=true",
+        "spring.cloud.config.enabled=false" })
+```
+
+This should resolve the error you're seeing.

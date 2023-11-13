@@ -1,0 +1,19 @@
+The error message suggests that the `--add-opens` option is not recognized by the version of Java that you are using. This option was introduced in Java 9, so it is possible that you are using an earlier version of Java that does not support it.
+
+You can check the version of Java that Besu is using by running the following command:
+```shell
+bin\besu --version
+```
+
+If the output shows a version of Java earlier than 9, you will need to install a newer version of Java that supports the `--add-opens` option. You can download the latest version of Java from the official website: https://www.java.com/en/download/
+
+Once you have installed a newer version of Java, you can set the `JAVA_HOME` environment variable to point to the installation directory of the new version. This will ensure that Besu uses the correct version of Java.
+
+You can set the `JAVA_HOME` environment variable by running the following command:
+```shell
+set JAVA_HOME=<path_to_java_installation_directory>
+```
+
+Replace `<path_to_java_installation_directory>` with the actual path to the installation directory of the new version of Java.
+
+After setting the `JAVA_HOME` environment variable, try running the `bin\besu --help` command again to see if the issue has been resolved.

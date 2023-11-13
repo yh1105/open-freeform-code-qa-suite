@@ -1,0 +1,7 @@
+Having separate pipelines for specific requests is not necessarily a bad practice. In fact, it can be a good practice to keep your code organized and maintainable. 
+
+However, it's important to consider the trade-offs. Having separate pipelines can increase the complexity of your codebase, as you'll need to manage multiple pipelines and ensure that they're all working correctly. It can also make it harder to reuse code between pipelines.
+
+On the other hand, using a generic implementation can simplify your codebase and make it easier to reuse code. However, it may not be flexible enough to handle all of your specific requirements.
+
+Ultimately, the decision of whether to use separate pipelines or a generic implementation depends on the specific requirements of your project. If you find that a generic implementation is not sufficient for your needs, then using separate pipelines may be the best approach.

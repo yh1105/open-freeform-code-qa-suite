@@ -1,0 +1,7 @@
+Having separate pipelines for specific requests is not necessarily a bad practice. In fact, it can be a good practice to keep the logic for each request separate and organized. 
+
+However, it's important to consider the overall design of your application and make sure that having separate pipelines doesn't lead to unnecessary complexity or duplication of code. 
+
+If you find that you have a lot of separate pipelines for specific requests, it may be worth considering if there is a way to refactor your code to make it more modular and reusable. For example, you could create a base pipeline class that handles common logic and then have separate classes that inherit from it and add specific logic for each request. 
+
+Ultimately, the decision of whether to have separate pipelines or not depends on the specific requirements and design of your application.

@@ -1,0 +1,32 @@
+The error message indicates that there is no serializer found for the `java.io.ByteArrayInputStream` class. This is because the `CommonsMultipartFile` class contains a `DiskFileItem` object, which in turn contains an `InputStream` object. The `InputStream` object cannot be serialized directly.
+
+To solve this, you can configure the `RestTemplate` to use a `ByteArrayResourceHttpMessageConverter` instead of the default `FormHttpMessageConverter`. The `ByteArrayResourceHttpMessageConverter` can handle `MultipartFile` objects and convert them to `ByteArrayResource` objects, which can be serialized and sent in the request body.
+
+Here's an example of how to configure the `RestTemplate` to use the `ByteArrayResourceHttpMessageConverter`:
+
+```java
+RestTemplate restTemplate = new RestTemplate();
+
+List<HttpMessageConverter<?>> messageConverters = new ArrayList<>();
+messageConverters.add(new ByteArrayResourceHttpMessageConverter());
+restTemplate.setMessageConverters(messageConverters);
+```
+
+With this configuration, you can use the `RestTemplate` to send the `MultipartFile` object as follows:
+
+```java
+HttpHeaders headers = new HttpHeaders();
+headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+
+MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
+body.add("circularAttachment", new ByteArrayResource(souqBean.getCircularAttachment().getBytes()));
+body.add("circularEntryId", souqBean.getCircularEntryId());
+body.add("circularTitle", souqBean.getCircularTitle());
+
+HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
+
+ResponseEntity<Boolean> response = restTemplate.postForEntity("http://localhost:8081/circular-save", requestEntity, Boolean.class);
+status = response.getBody();
+```
+
+Note that in the `body.add("circularAttachment", new ByteArrayResource(souqBean.getCircularAttachment().getBytes()));` line, we are converting the `MultipartFile` object to a `ByteArrayResource` object using the `getBytes()` method. This creates a byte array from the `MultipartFile` object, which can be used to create the `ByteArrayResource` object.

@@ -1,0 +1,15 @@
+It seems like IntelliJ IDEA is still using the old version of Java (1.8) to compile your code. Here are some steps you can try:
+
+1. In IntelliJ IDEA, go to `File > Project Structure > Project` and make sure that the `Project SDK` is set to Java 11.
+
+2. In the same `Project Structure` window, go to `Modules` and make sure that the `Language level` is set to at least 11.
+
+3. In the `Project Structure` window, go to `SDKs` and make sure that you have added the correct JDK 11 installation directory. If you are getting an error message saying that the directory is not a valid home for JDK, try selecting the `C:\Program Files\Java\jdk-11.0.1` directory instead of the `C:\Program Files\Java\` directory.
+
+4. If you have made any changes to the `Project Structure`, make sure to click `Apply` and `OK` to save the changes.
+
+5. Restart IntelliJ IDEA to make sure that the changes take effect.
+
+6. Try building your application again and see if the error message persists.
+
+If the above steps do not work, you can try checking your IntelliJ IDEA logs to see if there are any errors related to the JDK configuration. You can find the logs in the `Help > Show Log in Explorer` menu.

@@ -1,0 +1,44 @@
+If you're using GitHub Actions, you can use the `actions/setup-java` action to set up a specific version of Java. Here's an example of how you can set up Java 11:
+
+```yaml
+name: Java CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up JDK 11
+      uses: actions/setup-java@v2
+      with:
+        java-version: '11'
+        distribution: 'adopt'
+    - name: Build with Maven
+      run: ./mvnw clean install
+```
+
+In this example, the `actions/setup-java@v2` action is used to set up AdoptOpenJDK 11. After that, the Maven Wrapper is used to build the project.
+
+If you're using Azure Pipelines, you can use the `UseJava` task to set up a specific version of Java. Here's an example of how you can set up Java 11:
+
+```yaml
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: UseJava@0
+  inputs:
+    version: '11'
+    jdkArchitecture: 'x64'
+- script: ./mvnw clean install
+  displayName: 'Build with Maven'
+```
+
+In this example, the `UseJava@0` task is used to set up JDK 11. After that, the Maven Wrapper is used to build the project.
